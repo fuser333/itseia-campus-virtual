@@ -1,0 +1,241 @@
+{
+  "titulo": "IA para Profesionales de la Salud",
+  "profesion": "medico",
+  "version": "1.0",
+  "fecha_creacion": "2026-03-18",
+  "duracion_total_horas": 20,
+  "semanas": 4,
+  "precio": {
+    "express": 97,
+    "estandar": 197,
+    "completo": 297
+  },
+  "descripcion": "Curso practico para medicos y profesionales de la salud que quieren integrar herramientas de inteligencia artificial en su practica clinica diaria. Enfoque en herramientas accesibles, criterio clinico y cumplimiento de normativa ecuatoriana (MSP, IESS, ARCSA, Ley Organica de Salud).",
+  "herramientas_principales": [
+    "ChatGPT Plus",
+    "Claude",
+    "Elicit",
+    "Consensus",
+    "Glass Health",
+    "Suki AI"
+  ],
+  "herramientas_alternativas_ecuador": [
+    "ChatGPT (version gratuita)",
+    "Claude (version gratuita)",
+    "PubMed (gratuito)",
+    "Semantic Scholar (gratuito)"
+  ],
+  "perfil_egreso": "Profesional de la salud capaz de integrar herramientas de IA en su practica clinica con criterio etico, respeto a la privacidad del paciente y alineacion con la normativa ecuatoriana vigente.",
+  "advertencia_disclaimer": "La IA no reemplaza el criterio clinico profesional. Todo resultado generado por herramientas de IA debe ser revisado, validado y aprobado por el profesional medico responsable antes de aplicarse en la atencion de pacientes reales.",
+  "modulos": [
+    {
+      "codigo": "T-01",
+      "titulo": "Fundamentos de IA para profesionales de la salud",
+      "tipo": "leccion",
+      "duracion_minutos": 45,
+      "semana": 1,
+      "orden": 1,
+      "descripcion": "Introduccion a la inteligencia artificial aplicada al sector salud. Conceptos basicos sin tecnicismos, historia reciente, casos de uso reales en hospitales y clinicas, y el rol del profesional de salud ante la IA.",
+      "objetivo_aprendizaje": "Comprender que es la IA, como funciona en terminos generales y cuales son sus aplicaciones actuales en el campo medico, con enfasis en el contexto ecuatoriano.",
+      "temas": [
+        "Que es la IA y como funciona (sin tecnicismos)",
+        "IA en salud: casos reales en Latinoamerica",
+        "Herramientas disponibles hoy para medicos",
+        "Oportunidades y limites reales de la IA clinica",
+        "El rol del medico en la era de la IA"
+      ],
+      "herramientas_cubierta": ["ChatGPT", "Claude"],
+      "archivo_contenido": "modulos/T01_fundamentos_ia_salud.md"
+    },
+    {
+      "codigo": "T-02",
+      "titulo": "ChatGPT y Claude en la practica clinica",
+      "tipo": "leccion",
+      "duracion_minutos": 60,
+      "semana": 1,
+      "orden": 2,
+      "descripcion": "Uso practico de los dos principales modelos de lenguaje para tareas clinicas: redaccion de informes, busqueda de informacion, generacion de preguntas de triaje y comunicacion con el paciente. Incluye tecnicas de prompting para medicos.",
+      "objetivo_aprendizaje": "Usar ChatGPT y Claude de manera efectiva en tareas clinicas cotidianas, aplicando tecnicas de prompting especificas para el campo medico.",
+      "temas": [
+        "Diferencias practicas entre ChatGPT y Claude",
+        "Prompting medico: como formular instrucciones claras",
+        "Casos de uso: redaccion, resumen, triaje, educacion al paciente",
+        "Limitaciones conocidas: alucinaciones y errores medicos",
+        "Flujo de trabajo: IA como primer borrador, medico como autoridad final"
+      ],
+      "herramientas_cubierta": ["ChatGPT Plus", "Claude"],
+      "archivo_contenido": "modulos/T02_chatgpt_claude_clinica.md"
+    },
+    {
+      "codigo": "T-03",
+      "titulo": "Privacidad y proteccion de datos del paciente",
+      "tipo": "leccion_quiz",
+      "duracion_minutos": 30,
+      "semana": 1,
+      "orden": 3,
+      "descripcion": "Marco legal y etico para el uso de IA con datos de pacientes. Ley Organica de Proteccion de Datos Personales del Ecuador (LOPDP), normativa MSP, HIPAA como referencia internacional, y reglas practicas para anonimizacion de datos antes de usar IA.",
+      "objetivo_aprendizaje": "Conocer el marco legal ecuatoriano aplicable al uso de IA con datos de salud y aplicar reglas practicas de proteccion de datos en el dia a dia clinico.",
+      "temas": [
+        "LOPDP Ecuador y datos de salud (datos sensibles)",
+        "Normativa MSP e IESS sobre expediente electronico",
+        "Que datos NUNCA deben pegarse en una IA publica",
+        "Tecnicas de anonimizacion antes de usar IA",
+        "Responsabilidad legal del profesional"
+      ],
+      "herramientas_cubierta": [],
+      "incluye_quiz": true,
+      "quiz_referencia": "quiz.json#privacidad_criterio",
+      "archivo_contenido": "modulos/T03_privacidad_datos_paciente.md"
+    },
+    {
+      "codigo": "T-04",
+      "titulo": "IA y criterio clinico: cuando NO confiar en la IA",
+      "tipo": "leccion_quiz",
+      "duracion_minutos": 30,
+      "semana": 1,
+      "orden": 4,
+      "descripcion": "Analisis critico de las limitaciones de la IA en entornos clinicos. Sesgos de entrenamiento, errores documentados, escenarios de alto riesgo donde la IA falla, y framework de decision para saber cuando usar y cuando no usar IA.",
+      "objetivo_aprendizaje": "Identificar las situaciones donde la IA puede inducir a error clinico y aplicar un framework de evaluacion critica de los resultados generados por IA.",
+      "temas": [
+        "Como funcionan los LLMs y por que 'alucinan'",
+        "Errores documentados de IA en medicina",
+        "Sesgos raciales, de genero y poblacionales en datos de entrenamiento",
+        "Escenarios de alto riesgo: urgencias, psiquiatria, oncologia",
+        "Framework de decision: cuando usar IA, cuando no"
+      ],
+      "herramientas_cubierta": [],
+      "incluye_quiz": true,
+      "quiz_referencia": "quiz.json#privacidad_criterio",
+      "archivo_contenido": "modulos/T04_criterio_clinico_limites_ia.md"
+    },
+    {
+      "codigo": "S-01",
+      "titulo": "IA en diagnostico asistido",
+      "tipo": "leccion",
+      "duracion_minutos": 60,
+      "semana": 2,
+      "orden": 5,
+      "descripcion": "Aplicacion practica de IA para apoyo en el proceso diagnostico. Generacion de diagnosticos diferenciales, uso de herramientas especializadas como Glass Health, integracion en el flujo de consulta, y casos clinicos ilustrativos del contexto ecuatoriano.",
+      "objetivo_aprendizaje": "Utilizar herramientas de IA para generar y evaluar diagnosticos diferenciales, integrando los resultados como apoyo (no reemplazo) del juicio clinico.",
+      "temas": [
+        "El proceso diagnostico asistido por IA",
+        "Glass Health: la herramienta de diagnostico mas usada por medicos",
+        "ChatGPT para diagnostico diferencial: tecnica y limites",
+        "Casos clinicos: enfermedades prevalentes en Ecuador (diabetes, HTA, Chagas, dengue)",
+        "Documentando el razonamiento diagnostico con IA"
+      ],
+      "herramientas_cubierta": ["Glass Health", "ChatGPT Plus", "Claude"],
+      "archivo_contenido": "modulos/S01_diagnostico_asistido_ia.md"
+    },
+    {
+      "codigo": "S-02",
+      "titulo": "Documentacion clinica automatizada",
+      "tipo": "demo",
+      "duracion_minutos": 45,
+      "semana": 2,
+      "orden": 6,
+      "descripcion": "Automatizacion de la documentacion clinica usando IA: notas de evolucion SOAP, epicrisis, informes para seguros, certificados medicos y comunicaciones con el MSP/IESS. Demo practico con plantillas adaptadas al sistema de salud ecuatoriano.",
+      "objetivo_aprendizaje": "Generar documentacion clinica estructurada con apoyo de IA, reduciendo el tiempo administrativo manteniendo la precision y el cumplimiento de los formatos exigidos por el MSP e IESS.",
+      "temas": [
+        "El problema real: tiempo que toma documentar en consulta",
+        "Notas SOAP con IA: del dictado al documento en segundos",
+        "Epicrisis y altas hospitalarias con asistencia de IA",
+        "Informes para IESS y seguradoras privadas",
+        "Suki AI: transcripcion clinica automatizada (y alternativas)",
+        "Demo: generacion de nota clinica con ChatGPT"
+      ],
+      "herramientas_cubierta": ["Suki AI", "ChatGPT Plus", "Claude"],
+      "archivo_contenido": "modulos/S02_documentacion_clinica_automatizada.md"
+    },
+    {
+      "codigo": "S-03",
+      "titulo": "Busqueda bibliografica con IA",
+      "tipo": "quiz",
+      "duracion_minutos": 30,
+      "semana": 3,
+      "orden": 7,
+      "descripcion": "Uso de herramientas de IA para busqueda y sintesis de evidencia cientifica. Elicit y Consensus para revisar sistematicas y meta-analisis. PubMed potenciado con IA. Evaluacion critica de la calidad de la evidencia encontrada.",
+      "objetivo_aprendizaje": "Usar Elicit, Consensus y herramientas de busqueda potenciadas por IA para encontrar, sintetizar y evaluar evidencia cientifica de manera eficiente.",
+      "temas": [
+        "El problema de la sobrecarga de informacion en medicina",
+        "Elicit: busqueda semantica en literatura cientifica",
+        "Consensus: encontrar consenso en la investigacion",
+        "PubMed + ChatGPT: tecnicas combinadas",
+        "Evaluacion critica: como verificar que la IA no invento referencias"
+      ],
+      "herramientas_cubierta": ["Elicit", "Consensus", "ChatGPT Plus"],
+      "incluye_quiz": true,
+      "quiz_referencia": "quiz.json#busqueda_bibliografica",
+      "archivo_contenido": "modulos/S03_busqueda_bibliografica_ia.md"
+    },
+    {
+      "codigo": "S-04",
+      "titulo": "Analisis de imagenes medicas con IA",
+      "tipo": "leccion",
+      "duracion_minutos": 45,
+      "semana": 3,
+      "orden": 8,
+      "descripcion": "Introduccion al uso de IA en interpretacion de imagenes medicas: radiografia, ecografia, histopatologia. Herramientas disponibles, empresas que operan en Latinoamerica (incluyendo ImagemIA), limites regulatorios y el rol del radiologo/clinico.",
+      "objetivo_aprendizaje": "Comprender el estado actual de la IA en imagenologia medica, identificar herramientas disponibles en el contexto latinoamericano y entender el marco regulatorio para su uso clinico.",
+      "temas": [
+        "Como funciona la IA en imagenes medicas (vision por computadora)",
+        "Radiologia asistida por IA: lo que ya funciona",
+        "ImagemIA: caso de uso real en Ecuador (imagenologia predictiva)",
+        "Limitaciones regulatorias: que dice el ARCSA y MSP",
+        "El futuro del radiologo y el clinico ante la IA"
+      ],
+      "herramientas_cubierta": ["ImagemIA"],
+      "archivo_contenido": "modulos/S04_imagenes_medicas_ia.md"
+    },
+    {
+      "codigo": "S-05",
+      "titulo": "Plan de tratamiento asistido por IA",
+      "tipo": "caso_practico",
+      "duracion_minutos": 45,
+      "semana": 4,
+      "orden": 9,
+      "descripcion": "Caso practico con paciente con diabetes tipo 2 descompensada e insuficiencia renal incipiente. El alumno usa IA para revisar guias ADA, generar diagnostico diferencial, proponer plan de tratamiento, redactar educacion al paciente y definir seguimiento.",
+      "objetivo_aprendizaje": "Integrar todas las herramientas y competencias del curso en un caso clinico real, demostrando uso responsable de IA con criterio clinico y documentacion adecuada.",
+      "temas": [
+        "Revision de guias clinicas con Elicit (ADA 2025)",
+        "Diagnostico diferencial con ChatGPT o Claude",
+        "Plan de tratamiento: farmacologico y no farmacologico",
+        "Educacion al paciente generada con IA",
+        "Seguimiento y alertas de control"
+      ],
+      "herramientas_cubierta": ["ChatGPT Plus", "Claude", "Elicit"],
+      "es_caso_practico": true,
+      "tiempo_estimado_minutos": 45,
+      "archivo_contenido": "modulos/S05_plan_tratamiento.md"
+    }
+  ],
+  "evaluacion": {
+    "quizzes": 2,
+    "caso_practico": 1,
+    "puntaje_minimo_aprobacion": 70,
+    "intentos_quiz": 2,
+    "certificado_al_aprobar": true
+  },
+  "contexto_normativo": {
+    "ecuador": [
+      "Ley Organica de Salud (LOS)",
+      "Ley Organica de Proteccion de Datos Personales (LOPDP)",
+      "Normativa MSP sobre Historia Clinica Unica",
+      "Reglamento IESS de atencion medica",
+      "Regulaciones ARCSA para dispositivos medicos"
+    ],
+    "internacional_referencia": [
+      "Guias ADA 2025 (diabetes)",
+      "Reglamento GDPR (referencia europea)",
+      "HIPAA (referencia EEUU)",
+      "Declaracion de Helsinki (etica en investigacion)"
+    ]
+  },
+  "metadata": {
+    "creado_por": "ITSEIA Academy - Departamento Academico",
+    "revisado_por": "pendiente_revision_medica",
+    "proxima_revision": "2026-09-18",
+    "idioma": "es-EC",
+    "nivel": "basico_intermedio"
+  }
+}

@@ -1,0 +1,1280 @@
+#!/usr/bin/env node
+// Carga sesiones 5-8 de Introducción a Big Data (Carrera BD)
+// Subject ID: 191281b2-a3bb-4fbd-9a1d-f92443d1be3b
+
+const BASE_URL = 'https://wqlselfapnggxxeziruo.supabase.co/rest/v1';
+const SERVICE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndxbHNlbGZhcG5nZ3h4ZXppcnVvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDEzMzEzOCwiZXhwIjoyMDg5NzA5MTM4fQ.-84Rvf9WHfZzEZl9X2BRfn8ctS04Zb8NVfSy90DlWxc';
+const ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndxbHNlbGZhcG5nZ3h4ZXppcnVvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQxMzMxMzgsImV4cCI6MjA4OTcwOTEzOH0.CO--ha0pMyJWCbAULMxbI0lwk_RLhrFtUYYTZRzkhdk';
+const SUBJECT_ID = '191281b2-a3bb-4fbd-9a1d-f92443d1be3b';
+
+const headers = {
+  'apikey': ANON_KEY,
+  'Authorization': `Bearer \${SERVICE_KEY}`,
+  'Content-Type': 'application/json',
+};
+
+async function post(endpoint, body, prefer = 'return=representation') {
+  const res = await fetch(`\${BASE_URL}\${endpoint}`, {
+    method: 'POST',
+    headers: { ...headers, 'Prefer': prefer },
+    body: JSON.stringify(body),
+  });
+  const text = await res.text();
+  if (!res.ok) {
+    console.error(`ERROR \${res.status} on \${endpoint}:`, text.slice(0, 200));
+    return null;
+  }
+  try {
+    const data = JSON.parse(text);
+    return Array.isArray(data) ? data[0] : data;
+  } catch {
+    return null;
+  }
+}
+
+const sessions = [
+  {
+    number: 5,
+    title: 'Introducción a NoSQL y bases de datos distribuidas',
+    video_url: 'https://www.youtube.com/watch?v=v_hR4K4auoQ',
+    estimated_duration_minutes: 85,
+    order_index: 5,
+    theory_markdown: `# NoSQL y Bases de Datos Distribuidas
+
+Las bases de datos relacionales (SQL) no pueden manejar eficientemente los volúmenes, velocidades y variedades del Big Data. NoSQL surgió como solución.
+
+## ¿Por qué NoSQL?
+
+Las bases relacionales tienen límites cuando:
+- Los datos no tienen esquema fijo (JSON dinámico, logs, redes sociales)
+- El volumen supera lo que un servidor puede manejar (petabytes)
+- Se necesita escalar horizontalmente (agregar más servidores)
+- La latencia debe ser milisegundos para millones de usuarios
+
+## Tipos de bases de datos NoSQL
+
+### 1. Clave-Valor (Key-Value)
+El tipo más simple: una clave única apunta a un valor.
+
+\`\`\`
+clave: "usuario:1001:sesion"
+valor: {"token": "abc123", "expira": "2024-12-31", "permisos": ["read", "write"]}
+\`\`\`
+
+**Ejemplos:** Redis, DynamoDB, Riak
+**Casos de uso:** Cache de sesiones, configuración distribuida, colas de mensajes
+
+### 2. Documentos
+Almacena documentos JSON/BSON con estructura flexible.
+
+\`\`\`json
+{
+  "_id": "user_1001",
+  "nombre": "Ana García",
+  "carrera": "Inteligencia Artificial",
+  "historial_notas": [
+    {"materia": "Python", "nota": 92, "semestre": 1},
+    {"materia": "ML", "nota": 88, "semestre": 2}
+  ],
+  "contacto": {
+    "email": "ana@itseia.ai",
+    "ciudad": "Quito"
+  }
+}
+\`\`\`
+
+**Ejemplos:** MongoDB, CouchDB, Firestore
+**Casos de uso:** CMS, e-commerce, perfiles de usuario, catálogos
+
+### 3. Columnar (Wide-Column)
+Organiza datos por columnas en lugar de filas. Excelente para analítica.
+
+\`\`\`
+Row Key: "usuario:1001"
+Columnas: { "nombre": "Ana", "edad": 22, "ciudad": "Quito" }
+
+Row Key: "usuario:1002"
+Columnas: { "nombre": "Juan", "pais": "Ecuador" }  # Columnas distintas por fila
+\`\`\`
+
+**Ejemplos:** Apache Cassandra, HBase, Google Bigtable
+**Casos de uso:** Series de tiempo, IoT, logs masivos, analítica
+
+### 4. Grafos
+Almacena nodos y relaciones entre ellos. Ideal para redes.
+
+\`\`\`
+(Ana)-[SIGUE]->(Juan)
+(Juan)-[TRABAJA_EN]->(ITSEIA)
+(Ana)-[ESTUDIA_EN]->(ITSEIA)
+\`\`\`
+
+**Ejemplos:** Neo4j, Amazon Neptune, ArangoDB
+**Casos de uso:** Redes sociales, motores de recomendación, detección de fraude
+
+## Teorema CAP
+
+Todo sistema distribuido debe elegir 2 de 3 garantías:
+
+| Garantía | Descripción |
+|---|---|
+| **C**onsistency | Todos los nodos ven los mismos datos simultáneamente |
+| **A**vailability | El sistema siempre responde (aunque no tenga los datos más recientes) |
+| **P**artition tolerance | El sistema funciona aunque haya fallas de red |
+
+En la práctica, P es obligatorio (siempre habrá fallas de red), entonces se elige entre:
+- **CP**: Bancos, sistemas de pagos (prefieren consistencia)
+- **AP**: Redes sociales, feeds de noticias (prefieren disponibilidad)
+
+## SQL vs NoSQL: ¿cuándo usar cada uno?
+
+| Criterio | SQL | NoSQL |
+|---|---|---|
+| Esquema | Fijo y predefinido | Flexible, dinámico |
+| Escalabilidad | Vertical (más RAM/CPU) | Horizontal (más servidores) |
+| Transacciones ACID | Completo | Parcial o eventual |
+| Modelo de datos | Tablas relacionadas | Documentos, grafos, columnas |
+| Queries complejos | Excelente (JOINs) | Limitado por diseño |
+| Casos de uso | ERP, CRM, sistemas financieros | Big Data, tiempo real, IoT |
+
+## Escala horizontal vs vertical
+
+\`\`\`
+Vertical (Scale-Up):        Horizontal (Scale-Out):
+[Servidor 16GB RAM]    →    [Servidor 4GB] + [Servidor 4GB] + [Servidor 4GB]
+    UN servidor grande          MÚLTIPLES servidores pequeños
+    Tiene límite físico         Sin límite teórico
+    Más costoso                 Más económico
+    SQL nativo                  Necesita coordinación
+\`\`\`
+
+Las bases NoSQL están diseñadas nativamente para escala horizontal, lo que las hace esenciales en ecosistemas Big Data.`,
+    ai_lab_context: `El estudiante está aprendiendo sobre bases de datos NoSQL en el contexto de Big Data. Cubre los 4 tipos (clave-valor, documentos, columnar, grafos) con sus casos de uso, el teorema CAP, escala horizontal vs vertical, y cuándo elegir SQL vs NoSQL. Ayúdale a entender por qué NoSQL existe y no "reemplaza" a SQL, cómo elegir el tipo correcto para cada problema, y qué significa la consistencia eventual. Si pregunta sobre MongoDB o Redis específicos, puedes dar ejemplos de sintaxis básica.`,
+    ai_lab_suggested_prompt: 'Estoy diseñando una app de redes sociales para Ecuador con 500,000 usuarios. Tengo que guardar perfiles de usuario, publicaciones con likes/comentarios y relaciones de seguimiento. ¿Qué tipo de base de datos NoSQL usaría para cada parte y por qué?',
+    quiz: {
+      title: 'Quiz: NoSQL y Bases de Datos Distribuidas',
+      questions: [
+        {
+          question_text: '¿Cuál de los siguientes es el caso de uso más apropiado para una base de datos de grafos?',
+          options: JSON.stringify([
+            { key: 'a', text: 'Almacenar logs de servidor con millones de registros por día', is_correct: false },
+            { key: 'b', text: 'Gestionar sesiones de usuario con alta velocidad de lectura/escritura', is_correct: false },
+            { key: 'c', text: 'Modelar relaciones de amistad en una red social y encontrar amigos en común', is_correct: true },
+            { key: 'd', text: 'Almacenar documentos JSON de productos de un e-commerce', is_correct: false },
+          ]),
+          explanation: 'Las bases de datos de grafos (Neo4j, Neptune) brillan cuando las RELACIONES entre datos son tan importantes como los datos mismos. "¿Qué amigos tenemos en común?" o "¿Qué productos te recomiendo basado en tu red?" son queries naturales en grafos pero costosos en SQL.',
+          order_index: 1,
+        },
+        {
+          question_text: 'Según el Teorema CAP, si un sistema prioriza Consistency y Partition Tolerance, ¿qué sacrifica?',
+          options: JSON.stringify([
+            { key: 'a', text: 'Partition Tolerance', is_correct: false },
+            { key: 'b', text: 'Availability (disponibilidad)', is_correct: true },
+            { key: 'c', text: 'Consistency (consistencia)', is_correct: false },
+            { key: 'd', text: 'No sacrifica nada, los tres son compatibles', is_correct: false },
+          ]),
+          explanation: 'CAP demuestra que un sistema distribuido solo puede garantizar 2 de las 3 propiedades. Un sistema CP (como HBase) prefiere devolver error en lugar de datos desactualizados. Los bancos son CP: prefieren "sistema no disponible" antes que mostrar saldo incorrecto.',
+          order_index: 2,
+        },
+        {
+          question_text: '¿Qué ventaja principal ofrece el escalado horizontal sobre el vertical en Big Data?',
+          options: JSON.stringify([
+            { key: 'a', text: 'Los servidores son más rápidos individualmente', is_correct: false },
+            { key: 'b', text: 'Se puede crecer añadiendo más servidores commodity sin límite teórico', is_correct: true },
+            { key: 'c', text: 'Reduce la latencia de red entre servidores', is_correct: false },
+            { key: 'd', text: 'Permite usar lenguaje SQL estándar', is_correct: false },
+          ]),
+          explanation: 'El escalado vertical (más RAM/CPU al mismo servidor) tiene límite físico y es muy costoso. El escalado horizontal añade servidores comunes (commodity hardware) y puede crecer indefinidamente. Google, Facebook y Amazon usan miles de servidores baratos en lugar de pocos supercomputadores.',
+          order_index: 3,
+        },
+        {
+          question_text: '¿Qué tipo de base de datos NoSQL es MongoDB?',
+          options: JSON.stringify([
+            { key: 'a', text: 'Clave-Valor', is_correct: false },
+            { key: 'b', text: 'Columnar', is_correct: false },
+            { key: 'c', text: 'Orientada a documentos', is_correct: true },
+            { key: 'd', text: 'Base de datos de grafos', is_correct: false },
+          ]),
+          explanation: 'MongoDB almacena documentos BSON (Binary JSON) con estructura flexible. Cada documento puede tener diferentes campos. Permite arrays y documentos anidados de forma nativa. Redis es clave-valor, Cassandra es columnar, Neo4j es de grafos.',
+          order_index: 4,
+        },
+        {
+          question_text: '¿En qué escenario es INCORRECTO usar NoSQL en lugar de SQL?',
+          options: JSON.stringify([
+            { key: 'a', text: 'Almacenar tweets de 100 millones de usuarios', is_correct: false },
+            { key: 'b', text: 'Gestionar transacciones bancarias con múltiples tablas relacionadas y ACID garantizado', is_correct: true },
+            { key: 'c', text: 'Procesar logs de IoT de 10,000 dispositivos en tiempo real', is_correct: false },
+            { key: 'd', text: 'Catálogo de productos con atributos variables por categoría', is_correct: false },
+          ]),
+          explanation: 'Las transacciones financieras requieren ACID completo (Atomicity, Consistency, Isolation, Durability) y relaciones complejas con JOINs. SQL es superior aquí. NoSQL con "consistencia eventual" es inaceptable en sistemas bancarios donde cada centavo debe ser exacto.',
+          order_index: 5,
+        },
+      ],
+    },
+    assignment: {
+      title: 'Ejercicio: Diseño de arquitectura NoSQL',
+      instructions_markdown: `# Ejercicio: Diseño de arquitectura de datos para startup EdTech
+
+## Objetivo
+Diseñar la arquitectura de datos para una plataforma educativa usando los tipos de NoSQL correctos para cada componente.
+
+## Escenario
+Eres el arquitecto de datos de EduTech Ecuador, una plataforma de aprendizaje online con:
+- 50,000 estudiantes activos
+- 500 cursos con videos, quizzes y asignaciones
+- Sistema de recomendación de cursos basado en historial
+- Chat en tiempo real entre estudiantes y tutores
+- Dashboard de analítica para directores académicos
+
+## Tareas
+
+### Tarea 1: Mapeo de componentes (40 pts)
+Para cada componente, indica QUÉ tipo de NoSQL usarías y POR QUÉ:
+
+Crea una tabla como esta:
+
+| Componente | Tipo NoSQL | Base específica | Justificación |
+|---|---|---|---|
+| Perfiles de estudiante | Documentos | MongoDB | Atributos variables por tipo de estudiante |
+| Sesiones de usuario | ? | ? | ? |
+| Historial de notas por tiempo | ? | ? | ? |
+| Red de mentores y estudiantes | ? | ? | ? |
+| Cache de videos más vistos | ? | ? | ? |
+
+### Tarea 2: Diseño de documento (30 pts)
+Diseña el documento JSON completo para un perfil de estudiante en MongoDB que incluya:
+- Datos personales básicos
+- Historial de cursos tomados (array con subcampos)
+- Progreso actual por curso
+- Logros/badges obtenidos
+- Configuraciones de notificación
+
+### Tarea 3: Análisis CAP (30 pts)
+Para 3 de los componentes de tu arquitectura, explica:
+- ¿Qué garantías CAP prioriza tu elección?
+- ¿Qué tradeoff aceptas y por qué?
+- ¿Cuál sería el impacto en el usuario si el sistema falla?
+
+## Entrega
+Documento .txt, .md o .pdf con tu diseño completo y justificaciones.
+
+## Criterios
+- Correcta selección del tipo NoSQL por componente: 40 pts
+- Diseño coherente y completo del documento JSON: 30 pts
+- Análisis CAP con razonamiento sólido: 30 pts`,
+      allowed_file_types: JSON.stringify(['.txt', '.md', '.pdf', '.docx', '.png']),
+    },
+    resources: [
+      { title: 'NoSQL Databases Explained - MongoDB', url: 'https://www.mongodb.com/nosql-explained', type: 'article', description: 'Explicación oficial de MongoDB sobre los tipos de bases NoSQL con casos de uso', order_index: 1 },
+      { title: 'CAP Theorem - Visual Guide', url: 'https://www.ibm.com/topics/cap-theorem', type: 'article', description: 'Guía visual del teorema CAP de IBM con ejemplos de sistemas reales', order_index: 2 },
+      { title: 'MongoDB University (cursos gratis)', url: 'https://learn.mongodb.com/', type: 'course', description: 'Cursos gratuitos oficiales de MongoDB en español e inglés con certificación', order_index: 3 },
+      { title: 'Redis Documentation', url: 'https://redis.io/docs/', type: 'documentation', description: 'Documentación oficial de Redis, la base de datos clave-valor más popular', order_index: 4 },
+    ],
+  },
+  {
+    number: 6,
+    title: 'El ecosistema Hadoop: HDFS y MapReduce',
+    video_url: 'https://www.youtube.com/watch?v=GqBwFnTFOMI',
+    estimated_duration_minutes: 90,
+    order_index: 6,
+    theory_markdown: `# El Ecosistema Hadoop: HDFS y MapReduce
+
+Hadoop fue el primer sistema que permitió procesar petabytes de datos en clusters de servidores commodity. Aunque hoy Spark lo ha superado en velocidad, Hadoop sigue siendo la base del ecosistema Big Data.
+
+## Historia y contexto
+
+En 2003-2004, Google publicó dos papers que cambiarían la computación:
+1. **Google File System (GFS)**: cómo almacenar datos masivos de forma distribuida
+2. **MapReduce**: cómo procesar esos datos en paralelo
+
+Yahoo y la comunidad open source implementaron estas ideas en Hadoop (2006). Hoy Hadoop es el estándar de facto para Big Data on-premise.
+
+## HDFS: Hadoop Distributed File System
+
+HDFS es el sistema de archivos distribuido de Hadoop. Sus principios:
+
+### Arquitectura HDFS
+
+\`\`\`
+┌─────────────────────────────────────────────────┐
+│                   CLIENTE                        │
+└──────────────────────┬──────────────────────────┘
+                       │
+┌──────────────────────▼──────────────────────────┐
+│              NAMENODE (maestro)                  │
+│  - Guarda metadatos: qué bloques están dónde     │
+│  - NO guarda los datos en sí                     │
+│  - Punto único de falla → Secondary NameNode     │
+└─────────┬─────────────────────────┬─────────────┘
+          │                         │
+┌─────────▼─────────┐   ┌──────────▼─────────────┐
+│  DATANODE 1       │   │  DATANODE 2             │
+│  [Bloque A] [B]   │   │  [Bloque B] [C]         │
+│  [Bloque C] [D]   │   │  [Bloque A] [D]         │
+└───────────────────┘   └────────────────────────┘
+\`\`\`
+
+### Principios clave de HDFS
+
+**1. División en bloques**: Un archivo de 1TB se divide en bloques de 128MB cada uno.
+
+**2. Replicación (por defecto 3x)**: Cada bloque se copia en 3 DataNodes diferentes. Si uno falla, los datos no se pierden.
+
+**3. Write-once, Read-many**: HDFS está optimizado para leer enormes archivos secuencialmente, no para actualizar datos frecuentemente.
+
+\`\`\`bash
+# Comandos HDFS básicos
+hdfs dfs -ls /                      # Listar directorio raíz
+hdfs dfs -mkdir /datos              # Crear directorio
+hdfs dfs -put archivo_local.csv /datos/  # Subir archivo
+hdfs dfs -get /datos/archivo.csv ./      # Descargar
+hdfs dfs -cat /datos/archivo.csv         # Ver contenido
+hdfs dfs -du -h /datos/                  # Ver tamaño
+hdfs dfs -rm /datos/archivo.csv          # Eliminar
+\`\`\`
+
+## MapReduce: Procesar datos en paralelo
+
+MapReduce es el paradigma de programación para procesar datos distribuidos en dos fases:
+
+### Fase 1: MAP
+Cada nodo procesa su porción de datos localmente y emite pares (clave, valor).
+
+### Fase 2: REDUCE
+Se agrupan todos los valores con la misma clave y se aplica una función de reducción.
+
+### Ejemplo clásico: Contar palabras
+
+\`\`\`
+Texto: "big data big analytics data science big"
+
+MAP (cada línea/chunk):
+  "big" → 1
+  "data" → 1
+  "big" → 1
+  "analytics" → 1
+  "data" → 1
+  "science" → 1
+  "big" → 1
+
+SHUFFLE & SORT (automático, agrupa por clave):
+  "analytics" → [1]
+  "big" → [1, 1, 1]
+  "data" → [1, 1]
+  "science" → [1]
+
+REDUCE (suma por clave):
+  "analytics" → 1
+  "big" → 3
+  "data" → 2
+  "science" → 1
+\`\`\`
+
+### MapReduce en Python (Hadoop Streaming)
+
+\`\`\`python
+# mapper.py - Fase Map
+import sys
+
+for linea in sys.stdin:
+    palabras = linea.strip().split()
+    for palabra in palabras:
+        print(f"{palabra.lower()}\\t1")
+\`\`\`
+
+\`\`\`python
+# reducer.py - Fase Reduce
+import sys
+from collections import defaultdict
+
+conteos = defaultdict(int)
+for linea in sys.stdin:
+    palabra, conteo = linea.strip().split("\\t")
+    conteos[palabra] += int(conteo)
+
+for palabra, total in sorted(conteos.items()):
+    print(f"{palabra}\\t{total}")
+\`\`\`
+
+## El ecosistema Hadoop
+
+Hadoop no es solo HDFS + MapReduce. Es un ecosistema completo:
+
+| Componente | Rol |
+|---|---|
+| **HDFS** | Sistema de archivos distribuido |
+| **YARN** | Gestión de recursos del cluster |
+| **MapReduce** | Motor de procesamiento por lotes |
+| **Hive** | SQL sobre HDFS (data warehouse) |
+| **HBase** | Base de datos columnar sobre HDFS |
+| **Pig** | Lenguaje de scripting para ETL |
+| **Sqoop** | Importar/exportar datos SQL↔HDFS |
+| **Flume** | Ingesta de logs en tiempo real |
+| **Oozie** | Orquestación de workflows |
+| **ZooKeeper** | Coordinación distribuida |
+
+## Limitaciones de MapReduce
+
+- **Lento para iteraciones**: cada paso escribe a disco (problema para ML)
+- **Latencia alta**: no apto para procesamiento en tiempo real
+- **Verboso**: requiere mucho código para operaciones simples
+- **Sin soporte nativo para SQL complejo**
+
+Estas limitaciones llevaron al desarrollo de **Apache Spark** (próxima sesión), que opera en memoria y es 10-100x más rápido.
+
+El legado de Hadoop es haber demostrado que el procesamiento distribuido de Big Data es posible con hardware commodity.`,
+    ai_lab_context: `El estudiante está aprendiendo el ecosistema Hadoop con foco en HDFS y MapReduce. Cubre la arquitectura HDFS (NameNode, DataNodes, bloques, replicación), comandos HDFS básicos, el paradigma MapReduce (Map, Shuffle&Sort, Reduce) con el ejemplo word count, implementación en Python con Hadoop Streaming, y el ecosistema completo (Hive, HBase, YARN, etc.). Ayúdale a entender por qué la replicación previene pérdida de datos, cómo el paradigma MapReduce resuelve el problema de paralelización, y por qué Spark lo superó en velocidad.`,
+    ai_lab_suggested_prompt: 'Tengo un archivo de 500GB de logs de un servidor web con el formato "IP FECHA URL STATUS_CODE". Quiero contar cuántas veces se accedió a cada URL usando MapReduce. ¿Cómo diseñaría el mapper y el reducer en Python?',
+    quiz: {
+      title: 'Quiz: Hadoop, HDFS y MapReduce',
+      questions: [
+        {
+          question_text: '¿Cuál es la función del NameNode en HDFS?',
+          options: JSON.stringify([
+            { key: 'a', text: 'Almacena los bloques de datos de los archivos', is_correct: false },
+            { key: 'b', text: 'Guarda los metadatos: qué bloques existen y en qué DataNodes están ubicados', is_correct: true },
+            { key: 'c', text: 'Procesa las operaciones MapReduce', is_correct: false },
+            { key: 'd', text: 'Balancea la carga entre DataNodes automáticamente', is_correct: false },
+          ]),
+          explanation: 'El NameNode es el maestro de HDFS y guarda el namespace: el árbol de directorios y la ubicación de cada bloque en los DataNodes. NO guarda los datos en sí. Por eso su falla es crítica → se usa Secondary NameNode o NameNode en alta disponibilidad.',
+          order_index: 1,
+        },
+        {
+          question_text: '¿Por qué HDFS replica cada bloque en múltiples DataNodes (por defecto 3)?',
+          options: JSON.stringify([
+            { key: 'a', text: 'Para acelerar las escrituras enviando a múltiples nodos simultáneamente', is_correct: false },
+            { key: 'b', text: 'Para garantizar tolerancia a fallos: si un nodo falla, los datos no se pierden', is_correct: true },
+            { key: 'c', text: 'Para comprimir los datos y ahorrar espacio', is_correct: false },
+            { key: 'd', text: 'Es un requisito legal de protección de datos', is_correct: false },
+          ]),
+          explanation: 'En clusters de cientos de servidores, la probabilidad de que un disco falle en algún momento es muy alta. Con replicación 3x, necesitarían fallar 3 nodos exactos simultáneamente para perder datos. La primera réplica va al rack local, la segunda a otro rack para proteger contra fallas de switch.',
+          order_index: 2,
+        },
+        {
+          question_text: 'En el paradigma MapReduce, ¿qué ocurre en la fase Shuffle & Sort?',
+          options: JSON.stringify([
+            { key: 'a', text: 'Se procesan los datos de entrada y se emiten pares clave-valor', is_correct: false },
+            { key: 'b', text: 'Se agregan todos los pares con la misma clave y se envían al mismo Reducer', is_correct: true },
+            { key: 'c', text: 'Se escriben los resultados finales en HDFS', is_correct: false },
+            { key: 'd', text: 'Se comprimen los datos para reducir el tamaño', is_correct: false },
+          ]),
+          explanation: 'Shuffle & Sort es automático entre Map y Reduce. Agrupa todos los pares con la misma clave de todos los Mappers y los envía al mismo Reducer. Sin esta fase, el Reducer no podría sumar todos los conteos de una misma palabra que están en distintos nodos.',
+          order_index: 3,
+        },
+        {
+          question_text: '¿Cuál es la principal razón por la que Apache Spark superó a MapReduce en rendimiento?',
+          options: JSON.stringify([
+            { key: 'a', text: 'Spark usa más nodos en paralelo que MapReduce', is_correct: false },
+            { key: 'b', text: 'Spark procesa datos en memoria RAM en lugar de escribir a disco entre etapas', is_correct: true },
+            { key: 'c', text: 'Spark soporta Python y MapReduce solo soporta Java', is_correct: false },
+            { key: 'd', text: 'Spark es de Google y MapReduce es de Yahoo', is_correct: false },
+          ]),
+          explanation: 'MapReduce escribe los resultados intermedios a HDFS (disco) entre cada etapa. En algoritmos iterativos (ML con 100 iteraciones), esto significa 100 lecturas y escrituras a disco. Spark mantiene los datos en RAM, haciendo cada iteración mucho más rápida.',
+          order_index: 4,
+        },
+        {
+          question_text: '¿Qué componente de Hadoop permite ejecutar consultas SQL sobre datos almacenados en HDFS?',
+          options: JSON.stringify([
+            { key: 'a', text: 'YARN', is_correct: false },
+            { key: 'b', text: 'ZooKeeper', is_correct: false },
+            { key: 'c', text: 'Apache Hive', is_correct: true },
+            { key: 'd', text: 'Flume', is_correct: false },
+          ]),
+          explanation: 'Apache Hive traduce consultas HiveQL (similar a SQL) en trabajos MapReduce o Tez que se ejecutan sobre datos en HDFS. Permite a analistas con conocimiento SQL trabajar con Big Data sin programar Java. YARN gestiona recursos, ZooKeeper coordina servicios, Flume ingesta logs.',
+          order_index: 5,
+        },
+      ],
+    },
+    assignment: {
+      title: 'Ejercicio: MapReduce con Python',
+      instructions_markdown: `# Ejercicio: Implementar MapReduce en Python
+
+## Objetivo
+Implementar el paradigma MapReduce en Python puro (sin Hadoop) para entender el concepto antes de usarlo en cluster.
+
+## Parte 1: MapReduce básico - Word Count (40 pts)
+
+Implementa las tres funciones:
+
+\`\`\`python
+def map_function(text):
+    """
+    Recibe un texto y emite pares (palabra, 1)
+    Retorna: lista de tuplas [(palabra1, 1), (palabra2, 1), ...]
+    """
+    pass
+
+def shuffle_and_sort(pairs):
+    """
+    Agrupa todos los valores por clave
+    Retorna: diccionario {palabra: [1, 1, 1, ...]}
+    """
+    pass
+
+def reduce_function(grouped):
+    """
+    Para cada clave, reduce la lista de valores a un total
+    Retorna: diccionario {palabra: total}
+    """
+    pass
+
+def mapreduce(texts):
+    """Pipeline completo"""
+    all_pairs = []
+    for text in texts:
+        all_pairs.extend(map_function(text))
+    grouped = shuffle_and_sort(all_pairs)
+    return reduce_function(grouped)
+\`\`\`
+
+### Datos de prueba
+\`\`\`python
+documentos = [
+    "big data es el futuro de la tecnologia",
+    "hadoop permite procesar big data de forma distribuida",
+    "apache spark es mas rapido que hadoop para big data",
+    "el futuro de la ciencia de datos es prometedor",
+    "los datos son el nuevo petroleo de la economia digital",
+]
+
+resultado = mapreduce(documentos)
+# Mostrar top 10 palabras más frecuentes
+top10 = sorted(resultado.items(), key=lambda x: x[1], reverse=True)[:10]
+for palabra, freq in top10:
+    print(f"{palabra}: {freq}")
+\`\`\`
+
+## Parte 2: MapReduce para analítica (60 pts)
+
+Usa el mismo patrón para calcular **ventas por ciudad** desde un dataset:
+
+\`\`\`python
+import csv
+
+# Dataset simulado
+ventas = [
+    {"ciudad": "Quito", "producto": "Laptop", "monto": 850},
+    {"ciudad": "Guayaquil", "producto": "Mouse", "monto": 25},
+    {"ciudad": "Quito", "producto": "Monitor", "monto": 350},
+    {"ciudad": "Cuenca", "producto": "Teclado", "monto": 45},
+    {"ciudad": "Guayaquil", "producto": "Laptop", "monto": 850},
+    {"ciudad": "Quito", "producto": "Mouse", "monto": 25},
+    {"ciudad": "Cuenca", "producto": "Monitor", "monto": 350},
+    {"ciudad": "Quito", "producto": "Laptop", "monto": 850},
+    {"ciudad": "Guayaquil", "producto": "Teclado", "monto": 45},
+]
+\`\`\`
+
+Implementa:
+1. \`map_ventas(registro)\` → emite (ciudad, monto)
+2. \`reduce_ventas(grouped)\` → suma montos por ciudad
+3. \`analisis_ventas(ventas)\` → retorna dict {ciudad: total_ventas}
+
+Output esperado:
+\`\`\`
+=== VENTAS POR CIUDAD ===
+Quito:      $2,075
+Guayaquil:  $920
+Cuenca:     $395
+Total:      $3,390
+\`\`\`
+
+## Parte 3 (Bonus - 20 pts extra)
+Extiende el análisis para calcular también el PROMEDIO de ventas por ciudad además del total.
+
+## Entrega
+Archivo .py con el código completo y capturas del output.`,
+      allowed_file_types: JSON.stringify(['.py', '.txt', '.png', '.jpg']),
+    },
+    resources: [
+      { title: 'Apache Hadoop Official Documentation', url: 'https://hadoop.apache.org/docs/current/', type: 'documentation', description: 'Documentación oficial de Hadoop con guías de administración y programación', order_index: 1 },
+      { title: 'MapReduce Tutorial - Apache', url: 'https://hadoop.apache.org/docs/current/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html', type: 'tutorial', description: 'Tutorial oficial de MapReduce con el ejemplo word count completo', order_index: 2 },
+      { title: 'HDFS Architecture Guide', url: 'https://hadoop.apache.org/docs/current/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html', type: 'documentation', description: 'Documento de diseño oficial de HDFS explicando NameNode, DataNodes y replicación', order_index: 3 },
+      { title: 'Big Data con Hadoop - Udemy (español)', url: 'https://www.udemy.com/course/big-data-hadoop/', type: 'course', description: 'Curso completo de Hadoop en español con prácticas en cluster virtual', order_index: 4 },
+    ],
+  },
+  {
+    number: 7,
+    title: 'Apache Spark: conceptos fundamentales',
+    video_url: 'https://www.youtube.com/watch?v=QaoJNXW6SQo',
+    estimated_duration_minutes: 95,
+    order_index: 7,
+    theory_markdown: `# Apache Spark: Conceptos Fundamentales
+
+Apache Spark es el motor de procesamiento de datos distribuido más popular del mundo. Es entre 10 y 100 veces más rápido que Hadoop MapReduce gracias a su procesamiento en memoria.
+
+## ¿Qué es Spark?
+
+Spark es un framework de computación distribuida que puede:
+- Procesar datos en **batch** (lotes grandes)
+- Procesar datos en **streaming** (tiempo real)
+- Ejecutar **machine learning** distribuido (MLlib)
+- Realizar queries **SQL** sobre datos distribuidos (Spark SQL)
+- Procesar grafos (GraphX)
+
+Todo desde la misma API y en múltiples lenguajes: Python (PySpark), Scala, Java, R y SQL.
+
+## Arquitectura Spark
+
+\`\`\`
+┌─────────────────────────────────────────────┐
+│          DRIVER PROGRAM                      │
+│  (tu código Python/Scala)                   │
+│  - Crea SparkContext/SparkSession           │
+│  - Define el DAG de operaciones             │
+│  - Coordina los Executors                   │
+└─────────────────┬───────────────────────────┘
+                  │
+┌─────────────────▼───────────────────────────┐
+│           CLUSTER MANAGER                   │
+│    (YARN / Mesos / Standalone / K8s)        │
+└──────────┬───────────────────┬──────────────┘
+           │                   │
+┌──────────▼─────────┐  ┌─────▼──────────────┐
+│   WORKER NODE 1    │  │  WORKER NODE 2      │
+│   ┌─────────────┐  │  │  ┌─────────────┐   │
+│   │  EXECUTOR   │  │  │  │  EXECUTOR   │   │
+│   │  [Cache]    │  │  │  │  [Cache]    │   │
+│   │  [Task 1]   │  │  │  │  [Task 3]   │   │
+│   │  [Task 2]   │  │  │  │  [Task 4]   │   │
+│   └─────────────┘  │  │  └─────────────┘   │
+└────────────────────┘  └────────────────────┘
+\`\`\`
+
+## RDD: Resilient Distributed Dataset
+
+El RDD es la estructura de datos fundamental de Spark (versión clásica):
+
+\`\`\`python
+from pyspark import SparkContext
+
+sc = SparkContext("local[*]", "Mi App Spark")
+
+# Crear RDD desde Python list
+numeros = sc.parallelize([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+
+# Transformaciones (lazy - no se ejecutan hasta action)
+pares = numeros.filter(lambda x: x % 2 == 0)
+cuadrados = pares.map(lambda x: x ** 2)
+
+# Action (desencadena la ejecución)
+resultado = cuadrados.collect()
+print(resultado)  # [4, 16, 36, 64, 100]
+
+# Otras acciones
+print(numeros.count())       # 10
+print(numeros.sum())         # 55
+print(numeros.take(3))       # [1, 2, 3]
+print(numeros.reduce(lambda a, b: a + b))  # 55
+\`\`\`
+
+## DataFrame API (recomendada para análisis)
+
+La API moderna de Spark, similar a Pandas pero distribuida:
+
+\`\`\`python
+from pyspark.sql import SparkSession
+from pyspark.sql.functions import col, avg, count, sum as spark_sum
+
+spark = SparkSession.builder.appName("AnalisisBigData").getOrCreate()
+
+# Leer datos (puede ser CSV, Parquet, JSON, HDFS, S3...)
+df = spark.read.csv("ventas.csv", header=True, inferSchema=True)
+
+# Operaciones similares a Pandas
+df.printSchema()              # Ver tipos de datos
+df.show(5)                    # Ver primeras filas
+df.describe().show()          # Estadísticas básicas
+
+# Seleccionar y filtrar
+df_filtrado = df.select("ciudad", "monto").filter(col("monto") > 100)
+
+# Groupby y agregaciones
+resumen = df.groupBy("ciudad").agg(
+    count("*").alias("num_ventas"),
+    avg("monto").alias("promedio"),
+    spark_sum("monto").alias("total")
+).orderBy("total", ascending=False)
+
+resumen.show()
+\`\`\`
+
+## Lazy Evaluation: La clave del rendimiento
+
+Spark no ejecuta nada hasta que se llama a una **action**:
+
+\`\`\`python
+# Estas son TRANSFORMACIONES (no se ejecutan aún):
+df2 = df.filter(col("ciudad") == "Quito")   # Lazy
+df3 = df2.groupBy("producto").sum("monto")   # Lazy
+df4 = df3.orderBy("sum(monto)", ascending=False)  # Lazy
+
+# Esta ACTION desencadena toda la ejecución optimizada:
+df4.show()  # Aquí Spark construye el plan óptimo y ejecuta
+
+# O para guardar:
+df4.write.parquet("output/ventas_quito/")  # También es action
+\`\`\`
+
+Spark construye un **DAG (Directed Acyclic Graph)** de todas las transformaciones y las optimiza antes de ejecutar. Esto es mucho más eficiente que ejecutar paso a paso.
+
+## Spark SQL
+
+\`\`\`python
+# Registrar DataFrame como tabla temporal
+df.createOrReplaceTempView("ventas")
+
+# Consultar con SQL puro
+resultado = spark.sql("""
+    SELECT ciudad,
+           COUNT(*) as num_ventas,
+           AVG(monto) as promedio,
+           SUM(monto) as total
+    FROM ventas
+    WHERE fecha >= '2024-01-01'
+    GROUP BY ciudad
+    ORDER BY total DESC
+""")
+
+resultado.show()
+\`\`\`
+
+## PySpark vs Pandas: ¿cuándo usar cada uno?
+
+| Criterio | Pandas | PySpark |
+|---|---|---|
+| Tamaño de datos | < 10GB (cabe en RAM) | > 10GB (no cabe en RAM) |
+| Hardware | Laptop/servidor único | Cluster de servidores |
+| Velocidad de desarrollo | Más rápido | Más verboso |
+| Escalabilidad | Limitada | Ilimitada |
+
+**Regla práctica:** Si tus datos caben en la RAM de tu computadora, usa Pandas. Si no, usa Spark.
+
+Spark es el estándar de la industria para Big Data: dominarlo abre puertas en Netflix, Uber, Airbnb y empresas LATAM de gran escala.`,
+    ai_lab_context: `El estudiante está aprendiendo Apache Spark desde los fundamentos. Cubre arquitectura (Driver, Cluster Manager, Executors), RDDs con transformaciones lazy (map, filter) y actions (collect, count, reduce), DataFrame API (read.csv, show, filter, groupBy, agg), Spark SQL para queries, y lazy evaluation con DAGs. Ayúdale a entender la diferencia entre transformaciones y acciones, por qué lazy evaluation mejora el rendimiento, y cuándo usar RDD vs DataFrame. Si no tiene un cluster, guíale en configurar Spark en modo local con "local[*]".`,
+    ai_lab_suggested_prompt: 'Tengo un CSV de 50GB de transacciones bancarias con columnas: fecha, cliente_id, tipo_transaccion, monto, ciudad. ¿Cómo escribiría el código PySpark para encontrar los 10 clientes con mayor volumen de transacciones en el último mes?',
+    quiz: {
+      title: 'Quiz: Apache Spark Fundamentals',
+      questions: [
+        {
+          question_text: '¿Cuál es la diferencia principal entre una Transformación y una Action en Spark?',
+          options: JSON.stringify([
+            { key: 'a', text: 'Las transformaciones son más rápidas; las actions son más lentas', is_correct: false },
+            { key: 'b', text: 'Las transformaciones son lazy (no se ejecutan inmediatamente); las actions desencadenan la ejecución', is_correct: true },
+            { key: 'c', text: 'Las transformaciones modifican los datos; las actions solo los leen', is_correct: false },
+            { key: 'd', text: 'No hay diferencia, ambas ejecutan el código inmediatamente', is_correct: false },
+          ]),
+          explanation: 'La evaluación lazy de Spark permite optimizar el plan de ejecución completo antes de procesar. filter().map().groupBy() son transformaciones (solo construyen el DAG). show(), collect(), count() son actions que ejecutan todo el DAG optimizado de una vez.',
+          order_index: 1,
+        },
+        {
+          question_text: '¿Qué significa que un RDD sea "Resilient" (resiliente)?',
+          options: JSON.stringify([
+            { key: 'a', text: 'Los RDDs son inmutables y no pueden ser modificados', is_correct: false },
+            { key: 'b', text: 'Spark puede reconstruir automáticamente particiones perdidas usando el linaje (DAG)', is_correct: true },
+            { key: 'c', text: 'Los RDDs se replican en 3 nodos como HDFS', is_correct: false },
+            { key: 'd', text: 'Los RDDs funcionan correctamente con datos corruptos', is_correct: false },
+          ]),
+          explanation: 'Resiliente significa tolerante a fallos. Spark guarda el "linaje": la secuencia de transformaciones para crear cada RDD. Si un nodo falla y pierde datos, Spark puede recalcular exactamente esa partición aplicando el linaje sobre los datos originales.',
+          order_index: 2,
+        },
+        {
+          question_text: '¿Qué ventaja tiene usar Spark SQL sobre la DataFrame API para análisis de datos?',
+          options: JSON.stringify([
+            { key: 'a', text: 'Spark SQL es más rápido porque evita el overhead del DataFrame', is_correct: false },
+            { key: 'b', text: 'Permite que analistas con conocimiento SQL trabajen con Big Data sin aprender PySpark', is_correct: true },
+            { key: 'c', text: 'Spark SQL soporta más operaciones que la DataFrame API', is_correct: false },
+            { key: 'd', text: 'Solo Spark SQL puede leer archivos Parquet', is_correct: false },
+          ]),
+          explanation: 'Ambos producen el mismo plan de ejecución optimizado (mismo rendimiento). La ventaja de Spark SQL es de adopción: analistas de negocios con experiencia en SQL pueden usar Big Data directamente sin reaprender una API nueva. En la práctica, ambos se usan según preferencia.',
+          order_index: 3,
+        },
+        {
+          question_text: '¿Cuándo es MÁS apropiado usar Spark en lugar de Pandas?',
+          options: JSON.stringify([
+            { key: 'a', text: 'Siempre, porque Spark es más moderno y mejor', is_correct: false },
+            { key: 'b', text: 'Cuando el dataset es muy pequeño (menos de 1MB)', is_correct: false },
+            { key: 'c', text: 'Cuando los datos superan la RAM disponible o se procesan en cluster distribuido', is_correct: true },
+            { key: 'd', text: 'Cuando se necesita visualizar datos con Matplotlib', is_correct: false },
+          ]),
+          explanation: 'Spark tiene overhead de coordinación de cluster. Para datos que caben en RAM, Pandas es más rápido y fácil. La regla práctica: si tu dataset es menor a 10GB y cabe en tu computadora, usa Pandas. Si es mayor o trabajas en cluster, usa Spark.',
+          order_index: 4,
+        },
+        {
+          question_text: '¿Qué hace spark.read.csv("datos.csv", header=True, inferSchema=True)?',
+          options: JSON.stringify([
+            { key: 'a', text: 'Lee el CSV y lo convierte a un DataFrame de Pandas', is_correct: false },
+            { key: 'b', text: 'Lee el CSV como DataFrame distribuido, usando la primera fila como nombres de columna y detectando tipos automáticamente', is_correct: true },
+            { key: 'c', text: 'Descarga el CSV de internet a HDFS', is_correct: false },
+            { key: 'd', text: 'Crea un RDD con el contenido del CSV como strings', is_correct: false },
+          ]),
+          explanation: 'header=True usa la primera fila del CSV como nombres de columnas. inferSchema=True hace que Spark escanee los datos para detectar tipos (int, double, string, date). Sin inferSchema, todo sería string. Para archivos grandes, es mejor especificar el schema manualmente para evitar el escaneo inicial.',
+          order_index: 5,
+        },
+      ],
+    },
+    assignment: {
+      title: 'Ejercicio: PySpark análisis de datos simulado',
+      instructions_markdown: `# Ejercicio: Análisis de Big Data con PySpark
+
+## Objetivo
+Aplicar las operaciones fundamentales de Spark DataFrame API para analizar un dataset de e-commerce.
+
+## Configuración
+Si no tienes Spark instalado, puedes usar Google Colab con:
+\`\`\`python
+!pip install pyspark
+\`\`\`
+
+## Dataset
+
+\`\`\`python
+from pyspark.sql import SparkSession
+from pyspark.sql.functions import col, avg, count, sum as spark_sum, month, year
+import random
+
+spark = SparkSession.builder.appName("EcommerceAnalysis").master("local[*]").getOrCreate()
+
+# Crear dataset simulado de 10,000 transacciones
+from pyspark.sql import Row
+import random
+from datetime import date, timedelta
+
+random.seed(42)
+ciudades = ["Quito", "Guayaquil", "Cuenca", "Ambato", "Manta"]
+categorias = ["Electronica", "Ropa", "Hogar", "Deportes", "Libros"]
+base_date = date(2024, 1, 1)
+
+data = [Row(
+    transaccion_id=i,
+    ciudad=random.choice(ciudades),
+    categoria=random.choice(categorias),
+    monto=round(random.uniform(10, 2000), 2),
+    unidades=random.randint(1, 10),
+    fecha=str(base_date + timedelta(days=random.randint(0, 364)))
+) for i in range(1, 10001)]
+
+df = spark.createDataFrame(data)
+df.printSchema()
+df.show(5)
+\`\`\`
+
+## Análisis requeridos
+
+### Análisis 1: Resumen por ciudad (20 pts)
+\`\`\`python
+# Número de transacciones, monto total y promedio por ciudad
+# Ordenado por monto total descendente
+\`\`\`
+
+### Análisis 2: Top 3 categorías por ciudad (20 pts)
+\`\`\`python
+# Para cada ciudad, mostrar las 3 categorías con más ventas
+\`\`\`
+
+### Análisis 3: Tendencia mensual (20 pts)
+\`\`\`python
+# Extraer mes de la fecha y mostrar monto total por mes
+# Hint: usa month(col("fecha"))
+\`\`\`
+
+### Análisis 4: Transacciones grandes (20 pts)
+\`\`\`python
+# Filtrar transacciones mayores a $500
+# Contar cuántas hay por ciudad
+# Calcular qué % representan del total de transacciones
+\`\`\`
+
+### Análisis 5: Spark SQL (20 pts)
+\`\`\`python
+# Registrar el DataFrame como vista temporal
+# Escribir una query SQL que encuentre:
+# La categoría más vendida (por monto) en cada ciudad
+\`\`\`
+
+## Entrega
+- Código .py o notebook .ipynb
+- Capturas del output de cada análisis
+- Breve interpretación (2-3 líneas) de los resultados más interesantes
+
+## Criterios de evaluación
+- 5 análisis correctos y funcionando: 100 pts base
+- Código limpio con comentarios: +10 pts
+- Interpretación de resultados: incluida en los 20 pts de cada análisis`,
+      allowed_file_types: JSON.stringify(['.py', '.ipynb', '.html', '.txt', '.png']),
+    },
+    resources: [
+      { title: 'PySpark Documentation', url: 'https://spark.apache.org/docs/latest/api/python/', type: 'documentation', description: 'Documentación oficial completa de la API Python de Apache Spark', order_index: 1 },
+      { title: 'Apache Spark - Getting Started Guide', url: 'https://spark.apache.org/docs/latest/quick-start.html', type: 'tutorial', description: 'Guía oficial de inicio rápido con ejemplos en Python y Scala', order_index: 2 },
+      { title: 'Learning Spark - Databricks (gratis)', url: 'https://pages.databricks.com/rs/094-YMS-629/images/LearningSpark2.0.pdf', type: 'book', description: 'Libro gratuito oficial de Databricks sobre Apache Spark 2.0 y posteriores', order_index: 3 },
+      { title: 'Databricks Community Edition', url: 'https://community.cloud.databricks.com/', type: 'tool', description: 'Entorno gratuito en la nube para practicar Spark sin instalación local', order_index: 4 },
+    ],
+  },
+  {
+    number: 8,
+    title: 'Procesamiento de datos en la nube',
+    video_url: 'https://www.youtube.com/watch?v=M988_fsOSWo',
+    estimated_duration_minutes: 90,
+    order_index: 8,
+    theory_markdown: `# Procesamiento de Datos en la Nube
+
+La nube ha transformado el Big Data: lo que antes requería un centro de datos propio ahora está disponible en minutos con una tarjeta de crédito. AWS, Google Cloud y Azure dominan el mercado.
+
+## ¿Por qué la nube para Big Data?
+
+| Factor | On-Premise (propio) | Cloud |
+|---|---|---|
+| Inversión inicial | Alta ($100K-$1M) | Cero (pay-as-you-go) |
+| Escalabilidad | Manual, semanas | Automática, minutos |
+| Mantenimiento | Equipo IT dedicado | Gestionado por proveedor |
+| Disponibilidad | Depende de ti | 99.99% SLA garantizado |
+| Flexibilidad | Limitada | Bajo demanda |
+
+## Los 3 grandes proveedores: servicios Big Data
+
+### AWS (Amazon Web Services)
+
+\`\`\`
+Almacenamiento:  Amazon S3 (Simple Storage Service)
+Data Warehouse:  Amazon Redshift
+Spark Managed:   Amazon EMR (Elastic MapReduce)
+ETL Serverless:  AWS Glue
+Streaming:       Amazon Kinesis
+Data Lake:       AWS Lake Formation
+BI:              Amazon QuickSight
+\`\`\`
+
+### Google Cloud Platform (GCP)
+
+\`\`\`
+Almacenamiento:  Google Cloud Storage (GCS)
+Data Warehouse:  BigQuery (serverless, paga por query)
+Spark Managed:   Google Dataproc
+ETL:             Google Dataflow (Apache Beam)
+Streaming:       Google Pub/Sub
+BI:              Looker Studio (gratis)
+ML Platforms:    Vertex AI
+\`\`\`
+
+### Microsoft Azure
+
+\`\`\`
+Almacenamiento:  Azure Data Lake Storage
+Data Warehouse:  Azure Synapse Analytics
+Spark Managed:   Azure HDInsight / Synapse Spark
+ETL:             Azure Data Factory
+Streaming:       Azure Event Hubs
+BI:              Power BI
+\`\`\`
+
+## Google BigQuery: el data warehouse serverless
+
+BigQuery es probablemente el servicio más accesible para analizar Big Data en la nube:
+
+\`\`\`sql
+-- Analizar millones de filas en segundos (precio por GB procesado)
+-- Dataset público: viajes en taxi de NYC (1.1 billones de filas!)
+
+SELECT
+  EXTRACT(HOUR FROM pickup_datetime) AS hora,
+  COUNT(*) AS num_viajes,
+  AVG(trip_distance) AS distancia_promedio,
+  AVG(total_amount) AS tarifa_promedio
+FROM `bigquery-public-data.new_york_taxi_trips.tlc_yellow_trips_2021`
+WHERE DATE(pickup_datetime) BETWEEN '2021-01-01' AND '2021-12-31'
+GROUP BY hora
+ORDER BY hora;
+\`\`\`
+
+Procesa 1.1 billones de registros en ~10 segundos. Costo: ~$5 por 1TB procesado. Los primeros 10GB por mes son gratuitos.
+
+## Amazon S3: el estándar de almacenamiento cloud
+
+\`\`\`python
+import boto3
+
+# Conectar a S3
+s3 = boto3.client('s3',
+    aws_access_key_id='TU_ACCESS_KEY',
+    aws_secret_access_key='TU_SECRET_KEY',
+    region_name='us-east-1'
+)
+
+# Subir archivo
+s3.upload_file('datos.csv', 'mi-bucket-bigdata', 'datos/2024/ventas.csv')
+
+# Descargar archivo
+s3.download_file('mi-bucket-bigdata', 'datos/2024/ventas.csv', 'local.csv')
+
+# Listar archivos en bucket
+response = s3.list_objects_v2(Bucket='mi-bucket-bigdata', Prefix='datos/2024/')
+for obj in response['Contents']:
+    print(f"{obj['Key']} - {obj['Size']/1024:.1f} KB")
+\`\`\`
+
+## Databricks: Spark en la nube
+
+Databricks es la plataforma cloud creada por los creadores de Spark:
+
+\`\`\`python
+# En Databricks (notebooks colaborativos)
+# Leer desde cloud storage
+df = spark.read.parquet("dbfs:/mnt/datalake/ventas/2024/")
+
+# Unity Catalog: gestión de datos corporativos
+df = spark.table("catalog.schema.tabla_ventas")
+
+# Delta Lake: transacciones ACID en Big Data
+df.write.format("delta").mode("overwrite").save("/mnt/delta/ventas/")
+
+# Time travel (ver datos históricos)
+df_ayer = spark.read.format("delta").option("versionAsOf", 5).load("/mnt/delta/ventas/")
+\`\`\`
+
+## Arquitectura Lambda: Batch + Streaming
+
+La arquitectura más común en producción para Big Data:
+
+\`\`\`
+                    FUENTES DE DATOS
+                         │
+              ┌──────────┴──────────┐
+              │                     │
+         BATCH LAYER           SPEED LAYER
+    (datos históricos)      (datos en tiempo real)
+    Hadoop/Spark            Spark Streaming / Flink
+    S3 / GCS                Kafka / Kinesis
+    Procesamiento lento      Latencia <1 segundo
+              │                     │
+              └──────────┬──────────┘
+                         │
+                   SERVING LAYER
+                 (queries combinadas)
+              BigQuery / Redshift / Hive
+                         │
+                    Dashboards / APIs
+\`\`\`
+
+## Costos y optimización
+
+\`\`\`
+Tips para no gastar de más en cloud Big Data:
+
+1. Usa formato Parquet (columnar): 5-10x menos costo de almacenamiento vs CSV
+2. Particiona los datos por fecha: lee solo lo que necesitas
+3. Configura Life Cycle Policies: datos viejos → almacenamiento más barato
+4. Usa Spot Instances (AWS) / Preemptible VMs (GCP): 60-80% más baratas
+5. BigQuery: usa tablas particionadas y clustered para reducir bytes procesados
+6. Apaga los clusters cuando no los uses (EMR, Dataproc)
+\`\`\`
+
+La nube democratizó el Big Data: ahora una startup en Ecuador puede analizar la misma cantidad de datos que una empresa Fortune 500, pagando solo por lo que usa.`,
+    ai_lab_context: `El estudiante está aprendiendo procesamiento de datos en la nube (AWS, GCP, Azure) en el contexto de Big Data. Cubre los principales servicios por proveedor (S3, Redshift, EMR, BigQuery, Dataproc, Synapse), Google BigQuery con consultas SQL sobre datasets públicos masivos, Amazon S3 con boto3 en Python, Databricks y Delta Lake, arquitectura Lambda (batch + streaming), y buenas prácticas de costos (Parquet, particionamiento). Ayúdale a entender las diferencias entre los proveedores, cuándo usar qué servicio, y cómo calcular el costo aproximado de un proyecto.`,
+    ai_lab_suggested_prompt: 'Soy estudiante en Ecuador y quiero practicar Big Data en la nube con un presupuesto de $0. ¿Qué servicios gratuitos existen en AWS, GCP o Azure que me permitan procesar datos reales? ¿Con cuál empezaría?',
+    quiz: {
+      title: 'Quiz: Procesamiento de datos en la nube',
+      questions: [
+        {
+          question_text: '¿Qué es Google BigQuery y qué lo hace especial para Big Data?',
+          options: JSON.stringify([
+            { key: 'a', text: 'Un sistema de archivos distribuido como HDFS pero en la nube', is_correct: false },
+            { key: 'b', text: 'Un data warehouse serverless que procesa petabytes con SQL, pagando solo por los datos consultados', is_correct: true },
+            { key: 'c', text: 'Un servicio de streaming de datos en tiempo real', is_correct: false },
+            { key: 'd', text: 'Una plataforma de machine learning automatizado', is_correct: false },
+          ]),
+          explanation: 'BigQuery es serverless (no hay clusters que gestionar), escala automáticamente, usa SQL estándar y tiene un modelo de precios por bytes procesados (~$5/TB). Los primeros 10GB/mes son gratis. Puede analizar billones de filas en segundos sin configuración.',
+          order_index: 1,
+        },
+        {
+          question_text: '¿Cuál es la principal ventaja del formato Parquet sobre CSV para almacenar datos en la nube?',
+          options: JSON.stringify([
+            { key: 'a', text: 'Parquet es más fácil de leer para humanos', is_correct: false },
+            { key: 'b', text: 'Parquet es columnar: permite leer solo las columnas necesarias, reduciendo I/O y costo', is_correct: true },
+            { key: 'c', text: 'Parquet es compatible con todos los sistemas mientras CSV no lo es', is_correct: false },
+            { key: 'd', text: 'Parquet no necesita compresión, el CSV sí', is_correct: false },
+          ]),
+          explanation: 'CSV almacena filas completas: para leer "precio" debes leer toda la fila. Parquet almacena columna por columna: para leer "precio" solo lees esa columna. En Big Data con 100 columnas, si solo necesitas 5, Parquet lee 5% de los datos vs 100% en CSV. Esto se traduce directamente en menor costo en BigQuery y Athena.',
+          order_index: 2,
+        },
+        {
+          question_text: 'En la arquitectura Lambda, ¿cuál es la diferencia entre el Batch Layer y el Speed Layer?',
+          options: JSON.stringify([
+            { key: 'a', text: 'Batch Layer usa Python; Speed Layer usa Java', is_correct: false },
+            { key: 'b', text: 'Batch Layer procesa datos históricos con alta latencia; Speed Layer procesa datos en tiempo real con baja latencia', is_correct: true },
+            { key: 'c', text: 'Batch Layer es más preciso; Speed Layer almacena más datos', is_correct: false },
+            { key: 'd', text: 'Son lo mismo, solo difieren en nombre según el proveedor', is_correct: false },
+          ]),
+          explanation: 'Lambda Architecture combina ambos: el Batch Layer recalcula todo el histórico nocturnamente con alta precisión. El Speed Layer procesa los últimos minutos/segundos con baja latencia. El Serving Layer combina ambos para responder queries. Ejemplo: Netflix recalcula recomendaciones diariamente (batch) pero actualiza el "continue watching" en tiempo real (speed).',
+          order_index: 3,
+        },
+        {
+          question_text: '¿Cuál es el equivalente de Amazon S3 en Google Cloud?',
+          options: JSON.stringify([
+            { key: 'a', text: 'Google BigQuery', is_correct: false },
+            { key: 'b', text: 'Google Dataproc', is_correct: false },
+            { key: 'c', text: 'Google Cloud Storage (GCS)', is_correct: true },
+            { key: 'd', text: 'Google Pub/Sub', is_correct: false },
+          ]),
+          explanation: 'S3 (AWS) y GCS (GCP) son servicios de object storage equivalentes: almacenan cualquier tipo de archivo con alta durabilidad (11 nueves), acceso global y escala ilimitada. El equivalente en Azure es Azure Data Lake Storage. Todos son la base del data lake moderno.',
+          order_index: 4,
+        },
+        {
+          question_text: '¿Qué ventaja económica ofrecen las Spot Instances (AWS) / Preemptible VMs (GCP) para procesamiento Big Data?',
+          options: JSON.stringify([
+            { key: 'a', text: 'Son gratuitas para proyectos académicos', is_correct: false },
+            { key: 'b', text: 'Son 60-80% más baratas que instancias regulares, ideales para jobs batch que toleran interrupciones', is_correct: true },
+            { key: 'c', text: 'Tienen mejor rendimiento que las instancias regulares', is_correct: false },
+            { key: 'd', text: 'Están disponibles solo en regiones de Europa', is_correct: false },
+          ]),
+          explanation: 'Spot/Preemptible usan capacidad no utilizada del proveedor. A cambio, pueden ser interrumpidas con 2 minutos de aviso. Son perfectas para jobs MapReduce y Spark batch que pueden reiniciarse desde checkpoints. Un job de $100 costaría $20-40 con Spot Instances.',
+          order_index: 5,
+        },
+      ],
+    },
+    assignment: {
+      title: 'Ejercicio: Consultas BigQuery sobre datos públicos',
+      instructions_markdown: `# Ejercicio: Análisis con Google BigQuery (cuenta gratuita)
+
+## Objetivo
+Usar BigQuery para analizar datasets públicos masivos y demostrar el poder del procesamiento cloud.
+
+## Configuración (gratis)
+1. Crear cuenta en Google Cloud: https://cloud.google.com/free
+2. Activar BigQuery (incluye 10GB gratis de consultas por mes)
+3. Acceder a la consola: https://console.cloud.google.com/bigquery
+
+## Dataset: NYC Taxi Trips (millones de viajes)
+
+El dataset \`bigquery-public-data.new_york_taxi_trips.tlc_yellow_trips_2021\` tiene más de 100 millones de registros de viajes en taxi en Nueva York durante 2021.
+
+## Consultas requeridas
+
+### Consulta 1: Volumen por hora del día (20 pts)
+\`\`\`sql
+-- Número de viajes y tarifa promedio por hora del día
+-- Pista: usa EXTRACT(HOUR FROM pickup_datetime)
+\`\`\`
+
+### Consulta 2: Análisis por día de la semana (20 pts)
+\`\`\`sql
+-- ¿En qué días de la semana se hacen más viajes?
+-- ¿En qué días se pagan más propinas en promedio?
+-- Pista: FORMAT_DATE('%A', DATE(pickup_datetime)) para nombre del día
+\`\`\`
+
+### Consulta 3: Distancias y tarifas (20 pts)
+\`\`\`sql
+-- Clasificar viajes en: corto (<2 millas), medio (2-10), largo (>10)
+-- Para cada categoría: count, tarifa promedio, propina promedio
+-- Pista: usa CASE WHEN trip_distance < 2 THEN 'corto' ...
+\`\`\`
+
+### Consulta 4: Tendencia mensual 2021 (20 pts)
+\`\`\`sql
+-- Total de viajes por mes durante 2021
+-- ¿Se recuperó el mercado tras el COVID?
+\`\`\`
+
+### Consulta 5: Query propia (20 pts)
+Diseña y ejecuta tu propia consulta que responda una pregunta de negocio interesante sobre los datos del taxi. Documenta: ¿qué pregunta buscabas responder? ¿qué encontraste?
+
+## Alternativa: BigQuery Sandbox (sin tarjeta de crédito)
+Si no puedes activar la cuenta con tarjeta, usa BigQuery Sandbox:
+https://cloud.google.com/bigquery/docs/sandbox
+
+## Entrega
+- Capturas de pantalla de cada consulta en BigQuery (código + resultados)
+- Breve análisis de los resultados de la Consulta 5
+- Opcional: nota cuántos bytes procesó BigQuery en total
+
+## Evaluación
+- 5 consultas ejecutadas correctamente: 100 pts
+- Análisis de la consulta propia: incluido en los 20 pts de la consulta 5
+- Eficiencia (minimizar bytes procesados): +10 pts bonus`,
+      allowed_file_types: JSON.stringify(['.sql', '.txt', '.png', '.jpg', '.pdf', '.docx']),
+    },
+    resources: [
+      { title: 'Google BigQuery - Public Datasets', url: 'https://cloud.google.com/bigquery/public-data', type: 'dataset', description: 'Catálogo de datasets públicos disponibles en BigQuery para practicar sin costo', order_index: 1 },
+      { title: 'AWS Big Data Learning Path', url: 'https://aws.amazon.com/training/learn-about/data-analytics/', type: 'course', description: 'Ruta de aprendizaje oficial de AWS para analytics y Big Data con recursos gratuitos', order_index: 2 },
+      { title: 'Google Cloud Skills Boost (Databricks Spark)', url: 'https://www.cloudskillsboost.google/', type: 'course', description: 'Plataforma de labs gratuitos de Google Cloud para practicar BigQuery, Dataproc y más', order_index: 3 },
+      { title: 'Databricks Community Edition (Spark gratis)', url: 'https://community.cloud.databricks.com/', type: 'tool', description: 'Entorno completamente gratuito de Databricks para practicar Spark y Delta Lake en la nube', order_index: 4 },
+      { title: 'Azure Data Engineering en español', url: 'https://learn.microsoft.com/es-es/training/paths/azure-data-engineer/', type: 'course', description: 'Ruta de aprendizaje gratuita de Microsoft para ingeniería de datos con Azure', order_index: 5 },
+    ],
+  },
+];
+
+async function loadSession(sessionData) {
+  console.log(`\nCargando sesión \${sessionData.number}: \${sessionData.title}`);
+  const session = await post('/sessions', {
+    subject_id: SUBJECT_ID,
+    number: sessionData.number,
+    title: sessionData.title,
+    video_url: sessionData.video_url,
+    theory_markdown: sessionData.theory_markdown,
+    ai_lab_context: sessionData.ai_lab_context,
+    ai_lab_suggested_prompt: sessionData.ai_lab_suggested_prompt,
+    order_index: sessionData.order_index,
+    estimated_duration_minutes: sessionData.estimated_duration_minutes,
+    is_active: true,
+  });
+  if (!session) { console.error(`  FALLO sesión \${sessionData.number}`); return false; }
+  console.log(`  Sesion creada: \${session.id}`);
+
+  const quiz = await post('/quizzes', {
+    session_id: session.id,
+    title: sessionData.quiz.title,
+    pass_percentage: 70,
+    max_attempts: 3,
+    is_active: true,
+  });
+  if (!quiz) { console.error(`  FALLO quiz`); return false; }
+  console.log(`  Quiz creado: \${quiz.id}`);
+
+  for (const q of sessionData.quiz.questions) {
+    await post('/quiz_questions', {
+      quiz_id: quiz.id,
+      question_text: q.question_text,
+      question_type: 'multiple_choice',
+      options: q.options,
+      explanation: q.explanation,
+      points: 1,
+      order_index: q.order_index,
+    }, 'return=minimal');
+  }
+  console.log(`  \${sessionData.quiz.questions.length} preguntas`);
+
+  await post('/assignments', {
+    session_id: session.id,
+    title: sessionData.assignment.title,
+    instructions_markdown: sessionData.assignment.instructions_markdown,
+    allowed_file_types: sessionData.assignment.allowed_file_types,
+    max_grade: 100,
+    is_active: true,
+  }, 'return=minimal');
+  console.log(`  Assignment creado`);
+
+  for (const r of sessionData.resources) {
+    await post('/session_resources', {
+      session_id: session.id,
+      title: r.title,
+      url: r.url,
+      type: r.type,
+      description: r.description,
+      order_index: r.order_index,
+    }, 'return=minimal');
+  }
+  console.log(`  \${sessionData.resources.length} recursos`);
+  return true;
+}
+
+async function main() {
+  console.log('=== CARGANDO SESIONES 5-8: Introducción a Big Data (BD) ===');
+  let exitosas = 0;
+  for (const s of sessions) {
+    const ok = await loadSession(s);
+    if (ok) exitosas++;
+  }
+  console.log(`\n=== RESULTADO: \${exitosas}/\${sessions.length} sesiones cargadas ===`);
+}
+
+main().catch(console.error);

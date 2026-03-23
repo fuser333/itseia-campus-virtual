@@ -1,0 +1,531 @@
+{
+  "version": "1.0",
+  "fecha_creacion": "2026-03-18",
+  "curso": "IA para Profesionales de la Salud",
+  "profesion": "medico",
+  "instrucciones_generales": "Cada quiz tiene 8 preguntas. Puntaje minimo para aprobar: 70% (6 de 8 preguntas correctas). Se permiten 2 intentos. Las preguntas de texto corto son evaluadas por coincidencia de palabras clave.",
+  "quizzes": [
+    {
+      "id": "quiz_privacidad_criterio",
+      "titulo": "Quiz T-03/T-04: Privacidad y Criterio Clinico",
+      "modulos_cubiertos": ["T-03", "T-04"],
+      "total_preguntas": 8,
+      "puntaje_maximo": 100,
+      "puntaje_minimo_aprobacion": 70,
+      "tiempo_estimado_minutos": 15,
+      "intentos_permitidos": 2,
+      "preguntas": [
+        {
+          "id": "q1_privacidad",
+          "numero": 1,
+          "tipo": "multiple_choice",
+          "modulo_origen": "T-03",
+          "dificultad": "media",
+          "pregunta": "Segun la Ley Organica de Proteccion de Datos Personales del Ecuador (LOPDP), el diagnostico medico de un paciente se clasifica como:",
+          "opciones": [
+            {
+              "id": "a",
+              "texto": "Dato personal de acceso publico",
+              "es_correcta": false
+            },
+            {
+              "id": "b",
+              "texto": "Dato personal comun",
+              "es_correcta": false
+            },
+            {
+              "id": "c",
+              "texto": "Dato sensible (categoria especial de proteccion)",
+              "es_correcta": true
+            },
+            {
+              "id": "d",
+              "texto": "Dato anonimo sin proteccion especifica",
+              "es_correcta": false
+            }
+          ],
+          "explicacion_correcta": "La LOPDP clasifica los datos de salud, incluyendo diagnosticos, tratamientos e historia clinica, como datos sensibles o de categoria especial. Esto les otorga el nivel mas alto de proteccion bajo la ley ecuatoriana. Su tratamiento inadecuado puede derivar en sanciones graves.",
+          "explicacion_incorrecta": "El diagnostico medico no es un dato publico ni comun. Es un dato sensible bajo la LOPDP, lo que implica restricciones estrictas para su tratamiento y transferencia.",
+          "puntos": 12
+        },
+        {
+          "id": "q2_privacidad",
+          "numero": 2,
+          "tipo": "multiple_choice",
+          "modulo_origen": "T-03",
+          "dificultad": "alta",
+          "pregunta": "Un medico del IESS necesita documentar la evolucion de un paciente con VIH y quiere usar ChatGPT para generar la nota clinica. Cual es el procedimiento correcto?",
+          "opciones": [
+            {
+              "id": "a",
+              "texto": "Puede enviar todos los datos del paciente a ChatGPT porque la plataforma es segura",
+              "es_correcta": false
+            },
+            {
+              "id": "b",
+              "texto": "Debe anonimizar el caso completamente (sin nombre, cedula, ni datos identificantes) antes de enviarlo a ChatGPT",
+              "es_correcta": true
+            },
+            {
+              "id": "c",
+              "texto": "Puede usar el nombre del paciente si desactiva la opcion de mejorar el modelo en la configuracion de ChatGPT",
+              "es_correcta": false
+            },
+            {
+              "id": "d",
+              "texto": "No puede usar IA en ningun caso para documentacion de pacientes con VIH",
+              "es_correcta": false
+            }
+          ],
+          "explicacion_correcta": "La anonimizacion completa (eliminar nombre, cedula, fecha exacta, lugar de trabajo, y cualquier dato que permita identificar al paciente) es el requisito minimo antes de usar cualquier herramienta de IA publica. La configuracion de privacidad reduce el riesgo pero no lo elimina. El diagnostico de VIH es especialmente sensible por el estigma social asociado.",
+          "explicacion_incorrecta": "Desactivar el entrenamiento de datos no autoriza compartir datos identificantes de pacientes con plataformas externas. La LOPDP y el secreto medico obligan a la anonimizacion independientemente de la configuracion de la plataforma.",
+          "puntos": 12
+        },
+        {
+          "id": "q3_privacidad",
+          "numero": 3,
+          "tipo": "multiple_choice",
+          "modulo_origen": "T-03",
+          "dificultad": "media",
+          "pregunta": "Cual de los siguientes conjuntos de datos es seguro enviar a ChatGPT para generar una nota clinica?",
+          "opciones": [
+            {
+              "id": "a",
+              "texto": "Nombre: Juan Andres Lopez, CI: 0987654321, diagnostico: tuberculosis pulmonar",
+              "es_correcta": false
+            },
+            {
+              "id": "b",
+              "texto": "Paciente masculino, 40-50 anos, diagnostico: tuberculosis pulmonar, 2 semanas de tratamiento con HRZE",
+              "es_correcta": true
+            },
+            {
+              "id": "c",
+              "texto": "Paciente J.L., cedula terminada en 21, trabajador de una empresa en Latacunga, tuberculosis pulmonar",
+              "es_correcta": false
+            },
+            {
+              "id": "d",
+              "texto": "Paciente Juan L., 45 anos, Latacunga, tuberculosis pulmonar",
+              "es_correcta": false
+            }
+          ],
+          "explicacion_correcta": "La opcion B contiene solo datos clinicamente relevantes (sexo, rango de edad, diagnostico, tratamiento) sin ningun dato identificante. El nombre, la cedula, el lugar de trabajo y la ubicacion especifica han sido eliminados. Los datos medicalmente necesarios estan intactos.",
+          "explicacion_incorrecta": "Las opciones A, C y D contienen datos que permiten identificar al paciente (nombre, cedula, cedula parcial, lugar de trabajo especifico). Aunque la C y la D parecen anonimizadas, siguen conteniendo combinaciones de datos que podrian identificar al paciente.",
+          "puntos": 12
+        },
+        {
+          "id": "q4_privacidad",
+          "numero": 4,
+          "tipo": "multiple_choice",
+          "modulo_origen": "T-03",
+          "dificultad": "media",
+          "pregunta": "Bajo la LOPDP ecuatoriana, compartir datos de salud de un paciente con una empresa de IA en el exterior sin base legal adecuada se clasifica como:",
+          "opciones": [
+            {
+              "id": "a",
+              "texto": "Una practica comun y sin consecuencias legales si el medico no lo hace con intencion danina",
+              "es_correcta": false
+            },
+            {
+              "id": "b",
+              "texto": "Una infraccion administrativa que puede derivar en sanciones economicas y disciplinarias",
+              "es_correcta": true
+            },
+            {
+              "id": "c",
+              "texto": "Solo un incumplimiento etico sin consecuencias legales formales en Ecuador",
+              "es_correcta": false
+            },
+            {
+              "id": "d",
+              "texto": "Permitido si el medico cuenta con el consentimiento verbal del paciente",
+              "es_correcta": false
+            }
+          ],
+          "explicacion_correcta": "La LOPDP establece sanciones para el tratamiento inadecuado de datos sensibles, incluyendo multas de hasta el 2% del volumen de negocios anual o entre 10,000 y 20,000 USD para personas naturales en infracciones muy graves. La transferencia internacional de datos sensibles sin base legal adecuada es una infraccion grave. El consentimiento verbal del paciente no es suficiente para habilitar una transferencia internacional de datos de salud.",
+          "explicacion_incorrecta": "La LOPDP es ley vigente con sanciones concretas. La buena intension no es una defensa legal. El consentimiento verbal informal no cumple los requisitos de la ley para tratamiento de datos sensibles.",
+          "puntos": 12
+        },
+        {
+          "id": "q5_criterio",
+          "numero": 5,
+          "tipo": "multiple_choice",
+          "modulo_origen": "T-04",
+          "dificultad": "alta",
+          "pregunta": "Un medico de urgencias le pregunta a ChatGPT la dosis de lidocaina intravenosa para una taquicardia ventricular estable. ChatGPT responde con una dosis especifica y confiante. Cual es la accion correcta?",
+          "opciones": [
+            {
+              "id": "a",
+              "texto": "Administrar la dosis indicada por ChatGPT ya que es una emergencia y no hay tiempo para verificar",
+              "es_correcta": false
+            },
+            {
+              "id": "b",
+              "texto": "Verificar la dosis en el protocolo institucional o vademecum antes de administrar, independientemente de lo que dijo la IA",
+              "es_correcta": true
+            },
+            {
+              "id": "c",
+              "texto": "Verificar solo si la dosis parece sospechosamente alta o baja",
+              "es_correcta": false
+            },
+            {
+              "id": "d",
+              "texto": "Pedir una segunda opinion a Claude para confirmar la dosis de ChatGPT",
+              "es_correcta": false
+            }
+          ],
+          "explicacion_correcta": "Los medicamentos con margen terapeutico estrecho en urgencias son una categoria de Nivel Rojo para uso de IA. Siempre verificar en fuentes farmacologicas primarias (protocolo institucional, vademecum, UpToDate) antes de administrar. Los LLMs pueden generar dosis incorrectas con aparente confianza. Consultar otro LLM no es verificacion — ambos pueden estar equivocados de la misma manera.",
+          "explicacion_incorrecta": "En urgencias con medicamentos de alto riesgo, la presion del tiempo no justifica saltarse la verificacion. Un error de dosis en lidocaina IV puede causar toxicidad cardiaca grave. Pedir confirmacion a otro LLM no resuelve el problema — los modelos pueden tener los mismos errores de entrenamiento.",
+          "puntos": 12
+        },
+        {
+          "id": "q6_criterio",
+          "numero": 6,
+          "tipo": "multiple_choice",
+          "modulo_origen": "T-04",
+          "dificultad": "media",
+          "pregunta": "Cual de los siguientes sesgos de los LLMs tiene mayor impacto potencial en la atencion de pacientes ecuatorianos?",
+          "opciones": [
+            {
+              "id": "a",
+              "texto": "Los LLMs no tienen sesgos — son objetivos porque son computadoras",
+              "es_correcta": false
+            },
+            {
+              "id": "b",
+              "texto": "Sesgo de popularidad: los LLMs prefieren responder sobre musica popular",
+              "es_correcta": false
+            },
+            {
+              "id": "c",
+              "texto": "Sesgo de poblacion: entrenados principalmente en literatura de paises de altos ingresos con predominio de poblacion blanca, pueden subrepresentar enfermedades endemicas de Ecuador y variantes de presentacion en poblacion mestiza",
+              "es_correcta": true
+            },
+            {
+              "id": "d",
+              "texto": "Sesgo de idioma: como los LLMs son en ingles, simplemente no funcionan en espanol",
+              "es_correcta": false
+            }
+          ],
+          "explicacion_correcta": "Los LLMs fueron entrenados con textos mayoritariamente en ingles y de paises de altos ingresos. Esto significa que las prevalencias de enfermedades endemicas ecuatorianas (dengue, malaria, Chagas, TB, parasitosis intestinales), las presentaciones atipicas en poblacion andina, y los protocolos del MSP pueden estar subrepresentados. El medico ecuatoriano debe complementar los resultados de la IA con su conocimiento epidemiologico local.",
+          "explicacion_incorrecta": "Los LLMs si tienen sesgos, y estos provienen de los datos de entrenamiento. El sesgo de poblacion es el mas relevante para la practica clinica en Ecuador. Los LLMs si funcionan en espanol aunque con menor precision que en ingles.",
+          "puntos": 12
+        },
+        {
+          "id": "q7_criterio_texto",
+          "numero": 7,
+          "tipo": "texto_corto",
+          "modulo_origen": "T-04",
+          "dificultad": "alta",
+          "pregunta": "Explica en 2-3 oraciones por que una referencia bibliografica generada por ChatGPT (sin usar Elicit o PubMed) NUNCA debe citarse en un informe medico o articulo sin verificacion previa.",
+          "respuesta_modelo": "ChatGPT puede generar referencias bibliograficas falsas o incorrectas con apariencia completamente real (fenomeno conocido como 'alucinacion'). El modelo predice texto plausible, no verifica la existencia de los articulos. Una referencia inventada puede llevar a citar evidencia inexistente, lo cual es un error cientifico grave.",
+          "palabras_clave_evaluacion": [
+            "alucinacion",
+            "inventa",
+            "falsa",
+            "no verifica",
+            "plausible",
+            "no existe",
+            "pubmed",
+            "verificar",
+            "doi"
+          ],
+          "puntos": 14,
+          "criterio_aprobacion": "La respuesta debe mencionar al menos 3 de las palabras clave o conceptos equivalentes. Debe quedar claro que ChatGPT puede generar referencias inexistentes y que siempre se requiere verificacion en fuente primaria."
+        },
+        {
+          "id": "q8_privacidad_texto",
+          "numero": 8,
+          "tipo": "texto_corto",
+          "modulo_origen": "T-03",
+          "dificultad": "alta",
+          "pregunta": "Un paciente de 38 anos, con diagnóstico reciente de esquizofrenia, es atendido en tu consultorio privado. Necesitas generar una nota de evolucion con ChatGPT. Describe en 3-4 oraciones que datos incluirias y cuales excluirias del prompt, y por que.",
+          "respuesta_modelo": "Se excluiria el nombre completo, numero de cedula, direccion, lugar de trabajo, fecha exacta de diagnostico, y cualquier dato que permita identificar al paciente. Se incluirian los datos clinicamente relevantes: sexo del paciente, rango de edad (no la fecha exacta), diagnostico de esquizofrenia, medicacion actual, sintomas de la consulta y plan. El diagnostico psiquiatrico es especialmente sensible porque puede generar estigma social y laboral, por lo que la anonimizacion es critica.",
+          "palabras_clave_evaluacion": [
+            "nombre",
+            "cedula",
+            "anonimiz",
+            "identificar",
+            "excluir",
+            "sensible",
+            "estigma",
+            "psiquiatrico",
+            "clinicamente relevante",
+            "incluir diagnostico"
+          ],
+          "puntos": 14,
+          "criterio_aprobacion": "La respuesta debe identificar correctamente al menos 2 datos a excluir con justificacion, y mencionar que los datos clinicos relevantes se pueden incluir. Bonus si menciona el estigma especifico de los diagnosticos psiquiatricos."
+        }
+      ]
+    },
+    {
+      "id": "quiz_busqueda_bibliografica",
+      "titulo": "Quiz S-03: Busqueda Bibliografica con IA",
+      "modulos_cubiertos": ["S-03"],
+      "total_preguntas": 8,
+      "puntaje_maximo": 100,
+      "puntaje_minimo_aprobacion": 70,
+      "tiempo_estimado_minutos": 15,
+      "intentos_permitidos": 2,
+      "preguntas": [
+        {
+          "id": "q1_busqueda",
+          "numero": 1,
+          "tipo": "multiple_choice",
+          "modulo_origen": "S-03",
+          "dificultad": "media",
+          "pregunta": "Un medico necesita saber si la evidencia actual apoya el uso de aspirina en prevencion cardiovascular primaria en adultos sanos. Quiere una respuesta rapida con el consenso de la literatura. Cual herramienta es la mas adecuada?",
+          "opciones": [
+            {
+              "id": "a",
+              "texto": "Preguntar directamente a ChatGPT y usar la respuesta como referencia",
+              "es_correcta": false
+            },
+            {
+              "id": "b",
+              "texto": "Consensus (consensus.app), porque muestra el consenso de la literatura sobre la pregunta especifica",
+              "es_correcta": true
+            },
+            {
+              "id": "c",
+              "texto": "Google Scholar, porque tiene los articulos mas recientes",
+              "es_correcta": false
+            },
+            {
+              "id": "d",
+              "texto": "Wikipedia, porque tiene resumenes claros de temas medicos",
+              "es_correcta": false
+            }
+          ],
+          "explicacion_correcta": "Consensus esta disenado especificamente para mostrar el grado de acuerdo o desacuerdo en la literatura cientifica sobre una pregunta especifica. Muestra cuantos estudios dicen si, cuantos dicen no, y cuales son los mas relevantes, con citas verificables. Es ideal para preguntas de tipo 'la evidencia apoya o no esta intervencion.'",
+          "explicacion_incorrecta": "ChatGPT puede inventar referencias. Google Scholar lista articulos pero no los sintetiza. Wikipedia no es fuente de evidencia clinica primaria. Consensus fue construido especificamente para responder preguntas con nivel de consenso de la literatura.",
+          "puntos": 12
+        },
+        {
+          "id": "q2_busqueda",
+          "numero": 2,
+          "tipo": "multiple_choice",
+          "modulo_origen": "S-03",
+          "dificultad": "alta",
+          "pregunta": "Usas Elicit para buscar evidencia sobre un tratamiento especifico. La herramienta muestra un articulo con datos convincentes. Antes de citar ese articulo en una presentacion clinica, que debes hacer?",
+          "opciones": [
+            {
+              "id": "a",
+              "texto": "Citarlo directamente — Elicit solo muestra articulos reales de la literatura",
+              "es_correcta": false
+            },
+            {
+              "id": "b",
+              "texto": "Hacer click en el DOI del articulo y verificar que el abstract en la fuente original coincide con el que muestra Elicit",
+              "es_correcta": true
+            },
+            {
+              "id": "c",
+              "texto": "Verificar solo si el articulo es de una revista que no reconoces",
+              "es_correcta": false
+            },
+            {
+              "id": "d",
+              "texto": "Pegar el titulo en ChatGPT para que confirme que el articulo existe",
+              "es_correcta": false
+            }
+          ],
+          "explicacion_correcta": "Aunque Elicit es mas confiable que ChatGPT en no inventar referencias, la verificacion es buena practica siempre. El paso correcto es hacer click en el DOI, ir a la fuente original (la revista o PubMed), y verificar que el articulo existe, que los autores son correctos, y que el abstract que muestra Elicit coincide con el original.",
+          "explicacion_incorrecta": "Ninguna herramienta de IA es 100% libre de errores en referencias. Pegar el titulo en ChatGPT para confirmar no es verificacion valida — ChatGPT puede confirmar articulos que no existen. La verificacion correcta es ir a la fuente primaria (DOI, PubMed, la revista).",
+          "puntos": 12
+        },
+        {
+          "id": "q3_busqueda",
+          "numero": 3,
+          "tipo": "multiple_choice",
+          "modulo_origen": "S-03",
+          "dificultad": "media",
+          "pregunta": "Un colega dice: 'Segun ChatGPT, el estudio EMPA-REG OUTCOME demostro que empagliflozina reduce la mortalidad cardiovascular en un 38% en pacientes con DM2 e insuficiencia cardiaca.' Cual es la respuesta correcta?",
+          "opciones": [
+            {
+              "id": "a",
+              "texto": "Aceptar el dato porque ChatGPT es confiable para informacion de ensayos clinicos famosos",
+              "es_correcta": false
+            },
+            {
+              "id": "b",
+              "texto": "Verificar el dato directamente en el articulo original del EMPA-REG OUTCOME en PubMed o NEJM antes de aceptarlo o repetirlo",
+              "es_correcta": true
+            },
+            {
+              "id": "c",
+              "texto": "Aceptar el dato si dos modelos de IA diferentes dicen lo mismo",
+              "es_correcta": false
+            },
+            {
+              "id": "d",
+              "texto": "El dato es incorrecto — ChatGPT siempre inventa datos sobre ensayos clinicos especificos",
+              "es_correcta": false
+            }
+          ],
+          "explicacion_correcta": "Incluso para ensayos clinicos famosos, los LLMs pueden citar cifras incorrectas, mezclar resultados de diferentes subgrupos, o confundir endpoints primarios y secundarios. El EMPA-REG OUTCOME es un estudio real y el beneficio cardiovascular de empagliflozina es real, pero el porcentaje exacto debe verificarse en el articulo original. Siempre ir a la fuente primaria antes de repetir un dato numerico especifico.",
+          "explicacion_incorrecta": "ChatGPT puede cometer errores en datos numericos especificos incluso para estudios famosos. Que dos LLMs digan lo mismo no garantiza que sea correcto — pueden tener los mismos errores de entrenamiento. La verificacion siempre debe hacerse en la fuente primaria.",
+          "puntos": 12
+        },
+        {
+          "id": "q4_busqueda",
+          "numero": 4,
+          "tipo": "multiple_choice",
+          "modulo_origen": "S-03",
+          "dificultad": "baja",
+          "pregunta": "Para usar ChatGPT Plus como apoyo en la busqueda bibliografica de manera segura, el flujo correcto es:",
+          "opciones": [
+            {
+              "id": "a",
+              "texto": "Pedirle a ChatGPT que liste los 5 articulos mas importantes sobre un tema y usarlos directamente",
+              "es_correcta": false
+            },
+            {
+              "id": "b",
+              "texto": "Pedirle a ChatGPT que construya la estrategia de busqueda con operadores MeSH, ejecutar esa busqueda en PubMed, y verificar los articulos en PubMed",
+              "es_correcta": true
+            },
+            {
+              "id": "c",
+              "texto": "Subir el PDF de un articulo a ChatGPT y usarlo para extraer datos sin leer el articulo original",
+              "es_correcta": false
+            },
+            {
+              "id": "d",
+              "texto": "ChatGPT no es util para ningun aspecto de la busqueda bibliografica",
+              "es_correcta": false
+            }
+          ],
+          "explicacion_correcta": "ChatGPT es excelente para construir estrategias de busqueda con operadores booleanos y terminos MeSH — eso es trabajo de lenguaje, no de verificacion de hechos. La estrategia se ejecuta en PubMed (fuente verificada) y los articulos se leen en la fuente primaria. Esto combina la capacidad de lenguaje de la IA con la fiabilidad de PubMed.",
+          "explicacion_incorrecta": "Pedir a ChatGPT que liste articulos directamente para usarlos es arriesgado porque puede inventarlos. Extraer datos de PDF sin leer el articulo original no permite evaluacion critica de la metodologia. ChatGPT si tiene usos validos en busqueda bibliografica cuando se usa correctamente.",
+          "puntos": 12
+        },
+        {
+          "id": "q5_busqueda",
+          "numero": 5,
+          "tipo": "multiple_choice",
+          "modulo_origen": "S-03",
+          "dificultad": "media",
+          "pregunta": "Cual de las siguientes es una ventaja clave de Elicit sobre una busqueda convencional en PubMed?",
+          "opciones": [
+            {
+              "id": "a",
+              "texto": "Elicit tiene acceso a articulos que PubMed no tiene",
+              "es_correcta": false
+            },
+            {
+              "id": "b",
+              "texto": "Elicit realiza busqueda semantica — entiende el significado de la pregunta clinica y no solo las palabras clave exactas",
+              "es_correcta": true
+            },
+            {
+              "id": "c",
+              "texto": "Elicit es siempre mas rapido que PubMed",
+              "es_correcta": false
+            },
+            {
+              "id": "d",
+              "texto": "Elicit no requiere verificacion de resultados porque es 100% confiable",
+              "es_correcta": false
+            }
+          ],
+          "explicacion_correcta": "La busqueda semantica es la ventaja central de Elicit: entiende el significado de la pregunta clinica aunque no uses los terminos MeSH exactos. Una pregunta como 'que tan efectivo es el control intensivo de glucosa en diabeticos hospitalizados' encuentra los estudios relevantes aunque usen 'intensive glycemic management' o 'tight glucose control'. PubMed requiere conocer los terminos correctos para buscar eficientemente.",
+          "explicacion_incorrecta": "Elicit busca en bases de datos de literatura academica que se superponen con PubMed pero no son necesariamente las mismas. Ningun motor de busqueda IA es 100% confiable — siempre requiere verificacion. La velocidad depende de la consulta y la conexion.",
+          "puntos": 12
+        },
+        {
+          "id": "q6_busqueda",
+          "numero": 6,
+          "tipo": "multiple_choice",
+          "modulo_origen": "S-03",
+          "dificultad": "alta",
+          "pregunta": "Un medico usa ChatGPT Plus y le sube el PDF de un meta-analisis reciente sobre control de HbA1c. Le pide que extraiga los resultados principales. Esta forma de usar ChatGPT es:",
+          "opciones": [
+            {
+              "id": "a",
+              "texto": "Inapropiada — ChatGPT no puede leer PDFs",
+              "es_correcta": false
+            },
+            {
+              "id": "b",
+              "texto": "Aceptable como apoyo, siempre que el medico lea la seccion de resultados del articulo original para verificar que ChatGPT extrae la informacion correctamente",
+              "es_correcta": true
+            },
+            {
+              "id": "c",
+              "texto": "Completamente confiable — cuando le pasas el texto del articulo, ChatGPT no puede equivocarse",
+              "es_correcta": false
+            },
+            {
+              "id": "d",
+              "texto": "Solo util si el articulo esta en ingles",
+              "es_correcta": false
+            }
+          ],
+          "explicacion_correcta": "Analizar un PDF subido en ChatGPT Plus es una forma valida y eficiente de extraer informacion de un articulo largo. Sin embargo, incluso leyendo el texto fuente, ChatGPT puede malinterpretar tablas, confundir endpoints o extraer datos de la seccion equivocada. Siempre verificar los datos numericos clave en el articulo original. Funciona en espanol, aunque con mayor precision en ingles.",
+          "explicacion_incorrecta": "ChatGPT Plus si puede analizar PDFs. Proporcionar el texto original reduce el riesgo de alucinacion pero no lo elimina — ChatGPT puede seguir cometiendo errores de interpretacion. El idioma del articulo afecta la precision pero no hace la funcion inutilizable.",
+          "puntos": 12
+        },
+        {
+          "id": "q7_busqueda_texto",
+          "numero": 7,
+          "tipo": "texto_corto",
+          "modulo_origen": "S-03",
+          "dificultad": "alta",
+          "pregunta": "Describe en 2-3 oraciones cuando usarias Elicit en lugar de Consensus, y viceversa, con un ejemplo clinico concreto para cada caso.",
+          "respuesta_modelo": "Usaria Elicit cuando necesito datos cuantitativos especificos de estudios (por ejemplo: 'cual es la reduccion de HbA1c con semaglutide en pacientes con ERC estadio 3?'), porque extrae columnas de datos de multiples articulos de forma comparativa. Usaria Consensus cuando necesito saber si la evidencia en general apoya o contradice una intervencion (por ejemplo: 'hay consenso en la literatura sobre iniciar estatinas en mayores de 75 anos en prevencion primaria?'), porque muestra el grado de acuerdo entre estudios sin entrar en detalles numericos.",
+          "palabras_clave_evaluacion": [
+            "elicit",
+            "datos especificos",
+            "cuantitativo",
+            "ejemplo elicit",
+            "consensus",
+            "consenso",
+            "acuerdo",
+            "ejemplo consensus",
+            "diferencia"
+          ],
+          "puntos": 14,
+          "criterio_aprobacion": "La respuesta debe distinguir correctamente el uso de cada herramienta con al menos un ejemplo clinico concreto por herramienta. La diferencia clave es: Elicit para preguntas con datos especificos; Consensus para preguntas sobre grado de acuerdo de la literatura."
+        },
+        {
+          "id": "q8_busqueda_texto",
+          "numero": 8,
+          "tipo": "texto_corto",
+          "modulo_origen": "S-03",
+          "dificultad": "media",
+          "pregunta": "Explica en 2-3 oraciones por que Semantic Scholar es una alternativa relevante para medicos ecuatorianos frente a herramientas como Elicit, mencionando al menos una ventaja concreta.",
+          "respuesta_modelo": "Semantic Scholar es completamente gratuito y sin limite de busquedas, lo que lo hace accesible para el medico ecuatoriano que no puede o no quiere pagar subscripciones adicionales. Ofrece busqueda semantica similar a Elicit, con acceso a millones de articulos academicos, visualizacion de redes de citas, y alertas de nuevas publicaciones sobre temas de interes. Es una alternativa solida para quienes usan intensivamente la busqueda bibliografica.",
+          "palabras_clave_evaluacion": [
+            "gratuito",
+            "sin costo",
+            "accesible",
+            "busqueda semantica",
+            "alternativa",
+            "sin limite",
+            "allen institute",
+            "citas",
+            "millones articulos"
+          ],
+          "puntos": 14,
+          "criterio_aprobacion": "La respuesta debe mencionar que Semantic Scholar es gratuito (esta es la ventaja clave para el contexto ecuatoriano) y al menos una caracteristica funcional. No es necesario que mencione Allen Institute."
+        }
+      ]
+    }
+  ],
+  "rubrica_texto_corto": {
+    "descripcion": "Para preguntas de texto corto, el sistema cuenta coincidencias de palabras clave en la respuesta del alumno",
+    "calculo": "puntaje = round((coincidencias / total_keywords) * puntos_pregunta)",
+    "aprobacion_texto": "El alumno aprueba la pregunta de texto si obtiene al menos el 60% del puntaje de esa pregunta",
+    "evaluacion_ia_disponible": "En V1 del sistema, Claude API evaluara las respuestas de texto con la siguiente rubrica: '{pregunta}. Respuesta del alumno: {respuesta}. Evalua si la respuesta es correcta y completa segun estos criterios: {criterio_aprobacion}. Responde SOLO JSON: {\"puntaje\": 0-100, \"feedback\": \"...\", \"correcto\": true/false}'"
+  },
+  "metadata": {
+    "creado_por": "ITSEIA Academy - Departamento Academico",
+    "revision_medica": "pendiente",
+    "proxima_revision": "2026-09-18",
+    "idioma": "es-EC",
+    "alineacion": "LOPDP Ecuador, HIPAA (referencia), ADA 2025, normativa MSP"
+  }
+}
