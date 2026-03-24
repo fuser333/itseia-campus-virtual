@@ -87,6 +87,7 @@ export default function CatalogoPage() {
         .from("programs")
         .select("*")
         .eq("is_active", true)
+        .neq("type", "teacher_training")
         .order("type")
         .order("price", { ascending: true });
 

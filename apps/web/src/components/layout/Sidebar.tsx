@@ -7,11 +7,9 @@ import { createClient } from "@/lib/supabase/client";
 import type { Profile, UserRole } from "@/types/database";
 import {
   LayoutDashboard,
-  BookOpen,
   FlaskConical,
   User,
   CreditCard,
-  Award,
   Settings,
   Users,
   GraduationCap,
@@ -23,18 +21,14 @@ import {
   LogOut,
   Brain,
   Sparkles,
-  Briefcase,
-  UsersRound,
   Library,
   School,
-  Compass,
-  Rocket,
-  Zap,
   ClipboardCheck,
   BookMarked,
   CalendarDays,
   ShieldCheck,
   Layers,
+  BookOpen,
 } from "lucide-react";
 
 interface NavItem {
@@ -76,18 +70,6 @@ const navItems: NavItem[] = [
     roles: ALL_ROLES,
   },
   {
-    href: "/courses",
-    label: "Mis Cursos",
-    icon: BookOpen,
-    roles: [
-      "estudiante",
-      "docente",
-      "coordinacion",
-      "admin",
-      "super_admin",
-    ],
-  },
-  {
     href: "/carreras",
     label: "Mi Carrera",
     icon: School,
@@ -97,13 +79,7 @@ const navItems: NavItem[] = [
     href: "/ai-lab",
     label: "AI Lab",
     icon: FlaskConical,
-    roles: [
-      "estudiante",
-      "docente",
-      "coordinacion",
-      "admin",
-      "super_admin",
-    ],
+    roles: ALL_ROLES,
     badge: "Beta",
   },
   {
@@ -112,24 +88,18 @@ const navItems: NavItem[] = [
     icon: Layers,
     roles: ["estudiante", ...ADMIN_ROLES],
   },
+  // -- Academy --
   {
-    href: "/portfolio",
-    label: "Mi Portafolio",
-    icon: Briefcase,
-    roles: ["estudiante", ...ADMIN_ROLES],
+    href: "/biblioteca",
+    label: "Biblioteca",
+    icon: BookMarked,
+    roles: ALL_ROLES,
   },
   {
-    href: "/cohorte",
-    label: "Mi Cohorte",
-    icon: UsersRound,
-    roles: ["estudiante", ...ADMIN_ROLES],
-    badge: "Nuevo",
-  },
-  {
-    href: "/certificates",
-    label: "Certificados",
-    icon: Award,
-    roles: ["estudiante", ...ADMIN_ROLES],
+    href: "/calendario",
+    label: "Calendario",
+    icon: CalendarDays,
+    roles: ALL_ROLES,
   },
   {
     href: "/certificaciones",
@@ -138,30 +108,7 @@ const navItems: NavItem[] = [
     roles: ["estudiante", ...ADMIN_ROLES],
     badge: "Nuevo",
   },
-  {
-    href: "/biblioteca",
-    label: "Biblioteca",
-    icon: BookMarked,
-    roles: [
-      "estudiante",
-      "docente",
-      "coordinacion",
-      "admin",
-      "super_admin",
-    ],
-  },
-  {
-    href: "/calendario",
-    label: "Calendario",
-    icon: CalendarDays,
-    roles: [
-      "estudiante",
-      "docente",
-      "coordinacion",
-      "admin",
-      "super_admin",
-    ],
-  },
+  // -- Mi Cuenta --
   {
     href: "/payments",
     label: "Mis Pagos",
@@ -186,25 +133,6 @@ const navItems: NavItem[] = [
     label: "Carreras",
     icon: GraduationCap,
     roles: ALL_ROLES,
-  },
-  {
-    href: "/preuniversitario",
-    label: "Preuniversitario",
-    icon: Rocket,
-    roles: ALL_ROLES,
-  },
-  {
-    href: "/bootcamp",
-    label: "Bootcamp IA",
-    icon: Zap,
-    roles: ALL_ROLES,
-  },
-  {
-    href: "/b2b",
-    label: "B2B Empresas",
-    icon: Briefcase,
-    roles: ALL_ROLES,
-    badge: "Nuevo",
   },
   // -- Panel Docente --
   {
@@ -283,11 +211,11 @@ const navItems: NavItem[] = [
   },
 ];
 
-// Paths that belong to Explorar section
-const EXPLORAR_PATHS = ["/catalogo", "/preuniversitario", "/bootcamp", "/b2b"];
-// The /carreras link in Explorar has the same href as the Principal one,
-// so we deduplicate by using label check in Principal.
-const EXPLORAR_LABELS = ["Catalogo", "Carreras", "Preuniversitario", "Bootcamp IA", "B2B Empresas"];
+// Section membership by label
+const PRINCIPAL_LABELS = ["Dashboard", "Mi Carrera", "AI Lab", "Flashcards"];
+const ACADEMY_LABELS = ["Biblioteca", "Calendario", "Certificaciones"];
+const CUENTA_LABELS = ["Mis Pagos", "Mi Perfil"];
+const EXPLORAR_LABELS = ["Catalogo", "Carreras"];
 
 // Paths for Panel Docente
 const DOCENTE_PATHS = ["/admin/courses", "/admin/lessons", "/admin/sesiones", "/admin/entregas"];
@@ -295,18 +223,37 @@ const DOCENTE_PATHS = ["/admin/courses", "/admin/lessons", "/admin/sesiones", "/
 function getSections(role: UserRole) {
   const sections: { label: string; items: NavItem[] }[] = [];
 
-  // Principal — personal navigation (exclude Explorar items)
+  // Principal
   const principalItems = navItems.filter(
     (item) =>
       item.roles.includes(role) &&
-      !item.href.startsWith("/admin") &&
-      !EXPLORAR_LABELS.includes(item.label)
+      PRINCIPAL_LABELS.includes(item.label)
   );
   if (principalItems.length > 0) {
     sections.push({ label: "Principal", items: principalItems });
   }
 
-  // Explorar — public discovery links
+  // Academy
+  const academyItems = navItems.filter(
+    (item) =>
+      item.roles.includes(role) &&
+      ACADEMY_LABELS.includes(item.label)
+  );
+  if (academyItems.length > 0) {
+    sections.push({ label: "Academy", items: academyItems });
+  }
+
+  // Mi Cuenta
+  const cuentaItems = navItems.filter(
+    (item) =>
+      item.roles.includes(role) &&
+      CUENTA_LABELS.includes(item.label)
+  );
+  if (cuentaItems.length > 0) {
+    sections.push({ label: "Mi Cuenta", items: cuentaItems });
+  }
+
+  // Explorar — deduplicate: /carreras "Carreras" is separate from /carreras "Mi Carrera"
   const explorarItems = navItems.filter(
     (item) =>
       item.roles.includes(role) &&
@@ -316,7 +263,7 @@ function getSections(role: UserRole) {
     sections.push({ label: "Explorar", items: explorarItems });
   }
 
-  // Panel Docente — staff content management
+  // Panel Docente — staff content management (docente and above only)
   if (STAFF_ROLES.includes(role)) {
     const docenteItems = navItems.filter(
       (item) =>

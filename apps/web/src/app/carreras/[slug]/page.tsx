@@ -23,6 +23,16 @@ const typeLabels: Record<string, { singular: string; plural: string; backLabel: 
   bootcamp: { singular: "Bootcamp", plural: "Bootcamp", backLabel: "Todas las carreras" },
 };
 
+// Human-friendly descriptions (override DB jargon)
+const slugDescriptions: Record<string, string> = {
+  "inteligencia-artificial":
+    "Aprende a crear sistemas inteligentes: machine learning, deep learning, vision por computadora y modelos de lenguaje aplicados a proyectos reales.",
+  "ciencia-de-datos":
+    "Convierte datos en decisiones: Python, analisis predictivo, estadistica avanzada y visualizacion de datos para empresas.",
+  "big-data-inteligencia-negocio":
+    "Maneja datos a gran escala: SQL, procesamiento distribuido, dashboards empresariales y toma de decisiones basada en datos.",
+};
+
 // Period label per program type
 const periodLabel = (type: string): string => {
   if (type === "preuni") return "Semana";
@@ -175,7 +185,7 @@ export default async function ProgramPage({
       <div className="rounded-2xl bg-gradient-to-r from-[#1F2F58] to-[#0A1628] p-6 sm:p-8 text-white">
         <Link
           href="/carreras"
-          className="inline-flex items-center gap-1 text-sm text-white/40 hover:text-white/70 transition-colors mb-4"
+          className="inline-flex items-center gap-1 text-sm text-white/60 hover:text-white transition-colors mb-4"
         >
           <ArrowLeft className="size-3.5" />
           {labels.backLabel}
@@ -188,12 +198,12 @@ export default async function ProgramPage({
             <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">
               {career.name}
             </h1>
-            {career.description && (
-              <p className="mt-2 text-sm text-white/60 max-w-xl">
-                {career.description}
+            {(slugDescriptions[slug] || career.description) && (
+              <p className="mt-2 text-sm text-white/80 max-w-xl leading-relaxed">
+                {slugDescriptions[slug] || career.description}
               </p>
             )}
-            <div className="mt-3 flex flex-wrap items-center gap-3 text-xs text-white/40">
+            <div className="mt-3 flex flex-wrap items-center gap-3 text-xs text-white/70">
               <span className="flex items-center gap-1">
                 <Clock className="size-3" />
                 {semesters?.length || 0} {pType === "preuni" ? "semanas" : pType === "bootcamp" ? "meses" : "periodos"}
@@ -232,12 +242,12 @@ export default async function ProgramPage({
                       <CardTitle className="text-base font-bold text-[#0A1628]">
                         {semester.name || `${periodLabel(pType)} ${semester.number}`}
                       </CardTitle>
-                      <div className="mt-0.5 flex items-center gap-2 text-xs text-[#1F2F58]/40">
+                      <div className="mt-0.5 flex items-center gap-2 text-xs text-[#1F2F58]/60">
                         <span className="flex items-center gap-1">
                           <BookOpen className="size-3" />
                           {semSubjects.length} materias
                         </span>
-                        <span className="size-1 rounded-full bg-[#1F2F58]/20" />
+                        <span className="size-1 rounded-full bg-[#1F2F58]/30" />
                         <span>600h</span>
                       </div>
                     </div>
@@ -281,10 +291,10 @@ export default async function ProgramPage({
                           )}
                         </div>
 
-                        <div className="mt-2 flex items-center gap-1.5 text-[10px] text-[#1F2F58]/40">
+                        <div className="mt-2 flex items-center gap-1.5 text-[10px] text-[#1F2F58]/60">
                           <Clock className="size-3" />
                           <span>{subject.hours_total}h</span>
-                          <span className="text-[#1F2F58]/15">|</span>
+                          <span className="text-[#1F2F58]/30">|</span>
                           <span>{subject.hours_docencia}D/{subject.hours_practica}P/{subject.hours_autonomo}A</span>
                         </div>
 
@@ -304,10 +314,10 @@ export default async function ProgramPage({
                         {user && (
                           <div className="mt-auto pt-3 space-y-1">
                             <div className="flex items-center justify-between">
-                              <span className="text-[10px] text-[#1F2F58]/40">
+                              <span className="text-[10px] text-[#1F2F58]/60">
                                 {progress?.completed || 0}/{progress?.total || 0} sesiones
                               </span>
-                              <span className="text-[10px] font-semibold text-[#1F2F58]/50">
+                              <span className="text-[10px] font-semibold text-[#1F2F58]/70">
                                 {progressPercent}%
                               </span>
                             </div>
@@ -342,7 +352,7 @@ export default async function ProgramPage({
           <h3 className="text-lg font-semibold text-[#0A1628]">
             Estructura en preparacion
           </h3>
-          <p className="mt-1 max-w-sm text-sm text-[#1F2F58]/50">
+          <p className="mt-1 max-w-sm text-sm text-[#1F2F58]/65">
             El contenido de esta carrera se esta configurando. Estara disponible pronto.
           </p>
         </div>

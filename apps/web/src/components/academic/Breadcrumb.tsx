@@ -21,8 +21,8 @@ export default function Breadcrumb({ items, className }: BreadcrumbProps) {
       className={cn("flex items-center gap-1.5 text-sm", className)}
     >
       <Link
-        href="/dashboard"
-        className="flex items-center gap-1 text-[#1F2F58]/40 transition-colors hover:text-[#1F2F58]"
+        href="/"
+        className="flex items-center gap-1 text-[#1F2F58]/55 transition-colors hover:text-[#1F2F58] font-medium"
       >
         <Home className="size-3.5" />
         <span className="hidden sm:inline">Inicio</span>
@@ -33,14 +33,14 @@ export default function Breadcrumb({ items, className }: BreadcrumbProps) {
 
         return (
           <span key={index} className="flex items-center gap-1.5">
-            <ChevronRight className="size-3 text-[#1F2F58]/20" />
+            <ChevronRight className="size-3 text-[#1F2F58]/35" />
             {isLast || !item.href ? (
               <span
                 className={cn(
                   "truncate max-w-[200px]",
                   isLast
-                    ? "font-medium text-[#0A1628]"
-                    : "text-[#1F2F58]/40"
+                    ? "font-semibold text-[#0A1628]"
+                    : "text-[#1F2F58]/55 font-medium"
                 )}
               >
                 {item.label}
@@ -48,7 +48,7 @@ export default function Breadcrumb({ items, className }: BreadcrumbProps) {
             ) : (
               <Link
                 href={item.href}
-                className="truncate max-w-[200px] text-[#1F2F58]/40 transition-colors hover:text-[#1F2F58]"
+                className="truncate max-w-[200px] text-[#1F2F58]/55 font-medium transition-colors hover:text-[#1F2F58]"
               >
                 {item.label}
               </Link>
