@@ -1,0 +1,62 @@
+{
+  "materia": "Matematicas II (Algebra Lineal)",
+  "periodo": 2,
+  "recursos": [
+    {
+      "titulo": "Algebra Lineal con Python - Blog de Raul Lopez Briega",
+      "url": "https://relopezbriega.github.io/blog/2015/06/14/algebra-lineal-con-python/",
+      "tipo": "tutorial",
+      "idioma": "español",
+      "descripcion": "Tutorial completo en espanol sobre algebra lineal usando Python y NumPy. Cubre vectores, matrices, operaciones matriciales, sistemas de ecuaciones lineales, determinantes, matrices inversas, eigenvalores y eigenvectores, y descomposicion de matrices. Incluye codigo ejecutable en Jupyter Notebook. Autor: Raul Lopez Briega, analista de datos de Argentina. Referencia clasica en la comunidad Python hispanohablante.",
+      "fuente_latam": true,
+      "fuente_origen": "Argentina",
+      "gratuito": true,
+      "actualizado": "2023"
+    },
+    {
+      "titulo": "Curso de Algebra Lineal para Machine Learning - Platzi",
+      "url": "https://platzi.com/cursos/algebra-ml/",
+      "tipo": "tutorial",
+      "idioma": "español",
+      "descripcion": "Platzi (Colombia) ofrece este curso especializado en algebra lineal aplicada a IA. Instructor Daniel Erazo (AI Software Engineer). Cubre tensores, vectores, matrices, producto punto, normas L1/L2, regresion lineal, SVD y embeddings con NumPy y Matplotlib en Google Colab. 16 clases, rating 4.8 estrellas. Incluye repositorio GitHub con notebooks.",
+      "fuente_latam": true,
+      "fuente_origen": "Platzi (Colombia)",
+      "gratuito": false,
+      "url_github": "https://github.com/platzi/algebra-aplicada",
+      "actualizado": "2024"
+    },
+    {
+      "titulo": "Numpy - Tutorial de Algebra Lineal - CertiDevs",
+      "url": "https://certidevs.com/tutorial-numpy-operaciones-de-algebra-lineal",
+      "tipo": "tutorial",
+      "idioma": "español",
+      "descripcion": "Tutorial practico en espanol sobre operaciones de algebra lineal con NumPy: creacion de matrices, multiplicacion, calculo de determinantes, matrices inversas, eigenvalores, descomposicion LU y SVD. Con codigo Python ejecutable paso a paso. CertiDevs es plataforma de aprendizaje hispanohablante con contenido actualizado.",
+      "fuente_latam": false,
+      "fuente_origen": "España",
+      "gratuito": true,
+      "actualizado": "2024"
+    },
+    {
+      "titulo": "Apuntes de Algebra Lineal con Python - Anthony Manotoa",
+      "url": "https://deepnote.com/app/anthonymanotoa/Apuntes-de-Algebra-Lineal-con-Python-bf71a544-4b58-430c-9e81-79153c6ef73d",
+      "tipo": "tutorial",
+      "idioma": "español",
+      "descripcion": "Apuntes interactivos en Deepnote (notebook online) de algebra lineal con Python, elaborados por un estudiante ecuatoriano. Cubre vectores, matrices, transformaciones lineales, sistemas de ecuaciones y aplicaciones a datos. Perfectamente alineado con el contexto del estudiante ecuatoriano de ITSEIA.",
+      "fuente_latam": true,
+      "fuente_origen": "Ecuador",
+      "gratuito": true,
+      "actualizado": "2023"
+    },
+    {
+      "titulo": "Matematicas para Machine Learning - Dev.to (en español)",
+      "url": "https://dev.to/ruizleandro/matematicas-para-machine-learning-2lh9",
+      "tipo": "tutorial",
+      "idioma": "español",
+      "descripcion": "Articulo en espanol publicado en Dev.to que explica los conceptos matematicos fundamentales para ML incluyendo algebra lineal, calculo y estadistica. El autor Leandro Ruiz explica intuitivamente por que el algebra lineal es la columna vertebral del machine learning, con ejemplos de como las redes neuronales usan multiplicacion de matrices. Conexion directa con las materias de IA del Periodo 3.",
+      "fuente_latam": true,
+      "fuente_origen": "Latinoamerica",
+      "gratuito": true,
+      "actualizado": "2023"
+    }
+  ]
+}

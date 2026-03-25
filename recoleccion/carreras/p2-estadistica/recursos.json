@@ -1,0 +1,63 @@
+{
+  "materia": "Estadistica Inferencial",
+  "periodo": 2,
+  "recursos": [
+    {
+      "titulo": "Estadistica Inferencial con Python - Blog Platzi",
+      "url": "https://platzi.com/blog/estadistica-inferencial-con-python-intervalos-de-confianza-y-prueba-de-hipotesis/",
+      "tipo": "tutorial",
+      "idioma": "español",
+      "descripcion": "Articulo tecnico gratuito de Platzi en espanol que explica estadistica inferencial con Python. Cubre como obtener conclusiones sobre una poblacion a partir de una muestra, intervalos de confianza usando scipy.stats, prueba de hipotesis y tecnica de Bootstrapping. Incluye codigo Python ejecutable. Platzi es de Colombia y el contenido esta orientado al contexto latinoamericano.",
+      "fuente_latam": true,
+      "fuente_origen": "Platzi (Colombia)",
+      "gratuito": true,
+      "actualizado": "2024"
+    },
+    {
+      "titulo": "Estadistica Inferencial para Machine Learning - Libro online (Drs Alberich y Mir)",
+      "url": "https://joanby.github.io/estadistica-inferencial/",
+      "tipo": "tutorial",
+      "idioma": "español",
+      "descripcion": "Libro online gratuito con mas de 40 horas de contenido sobre estadistica inferencial para ML e IA con R y Python. Autores: Drs. R. Alberich y A. Mir. Cubre distribuciones de probabilidad, estimacion de parametros, contrastes de hipotesis, regresion, correlacion y modelos estadisticos. Incluye repositorio GitHub con todo el codigo. Recurso academico de referencia en el mundo hispanohablante.",
+      "fuente_latam": false,
+      "fuente_origen": "España (Universidad de las Islas Baleares)",
+      "gratuito": true,
+      "url_github": "https://github.com/joanby/estadistica-inferencial",
+      "actualizado": "2023"
+    },
+    {
+      "titulo": "Computacion Cientifica con Python - Estadistica Inferencial",
+      "url": "https://phuijse.github.io/PythonBook/contents/statistics/model_fitting.html",
+      "tipo": "tutorial",
+      "idioma": "español",
+      "descripcion": "Libro interactivo en espanol sobre computacion cientifica con Python, con capitulo dedicado a estadistica inferencial y ajuste de modelos. Usa scipy.stats para pruebas de hipotesis y estimacion. Elaborado por Pablo Huijse de la Universidad Austral de Chile. Contenido academico riguroso con ejemplos de datos reales.",
+      "fuente_latam": true,
+      "fuente_origen": "Chile (Universidad Austral)",
+      "gratuito": true,
+      "actualizado": "2024"
+    },
+    {
+      "titulo": "Dataset ENEMDU 2024 - INEC Ecuador (Encuesta Empleo)",
+      "url": "https://www.ecuadorencifras.gob.ec/empleo-desempleo-y-subempleo/",
+      "tipo": "dataset",
+      "idioma": "español",
+      "descripcion": "Datos reales de la Encuesta Nacional de Empleo, Desempleo y Subempleo (ENEMDU) del INEC Ecuador. Disponible en CSV para descarga. Incluye variables de empleo, desempleo, subempleo, salarios y caracteristicas poblacionales. Ideal para practicar estadistica inferencial con datos reales ecuatorianos: pruebas de hipotesis sobre diferencias salariales, intervalos de confianza de tasas de empleo por provincia, etc.",
+      "fuente_latam": true,
+      "fuente_origen": "INEC Ecuador (gobierno)",
+      "gratuito": true,
+      "url_datos_abiertos": "http://catalogo.datosabiertos.gob.ec/dataset/encuesta-nacional-de-empleo-desempleo-y-subempleo-enemdu-inec",
+      "actualizado": "2024"
+    },
+    {
+      "titulo": "Fundamentos de Estadistica con Python - GitHub FrancoManca",
+      "url": "https://github.com/francomanca93/fundamentos-de-estadistica-con-python",
+      "tipo": "tutorial",
+      "idioma": "español",
+      "descripcion": "Repositorio GitHub completo de un curso de Fundamentos de Estadistica y Analisis de Datos con Python. Cubre conceptos basicos, analisis exploratorio, probabilidad, estadistica analitica, inferencia estadistica desde muestras y modelos estadisticos. Incluye notebook interactivos y un proyecto de prediccion de supervivencia en el Titanic. Autor latinoamericano.",
+      "fuente_latam": true,
+      "fuente_origen": "Latinoamerica",
+      "gratuito": true,
+      "actualizado": "2023"
+    }
+  ]
+}
