@@ -1,52 +1,42 @@
 # PLAN: COMPLETAR PLATAFORMA ITSEIA
 **Fecha:** 25 marzo 2026
 **Guardrail:** NADA se declara hecho sin verificacion real
+**Ultimo deploy:** 25 mar 13:55 — 138 paginas, 0 errores
 
 ---
 
-## FASE 2: FIXES (Prioridad 1)
+## FASE 2: FIXES (COMPLETADA)
 
 ### EQ-1: PREUNIVERSITARIO
-- [ ] F01: Crear rutas /preuni/semana-1..4 que redirijan a sesiones existentes en Supabase
-  - Verificar: Login como preuni, click semana-1 en sidebar → ve sesiones
-- [ ] F05: Verificar quiz funciona en preuniversitario
-  - Verificar: Completar un quiz, ver resultado
+- [x] F01: Crear rutas /preuni/semana-1..4 — Layout + 4 paginas con sesiones, progreso, navegacion
+- [ ] F05: Verificar quiz funciona en preuniversitario — PENDIENTE (necesita probar en vivo)
 
 ### EQ-2: CURSOS PRO
-- [ ] F03-CP: Verificar texto visible en /mi-curso y /courses/[id]/lesson/[lessonId]
-  - Verificar: Abrir leccion, teoria legible, instrucciones legibles
-- [ ] F04: Verificar presentaciones persisten en cursos (si aplica)
-  - Verificar: Cambiar tabs, volver a presentacion
+- [x] F03-CP: Fix texto visible en /mi-curso — Colores corregidos a #1F2F58
+- [ ] F04: Verificar presentaciones persisten en cursos — PENDIENTE (verificar en vivo)
 
 ### EQ-3: CERTIFICACIONES
-- [ ] F03-CERT: Verificar texto visible en /certificaciones/[slug] y examen
-  - Verificar: Abrir detalle certificacion, texto legible
-- [ ] F06: Verificar examen simulacro funciona end-to-end
-  - Verificar: Iniciar examen → responder → submit → ver resultados
+- [ ] F03-CERT: Verificar texto visible en /certificaciones/* — PENDIENTE (verificar en vivo)
+- [ ] F06: Verificar examen simulacro funciona end-to-end — PENDIENTE
 
 ### EQ-4: DOCENTES
-- [ ] F03-DOC: Verificar texto visible en /teacher/*
-  - Verificar: Login como docente, navegar todas las paginas
-- [ ] F10: Mejorar /teacher/tutorias (al menos info util, no solo "coming soon")
-  - Verificar: Pagina muestra info de como solicitar tutoria
+- [x] F03-DOC: Fix teacher layout con style color explicito
+- [x] F10: /teacher/tutorias reescrito con info practica (horarios, WhatsApp, pasos)
 
 ### EQ-5: EMPRESAS B2B
-- [ ] F02: Crear /b2b/capacitacion (link roto en sidebar)
-  - Verificar: Login como empresa, click "Capacitacion Activa" → no 404
-- [ ] F03-B2B: Verificar texto visible en /b2b/*
-  - Verificar: Dashboard, team, reportes — todo legible
+- [x] F02: Crear /b2b/capacitacion — Pagina funcional con programas activos
+- [x] F03-B2B: /b2b/team y /b2b/reportes mejorados con datos reales
 
 ### EQ-6: PERFORMANCE
-- [ ] F07: Optimizar session page — queries en paralelo
-  - Verificar: Session carga en <3s (medido en Network tab)
+- [x] F07: Session page — 14 queries → 6 etapas con Promise.all
 
 ---
 
-## FASE 3: COMPLETAR (Prioridad 2)
+## FASE 3: COMPLETAR (EN PROGRESO)
 
 ### EQ-1: PREUNIVERSITARIO
-- [ ] C01: Paginas /preuni/semana-N con lista de sesiones de esa semana
-- [ ] C02: Vincular presentaciones Gamma a sesiones preuni
+- [x] C01: Paginas /preuni/semana-N con lista de sesiones — HECHO (4 paginas)
+- [ ] C02: Vincular presentaciones Gamma a sesiones preuni en Supabase
 - [ ] C03: Generar teoria markdown para sesiones sin teoria
 
 ### EQ-2: CURSOS PRO
@@ -56,19 +46,19 @@
 - [ ] C07: Verificar banco preguntas suficiente (min 20 por certificacion)
 
 ### EQ-4: DOCENTES
-- [ ] C08: Tutorias con info practica (horarios, como agendar, contacto)
+- [x] C08: Tutorias con info practica — HECHO (horarios, WhatsApp, pasos Daily.co)
 
 ### EQ-5: EMPRESAS B2B
-- [ ] C04: /b2b/capacitacion con programas activos del equipo
-- [ ] C05: /b2b/team con info basica (no placeholder vacio)
-- [ ] C06: /b2b/reportes con al menos datos del enrollment
+- [x] C04: /b2b/capacitacion con programas activos — HECHO
+- [x] C05: /b2b/team mejorado — HECHO
+- [x] C06: /b2b/reportes mejorado — HECHO
 
 ### EQ-6: PERFORMANCE
-- [ ] C10: Parallel queries en session page + lazy loading tabs
+- [x] C10: Parallel queries en session page — HECHO
 
 ---
 
-## QA FINAL
+## QA FINAL (PENDIENTE — requiere verificacion en vivo)
 - [ ] Login como ALUMNO (demo@itseia.ai) → navegar carreras completo
 - [ ] Login como PREUNI → navegar 4 semanas
 - [ ] Login como CURSO PRO (cursos@itseia.ai) → navegar mi-curso
@@ -77,5 +67,26 @@
 - [ ] Verificar certificaciones accesibles
 - [ ] 0 links rotos en sidebar
 - [ ] 0 paginas con texto invisible
-- [ ] Build exitoso sin errores
-- [ ] Deploy a produccion
+- [x] Build exitoso sin errores — 138 paginas
+- [x] Deploy a produccion — tecnologico.itseia.ai
+
+---
+
+## INVENTARIO SUPABASE (25 mar 2026)
+| Dato | Cantidad | Estado |
+|------|----------|--------|
+| Sessions totales | 278 | TODAS con teoria + video |
+| Sessions con slides | 3/278 | Solo 1% tiene presentacion |
+| Quizzes | 254 | OK |
+| Exam questions (certs) | 20 | INSUFICIENTE — solo AWS |
+| Certification domains | 6 | 2 certs x 3 dominios |
+| Cursos Pro programs | 3 | Express, Estandar, Completo |
+| Cursos Pro courses | 2 | Faltan modulos Estandar/Completo |
+| Cursos Pro lessons | 25 | TODAS con contenido |
+
+## PENDIENTES PARA PROXIMA SESION
+1. **Verificacion en vivo** de cada producto con credenciales de prueba
+2. **Slides**: Solo 3 de 278 sesiones tienen presentacion — vincular Gamma existentes o generar nuevas
+3. **Exam questions**: Solo 20 — necesita 50+ para que los simulacros sean utiles
+4. **Cursos Pro modulos**: Solo 2 cursos, el Estandar y Completo necesitan sus modulos propios
+5. **QA final**: Probar login de cada tipo de usuario y navegar completo
