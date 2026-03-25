@@ -1,9 +1,132 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 import PublicHeader from "@/components/layout/PublicHeader";
 
 // ─────────────────────────────────────────────
 // /empresas-info — Sales landing for B2B corporate training
 // ─────────────────────────────────────────────
+
+// EmailJS config
+const EMAILJS_SERVICE = "service_yqv4dts";
+const EMAILJS_TEMPLATE = "template_mallas";
+const EMAILJS_KEY = "A7cQPi8jRCDyLrHQr";
+
+function ContactoB2BForm({ producto }: { producto: string }) {
+  const [nombre, setNombre] = useState("");
+  const [whatsapp, setWhatsapp] = useState("");
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<"idle" | "sending" | "ok" | "error">("idle");
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!nombre || !whatsapp || !email) return;
+    setStatus("sending");
+    try {
+      const res = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          service_id: EMAILJS_SERVICE,
+          template_id: EMAILJS_TEMPLATE,
+          user_id: EMAILJS_KEY,
+          template_params: {
+            nombre,
+            whatsapp,
+            email,
+            producto,
+            mensaje: `Nueva solicitud B2B desde tecnologico.itseia.ai — Producto: ${producto}`,
+          },
+        }),
+      });
+      if (res.ok) {
+        setStatus("ok");
+        setNombre(""); setWhatsapp(""); setEmail("");
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
+  }
+
+  if (status === "ok") {
+    return (
+      <div className="rounded-2xl border border-[#FBBC0C]/30 p-8 text-center" style={{ background: "rgba(251,188,12,0.06)" }}>
+        <div className="w-12 h-12 rounded-full bg-[#FBBC0C]/20 flex items-center justify-center mx-auto mb-4">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#FBBC0C" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+            <path d="M20 6L9 17l-5-5"/>
+          </svg>
+        </div>
+        <p className="text-white font-bold mb-1" style={{ fontFamily: "var(--font-space-grotesk)" }}>Solicitud recibida</p>
+        <p className="text-white/55 text-sm">Te enviamos una propuesta en menos de 24 horas. Tambien puedes escribirnos por WhatsApp.</p>
+        <a href="https://wa.me/593959892034?text=Hola%2C%20quiero%20una%20propuesta%20corporativa%20de%20ITSEIA" target="_blank" rel="noopener noreferrer" className="inline-block mt-4 text-[#25D366] text-sm font-semibold hover:underline">Escribir por WhatsApp →</a>
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="rounded-2xl border border-[#FBBC0C]/25 p-8" style={{ background: "linear-gradient(145deg, rgba(251,188,12,0.08) 0%, rgba(31,47,88,0.3) 100%)", backdropFilter: "blur(12px)" }}>
+      <div className="inline-flex items-center gap-2 bg-[#FBBC0C]/10 border border-[#FBBC0C]/20 rounded-full px-4 py-1.5 mb-6">
+        <span className="text-[#FBBC0C] text-xs font-bold uppercase tracking-wide">Solicitar propuesta corporativa</span>
+      </div>
+
+      <div className="grid sm:grid-cols-2 gap-4 mb-4">
+        <div>
+          <label className="block text-white/60 text-xs font-semibold uppercase tracking-wide mb-1.5">Nombre completo</label>
+          <input
+            type="text"
+            value={nombre}
+            onChange={e => setNombre(e.target.value)}
+            placeholder="Tu nombre"
+            required
+            className="w-full bg-white/[0.06] border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-[#FBBC0C]/50 transition-colors"
+          />
+        </div>
+        <div>
+          <label className="block text-white/60 text-xs font-semibold uppercase tracking-wide mb-1.5">WhatsApp</label>
+          <input
+            type="tel"
+            value={whatsapp}
+            onChange={e => setWhatsapp(e.target.value)}
+            placeholder="+593 99 999 9999"
+            required
+            className="w-full bg-white/[0.06] border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-[#FBBC0C]/50 transition-colors"
+          />
+        </div>
+      </div>
+      <div className="mb-4">
+        <label className="block text-white/60 text-xs font-semibold uppercase tracking-wide mb-1.5">Email empresarial</label>
+        <input
+          type="email"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+          placeholder="tu@empresa.com"
+          required
+          className="w-full bg-white/[0.06] border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-[#FBBC0C]/50 transition-colors"
+        />
+      </div>
+      <input type="hidden" value={producto} />
+
+      <button
+        type="submit"
+        disabled={status === "sending"}
+        className="w-full bg-[#FBBC0C] text-[#0A1628] py-3.5 rounded-xl font-bold text-sm hover:bg-[#E5AB00] transition-all disabled:opacity-60 disabled:cursor-not-allowed shadow-xl shadow-[#FBBC0C]/20 mb-4"
+      >
+        {status === "sending" ? "Enviando..." : "Solicitar propuesta en 24h"}
+      </button>
+
+      {status === "error" && <p className="text-red-400 text-xs text-center mb-3">Error al enviar. Escribe por WhatsApp directamente.</p>}
+
+      <div className="flex items-center justify-center gap-4 pt-2">
+        <a href="https://wa.me/593959892034?text=Hola%2C%20quiero%20una%20propuesta%20corporativa%20de%20ITSEIA" target="_blank" rel="noopener noreferrer" className="text-[#25D366] text-sm font-semibold hover:underline">WhatsApp: +593 95 989 2034</a>
+        <span className="text-white/20">|</span>
+        <a href="mailto:administracion@itseia.ai?subject=Propuesta%20Corporativa%20ITSEIA" className="text-[#73B8E7] text-sm hover:underline">administracion@itseia.ai</a>
+      </div>
+    </form>
+  );
+}
 
 const COMPANIES = [
   {
@@ -176,12 +299,12 @@ export default function EmpresasInfoPage() {
             >
               Solicitar propuesta corporativa
             </a>
-            <Link
-              href="/login?redirect=b2b"
+            <a
+              href="#propuesta"
               className="border border-white/15 text-white/80 px-7 py-3.5 rounded-xl font-semibold text-base hover:bg-white/[0.05] transition-all"
             >
-              Iniciar sesion — Dashboard empresarial
-            </Link>
+              Solicitar propuesta
+            </a>
           </div>
         </div>
       </section>
@@ -259,7 +382,7 @@ export default function EmpresasInfoPage() {
                       href={`https://${c.url}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-white/25 text-xs hover:text-white/50 transition-colors"
+                      className="text-white/35 text-xs hover:text-white/60 transition-colors"
                     >
                       {c.url}
                     </a>
@@ -268,7 +391,7 @@ export default function EmpresasInfoPage() {
                   <p className="text-white/70 font-semibold text-sm mb-3">{c.tagline}</p>
                   <p className="text-white/45 text-sm leading-relaxed mb-6">{c.desc}</p>
 
-                  <div className="grid grid-cols-3 gap-3">
+                  <div className="grid grid-cols-3 gap-3 mb-5">
                     {c.stats.map((s) => (
                       <div key={s.label} className="text-center">
                         <p
@@ -281,6 +404,16 @@ export default function EmpresasInfoPage() {
                       </div>
                     ))}
                   </div>
+
+                  <a
+                    href={`https://${c.url}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-sm font-semibold transition-all hover:gap-3"
+                    style={{ color: c.color }}
+                  >
+                    Visitar sitio →
+                  </a>
                 </div>
               </div>
             ))}
@@ -395,15 +528,15 @@ export default function EmpresasInfoPage() {
                   Un solo panel para ver como avanza cada persona en tu equipo: modulos completados,
                   tiempo de estudio, certificados obtenidos y ROI del programa.
                 </p>
-                <Link
-                  href="/login?redirect=b2b"
+                <a
+                  href="#propuesta"
                   className="inline-flex items-center gap-2 bg-[#73B8E7] text-[#0A1628] px-6 py-3 rounded-xl font-bold text-sm hover:bg-[#5AA8D8] transition-all"
                 >
-                  Acceder al Dashboard Corporativo
+                  Solicitar propuesta corporativa
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
                     <path d="M5 12h14M12 5l7 7-7 7"/>
                   </svg>
-                </Link>
+                </a>
               </div>
               <div className="space-y-3">
                 {[
@@ -451,9 +584,9 @@ export default function EmpresasInfoPage() {
         </div>
       </section>
 
-      {/* ── FOOTER CTA ── */}
-      <section className="py-20 px-5">
-        <div className="max-w-3xl mx-auto text-center">
+      {/* ── FOOTER CTA + PROPUESTA ── */}
+      <section id="propuesta" className="py-20 px-5">
+        <div className="max-w-2xl mx-auto text-center">
           <h2
             className="text-3xl md:text-4xl font-extrabold text-white mb-4"
             style={{ fontFamily: "var(--font-space-grotesk)" }}
@@ -465,22 +598,7 @@ export default function EmpresasInfoPage() {
           <p className="text-white/45 mb-8">
             Solicita una propuesta en menos de 24 horas.
           </p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <a
-              href="https://wa.me/593959892034?text=Hola%2C%20quiero%20solicitar%20una%20propuesta%20corporativa%20de%20ITSEIA"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-[#FBBC0C] text-[#0A1628] px-8 py-4 rounded-xl font-bold text-base hover:bg-[#E5AB00] transition-all hover:scale-[1.02] shadow-xl shadow-[#FBBC0C]/25"
-            >
-              Solicitar propuesta corporativa
-            </a>
-            <a
-              href="mailto:administracion@itseia.ai?subject=Propuesta%20Corporativa%20ITSEIA"
-              className="border border-white/15 text-white/80 px-8 py-4 rounded-xl font-semibold text-base hover:bg-white/[0.05] transition-all"
-            >
-              Enviar por email
-            </a>
-          </div>
+          <ContactoB2BForm producto="empresa-corporativo" />
         </div>
       </section>
     </div>

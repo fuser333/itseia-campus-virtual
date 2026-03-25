@@ -1,9 +1,127 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 import PublicHeader from "@/components/layout/PublicHeader";
 
 // ─────────────────────────────────────────────
 // /docentes-info — Sales landing for teacher portal
 // ─────────────────────────────────────────────
+
+// EmailJS config
+const EMAILJS_SERVICE = "service_yqv4dts";
+const EMAILJS_TEMPLATE = "template_mallas";
+const EMAILJS_KEY = "A7cQPi8jRCDyLrHQr";
+
+function PostulacionForm({ producto }: { producto: string }) {
+  const [nombre, setNombre] = useState("");
+  const [whatsapp, setWhatsapp] = useState("");
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<"idle" | "sending" | "ok" | "error">("idle");
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!nombre || !whatsapp || !email) return;
+    setStatus("sending");
+    try {
+      const res = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          service_id: EMAILJS_SERVICE,
+          template_id: EMAILJS_TEMPLATE,
+          user_id: EMAILJS_KEY,
+          template_params: {
+            nombre,
+            whatsapp,
+            email,
+            producto,
+            mensaje: `Nueva postulacion docente desde tecnologico.itseia.ai — Producto: ${producto}`,
+          },
+        }),
+      });
+      if (res.ok) {
+        setStatus("ok");
+        setNombre(""); setWhatsapp(""); setEmail("");
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
+  }
+
+  if (status === "ok") {
+    return (
+      <div className="rounded-2xl border border-[#73B8E7]/30 p-8 text-center" style={{ background: "rgba(115,184,231,0.06)" }}>
+        <div className="w-12 h-12 rounded-full bg-[#73B8E7]/20 flex items-center justify-center mx-auto mb-4">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#73B8E7" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+            <path d="M20 6L9 17l-5-5"/>
+          </svg>
+        </div>
+        <p className="text-white font-bold mb-1" style={{ fontFamily: "var(--font-space-grotesk)" }}>Postulacion recibida</p>
+        <p className="text-white/55 text-sm">El equipo academico se pondra en contacto contigo en menos de 48 horas.</p>
+        <a href="https://wa.me/593959892034?text=Hola%2C%20me%20postule%20como%20docente%20en%20ITSEIA" target="_blank" rel="noopener noreferrer" className="inline-block mt-4 text-[#25D366] text-sm font-semibold hover:underline">Escribir por WhatsApp →</a>
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="rounded-2xl border border-[#73B8E7]/25 p-8" style={{ background: "linear-gradient(145deg, rgba(115,184,231,0.08) 0%, rgba(31,47,88,0.3) 100%)", backdropFilter: "blur(12px)" }}>
+      <div className="inline-flex items-center gap-2 bg-[#73B8E7]/10 border border-[#73B8E7]/20 rounded-full px-4 py-1.5 mb-6">
+        <span className="text-[#73B8E7] text-xs font-bold uppercase tracking-wide">Postulacion docente ITSEIA</span>
+      </div>
+
+      <div className="grid sm:grid-cols-2 gap-4 mb-4">
+        <div>
+          <label className="block text-white/60 text-xs font-semibold uppercase tracking-wide mb-1.5">Nombre completo</label>
+          <input
+            type="text"
+            value={nombre}
+            onChange={e => setNombre(e.target.value)}
+            placeholder="Tu nombre"
+            required
+            className="w-full bg-white/[0.06] border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-[#73B8E7]/50 transition-colors"
+          />
+        </div>
+        <div>
+          <label className="block text-white/60 text-xs font-semibold uppercase tracking-wide mb-1.5">WhatsApp</label>
+          <input
+            type="tel"
+            value={whatsapp}
+            onChange={e => setWhatsapp(e.target.value)}
+            placeholder="+593 99 999 9999"
+            required
+            className="w-full bg-white/[0.06] border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-[#73B8E7]/50 transition-colors"
+          />
+        </div>
+      </div>
+      <div className="mb-4">
+        <label className="block text-white/60 text-xs font-semibold uppercase tracking-wide mb-1.5">Email</label>
+        <input
+          type="email"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+          placeholder="tu@email.com"
+          required
+          className="w-full bg-white/[0.06] border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-[#73B8E7]/50 transition-colors"
+        />
+      </div>
+      <input type="hidden" value={producto} />
+
+      <button
+        type="submit"
+        disabled={status === "sending"}
+        className="w-full bg-[#73B8E7] text-[#0A1628] py-3.5 rounded-xl font-bold text-sm hover:bg-[#5AA8D8] transition-all disabled:opacity-60 disabled:cursor-not-allowed shadow-xl shadow-[#73B8E7]/20 mb-3"
+      >
+        {status === "sending" ? "Enviando..." : "Enviar postulacion"}
+      </button>
+      <p className="text-white/30 text-xs text-center">O envia tu CV directamente a <a href="mailto:administracion@itseia.ai?subject=DOCENTE" className="text-[#73B8E7] hover:underline">administracion@itseia.ai</a> con asunto DOCENTE</p>
+
+      {status === "error" && <p className="text-red-400 text-xs text-center mt-3">Error al enviar. Escribe por email directamente.</p>}
+    </form>
+  );
+}
 
 const TOOLS = [
   {
@@ -156,17 +274,19 @@ export default function DocentesInfoPage() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link
-              href="/login?redirect=teacher"
+            <a
+              href="#postulacion"
               className="bg-[#73B8E7] text-[#0A1628] px-7 py-3.5 rounded-xl font-bold text-base hover:bg-[#5AA8D8] transition-all hover:scale-[1.02] shadow-xl shadow-[#73B8E7]/25"
             >
-              Iniciar sesion como Docente
-            </Link>
+              Postularme como docente
+            </a>
             <a
-              href="mailto:administracion@itseia.ai?subject=DOCENTE"
+              href="https://wa.me/593959892034?text=Hola%2C%20quiero%20postularme%20como%20docente%20en%20ITSEIA"
+              target="_blank"
+              rel="noopener noreferrer"
               className="border border-white/15 text-white/80 px-7 py-3.5 rounded-xl font-semibold text-base hover:bg-white/[0.05] transition-all"
             >
-              Postularme como docente
+              Consultar por WhatsApp
             </a>
           </div>
         </div>
@@ -228,15 +348,15 @@ export default function DocentesInfoPage() {
                   El Consejo de Educacion Superior exige esta capacitacion a todo docente de instituto superior.
                   ITSEIA te la provee completa, en plataforma, a tu ritmo y sin costo adicional.
                 </p>
-                <Link
-                  href="/login?redirect=ces"
+                <a
+                  href="#postulacion"
                   className="inline-flex items-center gap-2 bg-[#FBBC0C] text-[#0A1628] px-6 py-3 rounded-xl font-bold text-sm hover:bg-[#E5AB00] transition-all"
                 >
-                  Acceder a mi capacitacion CES
+                  Postularme para acceder a CES
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
                     <path d="M5 12h14M12 5l7 7-7 7"/>
                   </svg>
-                </Link>
+                </a>
               </div>
               <div className="space-y-3">
                 {[
@@ -329,34 +449,21 @@ export default function DocentesInfoPage() {
         </div>
       </section>
 
-      {/* ── FOOTER CTA ── */}
-      <section className="py-20 px-5 bg-[#1F2F58]/15 border-t border-white/[0.05]">
-        <div className="max-w-3xl mx-auto text-center">
+      {/* ── FOOTER CTA + POSTULACION ── */}
+      <section id="postulacion" className="py-20 px-5 bg-[#1F2F58]/15 border-t border-white/[0.05]">
+        <div className="max-w-2xl mx-auto text-center">
           <h2
             className="text-3xl md:text-4xl font-extrabold text-white mb-4"
             style={{ fontFamily: "var(--font-space-grotesk)" }}
           >
-            Ensenа IA con las mejores
+            Ensena IA con las mejores
             <br />
             <span className="text-[#73B8E7]">herramientas del mundo.</span>
           </h2>
           <p className="text-white/45 mb-8">
-            Vinculacion abierta. Postula enviando tu CV a administracion@itseia.ai
+            Vinculacion abierta. Completa el formulario y te contactamos en 48 horas.
           </p>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link
-              href="/login?redirect=teacher"
-              className="bg-[#73B8E7] text-[#0A1628] px-8 py-4 rounded-xl font-bold text-base hover:bg-[#5AA8D8] transition-all hover:scale-[1.02] shadow-xl shadow-[#73B8E7]/25"
-            >
-              Iniciar sesion como Docente
-            </Link>
-            <a
-              href="mailto:administracion@itseia.ai?subject=DOCENTE"
-              className="border border-white/15 text-white/80 px-8 py-4 rounded-xl font-semibold text-base hover:bg-white/[0.05] transition-all"
-            >
-              Postularme como docente
-            </a>
-          </div>
+          <PostulacionForm producto="docente" />
         </div>
       </section>
     </div>

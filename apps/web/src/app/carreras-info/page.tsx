@@ -1,9 +1,149 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 import PublicHeader from "@/components/layout/PublicHeader";
 
 // ─────────────────────────────────────────────
 // /carreras-info — Sales landing for degree programs
 // ─────────────────────────────────────────────
+
+// EmailJS config
+const EMAILJS_SERVICE = "service_yqv4dts";
+const EMAILJS_TEMPLATE = "template_mallas";
+const EMAILJS_KEY = "A7cQPi8jRCDyLrHQr";
+
+function InscripcionForm({ producto }: { producto: string }) {
+  const [nombre, setNombre] = useState("");
+  const [whatsapp, setWhatsapp] = useState("");
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState<"idle" | "sending" | "ok" | "error">("idle");
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!nombre || !whatsapp || !email) return;
+    setStatus("sending");
+    try {
+      const res = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          service_id: EMAILJS_SERVICE,
+          template_id: EMAILJS_TEMPLATE,
+          user_id: EMAILJS_KEY,
+          template_params: {
+            nombre,
+            whatsapp,
+            email,
+            producto,
+            mensaje: `Nueva inscripcion desde tecnologico.itseia.ai — Producto: ${producto}`,
+          },
+        }),
+      });
+      if (res.ok) {
+        setStatus("ok");
+        setNombre(""); setWhatsapp(""); setEmail("");
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
+  }
+
+  if (status === "ok") {
+    return (
+      <div className="rounded-2xl border border-[#FBBC0C]/30 p-8 text-center" style={{ background: "rgba(251,188,12,0.06)" }}>
+        <div className="w-12 h-12 rounded-full bg-[#FBBC0C]/20 flex items-center justify-center mx-auto mb-4">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#FBBC0C" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6">
+            <path d="M20 6L9 17l-5-5"/>
+          </svg>
+        </div>
+        <p className="text-white font-bold mb-1" style={{ fontFamily: "var(--font-space-grotesk)" }}>Solicitud recibida</p>
+        <p className="text-white/55 text-sm">Te contactamos en menos de 24 horas. Puedes enviarnos tu comprobante de pago por WhatsApp.</p>
+        <a href="https://wa.me/593959892034?text=Hola%2C%20quiero%20inscribirme%20en%20las%20carreras%20ITSEIA" target="_blank" rel="noopener noreferrer" className="inline-block mt-4 text-[#25D366] text-sm font-semibold hover:underline">Enviar comprobante por WhatsApp →</a>
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="rounded-2xl border border-[#FBBC0C]/25 p-8" style={{ background: "linear-gradient(145deg, rgba(251,188,12,0.08) 0%, rgba(31,47,88,0.3) 100%)", backdropFilter: "blur(12px)" }}>
+      <div className="inline-flex items-center gap-2 bg-[#FBBC0C]/10 border border-[#FBBC0C]/20 rounded-full px-4 py-1.5 mb-6">
+        <span className="text-[#FBBC0C] text-xs font-bold uppercase tracking-wide">Inscripcion directa — Precio Pionero 2026</span>
+      </div>
+
+      <div className="grid sm:grid-cols-2 gap-4 mb-4">
+        <div>
+          <label className="block text-white/60 text-xs font-semibold uppercase tracking-wide mb-1.5">Nombre completo</label>
+          <input
+            type="text"
+            value={nombre}
+            onChange={e => setNombre(e.target.value)}
+            placeholder="Tu nombre"
+            required
+            className="w-full bg-white/[0.06] border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-[#FBBC0C]/50 transition-colors"
+          />
+        </div>
+        <div>
+          <label className="block text-white/60 text-xs font-semibold uppercase tracking-wide mb-1.5">WhatsApp</label>
+          <input
+            type="tel"
+            value={whatsapp}
+            onChange={e => setWhatsapp(e.target.value)}
+            placeholder="+593 99 999 9999"
+            required
+            className="w-full bg-white/[0.06] border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-[#FBBC0C]/50 transition-colors"
+          />
+        </div>
+      </div>
+      <div className="mb-4">
+        <label className="block text-white/60 text-xs font-semibold uppercase tracking-wide mb-1.5">Email</label>
+        <input
+          type="email"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+          placeholder="tu@email.com"
+          required
+          className="w-full bg-white/[0.06] border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder:text-white/30 focus:outline-none focus:border-[#FBBC0C]/50 transition-colors"
+        />
+      </div>
+      <input type="hidden" value={producto} />
+
+      <button
+        type="submit"
+        disabled={status === "sending"}
+        className="w-full bg-[#FBBC0C] text-[#0A1628] py-3.5 rounded-xl font-bold text-sm hover:bg-[#E5AB00] transition-all disabled:opacity-60 disabled:cursor-not-allowed shadow-xl shadow-[#FBBC0C]/20 mb-5"
+      >
+        {status === "sending" ? "Enviando..." : "Reservar mi cupo ahora"}
+      </button>
+
+      {status === "error" && <p className="text-red-400 text-xs text-center mb-4">Error al enviar. Escribe por WhatsApp directamente.</p>}
+
+      {/* Datos de pago */}
+      <div className="border-t border-white/[0.08] pt-5 space-y-3">
+        <p className="text-white/40 text-xs uppercase tracking-wider font-bold text-center mb-3">Datos para deposito / transferencia</p>
+        <div className="flex items-center gap-3">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#FBBC0C" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 shrink-0">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+          <div>
+            <p className="text-white text-sm font-semibold">Produbanco — Cta. Corriente</p>
+            <p className="text-[#FBBC0C] text-sm font-bold tracking-widest">27059145711</p>
+          </div>
+        </div>
+        <div className="flex items-center gap-3">
+          <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 shrink-0 text-[#25D366]">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+          </svg>
+          <div>
+            <p className="text-white text-sm font-semibold">WhatsApp</p>
+            <a href="https://wa.me/593959892034?text=Hola%2C%20quiero%20inscribirme%20en%20las%20carreras%20ITSEIA" target="_blank" rel="noopener noreferrer" className="text-[#25D366] text-sm font-bold hover:underline">+593 95 989 2034</a>
+          </div>
+        </div>
+      </div>
+    </form>
+  );
+}
 
 const CAREERS = [
   {
@@ -173,12 +313,12 @@ export default function CarrerasInfoPage() {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link
-              href="/login?redirect=carreras"
+            <a
+              href="#inscripcion"
               className="bg-[#FBBC0C] text-[#0A1628] px-7 py-3.5 rounded-xl font-bold text-base hover:bg-[#E5AB00] transition-all hover:scale-[1.02] shadow-xl shadow-[#FBBC0C]/25"
             >
-              Iniciar sesion como Alumno
-            </Link>
+              Inscribirme ahora
+            </a>
             <a
               href="https://meet.google.com/fzx-fqns-ayc"
               target="_blank"
@@ -410,15 +550,15 @@ export default function CarrerasInfoPage() {
                 </div>
               ))}
             </div>
-            <Link
-              href="/login?redirect=ai-lab"
+            <a
+              href="#inscripcion"
               className="inline-flex items-center gap-2 bg-[#FBBC0C] text-[#0A1628] px-7 py-3.5 rounded-xl font-bold text-sm hover:bg-[#E5AB00] transition-all"
             >
-              Acceder al AI Lab
+              Inscribirme para acceder al AI Lab
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4">
                 <path d="M5 12h14M12 5l7 7-7 7"/>
               </svg>
-            </Link>
+            </a>
           </div>
         </div>
       </section>
@@ -470,8 +610,8 @@ export default function CarrerasInfoPage() {
         </div>
       </section>
 
-      {/* ── PRECIOS ── */}
-      <section className="py-20 px-5">
+      {/* ── PRECIOS + INSCRIPCION ── */}
+      <section id="inscripcion" className="py-20 px-5">
         <div className="max-w-2xl mx-auto text-center">
           <h2
             className="text-3xl md:text-4xl font-extrabold text-white mb-4"
@@ -482,7 +622,7 @@ export default function CarrerasInfoPage() {
           <p className="text-white/45 mb-10">Sin letras pequeñas. Sin costos ocultos.</p>
 
           <div
-            className="rounded-2xl border border-[#FBBC0C]/25 p-8 mb-6"
+            className="rounded-2xl border border-[#FBBC0C]/25 p-8 mb-8"
             style={{ background: "linear-gradient(145deg, rgba(251,188,12,0.08) 0%, rgba(31,47,88,0.3) 100%)", backdropFilter: "blur(12px)" }}
           >
             <div className="inline-flex items-center gap-2 bg-[#FBBC0C]/10 border border-[#FBBC0C]/20 rounded-full px-4 py-1.5 mb-6">
@@ -499,7 +639,7 @@ export default function CarrerasInfoPage() {
             </div>
             <p className="text-white/40 text-sm mb-8">+ Inscripcion $180 (unica vez)</p>
 
-            <ul className="space-y-3 text-left mb-8">
+            <ul className="space-y-3 text-left mb-6">
               {[
                 "3 carreras a elegir (IA, Ciencia de Datos, Big Data)",
                 "5 semestres — 2.5 años de formacion",
@@ -517,15 +657,10 @@ export default function CarrerasInfoPage() {
                 </li>
               ))}
             </ul>
-
-            <Link
-              href="/login?redirect=carreras"
-              className="block w-full bg-[#FBBC0C] text-[#0A1628] py-4 rounded-xl font-bold text-base hover:bg-[#E5AB00] transition-all text-center shadow-xl shadow-[#FBBC0C]/25"
-            >
-              Iniciar sesion como Alumno
-            </Link>
-            <p className="text-white/30 text-xs mt-3">Cupos limitados para el periodo 2026-1</p>
+            <p className="text-white/30 text-xs mb-2">Cupos limitados para el periodo 2026-1</p>
           </div>
+
+          <InscripcionForm producto="carreras" />
         </div>
       </section>
 
@@ -568,12 +703,12 @@ export default function CarrerasInfoPage() {
             Inscripciones abiertas. Sesion informativa gratuita cada sabado a las 11AM.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Link
-              href="/login?redirect=carreras"
+            <a
+              href="#inscripcion"
               className="bg-[#FBBC0C] text-[#0A1628] px-8 py-4 rounded-xl font-bold text-base hover:bg-[#E5AB00] transition-all hover:scale-[1.02] shadow-xl shadow-[#FBBC0C]/25"
             >
-              Iniciar sesion como Alumno
-            </Link>
+              Inscribirme ahora
+            </a>
             <a
               href="https://wa.me/593959892034?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20las%20carreras%20de%20ITSEIA"
               target="_blank"
