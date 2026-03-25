@@ -29,6 +29,11 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
+  // Public info pages — never redirect to login
+  const publicInfoPaths = ["/carreras-info", "/preuni-info", "/cursos-pro-info", "/certificaciones-info", "/docentes-info", "/empresas-info"];
+  const isPublicInfo = publicInfoPaths.some((path) => request.nextUrl.pathname.startsWith(path));
+  if (isPublicInfo) return supabaseResponse;
+
   // Protected routes - redirect to login if not authenticated
   const protectedPaths = ["/dashboard", "/courses", "/ai-lab", "/profile", "/payments", "/certificates", "/admin", "/teacher", "/biblioteca", "/carreras", "/cohorte", "/portfolio", "/flashcards"];
   const isProtected = protectedPaths.some((path) =>
