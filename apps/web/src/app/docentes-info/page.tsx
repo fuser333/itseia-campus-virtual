@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import PublicHeader from "@/components/layout/PublicHeader";
 
 // ─────────────────────────────────────────────
@@ -275,7 +274,7 @@ export default function DocentesInfoPage() {
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a
-              href="#postulacion"
+              href="#inscripcion"
               className="bg-[#73B8E7] text-[#0A1628] px-7 py-3.5 rounded-xl font-bold text-base hover:bg-[#5AA8D8] transition-all hover:scale-[1.02] shadow-xl shadow-[#73B8E7]/25"
             >
               Postularme como docente
@@ -349,7 +348,7 @@ export default function DocentesInfoPage() {
                   ITSEIA te la provee completa, en plataforma, a tu ritmo y sin costo adicional.
                 </p>
                 <a
-                  href="#postulacion"
+                  href="#inscripcion"
                   className="inline-flex items-center gap-2 bg-[#FBBC0C] text-[#0A1628] px-6 py-3 rounded-xl font-bold text-sm hover:bg-[#E5AB00] transition-all"
                 >
                   Postularme para acceder a CES
@@ -450,7 +449,7 @@ export default function DocentesInfoPage() {
       </section>
 
       {/* ── FOOTER CTA + POSTULACION ── */}
-      <section id="postulacion" className="py-20 px-5 bg-[#1F2F58]/15 border-t border-white/[0.05]">
+      <section id="inscripcion" className="py-20 px-5 bg-[#1F2F58]/15 border-t border-white/[0.05]">
         <div className="max-w-2xl mx-auto text-center">
           <h2
             className="text-3xl md:text-4xl font-extrabold text-white mb-4"

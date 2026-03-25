@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import PublicHeader from "@/components/layout/PublicHeader";
 
 // ─────────────────────────────────────────────
@@ -230,7 +229,7 @@ const FAQS = [
   },
   {
     q: "¿El título es reconocido oficialmente en Ecuador?",
-    a: "Sí. ITSEIA es un Instituto Superior Tecnológico registrado ante el SENESCYT. El título de Tecnólogo es reconocido en Ecuador y habilita para estudios de tercer nivel.",
+    a: "Sí. ITSEIA es un Instituto Superior Tecnológico registrado ante el legalmente reconocido. El título de Tecnólogo es reconocido en Ecuador y habilita para estudios de tercer nivel.",
   },
   {
     q: "¿Puedo estudiar si vivo fuera de Quito?",
@@ -285,7 +284,7 @@ export default function CarrerasInfoPage() {
               Inteligencia Artificial
             </span>
             <br className="hidden md:block" />
-            {" "}con título SENESCYT
+            {" "}con título legalmente reconocido
           </h1>
 
           <p className="text-white/55 text-lg md:text-xl max-w-2xl mx-auto mb-8 leading-relaxed">
@@ -431,13 +430,13 @@ export default function CarrerasInfoPage() {
                     >
                       Ver malla completa →
                     </a>
-                    <Link
-                      href={`/login?redirect=carreras`}
+                    <a
+                      href="#inscripcion"
                       className="inline-flex items-center gap-2 text-sm font-semibold transition-colors"
                       style={{ color: c.color }}
                     >
-                      Iniciar sesión →
-                    </Link>
+                      Inscribirme →
+                    </a>
                   </div>
                 </div>
               </div>
@@ -476,7 +475,7 @@ export default function CarrerasInfoPage() {
                   "Laboratorios fisicos de IA",
                   "Networking con empresas del ecosistema",
                   "Sesiones informativas sabatinas 11AM",
-                  "Titulo IST reconocido SENESCYT",
+                  "Titulo IST reconocido legalmente reconocido",
                 ].map((item) => (
                   <li key={item} className="flex items-center gap-3 text-white/65 text-sm">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#FBBC0C] shrink-0" />
@@ -647,7 +646,7 @@ export default function CarrerasInfoPage() {
                 "AI Lab: ChatGPT + Claude + Gemini incluidos",
                 "Certificaciones cloud incluidas (AWS, Azure, GCP)",
                 "Pipeline de empleo en H3L, ImagemIA y Strata",
-                "Titulo IST reconocido por SENESCYT",
+                "Titulo IST reconocido por legalmente reconocido",
               ].map((item) => (
                 <li key={item} className="flex items-start gap-3 text-white/65 text-sm">
                   <svg viewBox="0 0 24 24" fill="none" stroke="#FBBC0C" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 shrink-0 mt-0.5">

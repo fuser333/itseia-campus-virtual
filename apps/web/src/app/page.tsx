@@ -17,9 +17,9 @@ const WORLDS = [
     color: "#FBBC0C",
     borderColor: "rgba(251,188,12,0.25)",
     glowColor: "rgba(251,188,12,0.08)",
-    badge: "TÍTULO SENESCYT",
+    badge: "TÍTULO legalmente reconocido",
     title: "Carreras",
-    description: "3 carreras tecnológicas en IA, Ciencia de Datos y Big Data. Título oficial reconocido por SENESCYT.",
+    description: "3 carreras tecnológicas en IA, Ciencia de Datos y Big Data. Título oficial reconocido por legalmente reconocido.",
     detail: "5 semestres · Vespertino 17:30–21:30 · $220/mes",
     cta: "Ver carreras",
     href: "/carreras-info",
@@ -374,7 +374,7 @@ export default function HomePage() {
             Presencial en Quito.{" "}
             <span className="text-[#73B8E7]">100% online desde cualquier lugar.</span>
             <br />
-            Título SENESCYT · AI Lab incluido · Certificaciones cloud.
+            Título legalmente reconocido · AI Lab incluido · Certificaciones cloud.
           </p>
 
           {/* Precio pionero */}
@@ -510,7 +510,7 @@ export default function HomePage() {
                     { icon: "🧪", text: "Laboratorios físicos de IA" },
                     { icon: "📅", text: "Sesiones informativas sabatinas 11AM" },
                     { icon: "🤝", text: "Networking con empresas del ecosistema" },
-                    { icon: "🎓", text: "Título IST reconocido SENESCYT" },
+                    { icon: "🎓", text: "Título IST reconocido legalmente reconocido" },
                   ].map((item) => (
                     <li key={item.text} className="flex items-start gap-3 text-white/65 text-sm">
                       <span className="text-base shrink-0 mt-0.5">{item.icon}</span>
@@ -595,7 +595,7 @@ export default function HomePage() {
             <div>
               <div className="inline-flex items-center gap-2 bg-[#FBBC0C]/10 border border-[#FBBC0C]/20 rounded-full px-3 py-1 mb-4">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#FBBC0C]" />
-                <span className="text-[#FBBC0C] text-xs font-semibold tracking-wide uppercase">Título SENESCYT</span>
+                <span className="text-[#FBBC0C] text-xs font-semibold tracking-wide uppercase">Título legalmente reconocido</span>
               </div>
               <h2
                 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight"
@@ -605,7 +605,7 @@ export default function HomePage() {
                 <span className="text-[#FBBC0C]">Inteligencia Artificial</span>
               </h2>
               <p className="text-white/45 mt-3 max-w-lg">
-                Formación de nivel superior de 5 semestres (2.5 años) con título IST reconocido por SENESCYT.
+                Formación de nivel superior de 5 semestres (2.5 años) con título IST reconocido por legalmente reconocido.
                 Horario vespertino 17:30–21:30, presencial en Quito.
               </p>
             </div>
@@ -917,7 +917,7 @@ export default function HomePage() {
               <span className="text-[#FBBC0C]">internacionales incluidas</span>
             </h2>
             <p className="text-white/45 max-w-2xl mx-auto">
-              Título SENESCYT + certificaciones AWS, Google y Azure = el perfil más competitivo del mercado.
+              Título legalmente reconocido + certificaciones AWS, Google y Azure = el perfil más competitivo del mercado.
               Preparación completa incluida en tu matrícula. Sin costo adicional.
             </p>
           </div>

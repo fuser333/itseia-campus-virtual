@@ -38,7 +38,7 @@ const TYPE_BADGE_STYLES: Record<string, string> = {
 
 const TYPE_FEATURES: Record<string, string[]> = {
   carrera: [
-    "Titulo IST reconocido por SENESCYT",
+    "Titulo IST reconocido por legalmente reconocido",
     "5 semestres de formacion integral",
     "AI Lab incluido en la matricula",
     "Pipeline de talento con empresas",

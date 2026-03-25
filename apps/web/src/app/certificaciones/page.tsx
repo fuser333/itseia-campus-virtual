@@ -39,7 +39,7 @@ export default async function CertificationsPage() {
             Certificaciones de Industria
           </h1>
           <p className="mt-1 text-white/40 text-sm max-w-2xl">
-            Titulo SENESCYT + certificaciones AWS, Google y Azure = perfil imbatible en el mercado laboral. Estudia con la misma estructura pedagogica de tus materias formales.
+            Titulo legalmente reconocido + certificaciones AWS, Google y Azure = perfil imbatible en el mercado laboral. Estudia con la misma estructura pedagogica de tus materias formales.
           </p>
         </div>
       </div>

@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import PublicHeader from "@/components/layout/PublicHeader";
 
 // ─────────────────────────────────────────────
@@ -292,18 +291,18 @@ export default function EmpresasInfoPage() {
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a
-              href="https://wa.me/593959892034?text=Hola%2C%20quiero%20solicitar%20una%20propuesta%20corporativa%20de%20ITSEIA"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#inscripcion"
               className="bg-[#FBBC0C] text-[#0A1628] px-7 py-3.5 rounded-xl font-bold text-base hover:bg-[#E5AB00] transition-all hover:scale-[1.02] shadow-xl shadow-[#FBBC0C]/25"
             >
               Solicitar propuesta corporativa
             </a>
             <a
-              href="#propuesta"
+              href="https://wa.me/593959892034?text=Hola%2C%20quiero%20solicitar%20una%20propuesta%20corporativa%20de%20ITSEIA"
+              target="_blank"
+              rel="noopener noreferrer"
               className="border border-white/15 text-white/80 px-7 py-3.5 rounded-xl font-semibold text-base hover:bg-white/[0.05] transition-all"
             >
-              Solicitar propuesta
+              Consultar por WhatsApp
             </a>
           </div>
         </div>
@@ -484,9 +483,7 @@ export default function EmpresasInfoPage() {
                 </ul>
 
                 <a
-                  href="https://wa.me/593959892034?text=Hola%2C%20quiero%20solicitar%20una%20propuesta%20corporativa%20de%20ITSEIA"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="#inscripcion"
                   className="block w-full py-3 rounded-xl font-bold text-sm text-center transition-all hover:scale-[1.02]"
                   style={{
                     background: plan.isPopular ? plan.color : `${plan.color}20`,
@@ -529,7 +526,7 @@ export default function EmpresasInfoPage() {
                   tiempo de estudio, certificados obtenidos y ROI del programa.
                 </p>
                 <a
-                  href="#propuesta"
+                  href="#inscripcion"
                   className="inline-flex items-center gap-2 bg-[#73B8E7] text-[#0A1628] px-6 py-3 rounded-xl font-bold text-sm hover:bg-[#5AA8D8] transition-all"
                 >
                   Solicitar propuesta corporativa
@@ -585,7 +582,7 @@ export default function EmpresasInfoPage() {
       </section>
 
       {/* ── FOOTER CTA + PROPUESTA ── */}
-      <section id="propuesta" className="py-20 px-5">
+      <section id="inscripcion" className="py-20 px-5">
         <div className="max-w-2xl mx-auto text-center">
           <h2
             className="text-3xl md:text-4xl font-extrabold text-white mb-4"

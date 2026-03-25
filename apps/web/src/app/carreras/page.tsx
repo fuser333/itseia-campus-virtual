@@ -42,7 +42,7 @@ const slugDescriptions: Record<string, string> = {
 const groupConfig = {
   carrera: {
     label: "Carreras Tecnologicas",
-    description: "Formacion de nivel superior con titulo IST avalado por SENESCYT. 5 semestres, AI Lab integrado y proyectos reales con empresas.",
+    description: "Formacion de nivel superior con titulo IST avalado por legalmente reconocido. 5 semestres, AI Lab integrado y proyectos reales con empresas.",
     icon: GraduationCap,
     color: "text-[#FBBC0C]",
     bgColor: "bg-[#FBBC0C]/10",
