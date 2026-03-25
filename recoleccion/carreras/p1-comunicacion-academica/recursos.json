@@ -1,0 +1,90 @@
+{
+  "materia": "Comunicacion Academica y Tecnica",
+  "periodo": 1,
+  "descripcion": "Escritura academica, reportes tecnicos, citacion, presentacion oral y comunicacion profesional en contextos de tecnologia e IA",
+  "fecha_actualizacion": "2026-03-25",
+  "recursos": [
+    {
+      "titulo": "Fundamentos de la Escritura Academica - Tecnologico de Monterrey (Coursera, gratis)",
+      "url": "https://www.classcentral.com/course/escritura-academica-esp-13497",
+      "tipo": "curso",
+      "idioma": "espanol",
+      "descripcion": "Curso universitario gratuito del Tecnologico de Monterrey (Mexico) en Coursera. 4 semanas de duracion. Desarrolla competencia de comunicacion escrita: estructura de textos academicos, argumentacion, coherencia y cohesion. Uno de los MOOCs mas tomados en LATAM para escritura universitaria.",
+      "nivel": "principiante",
+      "gratuito": true,
+      "fuente_latam": true,
+      "fuente_ecuador": false,
+      "año_actualizacion": 2023,
+      "tags": ["Tec-Monterrey", "escritura", "universitario", "MOOC", "LATAM"]
+    },
+    {
+      "titulo": "Escritura Academica y Publicacion - PUCV (Pontificia Universidad Catolica de Valparaiso)",
+      "url": "https://www.pucv.cl/uuaa/curso-gratuito-de-escritura-y-publicacion-academica",
+      "tipo": "curso",
+      "idioma": "espanol",
+      "descripcion": "Curso gratuito de la Pontificia Universidad Catolica de Valparaiso (Chile) sobre escritura y publicacion academica. Orientado a universitarios que necesitan aprender a redactar textos formales, reportes e investigaciones. Perspectiva latinoamericana con normas APA y estandares regionales.",
+      "nivel": "principiante",
+      "gratuito": true,
+      "fuente_latam": true,
+      "fuente_ecuador": false,
+      "año_actualizacion": 2023,
+      "tags": ["Chile", "PUCV", "publicacion", "APA", "normas-citacion"]
+    },
+    {
+      "titulo": "Escritura Academica: Citas y Referencias - Universidad Nacional de Colombia",
+      "url": "https://aprendergratis.es/cursos-online/curso-de-escritura-academica-citas-y-referencias/",
+      "tipo": "curso",
+      "idioma": "espanol",
+      "descripcion": "Curso de la Universidad Nacional de Colombia sobre citacion y referencias academicas. Gratuito, con registro libre. Cubre normas APA, IEEE (importante para ingenieria y tecnologia), y buenas practicas anti-plagio. Perspectiva universitaria colombiana con aplicacion LATAM.",
+      "nivel": "principiante",
+      "gratuito": true,
+      "fuente_latam": true,
+      "fuente_ecuador": false,
+      "año_actualizacion": 2023,
+      "tags": ["Colombia", "citas", "APA", "IEEE", "anti-plagio", "referencias"]
+    },
+    {
+      "titulo": "Ciencia de Datos para Ciencias Naturales - BookDown en espanol (capitulo comunicacion)",
+      "url": "https://bookdown.org/keilor_rojas/CienciaDatos/",
+      "tipo": "libro_web",
+      "idioma": "espanol",
+      "descripcion": "Libro web gratuito sobre ciencia de datos en Python con capitulos sobre comunicacion de resultados tecnicos. Muestra como redactar reportes de analisis de datos, describir hallazgos estadisticos y presentar graficos con precision. Perspectiva latinoamericana (autor de Costa Rica).",
+      "nivel": "principiante",
+      "gratuito": true,
+      "fuente_latam": true,
+      "fuente_ecuador": false,
+      "año_actualizacion": 2023,
+      "tags": ["reporte-tecnico", "ciencia-datos", "comunicacion-resultados", "LATAM", "bookdown"]
+    },
+    {
+      "titulo": "Senescyt - Guia de escritura para trabajos de titulacion en Ecuador",
+      "url": "https://www.senescyt.gob.ec/",
+      "tipo": "recurso_institucional",
+      "idioma": "espanol",
+      "descripcion": "Sitio del organismo rector de educacion superior en Ecuador. Contiene guias, reglamentos y formatos oficiales para escritura de trabajos academicos segun normativa ecuatoriana (LOES, CES). Fundamental para entender el contexto regulatorio en el que los estudiantes de ITSEIA escribiran sus tesis y proyectos de titulacion.",
+      "nivel": "principiante",
+      "gratuito": true,
+      "fuente_latam": true,
+      "fuente_ecuador": true,
+      "año_actualizacion": 2024,
+      "tags": ["Ecuador", "Senescyt", "titulacion", "normativa", "institucional"]
+    }
+  ],
+  "herramientas_recomendadas": [
+    {
+      "nombre": "Google Docs",
+      "url": "https://docs.google.com",
+      "descripcion": "Para escritura colaborativa con herramientas de comentarios y control de cambios. Gratis."
+    },
+    {
+      "nombre": "Zotero",
+      "url": "https://www.zotero.org/",
+      "descripcion": "Gestor de referencias bibliograficas gratuito. Genera citas en APA, IEEE y otros formatos automaticamente."
+    },
+    {
+      "nombre": "Overleaf (LaTeX en linea)",
+      "url": "https://www.overleaf.com/",
+      "descripcion": "Para reportes tecnicos formales con LaTeX. Version gratuita disponible. Estandar en publicaciones cientificas."
+    }
+  ]
+}

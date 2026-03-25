@@ -1,0 +1,85 @@
+{
+  "materia": "Introduccion a la Inteligencia Artificial",
+  "periodo": 1,
+  "descripcion": "Historia, conceptos fundamentales, tipos de IA, aplicaciones actuales y panorama general del campo",
+  "fecha_actualizacion": "2026-03-25",
+  "recursos": [
+    {
+      "titulo": "Elementos de la IA - Curso gratuito Universidad de Helsinki en espanol",
+      "url": "https://course.elementsofai.com/es/",
+      "tipo": "curso",
+      "idioma": "espanol",
+      "descripcion": "Curso introductorio creado por la Universidad de Helsinki y MinnaLearn, avalado por la Comision Europea y el gobierno espanol. 100% gratuito, sin requisitos previos, con certificado. Explica historia de IA, busqueda, logica, aprendizaje automatico y redes neuronales de forma accesible. Mas de 1 millon de usuarios, 40,000 hispanohablantes.",
+      "nivel": "principiante",
+      "gratuito": true,
+      "fuente_latam": false,
+      "fuente_ecuador": false,
+      "año_actualizacion": 2024,
+      "tags": ["introduccion", "conceptos", "historia", "europeo", "sin-matematicas", "certificado"]
+    },
+    {
+      "titulo": "IA Para Todos - Coursera (Andrew Ng en espanol)",
+      "url": "https://www.coursera.org/learn/ai-for-everyone-es",
+      "tipo": "curso",
+      "idioma": "espanol",
+      "descripcion": "Curso de Andrew Ng (fundador de Coursera, ex-Google Brain) traducido al espanol. Explica que es y que no es la IA, como las empresas aplican IA, estrategia de IA y sociedad. No requiere programacion. Ideal como primer contacto con el campo. Gratis en modo auditoria.",
+      "nivel": "principiante",
+      "gratuito": true,
+      "fuente_latam": false,
+      "fuente_ecuador": false,
+      "año_actualizacion": 2023,
+      "tags": ["Andrew-Ng", "no-tecnico", "estrategia", "aplicaciones", "empresas"]
+    },
+    {
+      "titulo": "Platzi - Curso de Introduccion a Inteligencia Artificial (gratis)",
+      "url": "https://platzi.com/cursos/introduccion-ai/",
+      "tipo": "curso",
+      "idioma": "espanol",
+      "descripcion": "Curso introductorio de Platzi (plataforma LATAM) sobre IA. Cubre modelos de lenguaje, etica, matematicas basicas para IA, estadistica y toma de decisiones con datos. Contenido producido en Colombia con perspectiva latinoamericana. Primera clase gratuita sin registro.",
+      "nivel": "principiante",
+      "gratuito": true,
+      "fuente_latam": true,
+      "fuente_ecuador": false,
+      "año_actualizacion": 2024,
+      "tags": ["Platzi", "LATAM", "LLM", "etica", "perspectiva-regional"]
+    },
+    {
+      "titulo": "Repositorio Digital EPN - Trabajos de IA de la Escuela Politecnica Nacional",
+      "url": "https://bibdigital.epn.edu.ec/",
+      "tipo": "repositorio",
+      "idioma": "espanol",
+      "descripcion": "Repositorio institucional de la Escuela Politecnica Nacional de Ecuador con acceso abierto a tesis, proyectos y articulos sobre inteligencia artificial, machine learning y ciencia de datos. Incluye proyectos aplicados al contexto ecuatoriano: prediccion de corrosion en petroleo, reconocimiento de imagenes, etc.",
+      "nivel": "principiante",
+      "gratuito": true,
+      "fuente_latam": true,
+      "fuente_ecuador": true,
+      "año_actualizacion": 2024,
+      "tags": ["EPN", "Ecuador", "tesis", "investigacion", "aplicaciones-locales"]
+    },
+    {
+      "titulo": "IA Generativa - Santander Open Academy (gratis con certificado)",
+      "url": "https://www.santanderopenacademy.com/en/courses/generative-artificial-intelligence.html",
+      "tipo": "curso",
+      "idioma": "espanol",
+      "descripcion": "Curso gratuito de IA Generativa de Santander Open Academy con certificado. Cubre fundamentos de IA generativa, LLMs, texto, imagen y audio. Accesible para principiantes, disponible en espanol. Banco Santander lo financia como parte de su programa de educacion digital para LATAM.",
+      "nivel": "principiante",
+      "gratuito": true,
+      "fuente_latam": false,
+      "fuente_ecuador": false,
+      "año_actualizacion": 2024,
+      "tags": ["generativa", "LLM", "certificado", "santander", "LATAM-friendly"]
+    }
+  ],
+  "herramientas_recomendadas": [
+    {
+      "nombre": "ChatGPT (version gratuita)",
+      "url": "https://chat.openai.com",
+      "descripcion": "Para experimentar directamente con IA conversacional. Herramienta practica desde el primer dia."
+    },
+    {
+      "nombre": "Google AI Studio",
+      "url": "https://aistudio.google.com/",
+      "descripcion": "Interfaz gratuita para experimentar con modelos Gemini de Google."
+    }
+  ]
+}

@@ -1,0 +1,132 @@
+{
+  "proyecto": "ITSEIA - Recursos Educativos Periodo 1",
+  "version": "1.0",
+  "fecha_creacion": "2026-03-25",
+  "metodologia": "Investigacion web en fuentes primarias: documentacion oficial, plataformas educativas LATAM, portales gubernamentales Ecuador, repositorios universitarios ecuatorianos",
+  "criterios_seleccion": [
+    "100% en espanol o con version en espanol disponible",
+    "Gratuito y de acceso libre sin barrera de pago",
+    "Actualizado (2021 en adelante, mayoría 2023-2024)",
+    "Adecuado para nivel principiante universitario",
+    "Prioridad a fuentes ecuatorianas y latinoamericanas"
+  ],
+  "materias": [
+    {
+      "id": "p1-fundamentos-programacion",
+      "nombre": "Fundamentos de Programacion (Python)",
+      "archivo": "p1-fundamentos-programacion/recursos.json",
+      "total_recursos": 5,
+      "recursos_ecuador": 0,
+      "recursos_latam": 1,
+      "tipo_recursos": ["documentacion", "curso", "libro_web", "herramienta", "directorio_recursos"],
+      "recurso_estrella": {
+        "titulo": "Documentacion oficial Python en espanol",
+        "url": "https://docs.python.org/es/3/tutorial/"
+      }
+    },
+    {
+      "id": "p1-matematicas",
+      "nombre": "Matematicas I - Estadistica y Calculo",
+      "archivo": "p1-matematicas/recursos.json",
+      "total_recursos": 5,
+      "recursos_ecuador": 2,
+      "recursos_latam": 4,
+      "tipo_recursos": ["curso", "curso", "curso", "dataset", "dataset"],
+      "recurso_estrella": {
+        "titulo": "Datos Abiertos Ecuador - Portal con 500+ datasets reales",
+        "url": "https://www.datosabiertos.gob.ec/"
+      },
+      "nota": "Incluye 2 fuentes de datasets ecuatorianos reales (INEC + datosabiertos.gob.ec). Es la materia con mayor riqueza de datos locales."
+    },
+    {
+      "id": "p1-introduccion-ia",
+      "nombre": "Introduccion a la Inteligencia Artificial",
+      "archivo": "p1-introduccion-ia/recursos.json",
+      "total_recursos": 5,
+      "recursos_ecuador": 1,
+      "recursos_latam": 2,
+      "tipo_recursos": ["curso", "curso", "curso", "repositorio", "curso"],
+      "recurso_estrella": {
+        "titulo": "Elementos de la IA - Universidad de Helsinki (1M+ usuarios)",
+        "url": "https://course.elementsofai.com/es/"
+      },
+      "nota": "Incluye repositorio de la EPN Ecuador con tesis de IA aplicadas al contexto local."
+    },
+    {
+      "id": "p1-logica-pensamiento-analitico",
+      "nombre": "Logica y Pensamiento Analitico",
+      "archivo": "p1-logica-pensamiento-analitico/recursos.json",
+      "total_recursos": 5,
+      "recursos_ecuador": 0,
+      "recursos_latam": 3,
+      "tipo_recursos": ["curso", "libro_web", "libro_pdf", "curso", "curso"],
+      "recurso_estrella": {
+        "titulo": "Pensamiento Critico para el Aprendizaje - UNAM (libro abierto PDF)",
+        "url": "https://librosoa.unam.mx/bitstream/handle/123456789/3690/9786073081603.pdf"
+      }
+    },
+    {
+      "id": "p1-comunicacion-academica",
+      "nombre": "Comunicacion Academica y Tecnica",
+      "archivo": "p1-comunicacion-academica/recursos.json",
+      "total_recursos": 5,
+      "recursos_ecuador": 1,
+      "recursos_latam": 4,
+      "tipo_recursos": ["curso", "curso", "curso", "libro_web", "recurso_institucional"],
+      "recurso_estrella": {
+        "titulo": "Fundamentos de Escritura Academica - Tec de Monterrey (Coursera)",
+        "url": "https://www.classcentral.com/course/escritura-academica-esp-13497"
+      },
+      "nota": "Incluye Senescyt Ecuador como referencia normativa local para trabajos de titulacion."
+    },
+    {
+      "id": "p1-etica-digital",
+      "nombre": "Etica Digital y Responsabilidad Profesional",
+      "archivo": "p1-etica-digital/recursos.json",
+      "total_recursos": 5,
+      "recursos_ecuador": 0,
+      "recursos_latam": 3,
+      "tipo_recursos": ["documento_oficial", "curso", "paper", "libro_pdf", "paper"],
+      "recurso_estrella": {
+        "titulo": "UNESCO - Recomendacion sobre la Etica de la IA (documento oficial en espanol)",
+        "url": "https://unesdoc.unesco.org/ark:/48223/pf0000380455_spa"
+      },
+      "nota": "Incluye marco regulatorio Ecuador con Ley de Proteccion de Datos Personales 2021."
+    }
+  ],
+  "resumen_estadistico": {
+    "total_recursos": 30,
+    "recursos_con_fuente_ecuador": 3,
+    "recursos_con_fuente_latam": 17,
+    "recursos_100_gratuitos": 30,
+    "tipos_de_recurso": {
+      "curso": 16,
+      "libro_web_o_pdf": 5,
+      "dataset": 3,
+      "documentacion": 1,
+      "paper": 2,
+      "herramienta": 1,
+      "repositorio": 1,
+      "recurso_institucional": 1
+    },
+    "fuentes_principales": [
+      "docs.python.org/es (oficial Python)",
+      "es.khanacademy.org (Khan Academy)",
+      "elementsofai.com (Helsinki)",
+      "datosabiertos.gob.ec (Ecuador)",
+      "ecuadorencifras.gob.ec (INEC Ecuador)",
+      "bibdigital.epn.edu.ec (EPN Ecuador)",
+      "unesdoc.unesco.org (UNESCO)",
+      "platzi.com (Colombia/LATAM)",
+      "ed.team (EDteam LATAM)",
+      "coursera.org/UNAM y Tec Monterrey"
+    ]
+  },
+  "proximos_pasos_recomendados": [
+    "Verificar que todos los URLs esten activos antes de publicar en plataforma",
+    "Agregar datasets especificos del Banco Central Ecuador para Matematicas I",
+    "Buscar papers de la ESPOL sobre ML aplicado a Ecuador para Intro IA",
+    "Gestionar acceso institucional a Coursera for Campus para los cursos de auditoria",
+    "Crear recursos complementarios en espanol para Periodo 2 (Periodo 1 completo)"
+  ]
+}
