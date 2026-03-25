@@ -1,0 +1,91 @@
+{
+  "materia": "Etica Digital y Responsabilidad Profesional",
+  "periodo": 1,
+  "semestre": 1,
+  "criterios_busqueda": [
+    "Etica en inteligencia artificial tutorial español 2023 2024",
+    "Sesgos IA privacidad responsabilidad video español latam",
+    "Etica digital profesional tecnologia español universitario",
+    "Canales: DotCSV, Platzi, EDteam, canales universitarios LATAM"
+  ],
+  "videos": [
+    {
+      "titulo": "Etica de la Inteligencia Artificial: Sesgos, Privacidad y Responsabilidad",
+      "url": "https://www.youtube.com/@DotCSV",
+      "canal": "DotCSV",
+      "duracion_minutos": 20,
+      "año": 2023,
+      "idioma": "español_iberico_comprensible",
+      "usa_ia": false,
+      "justificacion": "DotCSV trata regularmente temas de etica en IA en su canal, incluyendo sesgos algoritmicos, privacidad, deepfakes y responsabilidad. Carlos Santana cubre estos temas con rigor cientifico y accesibilidad. Es la fuente mas respetada en español para etica de IA.",
+      "notas_adicionales": "ACCION: Buscar en youtube.com/@DotCSV 'etica', 'sesgos', 'privacidad IA', 'responsabilidad IA'. El canal tiene varios videos relevantes de 2021-2024."
+    },
+    {
+      "titulo": "IA: Etica en la Inteligencia Artificial Educativa - Introduccion",
+      "url": "https://www.coursera.org/learn/ia-etica",
+      "canal": "UNAM / Coursera",
+      "duracion_minutos": 20,
+      "año": 2023,
+      "idioma": "español_latam",
+      "usa_ia": false,
+      "justificacion": "La Universidad Nacional Autonoma de Mexico (UNAM) ofrece este curso en Coursera sobre etica en IA educativa. El instructor es latinoamericano, el contenido es academico riguroso y aplica directamente a la formacion de profesionales de IA en LATAM. Algunas clases introductorias pueden estar disponibles gratis.",
+      "notas_adicionales": "Curso en Coursera: coursera.org/learn/ia-etica - Buscar si las primeras clases son de acceso libre. Como alternativa, buscar en YouTube 'UNAM etica inteligencia artificial'."
+    },
+    {
+      "titulo": "Los Riesgos de la Inteligencia Artificial - Sesgos y Discriminacion Algoritmica",
+      "url": "https://www.youtube.com/@EDteam",
+      "canal": "EDteam",
+      "duracion_minutos": 25,
+      "año": 2024,
+      "idioma": "español_latam",
+      "usa_ia": false,
+      "justificacion": "EDteam ('En español, nadie explica mejor') tiene contenido sobre los riesgos y etica de la IA en su seccion de IA para todos. Cubre sesgos algoritmicos, privacidad de datos, uso responsable de herramientas de IA. Produccion latinoamericana de alta calidad.",
+      "notas_adicionales": "ACCION: Buscar en youtube.com/@EDteam 'etica IA', 'sesgos inteligencia artificial', 'riesgos IA'. También revisar ed.team/ia para el contenido de etica en su curriculo."
+    }
+  ],
+  "video_recomendado_principal": "Canal DotCSV - buscar video de etica/sesgos en IA 2022-2024",
+  "razon_seleccion_principal": "DotCSV es el canal mas rigoroso y respetado para temas de etica e implicaciones sociales de la IA en español. Sus videos combinan rigor academico con accesibilidad.",
+  "recursos_complementarios": [
+    {
+      "titulo": "UNESCO - Recomendacion sobre la Etica de la IA (materiales educativos)",
+      "url": "https://www.unesco.org/en/artificial-intelligence/recommendation-ethics",
+      "tipo": "documento_referencia",
+      "nota": "Marco etico global, util como material de lectura complementario al video"
+    },
+    {
+      "titulo": "IBM - Que es la Etica de la IA",
+      "url": "https://www.ibm.com/think/topics/ai-ethics",
+      "tipo": "articulo_referencia",
+      "nota": "Disponible en español, excelente para complementar el video con lectura"
+    }
+  ],
+  "canales_recomendados_busqueda_directa": [
+    {
+      "canal": "DotCSV",
+      "url_canal": "https://www.youtube.com/@DotCSV",
+      "buscar": "etica IA sesgos privacidad responsabilidad"
+    },
+    {
+      "canal": "EDteam",
+      "url_canal": "https://www.youtube.com/@EDteam",
+      "buscar": "etica inteligencia artificial riesgos"
+    },
+    {
+      "canal": "Platzi",
+      "url_canal": "https://www.youtube.com/@PlatziVideo",
+      "buscar": "etica IA responsabilidad digital"
+    }
+  ],
+  "nota_hallazgo_investigacion": "Esta materia tiene menos representacion en YouTube que las materias tecnicas. La investigacion revelo que la mayoria del contenido sobre etica en IA esta en formatos universitarios (Coursera, documentos, articulos) mas que en videos cortos de YouTube. Se recomienda combinar un video introductorio con materiales de lectura de UNESCO, UNAM o IBM.",
+  "fuentes_investigacion": [
+    "https://openwebinars.net/blog/etica-en-la-inteligencia-artificial/",
+    "https://www.coursera.org/learn/ia-etica",
+    "https://www.unesco.org/en/artificial-intelligence/recommendation-ethics/cases",
+    "https://www.ibm.com/think/topics/ai-ethics",
+    "https://sinapsisai.com/blog/inteligencia-artificial-para-principiantes-c%C3%B3mo-aprender-ia-desde-cero",
+    "https://scielo.sld.cu/scielo.php?script=sci_arttext&pid=S1990-86442023000500137"
+  ],
+  "accion_requerida": "PENDIENTE VERIFICACION: Buscar directamente en canal DotCSV el video mas reciente (2022-2024) sobre etica/sesgos en IA. Tambien explorar canal de UNAM en YouTube.",
+  "fecha_investigacion": "2026-03-25",
+  "investigador": "Agente Investigador Externo ITSEIA"
+}

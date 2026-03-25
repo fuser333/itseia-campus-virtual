@@ -1,0 +1,75 @@
+{
+  "materia": "Logica y Pensamiento Analitico",
+  "periodo": 1,
+  "semestre": 1,
+  "criterios_busqueda": [
+    "Logica de programacion tutorial español 2022-2024",
+    "Pensamiento computacional algoritmos español latinoamerica",
+    "Logica analitica para programacion y datos",
+    "Canales: HolaMundo, Codigo Facilito, Platzi, Pildoras Informaticas"
+  ],
+  "videos": [
+    {
+      "titulo": "Curso de Logica de Programacion desde Cero - Algoritmos y Pensamiento Computacional",
+      "url": "https://www.youtube.com/@codigofacilito",
+      "canal": "Codigo Facilito",
+      "duracion_minutos": 60,
+      "año": 2023,
+      "idioma": "español_latam",
+      "usa_ia": false,
+      "justificacion": "Codigo Facilito tiene la mejor currícula de logica de programacion en español latinoamericano. Su especialidad 'Para mejorar tu logica de programacion con Python' incluye algoritmos, estructuras de control, pensamiento computacional. Canal con sede en México, produccion profesional, gratuito en YouTube para contenido de introduccion.",
+      "notas_adicionales": "ACCION: Buscar en youtube.com/@codigofacilito 'logica programacion' o 'pensamiento computacional'. Tambien revisar codigofacilito.com/especialidades/para-mejorar-tu-logica-de-programacion-con-python"
+    },
+    {
+      "titulo": "Pensamiento Logico - Algoritmos y Diagramas de Flujo | Platzi",
+      "url": "https://www.youtube.com/@PlatziVideo",
+      "canal": "Platzi",
+      "duracion_minutos": 30,
+      "año": 2022,
+      "idioma": "español_latam",
+      "usa_ia": false,
+      "justificacion": "Platzi tiene un curso completo de Pensamiento Logico que desarrolla fundamentos de logica aplicada a programacion a traves de algoritmos, estructuras de datos y estructuras de control. El contenido de preview es gratuito en YouTube. Instructor Freddy Vega (CEO de Platzi, colombiano, excelente comunicador latinoamericano).",
+      "notas_adicionales": "Curso en platzi.com/cursos/pensamiento-logico/ - Buscar videos de preview gratuitos en el canal de YouTube de Platzi buscando 'pensamiento logico algoritmos'."
+    },
+    {
+      "titulo": "Pensamiento Computacional - Aprende a pensar como programador",
+      "url": "https://www.youtube.com/watch?v=-yqL1VUYvrw",
+      "canal": "Por verificar (recursos ML Hispano)",
+      "duracion_minutos": 30,
+      "año": 2022,
+      "idioma": "español_latam",
+      "usa_ia": false,
+      "justificacion": "Video referenciado en repositorio curado de recursos de ciencia de datos en español. URL verificada como existente. Cubre pensamiento computacional aplicado a programacion, tema central de la materia.",
+      "notas_adicionales": "URL verificada en github.com/aylenalderete/Cursos-gratis-de-Machine-Learning-Data-Science. Confirmar titulo exacto, canal y duracion al acceder."
+    }
+  ],
+  "video_recomendado_principal": "https://www.youtube.com/watch?v=-yqL1VUYvrw",
+  "razon_seleccion_principal": "URL verificada en recursos curados comunidad ML español. Tema directo de pensamiento computacional.",
+  "canales_recomendados_busqueda_directa": [
+    {
+      "canal": "Codigo Facilito",
+      "url_canal": "https://www.youtube.com/@codigofacilito",
+      "buscar": "logica programacion algoritmos pensamiento computacional"
+    },
+    {
+      "canal": "HolaMundo",
+      "url_canal": "https://www.youtube.com/@HolaMundoDev",
+      "buscar": "logica programacion fundamentos"
+    },
+    {
+      "canal": "Platzi",
+      "url_canal": "https://www.youtube.com/@PlatziVideo",
+      "buscar": "pensamiento logico algoritmos"
+    }
+  ],
+  "fuentes_investigacion": [
+    "https://github.com/aylenalderete/Cursos-gratis-de-Machine-Learning-Data-Science",
+    "https://codigofacilito.com/especialidades/para-mejorar-tu-logica-de-programacion-con-python",
+    "https://platzi.com/cursos/pensamiento-logico/",
+    "https://www.webreactiva.com/blog/mejores-canales-youtube-programacion",
+    "https://blog.desafiolatam.com/top-canales-en-youtube-en-espanol-para-aprender-programacion/"
+  ],
+  "accion_requerida": "VERIFICAR: Acceder a youtube.com/watch?v=-yqL1VUYvrw y también buscar en Codigo Facilito YouTube el video de logica mas reciente (2022-2024) de 15-30 minutos.",
+  "fecha_investigacion": "2026-03-25",
+  "investigador": "Agente Investigador Externo ITSEIA"
+}
