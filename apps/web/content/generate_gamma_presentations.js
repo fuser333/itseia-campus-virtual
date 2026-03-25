@@ -1008,7 +1008,7 @@ async function gammaCreate(presentation) {
     textOptions: {
       tone: 'professional, educational, clear, inspiring',
       amount: 'medium',
-      language: 'Spanish'
+      language: 'es-419'
     },
     imageOptions: {
       source: 'pictographic'
