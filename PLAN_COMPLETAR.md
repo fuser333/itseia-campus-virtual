@@ -57,12 +57,13 @@
 
 **Nota critica:** No existe tabla `lesson_progress` — solo `session_progress`. Los cursos pro NO tienen tracking de progreso del alumno.
 
-### CERTIFICACIONES (MEJORADO HOY)
+### CERTIFICACIONES (COMPLETADO HOY)
 | Certificacion | Dominios | Preguntas | Estado |
 |--------------|----------|-----------|--------|
-| AWS Cloud Practitioner | 6 | 20 | Activa |
-| Google Cloud Digital Leader | 4 | ~18 | Activa (NUEVA) |
-| Azure AI Fundamentals | 4 | ~19 | Activa (NUEVA) |
+| AWS Cloud Practitioner | 6 | 30 | Activa |
+| Google Cloud Digital Leader | 4 | 30 | Activa (NUEVA) |
+| Azure AI Fundamentals | 4 | 30 | Activa (NUEVA) |
+| **TOTAL** | **14** | **90** | **Simulacros funcionales** |
 
 ### CARRERAS (REFERENCIA)
 - 3 carreras activas (IA, Ciencia Datos, Big Data)
