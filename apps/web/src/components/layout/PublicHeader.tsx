@@ -3,13 +3,16 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { GraduationCap, BookOpen, FlaskConical, Home, Menu, X, LogIn, UserPlus } from "lucide-react";
+import { GraduationCap, BookOpen, Award, Building2, Users, Home, Menu, X, LogIn, UserPlus, Rocket } from "lucide-react";
 
 const navLinks = [
   { href: "/", label: "Inicio", icon: Home },
-  { href: "/carreras", label: "Carreras", icon: GraduationCap },
-  { href: "/catalogo", label: "Catalogo", icon: BookOpen },
-  { href: "/ai-lab", label: "AI Lab", icon: FlaskConical },
+  { href: "/carreras-info", label: "Carreras", icon: GraduationCap },
+  { href: "/preuni-info", label: "Preuni", icon: Rocket },
+  { href: "/cursos-pro-info", label: "Cursos Pro", icon: BookOpen },
+  { href: "/certificaciones-info", label: "Certificaciones", icon: Award },
+  { href: "/docentes-info", label: "Docentes", icon: Users },
+  { href: "/empresas-info", label: "Empresas", icon: Building2 },
 ];
 
 export default function PublicHeader() {

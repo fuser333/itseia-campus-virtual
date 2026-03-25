@@ -121,15 +121,15 @@ function LoginForm() {
           <div className="mt-12 grid grid-cols-3 gap-4">
             <div className="glass rounded-xl p-4">
               <div className="text-2xl font-bold text-yellow font-[family-name:var(--font-space-grotesk)]">
-                22
+                254
               </div>
-              <div className="text-xs text-muted-foreground mt-1">Cursos</div>
+              <div className="text-xs text-muted-foreground mt-1">Sesiones</div>
             </div>
             <div className="glass rounded-xl p-4">
               <div className="text-2xl font-bold text-light-blue font-[family-name:var(--font-space-grotesk)]">
-                198
+                10
               </div>
-              <div className="text-xs text-muted-foreground mt-1">Modulos</div>
+              <div className="text-xs text-muted-foreground mt-1">Programas</div>
             </div>
             <div className="glass rounded-xl p-4">
               <div className="text-2xl font-bold text-coral font-[family-name:var(--font-space-grotesk)]">

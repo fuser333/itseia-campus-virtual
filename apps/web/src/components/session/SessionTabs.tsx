@@ -13,6 +13,7 @@ import {
   Video,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import SessionAccordion from "./SessionAccordion";
 
 export interface SessionTab {
   id: string;
@@ -47,10 +48,16 @@ export default function SessionTabs({ tabs, className }: SessionTabsProps) {
 
   const activeTab = tabs.find((t) => t.id === activeTabId);
 
+  // All available tabs except the currently active one — go into the accordion
+  const accordionTabs = tabs.filter(
+    (t) => t.available && t.id !== activeTabId
+  );
+
   return (
     <div className={cn("flex flex-col h-full", className)}>
-      {/* Tab bar */}
-      <div className="border-b border-[#1F2F58]/8 bg-white">
+
+      {/* ── Tab bar (sticky) ─────────────────────────────────── */}
+      <div className="sticky top-0 z-10 border-b border-[#1F2F58]/8 bg-white shadow-sm">
         <div className="overflow-x-auto scrollbar-hide">
           <div className="flex min-w-max px-4 gap-0.5">
             {tabs.map((tab) => {
@@ -76,7 +83,7 @@ export default function SessionTabs({ tabs, className }: SessionTabsProps) {
                   <Icon className="size-4" />
                   <span className="hidden sm:inline">{tab.label}</span>
 
-                  {/* Completed dot */}
+                  {/* Completion dot */}
                   {tab.completed && (
                     <span className="size-1.5 rounded-full bg-emerald-400" />
                   )}
@@ -92,16 +99,27 @@ export default function SessionTabs({ tabs, className }: SessionTabsProps) {
         </div>
       </div>
 
-      {/* Tab content */}
+      {/* ── Scrollable body ──────────────────────────────────── */}
       <div className="flex-1 overflow-y-auto">
-        <div className="mx-auto max-w-4xl px-4 py-6 sm:px-6 lg:px-8">
-          {activeTab?.available ? (
-            activeTab.content
-          ) : (
-            <EmptyState />
+        <div className="mx-auto max-w-4xl px-4 py-6 sm:px-6 lg:px-8 space-y-10">
+
+          {/* Main content — the active tab rendered big */}
+          <section aria-label="Contenido principal">
+            {activeTab?.available ? (
+              activeTab.content
+            ) : (
+              <EmptyState />
+            )}
+          </section>
+
+          {/* Accordion — all other available tabs */}
+          {accordionTabs.length > 0 && (
+            <SessionAccordion tabs={accordionTabs} />
           )}
+
         </div>
       </div>
+
     </div>
   );
 }

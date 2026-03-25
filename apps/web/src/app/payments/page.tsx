@@ -90,6 +90,7 @@ export default function PaymentsPage() {
           .from("programs")
           .select("id, name, slug, price, type, is_active")
           .eq("is_active", true)
+          .neq("type", "teacher_training")
           .order("price", { ascending: true }),
       ]);
 

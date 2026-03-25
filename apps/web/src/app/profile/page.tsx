@@ -33,6 +33,7 @@ function getLevelProgress(xp: number) {
 export default function ProfilePage() {
   const supabase = createClient();
   const [profile, setProfile] = useState<Profile | null>(null);
+  const [loading, setLoading] = useState(true);
   const [fullName, setFullName] = useState("");
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState("");
@@ -41,7 +42,10 @@ export default function ProfilePage() {
   useEffect(() => {
     async function load() {
       const { data: { user } } = await supabase.auth.getUser();
-      if (!user) return;
+      if (!user) {
+        setLoading(false);
+        return;
+      }
 
       const { data } = await supabase
         .from("profiles")
@@ -51,7 +55,7 @@ export default function ProfilePage() {
 
       if (data) {
         setProfile(data);
-        setFullName(data.full_name);
+        setFullName(data.full_name || "");
       }
 
       // AI usage this month
@@ -71,6 +75,8 @@ export default function ProfilePage() {
           tokens: usage.reduce((sum, u) => sum + u.tokens_in + u.tokens_out, 0),
         });
       }
+
+      setLoading(false);
     }
     load();
   }, []);
@@ -95,10 +101,18 @@ export default function ProfilePage() {
     setTimeout(() => setMessage(""), 3000);
   }
 
-  if (!profile) {
+  if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
         <div className="w-8 h-8 border-2 border-[#FBBC0C] border-t-transparent rounded-full animate-spin" />
+      </div>
+    );
+  }
+
+  if (!profile) {
+    return (
+      <div className="p-6 text-center text-white/50">
+        No se pudo cargar el perfil. Intenta recargar la pagina.
       </div>
     );
   }

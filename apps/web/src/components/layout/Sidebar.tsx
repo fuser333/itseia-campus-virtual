@@ -7,337 +7,335 @@ import { createClient } from "@/lib/supabase/client";
 import type { Profile, UserRole } from "@/types/database";
 import {
   LayoutDashboard,
-  FlaskConical,
-  User,
-  CreditCard,
-  Settings,
-  Users,
   GraduationCap,
-  FileText,
-  BrainCircuit,
-  DollarSign,
+  Award,
+  Calendar,
+  Video,
+  MessageSquare,
+  Bot,
+  BookOpen,
+  Layers,
+  CreditCard,
+  User,
+  FileCheck,
+  Briefcase,
+  FlaskConical,
+  BookMarked,
   ChevronLeft,
   ChevronRight,
   LogOut,
   Brain,
+  Users,
+  FileText,
+  BrainCircuit,
+  DollarSign,
   Sparkles,
-  Library,
+  Settings,
+  CalendarDays,
   School,
   ClipboardCheck,
-  BookMarked,
-  CalendarDays,
   ShieldCheck,
-  Layers,
-  BookOpen,
+  Library,
+  ExternalLink,
+  ClipboardList,
+  BarChart2,
+  Megaphone,
+  Building2,
 } from "lucide-react";
+
+// ─── Types ────────────────────────────────────────────────────────────────────
 
 interface NavItem {
   href: string;
   label: string;
   icon: React.ComponentType<{ className?: string }>;
-  roles: UserRole[];
   badge?: string;
+  external?: boolean;
 }
 
-const ALL_ROLES: UserRole[] = [
-  "estudiante",
-  "docente",
-  "coordinacion",
-  "finanzas",
-  "admin",
-  "super_admin",
-];
-
-const STAFF_ROLES: UserRole[] = [
-  "docente",
-  "coordinacion",
-  "admin",
-  "super_admin",
-];
-
-const ADMIN_ROLES: UserRole[] = [
-  "coordinacion",
-  "admin",
-  "super_admin",
-];
-
-const navItems: NavItem[] = [
-  // -- Principal --
-  {
-    href: "/dashboard",
-    label: "Dashboard",
-    icon: LayoutDashboard,
-    roles: ALL_ROLES,
-  },
-  {
-    href: "/carreras",
-    label: "Mi Carrera",
-    icon: School,
-    roles: ["estudiante", ...ADMIN_ROLES],
-  },
-  {
-    href: "/ai-lab",
-    label: "AI Lab",
-    icon: FlaskConical,
-    roles: ALL_ROLES,
-    badge: "Beta",
-  },
-  {
-    href: "/flashcards",
-    label: "Flashcards",
-    icon: Layers,
-    roles: ["estudiante", ...ADMIN_ROLES],
-  },
-  // -- Academy --
-  {
-    href: "/biblioteca",
-    label: "Biblioteca",
-    icon: BookMarked,
-    roles: ALL_ROLES,
-  },
-  {
-    href: "/calendario",
-    label: "Calendario",
-    icon: CalendarDays,
-    roles: ALL_ROLES,
-  },
-  {
-    href: "/certificaciones",
-    label: "Certificaciones",
-    icon: ShieldCheck,
-    roles: ["estudiante", ...ADMIN_ROLES],
-    badge: "Nuevo",
-  },
-  // -- Mi Cuenta --
-  {
-    href: "/payments",
-    label: "Mis Pagos",
-    icon: CreditCard,
-    roles: ["estudiante"],
-  },
-  {
-    href: "/profile",
-    label: "Mi Perfil",
-    icon: User,
-    roles: ALL_ROLES,
-  },
-  // -- Explorar --
-  {
-    href: "/catalogo",
-    label: "Catalogo",
-    icon: Library,
-    roles: ALL_ROLES,
-  },
-  {
-    href: "/carreras",
-    label: "Carreras",
-    icon: GraduationCap,
-    roles: ALL_ROLES,
-  },
-  // -- Panel Docente --
-  {
-    href: "/admin/courses",
-    label: "Gestionar Cursos",
-    icon: FileText,
-    roles: STAFF_ROLES,
-  },
-  {
-    href: "/admin/lessons",
-    label: "Gestionar Lecciones",
-    icon: GraduationCap,
-    roles: STAFF_ROLES,
-  },
-  {
-    href: "/admin/sesiones",
-    label: "Gestionar Sesiones",
-    icon: BookOpen,
-    roles: STAFF_ROLES,
-  },
-  {
-    href: "/admin/entregas",
-    label: "Revisar Entregas",
-    icon: ClipboardCheck,
-    roles: STAFF_ROLES,
-  },
-  // -- Administracion --
-  {
-    href: "/admin/calendario",
-    label: "Calendario Global",
-    icon: CalendarDays,
-    roles: ADMIN_ROLES,
-  },
-  {
-    href: "/admin/users",
-    label: "Usuarios",
-    icon: Users,
-    roles: ADMIN_ROLES,
-  },
-  {
-    href: "/admin/programs",
-    label: "Carreras (Admin)",
-    icon: BrainCircuit,
-    roles: ADMIN_ROLES,
-  },
-  {
-    href: "/admin/carreras",
-    label: "Carreras (Acad.)",
-    icon: School,
-    roles: ADMIN_ROLES,
-  },
-  {
-    href: "/admin/enrollments",
-    label: "Matriculas",
-    icon: GraduationCap,
-    roles: ADMIN_ROLES,
-  },
-  {
-    href: "/admin/payments",
-    label: "Pagos",
-    icon: DollarSign,
-    roles: ["finanzas", "admin", "super_admin"],
-  },
-  // -- Sistema --
-  {
-    href: "/admin/ai-usage",
-    label: "Uso de IA",
-    icon: Sparkles,
-    roles: ["admin", "super_admin"],
-  },
-  {
-    href: "/admin",
-    label: "Panel Admin",
-    icon: Settings,
-    roles: ["admin", "super_admin"],
-  },
-];
-
-// Section membership by label
-const PRINCIPAL_LABELS = ["Dashboard", "Mi Carrera", "AI Lab", "Flashcards"];
-const ACADEMY_LABELS = ["Biblioteca", "Calendario", "Certificaciones"];
-const CUENTA_LABELS = ["Mis Pagos", "Mi Perfil"];
-const EXPLORAR_LABELS = ["Catalogo", "Carreras"];
-
-// Paths for Panel Docente
-const DOCENTE_PATHS = ["/admin/courses", "/admin/lessons", "/admin/sesiones", "/admin/entregas"];
-
-function getSections(role: UserRole) {
-  const sections: { label: string; items: NavItem[] }[] = [];
-
-  // Principal
-  const principalItems = navItems.filter(
-    (item) =>
-      item.roles.includes(role) &&
-      PRINCIPAL_LABELS.includes(item.label)
-  );
-  if (principalItems.length > 0) {
-    sections.push({ label: "Principal", items: principalItems });
-  }
-
-  // Academy
-  const academyItems = navItems.filter(
-    (item) =>
-      item.roles.includes(role) &&
-      ACADEMY_LABELS.includes(item.label)
-  );
-  if (academyItems.length > 0) {
-    sections.push({ label: "Academy", items: academyItems });
-  }
-
-  // Mi Cuenta
-  const cuentaItems = navItems.filter(
-    (item) =>
-      item.roles.includes(role) &&
-      CUENTA_LABELS.includes(item.label)
-  );
-  if (cuentaItems.length > 0) {
-    sections.push({ label: "Mi Cuenta", items: cuentaItems });
-  }
-
-  // Explorar — deduplicate: /carreras "Carreras" is separate from /carreras "Mi Carrera"
-  const explorarItems = navItems.filter(
-    (item) =>
-      item.roles.includes(role) &&
-      EXPLORAR_LABELS.includes(item.label)
-  );
-  if (explorarItems.length > 0) {
-    sections.push({ label: "Explorar", items: explorarItems });
-  }
-
-  // Panel Docente — staff content management (docente and above only)
-  if (STAFF_ROLES.includes(role)) {
-    const docenteItems = navItems.filter(
-      (item) =>
-        item.roles.includes(role) &&
-        DOCENTE_PATHS.includes(item.href)
-    );
-    if (docenteItems.length > 0) {
-      sections.push({ label: "Panel Docente", items: docenteItems });
-    }
-  }
-
-  // Administracion
-  if ([...ADMIN_ROLES, "finanzas" as UserRole].includes(role)) {
-    const adminItems = navItems.filter(
-      (item) =>
-        item.roles.includes(role) &&
-        item.href.startsWith("/admin") &&
-        !DOCENTE_PATHS.includes(item.href) &&
-        item.href !== "/admin" &&
-        item.href !== "/admin/ai-usage"
-    );
-    if (adminItems.length > 0) {
-      sections.push({ label: "Administracion", items: adminItems });
-    }
-  }
-
-  // Sistema
-  if (["admin", "super_admin"].includes(role)) {
-    const systemItems = navItems.filter(
-      (item) =>
-        item.roles.includes(role) &&
-        (item.href === "/admin" || item.href === "/admin/ai-usage")
-    );
-    if (systemItems.length > 0) {
-      sections.push({ label: "Sistema", items: systemItems });
-    }
-  }
-
-  return sections;
+interface NavSection {
+  label: string;
+  items: NavItem[];
 }
+
+// ─── Role sets ───────────────────────────────────────────────────────────────
+
+const ADMIN_ROLES: UserRole[] = ["coordinacion", "admin", "super_admin"];
+const STAFF_ROLES: UserRole[] = ["docente", "coordinacion", "admin", "super_admin"];
+
+// ─── Menu definitions ─────────────────────────────────────────────────────────
+
+/** 1. ALUMNO — carrera formal (role: estudiante, program type: carrera) */
+const MENU_ALUMNO: NavSection[] = [
+  {
+    label: "MI APRENDIZAJE",
+    items: [
+      { href: "/dashboard",        label: "Dashboard",     icon: LayoutDashboard },
+      { href: "/carreras",         label: "Mi Carrera",      icon: GraduationCap },
+      { href: "/certificaciones",  label: "Certificaciones", icon: Award, badge: "Nuevo" },
+      { href: "/calendario",       label: "Calendario",      icon: Calendar },
+      { href: "/cohorte",          label: "Clases en Vivo",  icon: Video },
+      { href: "/foros",            label: "Foros",           icon: MessageSquare },
+    ],
+  },
+  {
+    label: "HERRAMIENTAS",
+    items: [
+      { href: "/ai-lab",      label: "AI Lab",     icon: Bot,      badge: "Beta" },
+      { href: "/biblioteca",  label: "Biblioteca", icon: BookOpen },
+      { href: "/flashcards",  label: "Flashcards", icon: Layers },
+    ],
+  },
+  {
+    label: "MI CUENTA",
+    items: [
+      { href: "/payments",      label: "Pagos",        icon: CreditCard },
+      { href: "/profile",       label: "Perfil",       icon: User },
+      { href: "/certificates",  label: "Certificados", icon: FileCheck },
+      { href: "/portfolio",     label: "Portafolio",   icon: Briefcase },
+    ],
+  },
+];
+
+/** 2. EXTERNO — curso profesional (role: estudiante, program type: curso) */
+const MENU_EXTERNO: NavSection[] = [
+  {
+    label: "MI CURSO",
+    items: [
+      { href: "/dashboard",  label: "Dashboard",          icon: LayoutDashboard },
+      { href: "/carreras",   label: "Mi Curso",           icon: GraduationCap },
+      {
+        href: "https://itseia.ai/demos/",
+        label: "Demos Interactivos",
+        icon: FlaskConical,
+        external: true,
+      },
+    ],
+  },
+  {
+    label: "HERRAMIENTAS",
+    items: [
+      { href: "/ai-lab",     label: "AI Lab",     icon: Bot,     badge: "Beta" },
+      { href: "/biblioteca", label: "Biblioteca", icon: BookOpen },
+    ],
+  },
+  {
+    label: "MI CUENTA",
+    items: [
+      { href: "/payments",     label: "Pagos",       icon: CreditCard },
+      { href: "/profile",      label: "Perfil",      icon: User },
+      { href: "/certificates", label: "Certificado", icon: FileCheck },
+    ],
+  },
+];
+
+/** 3. DOCENTE */
+const MENU_DOCENTE: NavSection[] = [
+  {
+    label: "MIS MATERIAS",
+    items: [
+      { href: "/teacher",           label: "Dashboard",    icon: LayoutDashboard },
+      { href: "/teacher/materias",  label: "Mis Materias", icon: BookOpen },
+    ],
+  },
+  {
+    label: "GESTION",
+    items: [
+      { href: "/teacher/entregas",    label: "Calificar Entregas",  icon: ClipboardCheck },
+      { href: "/teacher/progreso",    label: "Progreso Alumnos",    icon: BarChart2 },
+      { href: "/teacher/comunicacion", label: "Anuncios",           icon: Megaphone },
+      { href: "/teacher/materias",    label: "Programar Clases",    icon: Video },
+      { href: "/teacher/tutorias",    label: "Tutorias",            icon: MessageSquare },
+      { href: "/teacher/asistencia",  label: "Asistencia",          icon: ClipboardList },
+    ],
+  },
+  {
+    label: "CAPACITACION CES",
+    items: [
+      { href: "/teacher/capacitacion", label: "Docencia Virtual 120h", icon: GraduationCap },
+      { href: "/teacher/capacitacion", label: "Mi Certificacion",      icon: FileCheck },
+    ],
+  },
+];
+
+/** 4. ADMIN / COORDINACION / SUPER_ADMIN — keep existing sections */
+const MENU_ADMIN: NavSection[] = [
+  {
+    label: "PRINCIPAL",
+    items: [
+      { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
+      { href: "/ai-lab",    label: "AI Lab",    icon: FlaskConical, badge: "Beta" },
+    ],
+  },
+  {
+    label: "PANEL DOCENTE",
+    items: [
+      { href: "/admin/courses",   label: "Gestionar Cursos",    icon: FileText },
+      { href: "/admin/lessons",   label: "Gestionar Lecciones", icon: GraduationCap },
+      { href: "/admin/sesiones",  label: "Gestionar Sesiones",  icon: BookOpen },
+      { href: "/admin/entregas",  label: "Revisar Entregas",    icon: ClipboardCheck },
+    ],
+  },
+  {
+    label: "ADMINISTRACION",
+    items: [
+      { href: "/admin/calendario",  label: "Calendario Global",  icon: CalendarDays },
+      { href: "/admin/users",       label: "Usuarios",           icon: Users },
+      { href: "/admin/programs",    label: "Carreras (Admin)",   icon: BrainCircuit },
+      { href: "/admin/carreras",    label: "Carreras (Acad.)",   icon: School },
+      { href: "/admin/enrollments", label: "Matriculas",         icon: GraduationCap },
+      { href: "/admin/payments",    label: "Pagos",              icon: DollarSign },
+    ],
+  },
+  {
+    label: "SISTEMA",
+    items: [
+      { href: "/admin/ai-usage", label: "Uso de IA",    icon: Sparkles },
+      { href: "/admin",          label: "Panel Admin",  icon: Settings },
+    ],
+  },
+];
+
+/** 5. FINANZAS */
+const MENU_FINANZAS: NavSection[] = [
+  {
+    label: "FINANZAS",
+    items: [
+      { href: "/dashboard",       label: "Dashboard", icon: LayoutDashboard },
+      { href: "/admin/payments",  label: "Pagos",     icon: DollarSign },
+      { href: "/admin/enrollments", label: "Reportes", icon: BarChart2 },
+    ],
+  },
+  {
+    label: "MI CUENTA",
+    items: [
+      { href: "/profile", label: "Perfil", icon: User },
+    ],
+  },
+];
+
+/** 6. B2B / CORPORATIVO */
+const MENU_B2B: NavSection[] = [
+  {
+    label: "MI EMPRESA",
+    items: [
+      { href: "/b2b",                  label: "Dashboard Corporativo", icon: LayoutDashboard },
+      { href: "/b2b/equipo",           label: "Mi Equipo",             icon: Users },
+      { href: "/b2b/capacitacion",     label: "Capacitacion Activa",   icon: GraduationCap },
+    ],
+  },
+  {
+    label: "NUESTRAS EMPRESAS",
+    items: [
+      { href: "/b2b/h3l",      label: "H3L",      icon: Building2 },
+      { href: "/b2b/imagemia", label: "ImagemIA", icon: Brain },
+      { href: "/b2b/strata",   label: "Strata",   icon: BrainCircuit },
+    ],
+  },
+  {
+    label: "REPORTES",
+    items: [
+      { href: "/b2b/progreso",    label: "Progreso del Equipo",  icon: BarChart2 },
+      { href: "/b2b/certificados", label: "Certificados Equipo", icon: Award },
+      { href: "/b2b/facturacion",  label: "Facturacion",         icon: CreditCard },
+    ],
+  },
+];
+
+// ─── Enrollment type detection ────────────────────────────────────────────────
+
+type MenuType = "alumno" | "externo" | "docente" | "admin" | "finanzas" | "b2b";
+
+function getMenuType(role: UserRole, programType: string | null): MenuType {
+  if (role === "super_admin" || role === "admin" || role === "coordinacion") return "admin";
+  if (role === "finanzas") return "finanzas";
+  if (role === "docente") return "docente";
+  if (role === "estudiante") {
+    // Distinguish ALUMNO (carrera) vs EXTERNO (curso, bootcamp, preuni, etc.)
+    if (programType === "curso" || programType === "bootcamp" || programType === "preuni") {
+      return "externo";
+    }
+    return "alumno";
+  }
+  // Fallback
+  return "alumno";
+}
+
+function getSectionsForMenuType(type: MenuType): NavSection[] {
+  switch (type) {
+    case "alumno":   return MENU_ALUMNO;
+    case "externo":  return MENU_EXTERNO;
+    case "docente":  return MENU_DOCENTE;
+    case "admin":    return MENU_ADMIN;
+    case "finanzas": return MENU_FINANZAS;
+    case "b2b":      return MENU_B2B;
+  }
+}
+
+// ─── Role display labels ──────────────────────────────────────────────────────
+
+const ROLE_LABELS: Record<UserRole, string> = {
+  super_admin: "Super Admin",
+  admin: "Administrador",
+  coordinacion: "Coordinacion",
+  docente: "Docente",
+  estudiante: "Estudiante",
+  finanzas: "Finanzas",
+};
+
+// ─── Component ────────────────────────────────────────────────────────────────
 
 export default function Sidebar() {
   const router = useRouter();
   const pathname = usePathname();
-  const [user, setUser] = useState<{ id: string; email: string } | null>(null);
+
+  const [user, setUser]       = useState<{ id: string; email: string } | null>(null);
   const [profile, setProfile] = useState<Profile | null>(null);
+  const [programType, setProgramType] = useState<string | null>(null);
   const [collapsed, setCollapsed] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const supabase = createClient();
 
-    async function getUser() {
-      const {
-        data: { user: authUser },
-      } = await supabase.auth.getUser();
+    async function loadUser() {
+      const { data: { user: authUser } } = await supabase.auth.getUser();
+      if (!authUser) { setLoading(false); return; }
 
-      if (authUser) {
-        setUser({ id: authUser.id, email: authUser.email || "" });
+      setUser({ id: authUser.id, email: authUser.email ?? "" });
 
-        const { data: profileData } = await supabase
-          .from("profiles")
-          .select("*")
-          .eq("id", authUser.id)
-          .single();
+      // Fetch profile
+      const { data: profileData } = await supabase
+        .from("profiles")
+        .select("*")
+        .eq("id", authUser.id)
+        .single();
 
-        if (profileData) {
-          setProfile(profileData as Profile);
+      if (profileData) {
+        setProfile(profileData as Profile);
+      }
+
+      // For estudiante role, fetch their active enrollment to detect program type
+      if (profileData?.role === "estudiante") {
+        const { data: enrollment } = await supabase
+          .from("enrollments")
+          .select("*, programs(type)")
+          .eq("user_id", authUser.id)
+          .eq("status", "active")
+          .order("enrolled_at", { ascending: false })
+          .limit(1)
+          .maybeSingle();
+
+        if (enrollment?.programs) {
+          const prog = enrollment.programs as { type: string };
+          setProgramType(prog.type ?? null);
         }
       }
+
       setLoading(false);
     }
 
-    getUser();
+    loadUser();
   }, []);
 
   async function handleLogout() {
@@ -347,16 +345,20 @@ export default function Sidebar() {
     router.refresh();
   }
 
-  function isActive(href: string) {
+  function isActive(href: string): boolean {
     if (href === "/dashboard") return pathname === "/dashboard";
     if (href === "/admin" && pathname !== "/admin") return false;
+    // exact match or sub-path match
     return pathname === href || pathname.startsWith(href + "/");
   }
 
-  const role: UserRole = profile?.role || "estudiante";
-  const sections = getSections(role);
+  const role: UserRole = profile?.role ?? "estudiante";
+  const menuType   = getMenuType(role, programType);
+  const sections   = getSectionsForMenuType(menuType);
+  const roleLabel  = ROLE_LABELS[role] ?? role;
 
-  // Loading skeleton
+  // ─── Loading skeleton ────────────────────────────────────────────────────
+
   if (loading) {
     return (
       <aside
@@ -365,21 +367,18 @@ export default function Sidebar() {
         }`}
       >
         <div className="h-16 flex items-center px-4 border-b border-white/[0.06]">
-          <div className="w-9 h-9 rounded-lg bg-yellow/20 animate-pulse" />
+          <div className="w-9 h-9 rounded-lg bg-yellow-400/20 animate-pulse" />
         </div>
-        <div className="flex-1 p-4">
-          <div className="space-y-3">
-            {[1, 2, 3, 4, 5].map((i) => (
-              <div
-                key={i}
-                className="h-9 rounded-lg bg-white/[0.04] animate-pulse"
-              />
-            ))}
-          </div>
+        <div className="flex-1 p-4 space-y-3">
+          {[1, 2, 3, 4, 5, 6].map((i) => (
+            <div key={i} className="h-9 rounded-lg bg-white/[0.04] animate-pulse" />
+          ))}
         </div>
       </aside>
     );
   }
+
+  // ─── Render ──────────────────────────────────────────────────────────────
 
   return (
     <aside
@@ -387,8 +386,8 @@ export default function Sidebar() {
         collapsed ? "w-[68px]" : "w-64"
       }`}
     >
-      {/* Logo */}
-      <div className="h-16 flex items-center px-4 border-b border-white/[0.06]">
+      {/* ── Logo ─────────────────────────────────────────────────────────── */}
+      <div className="h-16 flex items-center px-4 border-b border-white/[0.06] flex-shrink-0">
         <Link
           href="/dashboard"
           className="flex items-center gap-2.5 group overflow-hidden"
@@ -409,57 +408,66 @@ export default function Sidebar() {
         </Link>
       </div>
 
-      {/* Navigation */}
+      {/* ── Navigation ───────────────────────────────────────────────────── */}
       <nav className="flex-1 overflow-y-auto scrollbar-hide py-4 px-3">
         {sections.map((section, sectionIndex) => (
-          <div key={section.label} className={sectionIndex > 0 ? "mt-6" : ""}>
+          <div key={`${section.label}-${sectionIndex}`} className={sectionIndex > 0 ? "mt-6" : ""}>
+
+            {/* Section header */}
             {!collapsed && (
-              <p className="px-3 mb-2 text-[10px] font-semibold uppercase tracking-widest text-white/30">
+              <p className="px-3 mb-2 text-[10px] font-semibold uppercase tracking-widest text-white/30 select-none">
                 {section.label}
               </p>
             )}
             {collapsed && sectionIndex > 0 && (
               <div className="mx-2 mb-3 border-t border-white/[0.06]" />
             )}
+
+            {/* Items */}
             <div className="space-y-0.5">
               {section.items.map((item) => {
-                const Icon = item.icon;
+                const Icon   = item.icon;
                 const active = isActive(item.href);
+
+                const linkProps = item.external
+                  ? { href: item.href, target: "_blank", rel: "noopener noreferrer" }
+                  : { href: item.href };
 
                 return (
                   <Link
-                    key={item.href}
-                    href={item.href}
+                    key={`${item.href}-${item.label}`}
+                    {...linkProps}
                     title={collapsed ? item.label : undefined}
                     className={`group flex items-center gap-3 rounded-lg transition-all duration-200 ${
-                      collapsed
-                        ? "justify-center px-0 py-2.5"
-                        : "px-3 py-2.5"
+                      collapsed ? "justify-center px-0 py-2.5" : "px-3 py-2.5"
                     } ${
                       active
                         ? "bg-[#FBBC0C]/[0.12] text-[#FBBC0C]"
-                        : "text-white/60 hover:text-white hover:bg-white/[0.04]"
+                        : "text-white/70 hover:text-white hover:bg-white/[0.04]"
                     }`}
                   >
                     <Icon
                       className={`w-[18px] h-[18px] flex-shrink-0 transition-colors ${
                         active
                           ? "text-[#FBBC0C]"
-                          : "text-white/40 group-hover:text-white/70"
+                          : "text-white/50 group-hover:text-white/80"
                       }`}
                     />
                     {!collapsed && (
-                      <span className="text-sm font-medium truncate flex-1">
+                      <span className="text-sm font-medium truncate flex-1 leading-none">
                         {item.label}
                       </span>
                     )}
                     {!collapsed && item.badge && (
-                      <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded-full bg-[#73B8E7]/15 text-[#73B8E7]">
+                      <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded-full bg-[#73B8E7]/15 text-[#73B8E7] flex-shrink-0">
                         {item.badge}
                       </span>
                     )}
+                    {!collapsed && item.external && (
+                      <ExternalLink className="w-3 h-3 text-white/30 flex-shrink-0" />
+                    )}
                     {active && !collapsed && (
-                      <div className="ml-auto h-1.5 w-1.5 rounded-full bg-[#FBBC0C]" />
+                      <div className="h-1.5 w-1.5 rounded-full bg-[#FBBC0C] flex-shrink-0" />
                     )}
                   </Link>
                 );
@@ -469,33 +477,32 @@ export default function Sidebar() {
         ))}
       </nav>
 
-      {/* XP bar for students */}
-      {!collapsed && profile && role === "estudiante" && (
-        <div className="px-4 pb-2">
+      {/* ── XP bar (students only) ───────────────────────────────────────── */}
+      {!collapsed && profile && (role === "estudiante") && (
+        <div className="px-4 pb-2 flex-shrink-0">
           <div className="rounded-lg bg-white/[0.03] border border-white/[0.06] p-3">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40">
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-white/40 select-none">
                 Nivel XP
               </span>
               <span className="text-xs font-bold text-[#FBBC0C] font-[family-name:var(--font-space-grotesk)]">
-                {profile.nivel_xp || 0}
+                {profile.nivel_xp ?? 0}
               </span>
             </div>
             <div className="h-1.5 bg-white/[0.06] rounded-full overflow-hidden">
               <div
                 className="h-full bg-gradient-to-r from-[#FBBC0C] to-[#F0846D] rounded-full transition-all duration-500"
-                style={{
-                  width: `${Math.min((profile.nivel_xp || 0) % 100, 100)}%`,
-                }}
+                style={{ width: `${Math.min((profile.nivel_xp ?? 0) % 100, 100)}%` }}
               />
             </div>
           </div>
         </div>
       )}
 
-      {/* User & collapse */}
-      <div className="border-t border-white/[0.06] p-3">
-        {/* User info */}
+      {/* ── User & collapse toggle ───────────────────────────────────────── */}
+      <div className="border-t border-white/[0.06] p-3 flex-shrink-0">
+
+        {/* Expanded: name + role + logout */}
         {!collapsed && user && (
           <div className="flex items-center gap-2.5 px-2 mb-3">
             <div className="w-8 h-8 rounded-full bg-[#1F2F58] flex items-center justify-center flex-shrink-0 ring-2 ring-[#FBBC0C]/20">
@@ -511,11 +518,11 @@ export default function Sidebar() {
               </span>
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-white truncate">
+              <p className="text-sm font-medium text-white truncate leading-tight">
                 {profile?.full_name || user.email}
               </p>
-              <p className="text-[10px] text-white/40 capitalize truncate">
-                {role.replace("_", " ")}
+              <p className="text-[10px] text-white/40 truncate leading-tight mt-0.5">
+                {roleLabel}
               </p>
             </div>
             <button
@@ -529,6 +536,7 @@ export default function Sidebar() {
           </div>
         )}
 
+        {/* Collapsed: only logout icon */}
         {collapsed && user && (
           <div className="flex justify-center mb-3">
             <button

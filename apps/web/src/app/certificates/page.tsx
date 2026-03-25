@@ -146,7 +146,13 @@ export default function CertificatesPage() {
 
   return (
     <div className="p-6 max-w-4xl mx-auto space-y-6">
-      <h1 className="text-2xl font-bold text-white">Mis Certificados</h1>
+      <div>
+        <h1 className="text-2xl font-bold text-white">Mis Certificados Academicos</h1>
+        <p className="text-white/40 text-sm mt-1">
+          Certificados de finalizacion de programas emitidos por ITSEIA.
+          Distintos a las Certificaciones de industria (Google, AWS, etc.) que encontraras en la seccion Certificaciones.
+        </p>
+      </div>
 
       {certificates.length === 0 ? (
         <Card className="bg-white/5 border-white/10">
@@ -156,9 +162,9 @@ export default function CertificatesPage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             </div>
-            <h3 className="text-white font-semibold text-lg mb-2">Aun no tienes certificados</h3>
+            <h3 className="text-white font-semibold text-lg mb-2">Aun no tienes certificados academicos</h3>
             <p className="text-white/40 mb-6">
-              Completa una carrera para obtener tu certificado oficial ITSEIA.
+              Completa tu programa para obtener el certificado oficial de finalizacion emitido por ITSEIA.
             </p>
 
             {/* Progress toward completing a program */}
@@ -217,7 +223,7 @@ export default function CertificatesPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
-                <p className="text-white/30 text-xs uppercase tracking-widest mb-1">Certificado ITSEIA</p>
+                <p className="text-white/30 text-xs uppercase tracking-widest mb-1">Certificado Academico ITSEIA</p>
                 <h3 className="text-white font-bold text-lg">{cert.programs.name}</h3>
                 <p className="text-white/40 text-sm mt-1">
                   {new Date(cert.issued_at).toLocaleDateString("es-EC", {

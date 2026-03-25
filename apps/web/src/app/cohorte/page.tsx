@@ -131,15 +131,8 @@ export default function CohortePage() {
     );
   }
 
-  if (!profile) {
-    return (
-      <div className="p-6 text-center text-white/50">
-        No se pudo cargar el perfil.
-      </div>
-    );
-  }
-
-  const xp = profile.nivel_xp || 0;
+  // Show content even if profile failed to load — xp defaults to 0
+  const xp = profile?.nivel_xp || 0;
   const level = getLevel(xp);
   const levelProgress = getLevelProgress(xp);
 
