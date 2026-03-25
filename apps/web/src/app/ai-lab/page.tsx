@@ -185,14 +185,14 @@ export default function AILabPage() {
         <div className="px-2 py-2 border-b border-[#1F2F58]/40 space-y-1">
           <Link
             href="/ai-lab/historial"
-            className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-gray-400 hover:text-white hover:bg-[#1F2F58]/40 transition-all text-sm"
+            className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-white/70 hover:text-white hover:bg-[#1F2F58]/40 transition-all text-sm"
           >
             <History className="w-4 h-4 text-[#73B8E7]/70" />
             Ver historial completo
           </Link>
           <Link
             href="/flashcards"
-            className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-gray-400 hover:text-white hover:bg-[#1F2F58]/40 transition-all text-sm"
+            className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-white/70 hover:text-white hover:bg-[#1F2F58]/40 transition-all text-sm"
           >
             <BookMarked className="w-4 h-4 text-[#FBBC0C]/70" />
             Mi mazo de Flashcards
@@ -203,11 +203,11 @@ export default function AILabPage() {
         <div className="flex-1 overflow-y-auto py-2 px-2 space-y-1 scrollbar-thin">
           {conversations.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-12 px-4 text-center">
-              <MessageSquare className="w-8 h-8 text-gray-600 mb-3" />
-              <p className="text-sm text-gray-500">
+              <MessageSquare className="w-8 h-8 text-white/40 mb-3" />
+              <p className="text-sm text-white/60">
                 No tienes conversaciones aun
               </p>
-              <p className="text-xs text-gray-600 mt-1">
+              <p className="text-xs text-white/40 mt-1">
                 Crea un nuevo chat para comenzar
               </p>
             </div>
@@ -229,7 +229,7 @@ export default function AILabPage() {
                 <MessageSquare className="w-4 h-4 shrink-0 text-[#73B8E7]/60" />
                 <div className="flex-1 min-w-0">
                   <p className="text-sm truncate">{conv.title}</p>
-                  <p className="text-[10px] text-gray-500">
+                  <p className="text-[10px] text-white/50">
                     {new Date(conv.createdAt).toLocaleDateString("es-EC", {
                       day: "numeric",
                       month: "short",

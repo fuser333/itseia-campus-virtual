@@ -276,6 +276,15 @@ export default async function DashboardPage() {
   const xp = profile?.nivel_xp || 0;
   const role = profile?.role || "estudiante";
 
+  // Determine if user is EXTERNO (enrolled in curso/bootcamp/preuni vs carrera)
+  const activeEnrollment = (enrollments || [])[0];
+  const enrolledProgramType = (activeEnrollment?.programs as { type?: string } | null)?.type ?? null;
+  const isExterno =
+    role === "estudiante" &&
+    (enrolledProgramType === "curso" ||
+      enrolledProgramType === "bootcamp" ||
+      enrolledProgramType === "preuni");
+
   // Proximas clases para widget de calendario
   const upcomingEvents = await getUpcomingEventsForUser(user.id, role, 3);
 
@@ -283,10 +292,10 @@ export default async function DashboardPage() {
     <div className="space-y-8">
       {/* Welcome header */}
       <div>
-        <h1 className="text-3xl font-bold tracking-tight text-[#0A1628]">
+        <h1 className="text-3xl font-bold tracking-tight text-foreground">
           Bienvenido, {firstName}
         </h1>
-        <p className="mt-1 text-base text-[#1F2F58]/60">
+        <p className="mt-1 text-base text-muted-foreground">
           Continua tu camino en inteligencia artificial. Aqui tienes un resumen de tu progreso.
         </p>
       </div>
@@ -323,8 +332,8 @@ export default async function DashboardPage() {
       {/* Mi Carrera section */}
       {careerProgressData.length > 0 && (
         <div>
-          <h2 className="mb-4 text-xl font-bold text-[#0A1628] flex items-center gap-2">
-            <School className="size-5 text-[#1F2F58]" />
+          <h2 className="mb-4 text-xl font-bold text-white flex items-center gap-2">
+            <School className="size-5 text-[#73B8E7]" />
             Mi Carrera
           </h2>
           <div className="grid gap-4 sm:grid-cols-1 lg:grid-cols-2">
@@ -416,9 +425,9 @@ export default async function DashboardPage() {
       {/* Enrolled programs */}
       <div>
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-xl font-bold text-[#0A1628]">Mis Carreras</h2>
+          <h2 className="text-xl font-bold text-white">Mis Carreras</h2>
           <Link href="/courses">
-            <Button variant="ghost" size="sm" className="text-[#1F2F58]/60 hover:text-[#1F2F58]">
+            <Button variant="ghost" size="sm" className="text-white/60 hover:text-white">
               Ver todos
               <ArrowRight className="ml-1 size-3.5" />
             </Button>
@@ -509,12 +518,12 @@ export default async function DashboardPage() {
       {upcomingEvents.length > 0 && (
         <div>
           <div className="mb-4 flex items-center justify-between">
-            <h2 className="text-xl font-bold text-[#0A1628] flex items-center gap-2">
-              <CalendarDays className="size-5 text-[#1F2F58]" />
+            <h2 className="text-xl font-bold text-white flex items-center gap-2">
+              <CalendarDays className="size-5 text-[#73B8E7]" />
               Proximas Clases
             </h2>
             <Link href="/calendario">
-              <Button variant="ghost" size="sm" className="text-[#1F2F58]/60 hover:text-[#1F2F58]">
+              <Button variant="ghost" size="sm" className="text-white/60 hover:text-white">
                 Ver calendario
                 <ArrowRight className="ml-1 size-3.5" />
               </Button>

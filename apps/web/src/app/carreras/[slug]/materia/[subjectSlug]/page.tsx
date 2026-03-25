@@ -347,7 +347,7 @@ export default async function SubjectPage({
                   <h3 className="text-base font-semibold text-[#0A1628]">
                     Sesiones en preparacion
                   </h3>
-                  <p className="mt-1 max-w-sm text-sm text-[#1F2F58]/50">
+                  <p className="mt-1 max-w-sm text-sm text-[#1F2F58]/80">
                     El contenido de esta materia esta siendo preparado por el equipo
                     docente. Estara disponible pronto.
                   </p>

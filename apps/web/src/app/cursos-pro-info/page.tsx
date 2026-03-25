@@ -307,6 +307,12 @@ export default function CursosProInfoPage() {
       </a>
 
       <PublicHeader />
+        {/* Login access */}
+        <div className="text-center py-3 bg-white/[0.03] border-b border-white/[0.06]">
+          <span className="text-white/50 text-sm">¿Ya tienes cuenta? </span>
+          <a href="/login" className="text-[#FBBC0C] text-sm font-semibold hover:underline">Iniciar sesión →</a>
+        </div>
+
 
       {/* ── HERO ── */}
       <section className="relative pt-24 pb-16 px-5 overflow-hidden">
@@ -347,7 +353,7 @@ export default function CursosProInfoPage() {
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a
-              href="#inscripcion"
+              href="https://itseia.ai/cursos/"
               className="bg-[#F0846D] text-white px-7 py-3.5 rounded-xl font-bold text-base hover:bg-[#E07060] transition-all hover:scale-[1.02] shadow-xl shadow-[#F0846D]/25"
             >
               Inscribirme ahora
@@ -429,7 +435,7 @@ export default function CursosProInfoPage() {
                 El quiz de 9 preguntas personaliza tu ruta sin importar tu campo.
               </p>
               <a
-                href="#inscripcion"
+                href="https://itseia.ai/cursos/"
                 className="bg-[#FBBC0C] text-[#0A1628] px-5 py-2.5 rounded-xl font-bold text-sm hover:bg-[#E5AB00] transition-all"
               >
                 Inscribirme ahora
@@ -569,7 +575,7 @@ export default function CursosProInfoPage() {
                 </ul>
 
                 <a
-                  href="#inscripcion"
+                  href="https://itseia.ai/cursos/"
                   className="block w-full py-3 rounded-xl font-bold text-sm text-center transition-all hover:scale-[1.02]"
                   style={{
                     background: plan.isPopular ? plan.color : `${plan.color}20`,

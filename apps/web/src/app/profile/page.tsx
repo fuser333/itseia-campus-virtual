@@ -132,7 +132,7 @@ export default function ProfilePage() {
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
-              <Label className="text-white/50">Nombre Completo</Label>
+              <Label className="text-white/80">Nombre Completo</Label>
               <Input
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
@@ -140,15 +140,15 @@ export default function ProfilePage() {
               />
             </div>
             <div>
-              <Label className="text-white/50">Email</Label>
+              <Label className="text-white/80">Email</Label>
               <Input
                 value={profile.email}
                 disabled
-                className="bg-white/5 border-white/10 text-white/50 mt-1"
+                className="bg-white/5 border-white/10 text-white/70 mt-1"
               />
             </div>
             <div>
-              <Label className="text-white/50">Rol</Label>
+              <Label className="text-white/80">Rol</Label>
               <div className="mt-1">
                 <Badge
                   variant="outline"
@@ -159,8 +159,8 @@ export default function ProfilePage() {
               </div>
             </div>
             <div>
-              <Label className="text-white/50">Miembro desde</Label>
-              <p className="text-white/70 mt-1">
+              <Label className="text-white/80">Miembro desde</Label>
+              <p className="text-white/90 mt-1">
                 {new Date(profile.created_at).toLocaleDateString("es-EC", {
                   year: "numeric",
                   month: "long",

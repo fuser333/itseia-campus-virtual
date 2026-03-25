@@ -106,7 +106,7 @@ export default function FlashcardsPage() {
     <div className="max-w-4xl mx-auto py-8 space-y-8">
       {/* Header */}
       <div className="flex items-center gap-4">
-        <Link href="/ai-lab" className="text-gray-400 hover:text-white transition-colors">
+        <Link href="/ai-lab" className="text-white/70 hover:text-white transition-colors">
           <ArrowLeft className="w-5 h-5" />
         </Link>
         <div className="flex items-center gap-3">
@@ -115,7 +115,7 @@ export default function FlashcardsPage() {
           </div>
           <div>
             <h1 className="text-xl font-bold text-white">Mi Mazo de Flashcards</h1>
-            <p className="text-sm text-gray-400">
+            <p className="text-sm text-white/70">
               {groups.reduce((acc, g) => acc + g.cards.length, 0)} flashcards
               guardadas
             </p>
@@ -127,12 +127,12 @@ export default function FlashcardsPage() {
       {groups.length === 0 && (
         <div className="flex flex-col items-center justify-center py-20 px-6 text-center rounded-2xl bg-[#0A1628] border border-[#1F2F58]/50">
           <div className="w-16 h-16 rounded-3xl bg-[#1F2F58]/30 flex items-center justify-center mb-4 border border-[#1F2F58]/40">
-            <BookOpen className="w-8 h-8 text-gray-600" />
+            <BookOpen className="w-8 h-8 text-white/40" />
           </div>
           <h2 className="text-lg font-semibold text-white mb-2">
             Aun no tienes flashcards
           </h2>
-          <p className="text-sm text-gray-500 max-w-md leading-relaxed mb-6">
+          <p className="text-sm text-white/60 max-w-md leading-relaxed mb-6">
             Ve a cualquier sesion de tu carrera, abre el tab AI Lab y genera
             flashcards desde la teoria de la sesion con un clic.
           </p>
@@ -169,7 +169,7 @@ export default function FlashcardsPage() {
                       {group.sessionTitle}
                     </h3>
                     <div className="flex items-center gap-3 mt-1">
-                      <span className="text-sm text-gray-400">
+                      <span className="text-sm text-white/70">
                         {group.cards.length} flashcards
                       </span>
                       {isCompleted && (
@@ -178,7 +178,7 @@ export default function FlashcardsPage() {
                         </span>
                       )}
                       {lastDeck?.cards_revisadas && (
-                        <span className="text-[10px] text-gray-600">
+                        <span className="text-[10px] text-white/50">
                           {lastDeck.cards_revisadas} revisadas
                         </span>
                       )}
@@ -199,7 +199,7 @@ export default function FlashcardsPage() {
                       />
                     ))}
                     {group.cards.length > 3 && (
-                      <span className="text-[10px] text-gray-600 ml-1">
+                      <span className="text-[10px] text-white/50 ml-1">
                         +{group.cards.length - 3}
                       </span>
                     )}
@@ -221,7 +221,7 @@ export default function FlashcardsPage() {
                     <p className="text-[10px] font-semibold uppercase tracking-widest text-[#73B8E7]/70 mb-1">
                       Primera flashcard
                     </p>
-                    <p className="text-sm text-gray-300">
+                    <p className="text-sm text-white/80">
                       {group.cards[0].frente}
                     </p>
                   </div>
@@ -234,7 +234,7 @@ export default function FlashcardsPage() {
 
       {/* Footer con link al AI Lab */}
       <div className="text-center pt-4 border-t border-[#1F2F58]/20">
-        <p className="text-sm text-gray-600">
+        <p className="text-sm text-white/60">
           Genera nuevas flashcards desde el{" "}
           <Link href="/ai-lab" className="text-[#73B8E7] hover:underline">
             AI Lab

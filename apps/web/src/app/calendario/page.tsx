@@ -108,7 +108,7 @@ export default async function CalendarioPage() {
         <h1 className="text-2xl font-bold text-[#0A1628] tracking-tight">
           Calendario Academico
         </h1>
-        <p className="mt-1 text-sm text-[#1F2F58]/50">
+        <p className="mt-1 text-sm text-[#1F2F58]/80">
           {role === "estudiante"
             ? "Tus clases sincronicas, evaluaciones y fechas de entrega"
             : role === "docente"

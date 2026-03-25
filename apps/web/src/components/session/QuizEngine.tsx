@@ -514,7 +514,7 @@ export default function QuizEngine({
                             ? "bg-emerald-100 text-emerald-700 font-medium"
                             : isWrongSelection
                             ? "bg-[#F0846D]/10 text-[#F0846D] line-through"
-                            : "text-[#1F2F58]/50"
+                            : "text-[#1F2F58]/70"
                         )}
                       >
                         <span className="font-mono text-xs">
@@ -596,12 +596,12 @@ export default function QuizEngine({
         <div>
           <h3 className="text-sm font-semibold text-[#0A1628]">{quiz.title}</h3>
           {quiz.description && (
-            <p className="mt-0.5 text-xs text-[#1F2F58]/50">{quiz.description}</p>
+            <p className="mt-0.5 text-xs text-[#1F2F58]/70">{quiz.description}</p>
           )}
         </div>
 
         <div className="flex flex-col items-end gap-1">
-          <span className="text-xs text-[#1F2F58]/40">
+          <span className="text-xs text-[#1F2F58]/70">
             {quiz.pass_percentage}% para aprobar
           </span>
           {/* Timer */}

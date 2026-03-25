@@ -26,7 +26,7 @@ export default function HistorialPage() {
           <div className="flex items-center gap-3 mb-3">
             <Link
               href="/ai-lab"
-              className="text-gray-400 hover:text-white transition-colors"
+              className="text-white/70 hover:text-white transition-colors"
             >
               <ArrowLeft className="w-4 h-4" />
             </Link>
@@ -37,7 +37,7 @@ export default function HistorialPage() {
               </h1>
             </div>
           </div>
-          <p className="text-[10px] text-gray-500">
+          <p className="text-[10px] text-white/60">
             Todas tus conversaciones con el tutor IA, guardadas por sesion.
           </p>
         </div>
@@ -64,7 +64,7 @@ export default function HistorialPage() {
                   <p className="text-sm font-medium text-white truncate">
                     {selectedConversation.title ?? "Conversacion"}
                   </p>
-                  <p className="text-[10px] text-gray-500">
+                  <p className="text-[10px] text-white/60">
                     {selectedConversation.model} ·{" "}
                     {selectedConversation.messages.length} mensajes ·{" "}
                     {new Date(selectedConversation.created_at).toLocaleDateString(
@@ -84,7 +84,7 @@ export default function HistorialPage() {
                   size="sm"
                   variant="ghost"
                   onClick={() => setSelectedConversation(null)}
-                  className="text-gray-400 hover:text-white"
+                  className="text-white/70 hover:text-white"
                 >
                   Cerrar
                 </Button>
@@ -115,7 +115,7 @@ export default function HistorialPage() {
                     className={`max-w-[80%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${
                       msg.role === "user"
                         ? "bg-[#FBBC0C] text-[#0A1628] rounded-tr-md"
-                        : "bg-[#1F2F58]/60 text-gray-100 rounded-tl-md border border-[#1F2F58]/40"
+                        : "bg-[#1F2F58]/60 text-white/90 rounded-tl-md border border-[#1F2F58]/40"
                     }`}
                   >
                     <p className="whitespace-pre-wrap">{msg.content}</p>
@@ -126,7 +126,7 @@ export default function HistorialPage() {
 
             {/* Continuar conversacion */}
             <div className="px-4 py-3 border-t border-[#1F2F58]/40 bg-[#0A1628]/60">
-              <p className="text-xs text-gray-600 text-center">
+              <p className="text-xs text-white/60 text-center">
                 Esta es una vista de solo lectura del historial. Para continuar,
                 ve a{" "}
                 <Link href="/ai-lab" className="text-[#73B8E7] hover:underline">
@@ -144,7 +144,7 @@ export default function HistorialPage() {
             <h2 className="text-lg font-semibold text-white mb-2">
               Historial de conversaciones
             </h2>
-            <p className="text-sm text-gray-500 max-w-md leading-relaxed">
+            <p className="text-sm text-white/60 max-w-md leading-relaxed">
               Selecciona una conversacion del panel izquierdo para revisarla.
               Todas tus interacciones con el tutor IA se guardan automaticamente.
             </p>

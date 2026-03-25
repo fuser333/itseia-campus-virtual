@@ -108,7 +108,7 @@ export default async function ProgramasPage() {
       {/* Page header */}
       <div>
         <div className="flex items-center gap-2 mb-3">
-          <span className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-[#1F2F58]/50">
+          <span className="inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-widest text-[#1F2F58]/80">
             <GraduationCap className="size-3.5" />
             Instituto Ecuatoriano de Inteligencia Artificial
           </span>
@@ -132,7 +132,7 @@ export default async function ProgramasPage() {
             <p className="text-2xl font-bold text-[#0A1628] font-[family-name:var(--font-space-grotesk)]">
               {totalCarreras}
             </p>
-            <p className="text-xs font-medium text-[#1F2F58]/60">Carreras Tecnologicas</p>
+            <p className="text-xs font-medium text-[#1F2F58]/80">Carreras Tecnologicas</p>
           </div>
         </div>
         <div className="flex items-center gap-3 rounded-xl border border-[#1F2F58]/10 bg-white shadow-sm p-4">
@@ -143,7 +143,7 @@ export default async function ProgramasPage() {
             <p className="text-2xl font-bold text-[#0A1628] font-[family-name:var(--font-space-grotesk)]">
               {totalMaterias}
             </p>
-            <p className="text-xs font-medium text-[#1F2F58]/60">Materias en total</p>
+            <p className="text-xs font-medium text-[#1F2F58]/80">Materias en total</p>
           </div>
         </div>
         <div className="flex items-center gap-3 rounded-xl border border-[#1F2F58]/10 bg-white shadow-sm p-4">
@@ -154,13 +154,13 @@ export default async function ProgramasPage() {
             <p className="text-2xl font-bold text-[#0A1628] font-[family-name:var(--font-space-grotesk)]">
               {totalEspecialidades}
             </p>
-            <p className="text-xs font-medium text-[#1F2F58]/60">Especialidades</p>
+            <p className="text-xs font-medium text-[#1F2F58]/80">Especialidades</p>
           </div>
         </div>
       </div>
 
       {/* Breadcrumb */}
-      <nav aria-label="Ubicacion" className="flex items-center gap-1.5 text-sm text-[#1F2F58]/50">
+      <nav aria-label="Ubicacion" className="flex items-center gap-1.5 text-sm text-[#1F2F58]/80">
         <Link href="/" className="hover:text-[#1F2F58] transition-colors">Inicio</Link>
         <span className="text-[#1F2F58]/30">/</span>
         <span className="font-medium text-[#1F2F58]">Carreras</span>
@@ -199,7 +199,7 @@ export default async function ProgramasPage() {
                 )}
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="flex items-center gap-4 text-xs text-[#1F2F58]/55 font-medium">
+                <div className="flex items-center gap-4 text-xs text-[#1F2F58]/80 font-medium">
                   {program.subjectCount > 0 && (
                     <span className="flex items-center gap-1">
                       <BookOpen className="size-3" />
@@ -214,7 +214,7 @@ export default async function ProgramasPage() {
                   )}
                   {program.price > 0 && (
                     <span className="ml-auto font-bold text-[#0A1628] text-sm">
-                      ${program.price}<span className="text-[#1F2F58]/50 font-normal">/mes</span>
+                      ${program.price}<span className="text-[#1F2F58]/70 font-normal">/mes</span>
                     </span>
                   )}
                 </div>
@@ -239,7 +239,7 @@ export default async function ProgramasPage() {
           <h3 className="text-lg font-semibold text-[#0A1628]">
             Carreras en preparacion
           </h3>
-          <p className="mt-1 max-w-sm text-sm text-[#1F2F58]/60">
+          <p className="mt-1 max-w-sm text-sm text-[#1F2F58]/80">
             Las carreras estaran disponibles una vez que se configure la
             estructura academica.
           </p>

@@ -234,6 +234,12 @@ export default function DocentesInfoPage() {
       </a>
 
       <PublicHeader />
+        {/* Login access */}
+        <div className="text-center py-3 bg-white/[0.03] border-b border-white/[0.06]">
+          <span className="text-white/50 text-sm">¿Ya tienes cuenta? </span>
+          <a href="/login" className="text-[#FBBC0C] text-sm font-semibold hover:underline">Iniciar sesión →</a>
+        </div>
+
 
       {/* ── HERO ── */}
       <section className="relative pt-24 pb-16 px-5 overflow-hidden">

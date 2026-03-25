@@ -279,7 +279,7 @@ export default function SessionPage({ params }: PageProps) {
       <div className="flex h-[calc(100vh-64px)] items-center justify-center">
         <div className="flex flex-col items-center gap-3">
           <Loader2 className="size-8 animate-spin text-[#FBBC0C]" />
-          <p className="text-sm text-[#1F2F58]/50">Cargando sesion...</p>
+          <p className="text-sm text-[#1F2F58]">Cargando sesion...</p>
         </div>
       </div>
     );
@@ -290,8 +290,8 @@ export default function SessionPage({ params }: PageProps) {
     return (
       <div className="flex h-[calc(100vh-64px)] items-center justify-center">
         <div className="text-center">
-          <BookOpen className="mx-auto size-12 text-[#1F2F58]/20" />
-          <p className="mt-3 text-sm text-[#1F2F58]/50">
+          <BookOpen className="mx-auto size-12 text-[#1F2F58]/30" />
+          <p className="mt-3 text-sm text-[#1F2F58]/70">
             No se encontro la sesion.
           </p>
           <Link

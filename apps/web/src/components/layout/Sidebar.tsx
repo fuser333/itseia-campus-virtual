@@ -103,7 +103,7 @@ const MENU_EXTERNO: NavSection[] = [
     label: "MI CURSO",
     items: [
       { href: "/dashboard",  label: "Dashboard",          icon: LayoutDashboard },
-      { href: "/carreras",   label: "Mi Curso",           icon: GraduationCap },
+      { href: "/mi-curso",   label: "Mi Curso",           icon: GraduationCap },
       {
         href: "https://itseia.ai/demos/",
         label: "Demos Interactivos",
