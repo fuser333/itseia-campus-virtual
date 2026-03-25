@@ -1,224 +1,389 @@
-import { supabaseAdmin } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
-import type { Metadata } from "next";
+import { supabaseAdmin } from "@/lib/supabase/admin";
+import { redirect } from "next/navigation";
 import Link from "next/link";
+import type { Metadata } from "next";
 import {
   Building2,
-  Clock,
-  BookOpen,
-  ArrowRight,
-  ArrowLeft,
   Users,
-  Briefcase,
-  Shield,
+  BookOpen,
+  TrendingUp,
+  ArrowRight,
+  ExternalLink,
+  Mail,
+  MessageCircle,
+  Brain,
+  BarChart2,
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import Breadcrumb from "@/components/academic/Breadcrumb";
 
 export const metadata: Metadata = {
-  title: "Capacitacion B2B | ITSEIA Academy",
+  title: "Dashboard Corporativo | ITSEIA Academy",
   description:
-    "Carreras de capacitacion empresarial en Inteligencia Artificial. Formacion a medida para equipos y empresas.",
+    "Panel corporativo ITSEIA — gestiona la capacitacion en IA de tu equipo.",
 };
 
-export default async function B2BPage() {
-  // B2B programs could be stored as type 'curso' with a naming convention,
-  // or as a future 'b2b' type. For now, we query any programs that have
-  // 'b2b' or 'empresarial' or 'corporativ' in their name/description
-  // OR a dedicated type if it exists in the future.
-  const { data: b2bPrograms } = await supabaseAdmin
-    .from("programs")
-    .select("*")
-    .eq("is_active", true)
-    .or("name.ilike.%b2b%,name.ilike.%empresarial%,name.ilike.%corporativ%,description.ilike.%b2b%")
-    .order("created_at", { ascending: true });
+// ─── Partner companies config ────────────────────────────────────────────────
 
-  // Get stats for programs
-  const programsWithStats = await Promise.all(
-    (b2bPrograms || []).map(async (program) => {
-      const { count: semesterCount } = await supabaseAdmin
-        .from("semesters")
-        .select("*", { count: "exact", head: true })
-        .eq("program_id", program.id);
+const PARTNER_COMPANIES = [
+  {
+    name: "H3L",
+    tagline: "Auditoria operativa con IA",
+    description:
+      "Identifica $150K–$800K de capacidad atrapada en tu empresa. Opera en 7 paises.",
+    url: "https://h3l.ai",
+    color: "from-[#1F2F58] to-[#0A1628]",
+    accent: "#73B8E7",
+    icon: Building2,
+    badge: "Auditoria IA",
+  },
+  {
+    name: "ImagemIA",
+    tagline: "IA predictiva en imagenologia medica",
+    description:
+      "Reduce inasistencias un 30% y optimiza la agenda clinica con inteligencia artificial.",
+    url: "https://imagemia.com",
+    color: "from-[#0A1628] to-[#1F2F58]",
+    accent: "#F0846D",
+    icon: Brain,
+    badge: "IA Medica",
+  },
+  {
+    name: "Strata",
+    tagline: "Cerebro digital profesional",
+    description:
+      "9,000 documentos indexados, 19 paises, desde $19.99/mes. Tu knowhow siempre disponible.",
+    url: "https://strata.h3l.ai",
+    color: "from-[#1F2F58] to-[#2A3F6E]",
+    accent: "#FBBC0C",
+    icon: BarChart2,
+    badge: "Gestion Conocimiento",
+  },
+];
 
-      const { data: semesters } = await supabaseAdmin
-        .from("semesters")
-        .select("id")
-        .eq("program_id", program.id);
+// ─── Page ────────────────────────────────────────────────────────────────────
 
-      let subjectCount = 0;
-      if (semesters && semesters.length > 0) {
-        const semesterIds = semesters.map((s) => s.id);
-        const { count } = await supabaseAdmin
-          .from("subjects")
-          .select("*", { count: "exact", head: true })
-          .in("semester_id", semesterIds);
-        subjectCount = count || 0;
-      }
-
-      return {
-        ...program,
-        semesterCount: semesterCount || 0,
-        subjectCount,
-      };
-    })
-  );
-
-  // Check if user is logged in
+export default async function B2BDashboardPage() {
   const authClient = await createClient();
+  const supabase   = supabaseAdmin;
+
   const {
     data: { user },
   } = await authClient.auth.getUser();
 
-  return (
-    <div className="space-y-8">
-      {/* Breadcrumb */}
-      <Breadcrumb
-        items={[
-          { label: "Carreras", href: "/carreras" },
-          { label: "Capacitacion B2B" },
-        ]}
-      />
+  if (!user) {
+    redirect("/login");
+  }
 
-      {/* Header */}
+  // Fetch profile to get company name and role
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("*")
+    .eq("id", user.id)
+    .single();
+
+  // Only B2B/finanzas role should access this page
+  if (profile && profile.role !== "finanzas") {
+    redirect("/dashboard");
+  }
+
+  // Fetch enrollments for this user's company (user = corporate contact)
+  // In the current schema the "finanzas" user IS the empresa user.
+  // We show their own enrollments + any enrollments managed by them.
+  const { data: enrollments } = await supabase
+    .from("enrollments")
+    .select("*, programs(*)")
+    .eq("user_id", user.id)
+    .eq("status", "active");
+
+  const activeCourses   = enrollments?.length ?? 0;
+  const companyName     = profile?.full_name ?? user.email?.split("@")[0] ?? "Tu Empresa";
+  const firstName       = companyName.split(" ")[0];
+
+  // Calculate approximate investment
+  const totalInvestment = (enrollments ?? []).reduce(
+    (acc, e) => acc + (e.programs?.price ?? 0),
+    0,
+  );
+
+  return (
+    <div className="space-y-10">
+
+      {/* ── Welcome header ──────────────────────────────────────────────── */}
       <div className="rounded-2xl bg-gradient-to-r from-[#1F2F58] to-[#0A1628] p-6 sm:p-8 text-white">
-        <Link
-          href="/carreras"
-          className="inline-flex items-center gap-1 text-sm text-white/40 hover:text-white/70 transition-colors mb-4"
-        >
-          <ArrowLeft className="size-3.5" />
-          Todas las carreras
-        </Link>
-        <div className="flex items-start gap-4">
-          <div className="hidden sm:flex size-14 items-center justify-center rounded-xl bg-[#FBBC0C]/15">
-            <Building2 className="size-7 text-[#FBBC0C]" />
-          </div>
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
+            <p className="text-xs font-semibold uppercase tracking-widest text-white/40 mb-1">
+              Panel Corporativo
+            </p>
             <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">
-              Capacitacion Empresarial en IA
+              Bienvenido, {firstName}
             </h1>
-            <p className="mt-2 text-sm text-white/60 max-w-xl">
-              Carreras de formacion a medida para equipos y empresas. Capacita a
-              tu equipo en Inteligencia Artificial con contenido adaptado a tu industria.
+            <p className="mt-1 text-sm text-white/60">
+              Aqui gestionas la capacitacion en Inteligencia Artificial de tu equipo.
             </p>
           </div>
-        </div>
-      </div>
-
-      {/* Features */}
-      <div className="grid gap-4 sm:grid-cols-3">
-        <div className="flex items-center gap-3 rounded-xl border border-[#1F2F58]/8 bg-white p-4">
-          <div className="flex size-10 items-center justify-center rounded-lg bg-[#FBBC0C]/10">
-            <Users className="size-5 text-[#FBBC0C]" />
-          </div>
-          <div>
-            <p className="text-sm font-semibold text-[#0A1628]">Equipos</p>
-            <p className="text-xs text-[#1F2F58]/40">Desde 5 hasta 50+ personas</p>
-          </div>
-        </div>
-        <div className="flex items-center gap-3 rounded-xl border border-[#1F2F58]/8 bg-white p-4">
-          <div className="flex size-10 items-center justify-center rounded-lg bg-[#73B8E7]/10">
-            <Shield className="size-5 text-[#73B8E7]" />
-          </div>
-          <div>
-            <p className="text-sm font-semibold text-[#0A1628]">A Medida</p>
-            <p className="text-xs text-[#1F2F58]/40">Contenido adaptado a tu industria</p>
-          </div>
-        </div>
-        <div className="flex items-center gap-3 rounded-xl border border-[#1F2F58]/8 bg-white p-4">
-          <div className="flex size-10 items-center justify-center rounded-lg bg-[#F0846D]/10">
-            <Briefcase className="size-5 text-[#F0846D]" />
-          </div>
-          <div>
-            <p className="text-sm font-semibold text-[#0A1628]">$1,500 — $10,000</p>
-            <p className="text-xs text-[#1F2F58]/40">Segun alcance y duracion</p>
-          </div>
-        </div>
-      </div>
-
-      {/* B2B Programs */}
-      {programsWithStats.length > 0 ? (
-        <div className="grid gap-6 md:grid-cols-2">
-          {programsWithStats.map((program) => (
-            <Card
-              key={program.id}
-              className="group border-none bg-white shadow-sm transition-all hover:shadow-md hover:-translate-y-1"
+          <div className="flex items-center gap-3">
+            <a
+              href="https://wa.me/593959892034?text=Hola%2C%20soy%20empresa%20cliente%20ITSEIA%20y%20necesito%20soporte"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-lg bg-white/10 px-4 py-2 text-sm font-medium text-white hover:bg-white/20 transition-colors"
             >
-              <CardHeader>
-                <div className="flex items-start justify-between">
-                  <div className="flex size-12 items-center justify-center rounded-xl bg-gradient-to-br from-[#1F2F58] to-[#0A1628]">
-                    <Building2 className="size-6 text-[#FBBC0C]" />
-                  </div>
-                  {program.semesterCount > 0 && (
-                    <Badge className="border-none bg-[#1F2F58]/10 text-[10px] font-semibold uppercase tracking-wider text-[#1F2F58]">
-                      {program.semesterCount} modulos
-                    </Badge>
-                  )}
-                </div>
-                <CardTitle className="mt-4 text-lg font-bold text-[#0A1628]">
-                  {program.name}
-                </CardTitle>
-                {program.description && (
-                  <p className="mt-1 text-sm text-[#1F2F58]/50 line-clamp-3">
-                    {program.description}
-                  </p>
-                )}
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="flex items-center gap-4 text-xs text-[#1F2F58]/40">
-                  {program.subjectCount > 0 && (
-                    <span className="flex items-center gap-1">
-                      <BookOpen className="size-3" />
-                      {program.subjectCount} materias
-                    </span>
-                  )}
-                  {program.duration_months && (
-                    <span className="flex items-center gap-1">
-                      <Clock className="size-3" />
-                      {program.duration_months} meses
-                    </span>
-                  )}
-                  {program.price > 0 && (
-                    <span className="font-semibold text-[#0A1628]">
-                      ${program.price.toLocaleString()}
-                    </span>
-                  )}
-                </div>
-
-                <Link
-                  href={`/carreras/${program.slug}`}
-                  className="group/link flex items-center justify-center gap-2 rounded-lg bg-[#1F2F58] px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-[#0A1628]"
-                >
-                  {user ? "Ver contenido" : "Explorar carrera"}
-                  <ArrowRight className="size-3.5 transition-transform group-hover/link:translate-x-0.5" />
-                </Link>
-              </CardContent>
-            </Card>
-          ))}
+              <MessageCircle className="size-4" />
+              Soporte WhatsApp
+            </a>
+          </div>
         </div>
-      ) : (
-        /* Coming soon state */
-        <div className="flex flex-col items-center justify-center py-16 text-center rounded-2xl border border-dashed border-[#1F2F58]/15 bg-white/50">
-          <Building2 className="size-12 text-[#1F2F58]/10 mb-4" />
-          <h3 className="text-lg font-semibold text-[#0A1628]">
-            Carreras B2B en preparacion
-          </h3>
-          <p className="mt-1 max-w-sm text-sm text-[#1F2F58]/50">
-            Estamos preparando las carreras de capacitacion empresarial. Contactanos
-            para soluciones a medida para tu equipo.
-          </p>
-          <a
-            href="https://wa.me/593959892034?text=Hola%2C%20me%20interesa%20la%20capacitacion%20B2B%20en%20IA"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-6 inline-flex items-center gap-2 rounded-lg bg-[#FBBC0C] px-6 py-2.5 text-sm font-semibold text-[#0A1628] hover:bg-[#FBBC0C]/90 transition-colors"
-          >
-            Contactar por WhatsApp
-            <ArrowRight className="size-3.5" />
-          </a>
+      </div>
+
+      {/* ── KPI cards ───────────────────────────────────────────────────── */}
+      <div className="grid gap-4 sm:grid-cols-3">
+        <KpiCard
+          icon={<Users className="size-5 text-[#73B8E7]" />}
+          label="Miembros del Equipo"
+          value="—"
+          sub="Proximamente"
+          accent="bg-[#73B8E7]/10"
+        />
+        <KpiCard
+          icon={<BookOpen className="size-5 text-[#FBBC0C]" />}
+          label="Capacitaciones Activas"
+          value={String(activeCourses)}
+          sub={activeCourses === 1 ? "programa activo" : "programas activos"}
+          accent="bg-[#FBBC0C]/10"
+        />
+        <KpiCard
+          icon={<TrendingUp className="size-5 text-[#F0846D]" />}
+          label="Inversion Total"
+          value={totalInvestment > 0 ? `$${totalInvestment.toLocaleString()}` : "—"}
+          sub="Ver facturacion"
+          accent="bg-[#F0846D]/10"
+          href="/payments"
+        />
+      </div>
+
+      {/* ── Active programs ──────────────────────────────────────────────── */}
+      {(enrollments ?? []).length > 0 && (
+        <div>
+          <h2 className="mb-4 text-xl font-bold text-foreground flex items-center gap-2">
+            <BookOpen className="size-5 text-[#73B8E7]" />
+            Capacitacion Activa
+          </h2>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {(enrollments ?? []).map((enrollment) => (
+              <Card
+                key={enrollment.id}
+                className="border-none bg-white shadow-sm hover:shadow-md transition-shadow"
+              >
+                <CardContent className="p-5 space-y-3">
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="flex size-10 items-center justify-center rounded-lg bg-[#1F2F58]/8">
+                      <BookOpen className="size-5 text-[#1F2F58]" />
+                    </div>
+                    <Badge className="border-none bg-emerald-50 text-emerald-700 text-[10px] font-semibold uppercase tracking-wider">
+                      Activo
+                    </Badge>
+                  </div>
+                  <div>
+                    <p className="font-semibold text-[#0A1628] leading-tight">
+                      {enrollment.programs?.name ?? "Programa"}
+                    </p>
+                    {enrollment.programs?.duration_months && (
+                      <p className="text-xs text-[#1F2F58]/40 mt-0.5">
+                        {enrollment.programs.duration_months} meses
+                      </p>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
       )}
+
+      {/* ── ITSEIA Partner Companies ─────────────────────────────────────── */}
+      <div>
+        <h2 className="mb-1 text-xl font-bold text-foreground flex items-center gap-2">
+          <Building2 className="size-5 text-[#73B8E7]" />
+          Nuestras Empresas
+        </h2>
+        <p className="mb-6 text-sm text-muted-foreground">
+          El ecosistema de empresas de IA del fundador de ITSEIA, disponibles para tu organizacion.
+        </p>
+        <div className="grid gap-6 sm:grid-cols-3">
+          {PARTNER_COMPANIES.map((company) => {
+            const Icon = company.icon;
+            return (
+              <a
+                key={company.name}
+                href={company.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group block rounded-2xl overflow-hidden border border-white/10 hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+              >
+                {/* Header gradient */}
+                <div className={`bg-gradient-to-br ${company.color} p-5 text-white`}>
+                  <div className="flex items-start justify-between mb-3">
+                    <div
+                      className="flex size-10 items-center justify-center rounded-xl"
+                      style={{ background: `${company.accent}20` }}
+                    >
+                      <Icon className="size-5" style={{ color: company.accent }} />
+                    </div>
+                    <ExternalLink className="size-4 text-white/30 group-hover:text-white/70 transition-colors" />
+                  </div>
+                  <p className="text-lg font-bold">{company.name}</p>
+                  <p className="text-xs font-medium mt-0.5" style={{ color: company.accent }}>
+                    {company.tagline}
+                  </p>
+                </div>
+                {/* Body */}
+                <div className="bg-white p-4">
+                  <Badge
+                    className="mb-3 border-none text-[10px] font-semibold uppercase tracking-wider"
+                    style={{ background: `${company.accent}15`, color: company.accent }}
+                  >
+                    {company.badge}
+                  </Badge>
+                  <p className="text-sm text-[#1F2F58]/60 leading-relaxed">
+                    {company.description}
+                  </p>
+                  <p
+                    className="mt-3 text-xs font-semibold flex items-center gap-1 group-hover:gap-2 transition-all"
+                    style={{ color: company.accent }}
+                  >
+                    Visitar sitio web
+                    <ArrowRight className="size-3" />
+                  </p>
+                </div>
+              </a>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* ── Quick actions ────────────────────────────────────────────────── */}
+      <div className="grid gap-4 sm:grid-cols-3">
+        <QuickAction
+          href="/b2b/team"
+          icon={<Users className="size-5" />}
+          title="Mi Equipo"
+          description="Gestiona los miembros y accesos"
+          color="text-[#73B8E7]"
+          bg="bg-[#73B8E7]/10"
+        />
+        <QuickAction
+          href="/b2b/reportes"
+          icon={<BarChart2 className="size-5" />}
+          title="Reportes"
+          description="Progreso y avance del equipo"
+          color="text-[#FBBC0C]"
+          bg="bg-[#FBBC0C]/10"
+        />
+        <QuickAction
+          href={`mailto:administracion@itseia.ai?subject=Soporte%20Corporativo%20ITSEIA`}
+          icon={<Mail className="size-5" />}
+          title="Contactar Admin"
+          description="administracion@itseia.ai"
+          color="text-[#F0846D]"
+          bg="bg-[#F0846D]/10"
+          external
+        />
+      </div>
     </div>
   );
+}
+
+// ─── Helper components ────────────────────────────────────────────────────────
+
+function KpiCard({
+  icon,
+  label,
+  value,
+  sub,
+  accent,
+  href,
+}: {
+  icon: React.ReactNode;
+  label: string;
+  value: string;
+  sub: string;
+  accent: string;
+  href?: string;
+}) {
+  const content = (
+    <CardContent className="flex items-center gap-4">
+      <div className={`flex size-11 shrink-0 items-center justify-center rounded-xl ${accent}`}>
+        {icon}
+      </div>
+      <div>
+        <p className="text-sm font-medium text-[#1F2F58]/50">{label}</p>
+        <p className="text-2xl font-bold tracking-tight text-[#0A1628]">{value}</p>
+        <p className="text-xs text-[#1F2F58]/40 mt-0.5">{sub}</p>
+      </div>
+    </CardContent>
+  );
+
+  if (href) {
+    return (
+      <Link href={href}>
+        <Card className="border-none bg-white shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+          {content}
+        </Card>
+      </Link>
+    );
+  }
+
+  return (
+    <Card className="border-none bg-white shadow-sm">
+      {content}
+    </Card>
+  );
+}
+
+function QuickAction({
+  href,
+  icon,
+  title,
+  description,
+  color,
+  bg,
+  external,
+}: {
+  href: string;
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+  color: string;
+  bg: string;
+  external?: boolean;
+}) {
+  const inner = (
+    <Card className="group cursor-pointer border-none bg-white shadow-sm transition-all hover:shadow-md hover:-translate-y-0.5">
+      <CardContent className="flex items-center gap-4">
+        <div
+          className={`flex size-10 shrink-0 items-center justify-center rounded-lg ${bg} ${color} transition-transform group-hover:scale-110`}
+        >
+          {icon}
+        </div>
+        <div>
+          <p className="font-semibold text-[#0A1628]">{title}</p>
+          <p className="text-xs text-[#1F2F58]/50">{description}</p>
+        </div>
+        <ArrowRight className="ml-auto size-4 text-[#1F2F58]/20 transition-all group-hover:translate-x-1 group-hover:text-[#1F2F58]/50" />
+      </CardContent>
+    </Card>
+  );
+
+  if (external) {
+    return (
+      <a href={href} target="_blank" rel="noopener noreferrer">
+        {inner}
+      </a>
+    );
+  }
+
+  return <Link href={href}>{inner}</Link>;
 }

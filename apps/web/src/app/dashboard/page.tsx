@@ -422,34 +422,127 @@ export default async function DashboardPage() {
         </Card>
       )}
 
-      {/* Enrolled programs */}
-      <div>
-        <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-xl font-bold text-white">Mis Carreras</h2>
-          <Link href="/courses">
-            <Button variant="ghost" size="sm" className="text-white/60 hover:text-white">
-              Ver todos
-              <ArrowRight className="ml-1 size-3.5" />
-            </Button>
-          </Link>
-        </div>
+      {/* Enrolled programs — hidden for EXTERNO (they use /mi-curso) */}
+      {!isExterno && (
+        <div>
+          <div className="mb-4 flex items-center justify-between">
+            <h2 className="text-xl font-bold text-foreground">Mis Programas</h2>
+            <Link href="/carreras">
+              <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
+                Ver carreras
+                <ArrowRight className="ml-1 size-3.5" />
+              </Button>
+            </Link>
+          </div>
 
-        {enrollmentsWithProgress.length > 0 ? (
+          {enrollmentsWithProgress.length > 0 ? (
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {enrollmentsWithProgress.map((enrollment) => (
+                <Card
+                  key={enrollment.id}
+                  className="group border border-border bg-card transition-shadow hover:shadow-md"
+                >
+                  <CardHeader>
+                    <div className="flex items-start justify-between">
+                      <div className="flex size-10 items-center justify-center rounded-lg bg-primary/10">
+                        <GraduationCap className="size-5 text-primary" />
+                      </div>
+                      <ProgramTypeBadge type={enrollment.programs?.type} />
+                    </div>
+                    <CardTitle className="mt-3 text-card-foreground">
+                      {enrollment.programs?.name || "Carrera"}
+                    </CardTitle>
+                    {enrollment.programs?.description && (
+                      <CardDescription className="line-clamp-2">
+                        {enrollment.programs.description}
+                      </CardDescription>
+                    )}
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between text-sm">
+                        <span className="text-muted-foreground">Progreso</span>
+                        <span className="font-semibold text-card-foreground">
+                          {enrollment.percentage}%
+                        </span>
+                      </div>
+                      <div className="h-2 w-full overflow-hidden rounded-full bg-border">
+                        <div
+                          className="h-full rounded-full bg-gradient-to-r from-[#FBBC0C] to-[#F0846D] transition-all duration-500"
+                          style={{ width: `${enrollment.percentage}%` }}
+                        />
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-xs text-muted-foreground">
+                          {enrollment.completedLessons} / {enrollment.totalLessons} lecciones
+                        </span>
+                        <Link href="/carreras">
+                          <Button
+                            variant="ghost"
+                            size="xs"
+                            className="text-[#73B8E7] hover:text-foreground"
+                          >
+                            Ver carrera
+                            <ArrowRight className="ml-1 size-3" />
+                          </Button>
+                        </Link>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          ) : (
+            <Card className="border-dashed">
+              <CardContent className="flex flex-col items-center py-12 text-center">
+                <div className="mb-4 flex size-16 items-center justify-center rounded-2xl bg-primary/10">
+                  <BookOpen className="size-8 text-primary" />
+                </div>
+                <h3 className="text-lg font-semibold text-card-foreground">
+                  Aun no tienes carreras activas
+                </h3>
+                <p className="mt-1 max-w-sm text-sm text-muted-foreground">
+                  Explora nuestras carreras de inteligencia artificial y comienza tu transformacion profesional.
+                </p>
+                <Link href="/carreras" className="mt-6">
+                  <Button className="bg-primary font-semibold text-primary-foreground hover:opacity-90">
+                    Explorar Carreras
+                    <ArrowRight className="ml-2 size-4" />
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
+          )}
+        </div>
+      )}
+
+      {/* EXTERNO: shortcut to their course */}
+      {isExterno && enrollmentsWithProgress.length > 0 && (
+        <div>
+          <div className="mb-4 flex items-center justify-between">
+            <h2 className="text-xl font-bold text-foreground">Mi Curso</h2>
+            <Link href="/mi-curso">
+              <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
+                Ver curso completo
+                <ArrowRight className="ml-1 size-3.5" />
+              </Button>
+            </Link>
+          </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {enrollmentsWithProgress.map((enrollment) => (
               <Card
                 key={enrollment.id}
-                className="group border-none bg-white shadow-sm transition-shadow hover:shadow-md"
+                className="group border border-border bg-card transition-shadow hover:shadow-md"
               >
                 <CardHeader>
                   <div className="flex items-start justify-between">
-                    <div className="flex size-10 items-center justify-center rounded-lg bg-[#1F2F58]/5">
-                      <GraduationCap className="size-5 text-[#1F2F58]" />
+                    <div className="flex size-10 items-center justify-center rounded-lg bg-primary/10">
+                      <GraduationCap className="size-5 text-primary" />
                     </div>
                     <ProgramTypeBadge type={enrollment.programs?.type} />
                   </div>
-                  <CardTitle className="mt-3 text-[#0A1628]">
-                    {enrollment.programs?.name || "Carrera"}
+                  <CardTitle className="mt-3 text-card-foreground">
+                    {enrollment.programs?.name || "Curso"}
                   </CardTitle>
                   {enrollment.programs?.description && (
                     <CardDescription className="line-clamp-2">
@@ -460,28 +553,28 @@ export default async function DashboardPage() {
                 <CardContent>
                   <div className="space-y-3">
                     <div className="flex items-center justify-between text-sm">
-                      <span className="text-[#1F2F58]/50">Progreso</span>
-                      <span className="font-semibold text-[#1F2F58]">
+                      <span className="text-muted-foreground">Progreso</span>
+                      <span className="font-semibold text-card-foreground">
                         {enrollment.percentage}%
                       </span>
                     </div>
-                    <div className="h-2 w-full overflow-hidden rounded-full bg-[#1F2F58]/5">
+                    <div className="h-2 w-full overflow-hidden rounded-full bg-border">
                       <div
                         className="h-full rounded-full bg-gradient-to-r from-[#FBBC0C] to-[#F0846D] transition-all duration-500"
                         style={{ width: `${enrollment.percentage}%` }}
                       />
                     </div>
                     <div className="flex items-center justify-between">
-                      <span className="text-xs text-[#1F2F58]/40">
+                      <span className="text-xs text-muted-foreground">
                         {enrollment.completedLessons} / {enrollment.totalLessons} lecciones
                       </span>
-                      <Link href="/courses">
+                      <Link href="/mi-curso">
                         <Button
                           variant="ghost"
                           size="xs"
-                          className="text-[#73B8E7] hover:text-[#1F2F58]"
+                          className="text-[#73B8E7] hover:text-foreground"
                         >
-                          Ver cursos
+                          Ver curso
                           <ArrowRight className="ml-1 size-3" />
                         </Button>
                       </Link>
@@ -491,28 +584,8 @@ export default async function DashboardPage() {
               </Card>
             ))}
           </div>
-        ) : (
-          <Card className="border-dashed border-[#1F2F58]/20 bg-white/50">
-            <CardContent className="flex flex-col items-center py-12 text-center">
-              <div className="mb-4 flex size-16 items-center justify-center rounded-2xl bg-[#FBBC0C]/10">
-                <BookOpen className="size-8 text-[#FBBC0C]" />
-              </div>
-              <h3 className="text-lg font-semibold text-[#0A1628]">
-                Aun no tienes carreras activas
-              </h3>
-              <p className="mt-1 max-w-sm text-sm text-[#1F2F58]/50">
-                Explora nuestras carreras de inteligencia artificial y comienza tu transformacion profesional.
-              </p>
-              <Link href="/courses" className="mt-6">
-                <Button className="bg-[#FBBC0C] font-semibold text-[#0A1628] hover:bg-[#FBBC0C]/90">
-                  Explorar Carreras
-                  <ArrowRight className="ml-2 size-4" />
-                </Button>
-              </Link>
-            </CardContent>
-          </Card>
-        )}
-      </div>
+        </div>
+      )}
 
       {/* Proximas clases — widget calendario */}
       {upcomingEvents.length > 0 && (
@@ -610,14 +683,25 @@ export default async function DashboardPage() {
           color="text-[#FBBC0C]"
           bg="bg-[#FBBC0C]/10"
         />
-        <QuickAction
-          href="/calendario"
-          icon={<CalendarDays className="size-5" />}
-          title="Calendario"
-          description="Tus clases y evaluaciones"
-          color="text-[#73B8E7]"
-          bg="bg-[#73B8E7]/10"
-        />
+        {isExterno ? (
+          <QuickAction
+            href="/biblioteca"
+            icon={<BookOpen className="size-5" />}
+            title="Biblioteca"
+            description="Recursos y materiales"
+            color="text-[#73B8E7]"
+            bg="bg-[#73B8E7]/10"
+          />
+        ) : (
+          <QuickAction
+            href="/calendario"
+            icon={<CalendarDays className="size-5" />}
+            title="Calendario"
+            description="Tus clases y evaluaciones"
+            color="text-[#73B8E7]"
+            bg="bg-[#73B8E7]/10"
+          />
+        )}
         <QuickAction
           href="/profile"
           icon={<Clock className="size-5" />}
@@ -672,19 +756,19 @@ function ProgramTypeBadge({ type }: { type?: string }) {
   const config: Record<string, { label: string; className: string }> = {
     carrera: {
       label: "Carrera",
-      className: "bg-[#1F2F58]/10 text-[#1F2F58]",
+      className: "bg-white/15 text-white",
     },
     curso: {
       label: "Curso",
-      className: "bg-[#73B8E7]/15 text-[#73B8E7]",
+      className: "bg-[#73B8E7]/20 text-[#73B8E7]",
     },
     preuni: {
       label: "Preuniversitario",
-      className: "bg-[#FBBC0C]/15 text-[#FBBC0C]",
+      className: "bg-[#FBBC0C]/20 text-[#FBBC0C]",
     },
     bootcamp: {
       label: "Bootcamp",
-      className: "bg-[#F0846D]/15 text-[#F0846D]",
+      className: "bg-[#F0846D]/20 text-[#F0846D]",
     },
   };
 

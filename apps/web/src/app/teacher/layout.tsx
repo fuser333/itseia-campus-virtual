@@ -9,19 +9,42 @@ import {
   GraduationCap,
   ChevronLeft,
   ClipboardCheck,
+  ClipboardList,
   Award,
   Megaphone,
+  Video,
+  MessageSquare,
 } from "lucide-react";
 import { ForumBadge } from "@/components/forums/ForumBadge";
 
-const TEACHER_NAV = [
-  { label: "Dashboard", href: "/teacher", icon: LayoutDashboard },
-  { label: "Mis Materias", href: "/teacher/materias", icon: BookOpen },
-  { label: "Entregas", href: "/teacher/entregas", icon: FileCheck },
-  { label: "Progreso", href: "/teacher/progreso", icon: BarChart3 },
-  { label: "Asistencia", href: "/teacher/asistencia", icon: ClipboardCheck },
-  { label: "Capacitacion 120h", href: "/teacher/capacitacion", icon: Award },
-  { label: "Comunicacion", href: "/teacher/comunicacion", icon: Megaphone },
+// ─── Sections that match Sidebar MENU_DOCENTE exactly ─────────────────────────
+
+const TEACHER_NAV_SECTIONS = [
+  {
+    label: "MIS MATERIAS",
+    items: [
+      { label: "Dashboard",    href: "/teacher",          icon: LayoutDashboard },
+      { label: "Mis Materias", href: "/teacher/materias", icon: BookOpen, withBadge: true },
+    ],
+  },
+  {
+    label: "GESTION",
+    items: [
+      { label: "Calificar Entregas", href: "/teacher/entregas",          icon: ClipboardCheck },
+      { label: "Progreso Alumnos",   href: "/teacher/progreso",          icon: BarChart3 },
+      { label: "Anuncios",           href: "/teacher/comunicacion",      icon: Megaphone },
+      { label: "Programar Clases",   href: "/teacher/programar-clases",  icon: Video },
+      { label: "Tutorias",           href: "/teacher/tutorias",          icon: MessageSquare },
+      { label: "Asistencia",         href: "/teacher/asistencia",        icon: ClipboardList },
+    ],
+  },
+  {
+    label: "CAPACITACION CES",
+    items: [
+      { label: "Docencia Virtual 120h", href: "/teacher/capacitacion",  icon: Award },
+      { label: "Mi Certificacion",      href: "/teacher/certificacion", icon: FileCheck },
+    ],
+  },
 ];
 
 export default async function TeacherLayout({
@@ -63,24 +86,33 @@ export default async function TeacherLayout({
             <span className="text-xs font-bold tracking-wide text-[#1F2F58]">
               ITSEIA Docente
             </span>
+            <span className="text-[10px] text-gray-400 uppercase tracking-widest leading-none mt-0.5">
+              Panel
+            </span>
           </div>
         </div>
 
-        {/* Navigation */}
-        <nav className="flex-1 space-y-0.5 overflow-y-auto px-2 py-3">
-          {TEACHER_NAV.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="flex items-center gap-2.5 rounded-md px-2.5 py-2 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-100 hover:text-gray-900"
-            >
-              <item.icon className="size-4 shrink-0 text-gray-400" />
-              <span className="flex-1">{item.label}</span>
-              {/* Badge de foros no leidos solo en "Mis Materias" */}
-              {item.href === "/teacher/materias" && (
-                <ForumBadge />
-              )}
-            </Link>
+        {/* Navigation — sections */}
+        <nav className="flex-1 overflow-y-auto px-2 py-3 space-y-5">
+          {TEACHER_NAV_SECTIONS.map((section) => (
+            <div key={section.label}>
+              <p className="mb-1 px-2.5 text-[10px] font-semibold uppercase tracking-widest text-gray-400 select-none">
+                {section.label}
+              </p>
+              <div className="space-y-0.5">
+                {section.items.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="flex items-center gap-2.5 rounded-md px-2.5 py-2 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-100 hover:text-gray-900"
+                  >
+                    <item.icon className="size-4 shrink-0 text-gray-400" />
+                    <span className="flex-1">{item.label}</span>
+                    {"withBadge" in item && item.withBadge && <ForumBadge />}
+                  </Link>
+                ))}
+              </div>
+            </div>
           ))}
         </nav>
 

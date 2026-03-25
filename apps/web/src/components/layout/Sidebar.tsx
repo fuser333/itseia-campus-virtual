@@ -20,7 +20,6 @@ import {
   FileCheck,
   Briefcase,
   FlaskConical,
-  BookMarked,
   ChevronLeft,
   ChevronRight,
   LogOut,
@@ -35,7 +34,6 @@ import {
   School,
   ClipboardCheck,
   ShieldCheck,
-  Library,
   ExternalLink,
   ClipboardList,
   BarChart2,
@@ -58,11 +56,6 @@ interface NavSection {
   items: NavItem[];
 }
 
-// ─── Role sets ───────────────────────────────────────────────────────────────
-
-const ADMIN_ROLES: UserRole[] = ["coordinacion", "admin", "super_admin"];
-const STAFF_ROLES: UserRole[] = ["docente", "coordinacion", "admin", "super_admin"];
-
 // ─── Menu definitions ─────────────────────────────────────────────────────────
 
 /** 1. ALUMNO — carrera formal (role: estudiante, program type: carrera) */
@@ -70,9 +63,8 @@ const MENU_ALUMNO: NavSection[] = [
   {
     label: "MI APRENDIZAJE",
     items: [
-      { href: "/dashboard",        label: "Dashboard",     icon: LayoutDashboard },
+      { href: "/dashboard",        label: "Dashboard",       icon: LayoutDashboard },
       { href: "/carreras",         label: "Mi Carrera",      icon: GraduationCap },
-      { href: "/certificaciones",  label: "Certificaciones", icon: Award, badge: "Nuevo" },
       { href: "/calendario",       label: "Calendario",      icon: Calendar },
       { href: "/cohorte",          label: "Clases en Vivo",  icon: Video },
       { href: "/foros",            label: "Foros",           icon: MessageSquare },
@@ -97,8 +89,66 @@ const MENU_ALUMNO: NavSection[] = [
   },
 ];
 
-/** 2. EXTERNO — curso profesional (role: estudiante, program type: curso) */
-const MENU_EXTERNO: NavSection[] = [
+/** 2. PREUNIVERSITARIO — (role: estudiante, program type: preuni) */
+const MENU_PREUNI: NavSection[] = [
+  {
+    label: "MI PREUNIVERSITARIO",
+    items: [
+      { href: "/dashboard",           label: "Dashboard",              icon: LayoutDashboard },
+      { href: "/preuni/semana-1",     label: "Semana 1: Fundamentos IA", icon: Brain },
+      { href: "/preuni/semana-2",     label: "Semana 2: Datos con IA", icon: BarChart2 },
+      { href: "/preuni/semana-3",     label: "Semana 3: ML y Apps",    icon: BrainCircuit },
+      { href: "/preuni/semana-4",     label: "Semana 4: Proyecto Final", icon: Sparkles },
+    ],
+  },
+  {
+    label: "HERRAMIENTAS",
+    items: [
+      { href: "/ai-lab",     label: "AI Lab",     icon: Bot,     badge: "Beta" },
+      { href: "/biblioteca", label: "Biblioteca", icon: BookOpen },
+    ],
+  },
+  {
+    label: "MI CUENTA",
+    items: [
+      { href: "/payments",     label: "Pagos",        icon: CreditCard },
+      { href: "/profile",      label: "Perfil",       icon: User },
+      { href: "/certificates", label: "Certificado",  icon: FileCheck },
+    ],
+  },
+];
+
+/** 3. BOOTCAMP — (role: estudiante, program type: bootcamp) */
+const MENU_BOOTCAMP: NavSection[] = [
+  {
+    label: "MI BOOTCAMP",
+    items: [
+      { href: "/dashboard",   label: "Dashboard",       icon: LayoutDashboard },
+      { href: "/carreras",    label: "Mi Bootcamp",     icon: GraduationCap },
+      { href: "/cohorte",     label: "Clases en Vivo",  icon: Video },
+      { href: "/foros",       label: "Foros",           icon: MessageSquare },
+    ],
+  },
+  {
+    label: "HERRAMIENTAS",
+    items: [
+      { href: "/ai-lab",      label: "AI Lab",     icon: Bot,      badge: "Beta" },
+      { href: "/biblioteca",  label: "Biblioteca", icon: BookOpen },
+      { href: "/flashcards",  label: "Flashcards", icon: Layers },
+    ],
+  },
+  {
+    label: "MI CUENTA",
+    items: [
+      { href: "/payments",      label: "Pagos",        icon: CreditCard },
+      { href: "/profile",       label: "Perfil",       icon: User },
+      { href: "/certificates",  label: "Certificado",  icon: FileCheck },
+    ],
+  },
+];
+
+/** 4. CURSOS PRO — (role: estudiante, program type: curso) */
+const MENU_CURSOS_PRO: NavSection[] = [
   {
     label: "MI CURSO",
     items: [
@@ -129,6 +179,18 @@ const MENU_EXTERNO: NavSection[] = [
   },
 ];
 
+/**
+ * CERTIFICACIONES section — injected into any student menu when the user
+ * has at least one active certification enrollment.
+ */
+const SECTION_CERTIFICACIONES: NavSection = {
+  label: "MIS CERTIFICACIONES",
+  items: [
+    { href: "/certificaciones",            label: "Dashboard Certificaciones", icon: Award, badge: "Nuevo" },
+    { href: "/certificaciones/simulacros", label: "Simulacros de Examen",      icon: ShieldCheck },
+  ],
+};
+
 /** 3. DOCENTE */
 const MENU_DOCENTE: NavSection[] = [
   {
@@ -144,16 +206,16 @@ const MENU_DOCENTE: NavSection[] = [
       { href: "/teacher/entregas",    label: "Calificar Entregas",  icon: ClipboardCheck },
       { href: "/teacher/progreso",    label: "Progreso Alumnos",    icon: BarChart2 },
       { href: "/teacher/comunicacion", label: "Anuncios",           icon: Megaphone },
-      { href: "/teacher/materias",    label: "Programar Clases",    icon: Video },
-      { href: "/teacher/tutorias",    label: "Tutorias",            icon: MessageSquare },
-      { href: "/teacher/asistencia",  label: "Asistencia",          icon: ClipboardList },
+      { href: "/teacher/programar-clases", label: "Programar Clases",    icon: Video },
+      { href: "/teacher/tutorias",          label: "Tutorias",            icon: MessageSquare },
+      { href: "/teacher/asistencia",        label: "Asistencia",          icon: ClipboardList },
     ],
   },
   {
     label: "CAPACITACION CES",
     items: [
-      { href: "/teacher/capacitacion", label: "Docencia Virtual 120h", icon: GraduationCap },
-      { href: "/teacher/capacitacion", label: "Mi Certificacion",      icon: FileCheck },
+      { href: "/teacher/capacitacion",  label: "Docencia Virtual 120h", icon: GraduationCap },
+      { href: "/teacher/certificacion", label: "Mi Certificacion",      icon: FileCheck },
     ],
   },
 ];
@@ -220,56 +282,78 @@ const MENU_B2B: NavSection[] = [
     label: "MI EMPRESA",
     items: [
       { href: "/b2b",                  label: "Dashboard Corporativo", icon: LayoutDashboard },
-      { href: "/b2b/equipo",           label: "Mi Equipo",             icon: Users },
+      { href: "/b2b/team",         label: "Mi Equipo",             icon: Users },
       { href: "/b2b/capacitacion",     label: "Capacitacion Activa",   icon: GraduationCap },
     ],
   },
   {
     label: "NUESTRAS EMPRESAS",
     items: [
-      { href: "/b2b/h3l",      label: "H3L",      icon: Building2 },
-      { href: "/b2b/imagemia", label: "ImagemIA", icon: Brain },
-      { href: "/b2b/strata",   label: "Strata",   icon: BrainCircuit },
+      { href: "https://h3l.ai",        label: "H3L",      icon: Building2,   external: true },
+      { href: "https://imagemia.com",  label: "ImagemIA", icon: Brain,       external: true },
+      { href: "https://strata.h3l.ai", label: "Strata",   icon: BrainCircuit, external: true },
     ],
   },
   {
     label: "REPORTES",
     items: [
-      { href: "/b2b/progreso",    label: "Progreso del Equipo",  icon: BarChart2 },
-      { href: "/b2b/certificados", label: "Certificados Equipo", icon: Award },
-      { href: "/b2b/facturacion",  label: "Facturacion",         icon: CreditCard },
+      { href: "/b2b/reportes", label: "Progreso del Equipo", icon: BarChart2 },
+      { href: "/certificates", label: "Certificados Equipo", icon: Award },
+      { href: "/payments",     label: "Facturacion",         icon: CreditCard },
     ],
   },
 ];
 
 // ─── Enrollment type detection ────────────────────────────────────────────────
 
-type MenuType = "alumno" | "externo" | "docente" | "admin" | "finanzas" | "b2b";
+/**
+ * Priority order for students enrolled in multiple programs:
+ *   carrera > bootcamp > preuni > curso
+ *
+ * The highest-priority program determines the main menu. Certification
+ * enrollments are handled separately and add SECTION_CERTIFICACIONES.
+ */
+type MenuType = "alumno" | "bootcamp" | "preuni" | "cursos_pro" | "docente" | "admin" | "b2b";
 
-function getMenuType(role: UserRole, programType: string | null): MenuType {
+function getMenuType(role: UserRole, programTypes: string[]): MenuType {
   if (role === "super_admin" || role === "admin" || role === "coordinacion") return "admin";
-  if (role === "finanzas") return "finanzas";
+  // finanzas role = B2B/empresa user (placeholder until 'empresa' role exists)
+  if (role === "finanzas") return "b2b";
   if (role === "docente") return "docente";
   if (role === "estudiante") {
-    // Distinguish ALUMNO (carrera) vs EXTERNO (curso, bootcamp, preuni, etc.)
-    if (programType === "curso" || programType === "bootcamp" || programType === "preuni") {
-      return "externo";
-    }
+    if (programTypes.includes("carrera"))   return "alumno";
+    if (programTypes.includes("bootcamp"))  return "bootcamp";
+    if (programTypes.includes("preuni"))    return "preuni";
+    if (programTypes.includes("curso"))     return "cursos_pro";
+    // Enrolled but type not matched or no enrollments yet → default alumno view
     return "alumno";
   }
-  // Fallback
   return "alumno";
 }
 
-function getSectionsForMenuType(type: MenuType): NavSection[] {
+function getSectionsForMenuType(
+  type: MenuType,
+  hasCertEnrollment: boolean,
+): NavSection[] {
+  let base: NavSection[];
   switch (type) {
-    case "alumno":   return MENU_ALUMNO;
-    case "externo":  return MENU_EXTERNO;
-    case "docente":  return MENU_DOCENTE;
-    case "admin":    return MENU_ADMIN;
-    case "finanzas": return MENU_FINANZAS;
-    case "b2b":      return MENU_B2B;
+    case "alumno":     base = MENU_ALUMNO;     break;
+    case "bootcamp":   base = MENU_BOOTCAMP;   break;
+    case "preuni":     base = MENU_PREUNI;     break;
+    case "cursos_pro": base = MENU_CURSOS_PRO; break;
+    case "docente":    return MENU_DOCENTE;
+    case "admin":      return MENU_ADMIN;
+
+    case "b2b":        return MENU_B2B;
   }
+
+  // Inject CERTIFICACIONES section for students who have cert enrollment.
+  // Insert it BEFORE the MI CUENTA section (last section).
+  if (hasCertEnrollment) {
+    const last = base[base.length - 1];
+    return [...base.slice(0, -1), SECTION_CERTIFICACIONES, last];
+  }
+  return base;
 }
 
 // ─── Role display labels ──────────────────────────────────────────────────────
@@ -280,7 +364,7 @@ const ROLE_LABELS: Record<UserRole, string> = {
   coordinacion: "Coordinacion",
   docente: "Docente",
   estudiante: "Estudiante",
-  finanzas: "Finanzas",
+  finanzas: "Empresa", // B2B/corporate user
 };
 
 // ─── Component ────────────────────────────────────────────────────────────────
@@ -289,11 +373,12 @@ export default function Sidebar() {
   const router = useRouter();
   const pathname = usePathname();
 
-  const [user, setUser]       = useState<{ id: string; email: string } | null>(null);
-  const [profile, setProfile] = useState<Profile | null>(null);
-  const [programType, setProgramType] = useState<string | null>(null);
-  const [collapsed, setCollapsed] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [user, setUser]                   = useState<{ id: string; email: string } | null>(null);
+  const [profile, setProfile]             = useState<Profile | null>(null);
+  const [programTypes, setProgramTypes]   = useState<string[]>([]);
+  const [hasCertEnrollment, setHasCert]   = useState(false);
+  const [collapsed, setCollapsed]         = useState(false);
+  const [loading, setLoading]             = useState(true);
 
   useEffect(() => {
     const supabase = createClient();
@@ -315,21 +400,33 @@ export default function Sidebar() {
         setProfile(profileData as Profile);
       }
 
-      // For estudiante role, fetch their active enrollment to detect program type
+      // For estudiante role: fetch ALL active program enrollments + cert enrollments
       if (profileData?.role === "estudiante") {
-        const { data: enrollment } = await supabase
+        // 1. All active program enrollments (may be multiple)
+        const { data: enrollments } = await supabase
           .from("enrollments")
-          .select("*, programs(type)")
+          .select("programs(type)")
           .eq("user_id", authUser.id)
-          .eq("status", "active")
-          .order("enrolled_at", { ascending: false })
-          .limit(1)
-          .maybeSingle();
+          .eq("status", "active");
 
-        if (enrollment?.programs) {
-          const prog = enrollment.programs as { type: string };
-          setProgramType(prog.type ?? null);
+        if (enrollments) {
+          const types = enrollments
+            .map((e) => {
+              const prog = e.programs as unknown as { type: string } | null;
+              return prog?.type ?? null;
+            })
+            .filter((t): t is string => t !== null);
+          setProgramTypes(types);
         }
+
+        // 2. Check for any certification enrollment
+        const { data: certEnrollments } = await supabase
+          .from("certification_enrollments")
+          .select("id")
+          .eq("user_id", authUser.id)
+          .limit(1);
+
+        setHasCert(!!(certEnrollments && certEnrollments.length > 0));
       }
 
       setLoading(false);
@@ -346,15 +443,16 @@ export default function Sidebar() {
   }
 
   function isActive(href: string): boolean {
+    if (href.startsWith("http")) return false;
     if (href === "/dashboard") return pathname === "/dashboard";
+    if (href === "/b2b") return pathname === "/b2b";
     if (href === "/admin" && pathname !== "/admin") return false;
-    // exact match or sub-path match
     return pathname === href || pathname.startsWith(href + "/");
   }
 
   const role: UserRole = profile?.role ?? "estudiante";
-  const menuType   = getMenuType(role, programType);
-  const sections   = getSectionsForMenuType(menuType);
+  const menuType   = getMenuType(role, programTypes);
+  const sections   = getSectionsForMenuType(menuType, hasCertEnrollment);
   const roleLabel  = ROLE_LABELS[role] ?? role;
 
   // ─── Loading skeleton ────────────────────────────────────────────────────
