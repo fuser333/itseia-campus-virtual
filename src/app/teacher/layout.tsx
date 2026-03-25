@@ -74,7 +74,7 @@ export default async function TeacherLayout({
   }
 
   return (
-    <div className="flex h-screen overflow-hidden bg-gray-50">
+    <div className="flex h-screen overflow-hidden bg-gray-50" style={{ color: '#1F2F58' }}>
       {/* Teacher Sidebar */}
       <aside className="flex w-[240px] shrink-0 flex-col border-r border-gray-200 bg-white">
         {/* Header */}

@@ -9,29 +9,42 @@ import {
   MessageSquare,
   Clock,
   CalendarDays,
-  ExternalLink,
+  Phone,
+  Mail,
+  Video,
+  CheckCircle2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
-const HOWTO_STEPS = [
+const HORARIOS = [
+  { dia: "Lunes", hora: "09:00 – 11:00", disponible: true },
+  { dia: "Miercoles", hora: "14:00 – 16:00", disponible: true },
+  { dia: "Viernes", hora: "09:00 – 11:00", disponible: true },
+  { dia: "Sabado", hora: "10:00 – 12:00", disponible: true },
+];
+
+const PASOS = [
   {
-    step: 1,
-    title: "Agenda tu horario de tutorias",
-    description:
-      "Usa el calendario para publicar bloques de disponibilidad. Tus estudiantes los veran y podran reservar una sesion contigo.",
+    paso: 1,
+    titulo: "Contacta al coordinador",
+    descripcion:
+      "Escribe al coordinador academico por WhatsApp (+593 95 989 2034) o email (administracion@itseia.ai) indicando el tema de la tutoria y el nombre del estudiante.",
+    icon: Phone,
   },
   {
-    step: 2,
-    title: "Comunicate por mensajes directos",
-    description:
-      "Desde la seccion Anuncios puedes enviar mensajes directos a cada estudiante para coordinar la tutoria.",
+    paso: 2,
+    titulo: "Agenda el horario",
+    descripcion:
+      "El coordinador confirmara un slot disponible dentro de los horarios de atencion. Tambien puedes publicar tu disponibilidad en el calendario del campus.",
+    icon: CalendarDays,
   },
   {
-    step: 3,
-    title: "Realiza la sesion en video",
-    description:
-      "Usa la sala de video conferencia integrada desde cualquier sesion de tus materias. Sin instalar nada extra.",
+    paso: 3,
+    titulo: "Conecta por video",
+    descripcion:
+      "La sesion se realiza por Daily.co desde cualquier sesion de tus materias. No requiere instalacion — solo clic en 'Iniciar video' y comparte el enlace con tu estudiante.",
+    icon: Video,
   },
 ];
 
@@ -46,41 +59,88 @@ export default function TutoriasPage() {
         </p>
       </div>
 
-      {/* Coming soon banner */}
-      <div className="rounded-xl border border-[#FBBC0C]/40 bg-[#FBBC0C]/5 p-6">
-        <div className="flex flex-col items-center gap-3 text-center sm:flex-row sm:text-left sm:gap-5">
-          <div className="flex size-14 shrink-0 items-center justify-center rounded-2xl bg-[#FBBC0C]/20">
-            <MessageSquare className="size-7 text-[#1F2F58]" />
-          </div>
-          <div>
-            <p className="text-lg font-bold text-[#1F2F58]">
-              Modulo de Tutorias — Proximamente
-            </p>
-            <p className="mt-1 text-sm text-gray-600 max-w-prose">
-              Estamos construyendo un sistema de reserva de tutorias integrado.
-              Por ahora, usa los canales disponibles para coordinar con tus estudiantes.
-            </p>
-          </div>
+      {/* Horarios de atencion */}
+      <div>
+        <h2 className="mb-3 text-base font-semibold text-gray-900">
+          Horarios de atencion disponibles
+        </h2>
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {HORARIOS.map((h) => (
+            <div
+              key={h.dia}
+              className="flex items-center gap-3 rounded-xl border border-gray-200 bg-white px-4 py-3"
+            >
+              <div className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-[#1F2F58]/10">
+                <Clock className="size-4 text-[#1F2F58]" />
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-gray-900">{h.dia}</p>
+                <p className="text-xs text-gray-500">{h.hora}</p>
+              </div>
+              {h.disponible && (
+                <CheckCircle2 className="ml-auto size-4 shrink-0 text-emerald-500" />
+              )}
+            </div>
+          ))}
+        </div>
+        <p className="mt-2 text-xs text-gray-400">
+          Horarios referencial. Confirma disponibilidad con el coordinador antes de agendar.
+        </p>
+      </div>
+
+      {/* Canales de contacto */}
+      <div>
+        <h2 className="mb-3 text-base font-semibold text-gray-900">
+          Como contactar
+        </h2>
+        <div className="grid gap-3 sm:grid-cols-2">
+          <a
+            href="https://wa.me/593959892034"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-4 rounded-xl border border-emerald-200 bg-emerald-50 px-5 py-4 transition-colors hover:bg-emerald-100"
+          >
+            <div className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-emerald-500/20">
+              <Phone className="size-5 text-emerald-600" />
+            </div>
+            <div>
+              <p className="text-sm font-semibold text-gray-900">WhatsApp Coordinacion</p>
+              <p className="text-xs text-gray-600">+593 95 989 2034</p>
+            </div>
+          </a>
+
+          <a
+            href="mailto:administracion@itseia.ai"
+            className="flex items-center gap-4 rounded-xl border border-[#73B8E7]/30 bg-[#73B8E7]/5 px-5 py-4 transition-colors hover:bg-[#73B8E7]/10"
+          >
+            <div className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-[#73B8E7]/20">
+              <Mail className="size-5 text-[#1F2F58]" />
+            </div>
+            <div>
+              <p className="text-sm font-semibold text-gray-900">Email Coordinacion</p>
+              <p className="text-xs text-gray-600">administracion@itseia.ai</p>
+            </div>
+          </a>
         </div>
       </div>
 
-      {/* How to do it now */}
+      {/* Pasos del proceso */}
       <div>
         <h2 className="mb-4 text-base font-semibold text-gray-900">
-          Como hacer tutorias ahora
+          Pasos para agendar una tutoria
         </h2>
         <div className="grid gap-4 sm:grid-cols-3">
-          {HOWTO_STEPS.map((item) => (
-            <Card key={item.step}>
+          {PASOS.map((item) => (
+            <Card key={item.paso}>
               <CardContent className="pt-5">
                 <div className="mb-3 flex size-8 items-center justify-center rounded-full bg-[#1F2F58] text-sm font-bold text-[#FBBC0C]">
-                  {item.step}
+                  {item.paso}
                 </div>
                 <h3 className="mb-1 text-sm font-semibold text-gray-900">
-                  {item.title}
+                  {item.titulo}
                 </h3>
                 <p className="text-xs text-gray-500 leading-relaxed">
-                  {item.description}
+                  {item.descripcion}
                 </p>
               </CardContent>
             </Card>
@@ -93,7 +153,7 @@ export default function TutoriasPage() {
         <Link href="/calendario">
           <Button className="gap-2 bg-[#1F2F58] hover:bg-[#2A3F6E] text-white">
             <CalendarDays className="size-4" />
-            Ir al calendario
+            Publicar mi disponibilidad
           </Button>
         </Link>
         <Link href="/teacher/comunicacion">

@@ -224,10 +224,10 @@ export default async function MiCursoPage() {
     <div className="space-y-8">
       {/* Page header */}
       <div>
-        <h1 className="text-3xl font-bold tracking-tight text-foreground">
+        <h1 className="text-3xl font-bold tracking-tight text-[#0A1628]">
           Mi Curso
         </h1>
-        <p className="mt-1 text-base text-muted-foreground">
+        <p className="mt-1 text-base text-[#1F2F58]/60">
           Accede a tu contenido, modulos y progreso del curso.
         </p>
       </div>
@@ -239,10 +239,10 @@ export default async function MiCursoPage() {
             <div className="mb-4 flex size-16 items-center justify-center rounded-2xl bg-primary/10">
               <GraduationCap className="size-8 text-primary" />
             </div>
-            <h3 className="text-lg font-semibold text-foreground">
+            <h3 className="text-lg font-semibold text-[#0A1628]">
               No tienes un curso activo
             </h3>
-            <p className="mt-2 max-w-sm text-sm text-muted-foreground">
+            <p className="mt-2 max-w-sm text-sm text-[#1F2F58]/60">
               Inscríbete en un curso profesional de IA para comenzar tu
               aprendizaje personalizado.
             </p>
@@ -356,7 +356,7 @@ export default async function MiCursoPage() {
 
           {/* ── Courses / modules list ── */}
           <div>
-            <h2 className="mb-4 text-xl font-bold text-foreground">
+            <h2 className="mb-4 text-xl font-bold text-[#0A1628]">
               Contenido del Curso
             </h2>
 
@@ -381,18 +381,18 @@ export default async function MiCursoPage() {
                       </div>
 
                       <div>
-                        <h3 className="font-semibold text-foreground leading-snug">
+                        <h3 className="font-semibold text-[#0A1628] leading-snug">
                           {course.name}
                         </h3>
                         {course.description && (
-                          <p className="mt-1 text-xs text-muted-foreground line-clamp-2">
+                          <p className="mt-1 text-xs text-[#1F2F58]/60 line-clamp-2">
                             {course.description}
                           </p>
                         )}
                       </div>
 
                       {/* Stats */}
-                      <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                      <div className="flex items-center gap-3 text-xs text-[#1F2F58]/60">
                         <span className="flex items-center gap-1">
                           <Layers className="size-3" />
                           {course.moduleCount} modulos
@@ -418,14 +418,14 @@ export default async function MiCursoPage() {
                           <>
                             <Link
                               href={`/carreras/${program?.slug}/materia/${course.slug}`}
-                              className="flex-1 flex items-center justify-center gap-2 rounded-lg border border-border bg-card px-3 py-2 text-xs font-medium text-foreground hover:bg-accent/10 transition-colors"
+                              className="flex-1 flex items-center justify-center gap-2 rounded-lg border border-[#1F2F58]/15 bg-white px-3 py-2 text-xs font-medium text-[#1F2F58] hover:bg-[#1F2F58]/5 transition-colors"
                             >
                               Ver contenido
                             </Link>
                             {course.firstIncompleteLessonId && (
                               <Link
                                 href={`/carreras/${program?.slug}/materia/${course.slug}/sesion/1`}
-                                className="flex items-center gap-1.5 rounded-lg bg-primary px-3 py-2 text-xs font-semibold text-primary-foreground hover:opacity-90 transition-opacity"
+                                className="flex items-center gap-1.5 rounded-lg bg-[#1F2F58] px-3 py-2 text-xs font-semibold text-white hover:opacity-90 transition-opacity"
                               >
                                 <Play className="size-3" />
                                 Continuar
@@ -444,14 +444,14 @@ export default async function MiCursoPage() {
                           <>
                             <Link
                               href={`/courses/${course.id}`}
-                              className="flex-1 flex items-center justify-center gap-2 rounded-lg border border-border bg-card px-3 py-2 text-xs font-medium text-foreground hover:bg-accent/10 transition-colors"
+                              className="flex-1 flex items-center justify-center gap-2 rounded-lg border border-[#1F2F58]/15 bg-white px-3 py-2 text-xs font-medium text-[#1F2F58] hover:bg-[#1F2F58]/5 transition-colors"
                             >
                               Ver contenido
                             </Link>
                             {course.firstIncompleteLessonId && (
                               <Link
                                 href={`/courses/${course.id}/lesson/${course.firstIncompleteLessonId}`}
-                                className="flex items-center gap-1.5 rounded-lg bg-primary px-3 py-2 text-xs font-semibold text-primary-foreground hover:opacity-90 transition-opacity"
+                                className="flex items-center gap-1.5 rounded-lg bg-[#1F2F58] px-3 py-2 text-xs font-semibold text-white hover:opacity-90 transition-opacity"
                               >
                                 <Play className="size-3" />
                                 Continuar
@@ -474,8 +474,8 @@ export default async function MiCursoPage() {
             ) : (
               <Card className="border-dashed">
                 <CardContent className="flex flex-col items-center py-12 text-center">
-                  <BookOpen className="size-10 text-muted-foreground/30 mb-3" />
-                  <p className="text-sm text-muted-foreground">
+                  <BookOpen className="size-10 text-[#1F2F58]/30 mb-3" />
+                  <p className="text-sm text-[#1F2F58]/60">
                     El contenido de este curso se está preparando. Vuelve
                     pronto.
                   </p>
@@ -494,12 +494,12 @@ export default async function MiCursoPage() {
                 <span className="text-lg">🤖</span>
               </div>
               <div>
-                <p className="font-semibold text-foreground text-sm">AI Lab</p>
-                <p className="text-xs text-muted-foreground">
+                <p className="font-semibold text-[#0A1628] text-sm">AI Lab</p>
+                <p className="text-xs text-[#1F2F58]/60">
                   Practica con IA
                 </p>
               </div>
-              <ArrowRight className="ml-auto size-4 text-muted-foreground/30 transition-all group-hover:translate-x-1 group-hover:text-muted-foreground/60" />
+              <ArrowRight className="ml-auto size-4 text-[#1F2F58]/30 transition-all group-hover:translate-x-1 group-hover:text-[#1F2F58]/60" />
             </Link>
 
             <Link
@@ -510,14 +510,14 @@ export default async function MiCursoPage() {
                 <span className="text-lg">📖</span>
               </div>
               <div>
-                <p className="font-semibold text-foreground text-sm">
+                <p className="font-semibold text-[#0A1628] text-sm">
                   Biblioteca
                 </p>
-                <p className="text-xs text-muted-foreground">
+                <p className="text-xs text-[#1F2F58]/60">
                   Recursos y lecturas
                 </p>
               </div>
-              <ArrowRight className="ml-auto size-4 text-muted-foreground/30 transition-all group-hover:translate-x-1 group-hover:text-muted-foreground/60" />
+              <ArrowRight className="ml-auto size-4 text-[#1F2F58]/30 transition-all group-hover:translate-x-1 group-hover:text-[#1F2F58]/60" />
             </Link>
 
             <a
@@ -530,14 +530,14 @@ export default async function MiCursoPage() {
                 <span className="text-lg">🧪</span>
               </div>
               <div>
-                <p className="font-semibold text-foreground text-sm">
+                <p className="font-semibold text-[#0A1628] text-sm">
                   Demos Interactivos
                 </p>
-                <p className="text-xs text-muted-foreground">
+                <p className="text-xs text-[#1F2F58]/60">
                   Explora demos de IA
                 </p>
               </div>
-              <ExternalLink className="ml-auto size-4 text-muted-foreground/30 group-hover:text-muted-foreground/60" />
+              <ExternalLink className="ml-auto size-4 text-[#1F2F58]/30 group-hover:text-[#1F2F58]/60" />
             </a>
           </div>
         </>
