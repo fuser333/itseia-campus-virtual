@@ -56,7 +56,7 @@ export default async function MiCursoPage() {
   } | null;
 
   // Fetch courses for this program
-  const courses =
+  let courses =
     program
       ? (
           await supabase
@@ -68,51 +68,123 @@ export default async function MiCursoPage() {
         ).data || []
       : [];
 
-  // For each course, get modules and progress
-  const coursesWithProgress = await Promise.all(
-    courses.map(async (course) => {
-      const { data: modules } = await supabase
-        .from("modules")
-        .select("id, name, order_index")
-        .eq("course_id", course.id)
-        .eq("is_active", true)
+  // For programs without courses (preuni, bootcamp), convert semesters→subjects to courses
+  if (program && courses.length === 0) {
+    const { data: semesters } = await supabase
+      .from("semesters")
+      .select("*")
+      .eq("program_id", program.id)
+      .order("number", { ascending: true });
+
+    if (semesters && semesters.length > 0) {
+      const { data: subjects } = await supabase
+        .from("subjects")
+        .select("*")
+        .in("semester_id", semesters.map(s => s.id))
         .order("order_index", { ascending: true });
 
-      const moduleIds = (modules || []).map((m) => m.id);
+      // Transform subjects to course-like structure
+      courses = (subjects || []).map((subject) => ({
+        id: subject.id,
+        program_id: program.id,
+        name: subject.name,
+        slug: subject.slug,
+        description: subject.description,
+        order_index: subject.order_index,
+        is_active: subject.is_active,
+        // Mark as semester-based
+        _isSemesterBased: true,
+        _semesterId: subject.semester_id,
+      }));
+    }
+  }
 
+  // For each course, get modules and progress (or sessions if semester-based)
+  const coursesWithProgress = await Promise.all(
+    courses.map(async (course: any) => {
       let totalLessons = 0;
       let completedLessons = 0;
       let firstIncompleteLessonId: string | null = null;
+      let moduleCount = 0;
 
-      if (moduleIds.length > 0) {
-        const { data: lessons } = await supabase
-          .from("lessons")
-          .select("id, module_id, order_index")
-          .in("module_id", moduleIds)
+      // Check if this is semester-based (preuni)
+      if (course._isSemesterBased) {
+        // Get sessions for this subject
+        const { data: sessions } = await supabase
+          .from("sessions")
+          .select("id, number, title")
+          .eq("subject_id", course.id)
           .eq("is_active", true)
-          .order("order_index", { ascending: true });
+          .order("number", { ascending: true });
 
-        totalLessons = lessons?.length || 0;
-        const lessonIds = (lessons || []).map((l) => l.id);
+        totalLessons = sessions?.length || 0;
+        moduleCount = 1; // One "module" (the week itself)
+        const sessionIds = (sessions || []).map((s) => s.id);
 
-        if (lessonIds.length > 0) {
+        if (sessionIds.length > 0) {
+          // Get session progress
           const { data: progress } = await supabase
-            .from("progress")
-            .select("lesson_id, completed")
+            .from("session_progress")
+            .select("session_id, completed")
             .eq("user_id", user.id)
-            .in("lesson_id", lessonIds)
+            .in("session_id", sessionIds)
             .eq("completed", true);
 
           const completedSet = new Set(
-            (progress || []).map((p) => p.lesson_id)
+            (progress || []).map((p) => p.session_id)
           );
           completedLessons = completedSet.size;
 
-          // Find first incomplete lesson for "Continuar" CTA
-          for (const lesson of lessons || []) {
-            if (!completedSet.has(lesson.id)) {
-              firstIncompleteLessonId = lesson.id;
+          // Find first incomplete session
+          for (const session of sessions || []) {
+            if (!completedSet.has(session.id)) {
+              firstIncompleteLessonId = session.id;
               break;
+            }
+          }
+        }
+      } else {
+        // Traditional course → modules → lessons
+        const { data: modules } = await supabase
+          .from("modules")
+          .select("id, name, order_index")
+          .eq("course_id", course.id)
+          .eq("is_active", true)
+          .order("order_index", { ascending: true });
+
+        moduleCount = (modules || []).length;
+        const moduleIds = (modules || []).map((m) => m.id);
+
+        if (moduleIds.length > 0) {
+          const { data: lessons } = await supabase
+            .from("lessons")
+            .select("id, module_id, order_index")
+            .in("module_id", moduleIds)
+            .eq("is_active", true)
+            .order("order_index", { ascending: true });
+
+          totalLessons = lessons?.length || 0;
+          const lessonIds = (lessons || []).map((l) => l.id);
+
+          if (lessonIds.length > 0) {
+            const { data: progress } = await supabase
+              .from("progress")
+              .select("lesson_id, completed")
+              .eq("user_id", user.id)
+              .in("lesson_id", lessonIds)
+              .eq("completed", true);
+
+            const completedSet = new Set(
+              (progress || []).map((p) => p.lesson_id)
+            );
+            completedLessons = completedSet.size;
+
+            // Find first incomplete lesson
+            for (const lesson of lessons || []) {
+              if (!completedSet.has(lesson.id)) {
+                firstIncompleteLessonId = lesson.id;
+                break;
+              }
             }
           }
         }
@@ -125,7 +197,7 @@ export default async function MiCursoPage() {
 
       return {
         ...course,
-        moduleCount: (modules || []).length,
+        moduleCount,
         totalLessons,
         completedLessons,
         percentage,
@@ -341,28 +413,59 @@ export default async function MiCursoPage() {
 
                       {/* CTA */}
                       <div className="flex gap-2">
-                        <Link
-                          href={`/courses/${course.id}`}
-                          className="flex-1 flex items-center justify-center gap-2 rounded-lg border border-border bg-card px-3 py-2 text-xs font-medium text-foreground hover:bg-accent/10 transition-colors"
-                        >
-                          Ver contenido
-                        </Link>
-                        {course.firstIncompleteLessonId && (
-                          <Link
-                            href={`/courses/${course.id}/lesson/${course.firstIncompleteLessonId}`}
-                            className="flex items-center gap-1.5 rounded-lg bg-primary px-3 py-2 text-xs font-semibold text-primary-foreground hover:opacity-90 transition-opacity"
-                          >
-                            <Play className="size-3" />
-                            Continuar
-                          </Link>
+                        {course._isSemesterBased ? (
+                          // For semester-based (preuni), link to carrera page
+                          <>
+                            <Link
+                              href={`/carreras/${program?.slug}/materia/${course.slug}`}
+                              className="flex-1 flex items-center justify-center gap-2 rounded-lg border border-border bg-card px-3 py-2 text-xs font-medium text-foreground hover:bg-accent/10 transition-colors"
+                            >
+                              Ver contenido
+                            </Link>
+                            {course.firstIncompleteLessonId && (
+                              <Link
+                                href={`/carreras/${program?.slug}/materia/${course.slug}/sesion/1`}
+                                className="flex items-center gap-1.5 rounded-lg bg-primary px-3 py-2 text-xs font-semibold text-primary-foreground hover:opacity-90 transition-opacity"
+                              >
+                                <Play className="size-3" />
+                                Continuar
+                              </Link>
+                            )}
+                            {!course.firstIncompleteLessonId &&
+                              course.totalLessons > 0 && (
+                                <span className="flex items-center gap-1.5 rounded-lg bg-emerald-500/20 px-3 py-2 text-xs font-semibold text-emerald-400">
+                                  <CheckCircle2 className="size-3" />
+                                  Completado
+                                </span>
+                              )}
+                          </>
+                        ) : (
+                          // Traditional course navigation
+                          <>
+                            <Link
+                              href={`/courses/${course.id}`}
+                              className="flex-1 flex items-center justify-center gap-2 rounded-lg border border-border bg-card px-3 py-2 text-xs font-medium text-foreground hover:bg-accent/10 transition-colors"
+                            >
+                              Ver contenido
+                            </Link>
+                            {course.firstIncompleteLessonId && (
+                              <Link
+                                href={`/courses/${course.id}/lesson/${course.firstIncompleteLessonId}`}
+                                className="flex items-center gap-1.5 rounded-lg bg-primary px-3 py-2 text-xs font-semibold text-primary-foreground hover:opacity-90 transition-opacity"
+                              >
+                                <Play className="size-3" />
+                                Continuar
+                              </Link>
+                            )}
+                            {!course.firstIncompleteLessonId &&
+                              course.totalLessons > 0 && (
+                                <span className="flex items-center gap-1.5 rounded-lg bg-emerald-500/20 px-3 py-2 text-xs font-semibold text-emerald-400">
+                                  <CheckCircle2 className="size-3" />
+                                  Completado
+                                </span>
+                              )}
+                          </>
                         )}
-                        {!course.firstIncompleteLessonId &&
-                          course.totalLessons > 0 && (
-                            <span className="flex items-center gap-1.5 rounded-lg bg-emerald-500/20 px-3 py-2 text-xs font-semibold text-emerald-400">
-                              <CheckCircle2 className="size-3" />
-                              Completado
-                            </span>
-                          )}
                       </div>
                     </CardContent>
                   </Card>
