@@ -1,502 +1,376 @@
-# Ejercicio Sesion 6: Master Data Management (MDM)
+# Ejercicio Sesion 6: LOPDP Ecuador — Compliance en Datos Personales
 
 **Materia:** Gobierno de Datos y Cumplimiento
-**Nivel:** Intermedio-Avanzado
-**Herramienta IA:** ChatGPT
-**Duracion estimada:** 40 min
+**Nivel:** Avanzado
+**Herramienta IA:** Claude
+**Duracion estimada:** 55 min
 
 ## Objetivo
 
-Implementar un sistema de Master Data Management (MDM) para el Registro Civil del Ecuador: crear el golden record del ciudadano ecuatoriano unificando fuentes heterogeneas (Registro Civil, IESS, SRI, MSP, BCE), implementar el algoritmo de match y merge con reglas de confianza por fuente, gestionar el ciclo de vida del dato maestro, y medir la calidad del MDM — cumpliendo con la LOPDP y la normativa del MINTEL.
+Implementar los requisitos de compliance de la Ley Organica de Proteccion de Datos Personales (LOPDP) del Ecuador: clasificar datos por nivel de sensibilidad, aplicar tecnicas de proteccion (hash, cifrado, enmascaramiento, generalizacion), construir el Registro de Actividades de Tratamiento (RAT) y evaluar el impacto en privacidad (DPIA) para un proceso de alto riesgo.
 
 ## Contexto
 
-El Estado ecuatoriano tiene 18 millones de ciudadanos registrados en 47 sistemas distintos: Registro Civil, IESS, SRI, MSP, BCE, SENESCYT, Ministerios, GADs, etc. Cada sistema tiene "su version" del ciudadano. El resultado: un ciudadano puede tener 3 nombres distintos en 3 sistemas (Jose Manuel vs Jose M. vs J. Manuel), 2 fechas de nacimiento diferentes (error de digitacion), y 4 direcciones distintas (cambios de residencia sin actualizar). El MDM del Estado ecuatoriano busca crear UN registro de verdad por ciudadano — el golden record — que todos los sistemas consulten.
+La LOPDP entro en vigor el 26 de mayo de 2021 en Ecuador y otorgo 2 anos de plazo para cumplimiento. El IESS maneja datos sensibles de 8 millones de afiliados: historial medico, salarios, biometria, condicion familiar. Sin compliance LOPDP, el IESS se expone a multas de hasta el 2% de su facturacion anual (equivalente a decenas de millones de dolares) y responsabilidad penal del Director General. La LOPDP ecuatoriana sigue el modelo GDPR europeo pero con particularidades locales que todo profesional de datos en Ecuador debe dominar. No es opcional: el plazo de cumplimiento ya vencio.
 
 ## Instrucciones
 
-1. Crea el archivo `sesion06_mdm_registro_civil_ecuador.py`:
+1. Abre Google Colab y crea `sesion06_lopdp_compliance.ipynb`.
+
+2. Primero instala la dependencia necesaria para cifrado:
 
 ```python
-# Master Data Management - ITSEIA
-# Gobierno de Datos y Cumplimiento
-# Registro Civil Ecuador — golden record ciudadano
+# !pip install cryptography -q
+```
 
-import re
-import uuid
+3. Implementa la clasificacion de datos y las tecnicas de proteccion:
+
+```python
+# Gobierno de Datos - Sesion 6: LOPDP Compliance
+# ITSEIA - Periodo 5
+# Estudiante: [Tu nombre]
+
 import hashlib
-import numpy as np
+import re
 import pandas as pd
+import numpy as np
 from datetime import datetime, date
-from collections import defaultdict
-from difflib import SequenceMatcher
-import warnings
-warnings.filterwarnings("ignore")
+from cryptography.fernet import Fernet
+import matplotlib.pyplot as plt
 
+np.random.seed(42)
+
+# ============================================================
+# PARTE 1: Clasificacion de Datos Personales segun LOPDP
+# ============================================================
+
+print("CLASIFICACION DE DATOS PERSONALES — LOPDP Ecuador 2021")
 print("=" * 65)
-print("MASTER DATA MANAGEMENT — REGISTRO CIVIL ECUADOR")
-print("18M ciudadanos | 47 sistemas | 1 golden record")
-print("=" * 65)
 
-# ================================================
-# FUENTES DE DATOS Y NIVELES DE CONFIANZA
-# ================================================
-print("\n--- FUENTES DE DATOS Y CONFIANZA ---")
-
-FUENTES = {
-    "registro_civil": {
-        "descripcion":  "Registro Civil e Identificacion del Ecuador",
-        "confianza":    1.00,  # fuente autoritativa maxima
-        "campos_auth":  ["cedula", "nombres", "apellidos", "fecha_nacimiento",
-                         "lugar_nacimiento", "estado_civil"],
-        "frecuencia":   "Tiempo real (API)",
-        "cobertura":    1.00,
+clasificacion = {
+    "Dato personal ordinario (Art. 4)": {
+        "definicion":  "Cualquier informacion que identifica o hace identificable a una persona natural",
+        "ejemplos":    ["Nombre", "Apellido", "Email", "Telefono", "Direccion", "IP"],
+        "base_legal":  "Consentimiento libre e informado o interes legitimo",
+        "retencion":   "Minimo necesario segun la finalidad declarada",
+        "iess_campos": ["nombre_afiliado", "email", "telefono_contacto", "direccion_domicilio"],
+        "multa_riesgo": "Hasta 1% facturacion anual",
     },
-    "iess": {
-        "descripcion":  "Instituto Ecuatoriano de Seguridad Social",
-        "confianza":    0.90,
-        "campos_auth":  ["empleador_actual", "salario_declarado", "fecha_afiliacion"],
-        "frecuencia":   "Mensual (batch)",
-        "cobertura":    0.65,   # 65% de ciudadanos afiliados
+    "Dato personal sensible (Art. 5)": {
+        "definicion":  "Categoria especial que requiere mayor proteccion",
+        "ejemplos":    ["Estado de salud", "Biometria", "Opinion politica",
+                        "Orientacion sexual", "Etnia", "Religion", "Antecedentes penales"],
+        "base_legal":  "Consentimiento EXPLICITO, por escrito, especifico y documentado",
+        "retencion":   "Minimo necesario — eliminar cuando finalidad se cumpla",
+        "iess_campos": ["diagnostico_medico", "historial_clinico", "huella_dactilar",
+                        "tipo_sangre", "porcentaje_discapacidad"],
+        "multa_riesgo": "Hasta 2% facturacion anual + posible responsabilidad penal",
     },
-    "sri": {
-        "descripcion":  "Servicio de Rentas Internas",
-        "confianza":    0.92,
-        "campos_auth":  ["ruc", "actividad_economica", "regimen_tributario",
-                         "email_declarado"],
-        "frecuencia":   "Diario (batch nocturno)",
-        "cobertura":    0.80,
+    "Dato anonimizado (Art. 4, par. 6)": {
+        "definicion":  "Dato que NO puede re-identificar a persona natural de ninguna forma",
+        "ejemplos":    ["Estadistica agregada por provincia", "Datos sinteticos"],
+        "base_legal":  "No aplica LOPDP — no es dato personal si es verdaderamente anonimo",
+        "retencion":   "Sin restriccion temporal",
+        "iess_campos": ["n_afiliados_por_provincia", "tasa_ocupacion_hospitalaria"],
+        "multa_riesgo": "Sin riesgo (si la anonimizacion es correcta)",
     },
-    "msp": {
-        "descripcion":  "Ministerio de Salud Publica — Historia Clinica Unica",
-        "confianza":    0.85,
-        "campos_auth":  ["grupo_sanguineo", "alergias", "condiciones_cronicas"],
-        "frecuencia":   "Tiempo real (API)",
-        "cobertura":    0.70,
-    },
-    "bce_sistema_pagos": {
-        "descripcion":  "Banco Central — Sistema de Pagos SPI/SCI",
-        "confianza":    0.88,
-        "campos_auth":  ["cuenta_bancaria_principal", "banco_principal"],
-        "frecuencia":   "Diario",
-        "cobertura":    0.55,
-    },
-    "senescyt": {
-        "descripcion":  "Secretaria de Educacion Superior",
-        "confianza":    0.87,
-        "campos_auth":  ["nivel_educacion", "titulo_obtenido", "institucion_educativa"],
-        "frecuencia":   "Mensual",
-        "cobertura":    0.45,
+    "Dato seudonimizado (Art. 4, par. 7)": {
+        "definicion":  "Identificadores reemplazados — re-identificable con tabla de clave",
+        "ejemplos":    ["Hash de cedula", "Token de paciente", "ID pseudonimo"],
+        "base_legal":  "Reduccion de riesgo pero SIGUE siendo dato personal",
+        "retencion":   "Igual que el dato original correspondiente",
+        "iess_campos": ["hash_cedula_afiliado", "token_paciente_HCU"],
+        "multa_riesgo": "Reducido pero no eliminado",
     },
 }
 
-print(f"\n  {'Fuente':<22} {'Confianza':>10} {'Cobertura':>10} {'Frecuencia'}")
-print(f"  {'-'*62}")
-for fuente, info in FUENTES.items():
-    print(f"  {fuente:<22} {info['confianza']:>10.0%} {info['cobertura']:>10.0%} "
-          f"{info['frecuencia']}")
-print(f"\n  Fuente autoritativa: Registro Civil (confianza 100%)")
+for tipo, info in clasificacion.items():
+    print(f"\n  [{tipo}]")
+    print(f"    Definicion : {info['definicion'][:70]}")
+    print(f"    Base legal : {info['base_legal'][:70]}")
+    print(f"    Multa      : {info['multa_riesgo']}")
+    print(f"    IESS uses  : {', '.join(info['iess_campos'][:3])}")
+```
 
-# ================================================
-# REGISTRO FUENTE: REPRESENTACION DE DATOS CRUDOS
-# ================================================
-print("\n--- REGISTROS FUENTE (DATOS CRUDOS) ---")
+4. Implementa y aplica las cuatro tecnicas de proteccion de privacidad:
 
-# Simular registros del mismo ciudadano en distintos sistemas
-# Cedula: 1712345678 — Pedro Antonio Salinas Mora
+```python
+# ============================================================
+# PARTE 2: Tecnicas de Proteccion — Aplicadas al IESS
+# ============================================================
 
-registros_fuente = [
+# Generar dataset IESS con PII
+N = 500
+DIAGNOSTICOS = ["E11.9", "I10", "J06.9", "Z00.0", "K35.9", "M54.5", "F41.1"]
+PROVINCIAS    = ["Pichincha", "Guayas", "Azuay", "Manabi", "Tungurahua"]
+
+df_pii = pd.DataFrame({
+    "cedula":          [f"17{i:08d}" for i in range(N)],
+    "nombre":          [f"Afiliado_{i:04d}" for i in range(N)],
+    "email":           [f"afil{i}@gmail.com" for i in range(N)],
+    "telefono":        [f"09{np.random.randint(10000000, 99999999)}" for _ in range(N)],
+    "fecha_nacimiento":[date(np.random.randint(1960, 2000),
+                             np.random.randint(1, 13),
+                             np.random.randint(1, 28)).isoformat() for _ in range(N)],
+    "salario_mensual": np.random.lognormal(6.5, 0.5, N).round(2),
+    "diagnostico":     np.random.choice(DIAGNOSTICOS, N),   # DATO SENSIBLE
+    "huella_template": [f"BIOM{np.random.randint(10000, 99999)}" for _ in range(N)],  # SENSIBLE
+    "provincia":       np.random.choice(PROVINCIAS, N),
+    "anos_aportados":  np.random.exponential(8, N).clip(0, 40).round(1),
+})
+
+print(f"Dataset IESS generado: {df_pii.shape[0]} registros, {df_pii.shape[1]} columnas")
+print(f"Campos PII       : cedula, nombre, email, telefono, fecha_nacimiento, salario")
+print(f"Campos SENSIBLES : diagnostico, huella_template")
+
+# --- TECNICA 1: Hashing irreversible (para joins anonimos) ---
+def hash_campo(valor, salt="iess_salt_2025"):
+    """SHA-256 con salt. NO reversible. Permite joins sin exponer el dato."""
+    return hashlib.sha256(f"{salt}{valor}".encode()).hexdigest()[:32]
+
+# --- TECNICA 2: Cifrado simetrico (para datos que deben descifrarse) ---
+clave_fernet = Fernet.generate_key()
+fernet       = Fernet(clave_fernet)
+
+def cifrar(dato):
+    return fernet.encrypt(str(dato).encode()).decode()
+
+def descifrar(dato_cifrado):
+    return fernet.decrypt(dato_cifrado.encode()).decode()
+
+# --- TECNICA 3: Enmascaramiento (para visualizacion parcial) ---
+def enmascarar_cedula(cedula):
+    return str(cedula)[:3] + "****" + str(cedula)[-2:]
+
+def enmascarar_email(email):
+    if "@" not in str(email):
+        return "***@***.com"
+    user, domain = str(email).split("@", 1)
+    return user[:2] + "***@" + domain
+
+# --- TECNICA 4: Generalizacion / k-anonimato ---
+def generalizar_edad(fecha_nacimiento):
+    fnac = datetime.strptime(str(fecha_nacimiento), "%Y-%m-%d").date()
+    edad = (date.today() - fnac).days // 365
+    if edad < 30:    return "18-29"
+    elif edad < 45:  return "30-44"
+    elif edad < 60:  return "45-59"
+    else:            return "60+"
+
+def generalizar_salario(salario):
+    if salario < 600:    return "< $600"
+    elif salario < 1000: return "$600-$999"
+    elif salario < 2000: return "$1,000-$1,999"
+    else:                return ">= $2,000"
+
+# Aplicar tecnicas al dataset
+df_protegido = df_pii.copy()
+df_protegido["cedula_hash"]        = df_pii["cedula"].apply(hash_campo)
+df_protegido["cedula_mask"]        = df_pii["cedula"].apply(enmascarar_cedula)
+df_protegido["email_mask"]         = df_pii["email"].apply(enmascarar_email)
+df_protegido["diagnostico_cifrado"]= df_pii["diagnostico"].apply(cifrar)
+df_protegido["rango_edad"]         = df_pii["fecha_nacimiento"].apply(generalizar_edad)
+df_protegido["rango_salario"]      = df_pii["salario_mensual"].apply(generalizar_salario)
+
+# Dataset de analitica: sin PII ni datos sensibles en claro
+df_analitica = df_protegido[[
+    "cedula_hash", "cedula_mask", "email_mask",
+    "diagnostico_cifrado", "rango_edad", "rango_salario",
+    "provincia", "anos_aportados"
+]]
+
+print(f"\nDataset original (con PII)   : {df_pii.shape[1]} columnas")
+print(f"Dataset de analitica (sin PII): {df_analitica.shape[1]} columnas")
+print(f"\nEjemplo fila 0 — transformaciones aplicadas:")
+print(f"  cedula_hash        : {df_protegido['cedula_hash'].iloc[0]}")
+print(f"  cedula_mask        : {df_protegido['cedula_mask'].iloc[0]}")
+print(f"  email_mask         : {df_protegido['email_mask'].iloc[0]}")
+print(f"  diagnostico cifrado: {df_protegido['diagnostico_cifrado'].iloc[0][:30]}...")
+print(f"  rango_edad         : {df_protegido['rango_edad'].iloc[0]}")
+print(f"  rango_salario      : {df_protegido['rango_salario'].iloc[0]}")
+
+# Verificar que descifrado funciona
+diag_cifrado   = df_protegido['diagnostico_cifrado'].iloc[0]
+diag_descifrado = descifrar(diag_cifrado)
+diag_original  = df_pii['diagnostico'].iloc[0]
+print(f"\nVerificacion cifrado:")
+print(f"  Original: {diag_original} | Descifrado: {diag_descifrado} | OK: {diag_original == diag_descifrado}")
+```
+
+5. Construye el Registro de Actividades de Tratamiento (RAT) y una DPIA:
+
+```python
+# ============================================================
+# PARTE 3: RAT y DPIA (obligatorios bajo LOPDP)
+# ============================================================
+
+# Registro de Actividades de Tratamiento (RAT)
+# LOPDP Art. 37 — obligatorio para responsables que traten datos a escala
+rat_iess = [
     {
-        "fuente":         "registro_civil",
-        "cedula":         "1712345678",
-        "nombres":        "Pedro Antonio",
-        "apellidos":      "Salinas Mora",
-        "fecha_nac":      "1985-06-15",
-        "email":          None,
-        "telefono":       "0991234567",
-        "direccion":      "Av. Amazonas N34-451, Quito",
-        "estado_civil":   "SOLTERO",
-        "ts_fuente":      "2024-01-15",
+        "proceso":          "Gestion de afiliaciones y aportes",
+        "finalidad":        "Administrar relacion laboral y calculo de prestaciones",
+        "datos_tratados":   ["nombre", "cedula", "salario", "historial_aportes"],
+        "base_legal":       "Obligacion legal (LOPDP Art. 7.e) — mandato IESS",
+        "datos_sensibles":  False,
+        "destinatarios":    ["SRI", "Ministerio del Trabajo"],
+        "retencion":        "70 anos (vida laboral + jubilacion)",
+        "medidas_seguridad": "AES-256, acceso rol-based, auditoria completa",
+        "transferencias_internacionales": "No",
     },
     {
-        "fuente":         "iess",
-        "cedula":         "1712345678",
-        "nombres":        "Pedro A.",           # abreviado
-        "apellidos":      "Salinas Mora",
-        "fecha_nac":      "1985-06-15",
-        "email":          "pedro.salinas@empresa.com",
-        "telefono":       "0991234567",
-        "direccion":      "Amazona N34-451 Quito",  # error tipografico
-        "estado_civil":   None,
-        "ts_fuente":      "2024-03-01",
+        "proceso":          "Historia Clinica Unica (HCU) digital",
+        "finalidad":        "Prestacion de servicios de salud al afiliado",
+        "datos_tratados":   ["cedula", "diagnostico", "medicacion", "resultados_lab", "imagenes"],
+        "base_legal":       "Consentimiento explicito + obligacion legal salud (Art. 7.f)",
+        "datos_sensibles":  True,  # Datos de salud = SENSIBLES
+        "destinatarios":    ["MSP", "prestadores privados autorizados"],
+        "retencion":        "25 anos minimo (normativa MSP)",
+        "medidas_seguridad": "AES-256, cifrado en transito TLS 1.3, acceso medico tratante",
+        "transferencias_internacionales": "No (salvo emergencias con consentimiento)",
     },
     {
-        "fuente":         "sri",
-        "cedula":         "1712345678",
-        "nombres":        "PEDRO ANTONIO",     # mayusculas
-        "apellidos":      "SALINAS MORA",
-        "fecha_nac":      "1985-06-15",
-        "email":          "p.salinas.mora@gmail.com",
-        "telefono":       "+593991234567",     # con prefijo
-        "direccion":      "Av Amazonas N34-451, Quito",  # sin punto
-        "estado_civil":   "S",                # codigo corto
-        "ts_fuente":      "2024-02-28",
-    },
-    {
-        "fuente":         "msp",
-        "cedula":         "1712345678",
-        "nombres":        "Pedro",             # solo primer nombre
-        "apellidos":      "Salinas",           # solo primer apellido
-        "fecha_nac":      "1985-06-16",        # error 1 dia
-        "email":          None,
-        "telefono":       "2456789",           # convencional sin prefijo
-        "direccion":      "Quito",             # muy vago
-        "estado_civil":   None,
-        "ts_fuente":      "2023-11-20",
+        "proceso":          "Sistema biometrico control de acceso",
+        "finalidad":        "Verificar identidad de afiliados en ventanillas",
+        "datos_tratados":   ["huella_dactilar", "reconocimiento_facial"],
+        "base_legal":       "Consentimiento EXPLICITO por escrito (dato biometrico = sensible)",
+        "datos_sensibles":  True,
+        "destinatarios":    ["Sistema interno IESS solamente"],
+        "retencion":        "Solo durante vigencia de afiliacion + 5 anos",
+        "medidas_seguridad": "Templates cifrados, no imagen cruda, HSM para claves",
+        "transferencias_internacionales": "Prohibido",
     },
 ]
 
-print(f"\n  Registros del mismo ciudadano en 4 fuentes:")
-for r in registros_fuente:
-    print(f"\n  [{r['fuente'].upper()}]")
-    print(f"    Nombre:    {r['nombres']} {r['apellidos']}")
-    print(f"    Fecha nac: {r['fecha_nac']} | Tel: {r['telefono']}")
-    print(f"    Email:     {r['email'] or 'N/A'}")
-    print(f"    Direccion: {r['direccion']}")
-
-# ================================================
-# ALGORITMO MATCH Y MERGE
-# ================================================
-print("\n--- ALGORITMO MATCH Y MERGE ---")
-
-class NormalizadorDatos:
-    """Normaliza campos antes de comparar y construir el golden record."""
-
-    @staticmethod
-    def nombre(texto):
-        if not texto:
-            return ""
-        return " ".join(w.capitalize() for w in texto.strip().split())
-
-    @staticmethod
-    def telefono(tel):
-        if not tel:
-            return None
-        digitos = re.sub(r'\D', '', tel)
-        if digitos.startswith("593"):
-            digitos = "0" + digitos[3:]
-        if len(digitos) == 9 and not digitos.startswith("0"):
-            digitos = "0" + digitos
-        return digitos if len(digitos) in (9, 10) else None
-
-    @staticmethod
-    def estado_civil(valor):
-        if not valor:
-            return None
-        mapa = {
-            "S": "SOLTERO", "SOLTERO": "SOLTERO",
-            "C": "CASADO",  "CASADO":  "CASADO",
-            "D": "DIVORCIADO", "DIVORCIADO": "DIVORCIADO",
-            "V": "VIUDO",   "VIUDO":   "VIUDO",
-            "U": "UNION_LIBRE",
-        }
-        return mapa.get(valor.upper().strip())
-
-    @staticmethod
-    def similitud_texto(a, b):
-        if not a or not b:
-            return 0.0
-        return SequenceMatcher(None, a.lower(), b.lower()).ratio()
-
-
-class GoldenRecordBuilder:
-    """Construye el golden record priorizando fuentes por confianza."""
-
-    def __init__(self, fuentes_config):
-        self.fuentes_config = fuentes_config
-        self.norm = NormalizadorDatos()
-
-    def _confianza(self, fuente):
-        return self.fuentes_config.get(fuente, {}).get("confianza", 0.5)
-
-    def _elegir_valor(self, campo, registros):
-        """Elige el valor mas confiable para un campo dado."""
-        candidatos = []
-        for r in registros:
-            valor = r.get(campo)
-            if valor:
-                valor_norm = valor
-                if campo in ("nombres", "apellidos"):
-                    valor_norm = self.norm.nombre(valor)
-                elif campo == "telefono":
-                    valor_norm = self.norm.telefono(valor)
-                elif campo == "estado_civil":
-                    valor_norm = self.norm.estado_civil(valor)
-
-                if valor_norm:
-                    candidatos.append({
-                        "valor":     valor_norm,
-                        "fuente":    r["fuente"],
-                        "confianza": self._confianza(r["fuente"]),
-                        "ts":        r.get("ts_fuente", "2000-01-01"),
-                    })
-
-        if not candidatos:
-            return None, None
-
-        # Ordenar por confianza DESC, luego por timestamp DESC
-        candidatos.sort(key=lambda x: (x["confianza"], x["ts"]), reverse=True)
-        mejor = candidatos[0]
-        return mejor["valor"], mejor["fuente"]
-
-    def construir(self, registros):
-        """Construye el golden record a partir de multiples registros fuente."""
-        campos = ["cedula", "nombres", "apellidos", "fecha_nac", "email",
-                  "telefono", "direccion", "estado_civil"]
-
-        golden = {"_meta": {"fuentes_usadas": [], "fecha_creacion": datetime.now().isoformat(),
-                             "version": 1}}
-
-        for campo in campos:
-            valor, fuente = self._elegir_valor(campo, registros)
-            golden[campo] = valor
-            if fuente:
-                golden[f"_{campo}_fuente"] = fuente
-                if fuente not in golden["_meta"]["fuentes_usadas"]:
-                    golden["_meta"]["fuentes_usadas"].append(fuente)
-
-        golden["_id"] = f"GR-{hashlib.md5(str(golden['cedula']).encode()).hexdigest()[:12].upper()}"
-        return golden
-
-    def calcular_score_confianza(self, golden, registros):
-        """Calcula un score de confianza global del golden record (0-1)."""
-        campos_core = ["nombres", "apellidos", "fecha_nac", "telefono", "email"]
-        scores = []
-        for campo in campos_core:
-            fuente_campo = golden.get(f"_{campo}_fuente")
-            if fuente_campo:
-                scores.append(self._confianza(fuente_campo))
-            else:
-                scores.append(0.0)  # campo vacio
-
-        consistencia_nombre = self._verificar_consistencia_nombre(registros)
-        scores.append(consistencia_nombre)
-
-        return round(sum(scores) / len(scores), 3)
-
-    def _verificar_consistencia_nombre(self, registros):
-        """Mide consistencia del nombre completo entre fuentes."""
-        nombres_norm = [
-            self.norm.nombre(f"{r['nombres']} {r['apellidos']}")
-            for r in registros if r.get("nombres") and r.get("apellidos")
-        ]
-        if len(nombres_norm) < 2:
-            return 1.0
-        pares_sim = []
-        for i in range(len(nombres_norm)):
-            for j in range(i+1, len(nombres_norm)):
-                sim = NormalizadorDatos.similitud_texto(nombres_norm[i], nombres_norm[j])
-                pares_sim.append(sim)
-        return round(sum(pares_sim) / len(pares_sim), 3)
-
-
-builder = GoldenRecordBuilder(FUENTES)
-golden = builder.construir(registros_fuente)
-score  = builder.calcular_score_confianza(golden, registros_fuente)
-
-print(f"\n  GOLDEN RECORD CONSTRUIDO:")
-print(f"  ID:        {golden['_id']}")
-print(f"  Cedula:    {golden['cedula']} (fuente: {golden.get('_cedula_fuente','N/A')})")
-print(f"  Nombre:    {golden['nombres']} {golden['apellidos']}")
-print(f"             (fuente nombres: {golden.get('_nombres_fuente','N/A')})")
-print(f"  Fecha nac: {golden['fecha_nac']} (fuente: {golden.get('_fecha_nac_fuente','N/A')})")
-print(f"  Email:     {golden['email']} (fuente: {golden.get('_email_fuente','N/A')})")
-print(f"  Telefono:  {golden['telefono']} (fuente: {golden.get('_telefono_fuente','N/A')})")
-print(f"  Est. Civil:{golden['estado_civil']} (fuente: {golden.get('_estado_civil_fuente','N/A')})")
-print(f"  Fuentes:   {', '.join(golden['_meta']['fuentes_usadas'])}")
-print(f"  Score:     {score:.3f} / 1.000")
-
-# ================================================
-# GESTION DE DUPLICADOS Y SURVIVORSHIP
-# ================================================
-print("\n--- DETECCION Y RESOLUCION DE DUPLICADOS ---")
-
-np.random.seed(42)
-n = 1000
-
-def generar_padron_con_duplicados(n):
-    """Genera un padron con duplicados intencionales para practica."""
-    cedulas_base = [f"17{np.random.randint(10000000, 99999999):08d}" for _ in range(int(n * 0.9))]
-    nombres_base = ["Juan Carlos", "Maria Elena", "Pedro Antonio", "Ana Lucia",
-                    "Carlos Eduardo", "Sofia Isabel", "Luis Miguel", "Carmen Rosa"]
-    apellidos_base = ["Gonzalez", "Rodriguez", "Salinas", "Torres", "Morales",
-                      "Vega", "Castro", "Jimenez"]
-
-    rows = []
-    for i in range(n):
-        if i < int(n * 0.9):
-            cedula = cedulas_base[i]
-            nombre_real = np.random.choice(nombres_base)
-            apellido_real = np.random.choice(apellidos_base)
-        else:
-            # Duplicado: reusar cedula existente con variacion en nombre
-            cedula = np.random.choice(cedulas_base[:50])
-            nombre_real = np.random.choice(nombres_base)
-            apellido_real = np.random.choice(apellidos_base)
-
-        # Introducir variaciones de calidad
-        if np.random.rand() < 0.1:
-            nombre_final = nombre_real.split()[0]  # solo primer nombre
-        elif np.random.rand() < 0.05:
-            nombre_final = nombre_real.upper()
-        else:
-            nombre_final = nombre_real
-
-        rows.append({
-            "cedula":       cedula,
-            "nombre":       nombre_final,
-            "apellido":     apellido_real,
-            "fecha_nac":    f"19{np.random.randint(50, 99)}-"
-                            f"{np.random.randint(1,12):02d}-"
-                            f"{np.random.randint(1,28):02d}",
-            "fuente":       np.random.choice(list(FUENTES.keys())),
-        })
-    return pd.DataFrame(rows)
-
-df = generar_padron_con_duplicados(n)
-
-# Detectar duplicados por cedula
-duplicados = df[df.duplicated(subset=["cedula"], keep=False)]
-n_cedulas_dup = duplicados["cedula"].nunique()
-n_registros_dup = len(duplicados)
-
-print(f"\n  Padron simulado: {len(df):,} registros")
-print(f"  Cedulas con 2+ registros: {n_cedulas_dup:,}")
-print(f"  Registros duplicados:     {n_registros_dup:,} ({n_registros_dup/len(df):.1%} del padron)")
-
-# Regla de survivorship: para cada grupo de duplicados, quedarse con el de mayor confianza
-confianza_por_fuente = {f: info["confianza"] for f, info in FUENTES.items()}
-df["confianza_fuente"] = df["fuente"].map(confianza_por_fuente).fillna(0.5)
-
-# Survivorship: primer registro por cedula ordenado por confianza DESC
-df_superviviente = (df.sort_values("confianza_fuente", ascending=False)
-                      .drop_duplicates(subset=["cedula"], keep="first"))
-
-print(f"\n  Despues de survivorship:")
-print(f"  Registros unicos:         {len(df_superviviente):,}")
-print(f"  Duplicados eliminados:    {len(df) - len(df_superviviente):,}")
-print(f"  Tasa deduplicacion:       {(len(df) - len(df_superviviente))/len(df):.1%}")
-
-# ================================================
-# CICLO DE VIDA DEL DATO MAESTRO
-# ================================================
-print("\n--- CICLO DE VIDA DEL DATO MAESTRO ---")
-
-ciclo_vida = {
-    "Creacion": {
-        "descripcion": "Primer registro del ciudadano — nacimiento o naturalizacion",
-        "fuente_auth":  "Registro Civil (acta nacimiento o naturalizacion)",
-        "validaciones": ["Cedula valida (algoritmo modulo 10)", "Fecha nac coherente",
-                         "Lugar nacimiento en lista INEC"],
-        "estado_resultado": "ACTIVO",
-    },
-    "Actualizacion": {
-        "descripcion": "Cambios de datos — casamiento, cambio direccion, actualizacion email",
-        "fuente_auth":  "Ciudadano via gobierno.ec + validacion por fuente autoritativa",
-        "validaciones": ["Autenticacion ciudadano (clave unica)", "Coherencia vs fuente auth",
-                         "Audit trail del cambio"],
-        "estado_resultado": "ACTIVO_ACTUALIZADO",
-    },
-    "Fusion": {
-        "descripcion": "Dos registros detectados como el mismo ciudadano — merge",
-        "fuente_auth":  "CDO autoriza fusion de duplicados confirmados",
-        "validaciones": ["Match score >= 0.95", "Aprobacion steward", "Preservar historial"],
-        "estado_resultado": "ACTIVO (registro superviviente)",
-    },
-    "Suspension": {
-        "descripcion": "Cedula reportada como fraudulenta — en investigacion",
-        "fuente_auth":  "Fiscalia o Registro Civil notifica",
-        "validaciones": ["Numero de caso judicial", "Notificacion a sistemas consumidores"],
-        "estado_resultado": "SUSPENDIDO",
-    },
-    "Inactivacion": {
-        "descripcion": "Ciudadano fallecido o emigrado definitivamente",
-        "fuente_auth":  "Registro Civil (acta defuncion o declaracion emigracion)",
-        "validaciones": ["Fecha defuncion posterior a nacimiento", "Cruce con IESS (cese aportes)"],
-        "estado_resultado": "INACTIVO",
-    },
-    "Archivado": {
-        "descripcion": "Datos retenidos segun LOPDP y Codigo Civil — 10 anos post-inactivacion",
-        "fuente_auth":  "CDO autoriza archivado",
-        "validaciones": ["Plazo legal cumplido", "No hay litigios pendientes"],
-        "estado_resultado": "ARCHIVADO",
-    },
-}
-
-for fase, info in ciclo_vida.items():
-    print(f"\n  [{fase.upper()}]")
-    print(f"    Descripcion: {info['descripcion']}")
-    print(f"    Fuente auth: {info['fuente_auth'][:60]}")
-    print(f"    Estado:      {info['estado_resultado']}")
-
-# ================================================
-# METRICAS MDM
-# ================================================
-print("\n--- METRICAS DEL PROGRAMA MDM ---")
-
-meses = ["Oct", "Nov", "Dic", "Ene", "Feb", "Mar"]
-
-metricas_mdm = {
-    "Total golden records":         [16_800_000, 16_820_000, 16_850_000,
-                                      16_870_000, 16_890_000, 16_910_000],
-    "Tasa duplicados %":            [8.2, 6.1, 4.3, 2.9, 1.8, 1.1],
-    "Score confianza promedio":     [0.71, 0.74, 0.78, 0.83, 0.87, 0.90],
-    "Fuentes integradas":           [2, 3, 4, 5, 5, 6],
-    "Issues MDM abiertos":          [12_450, 9_230, 6_780, 4_120, 2_890, 1_540],
-}
-
-df_mdm = pd.DataFrame(metricas_mdm, index=meses)
-print(f"\n{df_mdm.to_string()}")
-
-print(f"\n  Mejoras en 6 meses:")
-print(f"    Duplicados:     8.2% → 1.1% (-86%)")
-print(f"    Confianza:      0.71 → 0.90 (+27%)")
-print(f"    Issues MDM:     12,450 → 1,540 (-88%)")
-print(f"    Fuentes:        2 → 6 sistemas integrados")
-
-print("\n" + "=" * 65)
-print("MASTER DATA MANAGEMENT — CONCEPTOS CLAVE:")
-print("  Golden record:   UN registro de verdad por entidad — elimina versiones")
-print("  Confianza fuente: Registro Civil 100% — SRI 92% — IESS 90%")
-print("  Match y merge:   similitud + confianza + timestamp = survivorship")
-print("  Ciclo de vida:   crear → actualizar → fusionar → inactivar → archivar")
-print("  Deduplicacion:   cedula duplicada = error que afecta prestaciones reales")
-print("  Normalizacion:   antes de comparar — mayusculas, prefijos, abreviaciones")
+print("REGISTRO DE ACTIVIDADES DE TRATAMIENTO (RAT) — IESS Ecuador")
+print("Exigido por LOPDP Art. 37 para responsables de tratamiento masivo")
 print("=" * 65)
+for actividad in rat_iess:
+    print(f"\n  Proceso   : {actividad['proceso']}")
+    print(f"  Base legal: {actividad['base_legal'][:60]}")
+    print(f"  Sensible  : {'SI — requiere DPIA' if actividad['datos_sensibles'] else 'No'}")
+    print(f"  Retencion : {actividad['retencion']}")
+
+# DPIA (Evaluacion de Impacto en Privacidad)
+# Obligatoria cuando el tratamiento implica datos sensibles a escala (Art. 38 LOPDP)
+print("\n\nEVALUACION DE IMPACTO EN PRIVACIDAD (DPIA)")
+print("Proceso evaluado: Sistema biometrico control de acceso IESS")
+print("=" * 65)
+
+riesgos_dpia = [
+    {
+        "riesgo":        "Fuga de base de datos de huellas dactilares",
+        "probabilidad":  "Media",
+        "impacto":       "Muy Alto",
+        "nivel":         "CRITICO",
+        "mitigacion":    "Almacenar solo templates matematicos, nunca imagen cruda; HSM",
+    },
+    {
+        "riesgo":        "Uso de datos biometricos para finalidad distinta (mision creep)",
+        "probabilidad":  "Baja",
+        "impacto":       "Alto",
+        "nivel":         "ALTO",
+        "mitigacion":    "Contrato tecnico limitando uso a verificacion identidad en ventanilla",
+    },
+    {
+        "riesgo":        "Afiliado no puede acceder al servicio si sistema falla",
+        "probabilidad":  "Alta",
+        "impacto":       "Medio",
+        "nivel":         "MEDIO",
+        "mitigacion":    "Proceso alternativo manual con cedula fisica como backup",
+    },
+]
+
+for r in riesgos_dpia:
+    print(f"\n  [{r['nivel']}] {r['riesgo']}")
+    print(f"    Probabilidad: {r['probabilidad']} | Impacto: {r['impacto']}")
+    print(f"    Mitigacion  : {r['mitigacion'][:70]}")
+
+# Derechos ARCO con plazos legales
+print("\n\nDERECHOS ARCO — LOPDP Art. 18-26 (plazos obligatorios)")
+print("=" * 65)
+derechos = [
+    ("Acceso",        "Art. 18", "15 dias habiles", "Entregar copia de todos los datos del titular"),
+    ("Rectificacion", "Art. 19", "15 dias habiles", "Corregir datos incorrectos con evidencia"),
+    ("Cancelacion",   "Art. 22", "15 dias habiles", "Derecho al olvido — excepto obligacion legal"),
+    ("Oposicion",     "Art. 23", "Inmediato (marketing)", "Suspender tratamiento para finalidad especifica"),
+    ("Portabilidad",  "Art. 24", "15 dias habiles", "Exportar datos en formato estandar (JSON/CSV)"),
+]
+for nombre, articulo, plazo, descripcion in derechos:
+    print(f"  {nombre:<14} ({articulo}): {plazo:<25} | {descripcion[:50]}")
 ```
 
-3. Implementa el algoritmo de match probabilistico entre dos registros de fuentes distintas sin cedula comun: usa similitud de nombre (Jaro-Winkler o SequenceMatcher), fecha de nacimiento (distancia en dias), telefono normalizado y direccion — genera un score de match (0-1) y una recomendacion: MATCH_CONFIRMADO (>0.90), REVISAR_MANUAL (0.70-0.90), NO_MATCH (<0.70).
+6. Genera el dashboard de compliance:
 
-4. Agrega el generador de reporte de cobertura del MDM por provincia: para cada una de las 24 provincias del Ecuador, calcula el porcentaje de ciudadanos con golden record completo (todos los campos core poblados), el numero de duplicados detectados y el score promedio de confianza.
+```python
+# ============================================================
+# PARTE 4: Dashboard de Compliance LOPDP
+# ============================================================
+
+fig, axes = plt.subplots(1, 3, figsize=(15, 5))
+
+# Panel 1: Estado de compliance por area
+areas = ['Consentimientos', 'Registro RAT', 'DPIA realizadas',
+         'Derechos ARCO', 'DPD nombrado', 'Seguridad datos']
+compliance_scores = [0.72, 0.90, 0.55, 0.80, 1.00, 0.85]
+cols = ['#F0846D' if s < 0.70 else '#FBBC0C' if s < 0.85 else '#73B8E7' for s in compliance_scores]
+bars = axes[0].barh(areas, compliance_scores, color=cols, height=0.5)
+axes[0].axvline(0.85, color='#1F2F58', linestyle='--', lw=1.5, label='Meta 85%')
+for b, s in zip(bars, compliance_scores):
+    axes[0].text(s + 0.01, b.get_y() + b.get_height()/2,
+                 f'{s:.0%}', va='center', fontsize=9, fontweight='bold')
+axes[0].set_xlim(0, 1.15)
+axes[0].set_title('Estado Compliance LOPDP — IESS')
+axes[0].legend(fontsize=8)
+axes[0].grid(True, alpha=0.3, axis='x')
+
+# Panel 2: Clasificacion del dataset por tipo de dato
+tipos_datos = ['Datos personales\nordinarios', 'Datos\nsensibles',
+               'Datos\nanonimizados', 'Datos\nseudonimizados']
+conteos = [6, 2, 2, 2]  # columnas por tipo en el dataset
+axes[1].bar(tipos_datos, conteos, color=['#73B8E7', '#F0846D', '#1F2F58', '#FBBC0C'])
+axes[1].set_ylabel('Numero de campos')
+axes[1].set_title('Clasificacion de Campos por Tipo LOPDP')
+axes[1].grid(True, alpha=0.3, axis='y')
+for i, v in enumerate(conteos):
+    axes[1].text(i, v + 0.05, str(v), ha='center', fontsize=11, fontweight='bold')
+
+# Panel 3: Distribucion de rango de edad (k-anonimato)
+rango_counts = df_protegido['rango_edad'].value_counts()
+axes[2].pie(rango_counts.values, labels=rango_counts.index, autopct='%1.0f%%',
+            colors=['#1F2F58', '#FBBC0C', '#73B8E7', '#F0846D'])
+axes[2].set_title('Distribucion por Rango de Edad\n(Dato generalizado — k-anonimato)')
+
+plt.suptitle('Dashboard Compliance LOPDP — IESS Ecuador | ITSEIA P5', color='gray')
+plt.tight_layout()
+plt.show()
+
+# Resumen de riesgo
+score_compliance = np.mean(compliance_scores)
+print(f"\nSCORE COMPLIANCE LOPDP: {score_compliance:.1%}")
+nivel_comp = "ALTO RIESGO" if score_compliance < 0.70 else "RIESGO MEDIO" if score_compliance < 0.85 else "COMPLIANT"
+print(f"Nivel de riesgo         : {nivel_comp}")
+print(f"\nMulta potencial maxima  : 2% facturacion anual")
+print(f"Acciones inmediatas     : completar DPIA para biometricos, actualizar consentimientos")
+```
 
 ## Usa IA para...
 
-> Abre ChatGPT y escribe:
-> "Soy el arquitecto de datos del Registro Civil del Ecuador. Estoy construyendo el MDM del Estado ecuatoriano — 18 millones de ciudadanos distribuidos en 47 sistemas. Mi problema critico: tenemos 3 sistemas con datos conflictivos para el mismo ciudadano. El caso real: Juan Carlos Vega, cedula 1712345678, aparece como SOLTERO en el Registro Civil (2019), CASADO en el IESS (2022 — se caso y lo reporto al empleador pero no actualizo Registro Civil), y con UNION LIBRE en el SRI (declaracion 2023). ¿Cual es el valor correcto para el golden record? Necesito: 1) la logica de survivorship para campos con dimension temporal (el estado civil mas reciente es el correcto), 2) el proceso para notificar al ciudadano del conflicto y darle 30 dias para corregir, 3) la politica de auditoria — cuando el registro cambia, quien cambio que y cuando. Diseña el proceso completo con diagrama de flujo."
+> Abre Claude (claude.ai) y escribe:
+> "Soy el Delegado de Proteccion de Datos (DPD) del IESS Ecuador. Tenemos tres situaciones concretas: (1) el IESS quiere compartir datos anonimizados de diagnosticos con la PAHO para estadisticas regionales — ¿es suficiente la anonimizacion que hacemos (eliminar nombre y cedula) para que deje de ser dato personal bajo LOPDP? ¿Como evaluamos el riesgo de re-identificacion?, (2) un afiliado ejercio derecho de cancelacion sobre su historial medico del 2015 — ¿puedo negarme basandome en la normativa de salud que exige retener 25 anos? Cita el articulo especifico de LOPDP y el reglamento de salud, (3) tenemos datos biometricos de 3 millones de afiliados desde 2018 sin consentimiento explicito — ¿como legalizamos este tratamiento historico?"
 
 Despues de leer la respuesta:
-- Implementa el motor de reglas de survivorship para campos con dimension temporal: dado un campo y una lista de valores con timestamps por fuente, determina el valor correcto aplicando la logica temporal + confianza de fuente.
-- Agrega el sistema de notificacion al ciudadano para datos conflictivos: genera el mensaje de notificacion via gobierno.ec con los datos en conflicto, el valor tentativo del golden record y el proceso para objetar.
+- Agrega una celda markdown con el dictamen juridico sintetizado para cada uno de los 3 casos.
+- Implementa la funcion `evaluar_base_legal(tipo_tratamiento, tipo_dato, finalidad)` que devuelva la base legal LOPDP aplicable.
 
 ## Que aprendiste
 
-- El golden record no es el promedio — es el valor mas confiable segun la fuente autoritativa y el timestamp.
-- La fuente autoritativa para datos de identidad es SIEMPRE el Registro Civil — no el IESS ni el SRI.
-- El score de confianza del golden record permite priorizar que registros revisar manualmente.
-- La deduplicacion por cedula es solo el primer paso — existen duplicados sin cedula comun (errores de digitacion).
-- El ciclo de vida del dato maestro incluye inactivacion y archivado — no todo dato vive para siempre.
-- Sin normalizacion previa (mayusculas, prefijos de telefono) el match produce falsos negativos.
+- La **LOPDP ecuatoriana** distingue datos personales ordinarios y sensibles — los sensibles requieren consentimiento EXPLICITO por escrito.
+- **Hash es irreversible** (para joins anonimos); **cifrado es reversible** (para datos que el DPD necesita descifrar); enmascaramiento es para visualizacion.
+- El **RAT** (Registro de Actividades de Tratamiento) es obligatorio bajo LOPDP Art. 37 para toda entidad que trate datos a escala.
+- La **DPIA** (Evaluacion de Impacto en Privacidad) es obligatoria cuando el tratamiento involucra datos sensibles, biometria o vigilancia masiva.
+- Los **derechos ARCO** tienen plazos de 15 dias habiles — incumplir genera infraccion administrativa desde el primer dia de retraso.
 
 ## Reto extra
 
-Diseña e implementa el MDM del sistema de salud ecuatoriano para el MSP: golden record del paciente unificando HCU del MSP, historia IESS, hospitales privados (via API HL7 FHIR), farmacias (ARCSA), y laboratorios clinicos. Implementa el Patient Master Index (PMI) con algoritmo de deduplicacion probabilistica que detecta al mismo paciente con cedula, nombre y fecha nacimiento ligeramente distintos (errores de digitacion en urgencias). El sistema debe cumplir HL7 FHIR R4 para interoperabilidad, LOPDP para privacidad, y generar el Patient Summary (PS-EC) estandar europeo adaptado a Ecuador que viaja con el paciente entre establecimientos.
+Construye el Programa de Compliance LOPDP completo para una empresa fintech ecuatoriana (como Kushki o PayPhone): inventario de 30 tratamientos clasificados por riesgo, DPIA para los 3 de mayor riesgo (scoring crediticio con IA, biometria facial, analisis de comportamiento transaccional), generador automatico de avisos de privacidad en espanol simple, y tracker de solicitudes ARCO con alertas cuando el plazo de 15 dias se este venciendo. El programa debe incluir el calculo de multas potenciales en dolares basado en la facturacion declarada de la empresa.

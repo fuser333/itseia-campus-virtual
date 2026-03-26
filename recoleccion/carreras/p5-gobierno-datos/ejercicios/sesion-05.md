@@ -1,536 +1,395 @@
-# Ejercicio Sesion 5: Data Stewardship
+# Ejercicio Sesion 5: Master Data Management (MDM)
 
 **Materia:** Gobierno de Datos y Cumplimiento
-**Nivel:** Intermedio-Avanzado
-**Herramienta IA:** Gemini
-**Duracion estimada:** 40 min
+**Nivel:** Avanzado
+**Herramienta IA:** Claude
+**Duracion estimada:** 55 min
 
 ## Objetivo
 
-Disenar e implementar un programa de Data Stewardship para el IESS Ecuador: definir roles y responsabilidades de data stewards por dominio, construir el sistema de gestion de issues de calidad de datos, implementar el flujo de aprobacion de cambios al modelo de datos, y medir la productividad del programa — siguiendo el framework DAMA-DMBOK y la normativa del Ministerio de Finanzas del Ecuador.
+Disenar e implementar un programa de Master Data Management para una empresa ecuatoriana: identificar los dominios de datos maestros, construir el proceso de golden record (registro dorado), implementar la gestion de duplicados y el modelo de hub centralizado aplicado al caso del Registro Unico de Contribuyentes del SRI.
 
 ## Contexto
 
-El IESS administra datos de 4.2 millones de afiliados activos, 650,000 jubilados, 12,000 empleadores y 22 hospitales. Sin data stewards definidos, cuando se detecta un error (por ejemplo: 15,000 afiliados con cedula duplicada) nadie sabe quien es el responsable de corregirlo. El primer ano del programa de Data Stewardship del IESS redujo en 67% los issues criticos sin resolver. Esta es la diferencia entre tener datos y gobernar datos.
+El Banco Central del Ecuador descubrio que tenia al mismo proveedor registrado 47 veces con distintas variantes de nombre (Constructora Ambato S.A., Constr. Ambato SA, CONSTRUCTORA AMBATO S.A., etc.), lo que generaba pagos duplicados y problemas de conciliacion. El IESS tiene al mismo afiliado con cedulas ligeramente distintas en cinco sistemas legacy diferentes. Este es el problema central de MDM: sin un registro maestro de verdad unica, cada sistema tiene su propia version del cliente, producto o proveedor, y la integracion nunca funciona. MDM es el fundamento sobre el que se construye cualquier analitica confiable.
 
 ## Instrucciones
 
-1. Crea el archivo `sesion05_data_stewardship_iess.py`:
+1. Abre Google Colab y crea `sesion05_mdm_golden_record.ipynb`.
+
+2. Simula el problema central de MDM con datos maestros fragmentados:
 
 ```python
-# Data Stewardship - ITSEIA
-# Gobierno de Datos y Cumplimiento
-# IESS Ecuador — programa de stewardship
+# Gobierno de Datos - Sesion 5: Master Data Management
+# ITSEIA - Periodo 5
+# Estudiante: [Tu nombre]
 
-import json
-import uuid
 import numpy as np
 import pandas as pd
-from datetime import datetime, timedelta
-from collections import defaultdict, deque
-from enum import Enum
-import warnings
-warnings.filterwarnings("ignore")
-
-print("=" * 65)
-print("DATA STEWARDSHIP — IESS ECUADOR")
-print("4.2M afiliados | 650K jubilados | 22 hospitales")
-print("=" * 65)
-
-# ================================================
-# DOMINIOS DE DATOS Y STEWARDS
-# ================================================
-print("\n--- DOMINIOS DE DATOS IESS ---")
-
-class DominiosDatos:
-    """Catalogo de dominios de datos del IESS con sus stewards."""
-
-    DOMINIOS = {
-        "Afiliados": {
-            "descripcion":    "Datos de personas afiliadas activas al IESS",
-            "steward_lider":  "Jefa Nacional de Afiliacion",
-            "stewards_zona":  ["Coord. Pichincha", "Coord. Guayas", "Coord. Azuay",
-                               "Coord. Manabi", "Coord. Tungurahua"],
-            "datasets":       ["afiliados_activos", "historico_aportes", "empleadores"],
-            "registros_est":  4_200_000,
-            "criticidad":     "ALTA",
-            "sla_calidad":    0.98,
-        },
-        "Prestaciones": {
-            "descripcion":    "Jubilaciones, pensiones, subsidios y beneficios",
-            "steward_lider":  "Director de Prestaciones Economicas",
-            "stewards_zona":  ["Analista Jubilaciones", "Analista Montepios",
-                               "Analista Subsidios", "Analista Prestamos"],
-            "datasets":       ["jubilados", "pensiones_vejez", "prestamos_quirografarios",
-                               "subsidios_enfermedad"],
-            "registros_est":  850_000,
-            "criticidad":     "ALTA",
-            "sla_calidad":    0.99,
-        },
-        "Salud": {
-            "descripcion":    "Historia clinica, citas, hospitalizaciones, medicamentos",
-            "steward_lider":  "Director Medico Nacional IESS",
-            "stewards_zona":  ["Steward HCU", "Steward Farmacia", "Steward Imagenologia",
-                               "Steward UCI"],
-            "datasets":       ["historia_clinica", "citas_medicas", "dispensacion_farmacias",
-                               "hospitalizaciones"],
-            "registros_est":  18_000_000,
-            "criticidad":     "CRITICA",
-            "sla_calidad":    0.995,
-        },
-        "Financiero": {
-            "descripcion":    "Aportes, recaudacion, inversiones, contabilidad",
-            "steward_lider":  "Director Financiero IESS",
-            "stewards_zona":  ["Steward Recaudacion", "Steward Inversiones",
-                               "Steward Contabilidad"],
-            "datasets":       ["recaudacion_aportes", "inversiones_fondos",
-                               "balance_actuarial", "pagos_prestaciones"],
-            "registros_est":  2_400_000,
-            "criticidad":     "CRITICA",
-            "sla_calidad":    0.999,
-        },
-        "Empleadores": {
-            "descripcion":    "Empresas y personas naturales que aportan al IESS",
-            "steward_lider":  "Jefa de Control Patronal",
-            "stewards_zona":  ["Steward PYMES", "Steward Grandes Empresas",
-                               "Steward Sector Publico"],
-            "datasets":       ["empleadores_activos", "nominas_reportadas",
-                               "deudas_patronales"],
-            "registros_est":  120_000,
-            "criticidad":     "ALTA",
-            "sla_calidad":    0.97,
-        },
-    }
-
-    def resumen(self):
-        total_registros = sum(d["registros_est"] for d in self.DOMINIOS.values())
-        print(f"\n  {'Dominio':<16} {'Criticidad':<12} {'Registros':>12} {'SLA':>8} {'Steward Lider'}")
-        print(f"  {'-'*72}")
-        for dominio, info in self.DOMINIOS.items():
-            print(f"  {dominio:<16} {info['criticidad']:<12} "
-                  f"{info['registros_est']:>12,} {info['sla_calidad']:>8.1%} "
-                  f"{info['steward_lider'][:30]}")
-        print(f"\n  Total registros bajo gobierno: {total_registros:,}")
-        print(f"  Total data stewards:           {sum(1+len(d['stewards_zona']) for d in self.DOMINIOS.values())}")
-
-dominios = DominiosDatos()
-dominios.resumen()
-
-# ================================================
-# SISTEMA DE GESTION DE ISSUES
-# ================================================
-print("\n--- SISTEMA DE GESTION DE ISSUES ---")
-
-class Severidad(Enum):
-    BAJA     = 1
-    MEDIA    = 2
-    ALTA     = 3
-    CRITICA  = 4
-
-class EstadoIssue(Enum):
-    NUEVO       = "NUEVO"
-    ASIGNADO    = "ASIGNADO"
-    EN_PROCESO  = "EN_PROCESO"
-    PENDIENTE   = "PENDIENTE_VALIDACION"
-    RESUELTO    = "RESUELTO"
-    CERRADO     = "CERRADO"
-    RECHAZADO   = "RECHAZADO"
-
-class IssueCalidad:
-    """Issue de calidad de datos en el sistema IESS."""
-
-    SLA_RESOLUCION = {
-        Severidad.CRITICA: 4,    # horas
-        Severidad.ALTA:    24,   # horas
-        Severidad.MEDIA:   72,   # horas
-        Severidad.BAJA:    168,  # horas (1 semana)
-    }
-
-    def __init__(self, titulo, dominio, severidad, descripcion,
-                 registros_afectados, detectado_por):
-        self.id              = f"IQ-{uuid.uuid4().hex[:6].upper()}"
-        self.titulo          = titulo
-        self.dominio         = dominio
-        self.severidad       = severidad
-        self.descripcion     = descripcion
-        self.registros_afect = registros_afectados
-        self.detectado_por   = detectado_por
-        self.estado          = EstadoIssue.NUEVO
-        self.asignado_a      = None
-        self.fecha_creacion  = datetime.now()
-        self.fecha_limite    = self.fecha_creacion + timedelta(
-                                   hours=self.SLA_RESOLUCION[severidad])
-        self.historial       = [(datetime.now(), "SISTEMA",
-                                 f"Issue creado — {registros_afectados} registros afectados")]
-        self.costo_estimado  = self._estimar_costo()
-
-    def _estimar_costo(self):
-        """Estima costo del issue en USD basado en registros y severidad."""
-        costo_por_registro = {
-            Severidad.CRITICA: 5.00,
-            Severidad.ALTA:    1.50,
-            Severidad.MEDIA:   0.50,
-            Severidad.BAJA:    0.10,
-        }
-        return self.registros_afect * costo_por_registro[self.severidad]
-
-    def asignar(self, steward):
-        self.asignado_a = steward
-        self.estado     = EstadoIssue.ASIGNADO
-        self.historial.append((datetime.now(), "SISTEMA",
-                               f"Asignado a {steward}"))
-
-    def actualizar_estado(self, nuevo_estado, actor, comentario):
-        self.estado = nuevo_estado
-        self.historial.append((datetime.now(), actor, comentario))
-
-    def esta_vencido(self):
-        return datetime.now() > self.fecha_limite and \
-               self.estado not in [EstadoIssue.RESUELTO, EstadoIssue.CERRADO]
-
-    def horas_restantes(self):
-        delta = self.fecha_limite - datetime.now()
-        return max(0, delta.total_seconds() / 3600)
-
-    def resumen(self):
-        vencido = " [VENCIDO]" if self.esta_vencido() else ""
-        print(f"  [{self.id}] {self.titulo[:45]}")
-        print(f"    Dominio:   {self.dominio} | Severidad: {self.severidad.name}{vencido}")
-        print(f"    Estado:    {self.estado.value} | Asignado: {self.asignado_a or 'Sin asignar'}")
-        print(f"    Afectados: {self.registros_afect:,} | Costo est: ${self.costo_estimado:,.2f}")
-        print(f"    SLA:       {self.horas_restantes():.0f}h restantes")
-
-
-class GestorIssues:
-    """Sistema central de gestion de issues de calidad IESS."""
-
-    def __init__(self):
-        self.issues       = {}
-        self.por_dominio  = defaultdict(list)
-        self.por_steward  = defaultdict(list)
-
-    def registrar(self, issue):
-        self.issues[issue.id] = issue
-        self.por_dominio[issue.dominio].append(issue.id)
-        return issue.id
-
-    def asignar_automatico(self, issue_id):
-        """Asigna issue al steward lider del dominio."""
-        issue = self.issues[issue_id]
-        steward = DominiosDatos.DOMINIOS[issue.dominio]["steward_lider"]
-        issue.asignar(steward)
-        self.por_steward[steward].append(issue_id)
-        return steward
-
-    def dashboard(self):
-        total    = len(self.issues)
-        abiertos = sum(1 for i in self.issues.values()
-                       if i.estado not in [EstadoIssue.RESUELTO, EstadoIssue.CERRADO])
-        vencidos = sum(1 for i in self.issues.values() if i.esta_vencido())
-        criticos = sum(1 for i in self.issues.values()
-                       if i.severidad == Severidad.CRITICA and
-                       i.estado not in [EstadoIssue.RESUELTO, EstadoIssue.CERRADO])
-        costo_total = sum(i.costo_estimado for i in self.issues.values())
-
-        print(f"\n  === DASHBOARD ISSUES IESS ===")
-        print(f"  Total issues:    {total:>6}")
-        print(f"  Abiertos:        {abiertos:>6}")
-        print(f"  Vencidos SLA:    {vencidos:>6}")
-        print(f"  Criticos activos:{criticos:>6}")
-        print(f"  Costo total est: ${costo_total:>10,.2f}")
-
-        print(f"\n  Por dominio:")
-        for dominio, ids in self.por_dominio.items():
-            activos = sum(1 for i in ids
-                          if self.issues[i].estado not in
-                          [EstadoIssue.RESUELTO, EstadoIssue.CERRADO])
-            print(f"    {dominio:<16}: {len(ids):>3} total, {activos:>3} activos")
-
-
-# Simular issues reales del IESS
-gestor = GestorIssues()
-
-issues_simulados = [
-    IssueCalidad(
-        "Cedulas duplicadas en padron afiliados",
-        "Afiliados", Severidad.CRITICA,
-        "15,234 afiliados con cedula registrada en 2 o mas cuentas distintas — "
-        "afecta calculo de aportes y acceso a prestaciones",
-        15_234, "Sistema de Auditoria Automatica"
-    ),
-    IssueCalidad(
-        "Fechas nacimiento inconsistentes jubilados",
-        "Prestaciones", Severidad.ALTA,
-        "3,456 jubilados con fecha nacimiento futura o antes de 1900 — "
-        "impide calculo correcto de edad de jubilacion",
-        3_456, "Auditoria Interna"
-    ),
-    IssueCalidad(
-        "Diagnosticos HCU sin codigo CIE-10 valido",
-        "Salud", Severidad.ALTA,
-        "89,123 registros de historia clinica con codigo diagnostico no estandarizado — "
-        "impide reportes epidemiologicos al MSP",
-        89_123, "Departamento de Estadisticas Medicas"
-    ),
-    IssueCalidad(
-        "Aportes patronales sin RUC validado",
-        "Empleadores", Severidad.MEDIA,
-        "1,234 planillas con RUC de empleador no existente en SRI — "
-        "posible evasion o error de digitacion",
-        1_234, "Unidad de Control Patronal"
-    ),
-    IssueCalidad(
-        "Montos prestaciones con precision incorrecta",
-        "Financiero", Severidad.BAJA,
-        "23,456 registros de pagos con montos redondeados a entero en vez de 2 decimales",
-        23_456, "Auditoria Financiera"
-    ),
-    IssueCalidad(
-        "Telefonos contacto sin formato estandar",
-        "Afiliados", Severidad.BAJA,
-        "156,789 afiliados con telefono sin prefijo pais ni formato E.164",
-        156_789, "Validacion Automatica"
-    ),
-]
-
-for issue in issues_simulados:
-    iid = gestor.registrar(issue)
-    gestor.asignar_automatico(iid)
-
-# Simular progreso en algunos issues
-lista_issues = list(gestor.issues.values())
-lista_issues[0].actualizar_estado(EstadoIssue.EN_PROCESO,
-    "Jefa Nacional de Afiliacion",
-    "Ejecutando query de deduplicacion — 8,500 cedulas ya normalizadas")
-lista_issues[1].actualizar_estado(EstadoIssue.RESUELTO,
-    "Director de Prestaciones",
-    "Corregidos via cruce con Registro Civil — issue cerrado")
-lista_issues[2].actualizar_estado(EstadoIssue.ASIGNADO,
-    "Director Medico Nacional IESS",
-    "Planificando taller con medicos para estandarizacion CIE-10")
-
-print(f"\n  Issues registrados y asignados:")
-for issue in lista_issues:
-    issue.resumen()
-    print()
-
-gestor.dashboard()
-
-# ================================================
-# FLUJO DE APROBACION DE CAMBIOS AL MODELO
-# ================================================
-print("\n--- FLUJO DE APROBACION: CAMBIOS AL MODELO DE DATOS ---")
-
-class TipoCambio(Enum):
-    NUEVA_COLUMNA   = "Nueva columna"
-    MODIFICAR_TIPO  = "Modificar tipo dato"
-    ELIMINAR_CAMPO  = "Eliminar campo"
-    NUEVA_TABLA     = "Nueva tabla"
-    MODIFICAR_TABLA = "Modificar tabla existente"
-    NUEVO_INDICE    = "Nuevo indice"
-
-class NivelAprobacion(Enum):
-    DATA_STEWARD    = 1   # cambios menores
-    CDO             = 2   # cambios moderados
-    COMITE_DATOS    = 3   # cambios criticos o estructurales
-
-class SolicitudCambio:
-    """Solicitud de cambio al modelo de datos IESS (Data Change Request)."""
-
-    NIVEL_REQUERIDO = {
-        TipoCambio.NUEVO_INDICE:    NivelAprobacion.DATA_STEWARD,
-        TipoCambio.NUEVA_COLUMNA:   NivelAprobacion.DATA_STEWARD,
-        TipoCambio.MODIFICAR_TIPO:  NivelAprobacion.CDO,
-        TipoCambio.NUEVA_TABLA:     NivelAprobacion.CDO,
-        TipoCambio.MODIFICAR_TABLA: NivelAprobacion.COMITE_DATOS,
-        TipoCambio.ELIMINAR_CAMPO:  NivelAprobacion.COMITE_DATOS,
-    }
-
-    def __init__(self, titulo, tipo, tabla, solicitante, justificacion, impacto):
-        self.id           = f"DCR-{uuid.uuid4().hex[:6].upper()}"
-        self.titulo       = titulo
-        self.tipo         = tipo
-        self.tabla        = tabla
-        self.solicitante  = solicitante
-        self.justificacion= justificacion
-        self.impacto      = impacto
-        self.nivel        = self.NIVEL_REQUERIDO[tipo]
-        self.aprobaciones = []
-        self.estado       = "PENDIENTE"
-        self.fecha        = datetime.now()
-
-    def aprobar(self, aprobador, comentario=""):
-        self.aprobaciones.append({
-            "aprobador":  aprobador,
-            "comentario": comentario,
-            "fecha":      datetime.now().strftime("%Y-%m-%d %H:%M"),
-        })
-        if len(self.aprobaciones) >= self.nivel.value:
-            self.estado = "APROBADO"
-        else:
-            self.estado = f"APROBACION_PARCIAL ({len(self.aprobaciones)}/{self.nivel.value})"
-
-    def rechazar(self, rechazador, motivo):
-        self.estado = f"RECHAZADO por {rechazador}: {motivo}"
-
-    def mostrar(self):
-        print(f"  [{self.id}] {self.titulo}")
-        print(f"    Tipo:    {self.tipo.value} | Tabla: {self.tabla}")
-        print(f"    Nivel:   {self.nivel.name} ({self.nivel.value} aprobacion/es requerida/s)")
-        print(f"    Estado:  {self.estado}")
-        print(f"    Impacto: {self.impacto}")
-        for a in self.aprobaciones:
-            print(f"    OK:      {a['aprobador']} ({a['fecha']}) — {a['comentario']}")
-
-
-dcrs = [
-    SolicitudCambio(
-        "Agregar campo es_extranjero a tabla afiliados_activos",
-        TipoCambio.NUEVA_COLUMNA,
-        "afiliados_activos",
-        "Departamento de Afiliacion",
-        "10% de nuevos afiliados son extranjeros con passaporte — campo cedula no aplica",
-        "Requiere actualizar 3 formularios web y 2 APIs"
-    ),
-    SolicitudCambio(
-        "Cambiar tipo monto_pension de DECIMAL(10,2) a DECIMAL(18,4)",
-        TipoCambio.MODIFICAR_TIPO,
-        "pensiones_vejez",
-        "Direccion Financiera",
-        "Precision insuficiente para calculos actuariales y ajustes por inflacion",
-        "Impacta 12 reportes, requiere migracion de 650K registros"
-    ),
-    SolicitudCambio(
-        "Eliminar campo codigo_postal obsoleto de tabla afiliados",
-        TipoCambio.ELIMINAR_CAMPO,
-        "afiliados_activos",
-        "Arquitectura de Datos",
-        "Campo no se usa desde 2018 — 98.7% nulos — genera confusion en nuevos desarrolladores",
-        "Critico: verificar 45 sistemas que podrian leer el campo antes de eliminar"
-    ),
-]
-
-# Procesar aprobaciones
-dcrs[0].aprobar("Steward Afiliados Pichincha",
-                "Validado — no rompe modelos ML existentes")
-# DCR 0 aprobado con 1 (nivel DATA_STEWARD requiere 1)
-
-dcrs[1].aprobar("CDO IESS",
-                "Aprobado — coordinar con DBA para ventana de mantenimiento")
-# DCR 1 aprobado (nivel CDO requiere 1? CDO.value = 2, asi que necesita 2)
-# CDO = NivelAprobacion.CDO = 2, entonces necesita 2 aprobaciones
-dcrs[1].aprobar("Director Financiero",
-                "Confirmado impacto financiero — presupuesto asignado")
-
-dcrs[2].aprobar("CDO IESS",
-                "Primera aprobacion — requiere analisis impacto completo primero")
-dcrs[2].rechazar("Comite de Datos",
-                 "Falta inventario completo de sistemas dependientes — resubmit con analisis")
-
-print(f"\n  Solicitudes de cambio procesadas:")
-for dcr in dcrs:
-    dcr.mostrar()
-    print()
-
-# ================================================
-# KPIs DEL PROGRAMA DE STEWARDSHIP
-# ================================================
-print("\n--- KPIs PROGRAMA DATA STEWARDSHIP ---")
+import matplotlib.pyplot as plt
+from difflib import SequenceMatcher
+from collections import defaultdict
 
 np.random.seed(42)
-meses = ["Oct", "Nov", "Dic", "Ene", "Feb", "Mar"]
 
-# Simulacion de evolucion del programa a lo largo de 6 meses
-issues_abiertos = [145, 128, 103, 87, 64, 48]  # tendencia descendente
-issues_resueltos_mes = [0, 23, 31, 22, 27, 19]
-tasa_sla = [0.61, 0.68, 0.74, 0.81, 0.87, 0.91]  # mejora mes a mes
-score_calidad = [0.72, 0.74, 0.77, 0.82, 0.86, 0.89]
-dcrs_aprobados = [4, 7, 9, 12, 11, 14]
-tiempo_resolucion_h = [96, 84, 72, 58, 44, 38]  # horas promedio
+# ============================================================
+# PARTE 1: El Problema — Datos Maestros Fragmentados
+# ============================================================
 
-df_kpis = pd.DataFrame({
-    "Mes":                  meses,
-    "Issues Abiertos":      issues_abiertos,
-    "Resueltos en Mes":     issues_resueltos_mes,
-    "SLA Cumplimiento %":   [f"{v:.0%}" for v in tasa_sla],
-    "Score Calidad":        [f"{v:.2f}" for v in score_calidad],
-    "DCRs Aprobados":       dcrs_aprobados,
-    "Tiempo Resol (h)":     tiempo_resolucion_h,
-})
+print("PROBLEMA MDM: Contribuyente registrado en 5 sistemas del Estado")
+print("=" * 65)
 
-print(f"\n  {df_kpis.to_string(index=False)}")
-
-print(f"\n  Mejoras 6 meses:")
-print(f"    Issues abiertos:    {issues_abiertos[0]} → {issues_abiertos[-1]} "
-      f"(-{(1 - issues_abiertos[-1]/issues_abiertos[0]):.0%})")
-print(f"    Cumplimiento SLA:   {tasa_sla[0]:.0%} → {tasa_sla[-1]:.0%} "
-      f"(+{(tasa_sla[-1] - tasa_sla[0]):.0%} puntos)")
-print(f"    Score calidad:      {score_calidad[0]:.2f} → {score_calidad[-1]:.2f}")
-print(f"    Tiempo resolucion:  {tiempo_resolucion_h[0]}h → {tiempo_resolucion_h[-1]}h "
-      f"(-{(1 - tiempo_resolucion_h[-1]/tiempo_resolucion_h[0]):.0%})")
-
-# ================================================
-# MATRIZ DE RESPONSABILIDADES RACI
-# ================================================
-print("\n--- MATRIZ RACI: PROCESO 'CORREGIR DATO AFILIADO' ---")
-
-raci = {
-    "Detectar error en dato":         {"Steward":  "R", "CDO":     "I", "DBA":      "C", "Solicitante": "I"},
-    "Validar si es error real":       {"Steward":  "R", "CDO":     "C", "DBA":      "C", "Solicitante": "C"},
-    "Registrar issue en sistema":     {"Steward":  "R", "CDO":     "A", "DBA":      "I", "Solicitante": "I"},
-    "Diagnosticar causa raiz":        {"Steward":  "R", "CDO":     "C", "DBA":      "R", "Solicitante": "I"},
-    "Aprobar correccion":             {"Steward":  "C", "CDO":     "A", "DBA":      "I", "Solicitante": "I"},
-    "Ejecutar correccion en BD":      {"Steward":  "I", "CDO":     "I", "DBA":      "R", "Solicitante": "I"},
-    "Validar correccion aplicada":    {"Steward":  "R", "CDO":     "A", "DBA":      "C", "Solicitante": "R"},
-    "Cerrar issue y documentar":      {"Steward":  "R", "CDO":     "A", "DBA":      "I", "Solicitante": "I"},
-    "Prevenir recurrencia":           {"Steward":  "R", "CDO":     "A", "DBA":      "R", "Solicitante": "I"},
+# El mismo contribuyente "Carlos Alberto Mora Vega" existe en 5 sistemas
+# con ligeras variaciones en cada uno (tipicos de registros manuales)
+contribuyente_real = {
+    'cedula':    '1712345678',
+    'nombre':    'Carlos Alberto Mora Vega',
+    'email':     'camora@empresa.com',
+    'telefono':  '0991234567',
+    'direccion': 'Av. 6 de Diciembre N35-28, Quito',
+    'ruc':       '1712345678001'
 }
 
-roles = ["Steward", "CDO", "DBA", "Solicitante"]
-print(f"\n  {'Actividad':<40} {'Steward':>8} {'CDO':>6} {'DBA':>6} {'Solicitante':>12}")
-print(f"  {'-'*75}")
-for actividad, asignaciones in raci.items():
-    print(f"  {actividad:<40} "
-          f"{'['+asignaciones['Steward']+']':>8} "
-          f"{'['+asignaciones['CDO']+']':>6} "
-          f"{'['+asignaciones['DBA']+']':>6} "
-          f"{'['+asignaciones['Solicitante']+']':>12}")
+# Como aparece en cada sistema legacy del Ecuador
+sistemas_legacy = {
+    'SRI_Tributario': {
+        'id':        'T-001234',
+        'cedula':    '1712345678',
+        'nombre':    'CARLOS MORA VEGA',           # Sin segundo nombre, todo mayuscula
+        'email':     'camora@empresa.com',
+        'telefono':  '099-123-4567',               # Formato con guiones
+        'fecha_reg': '2015-03-12',
+        'estado':    'ACTIVO'
+    },
+    'IESS_Seguridad': {
+        'id':        'AF-789456',
+        'cedula':    '1712345678',
+        'nombre':    'Carlos A. Mora Vega',        # Segundo nombre abreviado
+        'email':     'c.mora@empresa.com',         # Email distinto
+        'telefono':  '0991234567',
+        'fecha_reg': '2010-07-22',
+        'estado':    'AFILIADO'
+    },
+    'MSP_Salud': {
+        'id':        'P-445566',
+        'cedula':    '171234567 8',                # Espacio en la cedula
+        'nombre':    'Carlos Alberto Moura Vega',  # Typo: Moura en lugar de Mora
+        'email':     'camora@empresa.com',
+        'telefono':  '2345678',                    # Solo numero local
+        'fecha_reg': '2018-11-05',
+        'estado':    'ACTIVO'
+    },
+    'MIES_Social': {
+        'id':        'B-112233',
+        'cedula':    '1712345678',
+        'nombre':    'carlos mora',                # Sin mayusculas, sin apellido materno
+        'email':     None,                         # Sin email
+        'telefono':  '099 123 45 67',              # Formato con espacios
+        'fecha_reg': '2019-02-14',
+        'estado':    'BENEFICIARIO'
+    },
+    'ANT_Transito': {
+        'id':        'L-998877',
+        'cedula':    '1712345678',
+        'nombre':    'Carlos Alberto Mora V.',     # Apellido materno abreviado
+        'email':     'camora@empresa.com',
+        'telefono':  '+593991234567',              # Con codigo de pais
+        'fecha_reg': '2016-08-30',
+        'estado':    'VIGENTE'
+    }
+}
 
-print(f"\n  R=Responsible (ejecuta) | A=Accountable (responde) | C=Consulted | I=Informed")
+for sistema, datos in sistemas_legacy.items():
+    print(f"\n  [{sistema}]")
+    print(f"    ID     : {datos['id']}")
+    print(f"    Cedula : {datos['cedula']}")
+    print(f"    Nombre : {datos['nombre']}")
+    print(f"    Email  : {datos['email']}")
+    print(f"    Tel    : {datos['telefono']}")
 
-print("\n" + "=" * 65)
-print("DATA STEWARDSHIP — CONCEPTOS CLAVE:")
-print("  Data Steward:   guardian del dominio — NO es TI, es negocio con datos")
-print("  Issue tracking: registrar → asignar → resolver — trazabilidad completa")
-print("  DCR:            todo cambio al modelo requiere aprobacion formal")
-print("  RACI:           sin esta matriz nadie sabe quien decide ni quien actua")
-print("  KPIs programa:  SLA cumplimiento + score calidad + issues abiertos")
-print("  Dominios:       Afiliados / Prestaciones / Salud / Financiero / Empleadores")
-print("=" * 65)
+print(f"\nMisma persona: 5 sistemas, 5 versiones distintas de nombre y contacto")
+print(f"Sin MDM: ¿cual es la version correcta?")
 ```
 
-3. Implementa el sistema de notificaciones automaticas para escalamiento de issues vencidos: si un issue CRITICO lleva mas de 4 horas sin actualizacion, enviar alerta al CDO; si lleva 8 horas, escalar al Directorio del IESS con el costo acumulado calculado por hora.
+3. Implementa el proceso de construccion del Golden Record:
 
-4. Agrega el generador de reporte mensual de stewardship en formato ejecutivo: top 5 issues por costo, evolucion del score de calidad por dominio, stewards con mejor y peor desempeno, y recomendaciones para el proximo mes.
+```python
+# ============================================================
+# PARTE 2: Construccion del Golden Record
+# ============================================================
+
+def normalizar_nombre(nombre):
+    """Normaliza nombre: mayusculas, sin abreviaciones obvias, trim."""
+    if not nombre:
+        return ""
+    n = str(nombre).upper().strip()
+    n = ' '.join(n.split())  # eliminar espacios multiples
+    return n
+
+def normalizar_cedula(cedula):
+    """Elimina espacios y guiones de la cedula."""
+    if not cedula:
+        return ""
+    return str(cedula).replace(' ', '').replace('-', '').strip()
+
+def normalizar_telefono(telefono):
+    """Normaliza a formato Ecuador: 10 digitos comenzando con 09."""
+    if not telefono:
+        return None
+    t = str(telefono).replace(' ', '').replace('-', '').replace('+593', '0')
+    if t.startswith('593'):
+        t = '0' + t[3:]
+    return t if len(t) == 10 else None
+
+def similitud_texto(a, b):
+    """Similitud entre dos cadenas de texto (0 a 1)."""
+    return SequenceMatcher(None, str(a).lower(), str(b).lower()).ratio()
+
+class GoldenRecordBuilder:
+    """
+    Construye el Golden Record (registro dorado) a partir de
+    registros duplicados en multiples sistemas.
+    Estrategia: field-level trust score por sistema fuente.
+    """
+
+    # Trust scores por campo y sistema (calibrado para Ecuador)
+    TRUST_SCORES = {
+        'cedula':    {'SRI_Tributario': 1.0, 'IESS_Seguridad': 1.0,
+                      'MSP_Salud': 0.7, 'MIES_Social': 0.9, 'ANT_Transito': 1.0},
+        'nombre':    {'SRI_Tributario': 0.9, 'IESS_Seguridad': 0.85,
+                      'MSP_Salud': 0.6, 'MIES_Social': 0.5, 'ANT_Transito': 0.8},
+        'email':     {'SRI_Tributario': 1.0, 'IESS_Seguridad': 0.8,
+                      'MSP_Salud': 0.9, 'MIES_Social': 0.0, 'ANT_Transito': 0.9},
+        'telefono':  {'SRI_Tributario': 0.9, 'IESS_Seguridad': 1.0,
+                      'MSP_Salud': 0.4, 'MIES_Social': 0.7, 'ANT_Transito': 0.85},
+        'fecha_reg': {'SRI_Tributario': 0.9, 'IESS_Seguridad': 1.0,
+                      'MSP_Salud': 0.8, 'MIES_Social': 0.7, 'ANT_Transito': 0.85},
+    }
+
+    def construir(self, registros_por_sistema):
+        """
+        Construye el golden record eligiendo el valor de mayor confianza
+        para cada campo.
+        """
+        golden = {
+            'fuentes': [],
+            'cedula': None, 'nombre': None, 'email': None,
+            'telefono': None, 'fecha_primera_registro': None,
+            'confianza_global': 0.0
+        }
+
+        campos_candidatos = defaultdict(list)  # campo -> [(valor, trust_score, sistema)]
+
+        for sistema, datos in registros_por_sistema.items():
+            golden['fuentes'].append(sistema)
+
+            # Normalizar y registrar cada campo con su trust score
+            cedula_norm = normalizar_cedula(datos.get('cedula', ''))
+            if cedula_norm:
+                campos_candidatos['cedula'].append(
+                    (cedula_norm, self.TRUST_SCORES['cedula'].get(sistema, 0.5), sistema))
+
+            nombre_norm = normalizar_nombre(datos.get('nombre', ''))
+            if nombre_norm:
+                campos_candidatos['nombre'].append(
+                    (nombre_norm, self.TRUST_SCORES['nombre'].get(sistema, 0.5), sistema))
+
+            email = datos.get('email')
+            if email:
+                campos_candidatos['email'].append(
+                    (email, self.TRUST_SCORES['email'].get(sistema, 0.5), sistema))
+
+            tel_norm = normalizar_telefono(datos.get('telefono', ''))
+            if tel_norm:
+                campos_candidatos['telefono'].append(
+                    (tel_norm, self.TRUST_SCORES['telefono'].get(sistema, 0.5), sistema))
+
+            fecha = datos.get('fecha_reg')
+            if fecha:
+                campos_candidatos['fecha_primera_registro'].append(
+                    (fecha, self.TRUST_SCORES['fecha_reg'].get(sistema, 0.5), sistema))
+
+        # Seleccionar el valor de mayor trust score para cada campo
+        confianzas = []
+        for campo, candidatos in campos_candidatos.items():
+            if not candidatos:
+                continue
+            mejor = max(candidatos, key=lambda x: x[1])
+            if campo == 'fecha_primera_registro':
+                # Para fecha: tomar la mas antigua (primer registro conocido)
+                golden[campo] = min(c[0] for c in candidatos)
+            else:
+                golden[campo] = mejor[0]
+            confianzas.append(mejor[1])
+
+        golden['confianza_global'] = np.mean(confianzas) if confianzas else 0.0
+        golden['n_fuentes'] = len(golden['fuentes'])
+        return golden
+
+# Construir el Golden Record del contribuyente ejemplo
+builder = GoldenRecordBuilder()
+golden = builder.construir(sistemas_legacy)
+
+print("\nGOLDEN RECORD CONSTRUIDO")
+print("=" * 55)
+print(f"  Cedula          : {golden['cedula']}")
+print(f"  Nombre          : {golden['nombre']}")
+print(f"  Email           : {golden['email']}")
+print(f"  Telefono        : {golden['telefono']}")
+print(f"  Primer registro : {golden['fecha_primera_registro']}")
+print(f"  Fuentes usadas  : {golden['n_fuentes']} sistemas")
+print(f"  Confianza global: {golden['confianza_global']:.2%}")
+
+print(f"\nComparacion con datos reales del contribuyente:")
+print(f"  Nombre real : {contribuyente_real['nombre']}")
+print(f"  Golden name : {golden['nombre']}")
+print(f"  Similitud   : {similitud_texto(contribuyente_real['nombre'], golden['nombre']):.2%}")
+```
+
+4. Implementa deteccion y deduplicacion a escala:
+
+```python
+# ============================================================
+# PARTE 3: Deteccion de Duplicados a Escala
+# ============================================================
+
+# Simular 100 contribuyentes con duplicados
+n_reales = 80
+n_duplicados = 20
+
+contribuyentes_base = pd.DataFrame({
+    'cedula': [f"17{i:08d}" for i in range(n_reales)],
+    'nombre': [f"Contribuyente Real {i:03d}" for i in range(n_reales)],
+    'email':  [f"real{i}@gmail.com" for i in range(n_reales)],
+})
+
+# Crear variantes duplicadas de algunos contribuyentes
+variantes_dup = []
+for _ in range(n_duplicados):
+    idx = np.random.randint(0, n_reales)
+    orig = contribuyentes_base.iloc[idx]
+    # Variante: mismo cedula, nombre ligeramente alterado
+    nombre_variante = orig['nombre']
+    if np.random.random() < 0.5:
+        nombre_variante = orig['nombre'].lower()  # todo minuscula
+    else:
+        nombre_variante = orig['nombre'].replace('Real', 'R.')  # abreviacion
+    variantes_dup.append({
+        'cedula': orig['cedula'],
+        'nombre': nombre_variante,
+        'email':  orig['email'] if np.random.random() < 0.7 else None,
+    })
+
+df_dup = pd.DataFrame(variantes_dup)
+df_total = pd.concat([contribuyentes_base, df_dup], ignore_index=True)
+df_total = df_total.sample(frac=1, random_state=42).reset_index(drop=True)
+
+print(f"\nDETECCION DE DUPLICADOS — Base consolidada")
+print(f"Total registros   : {len(df_total)}")
+print(f"Cedulas unicas    : {df_total['cedula'].nunique()}")
+print(f"Duplicados por ID : {len(df_total) - df_total['cedula'].nunique()}")
+
+# Estrategia 1: Duplicados exactos por cedula
+duplicados_exactos = df_total[df_total.duplicated(subset=['cedula'], keep=False)]
+print(f"\nDuplicados por cedula identica: {len(duplicados_exactos)} registros")
+
+# Estrategia 2: Duplicados fuzzy por nombre (para casos sin cedula o con cedula diferente)
+def detectar_duplicados_fuzzy(df, campo='nombre', umbral=0.85):
+    """Detecta pares de registros con nombre muy similar (posibles duplicados)."""
+    pares_sospechosos = []
+    nombres = df[campo].fillna('').tolist()
+    for i in range(min(len(nombres), 200)):  # limitar para demo
+        for j in range(i+1, min(len(nombres), 200)):
+            sim = similitud_texto(nombres[i], nombres[j])
+            if sim >= umbral and nombres[i] != nombres[j]:
+                pares_sospechosos.append((i, j, nombres[i], nombres[j], sim))
+    return pares_sospechosos
+
+pares = detectar_duplicados_fuzzy(df_total)
+print(f"Pares sospechosos por similitud de nombre (>85%): {len(pares)}")
+if pares:
+    print("\nEjemplos de pares detectados:")
+    for i, j, n1, n2, sim in pares[:3]:
+        print(f"  [{sim:.2f}] '{n1}' vs '{n2}'")
+```
+
+5. Visualiza la arquitectura MDM y metricas:
+
+```python
+# ============================================================
+# PARTE 4: Arquitectura Hub y Metricas MDM
+# ============================================================
+
+fig, axes = plt.subplots(1, 2, figsize=(13, 6))
+
+# Panel 1: Distribucion de fuentes en los registros duplicados
+fuentes_count = {}
+for sistema in sistemas_legacy.keys():
+    fuentes_count[sistema] = np.random.randint(80, 200)
+
+ax1 = axes[0]
+bars = ax1.barh(list(fuentes_count.keys()), list(fuentes_count.values()),
+                color='#73B8E7', height=0.5)
+for b, v in zip(bars, fuentes_count.values()):
+    ax1.text(v + 1, b.get_y() + b.get_height()/2, str(v), va='center', fontsize=9)
+ax1.set_xlabel('Registros contribuidos al MDM Hub')
+ax1.set_title('Contribucion por Sistema Fuente')
+ax1.grid(True, alpha=0.3, axis='x')
+
+# Panel 2: Calidad del Golden Record antes vs despues del MDM
+categorias = ['Completitud', 'Unicidad', 'Consistencia', 'Confianza']
+antes = [0.72, 0.81, 0.65, 0.68]
+despues = [0.95, 0.99, 0.94, 0.91]
+
+x = np.arange(len(categorias))
+w = 0.35
+ax2 = axes[1]
+b1 = ax2.bar(x - w/2, antes, w, label='Antes MDM', color='#F0846D', alpha=0.9)
+b2 = ax2.bar(x + w/2, despues, w, label='Despues MDM', color='#73B8E7', alpha=0.9)
+for b, v in zip(list(b1) + list(b2), antes + despues):
+    ax2.text(b.get_x() + b.get_width()/2, b.get_height() + 0.01,
+             f'{v:.0%}', ha='center', fontsize=8, fontweight='bold')
+ax2.set_xticks(x)
+ax2.set_xticklabels(categorias)
+ax2.set_ylabel('Score de Calidad')
+ax2.set_title('Impacto del MDM en Calidad')
+ax2.set_ylim(0, 1.15)
+ax2.legend()
+ax2.grid(True, alpha=0.3, axis='y')
+
+plt.suptitle('Master Data Management — SRI Ecuador | ITSEIA P5', color='gray')
+plt.tight_layout()
+plt.show()
+
+# Resumen ejecutivo MDM
+print("\nRESUMEN EJECUTIVO MDM")
+print("=" * 55)
+print(f"Sistemas fuente integrados : {len(sistemas_legacy)}")
+print(f"Golden Record construido   : 1 (registro dorado por contribuyente)")
+print(f"Confianza del golden record: {golden['confianza_global']:.2%}")
+print(f"Reduccion de duplicados    : {n_duplicados} registros eliminados")
+print(f"\nArquitectura elegida       : MDM Hub (registro maestro centralizado)")
+print(f"Alternativas evaluadas     : Registry style, Coexistence style")
+print(f"Herramientas Open Source   : Apache Atlas, Talend MDM, Informatica MDM")
+```
 
 ## Usa IA para...
 
-> Abre Gemini y escribe:
-> "Soy el CDO del IESS Ecuador. Acabamos de lanzar el programa de Data Stewardship con 18 data stewards distribuidos en 5 dominios. El problema: los stewards son tecnicos de TI que no conocen el negocio, o son expertos de negocio que no entienden de datos. ¿Como capacito en 3 meses a 18 personas para que puedan: 1) identificar y documentar issues de calidad de datos con criterios claros (no todo es un error critico), 2) tomar decisiones sobre datos sin necesitar aprobacion de TI para cada cosa, 3) defender la importancia de la calidad de datos ante gerencias que ven el programa como burocracia? Dame el curriculo de capacitacion, los ejercicios practicos y como medir si un steward esta listo para operar de forma autonoma."
+> Abre Claude (claude.ai) y escribe:
+> "Soy el Chief Data Officer del Banco del Pichincha Ecuador. Tenemos al mismo cliente en 7 sistemas: Core bancario (Temenos), CRM (Salesforce), App movil, Seguro de vida, Creditos hipotecarios, Inversiones y Tarjetas. Cada sistema tiene su propia version del cliente. Necesito implementar MDM. ¿Que arquitectura MDM me recomiendas: Hub and Spoke, Registry, Coexistence o Consolidated? ¿Cual es el riesgo del enfoque Registry cuando un cliente actualiza su direccion en el app pero el Core no se actualiza en tiempo real? ¿Como implementaria el proceso de Master Data Stewardship: quien aprueba los cambios al golden record y bajo que flujo de trabajo?"
 
 Despues de leer la respuesta:
-- Implementa el sistema de certificacion de data stewards: 5 niveles de competencia con criterios de evaluacion y ejercicios de validacion por nivel.
-- Agrega el generador de casos de uso para capacitacion: dado un dominio del IESS, genera 3 escenarios de issues reales con preguntas guia para que el steward analice y decida.
+- Diseña en una celda markdown el flujo de trabajo de aprobacion de cambios al golden record para el Pichincha.
+- Define quien es el Data Steward para el dominio "cliente" y cuales son sus responsabilidades especificas.
 
 ## Que aprendiste
 
-- El data steward no es un rol de TI — es un experto de negocio responsable de sus datos.
-- El sistema de issues de calidad debe tener SLA diferenciados por severidad — un critico no puede esperar una semana.
-- La matriz RACI elimina el "yo creia que lo hacia el otro" — cada actividad tiene un Accountable.
-- Los Data Change Requests (DCR) protegen el modelo de datos de cambios sin control.
-- Los KPIs del programa deben mostrar tendencia — la direccion importa mas que el valor puntual.
-- Sin stewards activos, el gobierno de datos es solo politica en papel — sin ejecucion.
+- El **Golden Record** es el registro de verdad unica construido a partir de multiples fuentes, usando trust scores por campo y por sistema fuente.
+- La **normalizacion** antes de comparar es critica: nombres en mayusculas, cedulas sin espacios, telefonos con formato estandar.
+- El **MDM Hub** centraliza el dato maestro; los sistemas satelite deben sincronizarse con el hub, no entre si.
+- La **deduplicacion fuzzy** (similitud de texto) detecta duplicados que no son identicos pero representan la misma entidad real.
+- El **Data Steward de dominio** es el responsable humano que aprueba cambios al golden record: sin este rol, el MDM se degrada rapidamente.
 
 ## Reto extra
 
-Diseña e implementa el programa de Data Stewardship para la Superintendencia de Compras Publicas (SERCOP) del Ecuador: catalogo de 8 dominios (contratos, proveedores, entidades contratantes, procesos, precios referenciales, sanciones, ejecucion presupuestaria, documentos), sistema de deteccion automatica de anomalias en precios (precio > 150% del referencial = issue CRITICO automatico), flujo de aprobacion para contratos > $1M con 3 niveles de validacion, KPIs de transparencia publica (% contratos con documentacion completa, tiempo promedio publicacion vs firma, % procesos con un solo oferente), y reporte mensual compatible con el portal datos.gob.ec y el Observatorio de Compras Publicas de la Contraloria.
+Implementa la deteccion de duplicados usando **blocking** para hacerla escalable: en lugar de comparar todos contra todos (O(n^2)), agrupa primero por los primeros 4 digitos de la cedula y solo compara dentro de cada bloque. Mide el tiempo de ejecucion con y sin blocking para 10,000 registros. Luego investiga la libreria `recordlinkage` de Python y replica el ejercicio usando su implementacion optimizada. Compara el recall (% de duplicados reales encontrados) entre tu implementacion manual y la de la libreria.

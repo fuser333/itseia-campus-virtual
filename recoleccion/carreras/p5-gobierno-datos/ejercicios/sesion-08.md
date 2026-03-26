@@ -1,567 +1,506 @@
-# Ejercicio Sesion 8: Proyecto Programa Gobierno de Datos Empresarial
+# Ejercicio Sesion 8: Proyecto — Framework de Gobierno de Datos para Empresa Ecuatoriana
 
 **Materia:** Gobierno de Datos y Cumplimiento
-**Nivel:** Intermedio-Avanzado
-**Herramienta IA:** Gemini
-**Duracion estimada:** 90 min
+**Nivel:** Avanzado
+**Herramienta IA:** ChatGPT
+**Duracion estimada:** 60 min
 
 ## Objetivo
 
-Disenar e implementar el programa completo de Gobierno de Datos para Corporacion La Favorita (supermercados Supermaxi, Megamaxi, Santa Maria): arquitectura de gobierno, catalogo de datos empresarial, sistema de calidad con SLA, programa de stewardship por dominio, cumplimiento LOPDP para datos de 5 millones de clientes, MDM de clientes y proveedores, y dashboard ejecutivo — integrando todos los conceptos de la materia en un sistema operativo real.
+Construir un framework de gobierno de datos end-to-end para una empresa ecuatoriana mediana, integrando: evaluacion de madurez, politicas de calidad con DQS automatizado, MDM para el dominio cliente, cumplimiento LOPDP, y roadmap de implementacion con ROI calculado — entregando un programa ejecutivo listo para presentar al Directorio.
 
 ## Contexto
 
-Corporacion La Favorita es la empresa de retail mas grande de Ecuador: 82 tiendas, 15,000 empleados, 5 millones de clientes registrados en la tarjeta Mi Favorita, 1,200 proveedores, $3,500 millones en ventas anuales. Sus datos estan distribuidos en: SAP (ERP), Oracle (financiero), sistema de tarjeta de lealtad, e-commerce, WMS (bodegas), TMS (transporte), y 82 sistemas POS. Sin gobierno de datos, la empresa toma decisiones con datos inconsistentes — el mismo proveedor tiene 3 RUC distintos en 3 sistemas, el mismo producto tiene 2 precios diferentes. El programa de gobierno busca crear una unica version de la verdad para toda la organizacion.
+Tecnicentro S.A. es una cadena ecuatoriana de talleres automotrices con 35 sucursales en 12 ciudades, 180,000 clientes registrados y 15 empleados en TI. Sus datos estan en 4 sistemas: ERP (SAP), CRM (HubSpot), sistema de citas (propio), y contabilidad (Monica). El mismo cliente puede estar en los 4 sistemas con datos diferentes. No existe un responsable formal de datos, no hay politica de privacidad publicada (LOPDP), y el CEO acaba de perder una oportunidad de venta porque no sabia cuantos clientes activos tenia con vehiculos con mas de 3 anos sin servicio — los datos eran inconsistentes entre sistemas. La Junta Directiva aprobo contratar a un CDO y tiene $80,000 para el primer ano. Eres ese CDO.
 
 ## Instrucciones
 
-1. Crea el archivo `sesion08_gobierno_datos_favorita.py`:
+El proyecto tiene cinco componentes que debes completar en orden. Crea el notebook `proyecto_gobierno_datos_tecnicentro.ipynb`.
+
+### Componente 1: Evaluacion de Madurez Inicial
 
 ```python
-# Proyecto Integrador: Gobierno de Datos Empresarial - ITSEIA
-# Gobierno de Datos y Cumplimiento
-# Corporacion La Favorita — programa completo
+# Proyecto Gobierno de Datos — Tecnicentro S.A. Ecuador
+# ITSEIA - Periodo 5 - Sesion 8 (Proyecto Final)
+# Estudiante: [Tu nombre]
+# Fecha: [Fecha]
 
-import re
-import uuid
-import hashlib
 import numpy as np
 import pandas as pd
-from datetime import datetime, date, timedelta
-from collections import defaultdict, deque
-from enum import Enum
-import warnings
-warnings.filterwarnings("ignore")
+import matplotlib.pyplot as plt
+import re, hashlib
+from datetime import datetime, timedelta, date
+from cryptography.fernet import Fernet
+from collections import defaultdict
 
-print("=" * 70)
-print("PROGRAMA GOBIERNO DE DATOS — CORPORACION LA FAVORITA")
-print("82 tiendas | 5M clientes | 1,200 proveedores | $3,500M ventas")
-print("=" * 70)
-
-# ================================================
-# ARQUITECTURA DE GOBIERNO: DOMINIOS Y STEWARDS
-# ================================================
-print("\n--- ARQUITECTURA DE GOBIERNO ---")
-
-DOMINIOS_FAVORITA = {
-    "Clientes": {
-        "steward_lider":  "Gerente Tarjeta Mi Favorita",
-        "sistemas":       ["CRM Salesforce", "App MiFavorita", "Portal e-commerce",
-                           "POS 82 tiendas"],
-        "volumen_est":    5_000_000,
-        "criticidad":     "CRITICA",
-        "sla_calidad":    0.96,
-        "regulacion":     "LOPDP — datos PII masivos",
-        "kpi_negocio":    "Tasa retencion clientes activos",
-    },
-    "Productos": {
-        "steward_lider":  "Jefe de Categoria y Surtido",
-        "sistemas":       ["SAP MM", "WMS Bodegas", "POS tiendas", "E-commerce"],
-        "volumen_est":    180_000,
-        "criticidad":     "ALTA",
-        "sla_calidad":    0.98,
-        "regulacion":     "ARCSA (alimentos) — trazabilidad obligatoria",
-        "kpi_negocio":    "Fill rate y rotacion de inventario",
-    },
-    "Proveedores": {
-        "steward_lider":  "Gerente de Compras Corporativo",
-        "sistemas":       ["SAP MM", "Portal proveedores", "Oracle AP"],
-        "volumen_est":    1_200,
-        "criticidad":     "ALTA",
-        "sla_calidad":    0.97,
-        "regulacion":     "SRI — RUC valido, facturas electronicas",
-        "kpi_negocio":    "On-time delivery y calidad de producto",
-    },
-    "Transacciones": {
-        "steward_lider":  "Gerente de Finanzas",
-        "sistemas":       ["SAP FI", "Oracle GL", "POS tiendas", "E-commerce"],
-        "volumen_est":    350_000_000,  # tickets anuales estimados
-        "criticidad":     "CRITICA",
-        "sla_calidad":    0.999,
-        "regulacion":     "SRI — facturacion electronica, NIIF",
-        "kpi_negocio":    "Ticket promedio, ventas por m2",
-    },
-    "Empleados": {
-        "steward_lider":  "Gerente de RRHH",
-        "sistemas":       ["SAP HCM", "Portal RRHH", "IESS reportes"],
-        "volumen_est":    15_000,
-        "criticidad":     "MEDIA",
-        "sla_calidad":    0.95,
-        "regulacion":     "LOPDP — datos laborales sensibles",
-        "kpi_negocio":    "Rotacion, ausentismo, productividad",
-    },
-    "Logistica": {
-        "steward_lider":  "Gerente de Cadena de Suministro",
-        "sistemas":       ["WMS", "TMS", "SAP SD", "GPS flota"],
-        "volumen_est":    2_400_000,   # ordenes logisticas anuales
-        "criticidad":     "ALTA",
-        "sla_calidad":    0.96,
-        "regulacion":     "ARCSA — trazabilidad frio",
-        "kpi_negocio":    "OTIF (on-time in-full), costo por km",
-    },
-}
-
-print(f"\n  {'Dominio':<16} {'Criticidad':<10} {'Volumen':>14} {'SLA':>6} {'Steward'}")
-print(f"  {'-'*72}")
-for dominio, info in DOMINIOS_FAVORITA.items():
-    print(f"  {dominio:<16} {info['criticidad']:<10} {info['volumen_est']:>14,} "
-          f"{info['sla_calidad']:>6.1%} {info['steward_lider'][:28]}")
-
-# ================================================
-# CATALOGO DE DATOS EMPRESARIAL
-# ================================================
-print("\n--- CATALOGO DE DATOS FAVORITA ---")
-
-class EntradaCatalogo:
-    """Activo de datos en el catalogo empresarial."""
-
-    def __init__(self, nombre, dominio, sistema, descripcion,
-                 campos_clave, clasificacion_lopdp, sla_calidad, dueno):
-        self.id                 = f"DA-{uuid.uuid4().hex[:6].upper()}"
-        self.nombre             = nombre
-        self.dominio            = dominio
-        self.sistema            = sistema
-        self.descripcion        = descripcion
-        self.campos_clave       = campos_clave
-        self.clasificacion_lopdp= clasificacion_lopdp
-        self.sla_calidad        = sla_calidad
-        self.dueno              = dueno
-        self.fecha_registro     = date.today()
-        self.ultima_auditoria   = None
-        self.score_calidad      = None
-        self.tags               = []
-
-    def agregar_tag(self, tag):
-        self.tags.append(tag)
-
-    def registrar_auditoria(self, score):
-        self.score_calidad    = score
-        self.ultima_auditoria = date.today()
-
-    def estado_calidad(self):
-        if self.score_calidad is None:
-            return "SIN AUDITAR"
-        if self.score_calidad >= self.sla_calidad:
-            return "CUMPLE"
-        elif self.score_calidad >= self.sla_calidad - 0.05:
-            return "EN RIESGO"
-        return "INCUMPLE"
-
-
-class CatalogoEmpresarial:
-    """Catalogo central de activos de datos de La Favorita."""
-
-    def __init__(self, empresa):
-        self.empresa    = empresa
-        self.activos    = {}
-        self.por_dominio= defaultdict(list)
-
-    def registrar(self, entrada):
-        self.activos[entrada.id] = entrada
-        self.por_dominio[entrada.dominio].append(entrada.id)
-        return entrada.id
-
-    def buscar(self, termino):
-        """Busqueda full-text simple en nombre y descripcion."""
-        termino = termino.lower()
-        return [a for a in self.activos.values()
-                if termino in a.nombre.lower() or termino in a.descripcion.lower()]
-
-    def cobertura_por_dominio(self):
-        total = len(self.activos)
-        auditados = sum(1 for a in self.activos.values()
-                        if a.score_calidad is not None)
-        print(f"\n  Cobertura del catalogo: {total} activos, {auditados} auditados "
-              f"({auditados/total:.0%})")
-        print(f"\n  {'Dominio':<16} {'Activos':>8} {'Auditados':>10} "
-              f"{'Score Prom':>12} {'Estado'}")
-        print(f"  {'-'*56}")
-        for dominio in DOMINIOS_FAVORITA:
-            ids = self.por_dominio.get(dominio, [])
-            entradas = [self.activos[i] for i in ids]
-            auditadas_d = [e for e in entradas if e.score_calidad is not None]
-            score_prom = (sum(e.score_calidad for e in auditadas_d) / len(auditadas_d)
-                          if auditadas_d else None)
-            score_str = f"{score_prom:.1%}" if score_prom else "N/A"
-            incumple = sum(1 for e in auditadas_d if e.estado_calidad() == "INCUMPLE")
-            estado = "OK" if incumple == 0 else f"{incumple} INCUMPLE"
-            print(f"  {dominio:<16} {len(entradas):>8} {len(auditadas_d):>10} "
-                  f"{score_str:>12} {estado}")
-
-
-# Construir catalogo
-catalogo = CatalogoEmpresarial("Corporacion La Favorita")
 np.random.seed(42)
 
-activos_definidos = [
-    EntradaCatalogo("clientes_mi_favorita", "Clientes", "CRM Salesforce",
-        "5M clientes con tarjeta de lealtad — historial compras, puntos, preferencias",
-        ["id_cliente", "cedula_hash", "email", "telefono", "segmento"],
-        "PII — datos ordinarios", 0.96, "Gerente Tarjeta Mi Favorita"),
-    EntradaCatalogo("transacciones_pos", "Transacciones", "POS 82 tiendas",
-        "Tickets de venta de 82 tiendas — 350M+ transacciones anuales",
-        ["id_ticket", "id_tienda", "id_cajero", "monto_total", "fecha_hora"],
-        "No personal", 0.999, "Gerente de Finanzas"),
-    EntradaCatalogo("maestro_productos", "Productos", "SAP MM",
-        "Catalogo de 180,000 SKUs activos con precios, imagenes y trazabilidad ARCSA",
-        ["sku", "ean", "nombre_producto", "categoria", "precio_pvp", "lote"],
-        "No personal", 0.98, "Jefe de Categoria y Surtido"),
-    EntradaCatalogo("proveedores_activos", "Proveedores", "SAP MM",
-        "1,200 proveedores activos con RUC, condiciones pago y certificaciones",
-        ["id_proveedor", "ruc", "razon_social", "categoria", "certificaciones"],
-        "No personal", 0.97, "Gerente de Compras Corporativo"),
-    EntradaCatalogo("empleados_nomina", "Empleados", "SAP HCM",
-        "15,000 empleados activos con datos laborales y de nomina",
-        ["id_empleado", "cedula_hash", "cargo", "tienda", "salario_band"],
-        "PII — datos laborales sensibles", 0.95, "Gerente de RRHH"),
-    EntradaCatalogo("inventario_bodegas", "Logistica", "WMS",
-        "Stock en tiempo real de 8 centros de distribucion y 82 tiendas",
-        ["sku", "bodega_id", "unidades_disponibles", "fecha_vencimiento"],
-        "No personal", 0.96, "Gerente de Cadena de Suministro"),
-    EntradaCatalogo("historial_compras_cliente", "Clientes", "CRM Salesforce",
-        "Historial completo de compras por cliente — base para personalizacion",
-        ["id_cliente", "id_ticket", "sku", "cantidad", "monto", "fecha"],
-        "PII — dato de comportamiento", 0.96, "Gerente Tarjeta Mi Favorita"),
-    EntradaCatalogo("rutas_logisticas", "Logistica", "TMS",
-        "Rutas de distribucion de flota — GPS tracking y KPIs OTIF",
-        ["id_ruta", "placa", "origen", "destino", "gps_coords", "estado"],
-        "No personal", 0.96, "Gerente de Cadena de Suministro"),
-]
+print("=" * 65)
+print("PROGRAMA GOBIERNO DE DATOS — TECNICENTRO S.A. ECUADOR")
+print("CDO Report: Evaluacion inicial y roadmap 12 meses")
+print("=" * 65)
 
-for activo in activos_definidos:
-    iid = catalogo.registrar(activo)
-    # Simular auditoria con score aleatorio
-    score = np.random.uniform(0.88, 0.999)
-    activo.registrar_auditoria(round(score, 3))
-    if "cliente" in activo.nombre.lower() or "empleado" in activo.nombre.lower():
-        activo.agregar_tag("PII")
-    if "CRITICA" == DOMINIOS_FAVORITA.get(activo.dominio, {}).get("criticidad"):
-        activo.agregar_tag("CRITICO")
+# ============================================================
+# COMPONENTE 1: Evaluacion de Madurez (DMM — 5 niveles)
+# ============================================================
 
-# Forzar un activo con incumplimiento para demo
-activos_definidos[4].registrar_auditoria(0.887)  # empleados bajo SLA
-
-print(f"\n  Activos registrados en catalogo: {len(catalogo.activos)}")
-catalogo.cobertura_por_dominio()
-
-# ================================================
-# SISTEMA DE CALIDAD DE DATOS — MULTI-DOMINIO
-# ================================================
-print("\n--- SISTEMA DE CALIDAD DE DATOS ---")
-
-np.random.seed(7)
-n_clientes = 2000
-
-# Dataset clientes con issues de calidad intencionales
-df_clientes = pd.DataFrame({
-    "id_cliente":    [f"CL{i:07d}" for i in range(n_clientes)],
-    "cedula":        [f"17{np.random.randint(10000000, 99999999)}" for _ in range(n_clientes)],
-    "email":         [f"cliente{i}@{'gmail' if i%3==0 else 'hotmail' if i%3==1 else 'yahoo'}.com"
-                      for i in range(n_clientes)],
-    "telefono":      [f"09{np.random.randint(10000000, 99999999)}" if np.random.rand() > 0.08
-                      else None for _ in range(n_clientes)],
-    "fecha_registro":[f"202{np.random.randint(0,5)}-{np.random.randint(1,12):02d}-"
-                      f"{np.random.randint(1,28):02d}" for _ in range(n_clientes)],
-    "segmento":      np.random.choice(["ORO", "PLATA", "BRONCE", None, "INVALIDO"],
-                                       n_clientes, p=[0.1, 0.3, 0.5, 0.05, 0.05]),
-    "puntos_acum":   [np.random.randint(-100, 50000) for _ in range(n_clientes)],
-    "provincia":     np.random.choice(
-                        ["Pichincha","Guayas","Azuay","Manabi","Tungurahua",None],
-                        n_clientes, p=[0.35, 0.30, 0.10, 0.08, 0.07, 0.10]),
-})
-
-# Introducir cedulas duplicadas
-for i in range(50):
-    df_clientes.loc[n_clientes - 1 - i, "cedula"] = df_clientes.loc[i, "cedula"]
-
-class PerfiladorFavorita:
-    """Perfilador de calidad para datasets de La Favorita."""
-
-    def __init__(self, df, nombre_dataset):
-        self.df      = df
-        self.nombre  = nombre_dataset
-        self.scores  = {}
-
-    def medir_completitud(self, campos_obligatorios):
-        scores = {}
-        for campo in campos_obligatorios:
-            nulos   = self.df[campo].isna().sum()
-            score   = 1 - nulos / len(self.df)
-            scores[campo] = round(score, 4)
-        self.scores["completitud"] = round(sum(scores.values()) / len(scores), 4)
-        return scores
-
-    def medir_unicidad(self, campo_clave):
-        n_total = len(self.df)
-        n_unicos = self.df[campo_clave].nunique()
-        n_dup    = n_total - n_unicos
-        score    = n_unicos / n_total
-        self.scores["unicidad"] = round(score, 4)
-        return {"duplicados": n_dup, "score": round(score, 4)}
-
-    def medir_validez_segmento(self):
-        valores_validos = {"ORO", "PLATA", "BRONCE"}
-        invalidos = self.df["segmento"].notna() & ~self.df["segmento"].isin(valores_validos)
-        score = 1 - invalidos.sum() / len(self.df)
-        self.scores["validez_segmento"] = round(score, 4)
-        return {"invalidos": int(invalidos.sum()), "score": round(score, 4)}
-
-    def medir_validez_puntos(self):
-        negativos = (self.df["puntos_acum"] < 0).sum()
-        score = 1 - negativos / len(self.df)
-        self.scores["validez_puntos"] = round(score, 4)
-        return {"puntos_negativos": int(negativos), "score": round(score, 4)}
-
-    def score_global(self):
-        if not self.scores:
-            return 0.0
-        return round(sum(self.scores.values()) / len(self.scores), 4)
-
-    def reporte(self, sla_target):
-        print(f"\n  Perfil de calidad: {self.nombre}")
-        print(f"  Registros:   {len(self.df):,}")
-        for metrica, score in self.scores.items():
-            cumple = "OK" if score >= sla_target else "FALLO"
-            barra  = "#" * int(score * 20)
-            print(f"    {metrica:<25}: {score:.1%} [{barra:<20}] {cumple}")
-        global_score = self.score_global()
-        estado = "CUMPLE SLA" if global_score >= sla_target else "INCUMPLE SLA"
-        print(f"  Score global: {global_score:.1%} — {estado} (target {sla_target:.0%})")
-        return global_score
-
-
-perfilador = PerfiladorFavorita(df_clientes, "clientes_mi_favorita")
-perfilador.medir_completitud(["id_cliente", "cedula", "email", "telefono", "provincia"])
-perfilador.medir_unicidad("cedula")
-perfilador.medir_validez_segmento()
-perfilador.medir_validez_puntos()
-score_real = perfilador.reporte(sla_target=0.96)
-
-# ================================================
-# MDM PROVEEDOR: DEDUPLICACION Y GOLDEN RECORD
-# ================================================
-print("\n--- MDM PROVEEDORES: DEDUPLICACION ---")
-
-np.random.seed(15)
-proveedores_raw = [
-    {"fuente": "SAP",     "ruc": "1790012345001", "nombre": "PRONACA S.A.",
-     "contacto": "ventas@pronaca.com",      "telefono": "022456789"},
-    {"fuente": "Oracle",  "ruc": "1790012345001", "nombre": "PRONACA SA",
-     "contacto": "facturacion@pronaca.com", "telefono": "022456789"},
-    {"fuente": "Portal",  "ruc": "1790012345001", "nombre": "Pronaca S.A.",
-     "contacto": "logistica@pronaca.com",   "telefono": "+593 2 2456789"},
-    {"fuente": "SAP",     "ruc": "1790234567001", "nombre": "CORPORACION NOBOA",
-     "contacto": "compras@noboa.com",       "telefono": "042456123"},
-    {"fuente": "Oracle",  "ruc": "1790234567001", "nombre": "Corp. Noboa",
-     "contacto": "facturacion@noboa.com",   "telefono": "042456123"},
-    {"fuente": "SAP",     "ruc": "1790345678001", "nombre": "NESTLE ECUADOR S.A.",
-     "contacto": "customer@nestle.ec",      "telefono": "022789456"},
-]
-
-df_prov = pd.DataFrame(proveedores_raw)
-
-# Agrupar por RUC — survivorship: SAP como fuente autoritativa
-def golden_proveedor(grupo):
-    prioridad = {"SAP": 3, "Oracle": 2, "Portal": 1}
-    grupo_sorted = grupo.sort_values("fuente",
-                       key=lambda x: x.map(prioridad).fillna(0), ascending=False)
-    golden = {
-        "ruc":      grupo_sorted.iloc[0]["ruc"],
-        "nombre":   grupo_sorted.iloc[0]["nombre"],
-        "emails":   list(grupo["contacto"].dropna().unique()),
-        "telefono": grupo_sorted.iloc[0]["telefono"],
-        "fuentes":  list(grupo["fuente"].unique()),
-        "n_registros_merged": len(grupo),
-        "_id": f"GP-{hashlib.md5(grupo_sorted.iloc[0]['ruc'].encode()).hexdigest()[:8].upper()}",
-    }
-    return pd.Series(golden)
-
-golden_proveedores = df_prov.groupby("ruc", group_keys=False).apply(golden_proveedor)
-golden_proveedores = golden_proveedores.reset_index(drop=True)
-
-print(f"\n  Registros fuente: {len(df_prov)}")
-print(f"  Golden records:   {len(golden_proveedores)}")
-print(f"  Deduplicacion:    {len(df_prov) - len(golden_proveedores)} registros mergeados")
-print(f"\n  Golden records construidos:")
-for _, row in golden_proveedores.iterrows():
-    print(f"\n  [{row['_id']}] RUC: {row['ruc']}")
-    print(f"    Nombre:   {row['nombre']}")
-    print(f"    Emails:   {row['emails']}")
-    print(f"    Fuentes:  {row['fuentes']} ({row['n_registros_merged']} registros mergeados)")
-
-# ================================================
-# CUMPLIMIENTO LOPDP: INVENTARIO PII
-# ================================================
-print("\n--- INVENTARIO PII FAVORITA (LOPDP) ---")
-
-inventario_pii = [
-    {"sistema": "CRM Salesforce",  "campo": "cedula/pasaporte",
-     "categoria": "Identificador",  "sensibilidad": "ORDINARIO",
-     "proposito": "Identificacion unica cliente",
-     "base_legal": "Ejecucion contrato (tarjeta Mi Favorita)",
-     "retencion": "Vigencia relacion + 5 anos", "cifrado": True},
-    {"sistema": "CRM Salesforce",  "campo": "historial_compras",
-     "categoria": "Comportamiento", "sensibilidad": "ORDINARIO",
-     "proposito": "Personalizacion ofertas y puntos",
-     "base_legal": "Consentimiento explicito al registrarse",
-     "retencion": "5 anos desde ultima compra", "cifrado": False},
-    {"sistema": "App MiFavorita",  "campo": "ubicacion_gps",
-     "categoria": "Datos de ubicacion", "sensibilidad": "ORDINARIO",
-     "proposito": "Tienda mas cercana y delivery",
-     "base_legal": "Consentimiento granular (opt-in en app)",
-     "retencion": "30 dias", "cifrado": True},
-    {"sistema": "SAP HCM",         "campo": "datos_medicos_empleados",
-     "categoria": "Salud",          "sensibilidad": "SENSIBLE",
-     "proposito": "Gestion ausencias y licencias medicas",
-     "base_legal": "Obligacion legal (Codigo Trabajo)",
-     "retencion": "10 anos post-desvinculacion", "cifrado": True},
-    {"sistema": "SAP HCM",         "campo": "salarios_nomina",
-     "categoria": "Financiero personal", "sensibilidad": "SENSIBLE",
-     "proposito": "Pago de nomina",
-     "base_legal": "Ejecucion contrato laboral",
-     "retencion": "7 anos (tributario)", "cifrado": True},
-    {"sistema": "Camaras tiendas", "campo": "video_vigilancia",
-     "categoria": "Biometrico/video", "sensibilidad": "SENSIBLE",
-     "proposito": "Seguridad instalaciones",
-     "base_legal": "Interes legitimo + aviso visible",
-     "retencion": "30 dias", "cifrado": False},
-]
-
-df_pii = pd.DataFrame(inventario_pii)
-print(f"\n  {'Sistema':<20} {'Campo':<28} {'Sensibilidad':<12} {'Cifrado'}")
-print(f"  {'-'*72}")
-for _, row in df_pii.iterrows():
-    cifrado_str = "SI" if row["cifrado"] else "NO [REVISAR]"
-    print(f"  {row['sistema']:<20} {row['campo']:<28} "
-          f"{row['sensibilidad']:<12} {cifrado_str}")
-
-sin_cifrar = df_pii[~df_pii["cifrado"]]
-print(f"\n  Activos PII sin cifrado: {len(sin_cifrar)}")
-for _, row in sin_cifrar.iterrows():
-    print(f"  ACCION REQUERIDA: Cifrar '{row['campo']}' en {row['sistema']}")
-
-# ================================================
-# DASHBOARD EJECUTIVO PROGRAMA GOBIERNO
-# ================================================
-print("\n--- DASHBOARD EJECUTIVO — GOBIERNO DE DATOS ---")
-
-np.random.seed(99)
-trimestres = ["Q1 2023", "Q2 2023", "Q3 2023", "Q4 2023", "Q1 2024"]
-
-programa = {
-    "madurez_global":        [1.4, 1.7, 2.1, 2.4, 2.7],
-    "score_calidad_global":  [0.79, 0.83, 0.87, 0.91, 0.93],
-    "issues_abiertos":       [187, 142, 98, 63, 41],
-    "activos_catalogados":   [120, 210, 340, 480, 580],
-    "sla_cumplimiento":      [0.55, 0.65, 0.74, 0.82, 0.89],
-    "costo_datos_malos_mk":  [2.1, 1.8, 1.4, 1.0, 0.7],  # millones USD
-}
-
-df_prog = pd.DataFrame(programa, index=trimestres)
-
-print(f"\n  {df_prog.to_string()}")
-
-print(f"\n  Impacto del programa (Q1 2023 → Q1 2024):")
-print(f"    Madurez:      1.4 → 2.7 (Nivel 1 Ad-Hoc → Nivel 3 Proactivo)")
-print(f"    Calidad:      79% → 93% (+14 puntos)")
-print(f"    Issues:       187 → 41 abiertos (-78%)")
-print(f"    Catalogo:     120 → 580 activos documentados (+383%)")
-print(f"    Costo datos malos: $2.1M → $0.7M/trimestre (-67%, ahorro $5.6M/ano)")
-
-roi_inversion  = 450_000   # USD — costo del programa 12 meses
-roi_ahorro_ano = 5_600_000  # USD — ahorro anual por mejora calidad
-roi_ratio      = roi_ahorro_ano / roi_inversion
-print(f"\n  ROI del programa:")
-print(f"    Inversion 12 meses:  ${roi_inversion:,}")
-print(f"    Ahorro anual:        ${roi_ahorro_ano:,}")
-print(f"    ROI:                 {roi_ratio:.1f}x ({roi_ratio*100-100:.0f}%)")
-print(f"    Payback:             {12/roi_ratio:.1f} meses")
-
-# ================================================
-# OBSERVABILIDAD DEL PROGRAMA
-# ================================================
-print("\n--- OBSERVABILIDAD DEL PROGRAMA ---")
-
-observabilidad = {
-    "gobierno": {
-        "nivel_madurez":        2.7,
-        "meta_q2_2024":         3.0,
-        "comites_celebrados":   5,
-        "politicas_activas":    14,
-        "stewards_certificados": 8,
+criterios_evaluacion = {
+    "Estrategia y liderazgo datos": {
+        "score": 1.0, "peso": 0.20,
+        "evidencia": "No hay CDO, no hay politica de datos, datos no en agenda Directorio",
+        "target_12m": 3.0
     },
-    "calidad": {
-        "score_global":          score_real,
-        "sla_target":            0.96,
-        "dominios_en_sla":       sum(1 for d in DOMINIOS_FAVORITA.values()
-                                     if d["sla_calidad"] <= 0.97),
-        "issues_criticos":       2,
-        "tiempo_resolucion_h":   31,
+    "Calidad de datos": {
+        "score": 1.5, "peso": 0.20,
+        "evidencia": "Sin metricas de calidad, datos duplicados conocidos, sin data stewards",
+        "target_12m": 3.5
     },
-    "catalogo": {
-        "total_activos":         len(catalogo.activos),
-        "auditados":             len([a for a in catalogo.activos.values()
-                                      if a.score_calidad is not None]),
-        "con_tag_pii":           len([a for a in catalogo.activos.values()
-                                      if "PII" in a.tags]),
-        "cobertura_criticos":    "87.5%",
+    "Arquitectura e integracion": {
+        "score": 2.0, "peso": 0.15,
+        "evidencia": "4 sistemas sin integracion, datos maestros no sincronizados",
+        "target_12m": 3.0
     },
-    "privacidad": {
-        "activos_pii_inventariados": len(inventario_pii),
-        "activos_sin_cifrar":         len(sin_cifrar),
-        "dpo_nombrado":               True,
-        "dpias_completados":          3,
-        "solicitudes_arco_ytd":       127,
-        "tasa_sla_arco":              0.89,
+    "Seguridad y privacidad (LOPDP)": {
+        "score": 1.0, "peso": 0.20,
+        "evidencia": "Sin politica privacidad, sin base legal documentada, sin DPD",
+        "target_12m": 4.0
     },
-    "mdm": {
-        "golden_records_clientes": 4_987_234,
-        "tasa_duplicados":         0.008,
-        "golden_records_proveedores": len(golden_proveedores),
-        "fuentes_integradas":      4,
-        "score_confianza_prom":    0.912,
+    "Catalogo y metadata": {
+        "score": 1.0, "peso": 0.10,
+        "evidencia": "Sin diccionario de datos, sin glosario de negocio",
+        "target_12m": 3.0
+    },
+    "Datos maestros (MDM)": {
+        "score": 1.5, "peso": 0.15,
+        "evidencia": "Mismo cliente en 4 sistemas, sin golden record, sin MDM",
+        "target_12m": 3.5
     },
 }
 
-for categoria, metricas in observabilidad.items():
-    print(f"\n  [{categoria.upper()}]")
-    for k, v in metricas.items():
-        print(f"    {k:<35}: {v}")
+niveles_madurez = {1: "Ad Hoc", 2: "Consciente", 3: "Proactivo",
+                   4: "Gestionado", 5: "Optimizado"}
 
-print("\n" + "=" * 70)
-print("GOBIERNO DE DATOS EMPRESARIAL — LOGROS DEL PROYECTO:")
-print("  Arquitectura: 6 dominios, 8 stewards, comite gobierno activo")
-print("  Catalogo:     8 activos criticos documentados con score de calidad")
-print("  Calidad:      score 79% → 93% en 4 trimestres")
-print("  MDM:          deduplicacion proveedores — 6 registros → 3 golden records")
-print("  Privacidad:   inventario PII completo, 2 activos identificados sin cifrar")
-print("  ROI:          12.4x — payback en 1 mes (ahorro $5.6M/ano)")
-print("  LOPDP:        DPO nombrado, 3 DPIAs, tasa ARCO 89%")
-print("=" * 70)
+score_actual  = sum(c["score"] * c["peso"] for c in criterios_evaluacion.values())
+score_target  = sum(c["target_12m"] * c["peso"] for c in criterios_evaluacion.values())
+
+print(f"\nEVALUACION DE MADUREZ — Tecnicentro S.A.")
+print(f"{'Criterio':<35} {'Score':>6} {'Meta12m':>8} {'Brecha':>8}")
+print("-" * 60)
+for criterio, datos in criterios_evaluacion.items():
+    brecha = datos['target_12m'] - datos['score']
+    print(f"  {criterio:<33} {datos['score']:>6.1f} {datos['target_12m']:>8.1f} {brecha:>+8.1f}")
+
+print(f"\n  SCORE ACTUAL : {score_actual:.2f} / 5.00  — Nivel {int(score_actual)} ({niveles_madurez[int(score_actual)]})")
+print(f"  SCORE TARGET : {score_target:.2f} / 5.00  — Nivel {int(score_target)} ({niveles_madurez[int(score_target)]})")
+print(f"  MEJORA ESPERADA: +{score_target-score_actual:.2f} puntos en 12 meses")
 ```
 
-2. Implementa el modulo de alertas de gobierno: detecta automaticamente activos que caen por debajo de su SLA de calidad, notifica al steward lider con el detalle del incumplimiento y genera el plan de accion en formato ejecutivo para el CDO con prioridades y responsables.
+### Componente 2: DQS del Dataset de Clientes
 
-3. Agrega el generador de informe ejecutivo trimestral completo: dado el estado del programa, genera el documento de presentacion para el Directorio de La Favorita con: resumen ejecutivo (3 bullet points), estado de cumplimiento regulatorio (LOPDP, SRI, ARCSA), KPIs del programa con tendencia, top 3 logros del trimestre, top 3 riesgos con mitigacion, y plan de trabajo del siguiente trimestre.
+```python
+# ============================================================
+# COMPONENTE 2: Medir Calidad del Dataset de Clientes
+# ============================================================
+
+# Generar dataset de clientes Tecnicentro con problemas reales
+N = 1000
+
+clientes_df = pd.DataFrame({
+    "cedula":          [f"17{i:08d}" for i in range(N)],
+    "nombre":          [f"Cliente_{i:04d}" for i in range(N)],
+    "email":           [f"cliente{i}@gmail.com" for i in range(N)],
+    "telefono":        [f"09{np.random.randint(10000000, 99999999)}" for _ in range(N)],
+    "ciudad":          np.random.choice(['Quito', 'Guayaquil', 'Cuenca',
+                                          'Ambato', 'Manta'], N),
+    "marca_vehiculo":  np.random.choice(['Toyota', 'Chevrolet', 'Kia',
+                                          'Mazda', 'Hyundai', 'Volkswagen'], N),
+    "ultimo_servicio": pd.to_datetime([
+        (datetime.now() - timedelta(days=np.random.randint(30, 1095))).date()
+        for _ in range(N)
+    ]),
+    "valor_historico_usd": np.random.lognormal(5.5, 0.8, N).round(2),
+})
+
+# Introducir errores tipicos de un CRM ecuatoriano
+for i in np.random.choice(N, 120, replace=False):
+    clientes_df.loc[i, 'email'] = np.nan
+for i in np.random.choice(N, 80, replace=False):
+    clientes_df.loc[i, 'telefono'] = np.nan
+for i in np.random.choice(N, 20, replace=False):
+    clientes_df.loc[i, 'cedula'] = clientes_df.loc[np.random.randint(0, i+1), 'cedula']
+for i in np.random.choice(N, 25, replace=False):
+    clientes_df.loc[i, 'email'] = "sinArrobaEmail.ec"
+for i in np.random.choice(N, 15, replace=False):
+    clientes_df.loc[i, 'valor_historico_usd'] = -abs(clientes_df.loc[i, 'valor_historico_usd'])
+
+print(f"\nDataset Clientes Tecnicentro: {len(clientes_df)} registros")
+
+# Framework DQS (reutilizando conceptos de sesion 4)
+def calcular_dqs_tecnicentro(df):
+    n = len(df)
+    patron_email = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
+
+    completitud = np.mean([
+        df['cedula'].notna().sum() / n,
+        df['nombre'].notna().sum() / n,
+        df['email'].notna().sum() / n,
+        df['telefono'].notna().sum() / n,
+    ])
+
+    unicidad = df['cedula'].nunique() / n
+
+    emails_ok = (df['email'].dropna()
+                 .apply(lambda x: bool(re.match(patron_email, str(x)))).mean())
+    cedulas_ok = (df['cedula'].astype(str)
+                  .apply(lambda x: len(x.strip()) == 10 and x.strip().isdigit()).mean())
+    validez = np.mean([emails_ok, cedulas_ok])
+
+    exactitud = (df['valor_historico_usd'] > 0).mean()
+
+    al_menos_contacto = (df['email'].notna() | df['telefono'].notna()).mean()
+    consistencia = al_menos_contacto
+
+    pesos = {'completitud': 0.30, 'unicidad': 0.25, 'validez': 0.20,
+             'exactitud': 0.15, 'consistencia': 0.10}
+
+    scores = {'completitud': completitud, 'unicidad': unicidad,
+              'validez': validez, 'exactitud': exactitud, 'consistencia': consistencia}
+    dqs = sum(pesos[d] * scores[d] for d in pesos)
+    return scores, dqs
+
+scores, dqs = calcular_dqs_tecnicentro(clientes_df)
+nivel_dqs = "EXCELENTE" if dqs > 0.90 else "BUENO" if dqs > 0.80 else "ACEPTABLE" if dqs > 0.70 else "DEFICIENTE"
+
+print(f"\nDQS CLIENTES TECNICENTRO")
+print(f"{'Dimension':<15}: {'Score':>8}   {'Estado':>10}")
+print("-" * 40)
+for dim, s in scores.items():
+    estado = "CRITICO" if s < 0.70 else "ALERTA" if s < 0.85 else "OK"
+    print(f"  {dim:<15}: {s:>8.2%}   {estado:>10}")
+print(f"\n  DQS GLOBAL: {dqs:.2%}  ({nivel_dqs})")
+print(f"  Registros en riesgo: ~{int((1-dqs)*N)}")
+```
+
+### Componente 3: Golden Record de Clientes (MDM)
+
+```python
+# ============================================================
+# COMPONENTE 3: Golden Record — MDM Clientes Tecnicentro
+# ============================================================
+
+# Simular el mismo cliente en los 4 sistemas
+cliente_master = {
+    'SAP_ERP': {
+        'id': 'SAP-C-004521', 'cedula': '1712345678',
+        'nombre': 'MARIA ELENA TORRES SALAZAR',
+        'email': 'metorres@empresa.com', 'telefono': '099-456-7890',
+        'ciudad': 'Quito', 'fecha_reg': '2018-03-15'
+    },
+    'HubSpot_CRM': {
+        'id': 'HS-78432', 'cedula': '1712345678',
+        'nombre': 'Maria Torres',               # Nombre incompleto
+        'email': 'metorres@empresa.com', 'telefono': '0994567890',
+        'ciudad': 'Quito', 'fecha_reg': '2019-07-22'
+    },
+    'Sistema_Citas': {
+        'id': 'CIT-12901', 'cedula': '171234567 8',  # Espacio en cedula
+        'nombre': 'maria elena torres s.',
+        'email': None, 'telefono': '099 456 78 90',
+        'ciudad': 'QUITO', 'fecha_reg': '2020-01-10'
+    },
+    'Monica_Contabilidad': {
+        'id': 'MON-3344', 'cedula': '1712345678',
+        'nombre': 'Torres Salazar Maria Elena',  # Orden invertido
+        'email': 'metorres@empresa.com', 'telefono': '022345678',  # Telefono convencional
+        'ciudad': 'Quito', 'fecha_reg': '2018-04-01'
+    },
+}
+
+TRUST = {
+    'SAP_ERP':             {'cedula': 1.0, 'nombre': 0.9, 'email': 1.0, 'telefono': 0.9, 'fecha': 1.0},
+    'HubSpot_CRM':         {'cedula': 1.0, 'nombre': 0.7, 'email': 0.95,'telefono': 0.85,'fecha': 0.8},
+    'Sistema_Citas':       {'cedula': 0.6, 'nombre': 0.6, 'email': 0.3, 'telefono': 0.7, 'fecha': 0.7},
+    'Monica_Contabilidad': {'cedula': 1.0, 'nombre': 0.8, 'email': 0.9, 'telefono': 0.5, 'fecha': 0.9},
+}
+
+def norm_cedula(v):
+    return str(v).replace(' ', '').replace('-', '').strip() if v else None
+
+def norm_nombre(v):
+    return ' '.join(str(v).upper().strip().split()) if v else None
+
+def norm_tel(v):
+    if not v: return None
+    t = str(v).replace(' ','').replace('-','')
+    return t if len(t) == 10 else None
+
+golden_record = {}
+campos_trust = {'cedula': 'cedula', 'nombre': 'nombre',
+                'email': 'email', 'telefono': 'telefono'}
+
+for campo, trust_key in campos_trust.items():
+    candidatos = []
+    for sistema, datos in cliente_master.items():
+        val = datos.get(campo)
+        if val:
+            if campo == 'cedula':   val = norm_cedula(val)
+            elif campo == 'nombre': val = norm_nombre(val)
+            elif campo == 'telefono': val = norm_tel(val)
+            if val:
+                candidatos.append((val, TRUST[sistema][trust_key], sistema))
+
+    if candidatos:
+        mejor = max(candidatos, key=lambda x: x[1])
+        golden_record[campo] = {'valor': mejor[0], 'fuente': mejor[2], 'confianza': mejor[1]}
+
+# Fecha: tomar la mas antigua
+fechas = [(datos['fecha_reg'], sistema) for sistema, datos in cliente_master.items()]
+fecha_min = min(fechas, key=lambda x: x[0])
+golden_record['primer_registro'] = {'valor': fecha_min[0], 'fuente': fecha_min[1], 'confianza': 0.95}
+
+print(f"\nGOLDEN RECORD — Maria Elena Torres")
+print("=" * 55)
+for campo, datos in golden_record.items():
+    print(f"  {campo:<20}: {datos['valor']:<35} [fuente: {datos['fuente']}, trust: {datos['confianza']:.0%}]")
+```
+
+### Componente 4: Compliance LOPDP y Presupuesto
+
+```python
+# ============================================================
+# COMPONENTE 4: Compliance LOPDP + Presupuesto CDO
+# ============================================================
+
+# Estado de compliance LOPDP para Tecnicentro
+compliance_items = {
+    "Politica de privacidad publicada":    {'estado': 'FALTANTE', 'riesgo': 'ALTO',  'plazo_dias': 30},
+    "Aviso de privacidad en formularios":  {'estado': 'FALTANTE', 'riesgo': 'ALTO',  'plazo_dias': 45},
+    "DPD nombrado (Art. 28 LOPDP)":       {'estado': 'FALTANTE', 'riesgo': 'MEDIO', 'plazo_dias': 60},
+    "Registro de Actividades (RAT)":       {'estado': 'FALTANTE', 'riesgo': 'ALTO',  'plazo_dias': 90},
+    "Consentimientos de marketing":        {'estado': 'INCOMPLETO','riesgo': 'ALTO', 'plazo_dias': 45},
+    "Proceso derechos ARCO":               {'estado': 'FALTANTE', 'riesgo': 'ALTO',  'plazo_dias': 60},
+    "Medidas tecnicas seguridad (cifrado)": {'estado': 'INCOMPLETO', 'riesgo': 'MEDIO', 'plazo_dias': 120},
+    "Contrato encargados de tratamiento":  {'estado': 'FALTANTE', 'riesgo': 'MEDIO', 'plazo_dias': 90},
+}
+
+# Facturacion Tecnicentro estimada: $8M/ano
+# Multa max LOPDP: 2% facturacion = $160,000
+facturacion_anual = 8_000_000
+multa_maxima      = facturacion_anual * 0.02
+
+print(f"\nCOMPLIANCE LOPDP — Tecnicentro S.A.")
+print(f"Multa maxima potencial: ${multa_maxima:,.0f}")
+print(f"{'Requisito LOPDP':<45} {'Estado':>12} {'Plazo':>10}")
+print("-" * 70)
+
+items_compliance = [
+    ("Politica de privacidad publicada",      "FALTANTE",   30),
+    ("Aviso privacidad en formularios web",   "FALTANTE",   45),
+    ("DPD nombrado (Art. 28 LOPDP)",          "FALTANTE",   60),
+    ("Registro de Actividades RAT",           "FALTANTE",   90),
+    ("Consentimientos email marketing",       "INCOMPLETO", 45),
+    ("Proceso de derechos ARCO",              "FALTANTE",   60),
+    ("Cifrado datos sensibles",               "INCOMPLETO", 120),
+    ("Contratos encargados tratamiento",      "FALTANTE",   90),
+]
+
+for req, estado, dias in items_compliance:
+    icon = "CRITICO" if estado == "FALTANTE" else "ALERTA"
+    print(f"  [{icon}] {req:<43} {estado:>12}   {dias} dias")
+
+# Presupuesto CDO $80,000 / ano
+print(f"\nPRESUPUESTO CDO — $80,000 primer ano")
+print("-" * 50)
+presupuesto = [
+    ("Herramienta catalogo datos (DataHub OSS)", 0),
+    ("Herramienta DQ automatica (Great Expectations)", 0),
+    ("Consultoria legal LOPDP (3 meses)", 8_000),
+    ("Capacitacion equipo (workshops 2)", 3_000),
+    ("Salario Data Steward (12 meses)", 18_000),
+    ("Herramienta MDM (Talend Community)", 0),
+    ("Infraestructura (nube, pipelines)", 12_000),
+    ("Auditoria LOPDP externa (1 vez)", 6_000),
+    ("CDO salario propio (incluido en directivos)", 0),
+    ("Contingencias (15%)", 0),
+]
+total_hard = sum(v for _, v in presupuesto)
+contingencias = int(total_hard * 0.15)
+total = total_hard + contingencias
+
+for item, costo in presupuesto:
+    if costo > 0:
+        print(f"  {item:<50}: ${costo:>8,}")
+print(f"  {'Contingencias (15%)':<50}: ${contingencias:>8,}")
+print(f"  {'TOTAL':<50}: ${total:>8,}")
+print(f"  {'Saldo disponible':<50}: ${80_000 - total:>8,}")
+```
+
+### Componente 5: Roadmap 12 Meses y ROI
+
+```python
+# ============================================================
+# COMPONENTE 5: Roadmap 12 Meses + ROI + Dashboard Ejecutivo
+# ============================================================
+
+roadmap = {
+    "Fase 1 — Fundacion (Meses 1-3)": {
+        "presupuesto_k": 15,
+        "hitos": [
+            "Inventario completo de activos de datos (ERP, CRM, Citas, Contabilidad)",
+            "Evaluacion DQS baseline publicada al Directorio",
+            "Politica de privacidad LOPDP publicada en web",
+            "DPD nombrado y notificado a la ADPP",
+            "Comite de datos formado (CDO + 4 data stewards departamentales)",
+        ],
+        "kpi_meta": {"DQS": "Medir baseline", "LOPDP_items_ok": 3, "Duplicados_conocidos": "Mapear"}
+    },
+    "Fase 2 — Visibilidad (Meses 4-7)": {
+        "presupuesto_k": 25,
+        "hitos": [
+            "Golden Record para 180,000 clientes (MDM Fase 1)",
+            "DQS automatizado con alertas semanales",
+            "Catalogo de datos: 50 datasets documentados",
+            "Proceso ARCO operativo con SLA 15 dias habiles",
+            "RAT (Registro Actividades Tratamiento) completo",
+        ],
+        "kpi_meta": {"DQS": "> 85%", "LOPDP_items_ok": 7, "Duplicados_conocidos": "< 2%"}
+    },
+    "Fase 3 — Control (Meses 8-12)": {
+        "presupuesto_k": 35,
+        "hitos": [
+            "Integracion SAP-HubSpot-Citas: vista 360 cliente en tiempo real",
+            "Dashboard ventas con datos confiables (campana reactivacion vehiculos >3 anos)",
+            "Auditoria LOPDP externa superada",
+            "Score de madurez = 3.5 (Proactivo)",
+            "Primer informe gobierno datos al Directorio",
+        ],
+        "kpi_meta": {"DQS": "> 92%", "LOPDP_items_ok": 8, "Clientes_360": "100%"}
+    }
+}
+
+# ROI del programa
+print("\nANALISIS DE ROI — Programa Gobierno de Datos")
+print("=" * 55)
+
+beneficios_anuales = {
+    "Campana reactivacion clientes (vehiculos >3 anos sin servicio)":
+        {'valor': 45_000, 'descripcion': "5% de 9,000 clientes inactivos x $100 servicio promedio"},
+    "Reduccion errores facturacion SAP (datos sucios)":
+        {'valor': 12_000, 'descripcion': "80h/mes x $12.5/h ingeniero + multas contables evitadas"},
+    "Evitar multa LOPDP (compliance preventivo)":
+        {'valor': 80_000, 'descripcion': "50% del riesgo de multa maxima $160K evitado"},
+    "Reduccion tiempo analitica (de 3 semanas a 3 dias)":
+        {'valor': 18_000, 'descripcion': "2 analistas x 40h/mes ahorradas x $12.5/h x 12 meses"},
+    "Reduccion duplicados en envios marketing":
+        {'valor': 6_000, 'descripcion': "20% reduccion costo email marketing por lista limpia"},
+}
+
+total_beneficios = sum(b['valor'] for b in beneficios_anuales.values())
+costo_programa   = total  # de la celda anterior
+
+roi = (total_beneficios - costo_programa) / costo_programa * 100
+payback_meses = (costo_programa / total_beneficios) * 12
+
+print(f"{'Beneficio':<55} {'Valor USD':>10}")
+print("-" * 68)
+for nombre, datos in beneficios_anuales.items():
+    print(f"  {nombre[:53]:<53}: ${datos['valor']:>8,}")
+print(f"\n  {'TOTAL BENEFICIOS ANUALES':<53}: ${total_beneficios:>8,}")
+print(f"  {'COSTO PROGRAMA':<53}: ${costo_programa:>8,}")
+print(f"\n  ROI                   : {roi:.0f}%")
+print(f"  Payback               : {payback_meses:.1f} meses")
+print(f"  Recomendacion         : {'APROBAR' if roi > 100 else 'EVALUAR'} el programa")
+
+# Dashboard ejecutivo final
+fig, axes = plt.subplots(2, 2, figsize=(14, 10))
+
+# Panel 1: Madurez actual vs target
+categorias_mad = list(criterios_evaluacion.keys())
+scores_actuales = [criterios_evaluacion[c]['score'] for c in categorias_mad]
+scores_target12 = [criterios_evaluacion[c]['target_12m'] for c in categorias_mad]
+x = np.arange(len(categorias_mad))
+w = 0.35
+ax1 = axes[0][0]
+ax1.bar(x - w/2, scores_actuales, w, label='Actual', color='#F0846D', alpha=0.85)
+ax1.bar(x + w/2, scores_target12, w, label='Target 12m', color='#73B8E7', alpha=0.85)
+ax1.set_xticks(x)
+ax1.set_xticklabels([c[:15] for c in categorias_mad], rotation=25, ha='right', fontsize=7)
+ax1.set_ylabel('Nivel de Madurez (1-5)')
+ax1.set_title('Madurez: Actual vs Target 12 meses')
+ax1.legend()
+ax1.set_ylim(0, 5.5)
+ax1.grid(True, alpha=0.3, axis='y')
+
+# Panel 2: DQS por dimension
+dims_vis = list(scores.keys())
+sc_vis   = list(scores.values())
+cols_vis = ['#F0846D' if s < 0.70 else '#FBBC0C' if s < 0.85 else '#73B8E7' for s in sc_vis]
+brs = axes[0][1].barh(dims_vis, sc_vis, color=cols_vis, height=0.5)
+axes[0][1].axvline(0.85, color='#1F2F58', linestyle='--', lw=1.5)
+for b, s in zip(brs, sc_vis):
+    axes[0][1].text(s + 0.01, b.get_y() + b.get_height()/2,
+                    f'{s:.0%}', va='center', fontsize=9)
+axes[0][1].set_xlim(0, 1.1)
+axes[0][1].set_title(f'DQS Clientes: {dqs:.1%} ({nivel_dqs})')
+axes[0][1].grid(True, alpha=0.3, axis='x')
+
+# Panel 3: Compliance LOPDP
+items_vis = [req for req, _, _ in items_compliance]
+estados_vis = [1 if est == "CUMPLIDO" else 0.5 if est == "INCOMPLETO" else 0
+               for _, est, _ in items_compliance]
+cols_comp = ['#73B8E7' if v == 1 else '#FBBC0C' if v == 0.5 else '#F0846D' for v in estados_vis]
+axes[1][0].barh([i[:30] for i in items_vis], estados_vis, color=cols_comp, height=0.5)
+axes[1][0].set_xlim(0, 1.3)
+axes[1][0].set_title('Estado Compliance LOPDP')
+axes[1][0].axvline(1.0, color='#1F2F58', linestyle='--', lw=1.5)
+axes[1][0].grid(True, alpha=0.3, axis='x')
+
+# Panel 4: ROI waterfall
+categorias_roi = list(beneficios_anuales.keys())
+valores_roi    = [b['valor'] for b in beneficios_anuales.values()]
+colores_roi    = ['#73B8E7'] * len(valores_roi) + ['#F0846D']
+labels_roi     = [c[:20] for c in categorias_roi] + ['COSTO PROGRAMA']
+vals_completos = valores_roi + [-costo_programa]
+axes[1][1].barh(labels_roi, vals_completos,
+                color=['#73B8E7'] * len(valores_roi) + ['#F0846D'])
+axes[1][1].axvline(0, color='gray', linewidth=0.8)
+axes[1][1].set_title(f'ROI Programa: {roi:.0f}% | Payback: {payback_meses:.1f} meses')
+axes[1][1].set_xlabel('USD')
+axes[1][1].grid(True, alpha=0.3, axis='x')
+
+plt.suptitle('Dashboard Ejecutivo — Gobierno de Datos Tecnicentro S.A. | ITSEIA P5',
+             color='gray', fontsize=11)
+plt.tight_layout()
+plt.show()
+
+# Resumen ejecutivo final
+print("\nRESUMEN EJECUTIVO — Para presentar al Directorio")
+print("=" * 65)
+print(f"Madurez actual  : {score_actual:.1f}/5 (Ad Hoc) → Target: {score_target:.1f}/5 (Proactivo) en 12 meses")
+print(f"DQS clientes    : {dqs:.1%} ({nivel_dqs}) — {int((1-dqs)*N)} registros con riesgo")
+print(f"LOPDP compliance: {len([i for _,e,_ in items_compliance if e=='CUMPLIDO'])}/{len(items_compliance)} items ok — multa potencial ${multa_maxima:,}")
+print(f"Presupuesto 1er ano: ${total:,} (de $80,000 disponibles — ${80_000-total:,} reserva)")
+print(f"ROI proyectado  : {roi:.0f}% — recuperacion en {payback_meses:.1f} meses")
+print(f"\nDecision recomendada: APROBAR programa y contratar Data Steward inmediatamente")
+```
 
 ## Usa IA para...
 
-> Abre Gemini y escribe:
-> "Soy el CDO de Corporacion La Favorita. Tenemos 5 millones de clientes en nuestra tarjeta de lealtad Mi Favorita. Quiero usar esos datos para: 1) personalizar ofertas por cliente en tiempo real (que producto ofrecerle cuando entra a la tienda segun su historial), 2) predecir que clientes van a desertar en los proximos 3 meses para retenerlos, 3) optimizar el surtido de cada tienda basado en el perfil demografico del barrio. El problema legal: la LOPDP me pide que solo use los datos para el proposito para el que el cliente dio su consentimiento (comprar con puntos). ¿Puedo hacer estas 3 cosas con los datos actuales? Si no, ¿que consentimientos adicionales necesito y como los capturo sin perder clientes? ¿Como implemento 'Privacy by Design' en el sistema de recomendaciones para que nunca use datos sin base legal?"
+> Abre ChatGPT y escribe:
+> "Soy el CDO de Tecnicentro S.A., cadena de talleres automotrices con 35 sucursales en Ecuador. Mi programa de gobierno de datos tiene DQS inicial de [tu resultado], ROI proyectado de [tu resultado]% y necesita $[tu resultado] en presupuesto. Tengo que presentar esto al Directorio en 15 minutos. Los directores no saben de datos. Dame: (1) los 3 argumentos mas convincentes para un CEO que solo habla de ventas y margen, (2) los 3 riesgos mas concretos si NO aprueban el programa (en dolares y en clientes perdidos), (3) la diapositiva de titulo y la de 'next steps' para mi presentacion. Usa lenguaje de negocio, cero tecnicismos."
 
 Despues de leer la respuesta:
-- Implementa el motor de verificacion de base legal: antes de usar cualquier dato de cliente en un proceso analitico, verifica que existe base legal documentada para ese proposito especifico y rechaza el proceso si no la hay.
-- Agrega el sistema de gestion de consentimientos: permite registrar, actualizar y revocar consentimientos por tipo de uso, y genera el reporte de cobertura de consentimientos por segmento de cliente.
+- Agrega una celda markdown con el pitch de 2 minutos que darias al Directorio.
+- Define los 3 KPIs que reportarias trimestralmente y por que esos 3 y no otros.
 
 ## Que aprendiste
 
-- El gobierno de datos empresarial no es un proyecto puntual — es un programa continuo con madurez creciente.
-- El catalogo de datos sin auditoria de calidad es solo un inventario — la calidad con SLA lo convierte en gobierno real.
-- El MDM de proveedores es tan critico como el de clientes — un RUC duplicado genera pagos dobles.
-- La LOPDP no solo regula que datos tener sino para que usarlos — la base legal es por proposito, no por dato.
-- El ROI del gobierno de datos es medible: costo datos malos ($2.1M/trimestre) vs inversion programa ($450K/ano).
-- El dashboard ejecutivo convierte tecnica en negocio — el Directorio necesita ROI y riesgos, no scores tecnicos.
+- Un **programa de gobierno de datos** integra calidad (DQS), MDM (golden record), LOPDP (compliance) y arquitectura (Data Mesh) en un framework cohesivo con ROI demostrable.
+- La **evaluacion de madurez** es el primer paso obligatorio: sin linea de base, no puedes demostrar mejora ni justificar inversion.
+- El **ROI del gobierno de datos** en Ecuador se construye sobre tres pilares: beneficios comerciales (ventas), reduccion de riesgos (multas LOPDP), y eficiencia operativa (menos tiempo en limpieza manual).
+- Un CDO en Ecuador necesita hablar el lenguaje del **CEO y del Directorio**: traduce DQS y madurez a pesos y clientes, no a metricas tecnicas.
+- El **payback** del programa en una empresa mediana ecuatoriana es tipicamente de 6 a 10 meses, lo que hace el caso de inversion robusto.
 
 ## Reto extra
 
-Diseña e implementa el programa de gobierno de datos para el Municipio de Quito (MDMQ): 8 empresas municipales (EMASEO, EPMAPS, EPMMOP, EMT, MetroQuito, Patronato, Zoo, Quitumbe), catalogo de 500+ datasets de servicios ciudadanos, modelo de calidad para datos de ciudadanos con 2.8 millones de registros, MDM del ciudadano de Quito unificando registros de todas las empresas municipales, cumplimiento con LOPDP y transparencia (datos abiertos), sistema de gobierno de datos geoespaciales para la ciudad (SIG, catastro, rutas), y un portal de datos abiertos compatible con datos.quito.gob.ec y el estandar DCAT-AP con 100 datasets certificados de calidad para publicacion al ciudadano.
+Extiende el proyecto para incluir un **sistema de monitoreo continuo**: cada lunes a las 6 AM, el sistema ejecuta automaticamente el DQS de los 4 datasets criticos (clientes, vehiculos, servicios, facturacion), genera un reporte de semaforo por email al CDO y data stewards, y registra el score historico en una tabla para graficar la tendencia mensual. Simula 12 semanas de operacion con mejora gradual del DQS (de 78% a 93%) e incluye 2 eventos de degradacion (un batch de datos malos) con su deteccion y recuperacion.
