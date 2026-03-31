@@ -237,7 +237,7 @@ export default function TeacherDashboardPage() {
           Panel Docente
         </h1>
         <p className="mt-1 text-sm text-gray-500">
-          Bienvenido al panel de gestion de materias y estudiantes
+          Bienvenido al panel de gestión de materias y estudiantes
         </p>
       </div>
 

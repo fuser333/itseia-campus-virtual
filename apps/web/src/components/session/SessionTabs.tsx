@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
+import { useState, useCallback, type ReactNode } from "react";
 import {
   Play,
   Presentation,
@@ -46,7 +46,15 @@ export default function SessionTabs({ tabs, className }: SessionTabsProps) {
     availableTabs[0]?.id || tabs[0]?.id
   );
 
-  const activeTab = tabs.find((t) => t.id === activeTabId);
+  // Track which tabs have been visited so we keep them mounted (iframes stay alive)
+  const [visitedTabs, setVisitedTabs] = useState<Set<string>>(
+    new Set([availableTabs[0]?.id || tabs[0]?.id])
+  );
+
+  const handleTabClick = useCallback((tabId: string) => {
+    setActiveTabId(tabId);
+    setVisitedTabs((prev) => new Set(prev).add(tabId));
+  }, []);
 
   // All available tabs except the currently active one — go into the accordion
   const accordionTabs = tabs.filter(
@@ -68,7 +76,7 @@ export default function SessionTabs({ tabs, className }: SessionTabsProps) {
                 <button
                   key={tab.id}
                   onClick={() => {
-                    if (tab.available) setActiveTabId(tab.id);
+                    if (tab.available) handleTabClick(tab.id);
                   }}
                   disabled={!tab.available}
                   className={cn(
@@ -100,17 +108,32 @@ export default function SessionTabs({ tabs, className }: SessionTabsProps) {
       </div>
 
       {/* ── Scrollable body ──────────────────────────────────── */}
-      <div className="flex-1 overflow-y-auto">
+      <div className="flex-1 overflow-y-auto text-[#1F2F58]">
         <div className="mx-auto max-w-4xl px-4 py-6 sm:px-6 lg:px-8 space-y-10">
 
-          {/* Main content — the active tab rendered big */}
-          <section aria-label="Contenido principal">
-            {activeTab?.available ? (
-              activeTab.content
-            ) : (
+          {/* Keep visited tabs mounted but hidden — prevents iframe reload */}
+          {tabs.map((tab) => {
+            const isActive = tab.id === activeTabId;
+            const wasVisited = visitedTabs.has(tab.id);
+            if (!tab.available || !wasVisited) return null;
+
+            return (
+              <section
+                key={tab.id}
+                aria-label={tab.label}
+                style={{ display: isActive ? "block" : "none" }}
+              >
+                {tab.content}
+              </section>
+            );
+          })}
+
+          {/* Show empty state if active tab is not available */}
+          {!tabs.find((t) => t.id === activeTabId)?.available && (
+            <section aria-label="Contenido principal">
               <EmptyState />
-            )}
-          </section>
+            </section>
+          )}
 
           {/* Accordion — all other available tabs */}
           {accordionTabs.length > 0 && (

@@ -73,7 +73,7 @@ export default function ResourceList({
     return (
       <div className="flex h-48 flex-col items-center justify-center gap-3 text-center">
         <Link2 className="size-8 text-[#1F2F58]/20" />
-        <p className="text-sm text-[#1F2F58]/50">
+        <p className="text-sm text-[#1F2F58]/70">
           No hay recursos adicionales para esta sesion.
         </p>
       </div>
@@ -110,7 +110,7 @@ export default function ResourceList({
                 {resource.title}
               </p>
               {resource.description && (
-                <p className="mt-0.5 text-xs text-[#1F2F58]/40 line-clamp-1">
+                <p className="mt-0.5 text-xs text-[#1F2F58]/60 line-clamp-1">
                   {resource.description}
                 </p>
               )}

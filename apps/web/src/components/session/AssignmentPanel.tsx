@@ -182,8 +182,8 @@ export default function AssignmentPanel({
   if (!assignment) {
     return (
       <div className="flex h-64 flex-col items-center justify-center gap-3 text-center">
-        <FileText className="size-8 text-[#1F2F58]/20" />
-        <p className="text-sm text-[#1F2F58]/50">
+        <FileText className="size-8 text-[#1F2F58]/40" />
+        <p className="text-sm text-[#1F2F58]/70">
           Ejercicio no disponible aun.
         </p>
       </div>
@@ -198,7 +198,7 @@ export default function AssignmentPanel({
           {assignment.title}
         </h3>
         {assignment.due_date && (
-          <p className="mt-1 flex items-center gap-1 text-xs text-[#1F2F58]/40">
+          <p className="mt-1 flex items-center gap-1 text-xs text-[#1F2F58]/80">
             <Clock className="size-3" />
             Fecha limite:{" "}
             {new Date(assignment.due_date).toLocaleDateString("es-EC", {
@@ -212,10 +212,10 @@ export default function AssignmentPanel({
 
       {/* Instructions */}
       <div className="rounded-xl border border-[#1F2F58]/8 bg-[#F9F6E7]/30 p-5">
-        <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-[#1F2F58]/40">
+        <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-[#1F2F58]/80">
           Instrucciones
         </p>
-        <div className="prose prose-sm max-w-none prose-headings:text-[#0A1628] prose-p:text-[#1F2F58]/70 prose-li:text-[#1F2F58]/70 prose-code:text-[#F0846D] prose-code:bg-[#1F2F58]/5 prose-code:px-1 prose-code:py-0.5 prose-code:rounded-md prose-code:before:content-none prose-code:after:content-none">
+        <div className="prose prose-sm max-w-none prose-headings:text-[#0A1628] prose-p:text-[#1F2F58] prose-li:text-[#1F2F58] prose-code:text-[#F0846D] prose-code:bg-[#1F2F58]/5 prose-code:px-1 prose-code:py-0.5 prose-code:rounded-md prose-code:before:content-none prose-code:after:content-none">
           <ReactMarkdown>{assignment.instructions_markdown || "No hay instrucciones disponibles."}</ReactMarkdown>
         </div>
       </div>
@@ -322,7 +322,7 @@ export default function AssignmentPanel({
                   <p className="text-sm font-medium text-[#0A1628]">
                     {selectedFile.name}
                   </p>
-                  <p className="text-xs text-[#1F2F58]/40">
+                  <p className="text-xs text-[#1F2F58]/60">
                     {(selectedFile.size / 1024 / 1024).toFixed(2)} MB
                   </p>
                 </div>
@@ -331,18 +331,18 @@ export default function AssignmentPanel({
                     e.stopPropagation();
                     setSelectedFile(null);
                   }}
-                  className="rounded-lg p-1 text-[#1F2F58]/30 hover:bg-[#1F2F58]/5 hover:text-[#1F2F58]"
+                  className="rounded-lg p-1 text-[#1F2F58]/60 hover:bg-[#1F2F58]/5 hover:text-[#1F2F58]"
                 >
                   <X className="size-4" />
                 </button>
               </div>
             ) : (
               <>
-                <Upload className="mx-auto size-8 text-[#1F2F58]/20" />
+                <Upload className="mx-auto size-8 text-[#1F2F58]/40" />
                 <p className="mt-3 text-sm font-medium text-[#0A1628]">
                   Arrastra tu archivo aqui o haz clic para seleccionar
                 </p>
-                <p className="mt-1 text-xs text-[#1F2F58]/40">
+                <p className="mt-1 text-xs text-[#1F2F58]/70">
                   Tipos: {(assignment.allowed_file_types || []).join(", ")} | Max:{" "}
                   {assignment.max_file_size_mb}MB
                 </p>

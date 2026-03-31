@@ -80,7 +80,7 @@ export default function SlideViewer({
             <p className="font-medium text-[#0A1628]">
               No se pudo cargar la presentacion
             </p>
-            <p className="mt-1 text-sm text-[#1F2F58]/50">
+            <p className="mt-1 text-sm text-[#1F2F58]/70">
               Puedes descargarla directamente usando el boton de abajo.
             </p>
           </div>

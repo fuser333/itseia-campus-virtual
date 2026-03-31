@@ -60,7 +60,7 @@ export default function SessionNav({
             >
               <ArrowLeft className="size-4 transition-transform group-hover:-translate-x-0.5" />
               <div className="hidden min-w-0 sm:block">
-                <p className="text-[10px] text-[#1F2F58]/30">Anterior</p>
+                <p className="text-[10px] text-[#1F2F58]/60">Anterior</p>
                 <p className="truncate max-w-[180px] font-medium">
                   {prevSession.title}
                 </p>
@@ -89,7 +89,7 @@ export default function SessionNav({
               className="group inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-[#1F2F58]/50 transition-colors hover:bg-[#1F2F58]/5 hover:text-[#1F2F58]"
             >
               <div className="hidden min-w-0 text-right sm:block">
-                <p className="text-[10px] text-[#1F2F58]/30">Siguiente</p>
+                <p className="text-[10px] text-[#1F2F58]/60">Siguiente</p>
                 <p className="truncate max-w-[180px] font-medium">
                   {nextSession.title}
                 </p>

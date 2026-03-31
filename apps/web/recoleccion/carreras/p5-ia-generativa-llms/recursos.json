@@ -1,0 +1,41 @@
+{
+  "materia": "IA Generativa y LLMs",
+  "periodo": "P5",
+  "recursos": [
+    {
+      "titulo": "Anthropic - Documentacion oficial Claude en español",
+      "url": "https://docs.anthropic.com/es/docs/welcome",
+      "tipo": "documentacion",
+      "idioma": "español",
+      "descripcion": "Documentacion oficial de Anthropic Claude API completamente en español. Cubre Messages API, tool use (function calling), vision multimodal, embeddings y prompt engineering. Acceso gratuito a Claude via API con creditos iniciales. Claude es el modelo IA que usa ITSEIA en su campus virtual. Incluye guias de prompting y mejores practicas."
+    },
+    {
+      "titulo": "OpenAI Cookbook - Recetas practicas con la API de OpenAI",
+      "url": "https://cookbook.openai.com/",
+      "tipo": "tutorial",
+      "idioma": "ingles con comunidad en español",
+      "descripcion": "Repositorio oficial de OpenAI con ejemplos practicos de la API: RAG, function calling, embeddings, fine-tuning y agentes. La comunidad latinohispana traduce los ejemplos en blogs y videos. Buscar 'OpenAI API tutorial español 2024' en YouTube. Acceso gratuito con $5 de creditos iniciales. Notebooks en Google Colab."
+    },
+    {
+      "titulo": "LangChain Academy - Cursos gratuitos de LangChain con subtitulos",
+      "url": "https://academy.langchain.com/",
+      "tipo": "curso",
+      "idioma": "ingles con subtitulos en español",
+      "descripcion": "Plataforma educativa oficial de LangChain con cursos gratuitos sobre LangChain, LangGraph y RAG. Los videos tienen subtitulos automaticos en español de buena calidad. Cursos de LangChain Intro, LangGraph y RAG Architecture completamente gratuitos. La comunidad en YouTube en español cubre los mismos temas con ejemplos locales."
+    },
+    {
+      "titulo": "Ollama - LLMs open source localmente en español",
+      "url": "https://ollama.com/",
+      "tipo": "herramienta",
+      "idioma": "ingles con comunidad en español",
+      "descripcion": "Herramienta gratuita para correr LLMs open source localmente (Llama 3, Mistral, Gemma, Phi). Sin costo de API, sin internet requerido. La comunidad en YouTube en español tiene tutoriales: buscar 'Ollama tutorial español'. Permite fine-tuning local y prototipado sin gastos de API. Compatible con la API de OpenAI para migracion facil."
+    },
+    {
+      "titulo": "SomosIA - Comunidad y recursos de IA Generativa en español LATAM",
+      "url": "https://somosia.org/",
+      "tipo": "comunidad",
+      "idioma": "español",
+      "descripcion": "Comunidad latinoamericana dedicada a la IA generativa en español. Organiza talleres, hackathons y publica recursos educativos gratuitos sobre LLMs, agentes y RAG en contexto latinoamericano. Newsletter semanal con novedades de IA en español. Red de profesionales de IA en Ecuador, Colombia, Mexico y Argentina."
+    }
+  ]
+}

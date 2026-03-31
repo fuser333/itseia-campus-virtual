@@ -115,7 +115,7 @@ export default function FlashcardsPage() {
           </div>
           <div>
             <h1 className="text-xl font-bold text-white">Mi Mazo de Flashcards</h1>
-            <p className="text-sm text-white/70">
+            <p className="text-sm text-white/80">
               {groups.reduce((acc, g) => acc + g.cards.length, 0)} flashcards
               guardadas
             </p>
@@ -132,7 +132,7 @@ export default function FlashcardsPage() {
           <h2 className="text-lg font-semibold text-white mb-2">
             Aun no tienes flashcards
           </h2>
-          <p className="text-sm text-white/60 max-w-md leading-relaxed mb-6">
+          <p className="text-sm text-white/70 max-w-md leading-relaxed mb-6">
             Ve a cualquier sesion de tu carrera, abre el tab AI Lab y genera
             flashcards desde la teoria de la sesion con un clic.
           </p>

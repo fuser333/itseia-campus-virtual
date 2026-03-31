@@ -1,0 +1,79 @@
+{
+  "materia": "Comunicacion Academica y Tecnica",
+  "periodo": 1,
+  "semestre": 1,
+  "criterios_busqueda": [
+    "Escritura tecnica documentacion proyectos informatica español 2022-2024",
+    "Como escribir reportes tecnicos español universitarios",
+    "Comunicacion efectiva en tecnologia presentaciones tecnicas español",
+    "Documentacion software desarrollo profesional español"
+  ],
+  "videos": [
+    {
+      "titulo": "Como Documentar tu Código y Proyectos de Software Correctamente",
+      "url": "https://www.youtube.com/@HolaMundoDev",
+      "canal": "HolaMundo",
+      "duracion_minutos": 20,
+      "año": 2023,
+      "idioma": "español_latam",
+      "usa_ia": false,
+      "justificacion": "HolaMundo es el mayor canal de programacion en español latinoamericano. Tiene contenido específico sobre documentacion tecnica, escritura de README, commits correctos y comunicacion en proyectos de software. Relevante porque en ITSEIA los estudiantes necesitan comunicar proyectos tecnicos de IA.",
+      "notas_adicionales": "ACCION: Buscar en youtube.com/@HolaMundoDev 'documentacion' o 'como documentar' o 'README'. También buscar 'comunicacion tecnica programacion'."
+    },
+    {
+      "titulo": "Escritura Académica para Estudiantes de Tecnología e Ingeniería",
+      "url": "https://www.youtube.com/@PlatziVideo",
+      "canal": "Platzi",
+      "duracion_minutos": 25,
+      "año": 2022,
+      "idioma": "español_latam",
+      "usa_ia": false,
+      "justificacion": "Platzi tiene contenido sobre comunicacion profesional y escritura tecnica para el mundo tecnologico. Sus instructores latinoamericanos explican como redactar informes, presentar proyectos y comunicarse en ambitos academicos y corporativos de tecnologia.",
+      "notas_adicionales": "ACCION: Buscar en el canal de Platzi YouTube temas como 'escritura tecnica', 'presentacion proyectos', 'comunicacion profesional tecnologia'. También revisar Platzi Blog para encontrar el video correspondiente."
+    },
+    {
+      "titulo": "Cómo Hacer una Presentación Técnica Efectiva - Tips para Programadores",
+      "url": "https://www.youtube.com/@mouredev",
+      "canal": "MoureDev by Brais Moure",
+      "duracion_minutos": 15,
+      "año": 2023,
+      "idioma": "español_iberico_comprensible",
+      "usa_ia": false,
+      "justificacion": "MoureDev también tiene contenido sobre comunicacion profesional, como preparar presentaciones tecnicas, documentar proyectos en GitHub, y comunicarse efectivamente como desarrollador. Altamente relevante para la materia de Comunicacion Academica y Tecnica.",
+      "notas_adicionales": "ACCION: Buscar en youtube.com/@mouredev 'presentacion' o 'como comunicar' o 'documentacion proyecto'."
+    }
+  ],
+  "video_recomendado_principal": "A confirmar por búsqueda directa en canal HolaMundo",
+  "razon_seleccion_principal": "HolaMundo es el mejor canal latinoamericano para temas de comunicacion y documentacion tecnica para desarrolladores",
+  "nota_importante": "Esta materia tiene menos representacion en YouTube que las tecnicas. Se recomienda combinar: (1) video sobre documentacion tecnica/codigo, (2) video sobre escritura de informes tecnicos, (3) posiblemente crear contenido propio para ITSEIA complementando los videos encontrados.",
+  "canales_recomendados_busqueda_directa": [
+    {
+      "canal": "HolaMundo",
+      "url_canal": "https://www.youtube.com/@HolaMundoDev",
+      "buscar": "documentacion proyectos comunicacion tecnica README"
+    },
+    {
+      "canal": "MoureDev",
+      "url_canal": "https://www.youtube.com/@mouredev",
+      "buscar": "presentacion proyecto documentacion"
+    },
+    {
+      "canal": "Fazt",
+      "url_canal": "https://www.youtube.com/@Fazt",
+      "buscar": "git github documentacion README proyectos"
+    }
+  ],
+  "alternativa_youtube_verificada": {
+    "descripcion": "Buscar 'escribir documentacion tecnica español' en YouTube filtrando 2022-2024. Tambien 'git commit messages español', 'README perfecto español'",
+    "canales_adicionales": ["SoyDalto", "Victor Robles", "Pildoras Informaticas"]
+  },
+  "fuentes_investigacion": [
+    "https://www.socialmediapymes.com/redaccion-de-documentos-tecnicos/",
+    "https://ceo.uai.cl/wp-content/uploads/2024/03/MANUAL-DE-ESCRITURA-ACADEMICA-UAI-2024-interactivo.pdf",
+    "https://www.webreactiva.com/blog/mejores-canales-youtube-programacion",
+    "https://holamundo.io/category/cursos-de-programacion/"
+  ],
+  "accion_requerida": "PENDIENTE VERIFICACION: Esta materia requiere busqueda directa en los canales. El tema 'comunicacion academica tecnica' tiene menos videos especificos en YouTube. Considerar usar video de documentacion de codigo como proxy practico.",
+  "fecha_investigacion": "2026-03-25",
+  "investigador": "Agente Investigador Externo ITSEIA"
+}

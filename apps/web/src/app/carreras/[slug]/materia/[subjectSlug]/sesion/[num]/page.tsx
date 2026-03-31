@@ -59,32 +59,29 @@ export default function SessionPage({ params }: PageProps) {
     setLoading(true);
     const supabase = createClient();
 
-    // Auth
+    // ─── Grupo 1: Auth (base de todo) ───────────────────────────────────────
     const {
       data: { user },
     } = await supabase.auth.getUser();
-    if (user) {
-      setUserId(user.id);
-      // Fetch profile role
-      const { data: profileData } = await supabase
-        .from("profiles")
-        .select("role")
-        .eq("id", user.id)
-        .single();
-      if (profileData) setUserRole(profileData.role as UserRole);
-    }
+    if (user) setUserId(user.id);
 
-    // Get program (any type — not restricted to 'carrera')
-    const { data: careers } = await supabase
-      .from("programs")
-      .select("id, name, slug")
-      .eq("slug", slug)
-      .limit(1);
-    const career = careers?.[0] || null;
+    // ─── Grupo 2: profile + program en paralelo (ambos independientes) ──────
+    const [profileResult, careersResult] = await Promise.all([
+      user
+        ? supabase.from("profiles").select("role").eq("id", user.id).single()
+        : Promise.resolve({ data: null }),
+      supabase
+        .from("programs")
+        .select("id, name, slug")
+        .eq("slug", slug)
+        .limit(1),
+    ]);
 
+    if (profileResult.data) setUserRole((profileResult.data as { role: UserRole }).role);
+    const career = (careersResult as { data: { id: string; name: string; slug: string }[] | null }).data?.[0] || null;
     if (career) setCareerName(career.name);
 
-    // Get subject — filter by career to avoid duplicates across careers
+    // ─── Grupo 3: semesters (necesita career.id) ────────────────────────────
     let subjectData = null;
     if (career) {
       const { data: semesters } = await supabase
@@ -118,97 +115,109 @@ export default function SessionPage({ params }: PageProps) {
     }
     setSubject(subjectData);
 
-    // Get teacher name if assigned
-    if (subjectData.teacher_id) {
-      const { data: teacherProfile } = await supabase
-        .from("profiles")
-        .select("full_name")
-        .eq("id", subjectData.teacher_id)
-        .single();
-      if (teacherProfile) setTeacherName(teacherProfile.full_name);
-    }
+    // ─── Grupo 4: teacher + semesterNum en paralelo (ambos necesitan subjectData) ──
+    const [teacherResult, semesterResult] = await Promise.all([
+      subjectData.teacher_id
+        ? supabase
+            .from("profiles")
+            .select("full_name")
+            .eq("id", subjectData.teacher_id)
+            .single()
+        : Promise.resolve({ data: null }),
+      supabase
+        .from("semesters")
+        .select("number, program_id")
+        .eq("id", subjectData.semester_id)
+        .limit(1),
+    ]);
 
-    // Get semester number and check enrollment
-    const { data: semesterArr } = await supabase
-      .from("semesters")
-      .select("number, program_id")
-      .eq("id", subjectData.semester_id)
-      .limit(1);
-    if (semesterArr?.[0]) {
-      setSemesterNum(semesterArr[0].number);
-      // Check if current user is enrolled in this program
-      if (user) {
-        const { count: enrollCount } = await supabase
-          .from("enrollments")
-          .select("id", { count: "exact" })
-          .eq("user_id", user.id)
-          .eq("program_id", semesterArr[0].program_id)
-          .eq("status", "active");
-        setIsEnrolled((enrollCount || 0) > 0);
-      }
-    }
+    if (teacherResult.data) setTeacherName((teacherResult.data as { full_name: string }).full_name);
+    const semesterArr = (semesterResult as { data: { number: number; program_id: string }[] | null }).data;
+    if (semesterArr?.[0]) setSemesterNum(semesterArr[0].number);
 
-    // Get session by subject + number
-    const { data: sessionsArr } = await supabase
-      .from("sessions")
-      .select("*")
-      .eq("subject_id", subjectData.id)
-      .eq("number", parseInt(num))
-      .eq("is_active", true)
-      .limit(1);
-    const sessionData = sessionsArr?.[0] || null;
+    // ─── Grupo 5: enrollment + session en paralelo (independientes entre si) ─
+    const programId = semesterArr?.[0]?.program_id;
 
+    const [enrollResult, sessionsResult] = await Promise.all([
+      user && programId
+        ? supabase
+            .from("enrollments")
+            .select("id", { count: "exact" })
+            .eq("user_id", user.id)
+            .eq("program_id", programId)
+            .eq("status", "active")
+        : Promise.resolve({ count: 0 }),
+      supabase
+        .from("sessions")
+        .select("*")
+        .eq("subject_id", subjectData.id)
+        .eq("number", parseInt(num))
+        .eq("is_active", true)
+        .limit(1),
+    ]);
+
+    setIsEnrolled(((enrollResult as { count: number | null }).count || 0) > 0);
+
+    const sessionData = (sessionsResult as { data: Session[] | null }).data?.[0] || null;
     if (!sessionData) {
       setLoading(false);
       return;
     }
     setSession(sessionData);
 
-    // Get quiz for this session (fetch array, take first — .single() fails when empty)
-    const { data: quizArr } = await supabase
-      .from("quizzes")
-      .select("*")
-      .eq("session_id", sessionData.id)
-      .eq("is_active", true)
-      .limit(1);
-    setQuiz(quizArr?.[0] || null);
-
-    // Get assignment for this session (fetch array, take first — .single() fails when empty)
-    const { data: assignmentArr } = await supabase
-      .from("assignments")
-      .select("*")
-      .eq("session_id", sessionData.id)
-      .eq("is_active", true)
-      .limit(1);
-    setAssignment(assignmentArr?.[0] || null);
-
-    // Get resources
-    const { data: resourcesData } = await supabase
-      .from("session_resources")
-      .select("*")
-      .eq("session_id", sessionData.id)
-      .order("order_index", { ascending: true });
-    setResources(resourcesData || []);
-
-    // Get progress (fetch array, take first — .single() fails when empty)
-    if (user) {
-      const { data: progressArr } = await supabase
-        .from("session_progress")
+    // ─── Grupo 6: quiz + assignment + resources + progress + allSessions ─────
+    // Todos dependen de sessionData.id o subjectData.id — todos en paralelo
+    const [
+      quizResult,
+      assignmentResult,
+      resourcesResult,
+      progressResult,
+      allSessionsResult,
+    ] = await Promise.all([
+      // Get quiz for this session (fetch array, take first — .single() fails when empty)
+      supabase
+        .from("quizzes")
         .select("*")
         .eq("session_id", sessionData.id)
-        .eq("user_id", user.id)
-        .limit(1);
-      setProgress(progressArr?.[0] || null);
-    }
+        .eq("is_active", true)
+        .limit(1),
+      // Get assignment for this session (fetch array, take first — .single() fails when empty)
+      supabase
+        .from("assignments")
+        .select("*")
+        .eq("session_id", sessionData.id)
+        .eq("is_active", true)
+        .limit(1),
+      // Get resources
+      supabase
+        .from("session_resources")
+        .select("*")
+        .eq("session_id", sessionData.id)
+        .order("order_index", { ascending: true }),
+      // Get progress (fetch array, take first — .single() fails when empty)
+      user
+        ? supabase
+            .from("session_progress")
+            .select("*")
+            .eq("session_id", sessionData.id)
+            .eq("user_id", user.id)
+            .limit(1)
+        : Promise.resolve({ data: null }),
+      // Get all sessions for nav
+      supabase
+        .from("sessions")
+        .select("id, number, title")
+        .eq("subject_id", subjectData.id)
+        .eq("is_active", true)
+        .order("number", { ascending: true }),
+    ]);
 
-    // Get all sessions for nav
-    const { data: allSessions } = await supabase
-      .from("sessions")
-      .select("id, number, title")
-      .eq("subject_id", subjectData.id)
-      .eq("is_active", true)
-      .order("number", { ascending: true });
+    setQuiz((quizResult as { data: Quiz[] | null }).data?.[0] || null);
+    setAssignment((assignmentResult as { data: Assignment[] | null }).data?.[0] || null);
+    setResources((resourcesResult as { data: SessionResource[] | null }).data || []);
+    setProgress((progressResult as { data: SessionProgress[] | null }).data?.[0] || null);
 
+    const allSessions = (allSessionsResult as { data: { id: string; number: number; title: string }[] | null }).data;
     if (allSessions) {
       setTotalSessions(allSessions.length);
       const currentIdx = allSessions.findIndex(

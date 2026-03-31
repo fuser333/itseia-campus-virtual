@@ -38,7 +38,7 @@ export default async function CertificationsPage() {
           <h1 className="text-2xl font-bold text-white flex items-center gap-3">
             Certificaciones de Industria
           </h1>
-          <p className="mt-1 text-white/40 text-sm max-w-2xl">
+          <p className="mt-1 text-white/80 text-sm max-w-2xl">
             Titulo legalmente reconocido + certificaciones AWS, Google y Azure = perfil imbatible en el mercado laboral. Estudia con la misma estructura pedagogica de tus materias formales.
           </p>
         </div>
@@ -56,7 +56,7 @@ export default async function CertificationsPage() {
             <div className="w-2 h-2 rounded-full bg-[#FBBC0C] flex-shrink-0" />
             <div>
               <p className="text-xs font-semibold text-[#FBBC0C]">{item.label}</p>
-              <p className="text-[10px] text-white/40">{item.sub}</p>
+              <p className="text-[10px] text-white/80">{item.sub}</p>
             </div>
           </div>
         ))}
@@ -74,7 +74,7 @@ export default async function CertificationsPage() {
         <>
           {providers.map((provider) => (
             <section key={provider}>
-              <h2 className="text-xs font-semibold uppercase tracking-widest text-white/40 mb-4 px-1">
+              <h2 className="text-xs font-semibold uppercase tracking-widest text-white/70 mb-4 px-1">
                 {provider}
               </h2>
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">

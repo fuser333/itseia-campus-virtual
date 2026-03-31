@@ -205,7 +205,7 @@ export default function ComunicacionPage() {
             Volver al panel
           </Button>
         </Link>
-        <h1 className="text-2xl font-bold text-gray-900">Comunicacion</h1>
+        <h1 className="text-2xl font-bold text-gray-900">Comunicación</h1>
         <p className="mt-1 text-sm text-gray-500">
           Anuncios para tus materias y mensajes directos a estudiantes
         </p>

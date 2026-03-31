@@ -1,0 +1,90 @@
+{
+  "materia": "Etica Digital y Responsabilidad Profesional",
+  "periodo": 1,
+  "descripcion": "Etica en inteligencia artificial, ciudadania digital, sesgo algoritmico, privacidad, responsabilidad del profesional de IA",
+  "fecha_actualizacion": "2026-03-25",
+  "recursos": [
+    {
+      "titulo": "UNESCO - Recomendacion sobre la Etica de la Inteligencia Artificial (documento oficial en espanol)",
+      "url": "https://unesdoc.unesco.org/ark:/48223/pf0000380455_spa",
+      "tipo": "documento_oficial",
+      "idioma": "espanol",
+      "descripcion": "Documento oficial de la UNESCO adoptado en noviembre 2021 por 193 estados miembros. Primer estandar global sobre etica de la IA. Cubre valores fundamentales (dignidad humana, derechos, equidad), principios de IA responsable y areas de accion politica. Lectura obligatoria para cualquier profesional de IA. Disponible en PDF en espanol.",
+      "nivel": "principiante",
+      "gratuito": true,
+      "fuente_latam": false,
+      "fuente_ecuador": false,
+      "año_actualizacion": 2021,
+      "tags": ["UNESCO", "etica-IA", "global", "principios", "PDF-oficial", "derechos-humanos"]
+    },
+    {
+      "titulo": "UNESCO - Curso Ciudadania Digital desde la Escuela (gratis con certificado 2026)",
+      "url": "https://openlearning.unesco.org/courses/course-v1:UNESCO+ED-004+2026_T1_ESP/about",
+      "tipo": "curso",
+      "idioma": "espanol",
+      "descripcion": "Curso gratuito de UNESCO (edicion 2026) sobre ciudadania digital e IA. 5 modulos sobre algoritmos, influencia de la IA en decisiones cotidianas, privacidad y construccion de sentido en la era digital. Certificado oficial UNESCO al completar 80% del contenido. Perspectiva iberoamericana.",
+      "nivel": "principiante",
+      "gratuito": true,
+      "fuente_latam": false,
+      "fuente_ecuador": false,
+      "año_actualizacion": 2026,
+      "tags": ["UNESCO", "ciudadania-digital", "algoritmos", "certificado", "2026"]
+    },
+    {
+      "titulo": "Etica de la IA en educacion universitaria - Redalyc (articulo academico LATAM)",
+      "url": "https://revistainvecom.org/index.php/invecom/article/view/3859",
+      "tipo": "paper",
+      "idioma": "espanol",
+      "descripcion": "Revision sistematica de la literatura 2020-2024 sobre desafios y oportunidades de la IA en educacion superior latinoamericana. Analiza 40 articulos academicos. Identifica problemas eticos como privacidad de datos estudiantiles, sesgo en evaluaciones automatizadas y responsabilidad docente. Perspectiva 100% LATAM.",
+      "nivel": "principiante",
+      "gratuito": true,
+      "fuente_latam": true,
+      "fuente_ecuador": false,
+      "año_actualizacion": 2024,
+      "tags": ["LATAM", "revision-sistematica", "educacion-superior", "sesgo", "privacidad"]
+    },
+    {
+      "titulo": "CLAD - Inteligencia Artificial y Etica en la Gestion Publica (libro PDF gratis)",
+      "url": "https://clad.org/wp-content/uploads/2021/03/Libro-7-Inteligencia-artificial-y-%C3%A9tica-en-la-gesti%C3%B3n-p%C3%BAblica.pdf",
+      "tipo": "libro_pdf",
+      "idioma": "espanol",
+      "descripcion": "Libro del Centro Latinoamericano de Administracion para el Desarrollo (CLAD) sobre IA y etica en gestion publica latinoamericana. Perspectiva de politica publica, responsabilidad gubernamental y uso etico de la IA en el sector publico. Fundamental para entender el marco regulatorio LATAM. Descargable gratuitamente en PDF.",
+      "nivel": "principiante",
+      "gratuito": true,
+      "fuente_latam": true,
+      "fuente_ecuador": false,
+      "año_actualizacion": 2021,
+      "tags": ["CLAD", "LATAM", "sector-publico", "regulacion", "politica-publica", "libro-PDF"]
+    },
+    {
+      "titulo": "Dialnet - La etica digital en la educacion: fundamentos teoricos (articulo en espanol)",
+      "url": "https://dialnet.unirioja.es/descarga/articulo/10370796.pdf",
+      "tipo": "paper",
+      "idioma": "espanol",
+      "descripcion": "Articulo academico disponible en Dialnet (repositorio de universidades hispanohablantes) sobre fundamentos teoricos de la etica digital en educacion. Analiza conceptos de identidad digital, huella digital, derechos digitales y responsabilidad en entornos virtuales. Descargable gratis en PDF.",
+      "nivel": "principiante",
+      "gratuito": true,
+      "fuente_latam": true,
+      "fuente_ecuador": false,
+      "año_actualizacion": 2023,
+      "tags": ["Dialnet", "etica-digital", "identidad-digital", "derechos", "educacion"]
+    }
+  ],
+  "herramientas_recomendadas": [
+    {
+      "nombre": "AI Fairness 360 - IBM (en ingles con documentacion en espanol)",
+      "url": "https://aif360.mybluemix.net/",
+      "descripcion": "Toolkit de IBM para detectar y mitigar sesgo en modelos de IA. Util para ejercicios practicos de etica aplicada."
+    },
+    {
+      "nombre": "Foro Etica IA LAC",
+      "url": "https://foroialac.org/",
+      "descripcion": "Plataforma regional latinoamericana para el desarrollo etico de la IA. Recursos y debates actualizados."
+    }
+  ],
+  "marco_regulatorio_ecuador": {
+    "descripcion": "Ecuador no cuenta aun con ley especifica de IA, pero aplican: Ley Organica de Proteccion de Datos Personales (2021), Codigo de la Produccion (uso comercial de tecnologia) y las recomendaciones de la UNESCO adoptadas por Ecuador como Estado miembro.",
+    "ley_datos_personales": "https://www.telecomunicaciones.gob.ec/ley-organica-de-proteccion-de-datos-personales/",
+    "senescyt_etica": "https://www.senescyt.gob.ec/"
+  }
+}

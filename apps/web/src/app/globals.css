@@ -298,6 +298,33 @@
 }
 
 /* ========================================
+   Force dark text on light backgrounds
+   The body uses text-foreground (#F0F2F5 white)
+   for the dark theme, but content areas on beige
+   backgrounds need dark text forced via CSS.
+   ======================================== */
+.prose p,
+.prose li,
+.prose td,
+.prose th,
+.prose blockquote,
+.prose dd,
+.prose dt,
+.prose figcaption {
+  color: #1F2F58 !important;
+}
+.prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6,
+.prose strong, .prose b {
+  color: #0A1628 !important;
+}
+.prose a {
+  color: #73B8E7 !important;
+}
+.prose code:not(pre code) {
+  color: #F0846D !important;
+}
+
+/* ========================================
    Focus & Selection Styles
    ======================================== */
 ::selection {

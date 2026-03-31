@@ -144,7 +144,7 @@ export default function CohortePage() {
           <Users className="w-7 h-7 text-[#FBBC0C]" />
           Mi Cohorte
         </h1>
-        <p className="mt-1 text-white/40 text-sm">
+        <p className="mt-1 text-white/80 text-sm">
           Tu comunidad de aprendizaje en ITSEIA Academy
         </p>
       </div>
@@ -163,7 +163,7 @@ export default function CohortePage() {
           <h2 className="text-2xl font-bold text-white mb-3">
             Las Cohortes estan en camino
           </h2>
-          <p className="text-white/50 max-w-lg mx-auto mb-6 text-sm leading-relaxed">
+          <p className="text-white/70 max-w-lg mx-auto mb-6 text-sm leading-relaxed">
             Estamos construyendo la experiencia de cohorte definitiva. Pronto
             seras parte de un grupo exclusivo con foro, ranking, entregas
             compartidas y peer review.
@@ -210,15 +210,15 @@ export default function CohortePage() {
               </div>
               <div>
                 <p className="text-white font-semibold">{level.name}</p>
-                <p className="text-white/40 text-sm">XP Total</p>
+                <p className="text-white/60 text-sm">XP Total</p>
               </div>
             </div>
 
             <div>
               <div className="flex justify-between items-center mb-2">
-                <span className="text-white/60 text-sm">Progreso de nivel</span>
+                <span className="text-white/70 text-sm">Progreso de nivel</span>
                 {level.max !== Infinity && (
-                  <span className="text-white/40 text-xs">
+                  <span className="text-white/60 text-xs">
                     {xp} / {level.max} XP
                   </span>
                 )}
@@ -233,7 +233,7 @@ export default function CohortePage() {
                   className={`px-3 py-2 rounded-lg text-sm ${
                     level.name === l.name
                       ? "bg-[#FBBC0C]/10 border border-[#FBBC0C]/20 text-[#FBBC0C] font-semibold"
-                      : "bg-white/5 text-white/30"
+                      : "bg-white/5 text-white/60"
                   }`}
                 >
                   {l.name}

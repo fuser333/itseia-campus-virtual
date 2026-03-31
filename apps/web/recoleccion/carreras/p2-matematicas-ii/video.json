@@ -1,0 +1,32 @@
+{
+  "materia": "Matematicas II (Algebra Lineal)",
+  "periodo": 2,
+  "videos": [
+    {
+      "titulo": "Curso de Algebra Lineal para Machine Learning",
+      "url": "https://platzi.com/cursos/algebra-ml/",
+      "canal": "Platzi",
+      "url_youtube": "https://www.youtube.com/@PlatziOnline",
+      "duracion_minutos": 180,
+      "año": 2024,
+      "idioma": "español_latam",
+      "usa_ia": true,
+      "justificacion": "Platzi es la plataforma de educacion tecnologica mas grande de Latinoamerica. Este curso de algebra lineal esta disenado especificamente para IA y ML: cubre vectores, matrices, producto punto, normas L1/L2, regresion lineal, PCA, SVD y embeddings usando NumPy y Python. Instructor: Daniel Erazo (AI Software Engineer). 16 clases, 3h de video, 8h de practica. Directamente alineado con el perfil tecnico de los estudiantes ITSEIA.",
+      "temas_clave": [
+        "Vectores y matrices con NumPy",
+        "Multiplicacion de matrices",
+        "Producto punto para similitud semantica",
+        "Normas L1 y L2",
+        "Matrices identidad e inversas",
+        "Determinantes y rango",
+        "Regresion lineal con algebra",
+        "Descomposicion SVD",
+        "Visualizacion con Matplotlib"
+      ],
+      "nivel": "intermedio",
+      "prerequisitos": "Python basico, NumPy basico",
+      "rating": "4.8 estrellas (48 resenas)",
+      "url_github_curso": "https://github.com/platzi/algebra-aplicada"
+    }
+  ]
+}

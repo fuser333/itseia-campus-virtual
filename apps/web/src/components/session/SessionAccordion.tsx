@@ -149,7 +149,7 @@ export default function SessionAccordion({ tabs, className }: SessionAccordionPr
       {/* Section header */}
       <div className="flex items-center gap-2 px-1 pb-1">
         <div className="h-px flex-1 bg-[#1F2F58]/8" />
-        <span className="text-[11px] font-medium uppercase tracking-widest text-[#1F2F58]/30">
+        <span className="text-[11px] font-medium uppercase tracking-widest text-[#1F2F58]/70">
           Mas contenido
         </span>
         <div className="h-px flex-1 bg-[#1F2F58]/8" />

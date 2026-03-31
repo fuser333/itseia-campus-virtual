@@ -399,7 +399,7 @@ export default function QuizEngine({
     return (
       <div className="flex h-64 flex-col items-center justify-center gap-3 text-center">
         <AlertCircle className="size-8 text-[#F0846D]" />
-        <p className="text-sm text-[#1F2F58]/50">{error}</p>
+        <p className="text-sm text-[#1F2F58]/80">{error}</p>
       </div>
     );
   }
@@ -407,8 +407,8 @@ export default function QuizEngine({
   if (!quiz || questions.length === 0 || orderedIds.length === 0) {
     return (
       <div className="flex h-64 flex-col items-center justify-center gap-3 text-center">
-        <HelpCircle className="size-8 text-[#1F2F58]/20" />
-        <p className="text-sm text-[#1F2F58]/50">Quiz no disponible aun.</p>
+        <HelpCircle className="size-8 text-[#1F2F58]/40" />
+        <p className="text-sm text-[#1F2F58]/70">Quiz no disponible aun.</p>
       </div>
     );
   }
@@ -447,11 +447,11 @@ export default function QuizEngine({
           >
             {Math.round(result.percentage)}%
           </p>
-          <p className="mt-1 text-sm text-[#1F2F58]/50">
+          <p className="mt-1 text-sm text-[#1F2F58]/80">
             {result.score} de {result.maxScore} puntos
             {quiz.pass_percentage > 0 && ` (minimo ${quiz.pass_percentage}%)`}
           </p>
-          <p className="mt-1 text-xs text-[#1F2F58]/30">
+          <p className="mt-1 text-xs text-[#1F2F58]/80">
             Intento {result.attemptNumber}
             {quiz.max_attempts > 0 && ` de ${quiz.max_attempts}`}
           </p>
@@ -533,7 +533,7 @@ export default function QuizEngine({
                     <p className="text-xs font-semibold uppercase tracking-wider text-[#FBBC0C] mb-1">
                       Explicacion
                     </p>
-                    <p className="text-sm text-[#1F2F58]/60">{q.explanation}</p>
+                    <p className="text-sm text-[#1F2F58]/80">{q.explanation}</p>
                   </div>
                 )}
               </div>

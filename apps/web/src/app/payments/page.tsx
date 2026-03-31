@@ -128,25 +128,25 @@ export default function PaymentsPage() {
         <Card className="bg-white/5 border-white/10">
           <CardContent className="p-6 text-center">
             <p className="text-3xl font-extrabold text-green-400">${totalInvested.toFixed(2)}</p>
-            <p className="text-white/40 text-sm mt-1">Total Invertido</p>
+            <p className="text-white/80 text-sm mt-1">Total Invertido</p>
           </CardContent>
         </Card>
         <Card className="bg-white/5 border-white/10">
           <CardContent className="p-6 text-center">
             <p className="text-3xl font-extrabold text-green-400">${totals.paid.toFixed(2)}</p>
-            <p className="text-white/40 text-sm mt-1">Pagos Confirmados</p>
+            <p className="text-white/80 text-sm mt-1">Pagos Confirmados</p>
           </CardContent>
         </Card>
         <Card className="bg-white/5 border-white/10">
           <CardContent className="p-6 text-center">
             <p className="text-3xl font-extrabold text-[#FBBC0C]">${totals.pending.toFixed(2)}</p>
-            <p className="text-white/40 text-sm mt-1">Pendiente</p>
+            <p className="text-white/80 text-sm mt-1">Pendiente</p>
           </CardContent>
         </Card>
         <Card className="bg-white/5 border-white/10">
           <CardContent className="p-6 text-center">
             <p className="text-3xl font-extrabold text-white">{payments.length}</p>
-            <p className="text-white/40 text-sm mt-1">Transacciones</p>
+            <p className="text-white/80 text-sm mt-1">Transacciones</p>
           </CardContent>
         </Card>
       </div>
@@ -239,7 +239,7 @@ export default function PaymentsPage() {
                       {new Date(payment.created_at).toLocaleDateString("es-EC")}
                     </p>
                     {payment.reference && (
-                      <p className="text-white/30 text-xs mt-1">Ref: {payment.reference}</p>
+                      <p className="text-white/60 text-xs mt-1">Ref: {payment.reference}</p>
                     )}
                   </div>
                   <div className="text-right">

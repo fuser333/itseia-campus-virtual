@@ -345,7 +345,7 @@ export default async function DashboardPage() {
                 <CardContent className="space-y-4">
                   <div className="flex items-start justify-between">
                     <div>
-                      <p className="text-xs font-medium uppercase tracking-wider text-white/40">
+                      <p className="text-xs font-medium uppercase tracking-wider text-white/80">
                         Carrera Activa
                       </p>
                       <p className="mt-1 text-lg font-bold text-white">
@@ -358,7 +358,7 @@ export default async function DashboardPage() {
                   </div>
                   <div>
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm text-white/50">Progreso total</span>
+                      <span className="text-sm text-white/80">Progreso total</span>
                       <span className="text-sm font-semibold text-white">
                         {career.percent}%
                       </span>
@@ -369,7 +369,7 @@ export default async function DashboardPage() {
                         style={{ width: `${career.percent}%` }}
                       />
                     </div>
-                    <p className="mt-1.5 text-xs text-white/30">
+                    <p className="mt-1.5 text-xs text-white/60">
                       {career.completedSessions} / {career.totalSessions} sesiones completadas
                     </p>
                   </div>
@@ -398,7 +398,7 @@ export default async function DashboardPage() {
                 <Play className="size-5 text-[#FBBC0C]" />
               </div>
               <div>
-                <p className="text-xs font-medium uppercase tracking-wider text-white/50">
+                <p className="text-xs font-medium uppercase tracking-wider text-white/80">
                   Continuar donde lo dejaste
                 </p>
                 <p className="mt-0.5 text-lg font-semibold text-white">

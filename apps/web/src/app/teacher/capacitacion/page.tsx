@@ -249,7 +249,7 @@ export default function CapacitacionPage() {
       {/* Modules list */}
       <div>
         <h2 className="mb-3 text-lg font-semibold text-gray-900">
-          Modulos del Curso — Docencia Virtual Efectiva
+          Módulos del Curso — Docencia Virtual Efectiva
         </h2>
 
         {modules.length === 0 ? (

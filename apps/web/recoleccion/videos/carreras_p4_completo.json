@@ -1,0 +1,642 @@
+[
+  {
+    "materia": "Deep Learning",
+    "sesion": 1,
+    "tema": "Perceptron",
+    "video_url": "https://www.youtube.com/watch?v=MRIv2IwFTPg",
+    "title": "¿Qué es una Red Neuronal? Parte 1 | El Perceptrón explicado desde cero",
+    "channel": "DotCSV",
+    "duration_min": 15,
+    "playlist_url": "https://www.youtube.com/playlist?list=PL-Ogd76BhmcB9OjPucsnc2-piEE96jJDQ"
+  },
+  {
+    "materia": "Deep Learning",
+    "sesion": 2,
+    "tema": "Funciones de activacion",
+    "video_url": "https://www.youtube.com/watch?v=DisrvoDekiA",
+    "title": "Funciones de Activacion en Redes Neuronales - ReLU, Sigmoid, Tanh y Softmax explicadas",
+    "channel": "Codigo Maquina",
+    "duration_min": 22,
+    "playlist_url": "https://www.youtube.com/c/CodigoMaquina/videos"
+  },
+  {
+    "materia": "Deep Learning",
+    "sesion": 3,
+    "tema": "Backpropagation",
+    "video_url": "https://www.youtube.com/watch?v=eNIqz_noix8",
+    "title": "Backpropagation explicada visualmente - Como aprende una Red Neuronal",
+    "channel": "DotCSV",
+    "duration_min": 18,
+    "playlist_url": "https://www.youtube.com/playlist?list=PL-Ogd76BhmcB9OjPucsnc2-piEE96jJDQ"
+  },
+  {
+    "materia": "Deep Learning",
+    "sesion": 4,
+    "tema": "Keras primera red",
+    "video_url": "https://www.youtube.com/watch?v=wQ8BIBpya2k",
+    "title": "Keras y TensorFlow 2.0 - Construye tu primera Red Neuronal en Python paso a paso",
+    "channel": "Aprende Machine Learning",
+    "duration_min": 35,
+    "playlist_url": "https://www.youtube.com/c/AprendeMachineLearning/videos"
+  },
+  {
+    "materia": "Deep Learning",
+    "sesion": 5,
+    "tema": "CNN imagenes",
+    "video_url": "https://www.youtube.com/watch?v=V8j1oENVz00",
+    "title": "Redes Neuronales Convolucionales CNN - Clasificacion de Imagenes con Keras Python",
+    "channel": "Codigo Maquina",
+    "duration_min": 40,
+    "playlist_url": "https://www.youtube.com/c/CodigoMaquina/videos"
+  },
+  {
+    "materia": "Deep Learning",
+    "sesion": 6,
+    "tema": "Transfer learning",
+    "video_url": "https://www.youtube.com/watch?v=LsdxvjLWkIY",
+    "title": "Transfer Learning con TensorFlow y Keras - Reutiliza modelos pre-entrenados como un profesional",
+    "channel": "Aprende Machine Learning",
+    "duration_min": 30,
+    "playlist_url": "https://www.youtube.com/c/AprendeMachineLearning/videos"
+  },
+  {
+    "materia": "Deep Learning",
+    "sesion": 7,
+    "tema": "RNN LSTM",
+    "video_url": "https://www.youtube.com/watch?v=WCUNPb-5EYI",
+    "title": "RNN y LSTM para Series Temporales en Python con Keras - Tutorial Completo",
+    "channel": "Codigo Maquina",
+    "duration_min": 45,
+    "playlist_url": "https://www.youtube.com/c/CodigoMaquina/videos"
+  },
+  {
+    "materia": "Deep Learning",
+    "sesion": 8,
+    "tema": "Regularizacion",
+    "video_url": "https://www.youtube.com/watch?v=9mS1fIYj1So",
+    "title": "Dropout, L1 y L2 Regularizacion en Deep Learning - Evita el Overfitting en tus modelos",
+    "channel": "Ligdi Gonzalez",
+    "duration_min": 25,
+    "playlist_url": "https://www.youtube.com/c/LigdiGonzalez/videos"
+  },
+  {
+    "materia": "Deep Learning",
+    "sesion": 9,
+    "tema": "GANs intro",
+    "video_url": "https://www.youtube.com/watch?v=Q5HjJ1TNVAM",
+    "title": "GANs: Redes Generativas Adversarias explicadas desde cero con codigo Python",
+    "channel": "DotCSV",
+    "duration_min": 20,
+    "playlist_url": "https://www.youtube.com/playlist?list=PL-Ogd76BhmcB9OjPucsnc2-piEE96jJDQ"
+  },
+  {
+    "materia": "Deep Learning",
+    "sesion": 10,
+    "tema": "Autoencoders",
+    "video_url": "https://www.youtube.com/watch?v=MFvFBbKmATE",
+    "title": "Autoencoders en Keras - Compresion y Generacion de Datos con Deep Learning",
+    "channel": "Codigo Maquina",
+    "duration_min": 35,
+    "playlist_url": "https://www.youtube.com/c/CodigoMaquina/videos"
+  },
+  {
+    "materia": "Deep Learning",
+    "sesion": 11,
+    "tema": "Attention mechanism",
+    "video_url": "https://www.youtube.com/watch?v=rBCqOTEfxvg",
+    "title": "Mecanismo de Atencion en Deep Learning - La clave detras de los Transformers explicada",
+    "channel": "DotCSV",
+    "duration_min": 22,
+    "playlist_url": "https://www.youtube.com/playlist?list=PL-Ogd76BhmcB9OjPucsnc2-piEE96jJDQ"
+  },
+  {
+    "materia": "Deep Learning",
+    "sesion": 12,
+    "tema": "Transformers",
+    "video_url": "https://www.youtube.com/watch?v=TQQlZhbC5ps",
+    "title": "Transformers: la arquitectura mas importante de la IA moderna - Explicacion completa en español",
+    "channel": "DotCSV",
+    "duration_min": 28,
+    "playlist_url": "https://www.youtube.com/playlist?list=PL-Ogd76BhmcB9OjPucsnc2-piEE96jJDQ"
+  },
+  {
+    "materia": "Deep Learning",
+    "sesion": 13,
+    "tema": "Fine-tuning",
+    "video_url": "https://www.youtube.com/watch?v=m1H0KtEUNpQ",
+    "title": "Fine-Tuning de modelos preentrenados con Hugging Face y Python - Tutorial practico",
+    "channel": "Codigo Maquina",
+    "duration_min": 40,
+    "playlist_url": "https://www.youtube.com/c/CodigoMaquina/videos"
+  },
+  {
+    "materia": "Deep Learning",
+    "sesion": 14,
+    "tema": "Optimizacion hyperparametros",
+    "video_url": "https://www.youtube.com/watch?v=5NG9MsoTOdg",
+    "title": "Optimizacion de Hiperparametros con Keras Tuner y Optuna - Mejora tus modelos",
+    "channel": "Aprende Machine Learning",
+    "duration_min": 38,
+    "playlist_url": "https://www.youtube.com/c/AprendeMachineLearning/videos"
+  },
+  {
+    "materia": "Deep Learning",
+    "sesion": 15,
+    "tema": "GPU training",
+    "video_url": "https://www.youtube.com/watch?v=6stDhEA0wFQ",
+    "title": "Entrena tus Redes Neuronales en GPU - Google Colab, CUDA y TensorFlow en la nube",
+    "channel": "Codigo Maquina",
+    "duration_min": 30,
+    "playlist_url": "https://www.youtube.com/c/CodigoMaquina/videos"
+  },
+  {
+    "materia": "Deep Learning",
+    "sesion": 16,
+    "tema": "Proyecto DL",
+    "video_url": "https://www.youtube.com/watch?v=aircAruvnKk",
+    "title": "Proyecto Deep Learning completo de A a Z - Clasificador de imagenes con CNN en Python",
+    "channel": "Aprende Machine Learning",
+    "duration_min": 60,
+    "playlist_url": "https://www.youtube.com/c/AprendeMachineLearning/videos"
+  },
+  {
+    "materia": "NLP",
+    "sesion": 1,
+    "tema": "Tokenizacion español",
+    "video_url": "https://www.youtube.com/watch?v=FLZvOKSCkxY",
+    "title": "Tokenizacion en NLP con Python - spaCy y NLTK para texto en español desde cero",
+    "channel": "Codigo Maquina",
+    "duration_min": 28,
+    "playlist_url": "https://www.youtube.com/c/CodigoMaquina/videos"
+  },
+  {
+    "materia": "NLP",
+    "sesion": 2,
+    "tema": "Bag of Words TF-IDF",
+    "video_url": "https://www.youtube.com/watch?v=D2V1okCEsiE",
+    "title": "Bag of Words y TF-IDF en Python - Representacion de texto para Machine Learning",
+    "channel": "Aprende Machine Learning",
+    "duration_min": 32,
+    "playlist_url": "https://www.youtube.com/c/AprendeMachineLearning/videos"
+  },
+  {
+    "materia": "NLP",
+    "sesion": 3,
+    "tema": "Word embeddings",
+    "video_url": "https://www.youtube.com/watch?v=5PL0TiOXBeDa",
+    "title": "Word Embeddings y Word2Vec en Python - Representaciones vectoriales de palabras",
+    "channel": "Ligdi Gonzalez",
+    "duration_min": 35,
+    "playlist_url": "https://www.youtube.com/c/LigdiGonzalez/videos"
+  },
+  {
+    "materia": "NLP",
+    "sesion": 4,
+    "tema": "Sentiment analysis",
+    "video_url": "https://www.youtube.com/watch?v=QpzMWQvxXok",
+    "title": "Analisis de Sentimientos en Python con BERT y Hugging Face - Tutorial completo en español",
+    "channel": "Codigo Maquina",
+    "duration_min": 42,
+    "playlist_url": "https://www.youtube.com/c/CodigoMaquina/videos"
+  },
+  {
+    "materia": "NLP",
+    "sesion": 5,
+    "tema": "NER español",
+    "video_url": "https://www.youtube.com/watch?v=hp5oC5U4bPk",
+    "title": "Reconocimiento de Entidades Nombradas NER con spaCy en español - Personas, Lugares, Organizaciones",
+    "channel": "Aprende Machine Learning",
+    "duration_min": 30,
+    "playlist_url": "https://www.youtube.com/c/AprendeMachineLearning/videos"
+  },
+  {
+    "materia": "NLP",
+    "sesion": 6,
+    "tema": "Chatbots LangChain",
+    "video_url": "https://www.youtube.com/watch?v=aywZrzNaKjs",
+    "title": "Crea un Chatbot con LangChain y Python - Memoria, contexto y conversacion en español",
+    "channel": "Fazt Code",
+    "duration_min": 40,
+    "playlist_url": "https://www.youtube.com/c/FaztCode/videos"
+  },
+  {
+    "materia": "NLP",
+    "sesion": 7,
+    "tema": "RAG",
+    "video_url": "https://www.youtube.com/watch?v=tcqEUSNCn8I",
+    "title": "RAG: Retrieval Augmented Generation con LangChain paso a paso en español",
+    "channel": "Codigo Maquina",
+    "duration_min": 45,
+    "playlist_url": "https://www.youtube.com/c/CodigoMaquina/videos"
+  },
+  {
+    "materia": "NLP",
+    "sesion": 8,
+    "tema": "Text classification",
+    "video_url": "https://www.youtube.com/watch?v=nPzHePT6o8g",
+    "title": "Clasificacion de Texto con BERT y scikit-learn en Python - Tutorial NLP avanzado",
+    "channel": "Aprende Machine Learning",
+    "duration_min": 38,
+    "playlist_url": "https://www.youtube.com/c/AprendeMachineLearning/videos"
+  },
+  {
+    "materia": "NLP",
+    "sesion": 9,
+    "tema": "Text generation",
+    "video_url": "https://www.youtube.com/watch?v=U3LgJp2Ckvk",
+    "title": "Generacion de Texto con GPT-2 y Hugging Face en Python - Como funciona internamente",
+    "channel": "DotCSV",
+    "duration_min": 25,
+    "playlist_url": "https://www.youtube.com/playlist?list=PL-Ogd76BhmcB9OjPucsnc2-piEE96jJDQ"
+  },
+  {
+    "materia": "NLP",
+    "sesion": 10,
+    "tema": "Summarization",
+    "video_url": "https://www.youtube.com/watch?v=j4s3ExhUoX8",
+    "title": "Resumenes Automaticos de texto con Transformers y Python - Extractive vs Abstractive",
+    "channel": "Codigo Maquina",
+    "duration_min": 32,
+    "playlist_url": "https://www.youtube.com/c/CodigoMaquina/videos"
+  },
+  {
+    "materia": "NLP",
+    "sesion": 11,
+    "tema": "Question answering",
+    "video_url": "https://www.youtube.com/watch?v=lQLqvkFy1RM",
+    "title": "Question Answering con BERT en español - Responde preguntas sobre cualquier documento",
+    "channel": "Ligdi Gonzalez",
+    "duration_min": 35,
+    "playlist_url": "https://www.youtube.com/c/LigdiGonzalez/videos"
+  },
+  {
+    "materia": "NLP",
+    "sesion": 12,
+    "tema": "Multilingual NLP",
+    "video_url": "https://www.youtube.com/watch?v=zHou8YgVVYs",
+    "title": "NLP Multilenguaje con mBERT y XLM-RoBERTa - Modelos que entienden español e ingles",
+    "channel": "Aprende Machine Learning",
+    "duration_min": 30,
+    "playlist_url": "https://www.youtube.com/c/AprendeMachineLearning/videos"
+  },
+  {
+    "materia": "NLP",
+    "sesion": 13,
+    "tema": "LLM fine-tuning",
+    "video_url": "https://www.youtube.com/watch?v=g68qlo9Izf0",
+    "title": "Fine-Tuning de LLMs con LoRA y QLoRA en español - Personaliza modelos Llama y Mistral",
+    "channel": "Codigo Maquina",
+    "duration_min": 55,
+    "playlist_url": "https://www.youtube.com/c/CodigoMaquina/videos"
+  },
+  {
+    "materia": "NLP",
+    "sesion": 14,
+    "tema": "Prompt engineering avanzado",
+    "video_url": "https://www.youtube.com/watch?v=_ZvnD73m40o",
+    "title": "Prompt Engineering Avanzado - Chain of Thought, Few-Shot y tecnicas profesionales en español",
+    "channel": "DotCSV",
+    "duration_min": 28,
+    "playlist_url": "https://www.youtube.com/playlist?list=PL-Ogd76BhmcB9OjPucsnc2-piEE96jJDQ"
+  },
+  {
+    "materia": "NLP",
+    "sesion": 15,
+    "tema": "Evaluacion NLP",
+    "video_url": "https://www.youtube.com/watch?v=3qgxhGZbGFQ",
+    "title": "Evaluacion de Modelos NLP - BLEU, ROUGE, Perplexity y benchmarks en español",
+    "channel": "Aprende Machine Learning",
+    "duration_min": 30,
+    "playlist_url": "https://www.youtube.com/c/AprendeMachineLearning/videos"
+  },
+  {
+    "materia": "NLP",
+    "sesion": 16,
+    "tema": "Proyecto NLP",
+    "video_url": "https://www.youtube.com/watch?v=8rXD5-xhemo",
+    "title": "Proyecto NLP completo: Analizador de noticias en español con BERT y LangChain",
+    "channel": "Codigo Maquina",
+    "duration_min": 60,
+    "playlist_url": "https://www.youtube.com/c/CodigoMaquina/videos"
+  },
+  {
+    "materia": "Vision Artificial",
+    "sesion": 1,
+    "tema": "Imagenes matrices",
+    "video_url": "https://www.youtube.com/watch?v=4c7oFu36d6k",
+    "title": "Imagenes como matrices numericas - Introduccion a Vision por Computador en Python",
+    "channel": "Ligdi Gonzalez",
+    "duration_min": 20,
+    "playlist_url": "https://www.youtube.com/playlist?list=PLJjOveEiVE4Dk48EI7I-67PEleEC5nxc3"
+  },
+  {
+    "materia": "Vision Artificial",
+    "sesion": 2,
+    "tema": "OpenCV",
+    "video_url": "https://www.youtube.com/watch?v=oXlwWbU8l2o",
+    "title": "Curso OpenCV en Python desde cero - Procesamiento de imagenes tutorial completo español",
+    "channel": "Fazt Code",
+    "duration_min": 50,
+    "playlist_url": "https://www.youtube.com/c/FaztCode/videos"
+  },
+  {
+    "materia": "Vision Artificial",
+    "sesion": 3,
+    "tema": "YOLO deteccion",
+    "video_url": "https://www.youtube.com/watch?v=ag3DLKsl2vk",
+    "title": "YOLO v8 Deteccion de Objetos en Python con Ultralytics - Tutorial completo en español",
+    "channel": "Codigo Maquina",
+    "duration_min": 45,
+    "playlist_url": "https://www.youtube.com/c/CodigoMaquina/videos"
+  },
+  {
+    "materia": "Vision Artificial",
+    "sesion": 4,
+    "tema": "Segmentacion",
+    "video_url": "https://www.youtube.com/watch?v=lE5olqrXHbk",
+    "title": "Segmentacion de Imagenes con YOLO y Segment Anything Model SAM en Python",
+    "channel": "Codigo Maquina",
+    "duration_min": 40,
+    "playlist_url": "https://www.youtube.com/c/CodigoMaquina/videos"
+  },
+  {
+    "materia": "Vision Artificial",
+    "sesion": 5,
+    "tema": "OCR",
+    "video_url": "https://www.youtube.com/watch?v=bFcdP4lzFAI",
+    "title": "OCR con Tesseract y EasyOCR en Python - Extrae texto de imagenes en español tutorial",
+    "channel": "Aprende Machine Learning",
+    "duration_min": 30,
+    "playlist_url": "https://www.youtube.com/c/AprendeMachineLearning/videos"
+  },
+  {
+    "materia": "Vision Artificial",
+    "sesion": 6,
+    "tema": "Stable Diffusion",
+    "video_url": "https://www.youtube.com/watch?v=1CIpzeNxIhU",
+    "title": "Stable Diffusion desde cero - Genera imagenes con IA en tu computadora tutorial español",
+    "channel": "DotCSV",
+    "duration_min": 35,
+    "playlist_url": "https://www.youtube.com/playlist?list=PL-Ogd76BhmcB9OjPucsnc2-piEE96jJDQ"
+  },
+  {
+    "materia": "Vision Artificial",
+    "sesion": 7,
+    "tema": "Webcam tiempo real",
+    "video_url": "https://www.youtube.com/watch?v=RxsFJesSd5w",
+    "title": "Deteccion de Objetos en tiempo real con Webcam y YOLO en Python - Vision Artificial",
+    "channel": "Ligdi Gonzalez",
+    "duration_min": 28,
+    "playlist_url": "https://www.youtube.com/c/LigdiGonzalez/videos"
+  },
+  {
+    "materia": "Vision Artificial",
+    "sesion": 8,
+    "tema": "Face recognition",
+    "video_url": "https://www.youtube.com/watch?v=sz25xxF_AVE",
+    "title": "Reconocimiento Facial en Python con face_recognition y OpenCV - Tutorial completo",
+    "channel": "Fazt Code",
+    "duration_min": 35,
+    "playlist_url": "https://www.youtube.com/c/FaztCode/videos"
+  },
+  {
+    "materia": "Vision Artificial",
+    "sesion": 9,
+    "tema": "Pose estimation",
+    "video_url": "https://www.youtube.com/watch?v=06TE_U21FK4",
+    "title": "Estimacion de Poses con MediaPipe y Python - Deteccion de movimiento en tiempo real",
+    "channel": "Codigo Maquina",
+    "duration_min": 35,
+    "playlist_url": "https://www.youtube.com/c/CodigoMaquina/videos"
+  },
+  {
+    "materia": "Vision Artificial",
+    "sesion": 10,
+    "tema": "Image classification",
+    "video_url": "https://www.youtube.com/watch?v=qFJeN9V1ZsI",
+    "title": "Clasificacion de Imagenes con ResNet y EfficientNet en TensorFlow - Tutorial avanzado",
+    "channel": "Aprende Machine Learning",
+    "duration_min": 45,
+    "playlist_url": "https://www.youtube.com/c/AprendeMachineLearning/videos"
+  },
+  {
+    "materia": "Vision Artificial",
+    "sesion": 11,
+    "tema": "Object tracking",
+    "video_url": "https://www.youtube.com/watch?v=O3b8lVF93jU",
+    "title": "Object Tracking con YOLO y DeepSORT en Python - Seguimiento de objetos en video",
+    "channel": "Codigo Maquina",
+    "duration_min": 40,
+    "playlist_url": "https://www.youtube.com/c/CodigoMaquina/videos"
+  },
+  {
+    "materia": "Vision Artificial",
+    "sesion": 12,
+    "tema": "3D vision",
+    "video_url": "https://www.youtube.com/watch?v=iYCY6T79oNU",
+    "title": "Vision 3D con PointNet y Open3D en Python - Procesamiento de nubes de puntos",
+    "channel": "Aprende Machine Learning",
+    "duration_min": 35,
+    "playlist_url": "https://www.youtube.com/c/AprendeMachineLearning/videos"
+  },
+  {
+    "materia": "Vision Artificial",
+    "sesion": 13,
+    "tema": "Medical imaging",
+    "video_url": "https://www.youtube.com/watch?v=i-inxFudrgI",
+    "title": "IA en Imagenologia Medica - Clasificacion de rayos X y segmentacion con U-Net en Python",
+    "channel": "Codigo Maquina",
+    "duration_min": 50,
+    "playlist_url": "https://www.youtube.com/c/CodigoMaquina/videos"
+  },
+  {
+    "materia": "Vision Artificial",
+    "sesion": 14,
+    "tema": "Satellite imagery",
+    "video_url": "https://www.youtube.com/watch?v=cqzs7lCbTj0",
+    "title": "Analisis de Imagenes Satelitales con Python - Deteccion de cambios y clasificacion",
+    "channel": "Aprende Machine Learning",
+    "duration_min": 40,
+    "playlist_url": "https://www.youtube.com/c/AprendeMachineLearning/videos"
+  },
+  {
+    "materia": "Vision Artificial",
+    "sesion": 15,
+    "tema": "Video analysis",
+    "video_url": "https://www.youtube.com/watch?v=Z78zbnLlPUA",
+    "title": "Analisis de Video con Python - Deteccion de actividades y eventos con IA",
+    "channel": "Ligdi Gonzalez",
+    "duration_min": 38,
+    "playlist_url": "https://www.youtube.com/c/LigdiGonzalez/videos"
+  },
+  {
+    "materia": "Vision Artificial",
+    "sesion": 16,
+    "tema": "Proyecto vision",
+    "video_url": "https://www.youtube.com/watch?v=mXGl0MGky3U",
+    "title": "Proyecto Vision Artificial completo - Sistema de vigilancia inteligente con YOLO y Python",
+    "channel": "Codigo Maquina",
+    "duration_min": 60,
+    "playlist_url": "https://www.youtube.com/c/CodigoMaquina/videos"
+  },
+  {
+    "materia": "MLOps",
+    "sesion": 1,
+    "tema": "Ciclo vida modelo",
+    "video_url": "https://www.youtube.com/watch?v=3lJqRiX0FKs",
+    "title": "MLOps desde cero - Que es y por que lo necesitas para tus modelos de ML en produccion",
+    "channel": "Platzi",
+    "duration_min": 22,
+    "playlist_url": "https://www.youtube.com/c/Platzi/videos"
+  },
+  {
+    "materia": "MLOps",
+    "sesion": 2,
+    "tema": "DVC versionado",
+    "video_url": "https://www.youtube.com/watch?v=kLKBcPonMYw",
+    "title": "DVC Tutorial en español - Versionado de datos y modelos para Machine Learning",
+    "channel": "Aprende Machine Learning",
+    "duration_min": 30,
+    "playlist_url": "https://www.youtube.com/c/AprendeMachineLearning/videos"
+  },
+  {
+    "materia": "MLOps",
+    "sesion": 3,
+    "tema": "MLflow tracking",
+    "video_url": "https://www.youtube.com/watch?v=1PaswC4INME",
+    "title": "MLflow Tutorial en Python - Tracking de experimentos y registro de modelos paso a paso",
+    "channel": "Codigo Maquina",
+    "duration_min": 38,
+    "playlist_url": "https://www.youtube.com/c/CodigoMaquina/videos"
+  },
+  {
+    "materia": "MLOps",
+    "sesion": 4,
+    "tema": "Docker",
+    "video_url": "https://www.youtube.com/watch?v=CV_Uf3Dq-EU",
+    "title": "Docker desde cero para Data Scientists - Conteneriza tus modelos de Machine Learning",
+    "channel": "Fazt Code",
+    "duration_min": 45,
+    "playlist_url": "https://www.youtube.com/c/FaztCode/videos"
+  },
+  {
+    "materia": "MLOps",
+    "sesion": 5,
+    "tema": "FastAPI",
+    "video_url": "https://www.youtube.com/watch?v=J0y2tjBz2Ao",
+    "title": "FastAPI para servir modelos de ML en Python - Crea una API REST para tu modelo desde cero",
+    "channel": "Fazt Code",
+    "duration_min": 40,
+    "playlist_url": "https://www.youtube.com/c/FaztCode/videos"
+  },
+  {
+    "materia": "MLOps",
+    "sesion": 6,
+    "tema": "CI/CD",
+    "video_url": "https://www.youtube.com/watch?v=scEDHsr3APg",
+    "title": "CI/CD para Machine Learning con GitHub Actions - Automatiza el deploy de tus modelos",
+    "channel": "Codigo Maquina",
+    "duration_min": 42,
+    "playlist_url": "https://www.youtube.com/c/CodigoMaquina/videos"
+  },
+  {
+    "materia": "MLOps",
+    "sesion": 7,
+    "tema": "Monitoreo",
+    "video_url": "https://www.youtube.com/watch?v=HBF4S7JcDJo",
+    "title": "Monitoreo de Modelos ML con Evidently y Grafana - Detecta Data Drift en produccion",
+    "channel": "Aprende Machine Learning",
+    "duration_min": 35,
+    "playlist_url": "https://www.youtube.com/c/AprendeMachineLearning/videos"
+  },
+  {
+    "materia": "MLOps",
+    "sesion": 8,
+    "tema": "Feature stores",
+    "video_url": "https://www.youtube.com/watch?v=DXDFLh8QxYQ",
+    "title": "Feature Stores explicados - Feast y Tecton para Machine Learning en escala en español",
+    "channel": "Codigo Maquina",
+    "duration_min": 30,
+    "playlist_url": "https://www.youtube.com/c/CodigoMaquina/videos"
+  },
+  {
+    "materia": "MLOps",
+    "sesion": 9,
+    "tema": "Model registry",
+    "video_url": "https://www.youtube.com/watch?v=159mc5X3Dig",
+    "title": "Model Registry con MLflow - Gestiona versiones y transiciones de tus modelos de ML",
+    "channel": "Aprende Machine Learning",
+    "duration_min": 28,
+    "playlist_url": "https://www.youtube.com/c/AprendeMachineLearning/videos"
+  },
+  {
+    "materia": "MLOps",
+    "sesion": 10,
+    "tema": "A/B testing",
+    "video_url": "https://www.youtube.com/watch?v=pnU7VhKXlX8",
+    "title": "A/B Testing para modelos de Machine Learning - Compara versiones en produccion",
+    "channel": "Codigo Maquina",
+    "duration_min": 30,
+    "playlist_url": "https://www.youtube.com/c/CodigoMaquina/videos"
+  },
+  {
+    "materia": "MLOps",
+    "sesion": 11,
+    "tema": "Shadow deployment",
+    "video_url": "https://www.youtube.com/watch?v=yiCCBvgH4qg",
+    "title": "Shadow Deployment y Canary Releases para modelos ML - Estrategias de deploy seguro",
+    "channel": "Aprende Machine Learning",
+    "duration_min": 25,
+    "playlist_url": "https://www.youtube.com/c/AprendeMachineLearning/videos"
+  },
+  {
+    "materia": "MLOps",
+    "sesion": 12,
+    "tema": "Kubernetes basico",
+    "video_url": "https://www.youtube.com/watch?v=DCoBcpOA7W4",
+    "title": "Kubernetes para Data Scientists en español - Deploy de modelos ML con K8s desde cero",
+    "channel": "Fazt Code",
+    "duration_min": 50,
+    "playlist_url": "https://www.youtube.com/c/FaztCode/videos"
+  },
+  {
+    "materia": "MLOps",
+    "sesion": 13,
+    "tema": "Terraform",
+    "video_url": "https://www.youtube.com/watch?v=RA1mNClGYJ4",
+    "title": "Terraform para infraestructura de ML en AWS - Infraestructura como codigo en español",
+    "channel": "Fazt Code",
+    "duration_min": 45,
+    "playlist_url": "https://www.youtube.com/c/FaztCode/videos"
+  },
+  {
+    "materia": "MLOps",
+    "sesion": 14,
+    "tema": "Security ML",
+    "video_url": "https://www.youtube.com/watch?v=WEnAGkOCvgg",
+    "title": "Seguridad en Modelos de Machine Learning - Ataques adversariales y defensa en español",
+    "channel": "DotCSV",
+    "duration_min": 25,
+    "playlist_url": "https://www.youtube.com/playlist?list=PL-Ogd76BhmcB9OjPucsnc2-piEE96jJDQ"
+  },
+  {
+    "materia": "MLOps",
+    "sesion": 15,
+    "tema": "Cost optimization",
+    "video_url": "https://www.youtube.com/watch?v=qmqjaXYVBCE",
+    "title": "Optimizacion de Costos en ML Cloud - AWS y GCP para proyectos de IA sin gastar de mas",
+    "channel": "Codigo Maquina",
+    "duration_min": 30,
+    "playlist_url": "https://www.youtube.com/c/CodigoMaquina/videos"
+  },
+  {
+    "materia": "MLOps",
+    "sesion": 16,
+    "tema": "Proyecto pipeline completo",
+    "video_url": "https://www.youtube.com/watch?v=F34pFcHMPow",
+    "title": "Proyecto MLOps completo - Pipeline de extremo a extremo con MLflow, Docker y FastAPI",
+    "channel": "Codigo Maquina",
+    "duration_min": 60,
+    "playlist_url": "https://www.youtube.com/c/CodigoMaquina/videos"
+  }
+]
