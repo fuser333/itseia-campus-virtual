@@ -74,25 +74,41 @@ Jornada nocturna completa (6PM - 5AM). Se completaron los 7 modulos de la plataf
 | M07 Admin | 92% | 92% |
 | **Promedio** | **62%** | **98%** |
 
+### 10. ASISTENTES OPENAI — 6 TUTORES IA PERSONALIZADOS
+- 6 asistentes creados con OpenAI Assistants API (GPT-4o-mini)
+- Cada uno con base de conocimiento completa de su modulo:
+  - Tutor Carreras (asst_Xzg3MReVcDAv0xWSMfljSErN) — 384K chars, 1958 sesiones
+  - Tutor Preuni (asst_EfvbzvFf59u18D7vmhdeWO80) — 4 semanas, 20 sesiones
+  - Tutor Cursos Pro (asst_xv4OTxNB4a8ScaQHzRvAQX1Z) — 5 profesiones, 112 sesiones
+  - Tutor Certificaciones (asst_NTViwVvJVcPgPW5YY5MExpBU) — AWS, Google, Azure, Claude
+  - Tutor Docentes (asst_4aSxAFk5cZvAISWrqau4Dkrn) — 120h CES, 24 sesiones
+  - Tutor B2B (asst_c1h8jSxQlcaePe6W0gKO9GzH) — IDCE banca, 16 sesiones
+- API route: /api/ai/assistant (streaming SSE, threads persistentes)
+- File search habilitado para buscar en toda la base de conocimiento
+
 ## Pendientes
 
-### Criticos (hacer hoy)
+### Criticos (hacer hoy miercoles 1 abril)
 - [ ] Charla miercoles 7PM (T8 ya enviado a 113 leads)
 - [ ] Verificar OpenRouter funciona en produccion (probar chat con ChatGPT-4o)
+- [ ] Conectar Asistentes OpenAI al frontend (cambiar ChatPanel para usar /api/ai/assistant)
 - [ ] Enviar propuesta a Julio Cruz (CEO debe aprobar primero)
+- [ ] WhatsApp T8 manual a leads con numero
 
 ### Importantes (esta semana)
 - [ ] Presentaciones Gamma para M01, M02, M03 (solo IDCE tiene slides)
 - [ ] M01: 354 quizzes para 1,958 sesiones (20% cobertura) — crear mas quizzes
 - [ ] Cargar credito OpenRouter cuando se agoten los $10
-- [ ] Diferenciar contenido Express vs Estandar vs Completo (teoria copiada)
+- [ ] Diferenciar contenido Express vs Estandar vs Completo (teoria similar)
 - [ ] Videos Express (27 sesiones tienen videos genericos)
+- [ ] Frontend del Asistente: componente AsistenteTutor con thread persistente por usuario
 
 ### Deuda Tecnica
 - [ ] M07 Admin al 92% — mejorar si se necesita
 - [ ] Tests E2E para cada modulo
-- [ ] Monitoreo de costos OpenRouter
+- [ ] Monitoreo de costos OpenRouter + OpenAI
 - [ ] Backup periodico Supabase
+- [ ] Actualizar asistentes OpenAI cuando cambie contenido en Supabase (re-sync script)
 
 ## Archivos Modificados
 - src/components/layout/SidebarWrapper.tsx (server component)
