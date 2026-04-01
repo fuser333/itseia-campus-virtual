@@ -306,7 +306,7 @@ print("=" * 65)
 ## Usa IA para...
 
 > Abre Claude y escribe:
-> "Trabajo en el BCE Ecuador y quiero construir un sistema de monitoreo de sentimiento economico en tiempo real. Tenemos 10,000 tweets diarios en espanol sobre economia ecuatoriana. ¿Como implemento: 1) un pipeline de clasificacion con pysentimiento/robertuito que corra en AWS Lambda (< 500ms por tweet), 2) fine-tuning del modelo con 500 tweets etiquetados propios del BCE para mejorar precision en jerga financiera ecuatoriana ('riesgo pais', 'bonos soberanos', 'dolarizacion'), 3) dashboard en tiempo real con el indice de sentimiento agregado por hora? Dame el codigo de fine-tuning con Trainer de Hugging Face y las metricas de evaluacion correctas para clasificacion de 3 clases."
+> "Trabajo en el BCE Ecuador y quiero construir un sistema de monitoreo de sentimiento economico en tiempo real. Tenemos 10,000 tweets diarios en espanol sobre economia ecuatoriana. ¿Como implemento: 1) un pipeline de clasificacion con pysentimiento/robertuito que corra en AWS Lambda (< 500ms por tweet), 2) fine-tuning del modelo con 500 tweets etiquetados propios del BCE para mejorar precision en jerga financiera ecuatoriana ('riesgo pais', 'bonos soberaños', 'dolarizacion'), 3) dashboard en tiempo real con el indice de sentimiento agregado por hora? Dame el codigo de fine-tuning con Trainer de Hugging Face y las metricas de evaluacion correctas para clasificacion de 3 clases."
 
 Despues de leer la respuesta:
 - Implementa el loop de fine-tuning simplificado con los datos del BCE.

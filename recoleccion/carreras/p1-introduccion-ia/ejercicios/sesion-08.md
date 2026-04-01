@@ -29,7 +29,7 @@ El IESS tiene listas de espera de hasta 90 dias para citas con especialistas en 
 La tasa de abandono escolar en Ecuador es del 6.8% (INEC 2024). La mayoria de deserciones no se detectan hasta que ya ocurrieron: no hay sistema de alerta temprana.
 
 **Opcion D — Trafico**
-Quito tiene 800,000 vehiculos y los semaforos funcionan con ciclos fijos desde los anos 90. En horas pico, el tiempo promedio de viaje se duplica innecesariamente.
+Quito tiene 800,000 vehiculos y los semaforos funcionan con ciclos fijos desde los años 90. En horas pico, el tiempo promedio de viaje se duplica innecesariamente.
 
 **Opcion E — Tu propio problema**
 Identifica un problema real que vives tu, tu familia o tu comunidad. Debe ser cuantificable (tiene datos) y resoluble con IA.

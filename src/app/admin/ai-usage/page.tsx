@@ -32,8 +32,10 @@ const QUOTA_ALERT_THRESHOLD = 0.8; // 80%
 const MODEL_COLORS: Record<string, string> = {
   "gemini-2.0-flash": "bg-[#FBBC0C]/15 text-[#FBBC0C]",
   "gemini-2.5-flash": "bg-[#73B8E7]/15 text-[#73B8E7]",
-  "gemini-2.0-flash-lite": "bg-emerald-100 text-emerald-700",
-  "gemini-2.5-pro": "bg-purple-100 text-purple-700",
+  "chatgpt-4o": "bg-[#10A37F]/15 text-[#10A37F]",
+  "claude-sonnet": "bg-[#CC785C]/15 text-[#CC785C]",
+  "llama-3.1": "bg-[#0668E1]/15 text-[#0668E1]",
+  "mistral-large": "bg-[#F97316]/15 text-[#F97316]",
 };
 
 export default function AIUsagePage() {

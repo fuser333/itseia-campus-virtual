@@ -11,7 +11,7 @@ Calcular determinantes e inversas de matrices 2x2 y 3x3, y entender su relacion 
 
 ## Contexto
 
-El INEC Ecuador realizó una encuesta sobre tres factores que predicen el ingreso mensual de un hogar en Quito: anos de educacion (X1), anos de experiencia laboral (X2) y horas trabajadas por semana (X3). Para resolver el sistema de ecuaciones que encuentra los coeficientes del modelo predictivo, necesitamos calcular inversas de matrices.
+El INEC Ecuador realizó una encuesta sobre tres factores que predicen el ingreso mensual de un hogar en Quito: años de educacion (X1), años de experiencia laboral (X2) y horas trabajadas por semana (X3). Para resolver el sistema de ecuaciones que encuentra los coeficientes del modelo predictivo, necesitamos calcular inversas de matrices.
 
 **Matriz de correlaciones entre variables (simplificada):**
 ```

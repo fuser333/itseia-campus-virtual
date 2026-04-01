@@ -72,4 +72,4 @@ Despues de leer la respuesta:
 
 ## Reto extra
 
-Agrega al final de tu programa un bloque que calcule y muestre cuantos anos faltan para que Ecuador cierre la brecha de talento si ITSEIA gradua 65 estudiantes por ano. Usa solo `print()` y escribe el calculo directamente en el texto. (Pista: 27,000 / 65 = ?)
+Agrega al final de tu programa un bloque que calcule y muestre cuantos años faltan para que Ecuador cierre la brecha de talento si ITSEIA gradua 65 estudiantes por ano. Usa solo `print()` y escribe el calculo directamente en el texto. (Pista: 27,000 / 65 = ?)

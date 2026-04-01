@@ -158,13 +158,13 @@ print("=" * 65)
 print("ANALISIS BIG O — Datos INEC Ecuador")
 print("=" * 65)
 
-tamanos = [100, 500, 1000, 5000, 10000]
+tamaños = [100, 500, 1000, 5000, 10000]
 # Para O(n^2) solo hasta 2000 para no tardar demasiado
-tamanos_cuadratico = [50, 100, 200, 500, 1000]
+tamaños_cuadratico = [50, 100, 200, 500, 1000]
 
 resultados = {clase: {} for clase in ["O(1)", "O(log n)", "O(n)", "O(n log n)", "O(n^2)"]}
 
-for n in tamanos:
+for n in tamaños:
     datos = generar_datos_inec(n)
     datos_ordenados = sorted(datos, key=lambda p: p["edad"])
     tabla = {p["cedula"]: p for p in datos}
@@ -191,7 +191,7 @@ for n in tamanos:
     ordenar_por_ingreso(datos)
     resultados["O(n log n)"][n] = (time.perf_counter() - t0) * 1000
 
-for n in tamanos_cuadratico:
+for n in tamaños_cuadratico:
     datos = generar_datos_inec(n)
     t0 = time.perf_counter()
     seleccion_sort_ingresos(datos)
@@ -206,7 +206,7 @@ print("-" * 60)
 
 for clase in ["O(1)", "O(log n)", "O(n)", "O(n log n)"]:
     fila = f"{clase:<15}"
-    for n in tamanos:
+    for n in tamaños:
         val = resultados[clase].get(n, 0)
         fila += f"{val:>9.4f}ms"
     print(fila)
@@ -214,7 +214,7 @@ for clase in ["O(1)", "O(log n)", "O(n)", "O(n log n)"]:
 print(f"\n{'Complejidad':<15} {'50':>10} {'100':>10} {'200':>10} {'500':>10} {'1000':>10}")
 print("-" * 60)
 fila = f"{'O(n^2)':<15}"
-for n in tamanos_cuadratico:
+for n in tamaños_cuadratico:
     val = resultados["O(n^2)"].get(n, 0)
     fila += f"{val:>9.3f}ms"
 print(fila)

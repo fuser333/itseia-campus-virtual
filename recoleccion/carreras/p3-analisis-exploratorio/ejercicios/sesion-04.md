@@ -11,7 +11,7 @@ Calcular matrices de correlacion, visualizar heatmaps, interpretar coeficientes 
 
 ## Contexto
 
-La correlacion mide si dos variables se mueven juntas. En ciencia de datos es fundamental para seleccionar features, detectar multicolinealidad y entender relaciones en los datos. En el contexto laboral ecuatoriano: anos de educacion correlaciona positivamente con salario, pero esa correlacion varia por sector. Con un heatmap lo ves en segundos.
+La correlacion mide si dos variables se mueven juntas. En ciencia de datos es fundamental para seleccionar features, detectar multicolinealidad y entender relaciones en los datos. En el contexto laboral ecuatoriano: años de educacion correlaciona positivamente con salario, pero esa correlacion varia por sector. Con un heatmap lo ves en segundos.
 
 ## Instrucciones
 

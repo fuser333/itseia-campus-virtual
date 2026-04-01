@@ -369,18 +369,35 @@ const ROLE_LABELS: Record<UserRole, string> = {
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
-export default function Sidebar() {
+interface SidebarProps {
+  serverUser?: { id: string; email: string } | null;
+  serverProfile?: Profile | null;
+  serverProgramTypes?: string[];
+  serverHasCertEnrollment?: boolean;
+}
+
+export default function Sidebar({
+  serverUser,
+  serverProfile,
+  serverProgramTypes = [],
+  serverHasCertEnrollment = false,
+}: SidebarProps) {
   const router = useRouter();
   const pathname = usePathname();
 
-  const [user, setUser]                   = useState<{ id: string; email: string } | null>(null);
-  const [profile, setProfile]             = useState<Profile | null>(null);
-  const [programTypes, setProgramTypes]   = useState<string[]>([]);
-  const [hasCertEnrollment, setHasCert]   = useState(false);
+  // Use server-fetched data as initial state (authoritative)
+  const [user, setUser]                   = useState<{ id: string; email: string } | null>(serverUser ?? null);
+  const [profile, setProfile]             = useState<Profile | null>((serverProfile as Profile) ?? null);
+  const [programTypes, setProgramTypes]   = useState<string[]>(serverProgramTypes);
+  const [hasCertEnrollment, setHasCert]   = useState(serverHasCertEnrollment);
   const [collapsed, setCollapsed]         = useState(false);
-  const [loading, setLoading]             = useState(true);
+  // If server data is available, skip loading state entirely
+  const [loading, setLoading]             = useState(!serverUser);
 
   useEffect(() => {
+    // Skip client-side fetch if server already provided the data
+    if (serverUser) return;
+
     const supabase = createClient();
 
     async function loadUser() {
@@ -433,7 +450,7 @@ export default function Sidebar() {
     }
 
     loadUser();
-  }, []);
+  }, [serverUser]);
 
   async function handleLogout() {
     const supabase = createClient();

@@ -402,6 +402,8 @@ export default function SessionPage({ params }: PageProps) {
           sessionContext={sessionContext}
           suggestedPrompt={session.ai_lab_suggested_prompt || undefined}
           onFirstMessage={() => updateProgress("ai_lab_used")}
+          sessionId={session.id}
+          sessionTitle={session.title}
         />
       ),
     },
@@ -441,7 +443,7 @@ export default function SessionPage({ params }: PageProps) {
           subjectName={subject.name}
           teacherName={teacherName}
           userRole={userRole}
-          isEnrolled={isEnrolled || ["docente", "admin", "coordinacion", "super_admin"].includes(userRole || "")}
+          isEnrolled={isEnrolled || ["docente", "admin", "coordinacion", "super_admin", "finanzas"].includes(userRole || "")}
         />
       ),
     },

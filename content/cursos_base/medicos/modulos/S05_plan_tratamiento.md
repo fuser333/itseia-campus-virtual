@@ -33,7 +33,7 @@ El caso fue disenado para reflejar una situacion clinica frecuente en la consult
 
 **Datos demograficos (ficticios):**
 - Iniciales: M.G.
-- Edad: 52 anos
+- Edad: 52 años
 - Sexo: femenino
 - Ocupacion: ama de casa, zona urbana de la Sierra ecuatoriana
 - Nivel educativo: bachillerato
@@ -51,30 +51,30 @@ Maria acude a control mensual de su diabetes tipo 2. Refiere que en las ultimas 
 
 ### Historia Clinica Resumida
 
-**Antecedente personal patologico principal:** Diabetes mellitus tipo 2, diagnosticada hace 8 anos en el IESS. Control irregular — asiste a consulta de control "cuando puede", aproximadamente cada 2-3 meses.
+**Antecedente personal patologico principal:** Diabetes mellitus tipo 2, diagnosticada hace 8 años en el IESS. Control irregular — asiste a consulta de control "cuando puede", aproximadamente cada 2-3 meses.
 
 **Otros antecedentes personales:**
-- Hipertension arterial diagnosticada hace 3 anos, controlada (refiere)
+- Hipertension arterial diagnosticada hace 3 años, controlada (refiere)
 - Sobrepeso/obesidad: peso habitual 82 kg, talla 1.58m, IMC habitual 32.8
 - Sin antecedentes quirurgicos
 - Sin alergias medicamentosas conocidas
 - No fuma, no consume alcohol de manera regular
 
-**Antecedentes familiares:** Madre fallecida por "problemas del rinon" (probable nefropatia diabetica). Padre con HTA e IAM a los 68 anos.
+**Antecedentes familiares:** Madre fallecida por "problemas del rinon" (probable nefropatia diabetica). Padre con HTA e IAM a los 68 años.
 
 **Revision por sistemas (resumida):**
 - Cardiovascular: sin disnea de esfuerzo, sin edema de miembros inferiores
-- Neurológico: parestesias en plantas de los pies que refiere "desde hace un par de anos" — no le habia mencionado antes
-- Oftalmologico: no ha ido al oftalmologo en los ultimos 3 anos
+- Neurológico: parestesias en plantas de los pies que refiere "desde hace un par de años" — no le habia mencionado antes
+- Oftalmologico: no ha ido al oftalmologo en los ultimos 3 años
 - Renal: sin disuria, sin hematuria
 
 ### Medicacion Actual
 
 | Medicamento | Dosis | Frecuencia | Tiempo de uso |
 |-------------|-------|-----------|---------------|
-| Metformina | 850 mg | c/12h | 8 anos |
-| Losartan | 50 mg | 1 vez al dia (manana) | 3 anos |
-| Atorvastatina | 20 mg | 1 vez al dia (noche) | 2 anos |
+| Metformina | 850 mg | c/12h | 8 años |
+| Losartan | 50 mg | 1 vez al dia (manana) | 3 años |
+| Atorvastatina | 20 mg | 1 vez al dia (noche) | 2 años |
 
 Refiere no haber tomado la metformina de manera regular en los ultimos 2 meses "porque a veces se le olvida con tanto trabajo."
 
@@ -114,7 +114,7 @@ Refiere no haber tomado la metformina de manera regular en los ultimos 2 meses "
 | Hemograma | Hemoglobina 11.8 g/dL | 12-16 g/dL mujeres |
 
 **Calculo de TFG estimada (CKD-EPI):**
-Con creatinina 1.4, mujer, 52 anos: TFG estimada ~44 ml/min/1.73m2 — corresponde a ERC estadio 3a (si se confirma en 2 controles con 3 meses de diferencia).
+Con creatinina 1.4, mujer, 52 años: TFG estimada ~44 ml/min/1.73m2 — corresponde a ERC estadio 3a (si se confirma en 2 controles con 3 meses de diferencia).
 
 ---
 
@@ -148,7 +148,7 @@ evidence outcomes
 
 5. Responde las siguientes preguntas antes de continuar:
 
-   a) Segun las guias ADA 2025 (o la edicion mas reciente disponible en Elicit), cual es el objetivo de HbA1c para una paciente como Maria (62 anos, ERC estadio 3)?
+   a) Segun las guias ADA 2025 (o la edicion mas reciente disponible en Elicit), cual es el objetivo de HbA1c para una paciente como Maria (62 años, ERC estadio 3)?
 
    b) Esta contraindicada la metformina con una TFG de 44 ml/min? Cual es el umbral actual segun ADA?
 
@@ -170,7 +170,7 @@ Usa este prompt en ChatGPT o Claude (recuerda: datos anonimizados):
 Actua como internista con experiencia en diabetologia.
 
 CASO CLINICO (anonimizado):
-Paciente femenino, 52 anos, DM2 de 8 anos de evolucion con control irregular.
+Paciente femenino, 52 años, DM2 de 8 años de evolucion con control irregular.
 Presenta en las ultimas 6 semanas: fatiga progresiva, poliuria, perdida de peso
 4-5kg, nauseas ocasionales.
 Medicacion actual: metformina 850mg c/12h (con adherencia irregular), losartan 50mg/dia,
@@ -188,7 +188,7 @@ Laboratorios recientes:
 - TSH: no solicitada
 - Microalbuminuria: no solicitada
 
-Parestesias en plantas de pies referidas desde hace 2 anos.
+Parestesias en plantas de pies referidas desde hace 2 años.
 
 PREGUNTAS:
 1. Cuales son las causas mas probables de su descompensacion diabetica?
@@ -221,7 +221,7 @@ Usa este prompt:
 ```
 Actua como internista con experiencia en diabetologia y nefrologia.
 
-CONTEXTO: Paciente femenino, 52 anos, DM2 descompensada (HbA1c 9.2%),
+CONTEXTO: Paciente femenino, 52 años, DM2 descompensada (HbA1c 9.2%),
 TFG estimada 44 ml/min (posible ERC estadio 3a), anemia leve (Hb 11.8g/dL),
 dislipidemia no controlada (LDL 142, TG 198).
 Medicacion actual: metformina 850mg c/12h (adherencia irregular), losartan 50mg, atorvastatina 20mg.
@@ -257,7 +257,7 @@ Ahora genera las recomendaciones no farmacologicas para esta paciente:
 - Metas de peso
 - Importancia de la adherencia al tratamiento (segun su historia de olvidos de metformina)
 
-Adapta las recomendaciones a una paciente de 52 anos, ama de casa, Sierra ecuatoriana.
+Adapta las recomendaciones a una paciente de 52 años, ama de casa, Sierra ecuatoriana.
 Lenguaje tecnico pero que yo pueda traducir facilmente para explicarle a ella.
 ```
 
@@ -270,7 +270,7 @@ Lenguaje tecnico pero que yo pueda traducir facilmente para explicarle a ella.
 **Prompt:**
 
 ```
-Genera una "hoja de educacion para el paciente" para una mujer de 52 anos,
+Genera una "hoja de educacion para el paciente" para una mujer de 52 años,
 ama de casa de la Sierra ecuatoriana, bachillerato completo, con diabetes tipo 2
 que no ha estado controlada y que hoy descubrimos tiene posible dano en los rinones.
 

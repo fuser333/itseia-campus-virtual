@@ -108,7 +108,7 @@ st.sidebar.image("https://via.placeholder.com/200x60/1F2F58/FBBC0C?text=ITSEIA",
 st.sidebar.markdown("## Filtros del Dashboard")
 
 anio_sel = st.sidebar.multiselect(
-    "Selecciona anos:",
+    "Selecciona años:",
     options=sorted(df_serie['Anio'].unique()),
     default=[2023, 2024]
 )
@@ -278,4 +278,4 @@ Agrega ese boton de descarga al dashboard, justo debajo de la tabla resumen.
 
 ## Reto extra
 
-Agrega una cuarta seccion al dashboard llamada "Mapa de calor mensual" que muestre un heatmap con los meses en columnas y los anos en filas, donde el color representa el valor del indicador seleccionado. Usa `px.imshow()`. El resultado debe responder al filtro de indicador del sidebar.
+Agrega una cuarta seccion al dashboard llamada "Mapa de calor mensual" que muestre un heatmap con los meses en columnas y los años en filas, donde el color representa el valor del indicador seleccionado. Usa `px.imshow()`. El resultado debe responder al filtro de indicador del sidebar.

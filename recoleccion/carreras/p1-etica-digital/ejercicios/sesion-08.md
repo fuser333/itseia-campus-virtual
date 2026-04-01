@@ -19,7 +19,7 @@ Elige el dilema que se acerque mas a tu carrera de interes. Todos son escenarios
 ---
 
 **Dilema A — Para estudiantes de Inteligencia Artificial:**
-Eres el lider tecnico de IA en una empresa de seguros de salud en Ecuador (Seguros Constitución ficticia). Tu gerente te pide desarrollar un modelo que prediga con 87% de precision que asegurados tendran enfermedades cronicas en los proximos 3 anos, usando datos de las recetas medicas, el historial de farmacias y datos de redes sociales. El objetivo: reclasificar las primas de esos asegurados al 150% antes de que se enfermen, "para cubrir el riesgo actuarial". Los datos de redes sociales no fueron recolectados con ese proposito y los asegurados no saben que se analizan. El modelo es tecnicamente excelente.
+Eres el lider tecnico de IA en una empresa de seguros de salud en Ecuador (Seguros Constitución ficticia). Tu gerente te pide desarrollar un modelo que prediga con 87% de precision que asegurados tendran enfermedades cronicas en los proximos 3 años, usando datos de las recetas medicas, el historial de farmacias y datos de redes sociales. El objetivo: reclasificar las primas de esos asegurados al 150% antes de que se enfermen, "para cubrir el riesgo actuarial". Los datos de redes sociales no fueron recolectados con ese proposito y los asegurados no saben que se analizan. El modelo es tecnicamente excelente.
 
 ---
 

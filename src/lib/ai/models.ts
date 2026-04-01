@@ -1,11 +1,12 @@
 // ============================================================
 // ITSEIA Academy — AI Model Configuration
-// Multi-modelo: todos usan Gemini API con la misma key
+// Multi-provider: Gemini (directo) + OpenRouter (ChatGPT, Claude, Llama, Mistral)
 // ============================================================
 
 export interface AIModelConfig {
   name: string;
-  provider: "google";
+  provider: "google" | "openrouter";
+  modelId: string; // ID real del modelo en la API del provider
   description: string;
   costPer1kIn: number;
   costPer1kOut: number;
@@ -18,6 +19,7 @@ export const AI_MODELS = {
   "gemini-2.0-flash": {
     name: "Gemini 2.0 Flash",
     provider: "google",
+    modelId: "gemini-2.0-flash",
     description: "Rapido y economico",
     costPer1kIn: 0.0001,
     costPer1kOut: 0.0004,
@@ -25,25 +27,60 @@ export const AI_MODELS = {
     color: "#73B8E7",
     maxTokens: 8192,
   },
+  "chatgpt-4o": {
+    name: "ChatGPT-4o",
+    provider: "openrouter",
+    modelId: "openai/gpt-4o",
+    description: "OpenAI — el mas popular",
+    costPer1kIn: 0.0025,
+    costPer1kOut: 0.01,
+    icon: "\uD83E\uDDE0",
+    color: "#10A37F",
+    maxTokens: 4096,
+  },
+  "claude-sonnet": {
+    name: "Claude 3.5 Sonnet",
+    provider: "openrouter",
+    modelId: "anthropic/claude-3.5-sonnet",
+    description: "Anthropic — mejor en analisis",
+    costPer1kIn: 0.003,
+    costPer1kOut: 0.015,
+    icon: "\uD83C\uDFAF",
+    color: "#CC785C",
+    maxTokens: 4096,
+  },
+  "llama-3.1": {
+    name: "Llama 3.1 70B",
+    provider: "openrouter",
+    modelId: "meta-llama/llama-3.1-70b-instruct",
+    description: "Meta — open source potente",
+    costPer1kIn: 0.0004,
+    costPer1kOut: 0.0004,
+    icon: "\uD83E\uDD99",
+    color: "#0668E1",
+    maxTokens: 4096,
+  },
   "gemini-2.5-flash": {
     name: "Gemini 2.5 Flash",
     provider: "google",
-    description: "Ultimo modelo Google",
+    modelId: "gemini-2.5-flash",
+    description: "Google — ultimo modelo",
     costPer1kIn: 0.00015,
     costPer1kOut: 0.0006,
-    icon: "\uD83E\uDDE0",
+    icon: "\u2728",
     color: "#FBBC0C",
     maxTokens: 8192,
   },
-  "gemini-2.0-flash-lite": {
-    name: "Gemini Flash Lite",
-    provider: "google",
-    description: "El mas barato",
-    costPer1kIn: 0.0000375,
-    costPer1kOut: 0.00015,
-    icon: "\uD83D\uDCA8",
-    color: "#F0846D",
-    maxTokens: 8192,
+  "mistral-large": {
+    name: "Mistral Large",
+    provider: "openrouter",
+    modelId: "mistralai/mistral-large-latest",
+    description: "Mistral — europeo, rapido",
+    costPer1kIn: 0.002,
+    costPer1kOut: 0.006,
+    icon: "\uD83C\uDF0A",
+    color: "#F97316",
+    maxTokens: 4096,
   },
 } as const;
 
@@ -53,27 +90,18 @@ export const DEFAULT_MODEL: AIModelId = "gemini-2.0-flash";
 
 export const MODEL_IDS = Object.keys(AI_MODELS) as AIModelId[];
 
-/**
- * Valida que un string sea un model ID valido.
- */
 export function isValidModel(model: string): model is AIModelId {
   return model in AI_MODELS;
 }
 
-/**
- * Retorna el indicador de costo visual ($ a $$$) para un modelo.
- */
 export function getCostIndicator(modelId: AIModelId): string {
   const model = AI_MODELS[modelId];
   const avgCost = (model.costPer1kIn + model.costPer1kOut) / 2;
-  if (avgCost < 0.0001) return "$";
-  if (avgCost < 0.0003) return "$$";
+  if (avgCost < 0.0003) return "$";
+  if (avgCost < 0.003) return "$$";
   return "$$$";
 }
 
-/**
- * Calcula el costo estimado en USD para un modelo especifico.
- */
 export function estimateModelCost(
   modelId: AIModelId,
   tokensIn: number,
@@ -85,9 +113,6 @@ export function estimateModelCost(
   return Math.round((inputCost + outputCost) * 1_000_000) / 1_000_000;
 }
 
-/**
- * Construye la URL de la API de Gemini para un modelo dado.
- */
 export function getGeminiStreamUrl(modelId: AIModelId, apiKey: string): string {
   return `https://generativelanguage.googleapis.com/v1beta/models/${modelId}:streamGenerateContent?alt=sse&key=${apiKey}`;
 }

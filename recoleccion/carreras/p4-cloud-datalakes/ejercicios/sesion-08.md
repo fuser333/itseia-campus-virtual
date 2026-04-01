@@ -86,7 +86,7 @@ TIENDAS = {
 }
 
 CATEGORIAS = {
-    "GRA": ("Granos y Harinas",    [0.40, 1.80]),
+    "GRA": ("Graños y Harinas",    [0.40, 1.80]),
     "LAC": ("Lacteos",             [0.50, 4.50]),
     "CAR": ("Carnes y Embutidos",  [1.20, 12.00]),
     "FRV": ("Frutas y Verduras",   [0.30, 3.50]),
@@ -408,4 +408,4 @@ Despues de leer la respuesta:
 
 ## Reto extra
 
-Despliega el data lake de Favorita como servicio gestionado en AWS: S3 con versioning + lifecycle policies (raw 7 anos, curated 5 anos, analytics 2 anos), Glue Catalog con crawler automatico, Athena workgroup con limite de costo $100/mes, QuickSight dashboard con alertas cuando el margen de alguna categoria cae mas del 2% semana a semana, y presupuesto AWS Budget que alerta cuando el costo mensual supera $10,000. Presenta el ROI al directorio de Favorita.
+Despliega el data lake de Favorita como servicio gestionado en AWS: S3 con versioning + lifecycle policies (raw 7 años, curated 5 años, analytics 2 años), Glue Catalog con crawler automatico, Athena workgroup con limite de costo $100/mes, QuickSight dashboard con alertas cuando el margen de alguna categoria cae mas del 2% semana a semana, y presupuesto AWS Budget que alerta cuando el costo mensual supera $10,000. Presenta el ROI al directorio de Favorita.

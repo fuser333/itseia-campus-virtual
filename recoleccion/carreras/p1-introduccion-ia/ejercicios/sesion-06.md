@@ -33,7 +33,7 @@ Investiga y completa cada categoria (usa Google, LinkedIn, Claude, y los sitios 
 
 | Universidad/Instituto | Programa | Duracion | Modalidad |
 |----------------------|----------|----------|-----------|
-| ITSEIA | Tec. Sup. IA | 2.5 anos | Presencial |
+| ITSEIA | Tec. Sup. IA | 2.5 años | Presencial |
 | [Investiga 3 mas] | | | | |
 
 **Organizaciones del ecosistema:**
@@ -77,7 +77,7 @@ Investiga los datos que faltan.
 ## Usa IA para...
 
 > Abre ChatGPT y escribe:
-> "Actua como analista de politicas publicas de tecnologia. Dame un diagnostico del ecosistema de Inteligencia Artificial en Ecuador en 2024. Incluye: 1) Los 3 sectores donde Ecuador tiene mayor potencial de desarrollo de IA, 2) Las 3 barreras principales para el crecimiento de IA en el pais, 3) Que deberia hacer el gobierno ecuatoriano en los proximos 5 anos para no quedarse atras de Colombia y Peru en adopcion de IA. Basa tu analisis en datos reales cuando sea posible."
+> "Actua como analista de politicas publicas de tecnologia. Dame un diagnostico del ecosistema de Inteligencia Artificial en Ecuador en 2024. Incluye: 1) Los 3 sectores donde Ecuador tiene mayor potencial de desarrollo de IA, 2) Las 3 barreras principales para el crecimiento de IA en el pais, 3) Que deberia hacer el gobierno ecuatoriano en los proximos 5 años para no quedarse atras de Colombia y Peru en adopcion de IA. Basa tu analisis en datos reales cuando sea posible."
 
 Luego abre Gemini y escribe exactamente el mismo prompt. Compara:
 - ¿Coinciden en los sectores con mayor potencial?
@@ -89,7 +89,7 @@ Luego abre Gemini y escribe exactamente el mismo prompt. Compara:
 - Ecuador **no esta en el fondo** del ranking global de IA, pero tiene trabajo serio por hacer en infraestructura y talento.
 - La **LOPDP** es la ley mas relevante para cualquier profesional de IA en Ecuador: afecta como se pueden recolectar, procesar y usar datos de ecuatorianos.
 - El **ecosistema** de IA es mas que empresas: incluye gobierno, academia, regulacion, capital y cultura.
-- La **comparativa regional** muestra que Colombia y Chile son benchmarks cercanos y alcanzables.
+- La **comparativa regional** muestra que Colombia y Chile son benchmarks cercaños y alcanzables.
 - **Ser tecnologo en IA en Ecuador HOY** es como haber aprendido internet en 1998: el mercado aun se esta formando y los primeros tienen ventaja masiva.
 
 ## Reto extra

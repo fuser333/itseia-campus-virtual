@@ -53,9 +53,11 @@ function getProgramLink(
   slug: string | null | undefined,
   id: string,
 ): string {
-  if (type === "carrera" && slug) return `/carreras/${slug}`;
+  // Programs with a slug → use academic view (handles all types)
+  if (slug) return `/carreras/${slug}`;
   if (type === "curso") return `/mi-curso`;
-  return `/dashboard`;
+  // B2B courses without slug → dedicated course view
+  return `/b2b/curso/${id}`;
 }
 
 /** Estimates total hours based on duration_months (rough: 20h/month). */

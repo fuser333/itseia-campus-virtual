@@ -81,7 +81,7 @@ Maximo 200 palabras totales. Formato clinico conciso.
 
 *Resumen libre que escribes (60 segundos de dictado):*
 ```
-Martes, consulta externa, adulta de 38 anos, viene por tos de 4 dias
+Martes, consulta externa, adulta de 38 años, viene por tos de 4 dias
 seca que ahora tiene algo de flema, sin fiebre alta, rinorrea clara,
 garganta irritada. No tiene dificultad para respirar. Al examen faringe
 roja sin placas, pulmones bien. Le doy paracetamol 500 cada 8 horas
@@ -91,7 +91,7 @@ que vuelva si sigue mal o tiene fiebre mayor de 38.5 o le cuesta respirar.
 
 *Nota SOAP generada por IA:*
 ```
-S: Paciente femenina de 38 anos que consulta por cuadro de 4 dias de evolucion
+S: Paciente femenina de 38 años que consulta por cuadro de 4 dias de evolucion
 caracterizado por tos inicialmente seca, actualmente productiva con expectoracion
 mucoide, rinorrea hialina y odinofagia. Niega fiebre documentada ni disnea.
 
@@ -257,7 +257,7 @@ En este modulo tienes acceso a una herramienta de demo interactivo que simula el
 
 ```
 ESCENARIO PARA PRACTICAR:
-Paciente masculino, 55 anos. Consulta por dolor lumbar de 3 semanas de evolucion,
+Paciente masculino, 55 años. Consulta por dolor lumbar de 3 semanas de evolucion,
 de inicio gradual, mecánico (mejora con reposo, empeora con actividad),
 sin irradiacion a miembros inferiores, sin sintomas neurologicos.
 Trabaja en construccion. Toma ibuprofeno ocasionalmente con mejoria parcial.
@@ -294,7 +294,7 @@ Usa el siguiente caso para practicar el flujo completo:
 
 **Caso para documentar:**
 ```
-Consulta hoy: mujer, 29 anos, 20 semanas de embarazo. Viene por vaginosis
+Consulta hoy: mujer, 29 años, 20 semanas de embarazo. Viene por vaginosis
 bacteriana diagnosticada por laboratorio (Nugent >7). Sin alergias conocidas.
 Asintomatica actualmente. Examen pelvico: flujo moderado homogeneo grisaceo.
 Plan: metronidazol 500mg c/12h por 7 dias (via oral), explicar que completar

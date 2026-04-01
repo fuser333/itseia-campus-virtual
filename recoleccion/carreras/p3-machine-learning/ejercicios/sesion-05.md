@@ -181,7 +181,7 @@ Despues de leer la respuesta:
 
 ## Que aprendiste
 
-- KNN clasifica un nuevo punto buscando sus K vecinos mas cercanos en el espacio de features.
+- KNN clasifica un nuevo punto buscando sus K vecinos mas cercaños en el espacio de features.
 - **K pequeño (K=1):** el modelo memoriza el entrenamiento (sobreajuste), alta varianza.
 - **K grande:** el modelo generaliza mas pero puede perder detalles locales (sesgo).
 - La curva train/test vs K es una herramienta visual para elegir el K optimo.

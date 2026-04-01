@@ -71,7 +71,7 @@ estandar_nomenclatura = {
         "incorrecto": "15/03/24, March 15, 20240315",
         "justificacion": "Interoperabilidad internacional — SWIFT, OECD reportes",
     },
-    "Booleanos": {
+    "Booleaños": {
         "regla":    "es_ o tiene_ como prefijo",
         "correcto": "es_activo, tiene_garantia, es_persona_natural",
         "incorrecto": "activo, garantia, persona",
@@ -173,30 +173,30 @@ print("\n--- POLITICA DE RETENCION Y ELIMINACION ---")
 
 politica_retencion = {
     "Transacciones SPI/SCI": {
-        "retencion_online": "2 anos",
-        "retencion_archivo": "7 anos",
-        "retencion_legal": "7 anos (Art. 87 LRFSE)",
+        "retencion_online": "2 años",
+        "retencion_archivo": "7 años",
+        "retencion_legal": "7 años (Art. 87 LRFSE)",
         "eliminacion": "Destruccion segura certificada",
         "responsable": "Banco + SBS supervisa",
     },
     "Creditos y prestamos": {
-        "retencion_online": "Vigencia + 3 anos",
-        "retencion_archivo": "10 anos",
-        "retencion_legal": "10 anos (Codigo Civil 2346)",
+        "retencion_online": "Vigencia + 3 años",
+        "retencion_archivo": "10 años",
+        "retencion_legal": "10 años (Codigo Civil 2346)",
         "eliminacion": "Shredding fisico + borrado seguro digital",
         "responsable": "Banco prestamista",
     },
     "Datos PII clientes": {
-        "retencion_online": "Vigencia relacion + 2 anos",
-        "retencion_archivo": "5 anos post-cancelacion",
+        "retencion_online": "Vigencia relacion + 2 años",
+        "retencion_archivo": "5 años post-cancelacion",
         "retencion_legal": "LOPDP Art. 20 — minimo necesario",
         "eliminacion": "LOPDP Art. 22 — derecho al olvido en 15 dias",
         "responsable": "DPO del banco",
     },
     "Logs de auditoria": {
         "retencion_online": "1 ano",
-        "retencion_archivo": "5 anos",
-        "retencion_legal": "5 anos (EGSI Control A.12.4)",
+        "retencion_archivo": "5 años",
+        "retencion_legal": "5 años (EGSI Control A.12.4)",
         "eliminacion": "Solo con autorizacion CISO",
         "responsable": "CISO + CDO",
     },
@@ -279,7 +279,7 @@ print(f"\n  Bancos con cumplimiento >= 80%: "
 print("\n" + "=" * 65)
 print("POLITICAS Y ESTANDARES — CONCEPTOS CLAVE:")
 print("  Nomenclatura: snake_case, prefijos id_/fecha_/monto_usd — legibilidad")
-print("  Retencion:    plazos legales Ecuador (7-10 anos financiero)")
+print("  Retencion:    plazos legales Ecuador (7-10 años financiero)")
 print("  LOPDP:        derecho al olvido — eliminar PII en 15 dias")
 print("  OpenAPI:      documentacion automatica — interoperabilidad garantizada")
 print("  Scorecard:    medir cumplimiento — lo que no se mide no mejora")

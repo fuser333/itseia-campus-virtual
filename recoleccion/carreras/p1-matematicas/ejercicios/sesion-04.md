@@ -11,12 +11,12 @@ Aplicar probabilidad condicional y el Teorema de Bayes para actualizar creencias
 
 ## Contexto
 
-El IESS (Instituto Ecuatoriano de Seguridad Social) reporta que en Ecuador la **tasa de diabetes tipo 2** en adultos mayores de 40 anos es del **12%** (dato ENSANUT 2024). Una clinica privada en Cuenca implemento un test de glucosa rapido con las siguientes caracteristicas conocidas:
+El IESS (Instituto Ecuatoriano de Seguridad Social) reporta que en Ecuador la **tasa de diabetes tipo 2** en adultos mayores de 40 años es del **12%** (dato ENSANUT 2024). Una clinica privada en Cuenca implemento un test de glucosa rapido con las siguientes caracteristicas conocidas:
 
 - **Sensibilidad** (probabilidad de test positivo dado que tiene diabetes): 92%
 - **Especificidad** (probabilidad de test negativo dado que NO tiene diabetes): 87%
 
-Un paciente de 45 anos llega a la clinica. El test da **positivo**. ¿Cual es la probabilidad REAL de que tenga diabetes?
+Un paciente de 45 años llega a la clinica. El test da **positivo**. ¿Cual es la probabilidad REAL de que tenga diabetes?
 
 ## Instrucciones
 

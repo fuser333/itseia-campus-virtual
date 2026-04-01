@@ -11,7 +11,7 @@ Entender las diferencias fundamentales entre una base de datos operacional (OLTP
 
 ## Contexto
 
-El Banco Pichincha tiene dos sistemas: uno que procesa 500,000 transacciones diarias en tiempo real (OLTP), y otro que almacena 10 anos de historia para analizar tendencias (OLAP/DW). Confundirlos es uno de los errores mas costosos en arquitecturas de datos. Este ejercicio te ensena a distinguirlos y disenar el sistema correcto para cada necesidad.
+El Banco Pichincha tiene dos sistemas: uno que procesa 500,000 transacciones diarias en tiempo real (OLTP), y otro que almacena 10 años de historia para analizar tendencias (OLAP/DW). Confundirlos es uno de los errores mas costosos en arquitecturas de datos. Este ejercicio te ensena a distinguirlos y disenar el sistema correcto para cada necesidad.
 
 ## Instrucciones
 
@@ -74,7 +74,7 @@ for txn in transacciones_oltp:
     print(f"  {txn[0]:<25} {txn[1]:<22} ${txn[4]:>9.2f} {txn[5]:<18} {txn[6]}")
 
 print("\n  OLAP — Tabla de hechos en el Data Warehouse:")
-print("  Objetivo: analizar tendencias de 5 anos en segundos")
+print("  Objetivo: analizar tendencias de 5 años en segundos")
 
 # DW: tabla de hechos desnormalizada (joins ya aplicados)
 hechos_dw = [
@@ -124,7 +124,7 @@ print("\n--- DECIDE EL SISTEMA PARA CADA CASO ---")
 escenarios = [
     ("Registrar ventas de farmacia Fybeca en tiempo real",
      "OLTP", "Base de datos operacional", "Cada venta debe procesarse en ms"),
-    ("Analizar ventas mensuales de los ultimos 5 anos por provincia",
+    ("Analizar ventas mensuales de los ultimos 5 años por provincia",
      "OLAP", "Data Warehouse",            "Analisis historico de grandes volumenes"),
     ("Consultar el saldo actual de una cuenta bancaria",
      "OLTP", "Base de datos operacional", "Dato actual, lectura de 1 fila"),

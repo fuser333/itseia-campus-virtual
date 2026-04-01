@@ -15,6 +15,8 @@ import {
   Code2,
   RotateCcw,
   ChevronDown,
+  Globe,
+  Monitor,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -68,6 +70,7 @@ export default function CodePlayground({
     "idle" | "loading" | "ready" | "error"
   >("idle");
   const [showLangDropdown, setShowLangDropdown] = useState(false);
+  const [mode, setMode] = useState<"local" | "colab">("local");
 
   const workerRef = useRef<Worker | null>(null);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -239,10 +242,38 @@ export default function CodePlayground({
         <div className="flex items-center justify-center w-8 h-8 rounded-xl bg-[#FBBC0C]/15">
           <Code2 className="w-4 h-4 text-[#FBBC0C]" />
         </div>
-        <span className="text-sm font-semibold text-white">Playground de Codigo</span>
 
-        {/* Language selector */}
-        <div className="relative ml-2">
+        {/* Mode switcher: Local / Google Colab */}
+        <div className="flex items-center rounded-lg bg-[#0A1628]/50 border border-[#1F2F58]/50 p-0.5">
+          <button
+            onClick={() => setMode("local")}
+            className={cn(
+              "flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-[11px] font-medium transition-all",
+              mode === "local"
+                ? "bg-[#FBBC0C]/15 text-[#FBBC0C]"
+                : "text-gray-500 hover:text-gray-300"
+            )}
+          >
+            <Monitor className="w-3 h-3" />
+            Local
+          </button>
+          <button
+            onClick={() => setMode("colab")}
+            className={cn(
+              "flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-[11px] font-medium transition-all",
+              mode === "colab"
+                ? "bg-[#F9AB00]/15 text-[#F9AB00]"
+                : "text-gray-500 hover:text-gray-300"
+            )}
+          >
+            <Globe className="w-3 h-3" />
+            Google Colab
+            <span className="text-[8px] px-1 py-0.5 rounded bg-[#73B8E7]/15 text-[#73B8E7]">Internet</span>
+          </button>
+        </div>
+
+        {/* Language selector (only for local mode) */}
+        <div className={cn("relative ml-2", mode === "colab" && "hidden")}>
           <button
             onClick={() => setShowLangDropdown(!showLangDropdown)}
             className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-[#0A1628]/50 border border-[#1F2F58]/50 text-xs font-medium text-gray-300 hover:text-white hover:border-[#1F2F58]/80 transition-all"
@@ -280,27 +311,27 @@ export default function CodePlayground({
           )}
         </div>
 
-        {/* Pyodide status */}
-        {language === "python" && pyodideStatus === "loading" && (
+        {/* Pyodide status (local mode only) */}
+        {mode === "local" && language === "python" && pyodideStatus === "loading" && (
           <span className="flex items-center gap-1.5 text-[10px] text-[#73B8E7] ml-1">
             <Loader2 className="w-3 h-3 animate-spin" />
             Cargando Python...
           </span>
         )}
-        {language === "python" && pyodideStatus === "ready" && (
+        {mode === "local" && language === "python" && pyodideStatus === "ready" && (
           <span className="flex items-center gap-1.5 text-[10px] text-green-400 ml-1">
             <span className="w-1.5 h-1.5 rounded-full bg-green-400" />
             Python listo
           </span>
         )}
-        {language === "python" && pyodideStatus === "error" && (
+        {mode === "local" && language === "python" && pyodideStatus === "error" && (
           <span className="text-[10px] text-red-400 ml-1">
             Error cargando Python
           </span>
         )}
 
-        {/* Actions */}
-        <div className="ml-auto flex items-center gap-1.5">
+        {/* Actions (local mode only) */}
+        <div className={cn("ml-auto flex items-center gap-1.5", mode === "colab" && "hidden")}>
           <Button
             variant="ghost"
             size="icon-sm"
@@ -345,22 +376,76 @@ export default function CodePlayground({
         </div>
       </div>
 
-      {/* ── Editor ── */}
-      <div className="flex-1 flex flex-col overflow-hidden">
-        <div className="flex-1 relative">
+      {/* ── Google Colab Mode ── */}
+      {mode === "colab" && (
+        <div className="flex-1 flex flex-col items-center justify-center gap-6 px-8 text-center" style={{ minHeight: "500px" }}>
+          <div className="flex size-20 items-center justify-center rounded-2xl bg-[#F9AB00]/10">
+            <Globe className="size-10 text-[#F9AB00]" />
+          </div>
+          <div>
+            <h3 className="text-lg font-bold text-white mb-2">Google Colab</h3>
+            <p className="text-sm text-gray-400 max-w-md leading-relaxed">
+              Python completo con internet, APIs, pip install, GPU gratis.
+              Ideal para ejercicios que necesitan conexion a servicios externos.
+            </p>
+          </div>
+          <div className="flex flex-col gap-3 w-full max-w-xs">
+            <a
+              href="https://colab.research.google.com/#create=true"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 w-full rounded-lg bg-[#F9AB00] px-6 py-3 text-sm font-semibold text-[#0A1628] hover:bg-[#F9AB00]/90 transition-colors shadow-lg shadow-[#F9AB00]/20"
+            >
+              <Globe className="size-4" />
+              Abrir Google Colab
+            </a>
+            <p className="text-[10px] text-gray-600">
+              Se abre en nueva ventana — requiere cuenta Google
+            </p>
+          </div>
+          <div className="grid grid-cols-3 gap-4 mt-2 w-full max-w-sm">
+            <div className="rounded-lg bg-[#1F2F58]/30 p-3 text-center">
+              <p className="text-xs font-bold text-[#73B8E7]">Internet</p>
+              <p className="text-[10px] text-gray-500">APIs, pip, wget</p>
+            </div>
+            <div className="rounded-lg bg-[#1F2F58]/30 p-3 text-center">
+              <p className="text-xs font-bold text-[#FBBC0C]">GPU</p>
+              <p className="text-[10px] text-gray-500">T4 gratis</p>
+            </div>
+            <div className="rounded-lg bg-[#1F2F58]/30 p-3 text-center">
+              <p className="text-xs font-bold text-[#F0846D]">Librerias</p>
+              <p className="text-[10px] text-gray-500">pandas, sklearn</p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── Local Editor + Output split ── */}
+      <div className={cn("flex-1 flex flex-col overflow-hidden", mode === "colab" && "hidden")} style={{ minHeight: "500px" }}>
+        {/* Editor area — 60% height */}
+        <div className="relative" style={{ flex: "3 1 0%" }}>
+          {/* Line numbers gutter */}
+          <div className="absolute left-0 top-0 bottom-0 w-10 bg-[#0D1B30] border-r border-[#1F2F58]/30 overflow-hidden pointer-events-none z-10">
+            <div className="pt-3 px-1">
+              {code.split("\n").map((_, i) => (
+                <div key={i} className="text-[11px] text-gray-700 text-right pr-1 leading-relaxed font-mono h-[1.625rem]">
+                  {i + 1}
+                </div>
+              ))}
+            </div>
+          </div>
           <textarea
             value={code}
             onChange={(e) => setCode(e.target.value)}
             spellCheck={false}
-            className="absolute inset-0 w-full h-full bg-[#0A1628] text-[#E2E8F0] text-sm font-mono resize-none border-none outline-none px-4 py-3 scrollbar-thin leading-relaxed tab-size-2"
+            className="absolute inset-0 w-full h-full bg-[#0A1628] text-[#E2E8F0] text-[13px] font-mono resize-none border-none outline-none pl-12 pr-4 py-3 scrollbar-thin leading-relaxed"
             style={{ tabSize: 2 }}
             placeholder={
               language === "python"
-                ? "# Escribe tu codigo Python aqui..."
-                : "// Escribe tu codigo JavaScript aqui..."
+                ? "# Escribe tu codigo Python aqui...\n# Usa Ctrl+Enter para ejecutar"
+                : "// Escribe tu codigo JavaScript aqui...\n// Usa Ctrl+Enter para ejecutar"
             }
             onKeyDown={(e) => {
-              // Tab indentation
               if (e.key === "Tab") {
                 e.preventDefault();
                 const start = e.currentTarget.selectionStart;
@@ -373,7 +458,6 @@ export default function CodePlayground({
                   e.currentTarget.selectionEnd = start + 2;
                 }, 0);
               }
-              // Ctrl+Enter para ejecutar
               if ((e.ctrlKey || e.metaKey) && e.key === "Enter") {
                 e.preventDefault();
                 runCode();
@@ -382,35 +466,53 @@ export default function CodePlayground({
           />
         </div>
 
-        {/* ── Output ── */}
-        <div className="border-t border-[#1F2F58]/40">
-          {/* Debug with AI button si hay error */}
-          {result?.error && onDebugWithAI && !result.timed_out && (
-            <div className="flex items-center justify-between px-3 py-2 bg-red-500/5 border-b border-red-500/20">
-              <span className="text-xs text-red-400">Error detectado</span>
+        {/* ── Output area — 40% height, like a real terminal ── */}
+        <div className="border-t-2 border-[#FBBC0C]/30 flex flex-col" style={{ flex: "2 1 0%" }}>
+          {/* Output header */}
+          <div className="flex items-center justify-between px-4 py-2 bg-[#0D1B30] border-b border-[#1F2F58]/30">
+            <div className="flex items-center gap-2">
+              <span className="text-[10px] font-semibold uppercase tracking-widest text-gray-500">
+                Terminal
+              </span>
+              {result && !result.error && !result.timed_out && (
+                <span className="flex items-center gap-1 text-[10px] text-green-400">
+                  <span className="w-1.5 h-1.5 rounded-full bg-green-400" />
+                  {result.duration_ms}ms
+                  <span className="text-gray-600 ml-1">OK</span>
+                </span>
+              )}
+              {result?.error && (
+                <span className="flex items-center gap-1 text-[10px] text-red-400">
+                  <span className="w-1.5 h-1.5 rounded-full bg-red-400" />
+                  Error
+                </span>
+              )}
+            </div>
+            {result?.error && onDebugWithAI && !result.timed_out && (
               <Button
                 size="sm"
                 onClick={handleDebugWithAI}
-                className="gap-1.5 text-xs h-7 px-3 bg-red-500/15 text-red-300 hover:bg-red-500/25 border border-red-500/20 rounded-lg"
+                className="gap-1.5 text-[10px] h-6 px-2 bg-red-500/15 text-red-300 hover:bg-red-500/25 border border-red-500/20 rounded-md"
               >
-                <Wrench className="w-3.5 h-3.5" />
+                <Wrench className="w-3 h-3" />
                 Depurar con IA
               </Button>
-            </div>
-          )}
-          <div className="max-h-48 overflow-y-auto scrollbar-thin">
+            )}
+          </div>
+          {/* Output content */}
+          <div className="flex-1 overflow-y-auto scrollbar-thin bg-[#0A1628]">
             <PlaygroundOutput
               result={result}
               isRunning={isRunning}
-              className="p-3"
+              className="p-4 text-[13px] font-mono"
             />
           </div>
         </div>
       </div>
 
       {/* Footer hint */}
-      <div className="px-4 py-1.5 border-t border-[#1F2F58]/30 bg-[#0A1628]/60">
-        <p className="text-[10px] text-gray-700">
+      <div className="px-4 py-1.5 border-t border-[#1F2F58]/30 bg-[#0D1B30]">
+        <p className="text-[10px] text-gray-600">
           Ctrl + Enter para ejecutar | Tab para indentar |{" "}
           {language === "python"
             ? "Python 3.11 via WebAssembly (sin instalacion)"

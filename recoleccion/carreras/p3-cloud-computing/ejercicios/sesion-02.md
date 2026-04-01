@@ -152,11 +152,11 @@ n = 500
 df = pd.DataFrame({
     'edad': np.random.randint(18, 65, n),
     'ingreso': np.random.normal(600, 200, n).clip(200, 2000),
-    'educacion_anos': np.random.choice([6, 9, 12, 16], n),
+    'educacion_años': np.random.choice([6, 9, 12, 16], n),
     'empleo_formal': np.random.choice([0, 1], n, p=[0.45, 0.55])
 })
 df['tiene_cuenta_banco'] = (
-    (df['ingreso'] > 500) & (df['educacion_anos'] >= 12)
+    (df['ingreso'] > 500) & (df['educacion_años'] >= 12)
 ).astype(int)
 
 # Guardar dataset a Drive

@@ -32,7 +32,7 @@ Dame ideas de negocio en Ecuador
 
 **Ejemplo de prompt BUENO:**
 ```
-Actua como un consultor de negocios con 15 anos de experiencia en Ecuador.
+Actua como un consultor de negocios con 15 años de experiencia en Ecuador.
 Tengo $5,000 de capital inicial y quiero iniciar un negocio digital en Quito
 que pueda operar desde casa. Mi formacion es en administracion de empresas.
 Dame exactamente 5 ideas de negocio ordenadas de mayor a menor potencial,
@@ -77,7 +77,7 @@ Usa este patron para evaluar un plan de marketing que hayas generado antes.
 
 **5. Patron SIMPLIFICAR**
 ```
-Explica [concepto tecnico] como si yo tuviera 12 anos y viviera en Ecuador.
+Explica [concepto tecnico] como si yo tuviera 12 años y viviera en Ecuador.
 Usa una analogia con algo que conoceria un nino ecuatoriano.
 ```
 Usa este patron para entender: ¿Que es una red neuronal?

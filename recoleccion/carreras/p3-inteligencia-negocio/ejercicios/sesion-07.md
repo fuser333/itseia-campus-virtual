@@ -134,7 +134,7 @@ ax_bueno.annotate("Plaga botrytis\n-44% volumen",
                    xy=(6, 95), xytext=(5.5, 60),
                    fontsize=8, color="#D32F2F",
                    arrowprops=dict(arrowstyle="->", color="#D32F2F"))
-ax_bueno.annotate("Asia crece\n+480% en 2 anos",
+ax_bueno.annotate("Asia crece\n+480% en 2 años",
                    xy=(7, 52), xytext=(6.5, 65),
                    fontsize=8, color="#388E3C",
                    arrowprops=dict(arrowstyle="->", color="#388E3C"))
@@ -172,7 +172,7 @@ ax_texto.set_ylim(0, 1)
 narrativa_scr = {
     "SITUACION:": "Florexport SA exporta a 4 mercados. El mercado de EEUU\nrepresenta el 45% de ingresos.",
     "COMPLICACION:": "En Q3 2024, una plaga de botrytis redujo el volumen\nexportado a EEUU en un 44%, causando una caida de\n$2.1M en revenue trimestral.",
-    "RESOLUCION:": "El mercado Asia (China+Japon) crecio 480% en 2 anos.\nPropuesta: redirigir 30% de produccion a Asia donde\nel precio es 85% superior. ROI esperado: +$1.8M/ano.",
+    "RESOLUCION:": "El mercado Asia (China+Japon) crecio 480% en 2 años.\nPropuesta: redirigir 30% de produccion a Asia donde\nel precio es 85% superior. ROI esperado: +$1.8M/ano.",
 }
 colores_scr = {"SITUACION:":"#1F2F58","COMPLICACION:":"#D32F2F","RESOLUCION:":"#388E3C"}
 y_pos = 0.85

@@ -11,7 +11,7 @@ Implementar y comparar las representaciones vectoriales clasicas de texto: Bag o
 
 ## Contexto (Ecuador)
 
-El diario El Comercio de Quito tiene 20 anos de archivo digital. Su equipo editorial necesita un sistema que clasifique automaticamente noticias en categorias: Politica, Economia, Deportes, Cultura, Tecnologia y Sucesos. Este clasificador automatico ahorra horas de trabajo manual de los editores. Vamos a construirlo.
+El diario El Comercio de Quito tiene 20 años de archivo digital. Su equipo editorial necesita un sistema que clasifique automaticamente noticias en categorias: Politica, Economia, Deportes, Cultura, Tecnologia y Sucesos. Este clasificador automatico ahorra horas de trabajo manual de los editores. Vamos a construirlo.
 
 ## Instrucciones
 

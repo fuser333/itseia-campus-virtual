@@ -103,7 +103,7 @@ nueva_empresa = pd.DataFrame({
     "provincia_quito": [1], "provincia_guayas": [0]
 })
 pred_nueva = modelo_lr.predict(nueva_empresa)[0]
-print(f"\n  PREDICCION empresa nueva (25 emp, 5 anos, mkt $3K, ecommerce, Quito):")
+print(f"\n  PREDICCION empresa nueva (25 emp, 5 años, mkt $3K, ecommerce, Quito):")
 print(f"  Ventas estimadas: ${pred_nueva:,.0f}/mes")
 
 # ================================================
@@ -180,7 +180,7 @@ nuevo_sol = pd.DataFrame({
 nuevo_sol_s = scaler.transform(nuevo_sol)
 prob_mora_nuevo = modelo_log.predict_proba(nuevo_sol_s)[0][1]
 decision = "APROBAR" if prob_mora_nuevo < 0.35 else "REVISAR" if prob_mora_nuevo < 0.60 else "RECHAZAR"
-print(f"\n  SCORING nuevo solicitante (32 anos, $2500 ingreso, $3K deuda):")
+print(f"\n  SCORING nuevo solicitante (32 años, $2500 ingreso, $3K deuda):")
 print(f"  Probabilidad de mora: {prob_mora_nuevo:.3f} ({prob_mora_nuevo*100:.1f}%)")
 print(f"  Decision:             {decision}")
 

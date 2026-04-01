@@ -81,7 +81,7 @@ ChatGPT, Claude y la mayoria de herramientas de IA publica son servicios de terc
 **Escenario de riesgo real:**
 ```
 Prompt enviado (INCORRECTO):
-"Ana Martinez, CI 1723456789, 45 anos, diagnostico VIH positivo confirmado
+"Ana Martinez, CI 1723456789, 45 años, diagnostico VIH positivo confirmado
 enero 2025, actualmente en TARV con Tenofovir/Emtricitabina/Dolutegravir.
 Redacta una nota de evolucion para su control de marzo."
 ```
@@ -100,11 +100,11 @@ La buena noticia: la IA sigue siendo igual de util con datos anonimizados. Aqui 
 
 ### Tecnica 1: Iniciales + Edad Aproximada
 
-En lugar de: `Ana Martinez Roca, 45 anos`
-Usa: `Paciente A.M., mujer, 40-50 anos`
+En lugar de: `Ana Martinez Roca, 45 años`
+Usa: `Paciente A.M., mujer, 40-50 años`
 
 En lugar de: `Carlos Andrade, CI 0912345678`
-Usa: `Paciente masculino, 60-70 anos`
+Usa: `Paciente masculino, 60-70 años`
 
 ### Tecnica 2: Despersonalizar el Caso
 
@@ -113,12 +113,12 @@ Transforma el caso en un escenario clinico generico sin perder los datos medicam
 **Antes (identificable):**
 ```
 "Mi paciente del IESS Guayaquil, Ana Martinez, quien vive en Duran y trabaja
-como profesora, tiene diabetes tipo 2 de 10 anos de evolucion..."
+como profesora, tiene diabetes tipo 2 de 10 años de evolucion..."
 ```
 
 **Despues (anonimizado):**
 ```
-"Paciente femenino, 45 anos, diabetica tipo 2 de 10 anos de evolucion..."
+"Paciente femenino, 45 años, diabetica tipo 2 de 10 años de evolucion..."
 ```
 
 El dato medicamente relevante (edad, sexo, diagnostico, evolucion) esta intacto. El dato identitario (nombre, lugar, trabajo) ha desaparecido.
@@ -141,7 +141,7 @@ Para ejercicios de documentacion, cuando el caso real es muy especifico:
 
 | Tipo de dato | Se puede incluir | Condicion |
 |--------------|-----------------|-----------|
-| Edad (rango) | Si | "40-50 anos", no fecha exacta |
+| Edad (rango) | Si | "40-50 años", no fecha exacta |
 | Sexo biologico | Si | Relevante clinicamente |
 | Diagnostico principal | Si | Sin nombre ni cedula |
 | Laboratorios (valores) | Si | Sin fecha exacta ni cabecera identificante |
@@ -190,7 +190,7 @@ Compartir datos sensibles de salud sin base legal es tipicamente clasificado com
 
 - Sancion administrativa ante el MSP (suspension temporal de la autorizacion para ejercer)
 - Proceso disciplinario ante el Colegio de Medicos provincial
-- Responsabilidad civil por danos y perjuicios al paciente
+- Responsabilidad civil por daños y perjuicios al paciente
 - Responsabilidad penal si el incumplimiento configura delito (violacion de datos privados, Art. 229 COIP)
 
 ### El caso IESS
@@ -229,9 +229,9 @@ Toma el siguiente caso y reescribelo de forma correctamente anonimizada para pod
 
 **Caso original (como NO debe enviarse):**
 ```
-"Patricia Lema Salgado, cedula 1756234890, 52 anos, docente del colegio
+"Patricia Lema Salgado, cedula 1756234890, 52 años, docente del colegio
 Simon Bolivar de Riobamba. Diagnostico: lupus eritematoso sistemico diagnosticado
-hace 3 anos, actualmente con brote leve. Laboratorios de enero 2025:
+hace 3 años, actualmente con brote leve. Laboratorios de enero 2025:
 ANA positivo 1:320, anti-dsDNA positivo, C3 bajo. Medicacion: hidroxicloroquina
 200mg c/12h, prednisona 5mg/dia. Me pide certificado para licencia medica."
 ```

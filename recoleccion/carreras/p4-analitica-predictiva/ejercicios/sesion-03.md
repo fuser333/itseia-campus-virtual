@@ -11,7 +11,7 @@ Aplicar modelos de series de tiempo para forecasting: descomposicion STL, modelo
 
 ## Contexto
 
-El BCE publica series historicas de 30+ anos de inflacion, exportaciones y tipo de cambio. Los supermercados ecuatorianos proyectan ventas para planificar inventarios. Las series de tiempo permiten capturar tendencias, estacionalidad y ciclos para generar predicciones con intervalos de confianza que el gerente puede interpretar.
+El BCE publica series historicas de 30+ años de inflacion, exportaciones y tipo de cambio. Los supermercados ecuatorianos proyectan ventas para planificar inventarios. Las series de tiempo permiten capturar tendencias, estacionalidad y ciclos para generar predicciones con intervalos de confianza que el gerente puede interpretar.
 
 ## Instrucciones
 
@@ -82,7 +82,7 @@ trend_min  = descomp.trend.min()
 season_amp = descomp.seasonal.max() - descomp.seasonal.min()
 residual_std = descomp.resid.std()
 
-print(f"  Tendencia: {trend_min:.1f}K → {trend_max:.1f}K cajas (+{trend_max-trend_min:.1f}K en 7 anos)")
+print(f"  Tendencia: {trend_min:.1f}K → {trend_max:.1f}K cajas (+{trend_max-trend_min:.1f}K en 7 años)")
 print(f"  Amplitud estacionalidad: ±{season_amp/2:.1f}K cajas")
 print(f"  Ruido (std residuos): {residual_std:.1f}K")
 
@@ -209,7 +209,7 @@ ax2.set_title("Componente Tendencia")
 
 ax3 = fig.add_subplot(gs[1, 1])
 descomp.seasonal[:24].plot(ax=ax3, color="#73B8E7")
-ax3.set_title("Componente Estacional (2 anos)")
+ax3.set_title("Componente Estacional (2 años)")
 
 # Residuos
 ax4 = fig.add_subplot(gs[2, 0])

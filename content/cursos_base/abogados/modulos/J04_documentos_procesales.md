@@ -24,7 +24,7 @@ Este caso practico usa datos completamente ficticios. Los documentos generados s
 
 El bufete **Andrade y Asociados** recibe un nuevo cliente este lunes por la manana.
 
-**El cliente:** Importadora del Pacifico S.A., empresa quiteña con 12 anos de trayectoria en importacion y distribucion de insumos industriales. Su representante legal, el Ing. Roberto Camacho Vela, llega con carpeta en mano y evidente tension.
+**El cliente:** Importadora del Pacifico S.A., empresa quiteña con 12 años de trayectoria en importacion y distribucion de insumos industriales. Su representante legal, el Ing. Roberto Camacho Vela, llega con carpeta en mano y evidente tension.
 
 **El problema:** En septiembre de 2024, Importadora del Pacifico S.A. celebro un contrato de compraventa de mercaderia con su proveedor habitual, Distribuidora Comercial del Norte Cia. Ltda. (Guayaquil), por la suma de **$85,000 USD**. El contrato estipulaba la entrega de 500 unidades de maquinaria industrial en tres embarques entre octubre 2024 y enero 2025. Importadora del Pacifico pago el 60% del precio de contado ($51,000 USD) al momento de la firma, como senial.
 
@@ -60,7 +60,7 @@ El proveedor no entrego ningun embarque. Tras multiples comunicaciones sin respu
 "En caso de incumplimiento en el plazo de entrega por causas imputables al Vendedor, este pagara al Comprador una penalidad del 0.5% del valor del contrato por cada semana de retraso, sin perjuicio de la accion de resolucion."
 
 **Clausula 8 — Resolucion del Contrato:**
-"En caso de incumplimiento total o parcial por parte del Vendedor, el Comprador podra declarar la resolucion del contrato mediante notificacion escrita con 15 dias de anticipacion, exigiendo la restitucion del precio pagado mas los danos y perjuicios causados."
+"En caso de incumplimiento total o parcial por parte del Vendedor, el Comprador podra declarar la resolucion del contrato mediante notificacion escrita con 15 dias de anticipacion, exigiendo la restitucion del precio pagado mas los daños y perjuicios causados."
 
 **Clausula 10 — Jurisdiccion:**
 "Para cualquier controversia derivada del presente contrato, las partes se someten a la jurisdiccion de los jueces de lo civil del canton Quito, renunciando a su domicilio."
@@ -85,7 +85,7 @@ El proveedor no entrego ningun embarque. Tras multiples comunicaciones sin respu
 1. Resolucion del contrato de compraventa por incumplimiento imputable al vendedor
 2. Devolucion del anticipo pagado: $51,000 USD
 3. Clausula penal: calculada desde el 31/10/2024 hasta la fecha de demanda (aproximadamente 20 semanas x 0.5% x $85,000 = $8,500 USD)
-4. Danos y perjuicios por lucro cesante: $15,000 USD (ventas perdidas por no tener la maquinaria)
+4. Daños y perjuicios por lucro cesante: $15,000 USD (ventas perdidas por no tener la maquinaria)
 5. Costas y honorarios
 
 ---
@@ -99,10 +99,10 @@ Abre ChatGPT o Claude y ejecuta este prompt:
 ```
 Soy abogado en Ecuador. Tengo el siguiente caso para preparar una demanda:
 
-Una empresa compradora pago el 60% del precio ($51,000 de $85,000) de un contrato de compraventa de mercaderia. El vendedor incumplio totalmente la entrega (3 embarques en 3 meses). El vendedor alega ahora "fuerza mayor" sin documentacion. Se enviaron cartas notariales. El comprador quiere resolver el contrato y recuperar el dinero mas clausula penal y danos.
+Una empresa compradora pago el 60% del precio ($51,000 de $85,000) de un contrato de compraventa de mercaderia. El vendedor incumplio totalmente la entrega (3 embarques en 3 meses). El vendedor alega ahora "fuerza mayor" sin documentacion. Se enviaron cartas notariales. El comprador quiere resolver el contrato y recuperar el dinero mas clausula penal y daños.
 
 Necesito:
-1. Calificacion juridica correcta de la accion (resolucion por incumplimiento o accion de cumplimiento + danos?)
+1. Calificacion juridica correcta de la accion (resolucion por incumplimiento o accion de cumplimiento + daños?)
 2. Normas del Codigo Civil y Codigo de Comercio ecuatorianos que fundamentan la demanda
 3. Elementos que debo probar para ganar el caso
 4. Como rebatir la alegacion de fuerza mayor sin documentacion
@@ -118,12 +118,12 @@ Necesito:
 Con el mapa juridico del Paso 1, ejecuta este prompt para preparar la investigacion de jurisprudencia:
 
 ```
-Basandome en el caso descrito (incumplimiento contractual de compraventa, resolucion + devolucion de precio + danos), necesito:
+Basandome en el caso descrito (incumplimiento contractual de compraventa, resolucion + devolucion de precio + daños), necesito:
 
 1. Palabras clave para buscar jurisprudencia en el SATJE ecuatoriano sobre este tipo de caso
 2. Que tipo de argumentos han sido mas persuasivos en casos similares segun la jurisprudencia ecuatoriana
 3. Como se ha interpretado la alegacion de "fuerza mayor" en casos de incumplimiento contractual comercial (requiero al menos 2 criterios doctrinarios o jurisprudenciales generales — verificare las citas especificas en el SATJE)
-4. Precedente general sobre la procedencia de clausulas penales acumuladas con danos y perjuicios en Ecuador (art. 1551 Codigo Civil)
+4. Precedente general sobre la procedencia de clausulas penales acumuladas con daños y perjuicios en Ecuador (art. 1551 Codigo Civil)
 ```
 
 **Accion adicional:** Ingresa al SATJE (satje.gob.ec) y busca con los terminos que te provea la IA. Nota el numero de resultados relevantes que encuentras. No es necesario leer los fallos ahora; solo confirma que hay jurisprudencia disponible.
@@ -162,7 +162,7 @@ DATOS DEL CASO:
 - Anticipo pagado: $51,000 USD
 - Incumplimiento: entrega total de 3 embarques entre oct 2024 y ene 2025
 - Clausula penal: 0.5% por semana de retraso
-- Danos reclamados: $15,000 USD adicionales
+- Daños reclamados: $15,000 USD adicionales
 - Carta de resolucion: enviada 25/02/2025
 - Juzgado: lo Civil de Quito (competencia pactada en el contrato)
 
@@ -219,12 +219,12 @@ Para el caso de Importadora del Pacifico vs. Distribuidora Comercial del Norte, 
 
 2. PRUEBAS A PRESENTAR:
    - Lista de documentos clave (contrato, comprobante de pago, cartas notariales, comunicaciones)
-   - Que tipo de prueba pericial podria reforzar el caso de danos y perjuicios
+   - Que tipo de prueba pericial podria reforzar el caso de daños y perjuicios
    - Testigos potenciales
 
 3. POSIBILIDAD DE RESOLUCION ALTERNATIVA:
    - Conviene intentar mediacion previa? Ventajas e inconvenientes
-   - Si el demandado ofrece devolver solo el anticipo sin intereses ni danos: recomendacion al cliente
+   - Si el demandado ofrece devolver solo el anticipo sin intereses ni daños: recomendacion al cliente
 
 4. TIMELINE ESTIMADO:
    - Duracion estimada del proceso ordinario en Quito (primera instancia)

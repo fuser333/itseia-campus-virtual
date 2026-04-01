@@ -73,7 +73,7 @@ df_raw = pd.DataFrame({
     "patrimonio_estimado": np.random.lognormal(9.5, 1.5, n),
 
     # Variables de historial COAC
-    "anos_socio":         np.random.randint(0, 20, n),
+    "años_socio":         np.random.randint(0, 20, n),
     "num_creditos_prev":  np.random.randint(0, 8, n),
     "creditos_sin_mora":  np.random.randint(0, 8, n),
     "puntaje_interno":    np.random.randint(300, 950, n),
@@ -113,7 +113,7 @@ log_odds = (
     + 0.5 * (df_raw["tipo_credito"] == "consumo").astype(float)
     - 0.4 * df_raw["tiene_garante"]
     - 0.5 * df_raw["tiene_hipoteca"]
-    - 0.05 * df_raw["anos_socio"]
+    - 0.05 * df_raw["años_socio"]
     + np.random.normal(0, 0.9, n)
 )
 df_raw["mora_90d"] = (1/(1+np.exp(-log_odds)) > 0.48).astype(int)
@@ -165,7 +165,7 @@ FEATURES = [
     "deuda_actual_log", "patrimonio_estimado_log",
     "ratio_deuda_ingreso", "ratio_ahorro_ingreso",
     "ratio_cuota_ingreso", "capacidad_pago_score",
-    "anos_socio", "puntaje_norm", "tasa_cumplimiento",
+    "años_socio", "puntaje_norm", "tasa_cumplimiento",
     "experiencia_crediticia", "aportes_puntual_pct",
     "tiene_garante", "tiene_hipoteca", "plazo_meses",
     "tipo_cred_enc", "trimestre_solicitud", "es_fin_anio",
@@ -316,7 +316,7 @@ caso1 = {
     "patrimonio_estimado_log": np.log1p(80000),
     "ratio_deuda_ingreso": 0.06, "ratio_ahorro_ingreso": 0.25,
     "ratio_cuota_ingreso": 0.10, "capacidad_pago_score": 8.5,
-    "anos_socio": 12, "puntaje_norm": 0.85, "tasa_cumplimiento": 1.0,
+    "años_socio": 12, "puntaje_norm": 0.85, "tasa_cumplimiento": 1.0,
     "experiencia_crediticia": 1, "aportes_puntual_pct": 0.97,
     "tiene_garante": 1, "tiene_hipoteca": 0, "plazo_meses": 24,
     "tipo_cred_enc": 2, "trimestre_solicitud": 1, "es_fin_anio": 0,
@@ -327,7 +327,7 @@ caso2 = {**caso1,
     "ingreso_mensual_log": np.log1p(450), "gasto_mensual_log": np.log1p(420),
     "monto_solicitado_log": np.log1p(20000), "deuda_actual_log": np.log1p(15000),
     "ratio_deuda_ingreso": 3.2, "ratio_cuota_ingreso": 1.5,
-    "capacidad_pago_score": 0.8, "anos_socio": 1,
+    "capacidad_pago_score": 0.8, "años_socio": 1,
     "puntaje_norm": 0.25, "tasa_cumplimiento": 0.40,
     "aportes_puntual_pct": 0.55, "tiene_garante": 0,
     "tipo_cred_enc": 3, "tipo_cred_enc_nominal": "consumo",
@@ -411,7 +411,7 @@ print("\n" + "=" * 70)
 print("REPORTE EJECUTIVO — SISTEMA SCORING COAC ECUADOR")
 print("=" * 70)
 print(f"  Fecha:               {datetime.now().strftime('%Y-%m-%d')}")
-print(f"  Dataset:             {n} solicitudes historicas (3 anos)")
+print(f"  Dataset:             {n} solicitudes historicas (3 años)")
 print(f"  Features:            {len(FEATURES)} variables")
 print(f"  Modelos evaluados:   {len(modelos)}")
 print(f"  Mejor modelo:        {mejor_nombre}")

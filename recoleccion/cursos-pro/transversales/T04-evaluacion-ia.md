@@ -46,7 +46,7 @@ El denominador comun: el profesional firma. El profesional asume la responsabili
 **Los cinco tipos mas comunes de alucinaciones**
 
 Tipo 1: Citas bibliograficas inventadas
-El mas documentado. El modelo genera referencias con formato perfecto (autor, año, revista, DOI) donde todo es real excepto el contenido que describe. Las revistas existen, los autores son reales, los anos son plausibles. Solo que ese estudio especifico no existe.
+El mas documentado. El modelo genera referencias con formato perfecto (autor, año, revista, DOI) donde todo es real excepto el contenido que describe. Las revistas existen, los autores son reales, los años son plausibles. Solo que ese estudio especifico no existe.
 
 Como detectarlo: busca el DOI en scholar.google.com o en pubmed.ncbi.nlm.nih.gov. Si no aparece exactamente, la cita es sospechosa.
 
@@ -97,7 +97,7 @@ El sesgo algoritmico es diferente de las alucinaciones. No es informacion falsa.
 
 Caso 1: Sesgo en contratacion - Amazon, 2018
 
-Amazon desarrollo internamente un sistema de IA para analizar CVs y puntuar candidatos automaticamente. El sistema fue entrenado con CVs de empleados contratados durante los 10 anos anteriores. El problema: los empleados contratados habian sido mayoritariamente hombres.
+Amazon desarrollo internamente un sistema de IA para analizar CVs y puntuar candidatos automaticamente. El sistema fue entrenado con CVs de empleados contratados durante los 10 años anteriores. El problema: los empleados contratados habian sido mayoritariamente hombres.
 
 El sistema aprendio a penalizar CVs que contenian palabras tipicamente asociadas con mujeres: menciones a haber participado en clubes de mujeres en tecnologia, graduadas de universidades femeninas, e incluso el verbo "ejecuto" conjugado de cierta manera. Amazon tuvo que desactivar el sistema cuando descubrio el patron.
 

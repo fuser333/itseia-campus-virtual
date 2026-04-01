@@ -191,9 +191,9 @@ print("=" * 62)
 print(f"{'Tamanio':>10} | {'Bubble Sort':>14} | {'Merge Sort':>12} | {'Quick Sort':>12} | {'Python sort':>13}")
 print("-" * 70)
 
-tamanos = [100, 500, 1000, 5000, 10000]
+tamaños = [100, 500, 1000, 5000, 10000]
 
-for n in tamanos:
+for n in tamaños:
     datos = generar_empresas(n)
 
     # Bubble Sort (solo para n pequenos)

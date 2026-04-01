@@ -221,11 +221,11 @@ Despues de leer la respuesta:
 ## Que aprendiste
 
 - La **similitud coseno** mide el angulo entre vectores: dos usuarios con mismas preferencias relativas tienen similitud 1 aunque uno califique con 5 y otro con 2.5.
-- La **distancia euclidiana** mide la distancia geometrica directa: es sensible a la escala, por lo que usuarios con patrones similares pero escalas distintas parecen lejanos.
+- La **distancia euclidiana** mide la distancia geometrica directa: es sensible a la escala, por lo que usuarios con patrones similares pero escalas distintas parecen lejaños.
 - En recomendacion se prefiere **coseno** para ratings subjetivos porque captura preferencias relativas, no magnitudes absolutas.
 - La **sparsity** (muchos ceros) degrada ambas metricas: son mas confiables cuantos mas productos en comun hayan valorado dos usuarios.
 - El **mean-centering** corrige el sesgo de usuarios generosos vs criticos antes de calcular similitudes.
 
 ## Reto extra
 
-Descarga el dataset publico de MovieLens (ml-latest-small.zip en grouplens.org). Cargalo en Colab, calcula la similitud coseno entre los primeros 50 usuarios y encuentra los 3 vecinos mas cercanos de los usuarios 1, 5 y 10. Compara si el ranking cambia al aplicar mean-centering. Reporta tus hallazgos en una celda markdown.
+Descarga el dataset publico de MovieLens (ml-latest-small.zip en grouplens.org). Cargalo en Colab, calcula la similitud coseno entre los primeros 50 usuarios y encuentra los 3 vecinos mas cercaños de los usuarios 1, 5 y 10. Compara si el ranking cambia al aplicar mean-centering. Reporta tus hallazgos en una celda markdown.

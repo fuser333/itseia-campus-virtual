@@ -28,7 +28,7 @@ Elige UNO de estos problemas reales de Ecuador y descomponlo en los 3 niveles:
 
 **Opcion B:** "Crear un sistema para que el Ministerio de Salud rastree en tiempo real el inventario de medicamentos en todos los hospitales del Ecuador."
 
-**Opcion C:** "Disenar una plataforma para que los artesanos de Otavalo puedan exportar sus productos directamente a compradores internacionales."
+**Opcion C:** "Disenar una plataforma para que los artesaños de Otavalo puedan exportar sus productos directamente a compradores internacionales."
 
 Tu descomposicion debe tener:
 - 1 problema principal

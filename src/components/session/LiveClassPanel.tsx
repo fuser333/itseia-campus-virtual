@@ -51,7 +51,7 @@ export default function LiveClassPanel({
     userRole === "coordinacion" ||
     userRole === "super_admin"
       ? (userRole === "super_admin" ? "admin" : userRole)
-      : userRole === "estudiante"
+      : userRole === "estudiante" || userRole === "finanzas"
       ? "estudiante"
       : null;
 
@@ -179,15 +179,33 @@ export default function LiveClassPanel({
         </div>
       )}
 
-      {/* Estado sin sala y sin historial para estudiante */}
-      {!activeLiveSession && history.length === 0 && normalizedRole === "estudiante" && (
-        <div className="rounded-xl border border-[#73B8E7]/20 bg-[#73B8E7]/5 px-4 py-6 text-center">
-          <Video className="mx-auto mb-3 size-8 text-[#73B8E7]/50" />
-          <p className="text-sm text-[#1F2F58]/60">
-            Aun no se han realizado clases sincronicas para esta sesion.
-          </p>
-          <p className="mt-1 text-xs text-[#1F2F58]/40">
-            Las clases programadas y grabaciones apareceran aqui automaticamente.
+      {/* Google Meet — siempre disponible como alternativa */}
+      {!activeLiveSession && (
+        <div className="rounded-xl border border-[#73B8E7]/20 bg-gradient-to-br from-[#73B8E7]/5 to-[#1F2F58]/5 p-5">
+          <div className="flex items-center gap-3 mb-3">
+            <div className="flex size-10 items-center justify-center rounded-lg bg-[#1F2F58]/8">
+              <Video className="size-5 text-[#73B8E7]" />
+            </div>
+            <div>
+              <h4 className="text-sm font-semibold text-[#1F2F58]">
+                Clase por Google Meet
+              </h4>
+              <p className="text-xs text-[#1F2F58]/50">
+                Conectate a la sala de clases en vivo de ITSEIA
+              </p>
+            </div>
+          </div>
+          <a
+            href="https://meet.google.com/fzx-fqns-ayc"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-2 w-full rounded-lg bg-[#1F2F58] px-4 py-3 text-sm font-semibold text-white hover:bg-[#2A3F6E] transition-colors"
+          >
+            <Video className="size-4" />
+            Unirse a Google Meet
+          </a>
+          <p className="mt-2 text-[10px] text-[#1F2F58]/40 text-center">
+            El docente indicara el horario de las clases en vivo
           </p>
         </div>
       )}

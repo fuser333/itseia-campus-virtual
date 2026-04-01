@@ -20,7 +20,7 @@ Un prompt es la instruccion que le das a la IA. La diferencia entre un prompt me
 Los prompts juridicos efectivos tienen cinco componentes:
 
 **1. Rol (quien eres y quien es la IA)**
-"Eres un abogado senior con 20 anos de experiencia en derecho civil ecuatoriano..."
+"Eres un abogado senior con 20 años de experiencia en derecho civil ecuatoriano..."
 
 **2. Contexto (el marco del problema)**
 "Tengo un caso de incumplimiento contractual entre dos empresas. El contrato es de prestacion de servicios de construccion por $200,000..."
@@ -42,7 +42,7 @@ Los prompts juridicos efectivos tienen cinco componentes:
 **Prompt profesional:**
 "Actua como abogado especialista en derecho inmobiliario ecuatoriano. Necesito redactar un contrato de arrendamiento de bien inmueble para uso comercial (local en Quito, $1,200/mes) entre un arrendador persona natural y un arrendatario persona juridica (SAS). El contrato debe:
 - Cumplir con la Ley de Inquilinato y el Codigo Civil ecuatoriano
-- Incluir clausulas de: objeto, canon, duracion (2 anos), deposito de garantia (1 mes), prohibicion de subarrendamiento, causas de terminacion anticipada, y obligaciones de cada parte
+- Incluir clausulas de: objeto, canon, duracion (2 años), deposito de garantia (1 mes), prohibicion de subarrendamiento, causas de terminacion anticipada, y obligaciones de cada parte
 - Tener un tono formal y estilo de contratos ecuatorianos
 - Incluir espacios para datos que deberan completarse [NOMBRE], [CI], [DIRECCION]
 Redacta el contrato completo."

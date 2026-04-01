@@ -51,14 +51,14 @@ medallion = {
     "SILVER (Curated)": {
         "descripcion":  "Datos limpios, validados, tipados y deduplicados",
         "formato":      "Delta Lake / Parquet particionado",
-        "retencion":    "5-7 anos",
+        "retencion":    "5-7 años",
         "acceso":       "Data Engineers, ML Engineers",
         "ejemplo_ec":   "Facturas SRI normalizadas: fechas parseadas, RUC validado, nulos imputados"
     },
     "GOLD (Analytics)": {
         "descripcion":  "Datos agregados listos para consumo de negocio",
         "formato":      "Delta Lake / tablas BigQuery / Redshift",
-        "retencion":    "2 anos rolling",
+        "retencion":    "2 años rolling",
         "acceso":       "Analistas BI, Data Scientists, APIs",
         "ejemplo_ec":   "Ventas mensuales por categoria y region — dashboard ejecutivo SRI"
     },
@@ -200,7 +200,7 @@ print("=" * 65)
 ## Usa IA para...
 
 > Abre Gemini y escribe:
-> "Soy el Head of Data de Banco Guayaquil Ecuador. Tenemos: 1 DW Oracle legacy, datos en 3 sistemas core bancarios distintos, 12 silos departamentales en Excel, y la necesidad de GDPR/LOPDP compliance. El presupuesto para modernizacion es $500K en 2 anos. ¿Que arquitectura recomiendan: migrar a Snowflake, construir Data Mesh en AWS, o adoptar Databricks Lakehouse? Analiza costo, tiempo de implementacion, riesgo y capacidad del equipo actual (5 data engineers, 3 analistas)."
+> "Soy el Head of Data de Banco Guayaquil Ecuador. Tenemos: 1 DW Oracle legacy, datos en 3 sistemas core bancarios distintos, 12 silos departamentales en Excel, y la necesidad de GDPR/LOPDP compliance. El presupuesto para modernizacion es $500K en 2 años. ¿Que arquitectura recomiendan: migrar a Snowflake, construir Data Mesh en AWS, o adoptar Databricks Lakehouse? Analiza costo, tiempo de implementacion, riesgo y capacidad del equipo actual (5 data engineers, 3 analistas)."
 
 Despues de leer la respuesta:
 - Documenta la recomendacion con justificacion tecnica y financiera.

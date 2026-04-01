@@ -54,7 +54,7 @@ arquitectura = {
         "fuentes":     ["core_bancario_creditos.csv","bce_indicadores_api.json",
                         "calificacion_deudores.xlsx","transacciones_recuperacion.parquet"],
         "storage":     "S3 raw/ — Parquet snappy particionado por fecha_carga",
-        "retencion":   "7 anos (cumplimiento COSEDE/SBS Ecuador)",
+        "retencion":   "7 años (cumplimiento COSEDE/SBS Ecuador)",
     },
     "Silver (Curated)": {
         "descripcion": "Datos limpios, tipados, sin duplicados — calidad validada",

@@ -172,33 +172,49 @@ export default async function B2BDashboardPage() {
             Capacitacion Activa
           </h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {(enrollments ?? []).map((enrollment) => (
-              <Card
-                key={enrollment.id}
-                className="border-none bg-white shadow-sm hover:shadow-md transition-shadow"
-              >
-                <CardContent className="p-5 space-y-3">
-                  <div className="flex items-start justify-between gap-2">
-                    <div className="flex size-10 items-center justify-center rounded-lg bg-[#1F2F58]/8">
-                      <BookOpen className="size-5 text-[#1F2F58]" />
-                    </div>
-                    <Badge className="border-none bg-emerald-50 text-emerald-700 text-[10px] font-semibold uppercase tracking-wider">
-                      Activo
-                    </Badge>
-                  </div>
-                  <div>
-                    <p className="font-semibold text-[#0A1628] leading-tight">
-                      {enrollment.programs?.name ?? "Programa"}
-                    </p>
-                    {enrollment.programs?.duration_months && (
-                      <p className="text-xs text-[#1F2F58]/40 mt-0.5">
-                        {enrollment.programs.duration_months} meses
-                      </p>
-                    )}
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+            {(enrollments ?? []).map((enrollment) => {
+              const prog = enrollment.programs as { id?: string; slug?: string; name?: string; type?: string; duration_months?: number } | null;
+              const courseLink = prog?.slug
+                ? `/carreras/${prog.slug}`
+                : `/b2b/curso/${prog?.id ?? enrollment.program_id}`;
+
+              return (
+                <Link
+                  key={enrollment.id}
+                  href={courseLink}
+                  className="group block"
+                >
+                  <Card className="border-none bg-white shadow-sm hover:shadow-md transition-all group-hover:-translate-y-0.5">
+                    <CardContent className="p-5 space-y-3">
+                      <div className="flex items-start justify-between gap-2">
+                        <div className="flex size-10 items-center justify-center rounded-lg bg-[#1F2F58]/8">
+                          <BookOpen className="size-5 text-[#1F2F58]" />
+                        </div>
+                        <Badge className="border-none bg-emerald-50 text-emerald-700 text-[10px] font-semibold uppercase tracking-wider">
+                          Activo
+                        </Badge>
+                      </div>
+                      <div>
+                        <p className="font-semibold text-[#0A1628] leading-tight">
+                          {prog?.name ?? "Programa"}
+                        </p>
+                        {prog?.duration_months && (
+                          <p className="text-xs text-[#1F2F58]/40 mt-0.5">
+                            {prog.duration_months} meses
+                          </p>
+                        )}
+                      </div>
+                      <div className="flex items-center justify-end pt-1">
+                        <span className="text-xs font-semibold text-[#1F2F58]/40 flex items-center gap-1 group-hover:text-[#1F2F58]/70 group-hover:gap-1.5 transition-all">
+                          Ir al curso
+                          <ArrowRight className="size-3" />
+                        </span>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
+              );
+            })}
           </div>
         </div>
       )}

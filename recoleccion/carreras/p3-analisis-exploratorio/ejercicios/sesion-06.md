@@ -193,7 +193,7 @@ print("=" * 65)
 ## Usa IA para...
 
 > Abre Gemini y escribe:
-> "Tengo datos de salud con 18% de faltantes en presion arterial. El patron es que los mayores de 55 anos tienen mas faltantes. ¿Esto es MCAR, MAR o MNAR? ¿Por que importa esta clasificacion para elegir el metodo de imputacion?"
+> "Tengo datos de salud con 18% de faltantes en presion arterial. El patron es que los mayores de 55 años tienen mas faltantes. ¿Esto es MCAR, MAR o MNAR? ¿Por que importa esta clasificacion para elegir el metodo de imputacion?"
 
 Despues de leer la respuesta:
 - Clasifica cada columna del dataset segun su tipo de faltante.

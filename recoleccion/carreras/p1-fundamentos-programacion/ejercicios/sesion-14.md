@@ -80,7 +80,7 @@ datos_ofertas = {
         "Remoto", "Remoto", "Presencial", "Hibrido",
         "Presencial", "Hibrido", "Remoto", "Remoto"
     ],
-    "experiencia_anos": [
+    "experiencia_años": [
         1, 2, 2, 3, 2, 1, 1, 1,
         1, 2, 3, 3, 2, 3, 4, 1,
         1, 3, 2, 2
@@ -114,7 +114,7 @@ print("\n--- INFO DEL DATAFRAME ---")
 print(df.info())
 
 print("\n--- ESTADISTICAS DESCRIPTIVAS ---")
-print(df[["salario_min", "salario_max", "salario_promedio", "experiencia_anos"]].describe().round(2))
+print(df[["salario_min", "salario_max", "salario_promedio", "experiencia_años"]].describe().round(2))
 
 # ================================================
 # 3. FILTROS
@@ -170,10 +170,10 @@ print(f"Cargo mejor pagado:     {cargo_mejor_pagado} en {empresa_mejor}")
 print(f"Salario maximo prom:    ${salario_max_global:,.0f}")
 print(f"Requieren Python:       {df['requiere_python'].sum()}/{len(df)} ({df['requiere_python'].mean()*100:.0f}%)")
 print(f"Requieren Ingles:       {df['requiere_ingles'].sum()}/{len(df)} ({df['requiere_ingles'].mean()*100:.0f}%)")
-print(f"Experiencia promedio:   {df['experiencia_anos'].mean():.1f} años")
+print(f"Experiencia promedio:   {df['experiencia_años'].mean():.1f} años")
 
 # Correlacion salario vs experiencia
-corr = df["salario_promedio"].corr(df["experiencia_anos"])
+corr = df["salario_promedio"].corr(df["experiencia_años"])
 print(f"Correlacion salario-experiencia: {corr:.3f}")
 
 # ================================================
@@ -213,4 +213,4 @@ Despues de leer la respuesta:
 
 ## Reto extra
 
-Calcula el "Score de Oportunidad ITSEIA" para cada oferta: (salario_promedio / 220) * (1 / experiencia_anos) * (1.2 si es remoto, 1.0 si no). Agrega esta columna al DataFrame y muestra el top 5 de mejores oportunidades para un graduado ITSEIA sin experiencia previa.
+Calcula el "Score de Oportunidad ITSEIA" para cada oferta: (salario_promedio / 220) * (1 / experiencia_años) * (1.2 si es remoto, 1.0 si no). Agrega esta columna al DataFrame y muestra el top 5 de mejores oportunidades para un graduado ITSEIA sin experiencia previa.

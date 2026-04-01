@@ -65,7 +65,7 @@ df = pd.DataFrame({
     "ratio_liquidez":         np.random.uniform(0.5, 3.0, n),
     "roa":                    np.random.normal(0.05, 0.08, n), # retorno sobre activos
     "crecimiento_ventas":     np.random.normal(0.08, 0.15, n),
-    "anos_empresa":           np.random.randint(1, 40, n),
+    "años_empresa":           np.random.randint(1, 40, n),
     "sector_riesgo":          np.random.uniform(0, 1, n),      # score sector
     "historial_credito":      np.random.uniform(0, 1, n),
     "num_empleados_log":      np.random.normal(4, 1.2, n),
@@ -328,4 +328,4 @@ Despues de leer la respuesta:
 
 ## Reto extra
 
-Construye una red neuronal LSTM para predecir la demanda semanal de productos en supermercados ecuatorianos: usa 3 anos de datos historicos de ventas, agrega variables externas (feriados, quincena de pago, inflacion), implementa la arquitectura LSTM(64)-LSTM(32)-Dense(1), compara con el Prophet del ejercicio anterior, y despliega el modelo como API REST con FastAPI + TFServing para inferencia en tiempo real.
+Construye una red neuronal LSTM para predecir la demanda semanal de productos en supermercados ecuatorianos: usa 3 años de datos historicos de ventas, agrega variables externas (feriados, quincena de pago, inflacion), implementa la arquitectura LSTM(64)-LSTM(32)-Dense(1), compara con el Prophet del ejercicio anterior, y despliega el modelo como API REST con FastAPI + TFServing para inferencia en tiempo real.

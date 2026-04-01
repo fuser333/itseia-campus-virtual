@@ -44,13 +44,13 @@ exportaciones = [1850, 1720, 2100, 1980, 2050, 2200, 2150, 2080, 1950, 2010, 189
 remesas = [390, 385, 410, 405, 420, 415, 400, 395, 408, 412, 398, 430]
 ```
 
-3. Crea un dashboard con subplots de tamanos distintos usando `gridspec`:
+3. Crea un dashboard con subplots de tamaños distintos usando `gridspec`:
 
 ```python
 fig = plt.figure(figsize=(16, 10))
 fig.patch.set_facecolor('#F9F6E7')  # beige institucional ITSEIA
 
-# GridSpec permite subplots con tamanos diferentes
+# GridSpec permite subplots con tamaños diferentes
 from matplotlib.gridspec import GridSpec
 gs = GridSpec(2, 3, figure=fig, hspace=0.4, wspace=0.35)
 
@@ -158,7 +158,7 @@ plt.show()
 print("Cual estilo preferirías para un informe gubernamental? ¿Por que?")
 ```
 
-5. Escribe en una celda de texto: ¿Que ventaja tiene `gridspec` sobre `plt.subplots()` estandar? Nombre 2 casos de uso reales donde necesitarías subplots de tamanos distintos.
+5. Escribe en una celda de texto: ¿Que ventaja tiene `gridspec` sobre `plt.subplots()` estandar? Nombre 2 casos de uso reales donde necesitarías subplots de tamaños distintos.
 
 ## Usa IA para...
 

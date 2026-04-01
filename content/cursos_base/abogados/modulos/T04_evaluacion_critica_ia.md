@@ -77,7 +77,7 @@ No todas las tareas juridicas tienen el mismo riesgo de alucinacion. Este mapa t
 - Principios juridicos generales atribuidos a doctrina especifica
 - Interpretaciones jurisprudenciales sin cita especifica de caso
 - Conceptos de derecho comparado aplicados a derecho ecuatoriano
-- Referencias a resoluciones de organos reguladores
+- Referencias a resoluciones de orgaños reguladores
 - Procedimientos administrativos ante entidades publicas
 
 **Protocolo:** Verificar en fuente primaria cuando el documento va a presentarse ante un tercero.

@@ -36,7 +36,7 @@ Responde estas preguntas de analisis:
 **Paso 2 — Construye la narrativa (20 min)**
 Escribe un texto de storytelling con datos de 300-400 palabras para esta audiencia especifica:
 
-**Audiencia:** Jovenes bachilleres de 18-22 anos en Ecuador que estan decidiendo que carrera estudiar.
+**Audiencia:** Jovenes bachilleres de 18-22 años en Ecuador que estan decidiendo que carrera estudiar.
 **Objetivo de la narrativa:** Que entiendan que el mercado laboral ecuatoriano esta fragmentado y que la carrera tecnica correcta puede marcar la diferencia entre el 32% con empleo digno y el 40% con empleo precario.
 
 Tu narrativa debe seguir esta estructura:

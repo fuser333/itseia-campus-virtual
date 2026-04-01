@@ -15,7 +15,7 @@ El equipo de admisiones de ITSEIA quiere predecir si un estudiante que aplica al
 
 **Variables:**
 - **Y (objetivo):** Matriculo (1=Si, 0=No)
-- **X1:** Edad (anos)
+- **X1:** Edad (años)
 - **X2:** Nota Ser Bachiller (puntos)
 - **X3:** Horas de estudio autodidacta de programacion antes de ITSEIA
 - **X4:** Trabaja actualmente (1=Si, 0=No) — variable de riesgo

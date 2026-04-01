@@ -100,14 +100,12 @@ function LoginForm() {
 
         <div className="relative z-10 max-w-md px-8 text-center">
           {/* Logo */}
-          <div className="flex items-center justify-center gap-3 mb-8">
-            <div className="w-12 h-12 rounded-xl bg-yellow flex items-center justify-center">
-              <Brain className="w-7 h-7 text-navy-dark" />
-            </div>
+          <a href="https://tecnologico.itseia.ai" className="flex items-center justify-center gap-3 mb-8 no-underline">
+            <img src="/logo_itseia.svg" alt="ITSEIA" className="h-16" onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }} />
             <span className="text-3xl font-bold tracking-tight text-white font-[family-name:var(--font-space-grotesk)]">
               ITSEIA
             </span>
-          </div>
+          </a>
 
           <h1 className="text-2xl font-bold text-white mb-3 font-[family-name:var(--font-space-grotesk)]">
             Campus Virtual
@@ -121,7 +119,7 @@ function LoginForm() {
           <div className="mt-12 grid grid-cols-3 gap-4">
             <div className="glass rounded-xl p-4">
               <div className="text-2xl font-bold text-yellow font-[family-name:var(--font-space-grotesk)]">
-                254
+                1,942
               </div>
               <div className="text-xs text-muted-foreground mt-1">Sesiones</div>
             </div>

@@ -70,12 +70,12 @@ print(f"Columnas: {df.columns.tolist()}")
 print("\n--- TECNICA 1: EXTRACCION DE FECHAS ---")
 fecha_ref = pd.Timestamp("2026-01-01")
 
-df["edad_anos"] = ((fecha_ref - df["fecha_nacimiento"]).dt.days / 365.25).astype(int)
+df["edad_años"] = ((fecha_ref - df["fecha_nacimiento"]).dt.days / 365.25).astype(int)
 df["antiguedad_meses"] = ((fecha_ref - df["fecha_apertura_cuenta"]).dt.days / 30.44).astype(int)
 df["cohorte_anio"] = df["fecha_apertura_cuenta"].dt.year
 df["es_cliente_reciente"] = (df["antiguedad_meses"] < 12).astype(int)
 
-print(f"  edad_anos:          media={df['edad_anos'].mean():.1f} anos")
+print(f"  edad_años:          media={df['edad_años'].mean():.1f} años")
 print(f"  antiguedad_meses:   media={df['antiguedad_meses'].mean():.0f} meses")
 print(f"  clientes recientes: {df['es_cliente_reciente'].sum()}")
 
@@ -101,7 +101,7 @@ print("\n--- TECNICA 3: BINNING ---")
 
 # Rango etario Ecuador
 df["grupo_etario"] = pd.cut(
-    df["edad_anos"],
+    df["edad_años"],
     bins=[18, 25, 35, 45, 55, 100],
     labels=["joven(18-25)", "adulto-joven(26-35)",
             "adulto(36-45)", "senior(46-55)", "mayor(55+)"]
@@ -146,7 +146,7 @@ print(f"  Columnas originales:  11")
 print(f"  Columnas generadas:   {df.shape[1] - 11}")
 print(f"  Total columnas final: {df.shape[1]}")
 
-nuevas = ["edad_anos","antiguedad_meses","salario_vs_sbu","saldo_vs_salario",
+nuevas = ["edad_años","antiguedad_meses","salario_vs_sbu","saldo_vs_salario",
           "grupo_etario","segmento_salarial","provincia_le","cuenta_ahorro",
           "cuenta_corriente","cuenta_inversion","ratio_credito_ingreso"]
 print(f"\n  Nuevas features utiles para ML:")

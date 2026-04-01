@@ -139,7 +139,7 @@ plt.show()
 > "Explica los 5 principios principales de Edward Tufte para visualizacion de datos. Para cada principio, dame un ejemplo de como se viola comunmente en reportes de empresas ecuatorianas y como corregirlo."
 
 Luego pregunta:
-> "Tengo un dataset con ventas mensuales de 3 productos durante 2 anos en Ecuador. ¿Que tipo de grafico me recomiendas usar y por que? Dame el codigo Python."
+> "Tengo un dataset con ventas mensuales de 3 productos durante 2 años en Ecuador. ¿Que tipo de grafico me recomiendas usar y por que? Dame el codigo Python."
 
 Compara la respuesta de Claude con lo que aprendiste en el ejercicio.
 

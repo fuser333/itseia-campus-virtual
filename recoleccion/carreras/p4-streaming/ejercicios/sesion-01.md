@@ -74,7 +74,7 @@ topologia = {
         "transacciones.validadas": "Pasaron validacion basica del BCE",
         "alertas.fraude":        "Transacciones sospechosas — antifraude en tiempo real",
         "notificaciones.banco":  "Confirmaciones a banco origen/destino",
-        "auditoria.log":         "Log inmutable para SBS — retencion 7 anos",
+        "auditoria.log":         "Log inmutable para SBS — retencion 7 años",
         "metricas.kpi":          "Agregaciones 1-min para dashboard ejecutivo",
     },
     "Producers": {
@@ -88,7 +88,7 @@ topologia = {
         "Conciliacion":      "Group: conciliacion | Batch nocturno | Desde offset 0",
         "Notificador":       "Group: notify | Push a bancos confirmacion",
         "Dashboard CEO":     "Group: dashboard | Ventana 1-min agregaciones",
-        "Auditoria SBS":     "Group: audit | Consume TODO, retencion S3 7 anos",
+        "Auditoria SBS":     "Group: audit | Consume TODO, retencion S3 7 años",
     },
 }
 
@@ -279,7 +279,7 @@ print("=" * 65)
 ## Usa IA para...
 
 > Abre ChatGPT y escribe:
-> "Soy arquitecto de datos en el BCE Ecuador y necesito dimensionar el cluster Kafka para el Sistema de Pagos Interbancarios. Tenemos 2 millones de transacciones diarias con picos de 500 TPS (transacciones por segundo) en horas laborables. Cada mensaje pesa 2KB. Necesito: 1) calcular el numero de brokers, particiones y replication factor para garantizar 99.99% uptime y latencia < 5ms P99, 2) configuracion de retencion para cumplir los 7 anos de auditoria de la SBS sin costos excesivos (usar S3 Tiered Storage), 3) estrategia de compresion (gzip vs lz4 vs zstd) para el volumen de transacciones. Dame los calculos paso a paso y la configuracion server.properties."
+> "Soy arquitecto de datos en el BCE Ecuador y necesito dimensionar el cluster Kafka para el Sistema de Pagos Interbancarios. Tenemos 2 millones de transacciones diarias con picos de 500 TPS (transacciones por segundo) en horas laborables. Cada mensaje pesa 2KB. Necesito: 1) calcular el numero de brokers, particiones y replication factor para garantizar 99.99% uptime y latencia < 5ms P99, 2) configuracion de retencion para cumplir los 7 años de auditoria de la SBS sin costos excesivos (usar S3 Tiered Storage), 3) estrategia de compresion (gzip vs lz4 vs zstd) para el volumen de transacciones. Dame los calculos paso a paso y la configuracion server.properties."
 
 Despues de leer la respuesta:
 - Implementa el calculador de capacidad de Kafka en Python.

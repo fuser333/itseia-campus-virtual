@@ -11,7 +11,7 @@ Construir un framework de gobierno de datos end-to-end para una empresa ecuatori
 
 ## Contexto
 
-Tecnicentro S.A. es una cadena ecuatoriana de talleres automotrices con 35 sucursales en 12 ciudades, 180,000 clientes registrados y 15 empleados en TI. Sus datos estan en 4 sistemas: ERP (SAP), CRM (HubSpot), sistema de citas (propio), y contabilidad (Monica). El mismo cliente puede estar en los 4 sistemas con datos diferentes. No existe un responsable formal de datos, no hay politica de privacidad publicada (LOPDP), y el CEO acaba de perder una oportunidad de venta porque no sabia cuantos clientes activos tenia con vehiculos con mas de 3 anos sin servicio — los datos eran inconsistentes entre sistemas. La Junta Directiva aprobo contratar a un CDO y tiene $80,000 para el primer ano. Eres ese CDO.
+Tecnicentro S.A. es una cadena ecuatoriana de talleres automotrices con 35 sucursales en 12 ciudades, 180,000 clientes registrados y 15 empleados en TI. Sus datos estan en 4 sistemas: ERP (SAP), CRM (HubSpot), sistema de citas (propio), y contabilidad (Monica). El mismo cliente puede estar en los 4 sistemas con datos diferentes. No existe un responsable formal de datos, no hay politica de privacidad publicada (LOPDP), y el CEO acaba de perder una oportunidad de venta porque no sabia cuantos clientes activos tenia con vehiculos con mas de 3 años sin servicio — los datos eran inconsistentes entre sistemas. La Junta Directiva aprobo contratar a un CDO y tiene $80,000 para el primer ano. Eres ese CDO.
 
 ## Instrucciones
 
@@ -369,7 +369,7 @@ roadmap = {
         "presupuesto_k": 35,
         "hitos": [
             "Integracion SAP-HubSpot-Citas: vista 360 cliente en tiempo real",
-            "Dashboard ventas con datos confiables (campana reactivacion vehiculos >3 anos)",
+            "Dashboard ventas con datos confiables (campana reactivacion vehiculos >3 años)",
             "Auditoria LOPDP externa superada",
             "Score de madurez = 3.5 (Proactivo)",
             "Primer informe gobierno datos al Directorio",
@@ -383,7 +383,7 @@ print("\nANALISIS DE ROI — Programa Gobierno de Datos")
 print("=" * 55)
 
 beneficios_anuales = {
-    "Campana reactivacion clientes (vehiculos >3 anos sin servicio)":
+    "Campana reactivacion clientes (vehiculos >3 años sin servicio)":
         {'valor': 45_000, 'descripcion': "5% de 9,000 clientes inactivos x $100 servicio promedio"},
     "Reduccion errores facturacion SAP (datos sucios)":
         {'valor': 12_000, 'descripcion': "80h/mes x $12.5/h ingeniero + multas contables evitadas"},

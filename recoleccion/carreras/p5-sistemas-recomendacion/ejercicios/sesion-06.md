@@ -237,7 +237,7 @@ descripciones = {
     'Cafe_Lojano_Premium': 'cafe arabica de altura tostado medio sabor intenso producido en Loja Ecuador',
     'Chocolate_Pacari_70': 'chocolate negro 70 cacao fino aroma Arriba Nacional certificado organico',
     'Quinua_Chimborazo': 'quinua blanca cultivada en los Andes ecuatorianos alta proteina libre gluten',
-    'Cacao_Arriba_Fino': 'cacao fino aroma Arriba Nacional premium exportacion granos fermentados secos',
+    'Cacao_Arriba_Fino': 'cacao fino aroma Arriba Nacional premium exportacion graños fermentados secos',
     # Nuevo item sin historial:
     'Miel_Bosque_Nuevo': 'miel artesanal bosque nublado Mindo Ecuador produccion apicola organica natural',
 }

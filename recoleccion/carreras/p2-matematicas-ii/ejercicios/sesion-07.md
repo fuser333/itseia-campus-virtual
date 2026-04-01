@@ -67,7 +67,7 @@ for i in range(len(eigenvalues)):
 ```python
 import numpy as np
 
-# Datos: 10 empleados tech Quito (anos experiencia, sueldo en miles)
+# Datos: 10 empleados tech Quito (años experiencia, sueldo en miles)
 experiencia = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 sueldo =      [0.8, 1.1, 1.4, 1.8, 2.2, 2.5, 2.9, 3.4, 3.8, 4.2]
 

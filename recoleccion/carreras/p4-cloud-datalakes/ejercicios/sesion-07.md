@@ -168,7 +168,7 @@ for _, r in df_original.head(4).iterrows():
 
 # 4. GENERALIZACION (k-anonimidad)
 def generalizar_edad(edad):
-    """Agrupa edad en rangos de 10 anos."""
+    """Agrupa edad en rangos de 10 años."""
     return f"{(edad//10)*10}-{(edad//10)*10+9}"
 
 def generalizar_ingreso(ingreso):

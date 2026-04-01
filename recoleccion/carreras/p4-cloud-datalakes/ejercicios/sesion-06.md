@@ -68,7 +68,7 @@ X_raw = pd.DataFrame({
     "edad":                  np.random.randint(18, 65, n),
     "ingreso_log":           np.random.normal(7.5, 0.6, n),
     "ratio_deuda_ingreso":   np.random.uniform(0.05, 3.0, n),
-    "anos_socio":            np.random.randint(0, 20, n),
+    "años_socio":            np.random.randint(0, 20, n),
     "puntaje_interno":       np.random.randint(300, 950, n),
     "tasa_cumplimiento":     np.random.uniform(0, 1, n),
     "tiene_garante":         np.random.binomial(1, 0.55, n),
@@ -202,7 +202,7 @@ class SolicitudCredito(BaseModel):
     edad:                  int   = Field(..., ge=18, le=80, description="Edad del solicitante")
     ingreso_log:           float = Field(..., gt=0)
     ratio_deuda_ingreso:   float = Field(..., ge=0, le=10)
-    anos_socio:            int   = Field(..., ge=0, le=50)
+    años_socio:            int   = Field(..., ge=0, le=50)
     puntaje_interno:       int   = Field(..., ge=300, le=950)
     tasa_cumplimiento:     float = Field(..., ge=0, le=1)
     tiene_garante:         int   = Field(..., ge=0, le=1)

@@ -9,7 +9,7 @@
 Desarrollar argumentos fundamentados en datos reales sobre el impacto de la IA en el mercado laboral ecuatoriano, practicar el debate estructurado de temas tecnologicos controversiales, y llegar a posiciones matizadas basadas en evidencia y no en intuicion.
 
 ## Contexto (Ecuador)
-Segun el Banco Mundial (2024), el 40% de los empleos en Ecuador tienen alta probabilidad de automatizacion en los proximos 10 anos. El INEC reporta que Ecuador tiene 4.8 millones de empleados en el sector servicios, el mas amenazado por la IA. Al mismo tiempo, la empresa tecnologica Tata en Quito no puede contratar suficientes ingenieros de datos. La IA destruye empleos y crea empleos al mismo tiempo. La pregunta etica es: quien paga el costo de la transicion y quien se lleva los beneficios?
+Segun el Banco Mundial (2024), el 40% de los empleos en Ecuador tienen alta probabilidad de automatizacion en los proximos 10 años. El INEC reporta que Ecuador tiene 4.8 millones de empleados en el sector servicios, el mas amenazado por la IA. Al mismo tiempo, la empresa tecnologica Tata en Quito no puede contratar suficientes ingenieros de datos. La IA destruye empleos y crea empleos al mismo tiempo. La pregunta etica es: quien paga el costo de la transicion y quien se lleva los beneficios?
 
 ## Instrucciones (paso a paso)
 
@@ -22,13 +22,13 @@ Busca datos reales para responder estas preguntas:
 4. Cuantos egresados de tecnologia produce Ecuador cada ano (fuentes: SENESCYT)?
 
 **Paso 2 — Prepara ambos lados del debate con ChatGPT (20 min)**
-El debate tiene esta posicion: "La inteligencia artificial generara mas empleos de los que destruira en Ecuador en los proximos 10 anos."
+El debate tiene esta posicion: "La inteligencia artificial generara mas empleos de los que destruira en Ecuador en los proximos 10 años."
 
 Pide a ChatGPT que te ayude a preparar AMBOS lados:
 
 ```
 Soy estudiante de etica tecnologica en Ecuador. Necesito preparar un debate estructurado sobre:
-"La inteligencia artificial generara mas empleos de los que destruira en Ecuador en los proximos 10 anos"
+"La inteligencia artificial generara mas empleos de los que destruira en Ecuador en los proximos 10 años"
 Por favor:
 1. Dame los 5 argumentos mas solidos A FAVOR de la proposicion (con datos reales de Ecuador si existen)
 2. Dame los 5 argumentos mas solidos EN CONTRA de la proposicion (con datos reales)
@@ -57,4 +57,4 @@ Construir los argumentos mas solidos de AMBOS lados para poder debatir con rigor
 - La posicion mas responsable no es "la IA es buena" ni "la IA es mala", es "la IA es una herramienta cuyo impacto depende de las politicas que la rodean"
 
 ## Reto extra
-Encuentra a una persona mayor de 40 anos que trabaje en uno de los empleos en riesgo de automatizacion que identificaste (contador, cajero, operador de call center, conductor de taxi). Hacele esta entrevista de 5 preguntas: conoce el riesgo de automatizacion de su trabajo? Le preocupa? Ha tomado algun paso para adaptarse? Que le falta para sentirse mas seguro? Escribe un resumen de la entrevista en 200 palabras y reflexiona sobre lo que escuchaste.
+Encuentra a una persona mayor de 40 años que trabaje en uno de los empleos en riesgo de automatizacion que identificaste (contador, cajero, operador de call center, conductor de taxi). Hacele esta entrevista de 5 preguntas: conoce el riesgo de automatizacion de su trabajo? Le preocupa? Ha tomado algun paso para adaptarse? Que le falta para sentirse mas seguro? Escribe un resumen de la entrevista en 200 palabras y reflexiona sobre lo que escuchaste.

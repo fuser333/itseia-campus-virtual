@@ -277,7 +277,7 @@ print("=" * 65)
 
 3. Descarga el shapefile de provincias de Ecuador del INEC (`https://www.ecuadorencifras.gob.ec/documentos/`) y crea un mapa coropletco con GeoPandas mostrando la poblacion por provincia.
 
-4. Calcula el "indice de aislamiento" de cada ciudad: distancia promedio a los 3 hospitales mas cercanos.
+4. Calcula el "indice de aislamiento" de cada ciudad: distancia promedio a los 3 hospitales mas cercaños.
 
 ## Usa IA para...
 

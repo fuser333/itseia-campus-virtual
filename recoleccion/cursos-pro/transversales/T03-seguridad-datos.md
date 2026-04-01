@@ -23,7 +23,7 @@ Conocer los fundamentos de la LOPDP no es solo una obligacion legal. Es una vent
 
 **Que es la LOPDP y por que existe**
 
-La Ley Organica de Proteccion de Datos Personales del Ecuador fue publicada en el Registro Oficial en mayo de 2021. Entro en vigencia para su plena aplicacion en mayo de 2023 (con el periodo de dos anos de adecuacion que la ley otorgaba).
+La Ley Organica de Proteccion de Datos Personales del Ecuador fue publicada en el Registro Oficial en mayo de 2021. Entro en vigencia para su plena aplicacion en mayo de 2023 (con el periodo de dos años de adecuacion que la ley otorgaba).
 
 Su objetivo central es establecer el derecho fundamental de las personas a controlar sus propios datos personales. Establece que nadie puede recopilar, usar, compartir o procesar datos de una persona sin una base legal que lo justifique.
 
@@ -247,9 +247,9 @@ La consulta sigue siendo util. Los datos identificables, no.
 
 Generalizacion: reemplaza datos especificos por rangos o categorias.
 
-Ejemplo original: "Paciente de 34 anos, femenina, con diabetes tipo 2 diagnosticada en 2019, residente en el barrio La Floresta en Quito."
+Ejemplo original: "Paciente de 34 años, femenina, con diabetes tipo 2 diagnosticada en 2019, residente en el barrio La Floresta en Quito."
 
-Ejemplo generalizado: "Paciente adulta de entre 30 y 40 anos, con diabetes tipo 2 diagnosticada hace 5-7 anos, residente en Quito."
+Ejemplo generalizado: "Paciente adulta de entre 30 y 40 años, con diabetes tipo 2 diagnosticada hace 5-7 años, residente en Quito."
 
 Perturbacion: agrega pequeñas modificaciones a datos numericos que no afecten la naturaleza de la consulta.
 

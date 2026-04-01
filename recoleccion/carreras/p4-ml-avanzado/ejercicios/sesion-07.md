@@ -90,7 +90,7 @@ provincias  = ["Pichincha","Guayas","Azuay","Manabi","Tungurahua"]
 df_iess_real = pd.DataFrame({
     "edad":              np.random.normal(38, 10, N).clip(18, 65),
     "ingreso_mensual":   np.random.lognormal(6.5, 0.5, N).clip(450, 10000),
-    "anos_aportados":    np.random.exponential(8, N).clip(0, 40),
+    "años_aportados":    np.random.exponential(8, N).clip(0, 40),
     "n_aportes_12m":     np.random.choice(range(13), N, p=[0.05,0.05,0.05,0.05,0.05,
                                                              0.05,0.08,0.08,0.10,0.10,
                                                              0.10,0.10,0.14]),
@@ -107,7 +107,7 @@ X_real = scaler_iess.fit_transform(df_iess_real.values).astype(np.float32)
 
 print(f"  Dataset real: {df_iess_real.shape}")
 print(f"  Ingreso prom: ${df_iess_real['ingreso_mensual'].mean():.0f}")
-print(f"  Edad prom:    {df_iess_real['edad'].mean():.1f} anos")
+print(f"  Edad prom:    {df_iess_real['edad'].mean():.1f} años")
 print(f"  Con prestamo: {df_iess_real['tiene_prestamo'].mean()*100:.1f}%")
 
 # ================================================
@@ -254,7 +254,7 @@ print("\n--- PROMPTING AVANZADO: GENERACION CON LLMs ---")
 prompts_ejemplos = {
     "Few-shot tabular": """
   Genera 5 registros de afiliados IESS Ecuador con este formato CSV:
-  edad,ingreso_mensual,anos_aportados,sector,tiene_prestamo
+  edad,ingreso_mensual,años_aportados,sector,tiene_prestamo
 
   Ejemplos existentes:
   34,850.00,6,comercio,0
@@ -267,7 +267,7 @@ prompts_ejemplos = {
   Eres un generador de datos sinteticos para el IESS Ecuador.
   Reglas ESTRICTAS:
   - Ingreso: entre $450 (SBU) y $5,000 (percentil 95)
-  - Edad: entre 18 y 65 anos
+  - Edad: entre 18 y 65 años
   - Anos aportados: menor que (edad - 18)
   - Sector: solo [comercio, manufactura, servicios, construccion, agricultura]
 

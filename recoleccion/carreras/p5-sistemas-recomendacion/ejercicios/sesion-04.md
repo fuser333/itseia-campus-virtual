@@ -276,7 +276,7 @@ plt.figure(figsize=(10, 7))
 plt.scatter(emb_2d[:, 0], emb_2d[:, 1], s=60, alpha=0.7, c='#FBBC0C')
 for i in range(50):
     plt.annotate(f'P{i}', (emb_2d[i, 0], emb_2d[i, 1]), fontsize=7, alpha=0.8)
-plt.title('Embeddings de Productos en 2D (PCA)\nProductos cercanos = perfiles similares de compradores')
+plt.title('Embeddings de Productos en 2D (PCA)\nProductos cercaños = perfiles similares de compradores')
 plt.xlabel(f'PC1 ({pca.explained_variance_ratio_[0]:.1%} varianza)')
 plt.ylabel(f'PC2 ({pca.explained_variance_ratio_[1]:.1%} varianza)')
 plt.grid(True, alpha=0.3)

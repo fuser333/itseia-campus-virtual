@@ -149,4 +149,4 @@ Despues de leer la respuesta:
 
 ## Reto extra
 
-Agrega un bucle que calcule cuantos meses de salario minimo ($550) necesita una familia ecuatoriana para comprar exactamente 10 canastas basicas (asumiendo que destina el 40% del salario a alimentacion). Muestra el resultado en meses y en anos.
+Agrega un bucle que calcule cuantos meses de salario minimo ($550) necesita una familia ecuatoriana para comprar exactamente 10 canastas basicas (asumiendo que destina el 40% del salario a alimentacion). Muestra el resultado en meses y en años.

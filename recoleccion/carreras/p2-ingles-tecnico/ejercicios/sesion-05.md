@@ -50,7 +50,7 @@ Contexto: Eres el analista de datos de una empresa en Quito. El pipeline de ETL 
 - Describe el bug con precision: que ocurrio, cuando, que datos afecta, que hiciste para diagnosticarlo.
 
 **Email 2 — Solicitar dataset:**
-Contexto: Estas desarrollando un modelo de prediccion de churn para una empresa de telecomunicaciones ecuatoriana. Necesitas acceso al dataset de clientes de los ultimos 2 anos. Tu jefa es Sarah Lee, VP de Datos.
+Contexto: Estas desarrollando un modelo de prediccion de churn para una empresa de telecomunicaciones ecuatoriana. Necesitas acceso al dataset de clientes de los ultimos 2 años. Tu jefa es Sarah Lee, VP de Datos.
 - Subject: ?
 - Explica para que necesitas los datos, que variables requieres, como los usaras (confidencialmente).
 

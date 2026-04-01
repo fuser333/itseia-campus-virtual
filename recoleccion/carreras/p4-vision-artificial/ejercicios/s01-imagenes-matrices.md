@@ -126,4 +126,4 @@ Al terminar esta sesion debes poder responder:
 
 ## Reto Extra
 
-Implementa un "difference detector" para imagenes de la misma zona geografica tomadas en fechas distintas (deforestacion en el Yasuni). Descarga dos imagenes satelitales de la misma region con anos de diferencia (NASA EarthData o Google Earth Engine). Calcula la diferencia absoluta pixel a pixel en el canal verde (Green = vegetacion), aplica un umbral para detectar zonas de cambio y genera un mapa de calor de las areas afectadas. Cuantifica el porcentaje de cobertura vegetal perdida.
+Implementa un "difference detector" para imagenes de la misma zona geografica tomadas en fechas distintas (deforestacion en el Yasuni). Descarga dos imagenes satelitales de la misma region con años de diferencia (NASA EarthData o Google Earth Engine). Calcula la diferencia absoluta pixel a pixel en el canal verde (Green = vegetacion), aplica un umbral para detectar zonas de cambio y genera un mapa de calor de las areas afectadas. Cuantifica el porcentaje de cobertura vegetal perdida.

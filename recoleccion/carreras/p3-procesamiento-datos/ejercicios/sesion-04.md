@@ -89,7 +89,7 @@ html_precios = """
     <tr><th>Producto</th><th>Unidad</th><th>Precio Min</th><th>Precio Max</th><th>Categoria</th></tr>
   </thead>
   <tbody>
-    <tr><td>Arroz Diana 1kg</td><td>saco 100lb</td><td>$24.50</td><td>$26.00</td><td>Granos</td></tr>
+    <tr><td>Arroz Diana 1kg</td><td>saco 100lb</td><td>$24.50</td><td>$26.00</td><td>Graños</td></tr>
     <tr><td>Papa Superchola</td><td>quintal 100lb</td><td>$12.00</td><td>$15.00</td><td>Tuberculos</td></tr>
     <tr><td>Tomate Rinon</td><td>caja 20kg</td><td>$8.50</td><td>$12.00</td><td>Hortalizas</td></tr>
     <tr><td>Cebolla Colorada</td><td>quintal</td><td>$18.00</td><td>$22.00</td><td>Hortalizas</td></tr>

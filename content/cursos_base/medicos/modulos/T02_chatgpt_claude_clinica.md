@@ -91,7 +91,7 @@ Que hago con un paciente diabetico?
 **Ejemplo bueno:**
 ```
 Eres un internista con experiencia en medicina familiar.
-Tengo un paciente de 58 anos, diabetico tipo 2 de 10 anos de evolucion,
+Tengo un paciente de 58 años, diabetico tipo 2 de 10 años de evolucion,
 en metformina 1g c/12h, con HbA1c de 8.9% en control reciente.
 Genera una lista de diagnosticos diferenciales para fatiga cronica de 6 semanas,
 considerando complicaciones de diabetes y comorbilidades frecuentes.
@@ -113,7 +113,7 @@ Indicar que actue como un especialista especifico mejora drasticamente la calida
 La IA responde mejor con mas informacion del caso. No es necesario que sea identificable (de hecho, no debe serlo — ver modulo T-03).
 
 ```
-"Paciente femenino, 45 anos, IMC 32, HTA controlada con losartan,
+"Paciente femenino, 45 años, IMC 32, HTA controlada con losartan,
 sin antecedentes oncologicos, consulta por cefalea persistente 3 semanas..."
 ```
 
@@ -137,10 +137,10 @@ Di explicitamente que NO quieres: "no inventes referencias", "no incluyas patolo
 **Prompt tipo:**
 ```
 Actua como internista con experiencia clinica.
-Paciente: hombre, 42 anos, empleado de oficina.
+Paciente: hombre, 42 años, empleado de oficina.
 Motivo de consulta: fatiga progresiva 8 semanas, sudoracion nocturna ocasional,
 perdida de peso ~4kg, sin fiebre documentada.
-Antecedentes: fumador activo 1 paquete/dia por 15 anos. Sin otros antecedentes relevantes.
+Antecedentes: fumador activo 1 paquete/dia por 15 años. Sin otros antecedentes relevantes.
 Genera un diagnostico diferencial ordenado por probabilidad.
 Incluye para cada uno: probabilidad estimada (alta/media/baja), examenes clave para confirmar,
 y una bandera roja si aplica.
@@ -163,7 +163,7 @@ Convierte este resumen de consulta en una nota clinica formato SOAP.
 Sé conciso y clinicamente preciso.
 No inventes datos que no mencione.
 
-Resumen: "Paciente Carmen T., 38 anos, viene por cuadro de 3 dias de tos seca,
+Resumen: "Paciente Carmen T., 38 años, viene por cuadro de 3 dias de tos seca,
 rinorrea clara, febricula 37.5C, sin disnea. Examen: faringe congestiva,
 sin exudados. Pulmones limpios. Diagnostico: IVRS viral. Plan: paracetamol
 500mg c/8h por 3 dias, loratadina 10mg/dia, hidratacion, reposo relativo.
@@ -182,7 +182,7 @@ Formato: nota SOAP, lenguaje tecnico medico, tercera persona, maximo 150 palabra
 
 **Prompt tipo:**
 ```
-Explica la hipertension arterial para un paciente de 65 anos, campesino,
+Explica la hipertension arterial para un paciente de 65 años, campesino,
 con educacion primaria, de la Sierra ecuatoriana.
 Usa lenguaje simple, sin terminos tecnicos.
 Incluye: que es la enfermedad, por que es peligrosa, como se controla con pastillas,
@@ -200,7 +200,7 @@ Tono: amable, sin asustar. Longitud: 200 palabras.
 
 **Prompt tipo:**
 ```
-Revisa posibles interacciones medicamentosas para un paciente de 70 anos
+Revisa posibles interacciones medicamentosas para un paciente de 70 años
 con la siguiente medicacion actual:
 - Metformina 1g c/12h
 - Losartan 50mg/dia
@@ -227,7 +227,7 @@ primaria antes de prescribir.
 **Prompt tipo:**
 ```
 Analiza este fragmento de la guia ADA 2025 de diabetes y responde:
-1. Cual es el objetivo de HbA1c para adultos mayores de 65 anos segun esta guia?
+1. Cual es el objetivo de HbA1c para adultos mayores de 65 años segun esta guia?
 2. Cuando se recomienda agregar GLP-1 al esquema de metformina?
 3. Hay alguna recomendacion especifica sobre enfermedad renal cronica estadio 3?
 
@@ -249,7 +249,7 @@ Responde solo con informacion del texto que te di. Si no esta en el texto, dilo.
 Redacta un informe de referencia al segundo nivel para el siguiente caso,
 en formato exigido por el MSP Ecuador (datos del paciente anonimizados):
 
-Paciente femenino, 34 anos. Diagnostico: colecistitis cronica litiasica
+Paciente femenino, 34 años. Diagnostico: colecistitis cronica litiasica
 confirmada por ecografia (calculos multiples, mayor 12mm).
 Sintomas: dolor en hipocondrio derecho posiprandial recurrente por 6 meses.
 Fallo de tratamiento medico (dieta, espasmoliticos).
@@ -270,7 +270,7 @@ Los LLMs generan texto plausible — no necesariamente verdadero. Pueden:
 
 - Citar estudios que no existen con detalles convincentes (autores, revista, ano, resultados)
 - Dar dosis incorrectas de medicamentos con total confianza
-- Mezclar informacion de guias de diferentes anos o regiones
+- Mezclar informacion de guias de diferentes años o regiones
 - Describir protocolos de tratamiento que son una mezcla de fuentes distintas
 
 **Como detectarlos:**
