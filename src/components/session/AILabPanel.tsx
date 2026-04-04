@@ -1,9 +1,9 @@
 "use client";
 
 // ============================================================
-// ITSEIA Academy — AILabPanel (v2 — AI Lab Avanzado)
-// Sub-tabs: Chat | Comparar | Playground | Flashcards
-// Feature: 010-ai-lab-advanced
+// ITSEIA Academy — AILabPanel (v3 — AI Lab + Segundo Cerebro)
+// Sub-tabs: Chat | Comparar | Playground | Flashcards | Cerebro
+// Feature: 010-ai-lab-advanced + segundo-cerebro-mvp
 // ============================================================
 
 import { useState, lazy, Suspense } from "react";
@@ -17,6 +17,7 @@ import {
   GitCompare,
   Code2,
   BookOpen,
+  Brain,
   Loader2,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -31,8 +32,11 @@ const CodePlayground = lazy(
 const FlashcardGenerator = lazy(
   () => import("@/components/ai-lab/FlashcardGenerator")
 );
+const BrainPanel = lazy(
+  () => import("@/components/brain/BrainPanel")
+);
 
-type AILabTab = "chat" | "comparar" | "playground" | "flashcards";
+type AILabTab = "chat" | "comparar" | "playground" | "flashcards" | "cerebro";
 
 interface AILabPanelProps {
   sessionContext: string;
@@ -120,6 +124,12 @@ const TABS: { id: AILabTab; label: string; icon: React.ReactNode; badge?: string
     id: "flashcards",
     label: "Flashcards",
     icon: <BookOpen className="w-3.5 h-3.5" />,
+  },
+  {
+    id: "cerebro",
+    label: "2do Cerebro",
+    icon: <Brain className="w-3.5 h-3.5" />,
+    badge: "Nuevo",
   },
 ];
 
@@ -301,6 +311,18 @@ export default function AILabPanel({
               </div>
             )}
           </div>
+        )}
+
+        {/* TAB: Segundo Cerebro */}
+        {activeTab === "cerebro" && (
+          <Suspense fallback={<LoadingFallback />}>
+            <BrainPanel
+              sessionContext={sessionContext}
+              sessionId={sessionId}
+              sessionTitle={sessionTitle}
+              className="h-full"
+            />
+          </Suspense>
         )}
       </div>
     </div>
