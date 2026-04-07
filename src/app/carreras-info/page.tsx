@@ -256,10 +256,15 @@ export default function CarrerasInfoPage() {
       </a>
 
       <PublicHeader />
-        {/* Login access */}
-        <div className="text-center py-3 bg-white/[0.03] border-b border-white/[0.06]">
-          <span className="text-white/50 text-sm">¿Ya tienes cuenta? </span>
-          <a href="/login" className="text-[#FBBC0C] text-sm font-semibold hover:underline">Iniciar sesión →</a>
+        {/* Login access — prominent banner */}
+        <div className="text-center py-4 px-4 bg-gradient-to-r from-[#FBBC0C]/10 via-[#FBBC0C]/15 to-[#FBBC0C]/10 border-b border-[#FBBC0C]/20">
+          <a href="/login?module=carreras" className="inline-flex items-center gap-3 group">
+            <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-[#FBBC0C]/20 group-hover:bg-[#FBBC0C]/30 transition-colors">
+              <svg className="w-4 h-4 text-[#FBBC0C]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5zm0 0v7" /></svg>
+            </span>
+            <span className="text-white font-semibold text-sm sm:text-base">¿Ya eres estudiante ITSEIA?</span>
+            <span className="text-[#FBBC0C] font-bold text-sm sm:text-base group-hover:underline">Accede a tu carrera →</span>
+          </a>
         </div>
 
 

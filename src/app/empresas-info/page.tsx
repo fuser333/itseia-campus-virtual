@@ -251,10 +251,15 @@ export default function EmpresasInfoPage() {
       </a>
 
       <PublicHeader />
-        {/* Login access */}
-        <div className="text-center py-3 bg-white/[0.03] border-b border-white/[0.06]">
-          <span className="text-white/50 text-sm">¿Ya tienes cuenta? </span>
-          <a href="/login" className="text-[#FBBC0C] text-sm font-semibold hover:underline">Iniciar sesión →</a>
+        {/* Login access — prominent banner */}
+        <div className="text-center py-4 px-4 bg-gradient-to-r from-[#73B8E7]/10 via-[#73B8E7]/15 to-[#73B8E7]/10 border-b border-[#73B8E7]/20">
+          <a href="/login?module=b2b" className="inline-flex items-center gap-3 group">
+            <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-[#73B8E7]/20 group-hover:bg-[#73B8E7]/30 transition-colors">
+              <svg className="w-4 h-4 text-[#73B8E7]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
+            </span>
+            <span className="text-white font-semibold text-sm sm:text-base">¿Ya eres cliente empresarial?</span>
+            <span className="text-[#73B8E7] font-bold text-sm sm:text-base group-hover:underline">Accede al portal B2B →</span>
+          </a>
         </div>
 
 

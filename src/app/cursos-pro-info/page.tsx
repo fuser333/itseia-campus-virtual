@@ -307,10 +307,15 @@ export default function CursosProInfoPage() {
       </a>
 
       <PublicHeader />
-        {/* Login access */}
-        <div className="text-center py-3 bg-white/[0.03] border-b border-white/[0.06]">
-          <span className="text-white/50 text-sm">¿Ya tienes cuenta? </span>
-          <a href="/login" className="text-[#FBBC0C] text-sm font-semibold hover:underline">Iniciar sesión →</a>
+        {/* Login access — prominent banner */}
+        <div className="text-center py-4 px-4 bg-gradient-to-r from-[#FBBC0C]/10 via-[#FBBC0C]/15 to-[#FBBC0C]/10 border-b border-[#FBBC0C]/20">
+          <a href="/login?module=cursos" className="inline-flex items-center gap-3 group">
+            <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-[#FBBC0C]/20 group-hover:bg-[#FBBC0C]/30 transition-colors">
+              <svg className="w-4 h-4 text-[#FBBC0C]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" /></svg>
+            </span>
+            <span className="text-white font-semibold text-sm sm:text-base">¿Ya compraste tu curso?</span>
+            <span className="text-[#FBBC0C] font-bold text-sm sm:text-base group-hover:underline">Accede a tus cursos de IA →</span>
+          </a>
         </div>
 
 

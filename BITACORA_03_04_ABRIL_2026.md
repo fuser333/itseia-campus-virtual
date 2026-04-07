@@ -14,7 +14,9 @@ Viernes Santo + Sabado. Construccion completa del Segundo Cerebro ITSEIA. 0 lead
 - 7 componentes frontend: BrainPanel, NoteEditor, NoteList, SourceIngester, DeltaViewer, StudyMaterialGenerator, SemanticSearch
 - Tab "2do Cerebro" integrada en AI Lab con badge "Nuevo"
 - Build local exitoso (0 errores TypeScript)
-- Deploy Vercel: PENDIENTE (error temporal de Vercel, no de nuestro codigo)
+- Deploy Vercel: ✅ LIVE en tecnologico.itseia.ai (deploy qcdkldffz Ready)
+- Fix final: downgrade Next.js 16→15.5.14 + remove .vercelignore (commit 4280f69)
+- APIs verificadas: /api/brain/notes (401 auth ok), /api/brain/search (405 POST ok)
 
 ### 2. LEADS
 - 125 leads — 0 nuevos (Semana Santa)

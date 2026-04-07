@@ -287,10 +287,15 @@ export default function PreuniInfoPage() {
       </a>
 
       <PublicHeader />
-        {/* Login access */}
-        <div className="text-center py-3 bg-white/[0.03] border-b border-white/[0.06]">
-          <span className="text-white/50 text-sm">¿Ya tienes cuenta? </span>
-          <a href="/login" className="text-[#FBBC0C] text-sm font-semibold hover:underline">Iniciar sesión →</a>
+        {/* Login access — prominent banner */}
+        <div className="text-center py-4 px-4 bg-gradient-to-r from-[#F0846D]/10 via-[#F0846D]/15 to-[#F0846D]/10 border-b border-[#F0846D]/20">
+          <a href="/login?module=preuni" className="inline-flex items-center gap-3 group">
+            <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-[#F0846D]/20 group-hover:bg-[#F0846D]/30 transition-colors">
+              <svg className="w-4 h-4 text-[#F0846D]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+            </span>
+            <span className="text-white font-semibold text-sm sm:text-base">¿Ya te inscribiste al Preuni?</span>
+            <span className="text-[#F0846D] font-bold text-sm sm:text-base group-hover:underline">Accede a tu preuniversitario →</span>
+          </a>
         </div>
 
 
