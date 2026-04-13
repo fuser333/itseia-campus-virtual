@@ -130,7 +130,7 @@ Los proyectos de carreras en modalidad en linea se presentan a traves de la plat
 
 ### 1.7 Ley Organica de Proteccion de Datos Personales (LOPDP)
 
-**Vigencia desde:** 26 mayo 2021 (plazo de adaptacion para instituciones: 2 anos, vencio mayo 2023)
+**Vigencia desde:** 26 mayo 2021 (plazo de adaptacion para instituciones: 2 años, vencio mayo 2023)
 **Fuente:** https://www.finanzaspopulares.gob.ec/wp-content/uploads/2021/07/ley_organica_de_proteccion_de_datos_personales.pdf
 
 Obligatoria para toda plataforma educativa que procese datos de estudiantes.
@@ -287,7 +287,7 @@ El restante hasta 49% puede ser asincronico (videos grabados, lecturas, foros, a
 - [ ] Recursos educativos digitales pertinentes por cada asignatura.
 - [ ] Diversidad de formatos: textos, videos, simulaciones, ejercicios interactivos.
 - [ ] Accesibilidad: material compatible con lectores de pantalla (norma WCAG 2.1 recomendada).
-- [ ] Referencias bibliograficas actualizadas (menos de 5 anos para contenido tecnico de IA).
+- [ ] Referencias bibliograficas actualizadas (menos de 5 años para contenido tecnico de IA).
 - [ ] Material de autoria del docente o con licencia/permiso de uso claramente establecido.
 
 ### 4.5 Evaluacion en Linea
@@ -351,7 +351,7 @@ Vigente desde mayo 2021. Plazo de adaptacion vencio mayo 2023. ITSEIA debe cumpl
 ### 6.2 Obligaciones Especificas para la Plataforma Virtual ITSEIA
 
 - [ ] **Politica de Privacidad** publicada en la plataforma: describe que datos se recopilan, para que se usan, por cuanto tiempo se conservan, derechos del usuario.
-- [ ] **Consentimiento previo, libre, expreso, inequivoco e informado** del titular de los datos antes de procesar su informacion. Para estudiantes menores de 18 anos: consentimiento de representante legal.
+- [ ] **Consentimiento previo, libre, expreso, inequivoco e informado** del titular de los datos antes de procesar su informacion. Para estudiantes menores de 18 años: consentimiento de representante legal.
 - [ ] **Responsable del Tratamiento de Datos** designado formalmente dentro de ITSEIA (puede ser el Rector o Director Administrativo).
 - [ ] **Delegado de Proteccion de Datos** (DPO): recomendable aunque no siempre obligatorio para instituciones pequenas; es quien actua como enlace con la Autoridad de Proteccion de Datos de Ecuador.
 - [ ] **Medidas de seguridad tecnicas y organizativas**: HTTPS, contrasenas seguras, control de acceso por roles, backup cifrado.

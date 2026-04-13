@@ -29,7 +29,7 @@ Los articulos citados estan confirmados por al menos dos fuentes independientes.
 | ¿Puede ITSEIA tener modalidad en linea? | SI. Las 3 carreras (IA, Ciencia de Datos, Big Data) son elegibles. |
 | ¿Hay horario fijo para la carrera online? | NO obligatorio por ley. Solo las sesiones sincronicas tienen horario. |
 | ¿Cuanto debe ser sincronico? | Al menos 51% de los creditos deben tener interaccion docente-estudiante en tiempo real. |
-| ¿Misma duracion que presencial? | SI. 5 semestres, 2.5 anos. No se puede acelerar ni extender por modalidad. |
+| ¿Misma duracion que presencial? | SI. 5 semestres, 2.5 años. No se puede acelerar ni extender por modalidad. |
 | ¿Mismos creditos que presencial? | SI. La malla es la misma; solo cambia el metodo de entrega. |
 | ¿Puede estudiar desde cualquier ciudad? | SI. La modalidad en linea no exige presencia geografica. |
 | ¿Puede estudiar desde otro pais? | SI juridicamente. La IES debe definir politica de admision internacional. |
@@ -92,7 +92,7 @@ Basada en el estudio de mercado interno (33-50% de leads piden online son profes
 
 ### 2.2 Duracion del Programa
 
-**La duracion es identica a modalidad presencial: 5 semestres, 2.5 anos.**
+**La duracion es identica a modalidad presencial: 5 semestres, 2.5 años.**
 
 Base legal:
 - Art. 37 y siguientes, RRA 2022: la duracion de los programas de Tecnologia Superior se mide en creditos y semestres. Para el nivel de Tecnologia Superior (IST), el RRA establece duracion minima en creditos que no cambia por modalidad.
@@ -302,7 +302,7 @@ El reglamento ecuatoriano no exige que el estudiante este en Quito, en la provin
 **Implicacion para ITSEIA:** Puede captar estudiantes de:
 - Cualquier ciudad del Ecuador (Guayaquil, Cuenca, Loja, Manta, etc.).
 - Ecuatorianos residentes en el exterior (diaspora: Estados Unidos, Espana, Italia).
-- Ciudadanos extranjeros (requiere politica de admision que reconozca bachillerato extranjero, proceso de validacion ante SENESCYT).
+- Ciudadaños extranjeros (requiere politica de admision que reconozca bachillerato extranjero, proceso de validacion ante SENESCYT).
 
 ### 7.2 Admision de Estudiantes Internacionales
 
@@ -457,7 +457,7 @@ Este es el caso mas relevante para ITSEIA. Misma carrera, mismo nivel, misma mod
 | Horario | Lun-Vie 17:30-21:30 (fijo, aprobado) | A definir por ITSEIA (flexible, sesiones sincronicas planificadas) |
 | Lugar fisico | Quito (instalaciones ITSEIA) | Cualquier lugar con internet |
 | Asistencia | Presencia fisica obligatoria | Asistencia virtual a sesiones sincronicas |
-| Duracion carrera | 5 semestres / 2.5 anos | 5 semestres / 2.5 anos (igual) |
+| Duracion carrera | 5 semestres / 2.5 años | 5 semestres / 2.5 años (igual) |
 | Creditos | Mismo numero | Mismo numero (la malla no cambia) |
 | Evaluaciones | En aula o laboratorio | 100% online (plataforma + videoconferencia) |
 | Practicas | In-situ en empresa o remoto | 100% remoto (acceso virtual a empresa) |

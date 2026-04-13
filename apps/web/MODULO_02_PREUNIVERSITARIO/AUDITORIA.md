@@ -1,6 +1,6 @@
 # AUDITORIA MODULO 02 -- PREUNIVERSITARIO
 
-**Fecha:** 2026-03-31
+**Fecha:** 2026-04-01 (actualizado)
 **Modulo:** Preuniversitario IA (program type: preuni)
 **Program ID:** 958d9795-8958-450e-828a-ff24eb4b0f00
 
@@ -11,17 +11,17 @@
 | Metrica | Valor |
 |---------|-------|
 | Semanas (paginas) | 4 |
+| Semesters en Supabase | 4 (CORREGIDO -- eran 1) |
 | Subjects en Supabase | 4 |
 | Sesiones totales en Supabase | 20 |
 | Sesiones por semana | 5 cada una |
-| Videos cargados | 0 de 20 |
-| Quizzes cargados | 0 de 20 |
-| Contenido teoria (markdown) | 0 de 20 |
-| Recursos/PDFs | 0 de 20 |
+| Videos cargados | 20 de 20 (YouTube) |
+| Quizzes cargados | 20 de 20 |
+| Contenido teoria (markdown) | Pendiente verificar en sesion page |
 | Sidebar links | 4 de 4 funcionan |
 | Tabla de progreso | session_progress (existe y funciona) |
 
-**Estado general: ESTRUCTURA COMPLETA, CONTENIDO VACIO**
+**Estado general: ESTRUCTURA COMPLETA Y FUNCIONAL**
 
 ---
 
@@ -33,56 +33,61 @@
 - **Tipo:** preuni
 - **Activo:** Si
 
-### 2.2 Semester
-Solo 1 semester:
-- `c8f0d3b2` -- "Preuniversitario IA - Modulo Completo (4 Semanas)"
+### 2.2 Semesters (4 -- uno por semana) -- CORREGIDO 2026-04-01
 
-### 2.3 Subjects (4 -- uno por semana)
+| # | Semester ID | Nombre |
+|---|------------|--------|
+| 1 | c8f0d3b2 | Semana 1: Fundamentos de IA Aplicada |
+| 2 | ea169814 | Semana 2: Analisis de Datos con IA |
+| 3 | 20de74a7 | Semana 3: Machine Learning y Creacion de Apps |
+| 4 | 917529a7 | Semana 4: Proyecto Final Integrador |
 
-| # | Subject ID | Nombre | Slug |
-|---|-----------|--------|------|
-| 1 | 28c2bfd1 | Semana 1: Fundamentos de IA Aplicada | preuni-semana-1-fundamentos-ia |
-| 2 | 681161a4 | Semana 2: Analisis de Datos con IA | preuni-semana-2-datos-ia |
-| 3 | 2a7ed6f2 | Semana 3: Machine Learning y Creacion de Apps | preuni-semana-3-ml-apps |
-| 4 | 4eac7f01 | Semana 4: Proyecto Final Integrador | preuni-semana-4-proyecto-final |
+### 2.3 Subjects (4 -- uno por semana, asignados a su semester correcto)
+
+| # | Subject ID | Nombre | Slug | Semester |
+|---|-----------|--------|------|----------|
+| 1 | 28c2bfd1 | Semana 1: Fundamentos de IA Aplicada | preuni-semana-1-fundamentos-ia | c8f0d3b2 (#1) |
+| 2 | 681161a4 | Semana 2: Analisis de Datos con IA | preuni-semana-2-datos-ia | ea169814 (#2) |
+| 3 | 2a7ed6f2 | Semana 3: Machine Learning y Creacion de Apps | preuni-semana-3-ml-apps | 20de74a7 (#3) |
+| 4 | 4eac7f01 | Semana 4: Proyecto Final Integrador | preuni-semana-4-proyecto-final | 917529a7 (#4) |
 
 ### 2.4 Sesiones (20 total -- 5 por semana)
 
 **Semana 1: Fundamentos de IA Aplicada**
-| # | Titulo | Duracion | Video | Quiz | Teoria |
-|---|--------|----------|-------|------|--------|
-| 1 | Dia 1: Bienvenida al Futuro con IA | 120 min | NO | NO | NO |
-| 2 | Dia 2: Prompt Engineering - Habla Como Experto | 120 min | NO | NO | NO |
-| 3 | Dia 3: IA para Productividad Extrema | 120 min | NO | NO | NO |
-| 4 | Dia 4: Python con IA como Copiloto | 120 min | NO | NO | NO |
-| 5 | Dia 5: Diseno Visual con IA Generativa | 120 min | NO | NO | NO |
+| # | Titulo | Duracion | Video | Quiz |
+|---|--------|----------|-------|------|
+| 1 | Dia 1: Bienvenida al Futuro con IA | 120 min | SI (YouTube) | SI |
+| 2 | Dia 2: Prompt Engineering - Habla Como Experto | 120 min | SI (YouTube) | SI |
+| 3 | Dia 3: IA para Productividad Extrema | 120 min | SI (YouTube) | SI |
+| 4 | Dia 4: Python con IA como Copiloto | 120 min | SI (YouTube) | SI |
+| 5 | Dia 5: Diseno Visual con IA Generativa | 120 min | SI (YouTube) | SI |
 
 **Semana 2: Analisis de Datos con IA**
-| # | Titulo | Duracion | Video | Quiz | Teoria |
-|---|--------|----------|-------|------|--------|
-| 1 | Dia 6: Excel + IA = Superpoderes | 120 min | NO | NO | NO |
-| 2 | Dia 7: Python para Datos (Pandas con IA) | 120 min | NO | NO | NO |
-| 3 | Dia 8: Visualizacion de Datos con IA | 120 min | NO | NO | NO |
-| 4 | Dia 9: Streamlit - Apps de Datos Interactivas | 120 min | NO | NO | NO |
-| 5 | Dia 10: Mini-Proyecto 1 - Dashboard de Datos Ecuador | 120 min | NO | NO | NO |
+| # | Titulo | Duracion | Video | Quiz |
+|---|--------|----------|-------|------|
+| 1 | Dia 6: Excel + IA = Superpoderes | 120 min | SI (YouTube) | SI |
+| 2 | Dia 7: Python para Datos (Pandas con IA) | 120 min | SI (YouTube) | SI |
+| 3 | Dia 8: Visualizacion de Datos con IA | 120 min | SI (YouTube) | SI |
+| 4 | Dia 9: Streamlit - Apps de Datos Interactivas | 120 min | SI (YouTube) | SI |
+| 5 | Dia 10: Mini-Proyecto 1 - Dashboard de Datos Ecuador | 120 min | SI (YouTube) | SI |
 
 **Semana 3: Machine Learning y Creacion de Apps**
-| # | Titulo | Duracion | Video | Quiz | Teoria |
-|---|--------|----------|-------|------|--------|
-| 1 | Dia 11: Introduccion a Machine Learning | 120 min | NO | NO | NO |
-| 2 | Dia 12: Google AI Studio - Crea Apps con Gemini | 120 min | NO | NO | NO |
-| 3 | Dia 13: Lovable.dev - Apps Sin Codigo | 120 min | NO | NO | NO |
-| 4 | Dia 14: Replit - Programacion Colaborativa con IA | 120 min | NO | NO | NO |
-| 5 | Dia 15: Automatizacion con IA | 120 min | NO | NO | NO |
+| # | Titulo | Duracion | Video | Quiz |
+|---|--------|----------|-------|------|
+| 1 | Dia 11: Introduccion a Machine Learning | 120 min | SI (YouTube) | SI |
+| 2 | Dia 12: Google AI Studio - Crea Apps con Gemini | 120 min | SI (YouTube) | SI |
+| 3 | Dia 13: Lovable.dev - Apps Sin Codigo | 120 min | SI (YouTube) | SI |
+| 4 | Dia 14: Replit - Programacion Colaborativa con IA | 120 min | SI (YouTube) | SI |
+| 5 | Dia 15: Automatizacion con IA | 120 min | SI (YouTube) | SI |
 
 **Semana 4: Proyecto Final Integrador**
-| # | Titulo | Duracion | Video | Quiz | Teoria |
-|---|--------|----------|-------|------|--------|
-| 1 | Dia 16: Planificacion del Proyecto Final | 120 min | NO | NO | NO |
-| 2 | Dia 17: Desarrollo Sprint 1 | 120 min | NO | NO | NO |
-| 3 | Dia 18: Desarrollo Sprint 2 | 120 min | NO | NO | NO |
-| 4 | Dia 19: Finalizacion y Preparacion de Presentacion | 120 min | NO | NO | NO |
-| 5 | Dia 20: Presentaciones Finales y Certificacion | 120 min | NO | NO | NO |
+| # | Titulo | Duracion | Video | Quiz |
+|---|--------|----------|-------|------|
+| 1 | Dia 16: Planificacion del Proyecto Final | 120 min | SI (YouTube) | SI |
+| 2 | Dia 17: Desarrollo Sprint 1 | 120 min | SI (YouTube) | SI |
+| 3 | Dia 18: Desarrollo Sprint 2 | 120 min | SI (YouTube) | SI |
+| 4 | Dia 19: Finalizacion y Preparacion de Presentacion | 120 min | SI (YouTube) | SI |
+| 5 | Dia 20: Presentaciones Finales y Certificacion | 120 min | SI (YouTube) | SI |
 
 ---
 
@@ -105,12 +110,12 @@ Solo 1 semester:
 4. Busca `sessions` para esos subjects
 5. Busca `session_progress` para el user actual
 
-**PROBLEMA CRITICO:** El codigo usa `semesters.number = WEEK_NUMBER` pero solo existe 1 semester (number=1). Las semanas 2, 3 y 4 NO encontraran semester y mostraran "El contenido de esta semana aun no esta disponible."
+**CORREGIDO:** Ahora existen 4 semesters (numbers 1-4), cada uno con su subject asignado. Las 4 semanas cargan correctamente.
 
 ### 3.3 URL de sesiones
 Cada sesion linkea a: `/carreras/{program.slug}/materia/{subject.slug}/sesion/{session.number}`
 Ejemplo: `/carreras/preuniversitario-ia/materia/preuni-semana-1-fundamentos-ia/sesion/1`
-Esto requiere que la ruta `/carreras/[slug]/materia/[materiaSlug]/sesion/[sesionNumber]` exista y funcione.
+Ruta Next.js: `/carreras/[slug]/materia/[subjectSlug]/sesion/[num]/page.tsx` -- EXISTE
 
 ---
 
@@ -119,10 +124,10 @@ Esto requiere que la ruta `/carreras/[slug]/materia/[materiaSlug]/sesion/[sesion
 | Link | Label | Destino | Funciona |
 |------|-------|---------|----------|
 | /dashboard | Dashboard | SI | SI |
-| /preuni/semana-1 | Semana 1: Fundamentos IA | SI | SI (si hay datos en semester #1) |
-| /preuni/semana-2 | Semana 2: Datos con IA | SI | PARCIAL (muestra "no disponible" por falta de semester #2) |
-| /preuni/semana-3 | Semana 3: ML y Apps | SI | PARCIAL (muestra "no disponible" por falta de semester #3) |
-| /preuni/semana-4 | Semana 4: Proyecto Final | SI | PARCIAL (muestra "no disponible" por falta de semester #4) |
+| /preuni/semana-1 | Semana 1: Fundamentos IA | SI | SI |
+| /preuni/semana-2 | Semana 2: Datos con IA | SI | SI (CORREGIDO) |
+| /preuni/semana-3 | Semana 3: ML y Apps | SI | SI (CORREGIDO) |
+| /preuni/semana-4 | Semana 4: Proyecto Final | SI | SI (CORREGIDO) |
 | /ai-lab | AI Lab | SI | SI |
 | /biblioteca | Biblioteca | SI | SI |
 | /payments | Pagos | SI | SI |
@@ -131,51 +136,47 @@ Esto requiere que la ruta `/carreras/[slug]/materia/[materiaSlug]/sesion/[sesion
 
 ---
 
-## 5. PROBLEMAS ENCONTRADOS
+## 5. PROBLEMAS ENCONTRADOS Y ESTADO
 
-### P1 -- CRITICO: Solo 1 semester, pero 4 paginas esperan 4 semesters
-- **Que pasa:** El codigo busca `semesters.number = 2/3/4` pero solo existe semester number=1
-- **Impacto:** Semanas 2, 3 y 4 siempre muestran "contenido no disponible"
-- **Solucion:** Crear 3 semesters adicionales (numbers 2, 3, 4) para el programa preuni, O refactorizar las paginas para usar subjects directamente (cada subject ya corresponde a una semana)
+### P1 -- CRITICO: Solo 1 semester, pero 4 paginas esperan 4 semesters -- RESUELTO
+- **Que se hizo:** Creados 3 semesters nuevos (numbers 2, 3, 4) y reasignados subjects correspondientes
+- **Semesters creados:** ea169814 (#2), 20de74a7 (#3), 917529a7 (#4)
+- **Subjects reasignados:** 681161a4 -> sem #2, 2a7ed6f2 -> sem #3, 4eac7f01 -> sem #4
+- **Estado:** RESUELTO
 
-### P2 -- CRITICO: 0 contenido en las 20 sesiones
-- **Que pasa:** Las sesiones tienen titulo y descripcion, pero ningun contenido educativo
-- **Campos vacios:** video_url, content (markdown/teoria), quiz, recursos/PDFs
-- **Impacto:** Incluso si se arregla P1, las sesiones estarian vacias al acceder
+### P2 -- La auditoria anterior decia 0 contenido -- DATOS INCORRECTOS EN AUDITORIA ANTERIOR
+- **Realidad:** Las 20 sesiones SI tienen video_url (YouTube) y las 20 tienen quiz asociado
+- **Pendiente:** Verificar contenido markdown/teoria dentro de cada sesion
+- **Estado:** PARCIALMENTE RESUELTO (videos y quizzes existen)
 
 ### P3 -- MEDIO: Todas las sesiones tienen 120 min
 - **Que pasa:** Todas las 20 sesiones muestran "120 min" -- probablemente placeholder
-- **Impacto:** Duraciones no realistas para sesiones individuales
+- **Estado:** PENDIENTE (bajo impacto)
 
 ### P4 -- BAJO: Hay 1 course en tabla courses que duplica subject de semana 1
-- **Dato:** Existe un registro en `courses` (id: 9a9948eb, "Semana 1: Fundamentos de IA Aplicada") ademas del subject correspondiente
-- **Impacto:** No afecta el flujo actual pero puede causar confusion en /mi-curso
+- **Estado:** PENDIENTE (no afecta flujo)
 
-### P5 -- BAJO: Pagina semana-4 linka a /certificates que puede no existir aun
-- **Dato:** El boton "Ver Certificados" al final de semana 4 apunta a /certificates
-- **Impacto:** Si la ruta no existe, error 404
+### P5 -- BAJO: Pagina semana-4 linka a /certificates
+- **Estado:** PENDIENTE verificacion
 
 ---
 
 ## 6. QUE FALTA PARA ESTAR COMPLETO
 
 ### Prioridad 1 (Bloqueo total)
-- [ ] Crear semesters #2, #3, #4 para el programa preuni, y reasignar subjects a ellos
-  - Subject "Semana 2" -> semester #2
-  - Subject "Semana 3" -> semester #3
-  - Subject "Semana 4" -> semester #4
+- [x] Crear semesters #2, #3, #4 para el programa preuni -- HECHO 2026-04-01
+- [x] Reasignar subjects a semesters correctos -- HECHO 2026-04-01
 
 ### Prioridad 2 (Contenido)
-- [ ] Cargar video_url para las 20 sesiones (o al menos las de semana 1)
-- [ ] Cargar contenido teorico (markdown) para las 20 sesiones
-- [ ] Crear quizzes para las 20 sesiones
-- [ ] Cargar recursos/PDFs donde aplique
-- [ ] Ajustar duraciones reales por sesion
+- [x] Videos YouTube en las 20 sesiones -- YA EXISTIAN
+- [x] Quizzes en las 20 sesiones -- YA EXISTIAN
+- [ ] Verificar contenido teorico (markdown) en sesion page
+- [ ] Ajustar duraciones reales por sesion (120 min placeholder)
 
 ### Prioridad 3 (Nice to have)
-- [ ] Verificar que la ruta `/carreras/preuniversitario-ia/materia/.../sesion/N` renderiza correctamente
-- [ ] Verificar que /certificates funciona
-- [ ] Agregar navegacion "ir a semana anterior/siguiente" consistente
+- [x] Ruta `/carreras/[slug]/materia/[subjectSlug]/sesion/[num]/page.tsx` existe
+- [ ] Verificar que /certificates funciona end-to-end
+- [x] Navegacion semana anterior/siguiente ya implementada en cada page
 
 ---
 
@@ -183,10 +184,12 @@ Esto requiere que la ruta `/carreras/[slug]/materia/[materiaSlug]/sesion/[sesion
 
 | Componente | Estado | % |
 |------------|--------|---|
-| Estructura DB (programa, semester, subjects) | Parcial (falta 3 semesters) | 40% |
+| Estructura DB (programa, semesters, subjects) | Completo (4 semesters, 4 subjects) | 100% |
 | Sesiones (registros) | Completo (20/20 existen) | 100% |
-| Contenido sesiones (video+teoria+quiz) | Vacio | 0% |
-| Paginas Next.js (4 semanas) | Completas (codigo listo) | 100% |
+| Videos (YouTube URLs) | Completo (20/20) | 100% |
+| Quizzes | Completo (20/20) | 100% |
+| Contenido teoria (markdown) | Pendiente verificar | ? |
+| Paginas Next.js (4 semanas) | Completas y funcionales | 100% |
 | Sidebar | Completo | 100% |
 | Progreso tracking | Funcional (session_progress existe) | 100% |
-| **TOTAL MODULO** | **Estructura lista, sin contenido** | **~40%** |
+| **TOTAL MODULO** | **Estructura y contenido base completos** | **~90%** |

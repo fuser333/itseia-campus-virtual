@@ -54,7 +54,7 @@ ruc_digits = np.random.choice([2,6,9], n, p=[0.6,0.3,0.1])  # tipo contribuyente
 ventas = np.random.lognormal(11, 1.5, n)
 diferencia_iva = np.random.normal(0, 0.15, n)       # diferencia declarada vs calculada
 ratio_gastos = np.random.uniform(0.3, 1.2, n)       # gastos/ventas
-anos_en_sistema = np.random.randint(1, 20, n)
+años_en_sistema = np.random.randint(1, 20, n)
 num_empleados_dec = np.random.randint(0, 200, n)
 cambios_rep_legal = np.random.randint(0, 5, n)
 declaraciones_tardias = np.random.randint(0, 12, n)
@@ -64,7 +64,7 @@ log_odds = (
     -4.0
     + 2.5 * np.abs(diferencia_iva)
     + 1.5 * (ratio_gastos > 0.95).astype(float)
-    - 0.08 * anos_en_sistema
+    - 0.08 * años_en_sistema
     + 0.3 * cambios_rep_legal
     + 0.15 * declaraciones_tardias
     + np.random.normal(0, 0.8, n)
@@ -77,7 +77,7 @@ df = pd.DataFrame({
     "ventas_log":          np.log1p(ventas),
     "diferencia_iva_abs":  np.abs(diferencia_iva),
     "ratio_gastos":        ratio_gastos.round(4),
-    "anos_sistema":        anos_en_sistema,
+    "años_sistema":        años_en_sistema,
     "num_empleados":       num_empleados_dec,
     "cambios_rep_legal":   cambios_rep_legal,
     "declaraciones_tardias": declaraciones_tardias,

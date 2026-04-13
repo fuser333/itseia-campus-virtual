@@ -191,7 +191,7 @@ Copilot en Word trabaja con tu documento pero no tiene conocimiento especifico d
 ```
 Redacta un contrato de trabajo a plazo fijo bajo el Codigo de Trabajo ecuatoriano con:
 - Cargo: [CARGO]
-- Plazo: [N] meses (maximo 2 anos segun art. 14 CT)
+- Plazo: [N] meses (maximo 2 años segun art. 14 CT)
 - Remuneracion: $[MONTO] USD mensuales + beneficios de ley
 - Horario: [HORARIO]
 - Clausula de confidencialidad laboral

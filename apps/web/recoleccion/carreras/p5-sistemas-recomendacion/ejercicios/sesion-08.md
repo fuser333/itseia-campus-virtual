@@ -66,7 +66,7 @@ productos = pd.DataFrame({
         # Aceites y plantas
         'Aceite_Palma_Refinado', 'Aceite_Rosas_Esencial', 'Extracto_Cat_Claw_Organico',
         'Sangre_Drago_Certificada', 'Aceite_Aguacate_Cold_Press',
-        # Granos andinos
+        # Graños andinos
         'Quinua_Blanca_Chimborazo', 'Amaranto_Organico_Imbabura', 'Chocho_Tostado_Snack',
         'Chia_Organica_Certificada',
         # Conservas y procesados
@@ -85,7 +85,7 @@ productos = pd.DataFrame({
     ][:60],
     'categoria': np.random.choice(
         ['Frutas_Tropicales', 'Cacao_Chocolate', 'Cafe', 'Flores', 'Mariscos',
-         'Artesanias', 'Granos_Andinos', 'Aceites_Plantas', 'Procesados', 'Superfoods'],
+         'Artesanias', 'Graños_Andinos', 'Aceites_Plantas', 'Procesados', 'Superfoods'],
         60
     ),
     'precio_usd_kg': np.round(np.random.uniform(2, 85, 60), 2),

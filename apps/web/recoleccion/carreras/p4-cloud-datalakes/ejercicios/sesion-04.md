@@ -260,4 +260,4 @@ Despues de leer la respuesta:
 
 ## Reto extra
 
-Construye un pipeline PySpark que procese el Registro Civil de Ecuador: lee los datos de nacimientos, matrimonios y defunciones (simulados) de 20 anos, calcula indicadores demograficos (tasa natalidad, nupcialidad, mortalidad) por canton y anio, detecta anomalias estadisticas (cantones con mortalidad 3+ desviaciones sobre la media), y genera un reporte HTML automatico con Plotly. Despliega en Google Dataproc con un notebook Jupyter.
+Construye un pipeline PySpark que procese el Registro Civil de Ecuador: lee los datos de nacimientos, matrimonios y defunciones (simulados) de 20 años, calcula indicadores demograficos (tasa natalidad, nupcialidad, mortalidad) por canton y anio, detecta anomalias estadisticas (cantones con mortalidad 3+ desviaciones sobre la media), y genera un reporte HTML automatico con Plotly. Despliega en Google Dataproc con un notebook Jupyter.

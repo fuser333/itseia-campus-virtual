@@ -85,7 +85,7 @@ print(f"\nCiudad mas grande: {df.loc[df['Poblacion'].idxmax(), 'Ciudad']}")
 ```
 Ejecuta y documenta el resultado.
 
-**Tarea 6 — ElevenLabs:** Genera un audio de 30 segundos con la voz de un "asesor educativo" leyendo: "ITSEIA es el primer instituto especializado en Inteligencia Artificial del Ecuador. En 2.5 anos, nuestros graduados tienen empleabilidad del 92%." Descarga el MP3.
+**Tarea 6 — ElevenLabs:** Genera un audio de 30 segundos con la voz de un "asesor educativo" leyendo: "ITSEIA es el primer instituto especializado en Inteligencia Artificial del Ecuador. En 2.5 años, nuestros graduados tienen empleabilidad del 92%." Descarga el MP3.
 
 ### Parte C — Mapa de flujos de trabajo
 

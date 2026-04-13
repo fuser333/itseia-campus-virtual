@@ -141,4 +141,4 @@ print(f"MAPE: {mape:.2f}%")
 
 ## Reto extra
 
-Descarga del BCE (bce.fin.ec) la serie real del ICC Ecuador o del Indice de Precios al Consumidor (IPC) de los ultimos 5 anos. Aplica la descomposicion y el suavizamiento exponencial. Luego investiga el modelo **Holt-Winters** (triple exponential smoothing) que captura tanto tendencia como estacionalidad. Implementalo con statsmodels y compara su MAPE contra el modelo simple. ¿Vale la pena la complejidad adicional?
+Descarga del BCE (bce.fin.ec) la serie real del ICC Ecuador o del Indice de Precios al Consumidor (IPC) de los ultimos 5 años. Aplica la descomposicion y el suavizamiento exponencial. Luego investiga el modelo **Holt-Winters** (triple exponential smoothing) que captura tanto tendencia como estacionalidad. Implementalo con statsmodels y compara su MAPE contra el modelo simple. ¿Vale la pena la complejidad adicional?

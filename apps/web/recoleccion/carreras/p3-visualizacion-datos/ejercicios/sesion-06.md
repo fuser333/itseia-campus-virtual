@@ -29,7 +29,7 @@ import numpy as np
 np.random.seed(2024)
 
 # Datos de ventas de una empresa importadora ecuatoriana (ficticia)
-# Representa una empresa mediana con 3 anos de operacion
+# Representa una empresa mediana con 3 años de operacion
 
 provincias = {
     'Pichincha': 0.28, 'Guayas': 0.32, 'Azuay': 0.10,

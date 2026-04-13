@@ -11,7 +11,7 @@
 
 ## B. MEET V2 (itseia.ai/meet/) — PENDIENTE SUBIR
 1. [x] Banner "Presencial-Online" + plataforma virtual
-2. [x] Corregir "anos" → "años"
+2. [x] Corregir "años" → "años"
 3. [ ] Boton grande "Ver toda la informacion" → itseia.ai/informacion/
 4. [ ] Verificar que funciona antes de subir
 

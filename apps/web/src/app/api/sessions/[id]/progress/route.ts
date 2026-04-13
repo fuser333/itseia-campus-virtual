@@ -53,10 +53,10 @@ export async function POST(
       );
     }
 
-    // ── 3. Verificar que la sesion existe ──
+    // ── 3. Verificar que la sesion existe + contenido disponible ──
     const { data: session, error: sessionError } = await supabaseAdmin
       .from("sessions")
-      .select("id")
+      .select("id, video_url, slides_url, theory_markdown")
       .eq("id", sessionId)
       .single();
 
@@ -66,6 +66,39 @@ export async function POST(
         { status: 404 }
       );
     }
+
+    // Check what content actually exists for this session
+    const [quizExists, assignmentExists] = await Promise.all([
+      supabaseAdmin
+        .from("quizzes")
+        .select("id", { count: "exact", head: true })
+        .eq("session_id", sessionId)
+        .eq("is_active", true),
+      supabaseAdmin
+        .from("assignments")
+        .select("id", { count: "exact", head: true })
+        .eq("session_id", sessionId)
+        .eq("is_active", true),
+    ]);
+
+    const hasVideo = !!session.video_url;
+    const hasSlides = !!session.slides_url;
+    const hasTheory = !!session.theory_markdown;
+    const hasQuiz = (quizExists.count ?? 0) > 0;
+    const hasAssignment = (assignmentExists.count ?? 0) > 0;
+
+    // Helper: check if all APPLICABLE completion criteria are met.
+    // If a session has no quiz/slides/assignment, those fields auto-pass.
+    const isCompleted = (state: Record<string, unknown>): boolean => {
+      if (hasVideo && !(state.video_watched)) return false;
+      if (hasSlides && !(state.slides_viewed)) return false;
+      if (hasTheory && !(state.theory_read)) return false;
+      if (hasQuiz && !(state.quiz_passed)) return false;
+      if (hasAssignment && !(state.assignment_submitted)) return false;
+      if (!(state.ai_lab_used)) return false;
+      // At least ONE content type must exist and be completed
+      return (hasVideo || hasSlides || hasTheory);
+    };
 
     // ── 4. Check existing progress ──
     const { data: existingProgress } = await supabaseAdmin
@@ -83,14 +116,8 @@ export async function POST(
       // Update existing record
       const merged = { ...existing, ...updateFields, updated_at: new Date().toISOString() };
 
-      // Check if all completion criteria are met
-      const completed =
-        (merged.video_watched || false) &&
-        (merged.slides_viewed || false) &&
-        (merged.theory_read || false) &&
-        (merged.quiz_passed || false) &&
-        (merged.assignment_submitted || false) &&
-        (merged.ai_lab_used || false);
+      // Check if all APPLICABLE completion criteria are met
+      const completed = isCompleted(merged);
 
       const updatePayload: Record<string, unknown> = {
         ...updateFields,
@@ -118,29 +145,23 @@ export async function POST(
       }
       result = data;
     } else {
-      // Insert new record
+      // Insert new record — auto-mark N/A fields as true
       const insertPayload: Record<string, unknown> = {
         session_id: sessionId,
         user_id: user.id,
-        video_watched: false,
+        video_watched: !hasVideo,       // auto-true if no video
         video_watch_seconds: 0,
-        slides_viewed: false,
-        theory_read: false,
-        quiz_passed: false,
-        assignment_submitted: false,
+        slides_viewed: !hasSlides,       // auto-true if no slides
+        theory_read: !hasTheory,         // auto-true if no theory
+        quiz_passed: !hasQuiz,           // auto-true if no quiz
+        assignment_submitted: !hasAssignment, // auto-true if no assignment
         ai_lab_used: false,
         completed: false,
         ...updateFields,
       };
 
       // Check completion
-      const completed =
-        (insertPayload.video_watched as boolean) &&
-        (insertPayload.slides_viewed as boolean) &&
-        (insertPayload.theory_read as boolean) &&
-        (insertPayload.quiz_passed as boolean) &&
-        (insertPayload.assignment_submitted as boolean) &&
-        (insertPayload.ai_lab_used as boolean);
+      const completed = isCompleted(insertPayload);
 
       if (completed) {
         insertPayload.completed = true;

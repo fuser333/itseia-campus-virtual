@@ -180,10 +180,10 @@ El panel docente tiene **sidebar propio** (NO usa SidebarWrapper global). Defini
 4. **Horarios de tutoria:** Estaticos (hardcoded). No hay tabla para gestionarlos dinamicamente.
 
 ### Mejoras recomendadas:
-1. **Tutorias con calendario real:** Actualmente los horarios son hardcoded. Conectar con tabla de disponibilidad docente.
+1. **Tutorias con calendario real:** Actualmente los horarios son hardcoded (con nota de "pronto gestion desde calendario"). Conectar con tabla de disponibilidad docente. Horarios ajustados a pre-vespertino (15:00-17:00).
 2. **Notificaciones de mensajes:** El chat funciona pero no hay notificaciones push/email cuando llega un mensaje nuevo.
 3. **Admin de capacitacion docente:** Existe /admin/docentes/capacitacion para ver progreso de todos los docentes, pero depende de que haya datos.
-4. **ForumBadge en sidebar:** El nav incluye badge para "Mis Materias" (withBadge: true) que usa ForumBadge — verificar que muestre conteo correcto.
+4. ~~**ForumBadge en sidebar:**~~ **RESUELTO 2026-04-01** — Reemplazado ForumBadge por PendingSubmissionsBadge. El badge ahora muestra entregas pendientes de calificar y esta en "Calificar Entregas" (no en "Mis Materias").
 
 ---
 
@@ -197,10 +197,10 @@ El panel docente tiene **sidebar propio** (NO usa SidebarWrapper global). Defini
 | AttendanceReport | components/attendance/ | Matriz de asistencia |
 | AttendanceAlert | components/attendance/ | Alertas inasistencia |
 | AttendanceExport | components/attendance/ | Exportar asistencia |
-| ForumBadge | components/forums/ | Badge en sidebar |
+| PendingSubmissionsBadge | components/teacher/ | Badge entregas pendientes en sidebar |
 
 ---
 
 ## VEREDICTO
 
-**Estado: 90% completo.** El panel docente es el modulo mas extenso con 12 secciones funcionales, sidebar propio, y multiples features (asistencia, entregas, progreso, comunicacion, capacitacion CES). Solo falta uso real para poblar tablas de mensajes, anuncios y capacitacion. Las tutorias son estaticas.
+**Estado: 93% completo.** El panel docente es el modulo mas extenso con 12 secciones funcionales, sidebar propio, y multiples features (asistencia, entregas, progreso, comunicacion, capacitacion CES). Badge de sidebar corregido (PendingSubmissionsBadge en Calificar Entregas). Tutorias con horarios ajustados y nota de futuro calendario. Solo falta uso real para poblar tablas de mensajes, anuncios y capacitacion.

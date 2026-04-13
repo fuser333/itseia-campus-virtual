@@ -226,7 +226,7 @@ plt.tight_layout()
 plt.show()
 
 print("\nInterpretacion geometrica:")
-print("Usuarios y Items cercanos en el espacio latente = alta compatibilidad")
+print("Usuarios y Items cercaños en el espacio latente = alta compatibilidad")
 print("Los factores latentes NO son interpretables directamente")
 print("  (pueden ser 'factor de aventura', 'factor economico', etc.)")
 ```

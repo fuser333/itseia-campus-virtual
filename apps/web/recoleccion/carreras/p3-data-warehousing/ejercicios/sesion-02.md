@@ -151,7 +151,7 @@ for i in range(365):
 
 # Dim Producto
 productos_data = [
-    (1,"SKU-001","Arroz Diana 1kg","Abarrotes","Granos","Diana","Ecuador",1.25),
+    (1,"SKU-001","Arroz Diana 1kg","Abarrotes","Graños","Diana","Ecuador",1.25),
     (2,"SKU-002","Aceite Girasol 1L","Abarrotes","Aceites","La Favorita","Ecuador",3.45),
     (3,"SKU-003","Leche Toni 1L","Lacteos","Leche","Toni","Ecuador",1.15),
     (4,"SKU-004","Pollo entero 1kg","Carnes","Pollo","Pronaca","Ecuador",4.20),

@@ -158,7 +158,7 @@ Ejemplo sin formula (resultado generico):
 "Dame informacion sobre el impuesto a la renta en Ecuador"
 
 Ejemplo con formula (resultado especifico):
-"Actua como un contador tributario con 10 anos de experiencia en Ecuador. Tu tarea es explicarle a un empresario PYME con escasa formacion financiera como funciona el impuesto a la renta para personas naturales obligadas a llevar contabilidad. La respuesta debe estar en formato de lista numerada con ejemplos numericos concretos, maximo 5 puntos."
+"Actua como un contador tributario con 10 años de experiencia en Ecuador. Tu tarea es explicarle a un empresario PYME con escasa formacion financiera como funciona el impuesto a la renta para personas naturales obligadas a llevar contabilidad. La respuesta debe estar en formato de lista numerada con ejemplos numericos concretos, maximo 5 puntos."
 
 La diferencia en calidad es consistente y significativa.
 

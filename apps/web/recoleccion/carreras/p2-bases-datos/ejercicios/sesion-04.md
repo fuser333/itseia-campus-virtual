@@ -197,7 +197,7 @@ Despues de leer la respuesta:
 
 - `INNER JOIN` retorna solo las filas que tienen coincidencia en ambas tablas; si un registro no tiene pareja, desaparece del resultado.
 - `LEFT JOIN` garantiza que todas las filas de la tabla izquierda aparezcan aunque no tengan coincidencia en la tabla derecha (esas columnas llegan como NULL).
-- `IS NULL` despues de un LEFT JOIN es el patron clasico para encontrar registros "huerfanos" (sin relacion).
+- `IS NULL` despues de un LEFT JOIN es el patron clasico para encontrar registros "huerfaños" (sin relacion).
 - `COALESCE(valor, alternativa)` reemplaza NULL por un texto descriptivo en la salida.
 - Un JOIN de 3 o mas tablas se encadena: cada JOIN agrega la siguiente tabla a la combinacion.
 

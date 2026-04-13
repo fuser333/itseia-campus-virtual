@@ -28,14 +28,14 @@ Antes de comenzar, aqui la respuesta al ejercicio del modulo anterior:
 
 **Caso original (con datos identificantes):**
 ```
-Patricia Lema Salgado, cedula 1756234890, 52 anos, docente del colegio
+Patricia Lema Salgado, cedula 1756234890, 52 años, docente del colegio
 Simon Bolivar de Riobamba. Diagnostico: lupus eritematoso sistemico...
 ```
 
 **Version correctamente anonimizada:**
 ```
-Paciente femenino, 50-55 anos, profesional activa en zona urbana de la Sierra.
-Diagnostico: lupus eritematoso sistemico de 3 anos de evolucion, brote leve actual.
+Paciente femenino, 50-55 años, profesional activa en zona urbana de la Sierra.
+Diagnostico: lupus eritematoso sistemico de 3 años de evolucion, brote leve actual.
 Laboratorios recientes: ANA positivo 1:320, anti-dsDNA positivo, C3 bajo.
 Medicacion: hidroxicloroquina 200mg c/12h, prednisona 5mg/dia.
 Requiere documentacion para incapacidad temporal laboral.

@@ -28,7 +28,7 @@
 - [x] 100% automatizacion (FR-001/002) elimina error humano en registros para SENESCYT
 - [x] Reporte de % sesiones realizadas vs planificadas verifica cumplimiento 51% (FR-009)
 - [x] Exportacion CSV/PDF (FR-008) compatible con requerimientos de documentacion SENESCYT
-- [x] Historial 2 anos (FR-010) cubre periodos de seguimiento SENESCYT post-aprobacion
+- [x] Historial 2 años (FR-010) cubre periodos de seguimiento SENESCYT post-aprobacion
 
 ## Feature Readiness
 

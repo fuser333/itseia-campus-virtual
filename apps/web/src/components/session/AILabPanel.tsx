@@ -1,9 +1,9 @@
 "use client";
 
 // ============================================================
-// ITSEIA Academy — AILabPanel (v2 — AI Lab Avanzado)
-// Sub-tabs: Chat | Comparar | Playground | Flashcards
-// Feature: 010-ai-lab-advanced
+// ITSEIA Academy — AILabPanel (v3 — AI Lab + Segundo Cerebro)
+// Sub-tabs: Chat | Comparar | Playground | Flashcards | Cerebro
+// Feature: 010-ai-lab-advanced + segundo-cerebro-mvp
 // ============================================================
 
 import { useState, lazy, Suspense } from "react";
@@ -17,6 +17,7 @@ import {
   GitCompare,
   Code2,
   BookOpen,
+  Brain,
   Loader2,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -31,8 +32,11 @@ const CodePlayground = lazy(
 const FlashcardGenerator = lazy(
   () => import("@/components/ai-lab/FlashcardGenerator")
 );
+const BrainPanel = lazy(
+  () => import("@/components/brain/BrainPanel")
+);
 
-type AILabTab = "chat" | "comparar" | "playground" | "flashcards";
+type AILabTab = "chat" | "comparar" | "playground" | "flashcards" | "cerebro";
 
 interface AILabPanelProps {
   sessionContext: string;
@@ -120,6 +124,12 @@ const TABS: { id: AILabTab; label: string; icon: React.ReactNode; badge?: string
     id: "flashcards",
     label: "Flashcards",
     icon: <BookOpen className="w-3.5 h-3.5" />,
+  },
+  {
+    id: "cerebro",
+    label: "2do Cerebro",
+    icon: <Brain className="w-3.5 h-3.5" />,
+    badge: "Nuevo",
   },
 ];
 
@@ -215,15 +225,18 @@ export default function AILabPanel({
         {/* TAB: Chat */}
         {activeTab === "chat" && (
           <div className="flex flex-col h-full">
-            {/* Herramientas externas (solo en tab chat) */}
-            <div className="bg-[#0A1628]/80 px-3 py-2.5 border-b border-[#1F2F58]/30">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-[10px] font-semibold uppercase tracking-widest text-[#73B8E7]/70">
-                  Practica con estas herramientas
-                </span>
+            {/* Header con boton copiar contexto */}
+            <div className="bg-[#0A1628]/80 px-3 py-2 border-b border-[#1F2F58]/30">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5 text-[#FBBC0C]" />
+                  <span className="text-[11px] font-semibold text-[#FBBC0C] uppercase tracking-wider">
+                    Tutor IA ITSEIA
+                  </span>
+                </div>
                 <button
                   onClick={handleCopyContext}
-                  title="Copia el contexto de la sesion"
+                  title="Copia el contexto de la sesion para usar en cualquier herramienta IA"
                   className={cn(
                     "flex items-center gap-1.5 px-2 py-1 rounded-lg text-[10px] font-medium transition-all border",
                     copied
@@ -244,41 +257,6 @@ export default function AILabPanel({
                   )}
                 </button>
               </div>
-              <div className="flex items-center gap-1.5 flex-wrap">
-                {EXTERNAL_TOOLS.map((tool) => (
-                  <a
-                    key={tool.id}
-                    href={tool.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    title={`Abrir ${tool.name}`}
-                    className={cn(
-                      "flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg border border-[#1F2F58]/40 transition-all",
-                      "text-gray-300 text-[11px] font-medium",
-                      "bg-[#1F2F58]/25 cursor-pointer select-none",
-                      tool.hoverBg,
-                      tool.borderHover,
-                      "hover:text-white"
-                    )}
-                  >
-                    <span style={{ color: tool.color }}>{tool.icon}</span>
-                    <span>{tool.name}</span>
-                    <ExternalLink className="w-2.5 h-2.5 opacity-40" />
-                  </a>
-                ))}
-              </div>
-            </div>
-
-            {/* Separador con etiqueta */}
-            <div className="flex items-center gap-2 px-3 py-1.5 bg-[#0A1628]/60 border-b border-[#1F2F58]/40">
-              <div className="flex-1 h-px bg-[#1F2F58]/50" />
-              <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-[#1F2F58]/40 border border-[#1F2F58]/50">
-                <Sparkles className="w-3 h-3 text-[#FBBC0C]" />
-                <span className="text-[10px] font-semibold text-[#FBBC0C] uppercase tracking-wider">
-                  Tutor IA ITSEIA
-                </span>
-              </div>
-              <div className="flex-1 h-px bg-[#1F2F58]/50" />
             </div>
 
             {/* Chat panel */}
@@ -334,7 +312,20 @@ export default function AILabPanel({
             )}
           </div>
         )}
+
+        {/* TAB: Segundo Cerebro */}
+        {activeTab === "cerebro" && (
+          <Suspense fallback={<LoadingFallback />}>
+            <BrainPanel
+              sessionContext={sessionContext}
+              sessionId={sessionId}
+              sessionTitle={sessionTitle}
+              className="h-full"
+            />
+          </Suspense>
+        )}
       </div>
     </div>
   );
 }
+

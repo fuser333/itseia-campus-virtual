@@ -153,7 +153,7 @@ PDF, y el documento contiene datos correctos de todas las sesiones del periodo.
 - **FR-009**: System MUST incluir en los reportes el porcentaje de sesiones sincronicas
   realizadas vs planificadas para verificar cumplimiento del 51%.
 - **FR-010**: System MUST mantener el historial completo de asistencia por minimo 2
-  anos como evidencia de cumplimiento para SENESCYT.
+  años como evidencia de cumplimiento para SENESCYT.
 
 ### Key Entities
 

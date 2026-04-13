@@ -53,9 +53,9 @@ noticias = [
         "id": 2, "fecha": "2024-03-05",
         "titulo": "Banco Pichincha lanza credito hipotecario al 8.5% para jovenes",
         "cuerpo": "El Banco Pichincha presento su nuevo producto financiero para personas "
-                  "entre 25 y 35 anos. La tasa del 8.5% anual es la mas baja del mercado "
+                  "entre 25 y 35 años. La tasa del 8.5% anual es la mas baja del mercado "
                   "ecuatoriano. Los prestamos van desde 50.000 hasta 150.000 dolares "
-                  "con un plazo de hasta 20 anos. Los clientes deben tener ingresos "
+                  "con un plazo de hasta 20 años. Los clientes deben tener ingresos "
                   "demostrables y buen historial crediticio en el buro de credito.",
         "fuente": "Primicias", "categoria": "finanzas"
     },

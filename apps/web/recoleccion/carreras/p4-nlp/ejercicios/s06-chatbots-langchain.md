@@ -51,7 +51,7 @@ El IESS (Instituto Ecuatoriano de Seguridad Social) atiende a 4 millones de afil
    preguntas = [
        "Cuantos aportes tengo acumulados?",
        "Como saco un turno para el dentista en el IESS?",
-       "Tengo 30 anos de aportes, puedo jubilarme?",
+       "Tengo 30 años de aportes, puedo jubilarme?",
        "Cual es el monto maximo del prestamo quirografario?",
        "Como actualizo mi cuenta bancaria para recibir el fondo de reserva?"
    ]
@@ -84,11 +84,11 @@ El IESS (Instituto Ecuatoriano de Seguridad Social) atiende a 4 millones de afil
    # Simula una conversacion de 8 turnos con contexto acumulado
    turnos = [
        "Hola, soy Juan Pilatasig, quiero consultar mis aportes",
-       "Cuantos anos me faltan para jubilarme? Tengo 52 anos",
+       "Cuantos años me faltan para jubilarme? Tengo 52 años",
        "Y si aporto como voluntario los meses que faltan, funciona?",
        "Cual es el monto minimo de aporte voluntario?",
        "Gracias Juan... espera, yo me llamo Juan, no tu",
-       # Turnos que prueban la memoria: el bot debe recordar el nombre y los 52 anos
+       # Turnos que prueban la memoria: el bot debe recordar el nombre y los 52 años
    ]
    ```
 
@@ -111,7 +111,7 @@ El IESS (Instituto Ecuatoriano de Seguridad Social) atiende a 4 millones de afil
    def calcular_jubilacion(aportes: int, edad: int) -> str:
        """Calcula si un afiliado puede jubilarse."""
        if aportes >= 360 and edad >= 60:
-           return "Cumple requisitos de jubilacion por vejez (360 aportes y 60 anos)."
+           return "Cumple requisitos de jubilacion por vejez (360 aportes y 60 años)."
        elif aportes >= 480:
            return "Puede jubilarse por aportes (480 aportes sin limite de edad)."
        else:
@@ -127,7 +127,7 @@ El IESS (Instituto Ecuatoriano de Seguridad Social) atiende a 4 millones de afil
    ```
 
 5. Prueba el agente con preguntas que requieran usar herramientas:
-   - "Con cedula 1712345678, puedo jubilarme? Tengo 61 anos."
+   - "Con cedula 1712345678, puedo jubilarme? Tengo 61 años."
    - "Cuantos aportes tiene la cedula 0912345678 y cuanto le falta?"
 
 6. Implementa una interfaz simple con `input()` en Colab para chatear en tiempo real:

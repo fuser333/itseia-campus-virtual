@@ -22,7 +22,7 @@ El algoritmo COMPAS era usado por jueces en Estados Unidos para predecir la prob
 Pregunta: Si un algoritmo similar se usara en Ecuador para el sistema de justicia, que grupos poblacionales podrian ser perjudicados y por que?
 
 **Caso Real 2 — Amazon Recruiting (2018)**
-Amazon desarrollo un algoritmo de seleccion de hojas de vida que debia filtrar candidatos para posiciones tecnicas. Despues de 2 anos de desarrollo, lo cancelaron porque penalizaba automaticamente CVs que incluian la palabra "mujeres" (como "presidenta del club de mujeres en tecnologia") y favorecia palabras como "ejecutado" o "liderado" que aparecian mas en CVs de hombres. El algoritmo fue entrenado con los CVs de los empleados contratados en los ultimos 10 anos, una poblacion predominantemente masculina.
+Amazon desarrollo un algoritmo de seleccion de hojas de vida que debia filtrar candidatos para posiciones tecnicas. Despues de 2 años de desarrollo, lo cancelaron porque penalizaba automaticamente CVs que incluian la palabra "mujeres" (como "presidenta del club de mujeres en tecnologia") y favorecia palabras como "ejecutado" o "liderado" que aparecian mas en CVs de hombres. El algoritmo fue entrenado con los CVs de los empleados contratados en los ultimos 10 años, una poblacion predominantemente masculina.
 
 Pregunta: Si Kruger Corp Ecuador (empresa tech lider) usara un sistema similar, cuales grupos serian perjudicados en el contexto del mercado laboral ecuatoriano?
 

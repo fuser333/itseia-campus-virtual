@@ -23,7 +23,7 @@ El Banco Central del Ecuador publica mensualmente el Indice de Precios al Consum
    import pandas as pd
 
    np.random.seed(42)
-   t = np.arange(288)  # 288 meses = 24 anos
+   t = np.arange(288)  # 288 meses = 24 años
    # Serie con tendencia, estacionalidad y ruido
    serie = (2.5 + 0.005*t +           # tendencia
             1.2*np.sin(2*np.pi*t/12) + # estacionalidad anual

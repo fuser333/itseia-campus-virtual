@@ -9,7 +9,7 @@
 Aplicar reconocimiento de patrones y abstraccion para simplificar problemas complejos, identificando lo que es esencial y eliminando lo irrelevante en datasets y procesos ecuatorianos.
 
 ## Contexto (Ecuador)
-El INEC (Instituto Nacional de Estadistica y Censos) del Ecuador publica datos del censo cada 10 anos. Cuando los analistas de datos trabajan con esos millones de registros, no ven personas individuales: buscan patrones (edades, migracion, nivel educativo) y abstraen los datos a modelos que sirven para politicas publicas. Esta es la habilidad central de cualquier profesional de IA.
+El INEC (Instituto Nacional de Estadistica y Censos) del Ecuador publica datos del censo cada 10 años. Cuando los analistas de datos trabajan con esos millones de registros, no ven personas individuales: buscan patrones (edades, migracion, nivel educativo) y abstraen los datos a modelos que sirven para politicas publicas. Esta es la habilidad central de cualquier profesional de IA.
 
 ## Instrucciones (paso a paso)
 

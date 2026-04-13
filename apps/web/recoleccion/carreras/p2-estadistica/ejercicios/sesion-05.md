@@ -84,7 +84,7 @@ Interpreta en lenguaje de negocios:
 
 **Parte 4 — Prediccion**
 
-Un egresado de ITSEIA tiene: 0 anos experiencia, instruccion nivel 2 (Tecnologo), 80 horas de capacitacion IA durante el programa, y si maneja Python (prog=1).
+Un egresado de ITSEIA tiene: 0 años experiencia, instruccion nivel 2 (Tecnologo), 80 horas de capacitacion IA durante el programa, y si maneja Python (prog=1).
 
 ```python
 nuevo = pd.DataFrame({

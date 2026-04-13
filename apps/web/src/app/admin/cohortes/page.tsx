@@ -214,7 +214,7 @@ export default function AdminCohortesPage() {
                 <Input
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
-                  placeholder="Cohorte Abril 2026 — Los Pioneros"
+                  placeholder="Cohorte Abril 2026 — Los Beca H3Ls"
                   className="mt-1"
                 />
               </div>

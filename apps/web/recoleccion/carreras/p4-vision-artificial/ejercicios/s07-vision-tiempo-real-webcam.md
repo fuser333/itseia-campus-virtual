@@ -93,7 +93,7 @@ Corporacion Favorita (dueno de los supermercados AKI, Gran AKI, Mega Santa Maria
            break
    ```
 
-4. NIVEL 3 — Deteccion de manos con MediaPipe:
+4. NIVEL 3 — Deteccion de maños con MediaPipe:
    ```python
    import mediapipe as mp
 
@@ -131,7 +131,7 @@ Corporacion Favorita (dueno de los supermercados AKI, Gran AKI, Mega Santa Maria
                    cv2.putText(frame, f'Mano: {gesto}', (10, 70),
                                cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2)
 
-           cv2.imshow('Detector de Manos - MediaPipe', frame)
+           cv2.imshow('Detector de Maños - MediaPipe', frame)
            if cv2.waitKey(1) & 0xFF == ord('q'):
                break
    ```

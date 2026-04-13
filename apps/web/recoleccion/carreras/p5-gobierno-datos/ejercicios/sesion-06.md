@@ -11,7 +11,7 @@ Implementar los requisitos de compliance de la Ley Organica de Proteccion de Dat
 
 ## Contexto
 
-La LOPDP entro en vigor el 26 de mayo de 2021 en Ecuador y otorgo 2 anos de plazo para cumplimiento. El IESS maneja datos sensibles de 8 millones de afiliados: historial medico, salarios, biometria, condicion familiar. Sin compliance LOPDP, el IESS se expone a multas de hasta el 2% de su facturacion anual (equivalente a decenas de millones de dolares) y responsabilidad penal del Director General. La LOPDP ecuatoriana sigue el modelo GDPR europeo pero con particularidades locales que todo profesional de datos en Ecuador debe dominar. No es opcional: el plazo de cumplimiento ya vencio.
+La LOPDP entro en vigor el 26 de mayo de 2021 en Ecuador y otorgo 2 años de plazo para cumplimiento. El IESS maneja datos sensibles de 8 millones de afiliados: historial medico, salarios, biometria, condicion familiar. Sin compliance LOPDP, el IESS se expone a multas de hasta el 2% de su facturacion anual (equivalente a decenas de millones de dolares) y responsabilidad penal del Director General. La LOPDP ecuatoriana sigue el modelo GDPR europeo pero con particularidades locales que todo profesional de datos en Ecuador debe dominar. No es opcional: el plazo de cumplimiento ya vencio.
 
 ## Instrucciones
 
@@ -116,7 +116,7 @@ df_pii = pd.DataFrame({
     "diagnostico":     np.random.choice(DIAGNOSTICOS, N),   # DATO SENSIBLE
     "huella_template": [f"BIOM{np.random.randint(10000, 99999)}" for _ in range(N)],  # SENSIBLE
     "provincia":       np.random.choice(PROVINCIAS, N),
-    "anos_aportados":  np.random.exponential(8, N).clip(0, 40).round(1),
+    "años_aportados":  np.random.exponential(8, N).clip(0, 40).round(1),
 })
 
 print(f"Dataset IESS generado: {df_pii.shape[0]} registros, {df_pii.shape[1]} columnas")
@@ -176,7 +176,7 @@ df_protegido["rango_salario"]      = df_pii["salario_mensual"].apply(generalizar
 df_analitica = df_protegido[[
     "cedula_hash", "cedula_mask", "email_mask",
     "diagnostico_cifrado", "rango_edad", "rango_salario",
-    "provincia", "anos_aportados"
+    "provincia", "años_aportados"
 ]]
 
 print(f"\nDataset original (con PII)   : {df_pii.shape[1]} columnas")
@@ -214,7 +214,7 @@ rat_iess = [
         "base_legal":       "Obligacion legal (LOPDP Art. 7.e) — mandato IESS",
         "datos_sensibles":  False,
         "destinatarios":    ["SRI", "Ministerio del Trabajo"],
-        "retencion":        "70 anos (vida laboral + jubilacion)",
+        "retencion":        "70 años (vida laboral + jubilacion)",
         "medidas_seguridad": "AES-256, acceso rol-based, auditoria completa",
         "transferencias_internacionales": "No",
     },
@@ -225,7 +225,7 @@ rat_iess = [
         "base_legal":       "Consentimiento explicito + obligacion legal salud (Art. 7.f)",
         "datos_sensibles":  True,  # Datos de salud = SENSIBLES
         "destinatarios":    ["MSP", "prestadores privados autorizados"],
-        "retencion":        "25 anos minimo (normativa MSP)",
+        "retencion":        "25 años minimo (normativa MSP)",
         "medidas_seguridad": "AES-256, cifrado en transito TLS 1.3, acceso medico tratante",
         "transferencias_internacionales": "No (salvo emergencias con consentimiento)",
     },
@@ -236,7 +236,7 @@ rat_iess = [
         "base_legal":       "Consentimiento EXPLICITO por escrito (dato biometrico = sensible)",
         "datos_sensibles":  True,
         "destinatarios":    ["Sistema interno IESS solamente"],
-        "retencion":        "Solo durante vigencia de afiliacion + 5 anos",
+        "retencion":        "Solo durante vigencia de afiliacion + 5 años",
         "medidas_seguridad": "Templates cifrados, no imagen cruda, HSM para claves",
         "transferencias_internacionales": "Prohibido",
     },
@@ -357,7 +357,7 @@ print(f"Acciones inmediatas     : completar DPIA para biometricos, actualizar co
 ## Usa IA para...
 
 > Abre Claude (claude.ai) y escribe:
-> "Soy el Delegado de Proteccion de Datos (DPD) del IESS Ecuador. Tenemos tres situaciones concretas: (1) el IESS quiere compartir datos anonimizados de diagnosticos con la PAHO para estadisticas regionales — ¿es suficiente la anonimizacion que hacemos (eliminar nombre y cedula) para que deje de ser dato personal bajo LOPDP? ¿Como evaluamos el riesgo de re-identificacion?, (2) un afiliado ejercio derecho de cancelacion sobre su historial medico del 2015 — ¿puedo negarme basandome en la normativa de salud que exige retener 25 anos? Cita el articulo especifico de LOPDP y el reglamento de salud, (3) tenemos datos biometricos de 3 millones de afiliados desde 2018 sin consentimiento explicito — ¿como legalizamos este tratamiento historico?"
+> "Soy el Delegado de Proteccion de Datos (DPD) del IESS Ecuador. Tenemos tres situaciones concretas: (1) el IESS quiere compartir datos anonimizados de diagnosticos con la PAHO para estadisticas regionales — ¿es suficiente la anonimizacion que hacemos (eliminar nombre y cedula) para que deje de ser dato personal bajo LOPDP? ¿Como evaluamos el riesgo de re-identificacion?, (2) un afiliado ejercio derecho de cancelacion sobre su historial medico del 2015 — ¿puedo negarme basandome en la normativa de salud que exige retener 25 años? Cita el articulo especifico de LOPDP y el reglamento de salud, (3) tenemos datos biometricos de 3 millones de afiliados desde 2018 sin consentimiento explicito — ¿como legalizamos este tratamiento historico?"
 
 Despues de leer la respuesta:
 - Agrega una celda markdown con el dictamen juridico sintetizado para cada uno de los 3 casos.

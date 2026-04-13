@@ -30,8 +30,8 @@ Cada ano se publican mas de 1 millon de articulos medicos en PubMed. En el campo
 
 El resultado es una paradoja: hay mas evidencia disponible que nunca, pero el medico promedio tiene menos tiempo para leerla. Esto genera:
 
-- Practica clinica basada en lo aprendido en la carrera (que puede tener 10-20 anos de antiguedad)
-- Uso de guias de practica clinica que se revisan cada 2-5 anos (y entre revisiones, la evidencia avanza)
+- Practica clinica basada en lo aprendido en la carrera (que puede tener 10-20 años de antiguedad)
+- Uso de guias de practica clinica que se revisan cada 2-5 años (y entre revisiones, la evidencia avanza)
 - Decision de prescribir lo conocido sobre lo mejor para el paciente especifico
 
 ### Lo que la IA puede hacer aqui
@@ -132,15 +132,15 @@ PubMed sigue siendo la fuente primaria de evidencia medica. La IA no lo reemplaz
 
 ### Tecnica 1: Usar ChatGPT para construir la busqueda de PubMed
 
-Muchos medicos no usan los operadores booleanos de PubMed, lo que limita la calidad de los resultados. ChatGPT puede construir la estrategia de busqueda por ti.
+Muchos medicos no usan los operadores booleaños de PubMed, lo que limita la calidad de los resultados. ChatGPT puede construir la estrategia de busqueda por ti.
 
 **Prompt:**
 ```
 Necesito buscar en PubMed todos los ensayos clinicos randomizados de los
-ultimos 5 anos sobre el uso de GLP-1 agonistas en pacientes diabeticos
+ultimos 5 años sobre el uso de GLP-1 agonistas en pacientes diabeticos
 tipo 2 con obesidad e insuficiencia cardiaca con fraccion de eyeccion reducida.
 
-Genera la estrategia de busqueda completa con operadores booleanos MeSH
+Genera la estrategia de busqueda completa con operadores booleaños MeSH
 para copiar y pegar en PubMed. Incluye filtros de fecha y tipo de estudio.
 ```
 

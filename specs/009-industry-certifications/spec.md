@@ -97,7 +97,7 @@ Cuando un estudiante supera el umbral del simulacro de una certificacion, la pla
 
 ### Edge Cases
 
-- Proveedor actualiza el contenido del examen anualmente (AWS, Google y Microsoft cambian el dominio de objetivos cada 1-2 anos): el sistema debe permitir al admin marcar una certificacion como "Actualizacion pendiente" sin bloquear el acceso a los estudiantes que ya estaban estudiando.
+- Proveedor actualiza el contenido del examen anualmente (AWS, Google y Microsoft cambian el dominio de objetivos cada 1-2 años): el sistema debe permitir al admin marcar una certificacion como "Actualizacion pendiente" sin bloquear el acceso a los estudiantes que ya estaban estudiando.
 - Contenido de certificaciones mayoritariamente en ingles: los 7 tabs pueden ser bilingues (video en ingles con descripcion en espanol, teoria en espanol, quiz en ambos idiomas). El idioma del quiz de simulacro debe coincidir con el idioma del examen oficial.
 - Estudiante que no esta matriculado en ninguna carrera formal pero quiere solo las certificaciones: por definir si se les da acceso (fuera del alcance de esta especificacion, requiere decision comercial).
 - Certificacion descontinuada por el proveedor (ej. GitHub Copilot cambia su esquema de certificacion): el admin puede archivar la certificacion; los estudiantes que la iniciaron mantienen su progreso visible pero no pueden iniciar nuevas.

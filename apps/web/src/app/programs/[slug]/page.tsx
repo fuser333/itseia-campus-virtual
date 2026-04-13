@@ -214,7 +214,7 @@ export default async function ProgramDetailPage({
                 </div>
                 {program.type === "carrera" && (
                   <p className="mt-2 text-xs text-white/40">
-                    Matricula $180 + Pension $220/mes (precio pionero)
+                    Inscripción $49 online · $99 presencial + Pensión $99 online · $149 presencial/mes online · $149/mes presencial (Beca H3L)
                   </p>
                 )}
               </div>

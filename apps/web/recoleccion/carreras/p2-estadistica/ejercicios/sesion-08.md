@@ -11,7 +11,7 @@ Integrar todas las tecnicas estadisticas del periodo en un analisis completo de 
 
 ## Contexto
 
-El INEC Ecuador realiza anualmente la Encuesta Nacional de Actividades de Ciencia, Tecnologia e Innovacion (ACTI). Para este proyecto usamos un dataset sintetico pero fiel a la estructura INEC: 150 empresas ecuatorianas de distintos sectores y tamanos, con sus inversiones y resultados en tecnologia e IA para 2023.
+El INEC Ecuador realiza anualmente la Encuesta Nacional de Actividades de Ciencia, Tecnologia e Innovacion (ACTI). Para este proyecto usamos un dataset sintetico pero fiel a la estructura INEC: 150 empresas ecuatorianas de distintos sectores y tamaños, con sus inversiones y resultados en tecnologia e IA para 2023.
 
 **Variables del dataset:**
 - `empresa_id`: identificador
@@ -40,32 +40,32 @@ n = 150
 
 sectores = np.random.choice(['Manufactura','Servicios','Comercio','TIC','Agroindustria'],
                              n, p=[0.25, 0.30, 0.20, 0.15, 0.10])
-tamanos = np.random.choice(['Micro','Pequena','Mediana','Grande'],
+tamaños = np.random.choice(['Micro','Pequena','Mediana','Grande'],
                             n, p=[0.40, 0.30, 0.20, 0.10])
 
 # Inversion correlacionada con tamano
 inv_base = {'Micro': 2000, 'Pequena': 15000, 'Mediana': 80000, 'Grande': 400000}
-inversion = np.array([np.random.normal(inv_base[t], inv_base[t]*0.3) for t in tamanos]).clip(500)
+inversion = np.array([np.random.normal(inv_base[t], inv_base[t]*0.3) for t in tamaños]).clip(500)
 
 # Empleados TI
 emp_base = {'Micro': 0.5, 'Pequena': 2, 'Mediana': 8, 'Grande': 35}
-empleados_ti = np.array([max(0, int(np.random.normal(emp_base[t], emp_base[t]*0.5))) for t in tamanos])
+empleados_ti = np.array([max(0, int(np.random.normal(emp_base[t], emp_base[t]*0.5))) for t in tamaños])
 
 # Uso de IA (mas probable en TIC y grandes)
 prob_ia = np.where(sectores == 'TIC', 0.75,
-          np.where(tamanos == 'Grande', 0.60,
-          np.where(tamanos == 'Mediana', 0.35, 0.15)))
+          np.where(tamaños == 'Grande', 0.60,
+          np.where(tamaños == 'Mediana', 0.35, 0.15)))
 usa_ia = np.random.binomial(1, prob_ia).astype(bool)
 
 # Productividad
 prod = 2 + 0.00005*inversion + 1.5*usa_ia.astype(int) + np.random.normal(0, 2, n)
 
-exporta = np.random.binomial(1, np.where(tamanos.isin(['Grande','Mediana']) if hasattr(tamanos,'isin')
-                              else np.isin(tamanos, ['Grande','Mediana']), 0.5, 0.2))
+exporta = np.random.binomial(1, np.where(tamaños.isin(['Grande','Mediana']) if hasattr(tamaños,'isin')
+                              else np.isin(tamaños, ['Grande','Mediana']), 0.5, 0.2))
 
 df = pd.DataFrame({
     'sector': sectores,
-    'tamano': tamanos,
+    'tamano': tamaños,
     'inversion_tech_usd': inversion.round(0),
     'empleados_ti': empleados_ti,
     'usa_ia': usa_ia,

@@ -15,7 +15,7 @@ Al finalizar este modulo, podras explicar con tus propias palabras que es la int
 
 ## 1. Por que esto te importa ahora
 
-Hay una pregunta que muchos contadores prefieren no hacerse: "En 5 anos, cuanto de lo que hago hoy lo hara una maquina?"
+Hay una pregunta que muchos contadores prefieren no hacerse: "En 5 años, cuanto de lo que hago hoy lo hara una maquina?"
 
 La respuesta honesta es: una parte importante. Segun McKinsey (2025), el 60% de las tareas de contabilidad general son automatizables con tecnologia existente hoy. Eso no significa que tu trabajo desaparece — significa que cambia. Los contadores que prosperen en 2030 no seran los que saben mas de debitos y creditos, sino los que saben usar la IA para hacer mas trabajo de mayor valor en menos tiempo.
 

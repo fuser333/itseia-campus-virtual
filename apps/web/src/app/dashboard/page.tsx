@@ -54,6 +54,17 @@ export default async function DashboardPage() {
     .eq("id", user.id)
     .single();
 
+  // Redirect by role to the correct module dashboard
+  if (profile?.role === "finanzas") {
+    redirect("/b2b");
+  }
+  if (profile?.role === "docente") {
+    redirect("/teacher");
+  }
+  if (profile?.role === "super_admin" || profile?.role === "admin" || profile?.role === "coordinacion") {
+    redirect("/admin");
+  }
+
   // Fetch enrollments with programs
   const { data: enrollments } = await supabase
     .from("enrollments")

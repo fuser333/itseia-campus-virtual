@@ -147,7 +147,7 @@ No porque la IA sea mas inteligente que ti. Sino porque actua como un colega que
 
 ### Comunicacion con el paciente
 
-Uno de los usos mas infravalorados: generar explicaciones medicas claras, adaptadas al nivel educativo del paciente, en segundos. "Explica la diabetes tipo 2 para una paciente de 55 anos con primaria completa, en terminos simples, 200 palabras." Eso es IA trabajando para ti.
+Uno de los usos mas infravalorados: generar explicaciones medicas claras, adaptadas al nivel educativo del paciente, en segundos. "Explica la diabetes tipo 2 para una paciente de 55 años con primaria completa, en terminos simples, 200 palabras." Eso es IA trabajando para ti.
 
 ### Educacion medica continua
 

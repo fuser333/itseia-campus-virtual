@@ -402,7 +402,7 @@ print("=" * 65)
 
 3. Escribe el modulo Terraform `modules/data-lake` que encapsula S3 + IAM + Glue y puede reutilizarse para distintos proyectos.
 
-4. Implementa el `terraform.tfvars` para 3 ambientes (dev/stg/prod) con distintos tamanos de Redshift cluster.
+4. Implementa el `terraform.tfvars` para 3 ambientes (dev/stg/prod) con distintos tamaños de Redshift cluster.
 
 ## Usa IA para...
 
@@ -420,4 +420,4 @@ print("=" * 65)
 
 ## Reto extra
 
-Construye el modulo Terraform completo para el Data Lake del IESS Ecuador: S3 multi-zona con lifecycle policies de 7 anos (cumplimiento legal), Glue con 5 jobs parametrizados, Redshift Serverless para el DW, IAM roles con minimo privilegio, CloudWatch alarms para costo mensual, y Pipeline CI/CD con GitHub Actions que despliega en dev/stg con auto-aprobacion y en prod requiere aprobacion manual del Tech Lead. Toda la infra en git, zero-click deployment.
+Construye el modulo Terraform completo para el Data Lake del IESS Ecuador: S3 multi-zona con lifecycle policies de 7 años (cumplimiento legal), Glue con 5 jobs parametrizados, Redshift Serverless para el DW, IAM roles con minimo privilegio, CloudWatch alarms para costo mensual, y Pipeline CI/CD con GitHub Actions que despliega en dev/stg con auto-aprobacion y en prod requiere aprobacion manual del Tech Lead. Toda la infra en git, zero-click deployment.

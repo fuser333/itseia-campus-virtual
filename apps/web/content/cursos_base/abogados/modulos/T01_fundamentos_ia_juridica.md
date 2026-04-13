@@ -142,7 +142,7 @@ El output de la IA es un borrador inteligente, no una fuente de derecho. Tratar 
 - Cuantias y tarifas: verificar en normativa actualizada
 
 **Paso 4: Aplicar criterio profesional**
-La IA no conoce a tu cliente, no conoce la realidad del juzgado donde presentaras el escrito, no conoce la relacion previa entre las partes. Tu criterio juridico —construido en anos de estudio y practica— es irreemplazable para la toma de decision final.
+La IA no conoce a tu cliente, no conoce la realidad del juzgado donde presentaras el escrito, no conoce la relacion previa entre las partes. Tu criterio juridico —construido en años de estudio y practica— es irreemplazable para la toma de decision final.
 
 ### Diagrama de flujo: de la tarea al documento
 

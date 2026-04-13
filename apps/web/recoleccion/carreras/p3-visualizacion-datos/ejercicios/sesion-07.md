@@ -11,7 +11,7 @@ Aplicar principios de narrative data visualization para transformar un conjunto 
 
 ## Contexto
 
-Un grafico perfecto tecnica y esteticamente puede fracasar si no cuenta una historia. Los mejores reportes del New York Times, Bloomberg y el INEC no muestran datos: cuentan historias con datos. En Ecuador, el tema del empleo juvenil es critico: mas del 40% de jovenes entre 18 y 24 anos estan en subempleo o desempleo. Como analista, tienes los datos. Tu trabajo es convertirlos en una historia que mueva a la accion.
+Un grafico perfecto tecnica y esteticamente puede fracasar si no cuenta una historia. Los mejores reportes del New York Times, Bloomberg y el INEC no muestran datos: cuentan historias con datos. En Ecuador, el tema del empleo juvenil es critico: mas del 40% de jovenes entre 18 y 24 años estan en subempleo o desempleo. Como analista, tienes los datos. Tu trabajo es convertirlos en una historia que mueva a la accion.
 
 ## Instrucciones
 
@@ -33,12 +33,12 @@ import pandas as pd
 # "El empleo juvenil en Ecuador: una generacion sin oportunidades"
 # Estructura narrativa: Contexto → Tension → Punto de quiebre → Camino de salida
 
-# DATOS (basados en INEC ENEMDU 2019-2024, jovenes 18-24 anos)
+# DATOS (basados en INEC ENEMDU 2019-2024, jovenes 18-24 años)
 anios = [2019, 2020, 2021, 2022, 2023, 2024]
 
 # Tasa de desempleo por grupo etario
-desempleo_jovenes = [9.8, 15.2, 13.6, 10.4, 9.1, 8.7]  # 18-24 anos
-desempleo_adultos = [3.8,  6.2,  5.8,  4.2,  3.6, 3.4]  # 25-54 anos
+desempleo_jovenes = [9.8, 15.2, 13.6, 10.4, 9.1, 8.7]  # 18-24 años
+desempleo_adultos = [3.8,  6.2,  5.8,  4.2,  3.6, 3.4]  # 25-54 años
 
 # Subempleo juvenil (trabajan menos horas o fuera de su campo)
 subempleo_jovenes = [22.4, 29.8, 27.1, 20.6, 18.3, 17.9]
@@ -85,7 +85,7 @@ ax_titulo.text(0.5, 0.75, 'El empleo juvenil en Ecuador',
                transform=ax_titulo.transAxes, fontsize=26,
                color='white', ha='center', fontweight='bold',
                fontfamily='sans-serif')
-ax_titulo.text(0.5, 0.45, 'Los jovenes de 18-24 anos enfrentan una tasa de desempleo',
+ax_titulo.text(0.5, 0.45, 'Los jovenes de 18-24 años enfrentan una tasa de desempleo',
                transform=ax_titulo.transAxes, fontsize=14,
                color=color_texto, ha='center', alpha=0.9)
 ax_titulo.text(0.5, 0.22,
@@ -184,7 +184,7 @@ for bar in bars2:
 
 # ANOTACION: el punto de quiebre con educacion tecnica
 ax3.annotate(
-    'Con Tecnologia Superior en IA:\n$800-$1,200/mes en 2.5 anos',
+    'Con Tecnologia Superior en IA:\n$800-$1,200/mes en 2.5 años',
     xy=(5 + width/2, ingreso_adultos[-1]),
     xytext=(3.8, 750),
     arrowprops=dict(arrowstyle='->', color=color_esperanza, lw=2),

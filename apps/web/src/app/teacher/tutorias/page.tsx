@@ -17,10 +17,12 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
+// TODO: Conectar con tabla de disponibilidad docente (dynamic scheduling)
+// Actualmente estos horarios son referenciales — cada docente coordina con coordinacion
 const HORARIOS = [
-  { dia: "Lunes", hora: "09:00 – 11:00", disponible: true },
-  { dia: "Miercoles", hora: "14:00 – 16:00", disponible: true },
-  { dia: "Viernes", hora: "09:00 – 11:00", disponible: true },
+  { dia: "Lunes", hora: "15:00 – 17:00", disponible: true },
+  { dia: "Miercoles", hora: "15:00 – 17:00", disponible: true },
+  { dia: "Viernes", hora: "15:00 – 17:00", disponible: true },
   { dia: "Sabado", hora: "10:00 – 12:00", disponible: true },
 ];
 
@@ -84,7 +86,9 @@ export default function TutoriasPage() {
           ))}
         </div>
         <p className="mt-2 text-xs text-gray-400">
-          Horarios referencial. Confirma disponibilidad con el coordinador antes de agendar.
+          Horarios referenciales previos al horario vespertino (clases 17:30–21:30).
+          Confirma disponibilidad con el coordinador antes de agendar. Pronto podras
+          gestionar tus horarios directamente desde el calendario del campus.
         </p>
       </div>
 

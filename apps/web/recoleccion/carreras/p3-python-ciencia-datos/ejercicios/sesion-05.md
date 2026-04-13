@@ -42,7 +42,7 @@ plt.rcParams['grid.alpha'] = 0.35
 plt.rcParams['font.size'] = 10
 
 # Datos BCE Ecuador 2010-2024
-anos = list(range(2010, 2025))
+años = list(range(2010, 2025))
 pib = [69235, 79277, 87925, 95130, 101726, 100177, 99938, 104296,
        107562, 108108, 99290, 106168, 115059, 118845, 121200]  # millones USD
 inflacion = [3.56, 4.47, 5.11, 2.73, 3.59, 3.38, 1.12, -0.20,
@@ -64,7 +64,7 @@ print(f"PIB 2024: ${pib[-1]:,.0f} millones USD")
 fig, ax = plt.subplots(figsize=(12, 5))
 
 # Linea principal
-ax.plot(anos, pib, color=NAVY, linewidth=2.5, marker='o',
+ax.plot(años, pib, color=NAVY, linewidth=2.5, marker='o',
         markersize=6, markerfacecolor=YELLOW, markeredgecolor=NAVY,
         label='PIB Ecuador (millones USD)', zorder=3)
 
@@ -75,16 +75,16 @@ ax.axvline(2020, color=CORAL, linestyle='--', linewidth=1, alpha=0.6)
 # Anotar el punto minimo (COVID)
 idx_min = pib.index(min(pib))
 ax.annotate(f'${pib[idx_min]:,.0f}M\n(COVID-19)',
-            xy=(anos[idx_min], pib[idx_min]),
-            xytext=(anos[idx_min] - 2, pib[idx_min] + 5000),
+            xy=(años[idx_min], pib[idx_min]),
+            xytext=(años[idx_min] - 2, pib[idx_min] + 5000),
             arrowprops=dict(arrowstyle='->', color=CORAL),
             fontsize=9, color=CORAL)
 
 # Anotar el punto maximo
 idx_max = pib.index(max(pib))
 ax.annotate(f'${pib[idx_max]:,.0f}M\n(Record)',
-            xy=(anos[idx_max], pib[idx_max]),
-            xytext=(anos[idx_max] - 2, pib[idx_max] - 8000),
+            xy=(años[idx_max], pib[idx_max]),
+            xytext=(años[idx_max] - 2, pib[idx_max] - 8000),
             arrowprops=dict(arrowstyle='->', color=NAVY),
             fontsize=9, color=NAVY)
 
@@ -93,7 +93,7 @@ ax.set_xlabel('Año', fontsize=11)
 ax.set_ylabel('PIB (miles de millones USD)', fontsize=11)
 ax.set_title('Producto Interno Bruto del Ecuador 2010-2024\nFuente: Banco Central del Ecuador', fontsize=12)
 ax.legend(loc='upper left')
-ax.set_xticks(anos)
+ax.set_xticks(años)
 ax.tick_params(axis='x', rotation=45)
 plt.tight_layout()
 plt.show()
@@ -131,11 +131,11 @@ plt.show()
 fig, axes = plt.subplots(1, 2, figsize=(13, 5))
 
 # Scatter inflacion vs desempleo
-colores_puntos = [NAVY if a < 2020 else CORAL for a in anos]
+colores_puntos = [NAVY if a < 2020 else CORAL for a in años]
 scatter = axes[0].scatter(inflacion, desempleo, c=colores_puntos, s=80, zorder=3, alpha=0.85)
 
 # Etiquetas de años en puntos relevantes
-for i, (inf, desemp, ano) in enumerate(zip(inflacion, desempleo, anos)):
+for i, (inf, desemp, ano) in enumerate(zip(inflacion, desempleo, años)):
     if ano in [2010, 2016, 2020, 2023, 2024]:
         axes[0].annotate(str(ano), (inf, desemp),
                          textcoords='offset points', xytext=(5, 4), fontsize=8)
@@ -156,8 +156,8 @@ axes[0].legend(handles=legend_elements, loc='upper right')
 
 # Subgrafico de linea dual: inflacion + desempleo
 ax2_twin = axes[1].twinx()
-l1, = axes[1].plot(anos, inflacion, color=NAVY, linewidth=2, marker='s', markersize=5, label='Inflacion %')
-l2, = ax2_twin.plot(anos, desempleo, color=CORAL, linewidth=2, marker='^', markersize=5, label='Desempleo %')
+l1, = axes[1].plot(años, inflacion, color=NAVY, linewidth=2, marker='s', markersize=5, label='Inflacion %')
+l2, = ax2_twin.plot(años, desempleo, color=CORAL, linewidth=2, marker='^', markersize=5, label='Desempleo %')
 axes[1].set_xlabel('Año')
 axes[1].set_ylabel('Inflacion (%)', color=NAVY)
 ax2_twin.set_ylabel('Desempleo (%)', color=CORAL)

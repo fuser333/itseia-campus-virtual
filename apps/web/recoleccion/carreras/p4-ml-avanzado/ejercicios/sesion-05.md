@@ -11,7 +11,7 @@ Aplicar AutoML y optimizacion sistematica de hiperparametros: Optuna para Bayesi
 
 ## Contexto
 
-Un data scientist en una COAC ecuatoriana tipicamente prueba 3-5 modelos con parametros por defecto. Optuna con 50 trials automaticos explora cientos de combinaciones y encuentra hiperparametros que mejoran el AUC en 5-15 puntos porcentuales — en menos de 1 hora de computo. AutoML democratiza el ML: un analista sin experiencia avanzada puede obtener modelos de calidad comparable a un experto con anos de experiencia.
+Un data scientist en una COAC ecuatoriana tipicamente prueba 3-5 modelos con parametros por defecto. Optuna con 50 trials automaticos explora cientos de combinaciones y encuentra hiperparametros que mejoran el AUC en 5-15 puntos porcentuales — en menos de 1 hora de computo. AutoML democratiza el ML: un analista sin experiencia avanzada puede obtener modelos de calidad comparable a un experto con años de experiencia.
 
 ## Instrucciones
 
@@ -99,7 +99,7 @@ df = pd.DataFrame({
     "plazo_meses":       np.random.choice([12,24,36,48,60,72], N),
     "score_buro":        np.random.normal(650, 100, N).clip(300, 900).round(0),
     "n_creditos_activos":np.random.choice([0,1,2,3,4], N, p=[0.3,0.35,0.2,0.1,0.05]),
-    "anos_cliente":      np.random.exponential(3, N).clip(0, 20).round(1),
+    "años_cliente":      np.random.exponential(3, N).clip(0, 20).round(1),
     "ahorro_mensual":    np.random.lognormal(5.5, 0.8, N).round(2),
     "tiene_garante":     np.random.binomial(1, 0.45, N),
     "tipo_credito":      np.random.choice(range(len(tipos_credito)), N),
@@ -117,7 +117,7 @@ prob_incumpl  = (
     + 0.15 * (df["score_buro"] < 550).astype(float)
     + 0.10 * (df["mora_historica_dias"] > 30).astype(float)
     - 0.08 * df["tiene_garante"]
-    - 0.05 * (df["anos_cliente"] > 3).astype(float)
+    - 0.05 * (df["años_cliente"] > 3).astype(float)
     + np.random.normal(0, 0.05, N)
 ).clip(0.01, 0.99)
 

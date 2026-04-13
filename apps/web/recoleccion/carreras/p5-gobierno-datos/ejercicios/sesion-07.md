@@ -212,7 +212,7 @@ dp_clientes.definir_schema({
     "customer_id":   {"tipo": "UUID",   "nullable": False, "descripcion": "Golden record ID del cliente"},
     "segmento":      {"tipo": "ENUM",   "nullable": False, "valores": ["PERSONAL","PYME","CORPORATIVO"]},
     "riesgo_crediticio": {"tipo": "ENUM", "nullable": True, "valores": ["BAJO","MEDIO","ALTO"]},
-    "antiguedad_anos": {"tipo": "FLOAT", "nullable": False, "descripcion": "Anos como cliente"},
+    "antiguedad_años": {"tipo": "FLOAT", "nullable": False, "descripcion": "Anos como cliente"},
     "nps_score":     {"tipo": "INTEGER","nullable": True,  "descripcion": "Ultimo NPS medido"},
     "fecha_actualizacion": {"tipo": "DATE", "nullable": False},
 })

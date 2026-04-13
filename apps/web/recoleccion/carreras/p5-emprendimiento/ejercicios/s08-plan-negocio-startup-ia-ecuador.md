@@ -11,7 +11,7 @@ Integrar todos los aprendizajes del modulo para producir un plan de negocio ejec
 
 ## Contexto (Ecuador)
 
-Este ejercicio es el cierre del modulo y el producto mas cercano al mundo real que construiras en ITSEIA. Un plan de negocio bien ejecutado es la diferencia entre conseguir $50,000 de un angel inversor o volver a casa con las manos vacias. Los mejores planes de negocio no son documentos de 100 paginas — son documentos de 15-20 paginas extremadamente claros, con numeros defendibles y una narrativa convincente.
+Este ejercicio es el cierre del modulo y el producto mas cercano al mundo real que construiras en ITSEIA. Un plan de negocio bien ejecutado es la diferencia entre conseguir $50,000 de un angel inversor o volver a casa con las maños vacias. Los mejores planes de negocio no son documentos de 100 paginas — son documentos de 15-20 paginas extremadamente claros, con numeros defendibles y una narrativa convincente.
 
 ## Instrucciones
 

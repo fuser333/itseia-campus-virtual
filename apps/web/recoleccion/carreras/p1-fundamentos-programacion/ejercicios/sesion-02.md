@@ -39,7 +39,7 @@ pension_mensual = 220.00
 promedio = 0.0
 beca_porcentaje = 0.15  # 15% de descuento pionero
 
-# Datos booleanos (bool)
+# Datos booleaños (bool)
 es_estudiante_activo = True
 tiene_beca = True
 trabaja = False

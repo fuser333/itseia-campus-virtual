@@ -210,8 +210,8 @@ export default function ApplyPage() {
                     desc: "Acceso a ChatGPT, Claude y Gemini desde el dia 1",
                   },
                   {
-                    title: "Precio Pionero",
-                    desc: "$220/mes — el precio mas accesible del mercado",
+                    title: "Beca H3L",
+                    desc: "$99/mes online · $149/mes presencial — accesible con Beca Corporativa H3L",
                   },
                 ].map((item) => (
                   <div

@@ -68,7 +68,7 @@ Lee la respuesta con atencion y compara con tus respuestas de la Parte B:
 
 ## Que aprendiste
 
-- La **IA existe desde los anos 50** pero el gran salto ocurrio en 2012 con el Deep Learning.
+- La **IA existe desde los años 50** pero el gran salto ocurrio en 2012 con el Deep Learning.
 - Toda la IA de hoy es **ANI** (estrecha): excelente en una tarea, incapaz en otras.
 - **AGI no existe** todavia: ChatGPT parece inteligente general pero tiene limites claros.
 - La IA ya esta en **Ecuador ahora mismo**: banca, redes sociales, apps de transporte, comercio electronico.

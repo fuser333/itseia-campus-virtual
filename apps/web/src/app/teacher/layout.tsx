@@ -15,7 +15,7 @@ import {
   Video,
   MessageSquare,
 } from "lucide-react";
-import { ForumBadge } from "@/components/forums/ForumBadge";
+import { PendingSubmissionsBadge } from "@/components/teacher/PendingSubmissionsBadge";
 
 // ─── Sections that match Sidebar MENU_DOCENTE exactly ─────────────────────────
 
@@ -24,13 +24,13 @@ const TEACHER_NAV_SECTIONS = [
     label: "MIS MATERIAS",
     items: [
       { label: "Dashboard",    href: "/teacher",          icon: LayoutDashboard },
-      { label: "Mis Materias", href: "/teacher/materias", icon: BookOpen, withBadge: true },
+      { label: "Mis Materias", href: "/teacher/materias", icon: BookOpen },
     ],
   },
   {
     label: "GESTION",
     items: [
-      { label: "Calificar Entregas", href: "/teacher/entregas",          icon: ClipboardCheck },
+      { label: "Calificar Entregas", href: "/teacher/entregas",          icon: ClipboardCheck, withBadge: true },
       { label: "Progreso Alumnos",   href: "/teacher/progreso",          icon: BarChart3 },
       { label: "Anuncios",           href: "/teacher/comunicacion",      icon: Megaphone },
       { label: "Programar Clases",   href: "/teacher/programar-clases",  icon: Video },
@@ -108,7 +108,7 @@ export default async function TeacherLayout({
                   >
                     <item.icon className="size-4 shrink-0 text-gray-400" />
                     <span className="flex-1">{item.label}</span>
-                    {"withBadge" in item && item.withBadge && <ForumBadge />}
+                    {"withBadge" in item && item.withBadge && <PendingSubmissionsBadge />}
                   </Link>
                 ))}
               </div>

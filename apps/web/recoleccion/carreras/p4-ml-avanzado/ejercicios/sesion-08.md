@@ -102,7 +102,7 @@ provincias = ["Pichincha","Guayas","Azuay","El Oro","Manabi","Loja","Esmeraldas"
 
 df = pd.DataFrame({
     # Informacion empresa
-    "anos_operacion":    np.random.exponential(7, N).clip(1, 30).round(1),
+    "años_operacion":    np.random.exponential(7, N).clip(1, 30).round(1),
     "empleados":         np.random.lognormal(3.5, 1.0, N).clip(5, 500).round(0),
     "producto_export":   np.random.choice(range(len(productos)), N),
     "destino_export":    np.random.choice(range(len(destinos)), N),
@@ -134,7 +134,7 @@ prob = (
     + 0.12 * (df["endeudamiento_pct"] > 75).astype(float)
     + 0.10 * (df["score_buro"] < 580).astype(float)
     + 0.08 * (df["mora_dias_max"] > 30).astype(float)
-    - 0.06 * (df["anos_operacion"] > 5).astype(float)
+    - 0.06 * (df["años_operacion"] > 5).astype(float)
     - 0.04 * (df["liquidez"] > 1.5).astype(float)
     + 0.06 * (df["ratio_deuda_ventas"] > 0.5).astype(float)
     + np.random.normal(0, 0.04, N)

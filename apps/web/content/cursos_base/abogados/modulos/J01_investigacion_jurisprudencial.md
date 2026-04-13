@@ -130,7 +130,7 @@ Tengo [N] fallos sobre [TEMA JURIDICO] del sistema judicial ecuatoriano.
 Realiza un analisis comparado:
 1. CRITERIO PREDOMINANTE: Cual es la posicion mayoritaria de los tribunales en estos casos?
 2. CRITERIOS DIVERGENTES: Hay posiciones contradictorias? En que tipo de casos cada criterio prevalece?
-3. EVOLUCION: Si los fallos son de diferentes anos, hay alguna evolucion del criterio juridico?
+3. EVOLUCION: Si los fallos son de diferentes años, hay alguna evolucion del criterio juridico?
 4. FACTORES DECISIVOS: Que factores parecen inclinar la decision hacia el actor versus el demandado?
 5. TABLA COMPARADA: Resume en una tabla los casos con columnas: Tribunal | Ano | Decision | Factor determinante
 6. CONCLUSION PARA MI CASO: Con base en estos precedentes, cual es la probabilidad de exito para [ACTOR/DEMANDADO] en mi caso especifico?
@@ -152,7 +152,7 @@ Para ilustrar el flujo completo, trabajemos con un caso tipo frecuente en la pra
 
 ### Paso 2: Busqueda en SATJE
 
-Con esos terminos vas al SATJE. Buscas en la Sala Civil y en los Juzgados de lo Civil (primera instancia). Con "desahucio mora" y filtro por los ultimos 3 anos encontraras un numero manejable de causas relevantes.
+Con esos terminos vas al SATJE. Buscas en la Sala Civil y en los Juzgados de lo Civil (primera instancia). Con "desahucio mora" y filtro por los ultimos 3 años encontraras un numero manejable de causas relevantes.
 
 ### Paso 3: Analisis
 
@@ -176,7 +176,7 @@ Perplexity AI hace busquedas web en tiempo real con citas verificables. Es ideal
 
 Google Scholar indexa articulos academicos y algunos fallos. Util para encontrar articulos de doctrina sobre temas juridicos ecuatorianos que sirven de apoyo argumentativo.
 
-Busca: "[TEMA JURIDICO] Ecuador derecho" + filtra por los ultimos 5 anos.
+Busca: "[TEMA JURIDICO] Ecuador derecho" + filtra por los ultimos 5 años.
 
 ---
 

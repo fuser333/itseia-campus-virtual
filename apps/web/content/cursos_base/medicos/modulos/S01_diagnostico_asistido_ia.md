@@ -111,7 +111,7 @@ Esta es la estructura de prompt que genera mejores resultados para diagnostico:
 Actua como internista con experiencia clinica en medicina de adultos.
 
 PRESENTACION CLINICA:
-- Paciente: [sexo], [rango de edad] anos
+- Paciente: [sexo], [rango de edad] años
 - Motivo de consulta: [principal sintoma, tiempo de evolucion]
 - Sintomas acompanantes: [lista]
 - Signos vitales: [si relevantes]
@@ -139,7 +139,7 @@ a menos que las tengas completamente seguras.
 ```
 Actua como infectologo con experiencia en enfermedades tropicales.
 
-PRESENTACION: Paciente masculino, 28 anos, residente en zona costera ecuatoriana
+PRESENTACION: Paciente masculino, 28 años, residente en zona costera ecuatoriana
 (provincia de Esmeraldas). Fiebre de 39.5C de 4 dias de evolucion, mialgia
 intensa, cefalea frontal, sin tos. Examen: leve hepatomegalia palpable,
 sin signos de irritacion meningea. Plaquetas: 89,000.
@@ -156,7 +156,7 @@ Sugiere examenes disponibles en hospital de primer nivel del MSP.
 ```
 Actua como neumolago con experiencia en medicina de altitud.
 
-PRESENTACION: Paciente femenino, 35 anos, residente en Quito (altitud 2850 msnm).
+PRESENTACION: Paciente femenino, 35 años, residente en Quito (altitud 2850 msnm).
 Tos productiva de 3 semanas, esputo amarillo-verdoso, febricula vespertina.
 Perdida de peso 3kg en 6 semanas. Trabaja como educadora. Sin tratamiento previo.
 PPD: pendiente. Rx torax: patron infiltrativo en lobulo superior derecho.
@@ -170,7 +170,7 @@ considerando la alta prevalencia de TB en Ecuador (MSP ESNIT).
 ```
 Actua como internista especializado en enfermedades metabolicas.
 
-CONTROL CRONICO — Paciente femenino, 52 anos, diabetica tipo 2 de 7 anos
+CONTROL CRONICO — Paciente femenino, 52 años, diabetica tipo 2 de 7 años
 de evolucion. Consulta por fatiga progresiva 6 semanas, poliuria,
 perdida de peso 4kg. Medicacion actual: metformina 1g c/12h.
 Laboratorios hoy: HbA1c 9.2%, glucosa 245mg/dL, creatinina 1.4mg/dL,
@@ -264,11 +264,11 @@ Este es el punto donde el medico ecuatoriano debe complementar a la IA con conoc
 
 Selecciona uno de los tres casos siguientes y usa Glass Health O ChatGPT para generar el diagnostico diferencial:
 
-**Caso A:** Mujer, 40 anos, residente en Guayaquil, fiebre 5 dias, artralgia, exantema maculopapular.
+**Caso A:** Mujer, 40 años, residente en Guayaquil, fiebre 5 dias, artralgia, exantema maculopapular.
 
-**Caso B:** Hombre, 65 anos, Sierra ecuatoriana, tos cronica 4 meses, sudoracion nocturna, IMC 19.
+**Caso B:** Hombre, 65 años, Sierra ecuatoriana, tos cronica 4 meses, sudoracion nocturna, IMC 19.
 
-**Caso C:** Mujer, 28 anos, Quito, palpitaciones episodicas, perdida de peso 6 kg en 3 meses, nerviosismo, intolerancia al calor.
+**Caso C:** Mujer, 28 años, Quito, palpitaciones episodicas, perdida de peso 6 kg en 3 meses, nerviosismo, intolerancia al calor.
 
 Despues de obtener el diferencial:
 1. Identifica si la herramienta incluyo alguna condicion prevalente en Ecuador

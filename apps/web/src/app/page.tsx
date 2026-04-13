@@ -20,7 +20,7 @@ const WORLDS = [
     badge: "TÍTULO legalmente reconocido",
     title: "Carreras",
     description: "3 carreras tecnológicas en IA, Ciencia de Datos y Big Data. Título oficial reconocido por legalmente reconocido.",
-    detail: "5 semestres · Vespertino 17:30–21:30 · $220/mes",
+    detail: "6 semestres · Vespertino 17:30–21:30 · $99/mes online · $149/mes presencial",
     cta: "Ver carreras",
     href: "/carreras-info",
     isExternal: false,
@@ -130,7 +130,7 @@ const WORLDS = [
 const STATS = [
   { value: "254", suffix: "", label: "Sesiones de contenido" },
   { value: "85", suffix: "%", label: "Empleabilidad" },
-  { value: "$220", suffix: "/mes", label: "Precio Pionero" },
+  { value: "$99", suffix: "/mes", label: "Beca H3L" },
   { value: "3", suffix: "", label: "IAs incluidas" },
 ];
 
@@ -382,12 +382,12 @@ export default function HomePage() {
             <div className="inline-flex items-center gap-3 bg-[#1F2F58]/40 border border-[#FBBC0C]/20 rounded-2xl px-5 py-3">
               <div className="text-center">
                 <span className="text-white/40 text-xs line-through block">$300/mes</span>
-                <span className="text-[#FBBC0C] text-2xl font-extrabold" style={{fontFamily:"var(--font-space-grotesk)"}}>$220</span>
+                <span className="text-[#FBBC0C] text-2xl font-extrabold" style={{fontFamily:"var(--font-space-grotesk)"}}>$99</span>
                 <span className="text-white/50 text-xs">/mes</span>
               </div>
               <div className="w-px h-10 bg-white/10" />
               <div>
-                <p className="text-[#FBBC0C] text-xs font-bold uppercase tracking-wide">Precio Pionero</p>
+                <p className="text-[#FBBC0C] text-xs font-bold uppercase tracking-wide">Beca H3L</p>
                 <p className="text-white/50 text-xs">Matrículas limitadas · Cupos disponibles</p>
               </div>
             </div>
@@ -605,7 +605,7 @@ export default function HomePage() {
                 <span className="text-[#FBBC0C]">Inteligencia Artificial</span>
               </h2>
               <p className="text-white/45 mt-3 max-w-lg">
-                Formación de nivel superior de 5 semestres (2.5 años) con título IST reconocido por legalmente reconocido.
+                Formación de nivel superior de 6 semestres (3 años) con título IST reconocido por legalmente reconocido.
                 Horario vespertino 17:30–21:30, presencial en Quito.
               </p>
             </div>
@@ -615,8 +615,8 @@ export default function HomePage() {
                 style={{ background: "rgba(251,188,12,0.06)" }}
               >
                 <p className="text-white/40 text-xs line-through mb-0.5">$300/mes</p>
-                <p className="text-[#FBBC0C] text-3xl font-extrabold" style={{fontFamily:"var(--font-space-grotesk)"}}>$220<span className="text-base font-normal text-white/40">/mes</span></p>
-                <p className="text-[#FBBC0C] text-xs font-semibold mt-0.5">Precio Pionero</p>
+                <p className="text-[#FBBC0C] text-3xl font-extrabold" style={{fontFamily:"var(--font-space-grotesk)"}}>$99<span className="text-base font-normal text-white/40">/mes</span></p>
+                <p className="text-[#FBBC0C] text-xs font-semibold mt-0.5">Beca H3L</p>
                 <p className="text-white/30 text-[11px] mt-0.5">+ Inscripción $180</p>
               </div>
             </div>
@@ -696,8 +696,8 @@ export default function HomePage() {
                 </thead>
                 <tbody className="divide-y divide-white/[0.04]">
                   {[
-                    ["Duración", "2.5 años", "4–5 años"],
-                    ["Precio mensual", "$220 Pionero", "$300–$600+"],
+                    ["Duración", "3 años", "4–5 años"],
+                    ["Precio mensual", "$99 Beca H3L", "$300–$600+"],
                     ["AI Lab incluido", "Sí (ChatGPT+Claude+Gemini)", "No"],
                     ["Certificaciones cloud", "AWS+Azure+Google incluidas", "No incluidas"],
                     ["Proyectos reales", "Desde semestre 1", "Semestre 5+"],
@@ -727,7 +727,7 @@ export default function HomePage() {
                 href="/register"
                 className="flex-1 text-center py-2.5 rounded-xl text-sm font-bold bg-[#FBBC0C] text-[#0A1628] hover:bg-[#E5AB00] transition-all"
               >
-                Reservar mi cupo — $220/mes
+                Reservar mi cupo — $99/mes online · $149/mes presencial
               </Link>
             </div>
           </div>
@@ -852,7 +852,7 @@ export default function HomePage() {
 
               <div className="mt-5 p-4 rounded-xl bg-[#73B8E7]/10 border border-[#73B8E7]/15">
                 <p className="text-[#73B8E7] text-xs font-semibold mb-1">Al completar el preuniversitario</p>
-                <p className="text-white/55 text-xs">Recibes un certificado y puedes inscribirte directamente a la carrera de IA con el precio Pionero de $220/mes.</p>
+                <p className="text-white/55 text-xs">Recibes un certificado y puedes inscribirte directamente a la carrera de IA con el precio Beca H3L de $99/mes online · $149/mes presencial.</p>
               </div>
             </div>
           </div>
@@ -1399,7 +1399,7 @@ export default function HomePage() {
               href="/register"
               className="bg-[#FBBC0C] text-[#0A1628] px-8 py-4 rounded-xl font-bold text-base hover:bg-[#E5AB00] transition-all hover:scale-[1.02] shadow-xl shadow-[#FBBC0C]/25"
             >
-              Inscribirme ahora — $220/mes
+              Inscribirme ahora — $99/mes online · $149/mes presencial
             </Link>
             <a
               href="https://meet.google.com/fzx-fqns-ayc"

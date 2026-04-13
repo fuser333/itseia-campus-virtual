@@ -157,7 +157,7 @@ print("\n" + "=" * 62)
 
 3. Ejecuta el programa y verifica que detecta correctamente las habilidades.
 
-4. Modifica el `cv_candidato` para que sea el tuyo propio o de un perfil que quisieras tener en 3 anos. Observa que score obtienes.
+4. Modifica el `cv_candidato` para que sea el tuyo propio o de un perfil que quisieras tener en 3 años. Observa que score obtienes.
 
 5. Agrega una nueva categoria de habilidades llamada `habilidades_negocio` con: "finanzas", "marketing", "gestion de proyectos", "excel", "presentaciones". Analiza cuantas tiene el candidato.
 

@@ -402,6 +402,8 @@ export default function SessionPage({ params }: PageProps) {
           sessionContext={sessionContext}
           suggestedPrompt={session.ai_lab_suggested_prompt || undefined}
           onFirstMessage={() => updateProgress("ai_lab_used")}
+          sessionId={session.id}
+          sessionTitle={session.title}
         />
       ),
     },
@@ -441,7 +443,7 @@ export default function SessionPage({ params }: PageProps) {
           subjectName={subject.name}
           teacherName={teacherName}
           userRole={userRole}
-          isEnrolled={isEnrolled || ["docente", "admin", "coordinacion", "super_admin"].includes(userRole || "")}
+          isEnrolled={isEnrolled || ["docente", "admin", "coordinacion", "super_admin", "finanzas"].includes(userRole || "")}
         />
       ),
     },
@@ -452,11 +454,12 @@ export default function SessionPage({ params }: PageProps) {
   return (
     <div className="flex h-screen flex-col">
       {/* Top bar with breadcrumb and session title */}
-      <header className="flex items-center justify-between border-b border-[#1F2F58]/8 bg-white px-4 py-2.5 shadow-sm">
-        <div className="flex items-center gap-3 min-w-0">
+      <header className="border-b border-[#1F2F58]/8 bg-white px-4 py-2 shadow-sm">
+        {/* Breadcrumb row */}
+        <div className="hidden md:flex items-center gap-1 mb-1">
           <Breadcrumb
             items={[
-              { label: "Carreras", href: "/carreras" },
+              { label: "Inicio", href: "/dashboard" },
               { label: careerName, href: `/carreras/${slug}` },
               ...(semesterNum
                 ? [
@@ -470,29 +473,22 @@ export default function SessionPage({ params }: PageProps) {
                 label: subject.name,
                 href: subjectUrl,
               },
-              { label: `Sesion ${session.number}` },
             ]}
-            className="hidden md:flex"
           />
-
-          {/* Mobile: compact title */}
-          <div className="md:hidden min-w-0">
-            <p className="text-xs text-[#73B8E7] font-medium truncate">
-              {subject.name}
-            </p>
-            <h1 className="text-sm font-semibold text-[#0A1628] truncate">
-              {session.title}
-            </h1>
-          </div>
         </div>
-
-        {/* Desktop session title */}
-        <div className="hidden md:block text-right min-w-0">
-          <h1 className="text-sm font-semibold text-[#0A1628] truncate">
+        {/* Title row */}
+        <div className="flex items-center justify-between">
+          <h1 className="text-sm font-semibold text-[#0A1628] truncate max-w-[70%]">
             {session.title}
           </h1>
-          <p className="text-[10px] text-[#1F2F58]/40">
+          <p className="text-[10px] text-[#1F2F58]/40 flex-shrink-0">
             Sesion {session.number} de {totalSessions}
+          </p>
+        </div>
+        {/* Mobile: compact */}
+        <div className="md:hidden">
+          <p className="text-[10px] text-[#73B8E7] font-medium truncate">
+            {subject.name}
           </p>
         </div>
       </header>

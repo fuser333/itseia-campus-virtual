@@ -31,7 +31,7 @@ Usando los datos de tu vida diaria en Ecuador, construye 5 proposiciones compues
 - CONDICIONAL (SI...ENTONCES): "si P, entonces Q"
 - BICONDICIONAL (SI Y SOLO SI): "P si y solo si Q"
 
-Ejemplo: "Si tengo cedula ecuatoriana Y tengo 18 anos, entonces puedo votar."
+Ejemplo: "Si tengo cedula ecuatoriana Y tengo 18 años, entonces puedo votar."
 
 **Paso 3 — Verifica con ChatGPT (10 min)**
 Abre ChatGPT y escribe este prompt exacto:

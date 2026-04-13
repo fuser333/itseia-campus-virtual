@@ -63,7 +63,7 @@ df_raw = pd.DataFrame({
     "tipo_contrato": np.random.choice(tipos_contrato, n, p=[0.45,0.28,0.17,0.10]),
     "educacion":     np.random.choice(niveles_ed, n, p=[0.08,0.35,0.22,0.28,0.07]),
     "salario":       np.random.lognormal(6.5, 0.6, n),  # ~$450-$5000
-    "anos_afiliado": np.random.randint(0, 35, n),
+    "años_afiliado": np.random.randint(0, 35, n),
     "num_aportes_12m": np.random.randint(0, 12, n),
     "tiene_credito_iess": np.random.binomial(1, 0.35, n),
     "deuda_iess":    np.random.lognormal(7, 1, n) * np.random.binomial(1, 0.35, n),
@@ -75,7 +75,7 @@ df_raw = pd.DataFrame({
 # Target: retraso en aportaciones (1 = al menos 2 meses en mora en el ano)
 log_odds = (
     -3.5
-    - 0.03 * df_raw["anos_afiliado"]
+    - 0.03 * df_raw["años_afiliado"]
     + 0.5 * (df_raw["sector"] == "temporario").astype(float)
     + 0.4 * (df_raw["tipo_contrato"] == "temporal").astype(float)
     - 0.0003 * df_raw["salario"]
@@ -123,7 +123,7 @@ df["es_primer_semestre"] = (df["mes_ingreso"] <= 6).astype(int)
 
 # Interaccion temporal: aportaciones regularidad
 df["regularidad_aportaciones"] = df["num_aportes_12m"] / 12  # ratio 0-1
-df["aportaciones_esperadas_vs_reales"] = df["anos_afiliado"] * 12 - df["num_aportes_12m"]
+df["aportaciones_esperadas_vs_reales"] = df["años_afiliado"] * 12 - df["num_aportes_12m"]
 
 print("  Features temporales creadas:")
 for feat in ["antiguedad_anios","trimestre_ingreso","regularidad_aportaciones"]:
@@ -170,7 +170,7 @@ df["cargas_x_salario"]     = df["num_cargas"] / (df["salario"] / 1000 + 1)
 df["aportes_x_contrato"]   = df["regularidad_aportaciones"] * df["contrato_ord"]
 
 # Interacciones polinomiales de las 3 mejores features
-top_features = ["salario_log","anos_afiliado","regularidad_aportaciones"]
+top_features = ["salario_log","años_afiliado","regularidad_aportaciones"]
 poly = PolynomialFeatures(degree=2, include_bias=False, interaction_only=True)
 poly_features = poly.fit_transform(df[top_features])
 poly_names = poly.get_feature_names_out(top_features)
@@ -188,7 +188,7 @@ print("\n--- 5. SELECCION DE FEATURES ---")
 
 # Construir DataFrame final
 feature_cols = (
-    ["edad","salario_log","deuda_log","num_cargas_sqrt","anos_afiliado",
+    ["edad","salario_log","deuda_log","num_cargas_sqrt","años_afiliado",
      "num_aportes_12m","tiene_credito_iess","tiene_deuda","salario_bajo",
      "educacion_ord","contrato_ord","canton_target_enc","canton_freq_enc",
      "antiguedad_anios","regularidad_aportaciones","deuda_ratio_salario",
@@ -223,7 +223,7 @@ for feat, imp in rf_imp.head(10).items():
 
 # c) Comparar: original vs engineered
 print(f"\n--- IMPACTO DEL FEATURE ENGINEERING ---")
-features_originales = ["edad","salario","anos_afiliado","num_aportes_12m",
+features_originales = ["edad","salario","años_afiliado","num_aportes_12m",
                         "num_cargas","tiene_credito_iess","deuda_iess"]
 
 X_orig = df[features_originales].values

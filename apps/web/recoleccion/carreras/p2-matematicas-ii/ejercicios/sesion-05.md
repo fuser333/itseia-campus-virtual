@@ -11,7 +11,7 @@ Comprender los conceptos de subespacio vectorial, independencia lineal, base y d
 
 ## Contexto
 
-El Ministerio de Salud de Ecuador recopila 5 variables por paciente en sus hospitales: peso (kg), talla (cm), IMC (kg/m^2), edad (anos) y presion sistolica (mmHg). Un investigador nota que el IMC = peso / talla^2, es decir, el IMC se puede calcular a partir de peso y talla. Esto significa que el vector IMC es una combinacion lineal de los otros dos vectores — es informacion redundante.
+El Ministerio de Salud de Ecuador recopila 5 variables por paciente en sus hospitales: peso (kg), talla (cm), IMC (kg/m^2), edad (años) y presion sistolica (mmHg). Un investigador nota que el IMC = peso / talla^2, es decir, el IMC se puede calcular a partir de peso y talla. Esto significa que el vector IMC es una combinacion lineal de los otros dos vectores — es informacion redundante.
 
 **Muestra de 3 pacientes:**
 ```

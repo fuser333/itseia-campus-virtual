@@ -264,7 +264,7 @@ Despues de leer la respuesta:
 ## Que aprendiste
 
 - K-Means minimiza la inercia (suma de distancias cuadradas a centroides) — sensible a outliers.
-- El silhouette score mide la calidad del clustering: valores cercanos a 1 indican clusters bien separados.
+- El silhouette score mide la calidad del clustering: valores cercaños a 1 indican clusters bien separados.
 - DBSCAN detecta clusters de forma arbitraria sin requerir K predefinido y marca outliers con label=-1.
 - El clustering jerarquico (Ward) permite visualizar la estructura de agrupamiento en un dendrograma.
 - `RobustScaler` es preferible a `StandardScaler` cuando hay outliers (usa mediana e IQR).

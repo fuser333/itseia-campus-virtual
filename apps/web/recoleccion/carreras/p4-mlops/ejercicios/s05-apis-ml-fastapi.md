@@ -124,7 +124,7 @@ La empresa de seguros Seguros Equinoccial del Ecuador quiere exponer su modelo d
        anios_licencia: int = Field(..., ge=0, le=60,
                                     description="Anos con licencia de conducir")
        siniestros_prev: int = Field(0, ge=0, le=10,
-                                     description="Siniestros en los ultimos 3 anos")
+                                     description="Siniestros en los ultimos 3 años")
        marca: str = Field(..., description="Marca del vehiculo")
        provincia: str = Field(..., description="Provincia de circulacion")
 

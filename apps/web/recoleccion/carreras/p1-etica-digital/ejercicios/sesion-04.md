@@ -18,8 +18,8 @@ Analiza estas 5 señales de alerta de contenido potencialmente falso o generado 
 
 1. **Urgencia emocional extrema:** "URGENTE", "COMPARTE ANTES QUE LO BORREN", "NO DEJAN QUE VEAS ESTO"
 2. **Fuente vaga o inexistente:** "Segun expertos", "Un estudio revela", sin citar fuente verificable
-3. **Imagenes sin metadatos o con artefactos:** manos con 6 dedos, texto borroso en letreros, sombras incorrectas
-4. **Fecha anacrónica:** la noticia "de hoy" tiene imagenes o datos de hace anos
+3. **Imagenes sin metadatos o con artefactos:** maños con 6 dedos, texto borroso en letreros, sombras incorrectas
+4. **Fecha anacrónica:** la noticia "de hoy" tiene imagenes o datos de hace años
 5. **Audio/video deepfake:** movimiento de labios no sincronizado, iluminacion inconsistente, voz con metalicos
 
 Ahora ve a Twitter/X o Facebook y busca cualquier tema politico o de salud en Ecuador. Encuentra 2 publicaciones que tengan AL MENOS 2 de estas señales de alerta. Documenta: que señales identificas y por que.

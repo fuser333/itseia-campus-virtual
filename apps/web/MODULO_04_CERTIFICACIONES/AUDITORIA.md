@@ -25,11 +25,11 @@
 
 | Certificacion | Proveedor | Nivel | Dominios | Preguntas |
 |---------------|-----------|-------|----------|-----------|
-| AWS Cloud Practitioner | AWS | basico | 6 | 30 |
+| AWS Cloud Practitioner | AWS | basico | 6 | 35 |
 | Google Cloud Digital Leader | Google Cloud | basico | 4 | 30 |
 | Azure AI Fundamentals (AI-900) | Microsoft Azure | basico | 4 | 30 |
 
-**Total: 90 preguntas de examen distribuidas en 14 dominios**
+**Total: 95 preguntas de examen distribuidas en 14 dominios**
 
 ### Distribucion de preguntas por dominio:
 
@@ -38,8 +38,8 @@
 - Security and Compliance: 7
 - Cloud Technology and Services: 7
 - Billing, Pricing and Support: 5
-- Well-Architected Framework: 2
-- Migration and Cloud Adoption: 3
+- Well-Architected Framework: 5
+- Migration and Cloud Adoption: 5
 
 **Google Cloud (30 preguntas):**
 - Digital Transformation: 8
@@ -59,7 +59,7 @@
 |-------|-----------|--------|
 | certification_programs | 3 | OK |
 | certification_domains | 14 | OK |
-| exam_questions | 90 | OK |
+| exam_questions | 95 | OK |
 | certification_enrollments | 0 | Vacia (sin alumnos inscritos aun) |
 | exam_attempts | 0 | Vacia (sin simulacros realizados) |
 | certification_sessions | 0 | Vacia |
@@ -95,10 +95,10 @@
 ## 5. QUE FALTA PARA ESTAR COMPLETO
 
 ### Critico (bloqueante para uso):
-- **NADA critico** — El modulo esta completo y funcional con 90 preguntas
+- **NADA critico** — El modulo esta completo y funcional con 95 preguntas
 
 ### Mejoras recomendadas:
-1. **Preguntas AWS desbalanceadas:** Well-Architected (2) y Migration (3) tienen pocas preguntas vs Cloud Concepts (6-7). Recomendar agregar 3-5 preguntas mas a esos dominios.
+1. ~~**Preguntas AWS desbalanceadas:**~~ **RESUELTO 2026-04-01** — Se agregaron 3 preguntas a Well-Architected (2→5) y 2 a Migration (3→5). AWS total: 35 preguntas.
 2. **certification_sessions vacia:** La tabla existe pero no tiene datos. Si se planea preparacion tipo "sesiones de estudio" ademas de simulacro, habria que poblarla.
 3. **Sin enrollment de prueba:** Ningun usuario ha probado el flujo completo (enroll -> examen -> resultados). Recomendar test end-to-end.
 
@@ -124,4 +124,4 @@
 
 ## VEREDICTO
 
-**Estado: 95% completo.** El modulo de certificaciones es el mas completo de los 4 auditados. Tiene las 3 certificaciones, 90 preguntas, simulacro cronometrado, resultados con desglose, y reporte admin. Solo falta testing real con un usuario y balancear preguntas de AWS.
+**Estado: 98% completo.** El modulo de certificaciones es el mas completo de los auditados. Tiene las 3 certificaciones, 95 preguntas (balanceadas), simulacro cronometrado, resultados con desglose, y reporte admin. Solo falta testing real con un usuario.

@@ -17,7 +17,7 @@ const supabaseAdmin = createAdminClient(
 );
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY || "";
-const GENERATE_MODEL = "gemini-2.0-flash-lite" as const;
+const GENERATE_MODEL = "gemini-2.0-flash" as const;
 
 async function getAuth() {
   const cookieStore = await cookies();

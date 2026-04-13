@@ -43,7 +43,7 @@ CREATE TABLE ventas (
 -- Insertar productos tipicos de supermercado ecuatoriano
 INSERT INTO productos (nombre, categoria, precio_unitario, origen) VALUES
     ('Leche Toni 1L',           'Lacteos',       1.05, 'Ecuador'),
-    ('Arroz Superior 2kg',      'Granos',        1.80, 'Ecuador'),
+    ('Arroz Superior 2kg',      'Graños',        1.80, 'Ecuador'),
     ('Aceite La Favorita 1L',   'Aceites',       3.20, 'Ecuador'),
     ('Pan de molde Bimbo',      'Panaderia',     1.65, 'Mexico'),
     ('Coca Cola 2L',            'Bebidas',       1.75, 'Ecuador'),
@@ -52,7 +52,7 @@ INSERT INTO productos (nombre, categoria, precio_unitario, origen) VALUES
     ('Detergente Ariel 2kg',    'Limpieza',      8.90, 'Importado'),
     ('Yogurt Chiveria 200g',    'Lacteos',       0.85, 'Ecuador'),
     ('Atun Real 180g',          'Conservas',     1.45, 'Ecuador'),
-    ('Quinua organica 500g',    'Granos',        3.60, 'Ecuador'),
+    ('Quinua organica 500g',    'Graños',        3.60, 'Ecuador'),
     ('Cerveza Pilsener 6pack',  'Bebidas',       6.80, 'Ecuador');
 
 -- Insertar ventas de enero-marzo 2026 (muestra representativa)

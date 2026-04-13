@@ -84,7 +84,7 @@ Por favor:
 Auditar si la documentacion es suficientemente clara para que un desarrollador externo pueda usar el codigo sin contactar al autor.
 
 ## Que aprendiste
-- Un codigo bien documentado se puede mantener anos despues, incluso por otra persona
+- Un codigo bien documentado se puede mantener años despues, incluso por otra persona
 - Los docstrings son la primera linea de defensa contra bugs de mantenimiento
 - Un README excelente en GitHub aumenta la visibilidad de un proyecto y es parte del portafolio profesional
 

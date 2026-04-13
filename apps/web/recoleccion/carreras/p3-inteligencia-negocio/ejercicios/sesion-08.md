@@ -73,7 +73,7 @@ df_medicos = pd.DataFrame(medicos)
 # ================================================
 # GENERAR DATOS OPERATIVOS (2 años)
 # ================================================
-print("\n[DATOS] Generando 2 anos de datos operativos...")
+print("\n[DATOS] Generando 2 años de datos operativos...")
 fechas = pd.date_range("2023-01-01", "2024-12-31", freq="D")
 n_consultas = 5000
 

@@ -257,10 +257,15 @@ export default function CertificacionesInfoPage() {
       </a>
 
       <PublicHeader />
-        {/* Login access */}
-        <div className="text-center py-3 bg-white/[0.03] border-b border-white/[0.06]">
-          <span className="text-white/50 text-sm">¿Ya tienes cuenta? </span>
-          <a href="/login" className="text-[#FBBC0C] text-sm font-semibold hover:underline">Iniciar sesión →</a>
+        {/* Login access — prominent banner */}
+        <div className="text-center py-4 px-4 bg-gradient-to-r from-[#73B8E7]/10 via-[#73B8E7]/15 to-[#73B8E7]/10 border-b border-[#73B8E7]/20">
+          <a href="/login?module=certificaciones" className="inline-flex items-center gap-3 group">
+            <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-[#73B8E7]/20 group-hover:bg-[#73B8E7]/30 transition-colors">
+              <svg className="w-4 h-4 text-[#73B8E7]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
+            </span>
+            <span className="text-white font-semibold text-sm sm:text-base">¿Ya estudias con nosotros?</span>
+            <span className="text-[#73B8E7] font-bold text-sm sm:text-base group-hover:underline">Accede a tus certificaciones →</span>
+          </a>
         </div>
 
 

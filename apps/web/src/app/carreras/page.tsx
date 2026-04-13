@@ -18,7 +18,7 @@ import { Badge } from "@/components/ui/badge";
 export const metadata: Metadata = {
   title: "Carreras | ITSEIA Academy",
   description:
-    "3 carreras tecnologicas de IA en Ecuador: Inteligencia Artificial, Ciencia de Datos y Big Data. Titulo IST, 5 semestres, AI Lab incluido.",
+    "3 carreras tecnologicas de IA en Ecuador: Inteligencia Artificial, Ciencia de Datos y Big Data. Titulo IST, 6 semestres, AI Lab incluido.",
 };
 
 // Icons per known career slug
@@ -42,7 +42,7 @@ const slugDescriptions: Record<string, string> = {
 const groupConfig = {
   carrera: {
     label: "Carreras Tecnologicas",
-    description: "Formacion de nivel superior con titulo IST avalado por legalmente reconocido. 5 semestres, AI Lab integrado y proyectos reales con empresas.",
+    description: "Formacion de nivel superior con titulo IST avalado por legalmente reconocido. 6 semestres, AI Lab integrado y proyectos reales con empresas.",
     icon: GraduationCap,
     color: "text-[#FBBC0C]",
     bgColor: "bg-[#FBBC0C]/10",
@@ -186,7 +186,7 @@ export default async function ProgramasPage() {
                   <Badge className={`border-none ${config.bgColor} text-[10px] font-semibold uppercase tracking-wider ${config.color}`}>
                     {program.semesterCount > 0
                       ? `${program.semesterCount} semestres`
-                      : "5 semestres"}
+                      : "6 semestres"}
                   </Badge>
                 </div>
                 <CardTitle className="mt-4 text-lg font-bold text-[#0A1628]">

@@ -17,7 +17,7 @@ Segun datos del mercado laboral ecuatoriano (Computrabajo, LinkedIn Ecuador, 202
 - ML Engineer Junior: $1,200 - $1,800/mes
 - Senior AI Engineer: $2,500 - $4,000/mes
 
-Un graduado de ITSEIA entra al mercado como Junior y puede alcanzar nivel Senior en 3-5 anos. Vamos a calcular el impacto economico real de estudiar IA.
+Un graduado de ITSEIA entra al mercado como Junior y puede alcanzar nivel Senior en 3-5 años. Vamos a calcular el impacto economico real de estudiar IA.
 
 ## Instrucciones
 
@@ -42,7 +42,7 @@ pension_mensual = 220.00         # Pension ITSEIA pionero
 meses_carrera = 25               # 5 semestres x 5 meses
 
 # --- OPERADORES ARITMETICOS ---
-# Suma: ingresos acumulados sin carrera (5 anos = 60 meses)
+# Suma: ingresos acumulados sin carrera (5 años = 60 meses)
 ingresos_sin_itseia = salario_actual * 60
 print(f"\nSin estudiar IA (5 años): ${ingresos_sin_itseia:,.2f}")
 
@@ -97,7 +97,7 @@ print("=" * 60)
 > "Tengo este codigo Python que calcula ROI de una carrera. Explica paso a paso que hace el operador % (modulo) y ** (potencia) en Python. Dame 3 ejemplos practicos de cada uno con contexto de finanzas o salarios."
 
 Despues de leer la respuesta:
-- Agrega al menos un uso del operador modulo `%` en tu programa (ejemplo: calcular anos y meses restantes).
+- Agrega al menos un uso del operador modulo `%` en tu programa (ejemplo: calcular años y meses restantes).
 - ¿La explicacion de Claude fue mas clara o menos clara que el libro?
 
 ## Que aprendiste
@@ -110,4 +110,4 @@ Despues de leer la respuesta:
 
 ## Reto extra
 
-Agrega una seccion que calcule cuanto dinero EXTRA gana un profesional de IA vs un profesional promedio durante TODA su vida laboral (35 anos activos). Usa el salario promedio nacional ecuatoriano ($550/mes) como referencia. Muestra el resultado en dolares y en numero de veces mas.
+Agrega una seccion que calcule cuanto dinero EXTRA gana un profesional de IA vs un profesional promedio durante TODA su vida laboral (35 años activos). Usa el salario promedio nacional ecuatoriano ($550/mes) como referencia. Muestra el resultado en dolares y en numero de veces mas.

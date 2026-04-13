@@ -27,11 +27,11 @@ Piensa en como aprendiste a reconocer un fraude bancario. Al principio, tu jefe 
 
 **Por que ahora y no antes**
 
-La inteligencia artificial no es nueva. Los conceptos matematicos detras existen desde los anos 50. Lo que cambio en la ultima decada son tres cosas que llegaron al mismo tiempo:
+La inteligencia artificial no es nueva. Los conceptos matematicos detras existen desde los años 50. Lo que cambio en la ultima decada son tres cosas que llegaron al mismo tiempo:
 
 Primero, la cantidad de datos disponibles exploto. Cada vez que usas una aplicacion, cada busqueda de Google, cada transaccion bancaria, cada foto que subes genera datos. Ecuador tiene hoy mas datos digitales que todos los archivos fisicos acumulados en su historia.
 
-Segundo, el costo del procesamiento computacional bajo mas del 99% en 20 anos. Lo que antes requeria un supercomputador del tamaño de un edificio, hoy lo hace tu telefono.
+Segundo, el costo del procesamiento computacional bajo mas del 99% en 20 años. Lo que antes requeria un supercomputador del tamaño de un edificio, hoy lo hace tu telefono.
 
 Tercero, los algoritmos mejoraron. Los investigadores encontraron arquitecturas matematicas (las redes neuronales profundas) que son especialmente buenas aprendiendo de datos no estructurados: texto, imagenes, voz.
 
@@ -57,7 +57,7 @@ Lo que hace diferente a los modelos actuales como GPT-4 o Claude es que fueron e
 
 **La diferencia entre reglas y aprendizaje**
 
-Durante decadas, los programas de computadora funcionaron con reglas explicitas escritas por humanos. Si el saldo es menor que cero, mostrar alerta roja. Si el cliente lleva mas de 3 anos sin comprar, enviar correo de reactivacion. Las reglas funcionaban bien para situaciones predecibles.
+Durante decadas, los programas de computadora funcionaron con reglas explicitas escritas por humanos. Si el saldo es menor que cero, mostrar alerta roja. Si el cliente lleva mas de 3 años sin comprar, enviar correo de reactivacion. Las reglas funcionaban bien para situaciones predecibles.
 
 El problema era que la realidad es mas complicada que cualquier conjunto de reglas que puedas escribir. El mundo tiene millones de excepciones, contextos, matices. Un sistema de reglas para detectar fraude financiero tenia que ser actualizado manualmente cada vez que los estafadores inventaban un nuevo metodo.
 
@@ -107,7 +107,7 @@ Para el profesional practico, lo mas util es entender tres categorias: IA genera
 
 **IA Generativa: el que crea**
 
-La IA generativa es la que produce contenido nuevo: texto, imagenes, audio, video, codigo. Es el tipo mas visible en los ultimos anos porque ChatGPT, DALL-E, Midjourney y Claude pertenecen a esta categoria.
+La IA generativa es la que produce contenido nuevo: texto, imagenes, audio, video, codigo. Es el tipo mas visible en los ultimos años porque ChatGPT, DALL-E, Midjourney y Claude pertenecen a esta categoria.
 
 Como funciona (sin matematicas): aprende los patrones de como se construyen textos o imagenes validos, y luego genera nuevos contenidos que siguen esos mismos patrones. No copia. Crea. Pero crea basandose en lo que aprendio, no en comprension real.
 
@@ -149,7 +149,7 @@ Empresas de e-commerce como DeUna o plataformas de marketplace usan clasificacio
 
 1950: Alan Turing, matematico britanico, propone la pregunta "puede una maquina pensar?" y disena el Test de Turing, una prueba conceptual para evaluar si una maquina puede conversar de forma indistinguible de un humano. Es el punto de partida filosofico del campo.
 
-1956: Se acuna oficialmente el termino "inteligencia artificial" en una conferencia en Dartmouth College. Comienza la primera ola de entusiasmo, con promesas de que en 20 anos habra maquinas tan inteligentes como humanos.
+1956: Se acuna oficialmente el termino "inteligencia artificial" en una conferencia en Dartmouth College. Comienza la primera ola de entusiasmo, con promesas de que en 20 años habra maquinas tan inteligentes como humanos.
 
 1970s-1980s: Los "inviernos de la IA". La tecnologia no avanza tan rapido como se prometio. Los fondos se cortan. El campo casi desaparece del mapa publico.
 
@@ -209,9 +209,9 @@ Vamos a revisar los seis mitos mas comunes y lo que la evidencia real dice sobre
 
 **Mito 1: "La IA va a reemplazar mi trabajo"**
 
-La version extrema de este mito dice que en diez anos no va a haber contadores, abogados, medicos ni profesores porque la IA lo hara todo. Esta version es falsa.
+La version extrema de este mito dice que en diez años no va a haber contadores, abogados, medicos ni profesores porque la IA lo hara todo. Esta version es falsa.
 
-La version honesta es mas matizada y mas importante: la IA va a cambiar lo que hacen los profesionales, igual que la computadora personal cambio lo que hacia un contador en los anos 90, o como el correo electronico cambio lo que hacia una secretaria. Algunos tipos de trabajo van a desaparecer o reducirse significativamente. Otros tipos de trabajo van a surgir. Y muchos trabajos van a cambiar en su contenido sin desaparecer.
+La version honesta es mas matizada y mas importante: la IA va a cambiar lo que hacen los profesionales, igual que la computadora personal cambio lo que hacia un contador en los años 90, o como el correo electronico cambio lo que hacia una secretaria. Algunos tipos de trabajo van a desaparecer o reducirse significativamente. Otros tipos de trabajo van a surgir. Y muchos trabajos van a cambiar en su contenido sin desaparecer.
 
 Lo que la evidencia muestra hasta ahora es que la IA esta automatizando tareas especificas dentro de los trabajos, no los trabajos completos. Un contador todavia necesita criterio para interpretar una situacion tributaria compleja, negociar con el SRI, entender el contexto del cliente y asumir responsabilidad legal. Lo que puede automatizar son las partes del trabajo que implican procesar documentos repetitivos, generar borradores estandar y buscar informacion en bases de datos.
 
@@ -221,7 +221,7 @@ El riesgo real no es que la IA reemplace a los profesionales. Es que los profesi
 
 Este mito es peligroso porque lleva a profesionales a usar resultados de IA sin verificarlos. Los modelos de lenguaje como ChatGPT o Claude tienen una limitacion estructural llamada "alucinacion": el sistema genera texto que suena correcto y confiado, pero que puede ser completamente inventado.
 
-Un medico en Buenos Aires uso ChatGPT para buscar referencias de un medicamento y recibio citas de estudios cientificos que no existian: autores reales, revistas reales, anos reales, pero titulos y contenidos completamente inventados. Por suerte verifico antes de usarlos.
+Un medico en Buenos Aires uso ChatGPT para buscar referencias de un medicamento y recibio citas de estudios cientificos que no existian: autores reales, revistas reales, años reales, pero titulos y contenidos completamente inventados. Por suerte verifico antes de usarlos.
 
 Un abogado en Colombia pidio a ChatGPT jurisprudencia de la Corte Suprema y recibio numeros de sentencias que no existian. Los presento en un escrito y el juez los encontro todos falsos.
 
@@ -314,7 +314,7 @@ Este documento de reflexion te sera util como punto de comparacion cuando termin
 
 ### Verificacion
 
-1. Un colega te dice que no va a aprender IA porque "en cinco anos va a hacer todo el trabajo por nosotros de todas formas, asi que para que molestarse". Identificas al menos dos mitos en esa afirmacion. Cuales son y como los refutarias?
+1. Un colega te dice que no va a aprender IA porque "en cinco años va a hacer todo el trabajo por nosotros de todas formas, asi que para que molestarse". Identificas al menos dos mitos en esa afirmacion. Cuales son y como los refutarias?
 
 2. Describe en una sola oracion la diferencia mas importante entre lo que la IA puede hacer bien y lo que todavia requiere criterio humano, segun lo que aprendiste hoy.
 

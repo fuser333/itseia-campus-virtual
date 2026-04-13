@@ -68,7 +68,7 @@ function InscripcionForm({ producto }: { producto: string }) {
   return (
     <form onSubmit={handleSubmit} className="rounded-2xl border border-[#FBBC0C]/25 p-8" style={{ background: "linear-gradient(145deg, rgba(251,188,12,0.08) 0%, rgba(31,47,88,0.3) 100%)", backdropFilter: "blur(12px)" }}>
       <div className="inline-flex items-center gap-2 bg-[#FBBC0C]/10 border border-[#FBBC0C]/20 rounded-full px-4 py-1.5 mb-6">
-        <span className="text-[#FBBC0C] text-xs font-bold uppercase tracking-wide">Inscripcion directa — Precio Pionero 2026</span>
+        <span className="text-[#FBBC0C] text-xs font-bold uppercase tracking-wide">Inscripción directa — Beca Corporativa H3L</span>
       </div>
 
       <div className="grid sm:grid-cols-2 gap-4 mb-4">
@@ -256,10 +256,15 @@ export default function CarrerasInfoPage() {
       </a>
 
       <PublicHeader />
-        {/* Login access */}
-        <div className="text-center py-3 bg-white/[0.03] border-b border-white/[0.06]">
-          <span className="text-white/50 text-sm">¿Ya tienes cuenta? </span>
-          <a href="/login" className="text-[#FBBC0C] text-sm font-semibold hover:underline">Iniciar sesión →</a>
+        {/* Login access — prominent banner */}
+        <div className="text-center py-4 px-4 bg-gradient-to-r from-[#FBBC0C]/10 via-[#FBBC0C]/15 to-[#FBBC0C]/10 border-b border-[#FBBC0C]/20">
+          <a href="/login?module=carreras" className="inline-flex items-center gap-3 group">
+            <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-[#FBBC0C]/20 group-hover:bg-[#FBBC0C]/30 transition-colors">
+              <svg className="w-4 h-4 text-[#FBBC0C]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5zm0 0v7" /></svg>
+            </span>
+            <span className="text-white font-semibold text-sm sm:text-base">¿Ya eres estudiante ITSEIA?</span>
+            <span className="text-[#FBBC0C] font-bold text-sm sm:text-base group-hover:underline">Accede a tu carrera →</span>
+          </a>
         </div>
 
 
@@ -302,18 +307,18 @@ export default function CarrerasInfoPage() {
           {/* Price block */}
           <div className="inline-flex items-center gap-4 bg-[#1F2F58]/40 border border-[#FBBC0C]/25 rounded-2xl px-6 py-4 mb-8">
             <div className="text-center">
-              <span className="text-white/40 text-xs line-through block">$300/mes</span>
+              <span className="text-white/40 text-xs line-through block">Antes: $300/mes</span>
               <span
                 className="text-[#FBBC0C] text-3xl font-extrabold"
                 style={{ fontFamily: "var(--font-space-grotesk)" }}
-              >$220</span>
+              ><span className="block text-2xl md:text-3xl">$99<span className="text-base font-normal">/mes online</span></span><span className="block text-xl md:text-2xl">$149<span className="text-base font-normal">/mes presencial</span></span></span>
               <span className="text-white/50 text-xs">/mes</span>
             </div>
             <div className="w-px h-12 bg-white/10" />
             <div className="text-left">
-              <p className="text-[#FBBC0C] text-xs font-bold uppercase tracking-wide">Precio Pionero</p>
-              <p className="text-white/50 text-xs">Inscripción $180 · Cupos limitados</p>
-              <p className="text-white/50 text-xs">5 semestres · 2.5 años</p>
+              <p className="text-[#FBBC0C] text-xs font-bold uppercase tracking-wide">Beca Corporativa H3L</p>
+              <p className="text-white/50 text-xs">Inscripción: $49 online · $99 presencial</p>
+              <p className="text-white/50 text-xs">6 semestres · 3 años</p>
             </div>
           </div>
 
@@ -631,23 +636,23 @@ export default function CarrerasInfoPage() {
             style={{ background: "linear-gradient(145deg, rgba(251,188,12,0.08) 0%, rgba(31,47,88,0.3) 100%)", backdropFilter: "blur(12px)" }}
           >
             <div className="inline-flex items-center gap-2 bg-[#FBBC0C]/10 border border-[#FBBC0C]/20 rounded-full px-4 py-1.5 mb-6">
-              <span className="text-[#FBBC0C] text-xs font-bold uppercase tracking-wide">Precio Pionero 2026</span>
+              <span className="text-[#FBBC0C] text-xs font-bold uppercase tracking-wide">Beca Corporativa H3L</span>
             </div>
 
             <div className="flex items-baseline justify-center gap-2 mb-2">
-              <span className="text-white/35 text-xl line-through">$300</span>
+              <span className="text-white/35 text-xl line-through">Antes: $300/mes</span>
               <span
                 className="text-[#FBBC0C] text-5xl font-extrabold"
                 style={{ fontFamily: "var(--font-space-grotesk)" }}
-              >$220</span>
+              ><span className="block text-2xl md:text-3xl">$99<span className="text-base font-normal">/mes online</span></span><span className="block text-xl md:text-2xl">$149<span className="text-base font-normal">/mes presencial</span></span></span>
               <span className="text-white/50 text-lg">/mes</span>
             </div>
-            <p className="text-white/40 text-sm mb-8">+ Inscripcion $180 (unica vez)</p>
+            <p className="text-white/40 text-sm mb-8">+ Inscripción: $49 online · $99 presencial (única vez)</p>
 
             <ul className="space-y-3 text-left mb-6">
               {[
                 "3 carreras a elegir (IA, Ciencia de Datos, Big Data)",
-                "5 semestres — 2.5 años de formacion",
+                "6 semestres — 3 años de formación",
                 "Horario vespertino 17:30-21:30 o 100% online",
                 "AI Lab: ChatGPT + Claude + Gemini incluidos",
                 "Certificaciones cloud incluidas (AWS, Azure, GCP)",
