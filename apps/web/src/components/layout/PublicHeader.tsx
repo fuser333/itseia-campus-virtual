@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { GraduationCap, BookOpen, Award, Building2, Users, Home, Menu, X, UserPlus, Rocket } from "lucide-react";
+import { GraduationCap, BookOpen, Award, Building2, Users, Home, Menu, X, UserPlus, Rocket, Sparkles } from "lucide-react";
 
 const navLinks = [
   { href: "/", label: "Inicio", icon: Home },
@@ -13,6 +13,7 @@ const navLinks = [
   { href: "/certificaciones-info", label: "Certificaciones", icon: Award },
   { href: "/docentes-info", label: "Docentes", icon: Users },
   { href: "/empresas-info", label: "Empresas", icon: Building2 },
+  { href: "/demo-info", label: "Demo", icon: Sparkles },
 ];
 
 export default function PublicHeader() {
