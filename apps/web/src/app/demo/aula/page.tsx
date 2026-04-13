@@ -1,222 +1,232 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import {
-  PlayCircle,
+  BookOpen,
+  TrendingUp,
   Clock,
-  Flame,
   ArrowRight,
+  MessageCircle,
   Sparkles,
-  CheckCircle2,
-  Circle,
+  PlayCircle,
+  Users,
 } from "lucide-react";
 
-export default function DemoAulaDashboard() {
-  const progress = 0;
-  const daysCompleted = 0;
-  const daysTotal = 20;
+type DemoUser = {
+  email: string;
+  name: string;
+  loggedAt: number;
+};
 
-  const days = [
-    { num: 1, title: "Hoy hago una IA que habla como yo", tools: "Suno · Midjourney · Lovable", duration: "2h en vivo + 1h autónomo", status: "available", href: "/demo/aula/dia-1" },
-    { num: 2, title: "Mi voz habla 5 idiomas", tools: "ElevenLabs · HeyGen · Gemini", duration: "2h en vivo + 1h autónomo", status: "available", href: "/demo/aula/dia-2" },
-    { num: 3, title: "Animé mi foto del colegio", tools: "Kling · Runway · Pika Labs", duration: "2h en vivo + 1h autónomo", status: "available", href: "/demo/aula/dia-3" },
-    { num: 4, title: "Agentes que trabajan por mí", tools: "Cursor · n8n · APIs", duration: "2h en vivo + 1h autónomo", status: "locked" },
-    { num: 5, title: "Demo Day — presenta tu proyecto", tools: "Todas + tu narrativa", duration: "Presentación final", status: "locked" },
-  ] as const;
+export default function DemoAulaDashboard() {
+  const [user, setUser] = useState<DemoUser | null>(null);
+
+  useEffect(() => {
+    try {
+      const raw = window.localStorage.getItem("itseia_demo_user");
+      if (raw) setUser(JSON.parse(raw));
+    } catch {}
+  }, []);
+
+  const firstName = user?.name?.split(" ")[0] ?? "estudiante";
 
   return (
-    <div className="space-y-10">
-      {/* Hero */}
-      <section>
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FBBC0C]/10 border border-[#FBBC0C]/20 text-[#FBBC0C] text-[10px] font-bold tracking-[0.2em] uppercase mb-5">
-          <Sparkles className="w-3 h-3" />
-          Bienvenido al Campus
-        </div>
-        <h1
-          className="text-4xl md:text-5xl font-bold leading-tight mb-3"
-          style={{ fontFamily: "var(--font-space-grotesk), sans-serif" }}
-        >
-          Hola <span className="text-[#FBBC0C]">Estudiante</span>,
-          <br />
-          <span className="text-[#73B8E7] text-3xl md:text-4xl">
-            así se verá tu campus cuando empieces.
-          </span>
-        </h1>
-        <p className="text-white/60 max-w-2xl leading-relaxed">
-          Este es el modo demo. Tienes habilitados 3 primeros días del
-          Preuniversitario IGNITE para que veas videos, presentaciones,
-          ejercicios y herramientas reales funcionando. El resto se desbloquea
-          cuando empiece tu cohorte oficial en junio 2026.
-        </p>
-      </section>
-
-      {/* Stats */}
-      <section className="grid md:grid-cols-4 gap-4">
-        <StatCard icon={<Flame className="w-5 h-5" />} label="Progreso" value={`${daysCompleted} / ${daysTotal}`} caption="días completados" accent="#FBBC0C" />
-        <StatCard icon={<Clock className="w-5 h-5" />} label="Esta semana" value="0h" caption="estudiado" accent="#73B8E7" />
-        <StatCard icon={<PlayCircle className="w-5 h-5" />} label="Próximo inicio" value="Junio" caption="cohorte 2026" accent="#F0846D" />
-        <StatCard icon={<CheckCircle2 className="w-5 h-5" />} label="Proyectos" value="0 / 20" caption="entregados" accent="#FBBC0C" />
-      </section>
-
-      {/* Progress bar */}
-      <section>
-        <div className="flex items-center justify-between mb-2 text-xs text-white/50 uppercase tracking-widest">
-          <span>Programa · 20 días</span>
-          <span>{progress}%</span>
-        </div>
-        <div className="h-2 bg-[#1F2F58] rounded-full overflow-hidden">
-          <div
-            className="h-full bg-gradient-to-r from-[#FBBC0C] to-[#F0846D] transition-all"
-            style={{ width: `${progress}%` }}
-          />
-        </div>
-      </section>
-
-      {/* Continuar con */}
-      <section>
-        <h2 className="text-xs font-bold tracking-[0.2em] uppercase text-white/40 mb-4">
-          Continuar con
-        </h2>
-        <Link
-          href="/demo/aula/dia-1"
-          className="group block relative overflow-hidden p-6 md:p-8 rounded-3xl border border-[#FBBC0C]/30 transition-all hover:border-[#FBBC0C]"
-          style={{
-            background:
-              "linear-gradient(145deg, rgba(251,188,12,0.08) 0%, rgba(31,47,88,0.5) 100%)",
-          }}
-        >
-          <div aria-hidden className="absolute -top-20 -right-20 w-60 h-60 rounded-full bg-[#FBBC0C]/10 blur-3xl" />
-          <div className="relative flex flex-col md:flex-row md:items-center gap-6">
-            <div
-              className="shrink-0 text-6xl md:text-7xl font-bold text-[#FBBC0C] leading-none"
-              style={{ fontFamily: "var(--font-space-grotesk), serif", fontStyle: "italic" }}
+    <>
+      {/* ── Header gradient (igual al /b2b) ───────────────────────── */}
+      <div className="rounded-2xl bg-gradient-to-br from-[#1F2F58] to-[#0A1628] p-6 sm:p-8 text-white">
+        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-wider text-[#FBBC0C] mb-1">
+              Panel del Preuniversitario
+            </p>
+            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">
+              Bienvenido, {firstName}
+            </h1>
+            <p className="mt-1 text-sm text-white/60">
+              Aquí exploras el demo del Preuniversitario ITSEIA. 3 días completos disponibles.
+            </p>
+          </div>
+          <div className="flex items-center gap-3">
+            <a
+              href="https://wa.me/593997489821?text=Hola%2C%20estoy%20probando%20el%20demo%20de%20ITSEIA%20y%20tengo%20una%20pregunta"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-lg bg-white/10 px-4 py-2 text-sm font-medium text-white hover:bg-white/20 transition-colors"
             >
-              01
-            </div>
-            <div className="flex-1">
-              <div className="text-xs font-bold tracking-widest uppercase text-[#73B8E7] mb-2">
-                Día 1 · Semana 1 · Ignición
-              </div>
-              <h3 className="text-2xl md:text-3xl font-bold mb-2">
-                Hoy hago una IA que habla como yo
-              </h3>
-              <p className="text-white/60 mb-3 text-sm leading-relaxed">
-                Tu primera sesión: canción con Suno, avatar con Midjourney, app
-                funcional con Lovable. Todo en 2 horas.
-              </p>
-              <div className="flex flex-wrap items-center gap-2 text-xs">
-                <span className="px-2.5 py-1 rounded-full bg-white/5 text-white font-mono">🎵 Suno</span>
-                <span className="px-2.5 py-1 rounded-full bg-white/5 text-white font-mono">🎨 Midjourney</span>
-                <span className="px-2.5 py-1 rounded-full bg-white/5 text-white font-mono">💻 Lovable</span>
-              </div>
-            </div>
-            <div className="shrink-0">
-              <div className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-[#FBBC0C] text-[#0A1628] font-bold text-sm group-hover:bg-[#E5AB00] transition-all">
-                Empezar
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </div>
-            </div>
-          </div>
-        </Link>
-      </section>
-
-      {/* Todos los días */}
-      <section>
-        <h2 className="text-xs font-bold tracking-[0.2em] uppercase text-white/40 mb-4">
-          Todos los días del programa
-        </h2>
-        <div className="space-y-2">
-          {days.map((d) => (
-            <DayRow key={d.num} day={d} />
-          ))}
-          <div className="p-6 rounded-2xl border border-dashed border-white/[0.08] text-center text-sm text-white/40">
-            + 15 días más se desbloquean con tu cohorte oficial (junio 2026)
+              <MessageCircle className="size-4" />
+              Soporte WhatsApp
+            </a>
           </div>
         </div>
-      </section>
-    </div>
+      </div>
+
+      {/* ── KPI cards ───────────────────────────────────────────── */}
+      <div className="grid gap-4 sm:grid-cols-3">
+        <KpiCard
+          icon={<BookOpen className="size-5 text-[#73B8E7]" />}
+          label="Días del Programa"
+          value="20"
+          sub="3 disponibles en demo"
+          accent="bg-[#73B8E7]/10"
+        />
+        <KpiCard
+          icon={<Clock className="size-5 text-[#FBBC0C]" />}
+          label="Horas en vivo"
+          value="40h"
+          sub="clase sincrónica total"
+          accent="bg-[#FBBC0C]/10"
+        />
+        <KpiCard
+          icon={<TrendingUp className="size-5 text-[#F0846D]" />}
+          label="Inicio cohorte"
+          value="Junio 2026"
+          sub="100% online"
+          accent="bg-[#F0846D]/10"
+        />
+      </div>
+
+      {/* ── Progreso del demo ────────────────────────────────────── */}
+      <div className="rounded-2xl border border-[#1F2F58]/10 bg-white p-5 shadow-sm">
+        <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center gap-2">
+            <Sparkles className="size-4 text-[#FBBC0C]" />
+            <p className="text-sm font-semibold text-[#0A1628]">Progreso del demo</p>
+          </div>
+          <p className="text-xs font-semibold text-[#1F2F58]/60">0 / 3 días</p>
+        </div>
+        <div className="h-2 rounded-full bg-[#1F2F58]/8 overflow-hidden">
+          <div className="h-full bg-gradient-to-r from-[#FBBC0C] to-[#F0846D]" style={{ width: "0%" }} />
+        </div>
+      </div>
+
+      {/* ── Programa activo (cards blancos estilo /b2b) ─────────── */}
+      <div>
+        <h2 className="mb-1 text-xl font-bold text-foreground flex items-center gap-2">
+          <BookOpen className="size-5 text-[#73B8E7]" />
+          Programa Activo
+        </h2>
+        <p className="mb-6 text-sm text-muted-foreground">
+          Los 3 primeros días del Preuniversitario IGNITE. Cada día tiene video, presentación, agenda y proyecto práctico.
+        </p>
+
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <DayCard num={1} title="Hoy hago una IA que habla como yo" tools="Suno · Midjourney · Lovable" duration="2h + 1h autónomo" href="/demo/aula/dia-1" active />
+          <DayCard num={2} title="Mi voz habla 5 idiomas" tools="ElevenLabs · HeyGen · Gemini" duration="2h + 1h autónomo" href="/demo/aula/dia-2" />
+          <DayCard num={3} title="Animé mi foto del colegio" tools="Kling · Runway · Pika Labs" duration="2h + 1h autónomo" href="/demo/aula/dia-3" />
+        </div>
+      </div>
+
+      {/* ── Días futuros (lock) ──────────────────────────────────── */}
+      <div>
+        <h2 className="mb-4 text-xl font-bold text-foreground flex items-center gap-2">
+          <Users className="size-5 text-[#73B8E7]" />
+          Resto del programa
+        </h2>
+        <div className="rounded-2xl border border-dashed border-[#1F2F58]/15 bg-[#1F2F58]/5 p-8 text-center">
+          <p className="text-sm font-semibold text-[#0A1628] mb-1">
+            +17 días más se desbloquean con tu cohorte oficial
+          </p>
+          <p className="text-xs text-[#1F2F58]/60">
+            Semana 2: Construcción · Semana 3: Automatización · Semana 4: Lanzamiento (Demo Day)
+          </p>
+          <Link
+            href="/preuni-info"
+            className="inline-flex items-center gap-1.5 mt-4 text-xs font-semibold text-[#FBBC0C] hover:text-[#E5AB00] transition-colors"
+          >
+            Ver programa completo <ArrowRight className="size-3" />
+          </Link>
+        </div>
+      </div>
+    </>
   );
 }
 
-function StatCard({
+// ── KPI Card (copy exacto del /b2b) ───────────────────────────────
+
+function KpiCard({
   icon,
   label,
   value,
-  caption,
+  sub,
   accent,
+  href,
 }: {
   icon: React.ReactNode;
   label: string;
   value: string;
-  caption: string;
+  sub: string;
   accent: string;
+  href?: string;
 }) {
-  return (
-    <div className="relative p-5 rounded-2xl border border-white/[0.08] bg-[#1F2F58]/30 overflow-hidden">
-      <div
-        aria-hidden
-        className="absolute top-0 right-0 w-20 h-20 rounded-full opacity-20 blur-2xl"
-        style={{ background: accent }}
-      />
-      <div className="relative">
-        <div className="flex items-center gap-2 text-[10px] font-bold tracking-[0.2em] uppercase text-white/50 mb-3">
-          <span style={{ color: accent }}>{icon}</span>
-          {label}
-        </div>
-        <div
-          className="text-2xl font-bold mb-0.5"
-          style={{ color: accent, fontFamily: "var(--font-space-grotesk), sans-serif" }}
-        >
-          {value}
-        </div>
-        <div className="text-xs text-white/50">{caption}</div>
+  const body = (
+    <div className="rounded-2xl border border-[#1F2F58]/8 bg-white p-5 shadow-sm hover:shadow-md transition-shadow">
+      <div className={`mb-3 inline-flex size-10 items-center justify-center rounded-lg ${accent}`}>
+        {icon}
       </div>
+      <p className="text-xs font-semibold uppercase tracking-wider text-[#1F2F58]/50">
+        {label}
+      </p>
+      <p className="mt-1 text-2xl font-bold tracking-tight text-[#0A1628]">
+        {value}
+      </p>
+      <p className="mt-0.5 text-xs text-[#1F2F58]/50">{sub}</p>
     </div>
   );
+  return href ? <Link href={href}>{body}</Link> : body;
 }
 
-type Day = {
+// ── Day Card ──────────────────────────────────────────────────────
+
+function DayCard({
+  num,
+  title,
+  tools,
+  duration,
+  href,
+  active,
+}: {
   num: number;
   title: string;
   tools: string;
   duration: string;
-  status: "available" | "locked";
-  href?: string;
-};
-
-function DayRow({ day }: { day: Day }) {
-  const body = (
-    <div
-      className={`group flex items-center gap-4 p-4 md:p-5 rounded-xl border transition-all ${
-        day.status === "available"
-          ? "border-white/[0.08] bg-[#1F2F58]/20 hover:border-[#FBBC0C]/30 hover:bg-[#1F2F58]/40"
-          : "border-white/[0.04] bg-[#1F2F58]/10 opacity-60"
-      }`}
-    >
-      <div className="shrink-0 w-12 h-12 rounded-full bg-[#0A1628] border border-[#FBBC0C]/30 flex items-center justify-center text-[#FBBC0C] font-bold text-sm">
-        {String(day.num).padStart(2, "0")}
-      </div>
-      <div className="flex-1 min-w-0">
-        <div className="font-bold text-sm md:text-base mb-0.5 truncate">{day.title}</div>
-        <div className="text-xs text-white/50 uppercase tracking-wider truncate font-mono">
-          {day.tools}
+  href: string;
+  active?: boolean;
+}) {
+  return (
+    <Link href={href} className="group block">
+      <div className="rounded-2xl border border-[#1F2F58]/8 bg-white shadow-sm hover:shadow-md transition-all group-hover:-translate-y-0.5 overflow-hidden">
+        <div className="p-5 space-y-3">
+          <div className="flex items-start justify-between gap-2">
+            <div className="flex size-10 items-center justify-center rounded-lg bg-[#1F2F58]/8">
+              <PlayCircle className="size-5 text-[#1F2F58]" />
+            </div>
+            {active && (
+              <span className="inline-flex items-center rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-emerald-700">
+                En curso
+              </span>
+            )}
+          </div>
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-wider text-[#1F2F58]/50 mb-1">
+              Día {String(num).padStart(2, "0")}
+            </p>
+            <p className="font-semibold text-[#0A1628] leading-tight mb-1">
+              {title}
+            </p>
+            <p className="text-xs text-[#1F2F58]/60 mt-0.5">{tools}</p>
+          </div>
+          <div className="flex items-center justify-between pt-2 border-t border-[#1F2F58]/5">
+            <span className="text-xs text-[#1F2F58]/50 flex items-center gap-1">
+              <Clock className="size-3" /> {duration}
+            </span>
+            <span className="text-xs font-semibold text-[#1F2F58]/40 flex items-center gap-1 group-hover:text-[#FBBC0C] group-hover:gap-1.5 transition-all">
+              Ir al día
+              <ArrowRight className="size-3" />
+            </span>
+          </div>
         </div>
       </div>
-      <div className="hidden md:block text-xs text-white/40 text-right shrink-0">
-        {day.duration}
-      </div>
-      <div className="shrink-0">
-        {day.status === "available" ? (
-          <ArrowRight className="w-5 h-5 text-[#FBBC0C] group-hover:translate-x-1 transition-transform" />
-        ) : (
-          <Circle className="w-5 h-5 text-white/20" />
-        )}
-      </div>
-    </div>
+    </Link>
   );
-
-  if (day.status === "available" && day.href) {
-    return <Link href={day.href}>{body}</Link>;
-  }
-  return body;
 }

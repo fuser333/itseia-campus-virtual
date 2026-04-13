@@ -114,7 +114,7 @@ export default function DemoSidebar({
   const sidebarWidth = collapsed ? "w-20" : "w-72";
 
   return (
-    <div className="min-h-screen bg-[#0A1628] text-white flex">
+    <div className="min-h-screen bg-background flex h-screen overflow-hidden">
       {/* Mobile toggle */}
       <button
         type="button"
@@ -258,25 +258,9 @@ export default function DemoSidebar({
         </div>
       </aside>
 
-      {/* Main content */}
-      <main className="flex-1 min-w-0 min-h-screen">
-        <div className="sticky top-0 z-30 bg-[#0A1628]/90 backdrop-blur-xl border-b border-white/[0.06] px-6 lg:px-10 py-3 flex items-center justify-between">
-          <div className="lg:hidden w-8" />
-          <div className="hidden lg:flex items-center gap-2 text-xs text-white/50">
-            <Sparkles className="w-3.5 h-3.5 text-[#FBBC0C]" />
-            <span className="uppercase tracking-widest">Modo demo</span>
-            <span className="opacity-40">·</span>
-            <span className="text-white">Cohorte junio 2026</span>
-          </div>
-          <Link
-            href="/demo-info"
-            className="text-xs text-white/50 hover:text-[#FBBC0C] transition-colors"
-          >
-            ← Salir del demo
-          </Link>
-        </div>
-
-        <div className="px-6 lg:px-10 py-8 max-w-6xl mx-auto">{children}</div>
+      {/* Main content — light background like /b2b */}
+      <main className="flex-1 min-w-0 overflow-y-auto">
+        <div className="mx-auto max-w-7xl px-6 py-8 lg:px-10 space-y-6">{children}</div>
       </main>
     </div>
   );

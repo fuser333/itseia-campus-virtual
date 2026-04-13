@@ -1,18 +1,23 @@
 "use client";
 
 import Link from "next/link";
+import { useState, type ReactNode } from "react";
 import {
-  ArrowLeft,
-  ArrowRight,
-  CheckCircle2,
-  Clock,
-  Target,
-  Sparkles,
   Play,
-  Users,
-  MessageSquare,
+  Presentation,
+  BookOpen,
+  HelpCircle,
+  FileEdit,
+  Sparkles,
+  Link2,
+  Video,
+  Clock,
+  ArrowRight,
+  ArrowLeft,
+  CheckCircle2,
+  Home as HomeIcon,
+  ChevronRight,
 } from "lucide-react";
-import type { ReactNode, ComponentType } from "react";
 
 export type LessonTool = {
   name: string;
@@ -45,6 +50,19 @@ export type LessonProps = {
   children?: ReactNode;
 };
 
+type TabId = "video" | "slides" | "theory" | "quiz" | "assignment" | "ailab" | "resources" | "live";
+
+const TABS: { id: TabId; label: string; icon: React.ComponentType<{ className?: string }>; available: boolean }[] = [
+  { id: "video", label: "Video", icon: Play, available: true },
+  { id: "slides", label: "Presentación", icon: Presentation, available: true },
+  { id: "theory", label: "Teoría", icon: BookOpen, available: true },
+  { id: "quiz", label: "Quiz", icon: HelpCircle, available: false },
+  { id: "assignment", label: "Ejercicio", icon: FileEdit, available: true },
+  { id: "ailab", label: "AI Lab", icon: Sparkles, available: false },
+  { id: "resources", label: "Recursos", icon: Link2, available: false },
+  { id: "live", label: "Clase en Vivo", icon: Video, available: false },
+];
+
 export default function LessonLayout({
   dayNum,
   weekName,
@@ -62,230 +80,322 @@ export default function LessonLayout({
   nextDay,
   children,
 }: LessonProps) {
-  return (
-    <div className="space-y-10 pb-20">
-      {/* Breadcrumb */}
-      <div className="flex items-center gap-2 text-xs text-white/40">
-        <Link href="/demo/aula" className="hover:text-[#FBBC0C] transition-colors">
-          Mi panel
-        </Link>
-        <span className="opacity-40">/</span>
-        <span>{weekName}</span>
-        <span className="opacity-40">/</span>
-        <span className="text-white">Día {dayNum}</span>
-      </div>
+  const [activeTab, setActiveTab] = useState<TabId>("video");
 
-      {/* Header */}
-      <header>
-        <div className="flex items-start gap-6">
-          <div
-            className="hidden md:block shrink-0 text-7xl font-bold text-[#FBBC0C] leading-none"
-            style={{ fontFamily: "var(--font-space-grotesk), serif", fontStyle: "italic" }}
-          >
-            {String(dayNum).padStart(2, "0")}
-          </div>
+  return (
+    <>
+      {/* ── Breadcrumb ────────────────────────────────────────────── */}
+      <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-sm text-[#1F2F58]/60">
+        <Link href="/demo/aula" className="inline-flex items-center gap-1 hover:text-[#FBBC0C] transition-colors">
+          <HomeIcon className="size-4" /> Inicio
+        </Link>
+        <ChevronRight className="size-3.5 text-[#1F2F58]/30" />
+        <span>{weekName}</span>
+        <ChevronRight className="size-3.5 text-[#1F2F58]/30" />
+        <span className="text-[#0A1628] font-semibold">Día {dayNum}</span>
+      </nav>
+
+      {/* ── Header (gradient navy, como /b2b y /carreras/[slug]) ── */}
+      <div className="rounded-2xl bg-gradient-to-br from-[#1F2F58] to-[#0A1628] p-6 sm:p-8 text-white">
+        <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
           <div className="flex-1">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FBBC0C]/10 border border-[#FBBC0C]/20 text-[#FBBC0C] text-[10px] font-bold tracking-[0.2em] uppercase mb-4">
-              <Sparkles className="w-3 h-3" />
-              {weekName}
-            </div>
-            <h1
-              className="text-3xl md:text-5xl font-bold leading-tight mb-3"
-              style={{ fontFamily: "var(--font-space-grotesk), sans-serif" }}
-            >
+            <p className="text-xs font-semibold uppercase tracking-wider text-[#FBBC0C] mb-1">
+              {weekName} · Día {String(dayNum).padStart(2, "0")}
+            </p>
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight leading-tight mb-2">
               {title}
             </h1>
-            <p className="text-lg text-white/60 mb-4">{subtitle}</p>
-            <div className="flex flex-wrap items-center gap-4 text-sm">
-              <span className="inline-flex items-center gap-1.5 text-white/50">
-                <Clock className="w-4 h-4" /> {duration}
+            <p className="text-sm sm:text-base text-white/70 max-w-3xl">{subtitle}</p>
+            <div className="mt-4 flex flex-wrap items-center gap-4 text-xs text-white/60">
+              <span className="inline-flex items-center gap-1.5">
+                <Clock className="size-3.5" /> {duration}
               </span>
-              <span className="inline-flex items-center gap-1.5 text-white/50">
-                <Target className="w-4 h-4" /> {tools.length} herramientas
+              <span className="inline-flex items-center gap-1.5">
+                <Sparkles className="size-3.5" /> {tools.length} herramientas
               </span>
+              <span>4 créditos</span>
             </div>
           </div>
-        </div>
-      </header>
-
-      {/* Objetivos */}
-      <section className="grid md:grid-cols-2 gap-4">
-        <div className="p-5 rounded-2xl border border-[#FBBC0C]/20 bg-[#FBBC0C]/5">
-          <div className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#FBBC0C] mb-2">
-            Objetivo emocional
+          <div className="shrink-0">
+            <CircularProgress value={0} label={`0/${TABS.filter((t) => t.available).length} completadas`} />
           </div>
-          <p className="text-white">{emotionalGoal}</p>
         </div>
-        <div className="p-5 rounded-2xl border border-[#73B8E7]/20 bg-[#73B8E7]/5">
-          <div className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#73B8E7] mb-2">
-            Objetivo técnico
-          </div>
-          <p className="text-white">{technicalGoal}</p>
-        </div>
-      </section>
+      </div>
 
-      {/* Video */}
-      <section>
-        <div className="flex items-center gap-2 mb-3">
-          <Play className="w-4 h-4 text-[#FBBC0C]" />
-          <h2 className="text-xs font-bold tracking-[0.2em] uppercase text-white/50">
-            Clase en vivo · grabación
-          </h2>
+      {/* ── Tabs horizontales (estilo exacto del /b2b) ──────────── */}
+      <div className="rounded-2xl border border-[#1F2F58]/8 bg-white shadow-sm overflow-hidden">
+        <div className="sticky top-0 z-10 border-b border-[#1F2F58]/8 bg-white overflow-x-auto">
+          <div className="flex min-w-max px-4 gap-0.5">
+            {TABS.map((tab) => {
+              const Icon = tab.icon;
+              const isActive = tab.id === activeTab;
+              return (
+                <button
+                  key={tab.id}
+                  type="button"
+                  onClick={() => tab.available && setActiveTab(tab.id)}
+                  disabled={!tab.available}
+                  className={`relative flex items-center gap-2 px-4 py-3 text-sm font-semibold whitespace-nowrap transition-all ${
+                    isActive
+                      ? "text-[#FBBC0C]"
+                      : tab.available
+                        ? "text-[#1F2F58]/60 hover:text-[#0A1628]"
+                        : "text-[#1F2F58]/25 cursor-not-allowed"
+                  }`}
+                >
+                  <Icon className="size-4" />
+                  <span>{tab.label}</span>
+                  {tab.available && (
+                    <span className="ml-1 size-1.5 rounded-full bg-emerald-500" />
+                  )}
+                  {isActive && (
+                    <span className="absolute inset-x-3 -bottom-px h-0.5 bg-[#FBBC0C]" />
+                  )}
+                </button>
+              );
+            })}
+          </div>
         </div>
-        <div className="aspect-video rounded-2xl overflow-hidden border border-white/[0.08] bg-[#1F2F58]">
-          {videoEmbed ? (
-            <iframe
-              src={videoEmbed}
-              title={`Día ${dayNum} · Clase`}
-              className="w-full h-full"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-            />
-          ) : (
-            <div className="w-full h-full flex flex-col items-center justify-center text-white/40">
-              <Play className="w-12 h-12 mb-3 opacity-30" />
-              <p className="text-sm">Video de la clase</p>
-              <p className="text-xs opacity-60 mt-1">
-                Disponible al inicio de la cohorte oficial
-              </p>
-            </div>
+
+        <div className="p-6 sm:p-8 min-h-[280px]">
+          {activeTab === "video" && <VideoContent videoEmbed={videoEmbed} />}
+          {activeTab === "slides" && <SlidesContent />}
+          {activeTab === "theory" && (
+            <TheoryContent emotionalGoal={emotionalGoal} technicalGoal={technicalGoal} />
           )}
+          {activeTab === "assignment" && (
+            <AssignmentContent assignment={assignment} deliverable={deliverable} agenda={agenda} />
+          )}
+          {activeTab === "quiz" && <LockedContent label="Quiz" />}
+          {activeTab === "ailab" && <LockedContent label="AI Lab" />}
+          {activeTab === "resources" && <LockedContent label="Recursos" />}
+          {activeTab === "live" && <LockedContent label="Clase en Vivo" />}
         </div>
-      </section>
+      </div>
 
-      {/* Herramientas */}
-      <section>
-        <h2 className="text-xs font-bold tracking-[0.2em] uppercase text-white/50 mb-4">
-          Herramientas que vas a usar hoy
+      {/* ── Herramientas ─────────────────────────────────────────── */}
+      <div>
+        <h2 className="mb-4 text-lg font-bold text-[#0A1628] flex items-center gap-2">
+          <Sparkles className="size-4 text-[#FBBC0C]" /> Herramientas de la clase
         </h2>
-        <div className="grid md:grid-cols-3 gap-4">
+        <div className="grid gap-4 sm:grid-cols-3">
           {tools.map((tool) => (
             <div
               key={tool.name}
-              className="p-5 rounded-2xl border border-white/[0.08] bg-[#1F2F58]/20 hover:border-[#FBBC0C]/30 hover:bg-[#1F2F58]/40 transition-all"
+              className="rounded-2xl border border-[#1F2F58]/8 bg-white p-5 shadow-sm hover:shadow-md transition-shadow"
             >
               <div
-                className="w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-3"
-                style={{
-                  backgroundColor: tool.logoColor + "20",
-                  color: tool.logoColor,
-                }}
+                className="mb-3 inline-flex size-10 items-center justify-center rounded-lg text-xl"
+                style={{ background: tool.logoColor + "20", color: tool.logoColor }}
               >
                 {tool.emoji}
               </div>
-              <div className="font-bold mb-1">{tool.name}</div>
-              <div className="text-sm text-white/60">{tool.desc}</div>
+              <p className="font-semibold text-[#0A1628]">{tool.name}</p>
+              <p className="mt-1 text-xs text-[#1F2F58]/60 leading-relaxed">{tool.desc}</p>
             </div>
           ))}
         </div>
-      </section>
-
-      {/* Agenda */}
-      <section>
-        <h2 className="text-xs font-bold tracking-[0.2em] uppercase text-white/50 mb-4">
-          Estructura de la sesión · 2 horas
-        </h2>
-        <div className="space-y-3">
-          {agenda.map((block, idx) => (
-            <div
-              key={idx}
-              className="flex gap-5 items-start p-4 rounded-xl border border-white/[0.08] bg-[#1F2F58]/20"
-            >
-              <div className="shrink-0 w-20 text-right">
-                <div className="text-xs font-mono font-bold text-[#FBBC0C]">
-                  {block.time}
-                </div>
-              </div>
-              <div className="w-px h-14 bg-white/[0.08]" />
-              <div className="flex-1 pt-0.5">
-                <div className="font-bold mb-1 text-white">{block.title}</div>
-                <div className="text-sm text-white/60">{block.description}</div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Proyecto */}
-      <section
-        className="p-6 md:p-8 rounded-3xl border border-[#F0846D]/30"
-        style={{
-          background:
-            "linear-gradient(145deg, rgba(240,132,109,0.15) 0%, rgba(251,188,12,0.08) 100%)",
-        }}
-      >
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#F0846D]/20 text-[#F0846D] text-[10px] font-bold tracking-[0.2em] uppercase mb-4">
-          <CheckCircle2 className="w-3 h-3" />
-          Proyecto del día
-        </div>
-        <h3 className="text-xl font-bold mb-3">Tu tarea autónoma (1 hora)</h3>
-        <p className="text-white mb-4">{assignment}</p>
-        <div className="pt-4 border-t border-white/[0.08]">
-          <div className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#FBBC0C] mb-2">
-            Entregable
-          </div>
-          <p className="text-sm text-white/70">{deliverable}</p>
-        </div>
-      </section>
-
-      {/* Foro / cohorte placeholder */}
-      <section className="grid md:grid-cols-2 gap-4">
-        <div className="p-5 rounded-2xl border border-white/[0.08] bg-[#1F2F58]/20">
-          <div className="flex items-center gap-3 mb-3">
-            <MessageSquare className="w-5 h-5 text-[#73B8E7]" />
-            <h3 className="font-bold">Foro del día</h3>
-          </div>
-          <p className="text-sm text-white/60 mb-3">
-            Comparte tu proyecto con la cohorte. Da feedback a 2 compañeros.
-          </p>
-          <div className="px-3 py-2 rounded-full bg-white/5 text-xs text-white/40 inline-block">
-            🔒 Disponible en la cohorte oficial
-          </div>
-        </div>
-        <div className="p-5 rounded-2xl border border-white/[0.08] bg-[#1F2F58]/20">
-          <div className="flex items-center gap-3 mb-3">
-            <Users className="w-5 h-5 text-[#73B8E7]" />
-            <h3 className="font-bold">Tu cohorte</h3>
-          </div>
-          <p className="text-sm text-white/60 mb-3">
-            30 estudiantes en tu cohorte de junio. Chat de clase + foros.
-          </p>
-          <div className="px-3 py-2 rounded-full bg-white/5 text-xs text-white/40 inline-block">
-            🔒 Disponible en la cohorte oficial
-          </div>
-        </div>
-      </section>
+      </div>
 
       {children}
 
-      {/* Nav */}
-      <nav className="flex items-center justify-between gap-4 pt-8 border-t border-white/[0.06]">
+      {/* ── Nav anterior/siguiente ───────────────────────────────── */}
+      <nav className="flex items-center justify-between gap-3 pt-6 border-t border-[#1F2F58]/8">
         {prevDay ? (
           <Link
             href={prevDay.href}
-            className="flex items-center gap-2 text-sm text-white/50 hover:text-[#FBBC0C] transition-colors"
+            className="inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold text-[#1F2F58]/70 hover:bg-[#1F2F58]/5 hover:text-[#0A1628] transition-colors"
           >
-            <ArrowLeft className="w-4 h-4" />
-            Día {prevDay.num}
+            <ArrowLeft className="size-4" /> Día {prevDay.num}
           </Link>
         ) : (
           <Link
             href="/demo/aula"
-            className="flex items-center gap-2 text-sm text-white/50 hover:text-[#FBBC0C] transition-colors"
+            className="inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold text-[#1F2F58]/70 hover:bg-[#1F2F58]/5 hover:text-[#0A1628] transition-colors"
           >
-            <ArrowLeft className="w-4 h-4" /> Volver al panel
+            <ArrowLeft className="size-4" /> Volver al panel
           </Link>
         )}
         {nextDay && (
           <Link
             href={nextDay.href}
-            className="flex items-center gap-2 px-5 py-3 rounded-full bg-[#FBBC0C] text-[#0A1628] font-bold text-sm hover:bg-[#E5AB00] transition-all"
+            className="inline-flex items-center gap-2 rounded-lg bg-[#FBBC0C] px-5 py-2.5 text-sm font-bold text-[#0A1628] hover:bg-[#E5AB00] transition-colors"
           >
-            Día {nextDay.num}
-            <ArrowRight className="w-4 h-4" />
+            Día {nextDay.num} <ArrowRight className="size-4" />
           </Link>
         )}
       </nav>
+    </>
+  );
+}
+
+// ── Tab contents ─────────────────────────────────────────────────
+
+function VideoContent({ videoEmbed }: { videoEmbed?: string }) {
+  if (!videoEmbed) {
+    return (
+      <div className="aspect-video rounded-xl bg-[#1F2F58]/5 border border-dashed border-[#1F2F58]/15 flex flex-col items-center justify-center text-[#1F2F58]/40">
+        <Play className="size-10 mb-2" />
+        <p className="text-sm font-semibold">Video de la clase</p>
+        <p className="text-xs mt-1">Disponible cuando empiece tu cohorte</p>
+      </div>
+    );
+  }
+  return (
+    <div className="space-y-3">
+      <div className="aspect-video rounded-xl overflow-hidden border border-[#1F2F58]/10 bg-black">
+        <iframe
+          src={videoEmbed}
+          title="Video de la clase"
+          className="w-full h-full"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowFullScreen
+        />
+      </div>
+      <p className="text-xs text-[#1F2F58]/50 flex items-center gap-1.5">
+        <Play className="size-3" /> Grabación de la sesión · puedes verla a tu ritmo.
+      </p>
+    </div>
+  );
+}
+
+function SlidesContent() {
+  return (
+    <div className="aspect-video rounded-xl bg-[#1F2F58]/5 border border-dashed border-[#1F2F58]/15 flex flex-col items-center justify-center text-[#1F2F58]/40 text-center px-6">
+      <Presentation className="size-10 mb-2" />
+      <p className="text-sm font-semibold text-[#1F2F58]/70">Presentación (Gamma)</p>
+      <p className="text-xs mt-1 max-w-md">
+        Las slides de la clase se embeben aquí cuando arranque tu cohorte. Las preparamos específicamente para tu grupo.
+      </p>
+    </div>
+  );
+}
+
+function TheoryContent({ emotionalGoal, technicalGoal }: { emotionalGoal: string; technicalGoal: string }) {
+  return (
+    <div className="space-y-6">
+      <div className="grid md:grid-cols-2 gap-4">
+        <div className="rounded-xl border border-[#FBBC0C]/30 bg-[#FBBC0C]/5 p-5">
+          <p className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#FBBC0C] mb-2">
+            Objetivo emocional
+          </p>
+          <p className="text-sm text-[#0A1628] leading-relaxed">{emotionalGoal}</p>
+        </div>
+        <div className="rounded-xl border border-[#73B8E7]/30 bg-[#73B8E7]/5 p-5">
+          <p className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#73B8E7] mb-2">
+            Objetivo técnico
+          </p>
+          <p className="text-sm text-[#0A1628] leading-relaxed">{technicalGoal}</p>
+        </div>
+      </div>
+      <div className="rounded-xl border border-[#1F2F58]/10 bg-[#1F2F58]/[0.02] p-5">
+        <p className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#1F2F58]/60 mb-2">
+          Material teórico
+        </p>
+        <p className="text-sm text-[#1F2F58]/70 leading-relaxed">
+          En la versión completa de la clase, aquí encontrarás la teoría escrita de la sesión:
+          conceptos base, fundamentos técnicos de cada herramienta y referencias cruzadas con el
+          material de apoyo. El material teórico se prepara antes del inicio de tu cohorte oficial.
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function AssignmentContent({
+  assignment,
+  deliverable,
+  agenda,
+}: {
+  assignment: string;
+  deliverable: string;
+  agenda: LessonBlock[];
+}) {
+  return (
+    <div className="space-y-6">
+      {/* Agenda */}
+      <div>
+        <p className="text-xs font-bold tracking-[0.2em] uppercase text-[#1F2F58]/60 mb-3">
+          Estructura de la sesión · 2 horas
+        </p>
+        <div className="space-y-2">
+          {agenda.map((block, idx) => (
+            <div
+              key={idx}
+              className="flex gap-4 items-start p-3 rounded-lg bg-[#1F2F58]/[0.02] border border-[#1F2F58]/5"
+            >
+              <div className="shrink-0 w-20 text-right">
+                <div className="text-[11px] font-mono font-bold text-[#FBBC0C]">{block.time}</div>
+              </div>
+              <div className="w-px h-10 bg-[#1F2F58]/10" />
+              <div className="flex-1">
+                <p className="text-sm font-semibold text-[#0A1628]">{block.title}</p>
+                <p className="text-xs text-[#1F2F58]/60 mt-0.5">{block.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Proyecto */}
+      <div className="rounded-xl border border-[#F0846D]/30 bg-gradient-to-br from-[#F0846D]/10 to-[#FBBC0C]/5 p-5">
+        <div className="inline-flex items-center gap-2 text-[10px] font-bold tracking-[0.2em] uppercase text-[#F0846D] mb-3">
+          <CheckCircle2 className="size-3" />
+          Proyecto autónomo (1 hora)
+        </div>
+        <p className="text-sm text-[#0A1628] leading-relaxed mb-3">{assignment}</p>
+        <div className="pt-3 border-t border-[#F0846D]/20">
+          <p className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#FBBC0C] mb-1">
+            Entregable
+          </p>
+          <p className="text-xs text-[#1F2F58]/70">{deliverable}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function LockedContent({ label }: { label: string }) {
+  return (
+    <div className="rounded-xl bg-[#1F2F58]/5 border border-dashed border-[#1F2F58]/15 p-8 text-center">
+      <p className="text-sm font-semibold text-[#0A1628] mb-1">{label}</p>
+      <p className="text-xs text-[#1F2F58]/50 max-w-md mx-auto">
+        Esta pestaña se habilita durante tu cohorte oficial con los recursos personalizados de tu grupo.
+      </p>
+    </div>
+  );
+}
+
+// ── Circular progress ────────────────────────────────────────────
+
+function CircularProgress({ value, label }: { value: number; label: string }) {
+  const radius = 30;
+  const stroke = 6;
+  const circumference = 2 * Math.PI * radius;
+  const offset = circumference - (value / 100) * circumference;
+  return (
+    <div className="flex items-center gap-3 rounded-xl bg-white/10 backdrop-blur-sm px-4 py-3">
+      <div className="relative size-[72px]">
+        <svg viewBox="0 0 72 72" className="size-[72px] -rotate-90">
+          <circle cx="36" cy="36" r={radius} strokeWidth={stroke} fill="none" stroke="rgba(255,255,255,0.15)" />
+          <circle
+            cx="36"
+            cy="36"
+            r={radius}
+            strokeWidth={stroke}
+            fill="none"
+            stroke="#FBBC0C"
+            strokeDasharray={circumference}
+            strokeDashoffset={offset}
+            strokeLinecap="round"
+            className="transition-all duration-500"
+          />
+        </svg>
+        <div className="absolute inset-0 flex items-center justify-center text-sm font-bold text-[#FBBC0C]">
+          {value}%
+        </div>
+      </div>
+      <div className="text-left text-xs text-white/70 max-w-[100px] leading-tight">{label}</div>
     </div>
   );
 }
