@@ -32,6 +32,10 @@ export default function SlideViewer({
   }, [onViewed, viewed]);
 
   function getEmbedUrl(): string {
+    // Gamma.app embed: /docs/TITLE-ID → /embed/TITLE-ID
+    if (slidesUrl.includes("gamma.app/docs/")) {
+      return slidesUrl.replace("/docs/", "/embed/");
+    }
     if (slidesType === "google_slides") {
       // If it's already an embed URL, use as-is
       if (slidesUrl.includes("/embed")) return slidesUrl;
