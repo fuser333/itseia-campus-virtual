@@ -32,8 +32,13 @@ export default function SlideViewer({
   }, [onViewed, viewed]);
 
   function getEmbedUrl(): string {
-    // Gamma.app embed: /docs/TITLE-ID → /embed/TITLE-ID
-    if (slidesUrl.includes("gamma.app/docs/")) {
+    // Gamma.app embed oficial: gamma.app/embed/{docId}
+    // El docId es el ÚLTIMO segmento tras el último guión en /docs/TITLE-docId
+    if (slidesUrl.includes("gamma.app/")) {
+      if (slidesUrl.includes("/embed/")) return slidesUrl;
+      const match = slidesUrl.match(/gamma\.app\/docs\/.*?-([a-z0-9]+)\/?(?:\?.*)?$/);
+      if (match) return `https://gamma.app/embed/${match[1]}`;
+      // Fallback: si no hacen match con -ID, intentamos swap simple
       return slidesUrl.replace("/docs/", "/embed/");
     }
     if (slidesType === "google_slides") {
