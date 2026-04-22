@@ -405,14 +405,14 @@ function MessageBubble({
             "rounded-2xl px-4 py-3 text-sm leading-relaxed",
             isUser
               ? "bg-[#FBBC0C] text-[#0A1628] rounded-tr-md shadow-lg shadow-[#FBBC0C]/10"
-              : "bg-[#1F2F58]/80 text-white rounded-tl-md border border-[#1F2F58]/40",
+              : "bg-white text-[#0A1628] rounded-tl-md border border-[#1F2F58]/20 shadow-sm",
             isStreaming && "min-h-[2rem]"
           )}
         >
           {isUser ? (
             <p className="whitespace-pre-wrap">{message.content}</p>
           ) : (
-            <div className="prose prose-invert prose-sm max-w-none text-white prose-p:text-white prose-p:my-1.5 prose-headings:text-white prose-headings:my-2 prose-li:text-white prose-li:my-0.5 prose-code:text-[#73B8E7] prose-code:bg-[#0A1628]/60 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md prose-code:text-xs prose-pre:bg-[#0A1628] prose-pre:border prose-pre:border-[#1F2F58]/40 prose-pre:rounded-xl prose-a:text-[#73B8E7] prose-strong:text-[#FBBC0C]">
+            <div className="prose prose-sm max-w-none text-[#0A1628] prose-p:text-[#1F2F58] prose-p:my-1.5 prose-headings:text-[#0A1628] prose-headings:font-bold prose-headings:my-2 prose-li:text-[#1F2F58] prose-li:my-0.5 prose-code:text-[#F0846D] prose-code:bg-[#1F2F58]/10 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md prose-code:text-xs prose-pre:bg-[#0A1628] prose-pre:text-white prose-pre:border prose-pre:border-[#1F2F58]/20 prose-pre:rounded-xl prose-a:text-[#73B8E7] prose-strong:text-[#0A1628]">
               <ReactMarkdown>{message.content}</ReactMarkdown>
               {isStreaming && (
                 <span className="inline-block w-2 h-4 bg-[#73B8E7] animate-pulse rounded-sm ml-0.5 align-middle" />
