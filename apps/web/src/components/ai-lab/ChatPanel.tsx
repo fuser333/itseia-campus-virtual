@@ -67,6 +67,16 @@ export default function ChatPanel({
     scrollToBottom();
   }, [messages, scrollToBottom]);
 
+  // Auto-scroll durante streaming (cada vez que el contenido cambia)
+  useEffect(() => {
+    if (isStreaming) {
+      const interval = setInterval(() => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+      }, 300);
+      return () => clearInterval(interval);
+    }
+  }, [isStreaming]);
+
   // Cargar el prompt sugerido si existe
   useEffect(() => {
     if (suggestedPrompt && messages.length === 0) {
