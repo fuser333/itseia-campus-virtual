@@ -4,14 +4,14 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import {
   BookOpen,
-  TrendingUp,
-  Clock,
-  ArrowRight,
-  MessageCircle,
-  Sparkles,
+  ChevronRight,
+  Brain,
   PlayCircle,
-  Users,
+  Clock,
+  MessageCircle,
+  CheckCircle2,
 } from "lucide-react";
+import { IGNITE_WEEKS } from "./_data/ignite";
 
 type DemoUser = {
   email: string;
@@ -31,202 +31,267 @@ export default function DemoAulaDashboard() {
 
   const firstName = user?.name?.split(" ")[0] ?? "estudiante";
 
+  const allSessions = IGNITE_WEEKS.flatMap((w) =>
+    w.subjects.flatMap((s) => s.sessions),
+  );
+  const totalSessions = allSessions.length;
+  const availableCount = allSessions.filter(
+    (s) => s.status === "available",
+  ).length;
+
   return (
-    <>
-      {/* ── Header gradient (igual al /b2b) ───────────────────────── */}
-      <div className="rounded-2xl bg-gradient-to-br from-[#1F2F58] to-[#0A1628] p-6 sm:p-8 text-white">
-        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-wider text-[#FBBC0C] mb-1">
-              Panel del Preuniversitario
-            </p>
-            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">
+    <div style={{ color: "#1F2F58" }}>
+      {/* ── Header (misma estructura que /preuni/semana-X) ────────── */}
+      <div className="mb-8">
+        <div className="flex items-center gap-2 mb-2">
+          <span
+            className="text-xs font-semibold uppercase tracking-widest px-2.5 py-1 rounded-full"
+            style={{ backgroundColor: "#FBBC0C22", color: "#0A1628" }}
+          >
+            Preuniversitario ITSEIA · Demo
+          </span>
+        </div>
+        <div className="flex items-start gap-4 mt-3">
+          <div
+            className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
+            style={{ backgroundColor: "#1F2F58" }}
+          >
+            <Brain className="w-6 h-6" style={{ color: "#FBBC0C" }} />
+          </div>
+          <div className="flex-1">
+            <h1
+              className="text-2xl sm:text-3xl font-bold leading-tight"
+              style={{ color: "#0A1628" }}
+            >
               Bienvenido, {firstName}
             </h1>
-            <p className="mt-1 text-sm text-white/60">
-              Aquí exploras el demo del Preuniversitario ITSEIA. 3 días completos disponibles.
+            <p className="mt-1 text-sm" style={{ color: "#1F2F58AA" }}>
+              4 semanas &middot; {totalSessions} sesiones &middot; {availableCount} disponibles en demo
             </p>
           </div>
-          <div className="flex items-center gap-3">
-            <a
-              href="https://wa.me/593997489821?text=Hola%2C%20estoy%20probando%20el%20demo%20de%20ITSEIA%20y%20tengo%20una%20pregunta"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-lg bg-white/10 px-4 py-2 text-sm font-medium text-white hover:bg-white/20 transition-colors"
-            >
-              <MessageCircle className="size-4" />
-              Soporte WhatsApp
-            </a>
+        </div>
+
+        {/* Progress bar global */}
+        <div className="mt-5">
+          <div className="flex items-center justify-between mb-1.5">
+            <span className="text-xs font-medium" style={{ color: "#1F2F5899" }}>
+              Progreso del demo
+            </span>
+            <span className="text-xs font-bold" style={{ color: "#1F2F58" }}>
+              0/{availableCount} sesiones
+            </span>
           </div>
-        </div>
-      </div>
-
-      {/* ── KPI cards ───────────────────────────────────────────── */}
-      <div className="grid gap-4 sm:grid-cols-3">
-        <KpiCard
-          icon={<BookOpen className="size-5 text-[#73B8E7]" />}
-          label="Días del Programa"
-          value="20"
-          sub="3 disponibles en demo"
-          accent="bg-[#73B8E7]/10"
-        />
-        <KpiCard
-          icon={<Clock className="size-5 text-[#FBBC0C]" />}
-          label="Horas en vivo"
-          value="40h"
-          sub="clase sincrónica total"
-          accent="bg-[#FBBC0C]/10"
-        />
-        <KpiCard
-          icon={<TrendingUp className="size-5 text-[#F0846D]" />}
-          label="Inicio cohorte"
-          value="Junio 2026"
-          sub="100% online"
-          accent="bg-[#F0846D]/10"
-        />
-      </div>
-
-      {/* ── Progreso del demo ────────────────────────────────────── */}
-      <div className="rounded-2xl border border-[#1F2F58]/10 bg-white p-5 shadow-sm">
-        <div className="flex items-center justify-between mb-3">
-          <div className="flex items-center gap-2">
-            <Sparkles className="size-4 text-[#FBBC0C]" />
-            <p className="text-sm font-semibold text-[#0A1628]">Progreso del demo</p>
-          </div>
-          <p className="text-xs font-semibold text-[#1F2F58]/60">0 / 3 días</p>
-        </div>
-        <div className="h-2 rounded-full bg-[#1F2F58]/8 overflow-hidden">
-          <div className="h-full bg-gradient-to-r from-[#FBBC0C] to-[#F0846D]" style={{ width: "0%" }} />
-        </div>
-      </div>
-
-      {/* ── Programa activo (cards blancos estilo /b2b) ─────────── */}
-      <div>
-        <h2 className="mb-1 text-xl font-bold text-foreground flex items-center gap-2">
-          <BookOpen className="size-5 text-[#73B8E7]" />
-          Programa Activo
-        </h2>
-        <p className="mb-6 text-sm text-muted-foreground">
-          Los 3 primeros días del Preuniversitario IGNITE. Cada día tiene video, presentación, agenda y proyecto práctico.
-        </p>
-
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          <DayCard num={1} title="Hoy hago una IA que habla como yo" tools="Suno · Midjourney · Lovable" duration="2h + 1h autónomo" href="/demo/aula/dia-1" active />
-          <DayCard num={2} title="Mi voz habla 5 idiomas" tools="ElevenLabs · HeyGen · Gemini" duration="2h + 1h autónomo" href="/demo/aula/dia-2" />
-          <DayCard num={3} title="Animé mi foto del colegio" tools="Kling · Runway · Pika Labs" duration="2h + 1h autónomo" href="/demo/aula/dia-3" />
-        </div>
-      </div>
-
-      {/* ── Días futuros (lock) ──────────────────────────────────── */}
-      <div>
-        <h2 className="mb-4 text-xl font-bold text-foreground flex items-center gap-2">
-          <Users className="size-5 text-[#73B8E7]" />
-          Resto del programa
-        </h2>
-        <div className="rounded-2xl border border-dashed border-[#1F2F58]/15 bg-[#1F2F58]/5 p-8 text-center">
-          <p className="text-sm font-semibold text-[#0A1628] mb-1">
-            +17 días más se desbloquean con tu cohorte oficial
-          </p>
-          <p className="text-xs text-[#1F2F58]/60">
-            Semana 2: Construcción · Semana 3: Automatización · Semana 4: Lanzamiento (Demo Day)
-          </p>
-          <Link
-            href="/preuni-info"
-            className="inline-flex items-center gap-1.5 mt-4 text-xs font-semibold text-[#FBBC0C] hover:text-[#E5AB00] transition-colors"
+          <div
+            className="h-2 rounded-full overflow-hidden"
+            style={{ backgroundColor: "#1F2F5815" }}
           >
-            Ver programa completo <ArrowRight className="size-3" />
-          </Link>
+            <div
+              className="h-full rounded-full transition-all duration-500"
+              style={{ width: "0%", backgroundColor: "#FBBC0C" }}
+            />
+          </div>
         </div>
       </div>
-    </>
-  );
-}
 
-// ── KPI Card (copy exacto del /b2b) ───────────────────────────────
-
-function KpiCard({
-  icon,
-  label,
-  value,
-  sub,
-  accent,
-  href,
-}: {
-  icon: React.ReactNode;
-  label: string;
-  value: string;
-  sub: string;
-  accent: string;
-  href?: string;
-}) {
-  const body = (
-    <div className="rounded-2xl border border-[#1F2F58]/8 bg-white p-5 shadow-sm hover:shadow-md transition-shadow">
-      <div className={`mb-3 inline-flex size-10 items-center justify-center rounded-lg ${accent}`}>
-        {icon}
-      </div>
-      <p className="text-xs font-semibold uppercase tracking-wider text-[#1F2F58]/50">
-        {label}
-      </p>
-      <p className="mt-1 text-2xl font-bold tracking-tight text-[#0A1628]">
-        {value}
-      </p>
-      <p className="mt-0.5 text-xs text-[#1F2F58]/50">{sub}</p>
-    </div>
-  );
-  return href ? <Link href={href}>{body}</Link> : body;
-}
-
-// ── Day Card ──────────────────────────────────────────────────────
-
-function DayCard({
-  num,
-  title,
-  tools,
-  duration,
-  href,
-  active,
-}: {
-  num: number;
-  title: string;
-  tools: string;
-  duration: string;
-  href: string;
-  active?: boolean;
-}) {
-  return (
-    <Link href={href} className="group block">
-      <div className="rounded-2xl border border-[#1F2F58]/8 bg-white shadow-sm hover:shadow-md transition-all group-hover:-translate-y-0.5 overflow-hidden">
-        <div className="p-5 space-y-3">
-          <div className="flex items-start justify-between gap-2">
-            <div className="flex size-10 items-center justify-center rounded-lg bg-[#1F2F58]/8">
-              <PlayCircle className="size-5 text-[#1F2F58]" />
-            </div>
-            {active && (
-              <span className="inline-flex items-center rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-emerald-700">
-                En curso
-              </span>
-            )}
+      {/* ── Soporte WhatsApp (equivalente al CTA /b2b) ────────────── */}
+      <div className="mb-8 flex flex-wrap items-center justify-between gap-3 rounded-2xl border p-4"
+        style={{ borderColor: "#1F2F5815", backgroundColor: "#fff" }}
+      >
+        <div className="flex items-center gap-3">
+          <div
+            className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0"
+            style={{ backgroundColor: "#73B8E720" }}
+          >
+            <MessageCircle className="w-5 h-5" style={{ color: "#73B8E7" }} />
           </div>
           <div>
-            <p className="text-xs font-semibold uppercase tracking-wider text-[#1F2F58]/50 mb-1">
-              Día {String(num).padStart(2, "0")}
+            <p className="text-sm font-semibold" style={{ color: "#0A1628" }}>
+              Dudas con el demo? Escribimos ya mismo
             </p>
-            <p className="font-semibold text-[#0A1628] leading-tight mb-1">
-              {title}
+            <p className="text-xs" style={{ color: "#1F2F5880" }}>
+              Respuesta en menos de 2 horas, horario Ecuador
             </p>
-            <p className="text-xs text-[#1F2F58]/60 mt-0.5">{tools}</p>
-          </div>
-          <div className="flex items-center justify-between pt-2 border-t border-[#1F2F58]/5">
-            <span className="text-xs text-[#1F2F58]/50 flex items-center gap-1">
-              <Clock className="size-3" /> {duration}
-            </span>
-            <span className="text-xs font-semibold text-[#1F2F58]/40 flex items-center gap-1 group-hover:text-[#FBBC0C] group-hover:gap-1.5 transition-all">
-              Ir al día
-              <ArrowRight className="size-3" />
-            </span>
           </div>
         </div>
+        <a
+          href="https://wa.me/593997489821?text=Hola%2C%20estoy%20probando%20el%20demo%20de%20ITSEIA%20y%20tengo%20una%20pregunta"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-sm font-semibold px-4 py-2 rounded-lg flex items-center gap-2 transition-opacity hover:opacity-80"
+          style={{ backgroundColor: "#FBBC0C", color: "#0A1628" }}
+        >
+          WhatsApp
+          <ChevronRight className="w-4 h-4" />
+        </a>
       </div>
-    </Link>
+
+      {/* ── Weeks list (misma forma que subjects en /preuni/semana) ─ */}
+      <div className="space-y-6">
+        {IGNITE_WEEKS.map((week) => {
+          const weekSessions = week.subjects.flatMap((s) => s.sessions);
+          const weekAvailable = weekSessions.filter(
+            (s) => s.status === "available",
+          ).length;
+          const isOpen = weekAvailable > 0;
+
+          return (
+            <div
+              key={week.number}
+              className="rounded-2xl border overflow-hidden"
+              style={{ borderColor: "#1F2F5815", backgroundColor: "#fff" }}
+            >
+              {/* Week header */}
+              <div
+                className="px-5 py-4 border-b flex items-center justify-between gap-3"
+                style={{ borderColor: "#1F2F5810", backgroundColor: "#F9F6E7" }}
+              >
+                <div>
+                  <h2 className="text-base font-bold" style={{ color: "#0A1628" }}>
+                    Semana {week.number}: {week.name}
+                  </h2>
+                  <p className="mt-0.5 text-sm" style={{ color: "#1F2F5880" }}>
+                    {week.tagline}
+                  </p>
+                </div>
+                {isOpen ? (
+                  <span
+                    className="text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full flex-shrink-0"
+                    style={{ backgroundColor: "#22c55e22", color: "#16a34a" }}
+                  >
+                    Demo activo
+                  </span>
+                ) : (
+                  <span
+                    className="text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full flex-shrink-0"
+                    style={{ backgroundColor: "#1F2F5810", color: "#1F2F58AA" }}
+                  >
+                    Cohorte oficial
+                  </span>
+                )}
+              </div>
+
+              {/* Sessions summary */}
+              <ul className="divide-y" style={{ borderColor: "#1F2F5808" }}>
+                {weekSessions.map((session) => {
+                  const isAvailable = session.status === "available";
+                  const sessionUrl = isAvailable
+                    ? `/demo/aula/sesion/${session.number}`
+                    : "#";
+
+                  const Row = (
+                    <div
+                      className="flex items-center gap-4 px-5 py-4 transition-colors"
+                      style={{ color: "#1F2F58", opacity: isAvailable ? 1 : 0.6 }}
+                    >
+                      <div className="flex-shrink-0">
+                        <div
+                          className="w-5 h-5 rounded-full border-2 flex items-center justify-center"
+                          style={{ borderColor: "#1F2F5830" }}
+                        >
+                          <span
+                            className="text-[10px] font-bold"
+                            style={{ color: "#1F2F5860" }}
+                          >
+                            {session.number}
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="flex-1 min-w-0">
+                        <p
+                          className="text-sm font-semibold leading-snug truncate"
+                          style={{ color: "#0A1628" }}
+                        >
+                          Día {session.number}: {session.title}
+                        </p>
+                        <p
+                          className="text-xs mt-0.5 truncate"
+                          style={{ color: "#1F2F5870" }}
+                        >
+                          {session.description}
+                        </p>
+                      </div>
+
+                      <div className="flex-shrink-0 flex items-center gap-1">
+                        {isAvailable ? (
+                          <>
+                            <span
+                              className="text-xs font-semibold hidden sm:block"
+                              style={{ color: "#FBBC0C" }}
+                            >
+                              Iniciar
+                            </span>
+                            <PlayCircle
+                              className="w-4 h-4"
+                              style={{ color: "#FBBC0C" }}
+                            />
+                          </>
+                        ) : (
+                          <span
+                            className="text-[10px] font-semibold uppercase tracking-wider px-2 py-1 rounded-full"
+                            style={{ backgroundColor: "#1F2F5810", color: "#1F2F58AA" }}
+                          >
+                            Cohorte
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  );
+
+                  return (
+                    <li key={session.number}>
+                      {isAvailable ? (
+                        <Link href={sessionUrl} className="block">
+                          {Row}
+                        </Link>
+                      ) : (
+                        Row
+                      )}
+                    </li>
+                  );
+                })}
+              </ul>
+
+              {/* CTA a la semana completa */}
+              <div className="px-5 py-3 border-t flex items-center justify-end"
+                style={{ borderColor: "#1F2F5808" }}
+              >
+                <Link
+                  href={`/demo/aula/semana-${week.number}`}
+                  className="text-xs font-semibold flex items-center gap-1 transition-opacity hover:opacity-70"
+                  style={{ color: "#1F2F58" }}
+                >
+                  Ver semana completa
+                  <ChevronRight className="w-3.5 h-3.5" />
+                </Link>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* ── Footer demo ───────────────────────────────────────────── */}
+      <div className="mt-10 rounded-2xl border p-5 text-center"
+        style={{
+          borderColor: "#FBBC0C40",
+          backgroundColor: "#FBBC0C10",
+        }}
+      >
+        <p className="text-sm font-semibold" style={{ color: "#0A1628" }}>
+          Los 17 días restantes se desbloquean con tu cohorte oficial
+        </p>
+        <p className="mt-1 text-xs" style={{ color: "#1F2F58AA" }}>
+          Semana 2: Construcción · Semana 3: Automatización · Semana 4: Lanzamiento
+        </p>
+        <Link
+          href="/preuni-info"
+          className="inline-flex items-center gap-1.5 mt-3 text-xs font-semibold transition-opacity hover:opacity-70"
+          style={{ color: "#0A1628" }}
+        >
+          Ver programa completo
+          <ChevronRight className="w-3.5 h-3.5" />
+        </Link>
+      </div>
+    </div>
   );
 }

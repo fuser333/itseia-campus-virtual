@@ -5,21 +5,20 @@ import { useRouter, usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import {
   LayoutDashboard,
-  PlayCircle,
-  FileText,
-  Users,
-  MessageSquare,
-  Award,
+  Brain,
+  BarChart2,
+  BrainCircuit,
+  Sparkles,
   Bot,
   BookOpen,
   LogOut,
   Menu,
   X,
-  Sparkles,
   ChevronLeft,
   ChevronRight,
-  Rocket,
-  Brain,
+  MessageSquare,
+  Users,
+  Award,
 } from "lucide-react";
 
 type DemoUser = {
@@ -32,20 +31,20 @@ type NavItem = {
   href: string;
   label: string;
   icon: typeof LayoutDashboard;
-  badge?: string;
   disabled?: boolean;
 };
 
 type NavSection = { label: string; items: NavItem[] };
 
-const SECTIONS: NavSection[] = [
+const MENU: NavSection[] = [
   {
     label: "MI PREUNIVERSITARIO",
     items: [
       { href: "/demo/aula", label: "Dashboard", icon: LayoutDashboard },
-      { href: "/demo/aula/dia-1", label: "Día 1 · Ignición", icon: PlayCircle, badge: "En curso" },
-      { href: "/demo/aula/dia-2", label: "Día 2 · Tu voz IA", icon: PlayCircle },
-      { href: "/demo/aula/dia-3", label: "Día 3 · Cine IA", icon: PlayCircle },
+      { href: "/demo/aula/semana-1", label: "Semana 1: Ignición", icon: Brain },
+      { href: "/demo/aula/semana-2", label: "Semana 2: Construcción", icon: BarChart2 },
+      { href: "/demo/aula/semana-3", label: "Semana 3: Automatización", icon: BrainCircuit },
+      { href: "/demo/aula/semana-4", label: "Semana 4: Lanzamiento", icon: Sparkles },
     ],
   },
   {
@@ -98,8 +97,8 @@ export default function DemoSidebar({
 
   if (!user) {
     return (
-      <div className="min-h-screen bg-[#0A1628] text-white flex items-center justify-center">
-        <div className="text-sm text-white/50">Cargando demo...</div>
+      <div className="min-h-screen bg-[#F9F6E7] text-[#1F2F58] flex items-center justify-center">
+        <div className="text-sm text-[#1F2F58]/50">Cargando demo...</div>
       </div>
     );
   }
@@ -114,12 +113,15 @@ export default function DemoSidebar({
   const sidebarWidth = collapsed ? "w-20" : "w-72";
 
   return (
-    <div className="min-h-screen bg-background flex h-screen overflow-hidden">
+    <div
+      className="flex h-screen overflow-hidden bg-[#F9F6E7] text-[#1F2F58]"
+      style={{ color: "#1F2F58" }}
+    >
       {/* Mobile toggle */}
       <button
         type="button"
         onClick={() => setMobileOpen((v) => !v)}
-        className="lg:hidden fixed top-4 left-4 z-50 p-2 rounded-lg bg-[#1F2F58] border border-white/10"
+        className="lg:hidden fixed top-4 left-4 z-50 p-2 rounded-lg bg-[#1F2F58] border border-white/10 text-white"
         aria-label="Toggle menu"
       >
         {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -127,7 +129,7 @@ export default function DemoSidebar({
 
       {/* Sidebar */}
       <aside
-        className={`fixed lg:sticky top-0 h-screen ${sidebarWidth} shrink-0 bg-[#0A1628] border-r border-white/[0.06] flex flex-col z-40 transition-all duration-200 ${
+        className={`fixed lg:sticky top-0 h-screen ${sidebarWidth} shrink-0 bg-[#0A1628] text-white border-r border-white/[0.06] flex flex-col z-40 transition-all duration-200 ${
           mobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         }`}
       >
@@ -169,7 +171,7 @@ export default function DemoSidebar({
 
         {/* Nav */}
         <nav className="flex-1 overflow-y-auto px-3 py-4">
-          {SECTIONS.map((section) => (
+          {MENU.map((section) => (
             <div key={section.label} className="mb-6">
               {!collapsed && (
                 <div className="px-3 mb-2 text-[10px] font-bold tracking-[0.2em] uppercase text-white/40">
@@ -204,11 +206,6 @@ export default function DemoSidebar({
                       {!collapsed && (
                         <>
                           <span className="flex-1 truncate">{item.label}</span>
-                          {item.badge && (
-                            <span className="text-[9px] px-2 py-0.5 rounded-full bg-[#73B8E7]/20 text-[#73B8E7] font-semibold uppercase tracking-wider">
-                              {item.badge}
-                            </span>
-                          )}
                           {item.disabled && (
                             <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-white/5 text-white/40 font-semibold uppercase tracking-wider">
                               soon
@@ -258,9 +255,14 @@ export default function DemoSidebar({
         </div>
       </aside>
 
-      {/* Main content — light background like /b2b */}
-      <main className="flex-1 min-w-0 overflow-y-auto">
-        <div className="mx-auto max-w-7xl px-6 py-8 lg:px-10 space-y-6">{children}</div>
+      {/* Main content — matches /preuni layout exactly */}
+      <main
+        className="flex-1 overflow-y-auto"
+        style={{ color: "#1F2F58" }}
+      >
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
+          {children}
+        </div>
       </main>
     </div>
   );

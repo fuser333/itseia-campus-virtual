@@ -380,11 +380,14 @@ async function gammaPoll(generationId, maxWaitMs = 300000) {
   throw new Error(`Gamma generation timed out`);
 }
 
-async function updateSupabaseSession(sessionId, slidesUrl) {
+async function updateSupabaseSession(sessionId, slidesUrl, slidesType = 'google_slides') {
+  // NOTE: Usamos slides_type='google_slides' para que SlideViewer embeba
+  // el gammaUrl con iframe directo (no via Google Docs viewer). El
+  // exportUrl PDF de Gamma expira en horas — NUNCA usar como slides_url.
   const res = await fetch(`${SUPA_BASE}/sessions?id=eq.${sessionId}`, {
     method: 'PATCH',
     headers: SUPA_HEADERS,
-    body: JSON.stringify({ slides_url: slidesUrl, slides_type: 'pdf' })
+    body: JSON.stringify({ slides_url: slidesUrl, slides_type: slidesType })
   });
   if (!res.ok) throw new Error(`Supabase PATCH failed (${res.status})`);
 }
@@ -411,10 +414,13 @@ async function main() {
 
       console.log(`    Generation ID: ${genId}`);
       const result = await gammaPoll(genId);
-      const slidesUrl = result.exportUrl || result.gammaUrl;
+      // IMPORTANT: gammaUrl es permanente, exportUrl expira en horas.
+      // Siempre priorizamos gammaUrl.
+      const slidesUrl = result.gammaUrl || result.exportUrl;
+      const slidesType = result.gammaUrl ? 'google_slides' : 'pdf';
 
-      console.log(`    URL: ${slidesUrl}`);
-      await updateSupabaseSession(p.sessionId, slidesUrl);
+      console.log(`    URL: ${slidesUrl} (type=${slidesType})`);
+      await updateSupabaseSession(p.sessionId, slidesUrl, slidesType);
       console.log(`    DB actualizada OK\n`);
       ok++;
     } catch (err) {
