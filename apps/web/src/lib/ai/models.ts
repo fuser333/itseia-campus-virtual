@@ -39,9 +39,9 @@ export const AI_MODELS = {
     maxTokens: 4096,
   },
   "claude-sonnet": {
-    name: "Claude 3.5 Sonnet",
+    name: "Claude Sonnet 4.5",
     provider: "openrouter",
-    modelId: "anthropic/claude-3.5-sonnet",
+    modelId: "anthropic/claude-sonnet-4.5",
     description: "Anthropic — mejor en analisis",
     costPer1kIn: 0.003,
     costPer1kOut: 0.015,
@@ -74,7 +74,7 @@ export const AI_MODELS = {
   "mistral-large": {
     name: "Mistral Large",
     provider: "openrouter",
-    modelId: "mistralai/mistral-large-latest",
+    modelId: "mistralai/mistral-large",
     description: "Mistral — europeo, rapido",
     costPer1kIn: 0.002,
     costPer1kOut: 0.006,
