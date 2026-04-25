@@ -3,13 +3,15 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { GraduationCap, BookOpen, Award, Building2, Users, Home, Menu, X, UserPlus, Rocket, Sparkles } from "lucide-react";
+import { GraduationCap, BookOpen, Award, Building2, Users, Home, Menu, X, UserPlus, Rocket, Sparkles, Compass, Zap } from "lucide-react";
 
 const navLinks = [
   { href: "/", label: "Inicio", icon: Home },
   { href: "/carreras-info", label: "Carreras", icon: GraduationCap },
   { href: "/preuni-info", label: "Preuni", icon: Rocket },
+  { href: "/cursos-mdt", label: "Cursos MDT", icon: Compass },
   { href: "/cursos-pro-info", label: "Cursos Pro", icon: BookOpen },
+  { href: "/bootcamp", label: "Bootcamp", icon: Zap },
   { href: "/certificaciones-info", label: "Certificaciones", icon: Award },
   { href: "/docentes-info", label: "Docentes", icon: Users },
   { href: "/empresas-info", label: "Empresas", icon: Building2 },
@@ -67,18 +69,8 @@ export default function PublicHeader() {
             })}
           </nav>
 
-          {/* Right: Register */}
+          {/* Right: Mobile menu */}
           <div className="flex items-center gap-2">
-            <a
-              href="https://itseia.ai/meet/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden md:flex items-center gap-1.5 bg-[#FBBC0C] hover:bg-[#E5AB00] text-[#0A1628] px-4 py-2 rounded-lg font-semibold text-sm transition-all"
-            >
-              <UserPlus className="w-4 h-4" />
-              <span>Charla Sábados</span>
-            </a>
-
             {/* Mobile menu toggle */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}

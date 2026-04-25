@@ -180,6 +180,18 @@ const MENU_CURSOS_PRO: NavSection[] = [
 ];
 
 /**
+ * EXPLORAR section — injected into all student menus so users can
+ * discover other programs (Cursos MDT, Bootcamp).
+ */
+const SECTION_EXPLORAR: NavSection = {
+  label: "EXPLORAR",
+  items: [
+    { href: "/cursos-mdt", label: "Cursos MDT",  icon: BookOpen },
+    { href: "/bootcamp",   label: "Bootcamp",    icon: FlaskConical },
+  ],
+};
+
+/**
  * CERTIFICACIONES section — injected into any student menu when the user
  * has at least one active certification enrollment.
  */
@@ -347,13 +359,15 @@ function getSectionsForMenuType(
     case "b2b":        return MENU_B2B;
   }
 
-  // Inject CERTIFICACIONES section for students who have cert enrollment.
-  // Insert it BEFORE the MI CUENTA section (last section).
+  // Inject EXPLORAR section before MI CUENTA (last section).
+  // Inject CERTIFICACIONES section after EXPLORAR when the user has cert enrollment.
+  const last = base[base.length - 1];
+  const middle = base.slice(0, -1);
+
   if (hasCertEnrollment) {
-    const last = base[base.length - 1];
-    return [...base.slice(0, -1), SECTION_CERTIFICACIONES, last];
+    return [...middle, SECTION_EXPLORAR, SECTION_CERTIFICACIONES, last];
   }
-  return base;
+  return [...middle, SECTION_EXPLORAR, last];
 }
 
 // ─── Role display labels ──────────────────────────────────────────────────────
@@ -507,18 +521,16 @@ export default function Sidebar({
           href="/dashboard"
           className="flex items-center gap-2.5 group overflow-hidden"
         >
-          <div className="w-9 h-9 rounded-lg bg-[#FBBC0C] flex items-center justify-center flex-shrink-0 transition-transform duration-200 group-hover:scale-105">
-            <Brain className="w-5 h-5 text-[#0A1628]" />
-          </div>
-          {!collapsed && (
-            <div className="flex flex-col overflow-hidden">
-              <span className="text-lg font-bold tracking-tight leading-none text-white font-[family-name:var(--font-space-grotesk)] whitespace-nowrap">
-                ITSEIA
-              </span>
-              <span className="text-[10px] text-[#73B8E7] font-medium uppercase tracking-widest leading-none mt-0.5">
-                Academy
-              </span>
+          {collapsed ? (
+            <div className="w-9 h-9 rounded-lg bg-[#FBBC0C] flex items-center justify-center flex-shrink-0 transition-transform duration-200 group-hover:scale-105">
+              <Brain className="w-5 h-5 text-[#0A1628]" />
             </div>
+          ) : (
+            <img
+              src="/logo_itseia.svg"
+              alt="ITSEIA"
+              className="h-8 w-auto"
+            />
           )}
         </Link>
       </div>

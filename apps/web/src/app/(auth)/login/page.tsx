@@ -307,18 +307,12 @@ function LoginForm() {
           </div>
 
           {/* Logo */}
-          <a href="https://itseia.ai" className="flex items-center gap-3 mb-8 no-underline group" target="_blank" rel="noopener">
-            <div className="w-12 h-12 rounded-xl flex items-center justify-center transition-transform group-hover:scale-110" style={{ backgroundColor: `${config.accentHex}20` }}>
-              <IconComponent className="w-7 h-7" style={{ color: config.accentHex }} />
-            </div>
-            <div>
-              <span className="text-xl font-bold tracking-tight text-white font-[family-name:var(--font-space-grotesk)] block">
-                ITSEIA
-              </span>
-              <span className="text-[10px] uppercase tracking-[0.2em] text-white/40">
-                Instituto Ecuatoriano de IA
-              </span>
-            </div>
+          <a href="https://itseia.ai" className="flex items-center mb-8 no-underline group" target="_blank" rel="noopener">
+            <img
+              src="/logo_itseia.svg"
+              alt="ITSEIA"
+              className="h-8 w-auto transition-transform group-hover:scale-105"
+            />
           </a>
 
           {/* Headline */}
@@ -409,15 +403,11 @@ function LoginForm() {
         <div className="w-full max-w-sm">
           {/* Mobile header — module-aware */}
           <div className="flex flex-col items-center mb-8 lg:hidden">
-            <div
-              className="w-14 h-14 rounded-2xl flex items-center justify-center mb-3"
-              style={{ backgroundColor: `${config.accentHex}20` }}
-            >
-              <IconComponent className="w-8 h-8" style={{ color: config.accentHex }} />
-            </div>
-            <span className="text-2xl font-bold tracking-tight font-[family-name:var(--font-space-grotesk)]">
-              ITSEIA
-            </span>
+            <img
+              src="/logo_itseia.svg"
+              alt="ITSEIA"
+              className="h-10 w-auto mb-3"
+            />
             <span className="text-xs text-muted-foreground mt-1">
               {config.subheadline}
             </span>

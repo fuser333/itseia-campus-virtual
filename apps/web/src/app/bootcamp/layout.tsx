@@ -1,9 +1,9 @@
-import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { supabaseAdmin } from "@/lib/supabase/admin";
-import PreuniSidebar from "@/components/layout/PreuniSidebar";
+import { redirect } from "next/navigation";
+import BootcampSidebar from "@/components/layout/BootcampSidebar";
 
-export default async function PreuniLayout({
+export default async function BootcampLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -26,19 +26,13 @@ export default async function PreuniLayout({
     .single();
 
   return (
-    <div
-      className="flex h-screen overflow-hidden bg-[#F9F6E7] text-[#1F2F58]"
-      style={{ color: "#1F2F58" }}
-    >
-      <PreuniSidebar
+    <div className="flex h-screen overflow-hidden bg-background">
+      <BootcampSidebar
         userName={profile?.full_name ?? undefined}
         userEmail={user.email ?? undefined}
       />
-      <main
-        className="flex-1 overflow-y-auto"
-        style={{ color: "#1F2F58" }}
-      >
-        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
+      <main className="flex-1 overflow-y-auto">
+        <div className="mx-auto max-w-7xl px-6 py-8 lg:px-10">
           {children}
         </div>
       </main>
