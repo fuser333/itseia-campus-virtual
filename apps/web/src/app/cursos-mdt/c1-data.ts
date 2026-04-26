@@ -22,6 +22,9 @@ export interface PresentacionSlide {
   contenido: string;
 }
 
+/** URL de presentación generada en Gamma (https://gamma.app/docs/...) */
+export type GammaUrl = string;
+
 export interface EjercicioCriterio {
   criterio: string;
   puntos: number;
@@ -36,6 +39,9 @@ export interface TemaC1 {
   videoTitulo: string;
   videoDuracion?: string;
   teoria: string;
+  /** URL de la presentación generada en Gamma (preferido sobre presentacionSlides) */
+  slidesUrl?: GammaUrl;
+  /** Fallback inline cuando no hay Gamma URL */
   presentacionSlides: PresentacionSlide[];
   quiz: QuizQuestion[];
   ejercicio: {
@@ -94,6 +100,7 @@ const tema1: TemaC1 = {
   videoEmbed: "https://www.youtube.com/embed/WCM0h9TX7cY",
   videoTitulo: "La historia completa de la Inteligencia Artificial — EDteam",
   videoDuracion: "~45 min · Español · EDteam",
+  slidesUrl: "https://gamma.app/docs/iwmny6bbdi94d5l",
   teoria: `La Inteligencia Artificial (IA) es la rama de la informática que busca crear sistemas capaces de realizar tareas que normalmente requieren inteligencia humana: comprender lenguaje natural, reconocer patrones visuales, tomar decisiones complejas y aprender de la experiencia sin ser programados explícitamente para cada caso.
 
 Es importante distinguir la IA de otros conceptos relacionados. La automatización ejecuta tareas repetitivas siguiendo reglas fijas (como una macro de Excel). La robótica construye máquinas físicas que interactúan con el entorno. La IA, en cambio, dota a los sistemas de la capacidad de adaptarse, aprender y mejorar con el tiempo. Una lavadora automática no es IA; un asistente de voz que aprende tus preferencias sí lo es.
@@ -235,6 +242,7 @@ const tema2: TemaC1 = {
   videoEmbed: "https://www.youtube.com/embed/Y2m40hM0AoI",
   videoTitulo: "Curso de Inteligencia Artificial completo en español — Tipos de IA",
   videoDuracion: "~60 min · Español · Curso completo",
+  slidesUrl: "https://gamma.app/docs/4n84xwfm5y5qjdx",
   teoria: `La Inteligencia Artificial se clasifica en tres niveles según su capacidad y alcance. Comprender esta clasificación es esencial para separar la realidad de la ciencia ficción y para tomar decisiones informadas sobre qué esperar de las herramientas que usas a diario.
 
 La IA Estrecha (ANI — Artificial Narrow Intelligence) es la única que existe hoy en 2026. Está diseñada para realizar una tarea específica de forma excepcional, pero no puede transferir ese conocimiento a otros dominios. Es como un cirujano brillante que no sabe cocinar un huevo: excelente en su especialidad, inútil fuera de ella.
@@ -379,6 +387,7 @@ const tema3: TemaC1 = {
   videoEmbed: "https://www.youtube.com/embed/xyU2pzKTQE0",
   videoTitulo: "Curso de Machine Learning desde cero — Completo en español",
   videoDuracion: "~3h · Español · Curso completo desde cero",
+  slidesUrl: "https://gamma.app/docs/gf3be2fm1nbr0ty",
   teoria: `La IA moderna se construye sobre tres paradigmas principales. Cada uno resuelve problemas de forma diferente y tiene aplicaciones específicas. Entender cuándo usar cada enfoque es lo que distingue a un profesional competente de alguien que solo sigue tutoriales.
 
 El Machine Learning (ML) es el enfoque donde las máquinas aprenden de datos sin ser programadas explícitamente. En la programación tradicional, tú escribes las reglas: "si la temperatura es mayor a 38°C, es fiebre". En ML, le das miles de ejemplos de temperaturas con su diagnóstico, y el algoritmo descubre las reglas por sí mismo. La diferencia es fundamental: en lugar de programar soluciones, programas sistemas que encuentran soluciones.
@@ -527,6 +536,7 @@ const tema4: TemaC1 = {
   videoEmbed: "https://www.youtube.com/embed/dIf0Ndubhfs",
   videoTitulo: "Inteligencia Artificial y el futuro de los profesionales del Ecuador",
   videoDuracion: "~40 min · Español · Contexto ecuatoriano",
+  slidesUrl: "https://gamma.app/docs/ln3vw924c1p8gt0",
   teoria: `La IA ya no es exclusiva de Silicon Valley. Ecuador y Latinoamérica están adoptando soluciones de IA en sectores clave, creando oportunidades profesionales concretas para quienes dominen estas herramientas. Este tema te dará un mapa detallado de dónde se está usando IA en tu región y dónde están las oportunidades.
 
 SECTOR FINANCIERO — El más avanzado en IA en Ecuador
@@ -686,6 +696,7 @@ const tema5: TemaC1 = {
   videoEmbed: "https://www.youtube.com/embed/QaELm7cSzm0",
   videoTitulo: "Curso completo: Ética aplicada a la Inteligencia Artificial",
   videoDuracion: "~60 min · Español · Taller educativo completo",
+  slidesUrl: "https://gamma.app/docs/8cmrbocizoegodi",
   teoria: `La IA es una herramienta poderosa, pero su uso irresponsable puede causar daño real a personas y comunidades. Comprender los desafíos éticos no es opcional para un profesional de IA — es una competencia profesional esencial que te diferenciará en el mercado laboral y te protegerá legalmente.
 
 SESGOS ALGORÍTMICOS — Cuando la IA hereda nuestros prejuicios

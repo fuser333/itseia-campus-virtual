@@ -19,6 +19,7 @@ import {
   CheckCircle2,
   MessageCircle,
 } from "lucide-react";
+import SlideViewer from "@/components/session/SlideViewer";
 import { CURSOS_MDT } from "../data";
 import { C1_TEMAS, C1_MODULOS } from "../c1-data";
 import type { TemaC1 } from "../c1-data";
@@ -144,7 +145,18 @@ function SesionContent({ sesionTitulo, temaData }: { sesionTitulo: string; temaD
   );
 
   // ── Presentación content ──
+  // Preferido: presentación generada en Gamma (slidesUrl).
+  // Fallback: slider inline con presentacionSlides (sin Gamma).
   const presentacionContent = (() => {
+    if (temaData.slidesUrl) {
+      return (
+        <SlideViewer
+          slidesUrl={temaData.slidesUrl}
+          slidesType="google_slides"
+          title={`Presentación — ${temaData.titulo}`}
+        />
+      );
+    }
     const slides = temaData.presentacionSlides;
     if (!slides || slides.length === 0) {
       return <p className="text-sm text-[#1F2F58]/50">Presentación próximamente</p>;
@@ -153,7 +165,7 @@ function SesionContent({ sesionTitulo, temaData }: { sesionTitulo: string; temaD
     return (
       <div>
         <div className="flex items-center justify-between mb-3">
-          <span className="text-xs text-[#1F2F58]/50">{slides.length} slides</span>
+          <span className="text-xs text-[#1F2F58]/50">{slides.length} slides (vista previa)</span>
           <span className="text-xs font-semibold text-[#517CBE] bg-[#517CBE]/10 px-2 py-0.5 rounded-full">
             {slideIndex + 1} / {slides.length}
           </span>
