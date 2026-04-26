@@ -20,6 +20,8 @@ import {
   MessageCircle,
 } from "lucide-react";
 import { CURSOS_MDT } from "../data";
+import { C1_TEMAS, C1_MODULOS } from "../c1-data";
+import type { TemaC1 } from "../c1-data";
 
 // ─── Slug → índice en CURSOS_MDT (c1=índice 0, c2=índice 1, ...) ─────────────
 
@@ -90,52 +92,153 @@ const SESSION_TABS: TabDef[] = [
 
 // ─── Componente: pestañas de sesión ──────────────────────────────────────────
 
-function SesionTabs({ sesionNumero, sesionTitulo }: { sesionNumero: number; sesionTitulo: string }) {
+function SesionTabs({ sesionNumero, sesionTitulo, temaData }: { sesionNumero: number; sesionTitulo: string; temaData?: TemaC1 }) {
   const [activeTab, setActiveTab] = useState("video");
+  const [quizAnswers, setQuizAnswers] = useState<Record<number, number>>({});
+  const [showResults, setShowResults] = useState(false);
 
-  return (
-    <div className="mt-3 border border-[#1F2F58]/10 rounded-xl overflow-hidden bg-white">
-      {/* Tab bar */}
-      <div className="flex overflow-x-auto border-b border-[#1F2F58]/10 bg-[#F9F6E7]/60">
-        {SESSION_TABS.map((tab) => {
-          const isActive = activeTab === tab.id;
-          return (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center gap-1.5 px-3 py-2.5 text-xs font-semibold whitespace-nowrap transition-all border-b-2 ${
-                isActive
-                  ? "border-[#FBBC0C] text-[#0A1628] bg-white"
-                  : "border-transparent text-[#1F2F58]/50 hover:text-[#1F2F58]/80 hover:bg-white/60"
-              }`}
-            >
-              <span style={{ color: isActive ? tab.color : undefined }}>
-                {tab.icon}
-              </span>
-              {tab.label}
-            </button>
-          );
-        })}
-      </div>
+  const hasContent = temaData && temaData.videoEmbed !== "";
 
-      {/* Tab content — placeholder */}
-      <div className="p-6">
+  function renderTabContent() {
+    if (!hasContent || !temaData) {
+      return (
         <div className="flex flex-col items-center justify-center py-8 text-center">
           <div className="mb-4 flex size-12 items-center justify-center rounded-full bg-[#1F2F58]/5">
             <Brain className="size-6 text-[#1F2F58]/20" />
           </div>
-          <h4 className="text-sm font-semibold text-[#0A1628]">
-            {SESSION_TABS.find((t) => t.id === activeTab)?.label} — Sesión {sesionNumero}
-          </h4>
-          <p className="mt-1 text-xs text-[#1F2F58]/50 max-w-xs">
-            &ldquo;{sesionTitulo}&rdquo; — El contenido de esta pestaña estará disponible próximamente.
-          </p>
-          <span className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-[#FBBC0C]/10 px-3 py-1 text-[10px] font-semibold text-[#0A1628]">
-            <Clock className="size-3" />
-            Contenido próximamente
-          </span>
+          <p className="text-sm text-[#1F2F58]/50">Contenido próximamente</p>
         </div>
+      );
+    }
+
+    switch (activeTab) {
+      case "video":
+        return (
+          <div>
+            <h4 className="text-sm font-bold text-[#0A1628] mb-3">{temaData.videoTitulo}</h4>
+            <div className="rounded-xl overflow-hidden" style={{ aspectRatio: "16/9" }}>
+              <iframe src={temaData.videoEmbed} className="w-full h-full" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
+            </div>
+          </div>
+        );
+      case "presentacion":
+        return (
+          <div>
+            <h4 className="text-sm font-bold text-[#0A1628] mb-2">Presentación — {sesionTitulo}</h4>
+            <p className="text-sm text-[#1F2F58]/70 mb-4">Presentación interactiva de 10+ slides con los conceptos clave de este tema.</p>
+            <a href="https://gamma.app" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-[#FBBC0C] text-[#0A1628] px-4 py-2 rounded-lg font-semibold text-sm hover:bg-[#E5AB00]">
+              <FileText className="size-4" /> Abrir en Gamma
+            </a>
+          </div>
+        );
+      case "teoria":
+        return (
+          <div>
+            <h4 className="text-sm font-bold text-[#0A1628] mb-3">Teoría — {sesionTitulo}</h4>
+            <div className="prose prose-sm max-w-none text-[#1F2F58] leading-relaxed whitespace-pre-line">{temaData.teoria}</div>
+          </div>
+        );
+      case "quiz":
+        return (
+          <div>
+            <h4 className="text-sm font-bold text-[#0A1628] mb-4">Quiz — {temaData.quiz.length} preguntas</h4>
+            {temaData.quiz.map((q, qi) => (
+              <div key={qi} className="mb-6 p-4 rounded-lg bg-[#F9F6E7]/80 border border-[#1F2F58]/10">
+                <p className="text-sm font-semibold text-[#0A1628] mb-3">{qi + 1}. {q.pregunta}</p>
+                {q.opciones.map((op, oi) => {
+                  const selected = quizAnswers[qi] === oi;
+                  const isCorrect = showResults && oi === q.respuesta;
+                  const isWrong = showResults && selected && oi !== q.respuesta;
+                  return (
+                    <button key={oi} onClick={() => setQuizAnswers(prev => ({ ...prev, [qi]: oi }))}
+                      className={`block w-full text-left px-3 py-2 mb-1.5 rounded-lg text-sm transition-all border ${
+                        isCorrect ? "bg-green-50 border-green-400 text-green-800" :
+                        isWrong ? "bg-red-50 border-red-400 text-red-800" :
+                        selected ? "bg-[#FBBC0C]/10 border-[#FBBC0C] text-[#0A1628]" :
+                        "bg-white border-[#1F2F58]/10 text-[#1F2F58] hover:bg-[#F9F6E7]"
+                      }`}>
+                      {op}
+                    </button>
+                  );
+                })}
+                {showResults && <p className="mt-2 text-xs text-[#1F2F58]/60 italic">{q.explicacion}</p>}
+              </div>
+            ))}
+            <button onClick={() => setShowResults(!showResults)}
+              className="bg-[#FBBC0C] text-[#0A1628] px-4 py-2 rounded-lg font-semibold text-sm hover:bg-[#E5AB00]">
+              {showResults ? "Ocultar respuestas" : "Ver respuestas"}
+            </button>
+          </div>
+        );
+      case "ejercicio":
+        return (
+          <div>
+            <h4 className="text-sm font-bold text-[#0A1628] mb-2">Ejercicio Práctico</h4>
+            <p className="text-sm text-[#1F2F58]/70 mb-1"><strong>Objetivo:</strong> {temaData.ejercicio.objetivo}</p>
+            <p className="text-sm text-[#1F2F58]/70 mb-3"><strong>Herramientas:</strong> {temaData.ejercicio.herramientas}</p>
+            <ol className="list-decimal list-inside space-y-2 mb-4">
+              {temaData.ejercicio.pasos.map((p, i) => (
+                <li key={i} className="text-sm text-[#1F2F58]">{p}</li>
+              ))}
+            </ol>
+            <div className="p-3 rounded-lg bg-[#FBBC0C]/10 border border-[#FBBC0C]/30">
+              <p className="text-xs font-semibold text-[#0A1628]">Resultado esperado:</p>
+              <p className="text-xs text-[#1F2F58]">{temaData.ejercicio.resultado}</p>
+            </div>
+          </div>
+        );
+      case "ailab":
+        return (
+          <div className="text-center py-6">
+            <FlaskConical className="size-10 text-[#73B8E7] mx-auto mb-3" />
+            <h4 className="text-sm font-bold text-[#0A1628] mb-2">AI Lab</h4>
+            <p className="text-sm text-[#1F2F58]/60 mb-4">Practica con IA en vivo — ChatGPT, Claude y Gemini incluidos.</p>
+            <Link href="/ai-lab" className="inline-flex items-center gap-2 bg-[#73B8E7] text-white px-4 py-2 rounded-lg font-semibold text-sm hover:bg-[#5BA0D0]">
+              Abrir AI Lab
+            </Link>
+          </div>
+        );
+      case "recursos":
+        return (
+          <div>
+            <h4 className="text-sm font-bold text-[#0A1628] mb-3">Recursos Complementarios</h4>
+            {temaData.recursos.map((r, ri) => (
+              <a key={ri} href={r.url} target="_blank" rel="noopener noreferrer"
+                className="flex items-center gap-3 p-3 mb-2 rounded-lg bg-white border border-[#1F2F58]/10 hover:border-[#73B8E7]/40 transition-all">
+                <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${
+                  r.tipo === "documentacion" ? "bg-[#73B8E7]/10 text-[#73B8E7]" :
+                  r.tipo === "herramienta" ? "bg-[#FBBC0C]/10 text-[#0A1628]" :
+                  "bg-[#F0846D]/10 text-[#F0846D]"
+                }`}>{r.tipo}</span>
+                <span className="text-sm text-[#1F2F58] font-medium">{r.titulo}</span>
+              </a>
+            ))}
+          </div>
+        );
+      default:
+        return null;
+    }
+  }
+
+  return (
+    <div className="mt-3 border border-[#1F2F58]/10 rounded-xl overflow-hidden bg-white">
+      <div className="flex overflow-x-auto border-b border-[#1F2F58]/10 bg-[#F9F6E7]/60">
+        {SESSION_TABS.map((tab) => {
+          const isActive = activeTab === tab.id;
+          const hasData = hasContent && (tab.id !== "presentacion" || true);
+          return (
+            <button key={tab.id} onClick={() => setActiveTab(tab.id)}
+              className={`flex items-center gap-1.5 px-3 py-2.5 text-xs font-semibold whitespace-nowrap transition-all border-b-2 ${
+                isActive ? "border-[#FBBC0C] text-[#0A1628] bg-white" : "border-transparent text-[#1F2F58]/50 hover:text-[#1F2F58]/80 hover:bg-white/60"
+              }`}>
+              <span style={{ color: isActive ? tab.color : undefined }}>{tab.icon}</span>
+              {tab.label}
+              {hasData && <span className="size-1.5 rounded-full bg-green-400" />}
+            </button>
+          );
+        })}
       </div>
+      <div className="p-6">{renderTabContent()}</div>
     </div>
   );
 }
@@ -147,11 +250,13 @@ function SesionCard({
   titulo,
   isExpanded,
   onToggle,
+  temaData,
 }: {
   numero: number;
   titulo: string;
   isExpanded: boolean;
   onToggle: () => void;
+  temaData?: TemaC1;
 }) {
   return (
     <div
@@ -206,7 +311,7 @@ function SesionCard({
       {/* Expanded content */}
       {isExpanded && (
         <div className="px-4 pb-4">
-          <SesionTabs sesionNumero={numero} sesionTitulo={titulo} />
+          <SesionTabs sesionNumero={numero} sesionTitulo={titulo} temaData={temaData} />
         </div>
       )}
     </div>
@@ -426,15 +531,19 @@ export default function CursoMdtPage({ params }: PageProps) {
         </div>
 
         <div className="space-y-2">
-          {curso.sesiones.map((sesion) => (
-            <SesionCard
-              key={sesion.numero}
-              numero={sesion.numero}
-              titulo={sesion.titulo}
-              isExpanded={expandedSesion === sesion.numero}
-              onToggle={() => toggleSesion(sesion.numero)}
-            />
-          ))}
+          {curso.sesiones.map((sesion) => {
+            const temaData = slug === "c1" ? C1_TEMAS[sesion.numero - 1] : undefined;
+            return (
+              <SesionCard
+                key={sesion.numero}
+                numero={sesion.numero}
+                titulo={sesion.titulo}
+                isExpanded={expandedSesion === sesion.numero}
+                onToggle={() => toggleSesion(sesion.numero)}
+                temaData={temaData}
+              />
+            );
+          })}
         </div>
       </section>
 
