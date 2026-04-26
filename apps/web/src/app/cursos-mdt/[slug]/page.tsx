@@ -91,10 +91,13 @@ const SESSION_TABS: TabDef[] = [
 ];
 
 // ─── Componente: contenido de sesión (formato Julio Cruz) ───────────────────
-// Video arriba + MÁS CONTENIDO con acordeones expandibles debajo.
-// El estudiante puede ver el video mientras expande teoría, quiz, etc.
+// Tabs FUNCIONALES arriba: click en una tab cambia el contenido principal.
+// Debajo de "MÁS CONTENIDO" hay acordeones con LAS OTRAS pestañas (no la activa).
+// Así el estudiante puede ver Video grande arriba Y expandir Teoría/Quiz debajo
+// sin perder el video. Mismo patrón que Julio Cruz B2B.
 
 function SesionContent({ sesionTitulo, temaData }: { sesionTitulo: string; temaData?: TemaC1 }) {
+  const [activeTab, setActiveTab] = useState<string>("video");
   const [expandedSections, setExpandedSections] = useState<Set<string>>(new Set());
   const [quizAnswers, setQuizAnswers] = useState<Record<number, number>>({});
   const [showResults, setShowResults] = useState(false);
@@ -122,35 +125,9 @@ function SesionContent({ sesionTitulo, temaData }: { sesionTitulo: string; temaD
     );
   }
 
-  // ── Tabs at top (for quick navigation) ──
-  const tabBar = (
-    <div className="flex overflow-x-auto border-b border-[#1F2F58]/10 bg-[#F9F6E7]/60">
-      {SESSION_TABS.map((tab) => {
-        const isOpen = tab.id === "video" || expandedSections.has(tab.id);
-        return (
-          <button
-            key={tab.id}
-            onClick={() => {
-              if (tab.id !== "video") toggleSection(tab.id);
-            }}
-            className={`flex items-center gap-1.5 px-3 py-2.5 text-xs font-semibold whitespace-nowrap transition-all border-b-2 ${
-              isOpen
-                ? "border-[#FBBC0C] text-[#0A1628] bg-white"
-                : "border-transparent text-[#1F2F58]/50 hover:text-[#1F2F58]/80 hover:bg-white/60"
-            }`}
-          >
-            <span style={{ color: isOpen ? tab.color : undefined }}>{tab.icon}</span>
-            {tab.label}
-            <span className="size-1.5 rounded-full bg-green-400" />
-          </button>
-        );
-      })}
-    </div>
-  );
-
-  // ── Video section (always visible) ──
-  const videoSection = (
-    <div className="p-5">
+  // ── Video content (puede ir arriba o como acordeón) ──
+  const videoContent = (
+    <div>
       <h4 className="text-sm font-bold text-[#0A1628] mb-1">{temaData.videoTitulo}</h4>
       {temaData.videoDuracion && (
         <p className="text-xs text-[#1F2F58]/50 mb-3">{temaData.videoDuracion}</p>
@@ -165,40 +142,6 @@ function SesionContent({ sesionTitulo, temaData }: { sesionTitulo: string; temaD
       </div>
     </div>
   );
-
-  // ── Accordion section wrapper ──
-  const AccordionItem = ({
-    id,
-    label,
-    icon,
-    color,
-    children,
-  }: {
-    id: string;
-    label: string;
-    icon: React.ReactNode;
-    color: string;
-    children: React.ReactNode;
-  }) => {
-    const isOpen = expandedSections.has(id);
-    return (
-      <div className="border-t border-[#1F2F58]/8">
-        <button
-          onClick={() => toggleSection(id)}
-          className="w-full flex items-center gap-3 px-5 py-3.5 text-left hover:bg-[#F9F6E7]/40 transition-colors"
-        >
-          <span style={{ color }} className="shrink-0">{icon}</span>
-          <span className="text-sm font-semibold text-[#0A1628] flex-1">{label}</span>
-          {isOpen ? (
-            <ChevronUp className="size-4 text-[#1F2F58]/30" />
-          ) : (
-            <ChevronDown className="size-4 text-[#1F2F58]/30" />
-          )}
-        </button>
-        {isOpen && <div className="px-5 pb-5">{children}</div>}
-      </div>
-    );
-  };
 
   // ── Presentación content ──
   const presentacionContent = (() => {
@@ -370,16 +313,51 @@ function SesionContent({ sesionTitulo, temaData }: { sesionTitulo: string; temaD
     </div>
   );
 
+  // ── Mapa de contenidos por tab id ──
+  const contentMap: Record<string, React.ReactNode> = {
+    video: videoContent,
+    presentacion: presentacionContent,
+    teoria: teoriaContent,
+    quiz: quizContent,
+    ejercicio: ejercicioContent,
+    ailab: ailabContent,
+    recursos: recursosContent,
+  };
+
+  // ── Las "otras" tabs (no la activa) van como acordeones abajo ──
+  const otherTabs = SESSION_TABS.filter((t) => t.id !== activeTab);
+
   return (
     <div className="mt-3 border border-[#1F2F58]/10 rounded-xl overflow-hidden bg-white">
-      {/* ── Tab bar (navigation) ── */}
-      {tabBar}
+      {/* ── Tab bar — clic cambia el contenido principal ── */}
+      <div className="flex overflow-x-auto border-b border-[#1F2F58]/10 bg-[#F9F6E7]/60">
+        {SESSION_TABS.map((tab) => {
+          const isActive = activeTab === tab.id;
+          return (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`flex items-center gap-1.5 px-3 py-2.5 text-xs font-semibold whitespace-nowrap transition-all border-b-2 ${
+                isActive
+                  ? "border-[#FBBC0C] text-[#0A1628] bg-white"
+                  : "border-transparent text-[#1F2F58]/50 hover:text-[#1F2F58]/80 hover:bg-white/60"
+              }`}
+            >
+              <span style={{ color: isActive ? tab.color : undefined }}>{tab.icon}</span>
+              {tab.label}
+              <span className="size-1.5 rounded-full bg-green-400" />
+            </button>
+          );
+        })}
+      </div>
 
-      {/* ── Video (always visible at top) ── */}
-      {videoSection}
+      {/* ── Contenido principal — corresponde a la pestaña activa ── */}
+      <div className="p-5">
+        {contentMap[activeTab]}
+      </div>
 
       {/* ── MÁS CONTENIDO divider ── */}
-      <div className="flex items-center gap-3 px-5 py-2 bg-[#F9F6E7]/40">
+      <div className="flex items-center gap-3 px-5 py-2 bg-[#F9F6E7]/40 border-t border-[#1F2F58]/8">
         <div className="flex-1 border-t border-[#1F2F58]/8" />
         <span className="text-[10px] font-semibold uppercase tracking-widest text-[#1F2F58]/30 select-none">
           Más contenido
@@ -387,25 +365,27 @@ function SesionContent({ sesionTitulo, temaData }: { sesionTitulo: string; temaD
         <div className="flex-1 border-t border-[#1F2F58]/8" />
       </div>
 
-      {/* ── Accordion sections ── */}
-      <AccordionItem id="presentacion" label="Presentación" icon={<FileText className="size-4" />} color="#517CBE">
-        {presentacionContent}
-      </AccordionItem>
-      <AccordionItem id="teoria" label="Teoría" icon={<BookOpen className="size-4" />} color="#1F2F58">
-        {teoriaContent}
-      </AccordionItem>
-      <AccordionItem id="quiz" label="Quiz" icon={<ClipboardList className="size-4" />} color="#FBBC0C">
-        {quizContent}
-      </AccordionItem>
-      <AccordionItem id="ejercicio" label="Ejercicio" icon={<Pencil className="size-4" />} color="#F0846D">
-        {ejercicioContent}
-      </AccordionItem>
-      <AccordionItem id="ailab" label="AI Lab" icon={<FlaskConical className="size-4" />} color="#73B8E7">
-        {ailabContent}
-      </AccordionItem>
-      <AccordionItem id="recursos" label="Recursos" icon={<FolderOpen className="size-4" />} color="#517CBE">
-        {recursosContent}
-      </AccordionItem>
+      {/* ── Acordeones — las OTRAS pestañas (no la activa) ── */}
+      {otherTabs.map((tab) => {
+        const isOpen = expandedSections.has(tab.id);
+        return (
+          <div key={tab.id} className="border-t border-[#1F2F58]/8 first:border-t-0">
+            <button
+              onClick={() => toggleSection(tab.id)}
+              className="w-full flex items-center gap-3 px-5 py-3.5 text-left hover:bg-[#F9F6E7]/40 transition-colors"
+            >
+              <span style={{ color: tab.color }} className="shrink-0">{tab.icon}</span>
+              <span className="text-sm font-semibold text-[#0A1628] flex-1">{tab.label}</span>
+              {isOpen ? (
+                <ChevronUp className="size-4 text-[#1F2F58]/30" />
+              ) : (
+                <ChevronDown className="size-4 text-[#1F2F58]/30" />
+              )}
+            </button>
+            {isOpen && <div className="px-5 pb-5">{contentMap[tab.id]}</div>}
+          </div>
+        );
+      })}
     </div>
   );
 }
