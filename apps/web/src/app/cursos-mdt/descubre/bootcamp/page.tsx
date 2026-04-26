@@ -116,7 +116,7 @@ export default function DescubreBootcamp() {
         <div style={{ width: "100%", marginBottom: "40px" }}>
           <div className="bt-video-ratio">
             <iframe
-              src="https://www.youtube.com/embed/QOtj8k5YjtI?rel=0&modestbranding=1"
+              src="https://www.youtube.com/embed/QVoO3cY_BPQ?rel=0&modestbranding=1"
               title="Bootcamp Intensivo IA — ITSEIA"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
