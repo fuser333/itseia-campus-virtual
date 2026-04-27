@@ -30,7 +30,7 @@ export async function updateSession(request: NextRequest) {
   } = await supabase.auth.getUser();
 
   // Public info pages — never redirect to login
-  const publicInfoPaths = ["/carreras-info", "/preuni-info", "/cursos-pro-info", "/certificaciones-info", "/docentes-info", "/empresas-info"];
+  const publicInfoPaths = ["/carreras-info", "/preuni-info", "/cursos-mdt-info", "/cursos-pro-info", "/bootcamp-info", "/certificaciones-info", "/docentes-info", "/empresas-info", "/demo-info"];
   const isPublicInfo = publicInfoPaths.some((path) => request.nextUrl.pathname.startsWith(path));
   if (isPublicInfo) return supabaseResponse;
 
