@@ -6,22 +6,60 @@ import type { Metadata } from "next";
 import {
   Clock,
   Layers,
-  CalendarCheck,
-  ArrowRight,
   BookOpen,
+  ArrowRight,
   MessageCircle,
-  Wand2,
-  Wrench,
-  ClipboardList,
   Play,
+  GraduationCap,
+  Award,
+  Sparkles,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { STEVEEN_MODULOS, STEVEEN_TEMAS } from "./_data/steveen-data";
 
 export const metadata: Metadata = {
   title: "Panel Profesional | ITSEIA Academy",
-  description: "Dashboard del estudiante de Cursos Profesionales ITSEIA.",
+  description:
+    "Dashboard del estudiante de Cursos Profesionales ITSEIA — IA Aplicada para Ingeniería Industrial.",
 };
+
+// ─── Catálogo de cursos profesionales disponibles ────────────────────────────
+// Hoy publicamos un solo curso piloto ($197). Más cursos se sumarán al catálogo
+// cuando estén producidos. La estructura permite expandir sin romper el panel.
+
+interface CursoPro {
+  slug: string;
+  titulo: string;
+  subtitulo: string;
+  descripcion: string;
+  precio: string;
+  precioNumero: number;
+  horas: number;
+  modulos: number;
+  temas: number;
+  nivel: string;
+  categoria: string;
+  destacado: boolean;
+}
+
+const CURSOS_PRO: CursoPro[] = [
+  {
+    slug: "steveen-pinchao",
+    titulo: "IA Aplicada para Ingeniería Industrial",
+    subtitulo: "Curso Estándar — 8 módulos · 40 temas · 60 horas",
+    descripcion:
+      "Domina ChatGPT, Claude y Copilot Excel aplicados a producción, mantenimiento predictivo, control de calidad y cadena de suministro. Cliente piloto: Ing. Steveen Pinchao.",
+    precio: "$197",
+    precioNumero: 197,
+    horas: 60,
+    modulos: STEVEEN_MODULOS.length,
+    temas: STEVEEN_TEMAS.length,
+    nivel: "Profesional",
+    categoria: "Ingeniería Industrial",
+    destacado: true,
+  },
+];
 
 // ─── Page ────────────────────────────────────────────────────────────────────
 
@@ -36,141 +74,75 @@ export default async function CursosProDashboardPage() {
     redirect("/login");
   }
 
-  // Fetch profile
+  // Fetch profile server-side (bypasses RLS) para nombre de bienvenida
   const { data: profile } = await supabaseAdmin
     .from("profiles")
-    .select("full_name, email, nivel_xp")
+    .select("full_name, email")
     .eq("id", user.id)
     .single();
 
   const fullName  = profile?.full_name ?? user.email?.split("@")[0] ?? "Estudiante";
   const firstName = fullName.split(" ")[0];
 
-  // Fetch active enrollment for "curso" type program
-  const { data: enrollment } = await supabaseAdmin
-    .from("enrollments")
-    .select("id, enrolled_at, programs(id, name, slug, type, duration_months, description)")
-    .eq("user_id", user.id)
-    .eq("status", "active")
-    .order("enrolled_at", { ascending: false })
-    .limit(1)
-    .maybeSingle();
+  // Verificar enrollment al curso Steveen $197.
+  // No rompemos si la tabla aún no existe — devolvemos false y mostramos CTA "Inscríbete".
+  let enrolledSteveen = false;
+  try {
+    const { data: enrollment } = await supabaseAdmin
+      .from("cursos_pro_enrollments")
+      .select("curso_slug, estado")
+      .eq("user_id", user.id)
+      .eq("curso_slug", "steveen-pinchao")
+      .eq("estado", "activo")
+      .maybeSingle();
+    enrolledSteveen = Boolean(enrollment);
+  } catch {
+    enrolledSteveen = false;
+  }
 
-  type ProgramRow = {
-    id: string;
-    name: string;
-    slug: string;
-    type: string;
-    duration_months: number | null;
-    description: string | null;
-  };
+  // Fallback: también consideramos el enrollment genérico del modelo viejo
+  // si tiene un programa con slug que coincida.
+  if (!enrolledSteveen) {
+    try {
+      const { data: legacyEnrollment } = await supabaseAdmin
+        .from("enrollments")
+        .select("id, programs(slug)")
+        .eq("user_id", user.id)
+        .eq("status", "active")
+        .maybeSingle();
 
-  const rawPrograms = enrollment?.programs as unknown;
-  const program: ProgramRow | null = Array.isArray(rawPrograms)
-    ? (rawPrograms[0] as ProgramRow) ?? null
-    : (rawPrograms as ProgramRow | null) ?? null;
-
-  // Fetch progress data for the active program
-  let horasCompletadas    = 0;
-  let moduloActual        = 1;
-  let totalModulos        = 0;
-  let overallPercent      = 0;
-
-  if (program) {
-    // Get modules via courses for this program
-    const { data: courses } = await supabaseAdmin
-      .from("courses")
-      .select("id")
-      .eq("program_id", program.id)
-      .eq("is_active", true);
-
-    const courseIds = (courses ?? []).map((c) => c.id);
-
-    if (courseIds.length > 0) {
-      const { data: modules } = await supabaseAdmin
-        .from("modules")
-        .select("id")
-        .in("course_id", courseIds)
-        .eq("is_active", true);
-
-      const moduleIds = (modules ?? []).map((m) => m.id);
-      totalModulos    = moduleIds.length;
-
-      if (moduleIds.length > 0) {
-        const { data: lessons } = await supabaseAdmin
-          .from("lessons")
-          .select("id, duration_minutes")
-          .in("module_id", moduleIds)
-          .eq("is_active", true);
-
-        const lessonIds = (lessons ?? []).map((l) => l.id);
-
-        if (lessonIds.length > 0) {
-          const { data: progress } = await supabaseAdmin
-            .from("progress")
-            .select("lesson_id, completed")
-            .eq("user_id", user.id)
-            .in("lesson_id", lessonIds)
-            .eq("completed", true);
-
-          const completedSet = new Set((progress ?? []).map((p) => p.lesson_id));
-
-          // Hours = sum of duration_minutes for completed lessons / 60
-          const minutosCompletados = (lessons ?? [])
-            .filter((l) => completedSet.has(l.id))
-            .reduce((acc, l) => acc + (l.duration_minutes ?? 45), 0);
-
-          horasCompletadas = Math.round(minutosCompletados / 60);
-          overallPercent   =
-            lessonIds.length > 0
-              ? Math.round((completedSet.size / lessonIds.length) * 100)
-              : 0;
-
-          // Determine current module (first module with incomplete lesson)
-          if (modules && modules.length > 0) {
-            for (let i = 0; i < modules.length; i++) {
-              const { data: mLessons } = await supabaseAdmin
-                .from("lessons")
-                .select("id")
-                .eq("module_id", modules[i].id)
-                .eq("is_active", true);
-
-              const allCompleted = (mLessons ?? []).every((l) =>
-                completedSet.has(l.id),
-              );
-
-              if (!allCompleted) {
-                moduloActual = i + 1;
-                break;
-              }
-              moduloActual = modules.length;
-            }
-          }
-        }
+      type ProgramRow = { slug: string };
+      const rawPrograms = legacyEnrollment?.programs as unknown;
+      const program: ProgramRow | null = Array.isArray(rawPrograms)
+        ? (rawPrograms[0] as ProgramRow) ?? null
+        : (rawPrograms as ProgramRow | null) ?? null;
+      if (program?.slug === "steveen-pinchao" || program?.slug === "ia-ingenieria-industrial") {
+        enrolledSteveen = true;
       }
+    } catch {
+      // ignorar
     }
   }
 
-  // Fetch asesorías used (using lesson type as proxy — or just show placeholder)
-  // Since there's no dedicated asesorias table, we show a static placeholder
-  const asesoriasUsadas = 0;
-  const asesoriasTotal  = 3;
+  const cursoSteveen = CURSOS_PRO[0];
 
   return (
     <div className="space-y-10">
 
-      {/* ── Welcome header ──────────────────────────────────────────────── */}
+      {/* ── Welcome header ──────────────────────────────────────────────────── */}
       <div className="rounded-2xl bg-gradient-to-r from-[#1F2F58] to-[#0A1628] p-6 sm:p-8 text-white">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
             <p className="text-xs font-semibold uppercase tracking-widest text-white/40 mb-1">
-              PANEL PROFESIONAL
+              PANEL CURSOS PROFESIONALES
             </p>
             <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">
               Bienvenido, {firstName}
             </h1>
             <p className="mt-1 text-sm text-white/60">
-              Continúa aprendiendo. Tu próxima lección te está esperando.
+              {enrolledSteveen
+                ? "Continúa tu curso. Las 7 pestañas de cada tema te esperan."
+                : "Explora el curso profesional disponible y empieza a aplicar IA en tu trabajo."}
             </p>
           </div>
           <a
@@ -185,184 +157,160 @@ export default async function CursosProDashboardPage() {
         </div>
       </div>
 
-      {/* ── Stats ───────────────────────────────────────────────────────── */}
+      {/* ── Stats ───────────────────────────────────────────────────────────── */}
       <div className="grid gap-4 sm:grid-cols-3">
         <StatCard
-          icon={<Clock className="size-5 text-[#73B8E7]" />}
-          label="Horas Completadas"
-          value={String(horasCompletadas)}
-          sub="horas de aprendizaje"
+          icon={<Layers className="size-5 text-[#73B8E7]" />}
+          label="Módulos"
+          value={String(cursoSteveen.modulos)}
+          sub="estructurados por etapa"
           accent="bg-[#73B8E7]/10"
         />
         <StatCard
-          icon={<Layers className="size-5 text-[#FBBC0C]" />}
-          label="Módulo Actual"
-          value={totalModulos > 0 ? `${moduloActual} / ${totalModulos}` : "—"}
-          sub={totalModulos > 0 ? `${overallPercent}% completado` : "Sin contenido aún"}
+          icon={<BookOpen className="size-5 text-[#FBBC0C]" />}
+          label="Temas"
+          value={String(cursoSteveen.temas)}
+          sub="con video, quiz y AI Lab"
           accent="bg-[#FBBC0C]/10"
-          href="/cursos-pro/progreso"
         />
         <StatCard
-          icon={<CalendarCheck className="size-5 text-[#F0846D]" />}
-          label="Asesorías con Héctor"
-          value={`${asesoriasUsadas} / ${asesoriasTotal}`}
-          sub="usadas de tu plan"
+          icon={<Clock className="size-5 text-[#F0846D]" />}
+          label="Horas"
+          value={String(cursoSteveen.horas)}
+          sub="de aprendizaje aplicado"
           accent="bg-[#F0846D]/10"
-          href="/cursos-pro/asesorias"
         />
       </div>
 
-      {/* ── Active course card ───────────────────────────────────────────── */}
-      {program ? (
-        <div>
-          <h2 className="mb-4 text-xl font-bold text-foreground flex items-center gap-2">
-            <BookOpen className="size-5 text-[#73B8E7]" />
-            Tu Curso Activo
-          </h2>
-          <div className="rounded-2xl border border-border bg-card shadow-sm overflow-hidden">
-            {/* Card header */}
-            <div className="bg-gradient-to-br from-[#1F2F58]/8 to-[#0A1628]/5 px-6 py-5 border-b border-border">
-              <div className="flex items-start justify-between gap-4">
-                <div className="flex-1">
-                  <Badge className="mb-2 border-none bg-[#FBBC0C]/15 text-[10px] font-semibold uppercase tracking-wider text-[#FBBC0C]">
-                    Curso Profesional
+      {/* ── Curso Steveen card ──────────────────────────────────────────────── */}
+      <section>
+        <h2 className="mb-4 text-xl font-bold text-foreground flex items-center gap-2">
+          <GraduationCap className="size-5 text-[#73B8E7]" />
+          {enrolledSteveen ? "Tu Curso Activo" : "Curso Disponible"}
+        </h2>
+
+        <div className="rounded-2xl border border-border bg-card shadow-sm overflow-hidden">
+          {/* Card header */}
+          <div className="bg-gradient-to-br from-[#1F2F58]/8 to-[#0A1628]/5 px-6 py-5 border-b border-border">
+            <div className="flex flex-col sm:flex-row items-start gap-4">
+              <div className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-[#FBBC0C]/15">
+                <Sparkles className="size-6 text-[#FBBC0C]" />
+              </div>
+              <div className="flex-1">
+                <div className="flex flex-wrap items-center gap-2 mb-2">
+                  <Badge className="border-none bg-[#FBBC0C]/15 text-[10px] font-semibold uppercase tracking-wider text-[#FBBC0C]">
+                    Curso Estándar · {cursoSteveen.precio}
                   </Badge>
-                  <h3 className="text-lg font-bold text-[#0A1628] leading-tight">
-                    {program.name}
-                  </h3>
-                  {program.description && (
-                    <p className="mt-1 text-sm text-[#1F2F58]/60 line-clamp-2">
-                      {program.description}
-                    </p>
+                  <Badge className="border-none bg-[#73B8E7]/15 text-[10px] font-semibold uppercase tracking-wider text-[#517CBE]">
+                    {cursoSteveen.categoria}
+                  </Badge>
+                  {cursoSteveen.destacado && (
+                    <Badge className="border-none bg-[#F0846D]/15 text-[10px] font-semibold uppercase tracking-wider text-[#F0846D]">
+                      Piloto 2026
+                    </Badge>
                   )}
                 </div>
-                <div className="flex flex-col items-center gap-1 flex-shrink-0">
-                  <div className="relative flex size-16 items-center justify-center">
-                    <svg className="size-16 -rotate-90" viewBox="0 0 64 64">
-                      <circle
-                        cx="32"
-                        cy="32"
-                        r="26"
-                        fill="none"
-                        stroke="rgba(31,47,88,0.08)"
-                        strokeWidth="5"
-                      />
-                      <circle
-                        cx="32"
-                        cy="32"
-                        r="26"
-                        fill="none"
-                        stroke="#FBBC0C"
-                        strokeWidth="5"
-                        strokeLinecap="round"
-                        strokeDasharray={`${overallPercent * 1.634} ${163.4 - overallPercent * 1.634}`}
-                      />
-                    </svg>
-                    <span className="absolute text-sm font-bold text-[#0A1628]">
-                      {overallPercent}%
-                    </span>
-                  </div>
-                  <span className="text-[10px] text-[#1F2F58]/40">Progreso</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Progress bar */}
-            <div className="px-6 py-4">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-xs text-[#1F2F58]/60">
-                  Progreso general
-                </span>
-                <span className="text-xs font-semibold text-[#1F2F58]">
-                  {overallPercent}%
-                </span>
-              </div>
-              <div className="h-2 w-full overflow-hidden rounded-full bg-[#1F2F58]/8">
-                <div
-                  className="h-full rounded-full bg-gradient-to-r from-[#FBBC0C] to-[#F0846D] transition-all duration-700"
-                  style={{ width: `${overallPercent}%` }}
-                />
-              </div>
-
-              {/* Action buttons */}
-              <div className="mt-4 flex items-center gap-3">
-                <Link
-                  href="/mi-curso"
-                  className="inline-flex items-center gap-2 rounded-lg bg-[#1F2F58] px-4 py-2 text-sm font-semibold text-white hover:opacity-90 transition-opacity"
-                >
-                  <Play className="size-3.5" />
-                  Continuar Curso
-                </Link>
-                <Link
-                  href="/cursos-pro/progreso"
-                  className="inline-flex items-center gap-2 rounded-lg border border-[#1F2F58]/15 bg-white px-4 py-2 text-sm font-medium text-[#1F2F58] hover:bg-[#1F2F58]/5 transition-colors"
-                >
-                  Ver Progreso
-                  <ArrowRight className="size-3.5" />
-                </Link>
+                <h3 className="text-lg sm:text-xl font-bold text-[#0A1628] leading-tight">
+                  {cursoSteveen.titulo}
+                </h3>
+                <p className="mt-0.5 text-xs text-[#1F2F58]/50 font-medium">
+                  {cursoSteveen.subtitulo}
+                </p>
+                <p className="mt-2 text-sm text-[#1F2F58]/70 leading-relaxed">
+                  {cursoSteveen.descripcion}
+                </p>
               </div>
             </div>
           </div>
-        </div>
-      ) : (
-        /* Empty state */
-        <div className="rounded-2xl border border-dashed border-border bg-card p-12 text-center">
-          <BookOpen className="mx-auto size-12 text-[#1F2F58]/20 mb-4" />
-          <h3 className="text-lg font-semibold text-[#0A1628]">
-            Sin curso activo
-          </h3>
-          <p className="mt-2 text-sm text-[#1F2F58]/60 max-w-sm mx-auto">
-            Aún no tienes un curso profesional activo. Revisa los cursos disponibles o contacta a soporte.
-          </p>
-          <a
-            href="https://itseia.ai/cursos/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-6 inline-flex items-center gap-2 rounded-lg bg-[#FBBC0C] px-5 py-2.5 text-sm font-semibold text-[#0A1628] hover:opacity-90 transition-opacity"
-          >
-            Ver Cursos Disponibles
-            <ArrowRight className="size-3.5" />
-          </a>
-        </div>
-      )}
 
-      {/* ── Quick access recursos ────────────────────────────────────────── */}
-      <div>
+          {/* Stats inline */}
+          <div className="grid grid-cols-3 divide-x divide-border border-b border-border">
+            <InlineStat label="Módulos" value={String(cursoSteveen.modulos)} icon={<Layers className="size-3.5" />} />
+            <InlineStat label="Temas" value={String(cursoSteveen.temas)} icon={<BookOpen className="size-3.5" />} />
+            <InlineStat label="Horas" value={String(cursoSteveen.horas)} icon={<Clock className="size-3.5" />} />
+          </div>
+
+          {/* Action buttons */}
+          <div className="px-6 py-5">
+            {enrolledSteveen ? (
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+                <Link
+                  href={`/cursos-pro/${cursoSteveen.slug}`}
+                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#1F2F58] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[#0A1628] transition-colors"
+                >
+                  <Play className="size-3.5" />
+                  Continuar curso
+                </Link>
+                <Link
+                  href={`/cursos-pro/${cursoSteveen.slug}`}
+                  className="inline-flex items-center justify-center gap-2 rounded-lg border border-[#1F2F58]/15 bg-white px-5 py-2.5 text-sm font-medium text-[#1F2F58] hover:bg-[#1F2F58]/5 transition-colors"
+                >
+                  Ver módulos
+                  <ArrowRight className="size-3.5" />
+                </Link>
+              </div>
+            ) : (
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+                <div>
+                  <p className="text-xs text-[#1F2F58]/50">Acceso de por vida + certificado ITSEIA</p>
+                  <p className="text-2xl font-black text-[#0A1628] font-[family-name:var(--font-space-grotesk)]">
+                    {cursoSteveen.precio}
+                  </p>
+                </div>
+                <div className="flex flex-col sm:flex-row gap-2">
+                  <a
+                    href="https://wa.me/593959892034?text=Hola%2C%20quiero%20inscribirme%20al%20curso%20IA%20Aplicada%20para%20Ingenier%C3%ADa%20Industrial%20%24197"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#FBBC0C] px-5 py-2.5 text-sm font-bold text-[#0A1628] hover:bg-[#f5b300] transition-colors"
+                  >
+                    Inscríbete por {cursoSteveen.precio}
+                    <ArrowRight className="size-3.5" />
+                  </a>
+                  <Link
+                    href={`/cursos-pro/${cursoSteveen.slug}`}
+                    className="inline-flex items-center justify-center gap-2 rounded-lg border border-[#1F2F58]/15 bg-white px-5 py-2.5 text-sm font-medium text-[#1F2F58] hover:bg-[#1F2F58]/5 transition-colors"
+                  >
+                    Ver contenido
+                  </Link>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Beneficios incluidos ────────────────────────────────────────────── */}
+      <section>
         <h2 className="mb-4 text-xl font-bold text-foreground">
-          Acceso Rápido
+          Qué incluye tu curso profesional
         </h2>
         <div className="grid gap-4 sm:grid-cols-3">
-          <QuickLink
-            href="/cursos-pro/prompts"
-            icon={<Wand2 className="size-5" />}
-            title="Prompts Especializados"
-            description="Colección curada para tu curso"
-            color="text-[#73B8E7]"
+          <FeatureCard
+            icon={<BookOpen className="size-5 text-[#73B8E7]" />}
+            title="7 pestañas por tema"
+            description="Video, presentación, teoría, quiz, ejercicio, AI Lab y recursos."
             bg="bg-[#73B8E7]/10"
           />
-          <QuickLink
-            href="/cursos-pro/tools"
-            icon={<Wrench className="size-5" />}
-            title="Herramientas IA"
-            description="Stack recomendado ITSEIA"
-            color="text-[#FBBC0C]"
+          <FeatureCard
+            icon={<Award className="size-5 text-[#FBBC0C]" />}
+            title="Certificado ITSEIA"
+            description="Al completar el 100% recibes certificado profesional ITSEIA."
             bg="bg-[#FBBC0C]/10"
           />
-          <QuickLink
-            href="/cursos-pro/proyecto"
-            icon={<ClipboardList className="size-5" />}
-            title="Proyecto Final"
-            description="Instrucciones y entrega"
-            color="text-[#F0846D]"
+          <FeatureCard
+            icon={<MessageCircle className="size-5 text-[#F0846D]" />}
+            title="Soporte WhatsApp"
+            description="Resuelve dudas con nuestro equipo durante todo el curso."
             bg="bg-[#F0846D]/10"
           />
         </div>
-      </div>
+      </section>
     </div>
   );
 }
 
-// ─── Helper components ────────────────────────────────────────────────────────
+// ─── Helper components ───────────────────────────────────────────────────────
 
 function StatCard({
   icon,
@@ -370,76 +318,73 @@ function StatCard({
   value,
   sub,
   accent,
-  href,
 }: {
   icon: React.ReactNode;
   label: string;
   value: string;
   sub: string;
   accent: string;
-  href?: string;
 }) {
-  const inner = (
-    <CardContent className="flex items-center gap-4">
-      <div className={`flex size-11 shrink-0 items-center justify-center rounded-xl ${accent}`}>
-        {icon}
-      </div>
-      <div>
-        <p className="text-sm font-medium text-[#1F2F58]/50">{label}</p>
-        <p className="text-2xl font-bold tracking-tight text-[#0A1628]">{value}</p>
-        <p className="text-xs text-[#1F2F58]/40 mt-0.5">{sub}</p>
-      </div>
-    </CardContent>
-  );
-
-  if (href) {
-    return (
-      <Link href={href}>
-        <Card className="border-none bg-white shadow-sm hover:shadow-md transition-shadow cursor-pointer">
-          {inner}
-        </Card>
-      </Link>
-    );
-  }
-
   return (
     <Card className="border-none bg-white shadow-sm">
-      {inner}
+      <CardContent className="flex items-center gap-4">
+        <div className={`flex size-11 shrink-0 items-center justify-center rounded-xl ${accent}`}>
+          {icon}
+        </div>
+        <div>
+          <p className="text-sm font-medium text-[#1F2F58]/50">{label}</p>
+          <p className="text-2xl font-bold tracking-tight text-[#0A1628]">{value}</p>
+          <p className="text-xs text-[#1F2F58]/40 mt-0.5">{sub}</p>
+        </div>
+      </CardContent>
     </Card>
   );
 }
 
-function QuickLink({
-  href,
+function InlineStat({
+  icon,
+  label,
+  value,
+}: {
+  icon: React.ReactNode;
+  label: string;
+  value: string;
+}) {
+  return (
+    <div className="flex flex-col items-center justify-center px-3 py-4 text-center">
+      <span className="flex items-center gap-1 text-[10px] font-semibold uppercase tracking-widest text-[#1F2F58]/40">
+        {icon}
+        {label}
+      </span>
+      <span className="mt-1 text-lg font-bold text-[#0A1628] font-[family-name:var(--font-space-grotesk)]">
+        {value}
+      </span>
+    </div>
+  );
+}
+
+function FeatureCard({
   icon,
   title,
   description,
-  color,
   bg,
 }: {
-  href: string;
   icon: React.ReactNode;
   title: string;
   description: string;
-  color: string;
   bg: string;
 }) {
   return (
-    <Link href={href}>
-      <Card className="group cursor-pointer border-none bg-white shadow-sm transition-all hover:shadow-md hover:-translate-y-0.5">
-        <CardContent className="flex items-center gap-4">
-          <div
-            className={`flex size-10 shrink-0 items-center justify-center rounded-lg ${bg} ${color} transition-transform group-hover:scale-110`}
-          >
-            {icon}
-          </div>
-          <div>
-            <p className="font-semibold text-[#0A1628]">{title}</p>
-            <p className="text-xs text-[#1F2F58]/50">{description}</p>
-          </div>
-          <ArrowRight className="ml-auto size-4 text-[#1F2F58]/20 transition-all group-hover:translate-x-1 group-hover:text-[#1F2F58]/50" />
-        </CardContent>
-      </Card>
-    </Link>
+    <Card className="border-none bg-white shadow-sm">
+      <CardContent className="flex items-start gap-4">
+        <div className={`flex size-10 shrink-0 items-center justify-center rounded-lg ${bg}`}>
+          {icon}
+        </div>
+        <div>
+          <p className="font-semibold text-[#0A1628]">{title}</p>
+          <p className="mt-0.5 text-xs text-[#1F2F58]/60 leading-relaxed">{description}</p>
+        </div>
+      </CardContent>
+    </Card>
   );
 }

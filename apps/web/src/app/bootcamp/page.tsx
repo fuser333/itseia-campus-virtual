@@ -214,48 +214,28 @@ export default async function BootcampPage() {
                   <ul className="divide-y divide-[#1F2F58]/[0.06]">
                     {m.sesiones.map((s, i) => {
                       const numero = `${m.num}.${i + 1}`;
-                      const hasSlides = Boolean(s.slidesUrl);
 
-                      const inner = (
-                        <div className="group flex items-center gap-3 px-5 py-3 transition-colors hover:bg-[#1F2F58]/[0.03]">
-                          <span
-                            className="text-xs font-bold tabular-nums shrink-0 w-8"
-                            style={{ color: visual.color }}
-                          >
-                            {numero}
-                          </span>
-                          <span className="flex-1 text-sm text-[#0A1628] leading-snug">
-                            {s.titulo}
-                          </span>
-                          {hasSlides ? (
-                            <span className="flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider text-[#1F2F58]/40 group-hover:text-[#1F2F58]/70 transition-colors">
-                              Gamma
-                              <ExternalLink className="size-3" />
-                            </span>
-                          ) : (
-                            <span className="text-[10px] font-semibold uppercase tracking-wider text-[#1F2F58]/30">
-                              Próximamente
-                            </span>
-                          )}
-                        </div>
+                      return (
+                        <li key={s.id}>
+                          <Link href={`/bootcamp/sesion/${s.id}`} className="block">
+                            <div className="group flex items-center gap-3 px-5 py-3 transition-colors hover:bg-[#1F2F58]/[0.03]">
+                              <span
+                                className="text-xs font-bold tabular-nums shrink-0 w-8"
+                                style={{ color: visual.color }}
+                              >
+                                {numero}
+                              </span>
+                              <span className="flex-1 text-sm text-[#0A1628] leading-snug">
+                                {s.titulo}
+                              </span>
+                              <span className="flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wider text-[#1F2F58]/40 group-hover:text-[#1F2F58]/70 transition-colors">
+                                Abrir sesión
+                                <ArrowRight className="size-3" />
+                              </span>
+                            </div>
+                          </Link>
+                        </li>
                       );
-
-                      if (s.slidesUrl) {
-                        return (
-                          <li key={s.id}>
-                            <a
-                              href={s.slidesUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="block"
-                            >
-                              {inner}
-                            </a>
-                          </li>
-                        );
-                      }
-
-                      return <li key={s.id}>{inner}</li>;
                     })}
                   </ul>
                 </CardContent>
