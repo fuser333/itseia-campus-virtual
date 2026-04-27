@@ -886,7 +886,7 @@ const tema6: TemaC1 = {
   videoEmbed: "https://www.youtube.com/embed/-OPWZZhkrbQ",
   videoTitulo: "Introducción a la IA generativa — Curso oficial Google Cloud (subtítulos en español)",
   videoDuracion: "~22 min · Español (subtítulos) · Google Cloud Skills Boost",
-  slidesUrl: "",
+  slidesUrl: "https://gamma.app/docs/dwh560qneucc4hf",
   teoria: `La Inteligencia Artificial Generativa es la rama de la IA que crea contenido nuevo — texto, imágenes, audio, video, código — a partir de patrones aprendidos de enormes cantidades de datos. A diferencia de la IA tradicional, que clasifica o predice (¿este correo es spam?, ¿qué nota tendrá este estudiante?), la IA generativa produce algo que no existía antes: un poema, un retrato, una canción, un programa funcional, una respuesta personalizada.
 
 DEL CONCEPTO A LA REVOLUCIÓN — Los hitos que cambiaron todo
@@ -1048,7 +1048,7 @@ const tema7: TemaC1 = {
   videoEmbed: "https://www.youtube.com/embed/wM1NrkwJrvU",
   videoTitulo: "Curso de Prompt Engineering en Español: Cómo crear Prompts Efectivos (De 0 a Pro)",
   videoDuracion: "~45 min · Español · Curso completo en YouTube",
-  slidesUrl: "",
+  slidesUrl: "https://gamma.app/docs/h9gbkzlvvkdd4h2",
   teoria: `El Prompt Engineering es la disciplina de diseñar instrucciones (prompts) que extraigan el mejor resultado posible de un modelo de IA generativa. No es magia ni adivinación — es una habilidad práctica con principios claros, demanda creciente y salarios competitivos. En 2026, dominar el prompting es tan importante para un profesional como saber escribir un correo formal lo era hace 20 años.
 
 POR QUÉ IMPORTA EL PROMPT ENGINEERING
@@ -1244,7 +1244,7 @@ const tema8: TemaC1 = {
   videoEmbed: "https://www.youtube.com/embed/gAoVIsOlRJg",
   videoTitulo: "Curso Prompt Engineering en Español — Técnicas avanzadas (Zero-shot, Few-shot, CoT)",
   videoDuracion: "~35 min · Español · Curso gratuito completo",
-  slidesUrl: "",
+  slidesUrl: "https://gamma.app/docs/kiame4khvmtgw9v",
   teoria: `Una vez que dominas los principios básicos del prompting, las técnicas avanzadas te permiten resolver problemas complejos: razonamiento matemático, análisis legal, diagnóstico técnico, planificación estratégica. Las dos técnicas más poderosas son Few-Shot Prompting y Chain-of-Thought (CoT) — y ambas se inventaron entre 2020 y 2022 transformando la industria.
 
 ZERO-SHOT, ONE-SHOT, FEW-SHOT — La gradación
@@ -1475,7 +1475,7 @@ const tema9: TemaC1 = {
   videoEmbed: "https://www.youtube.com/embed/tdjMFxaZo-E",
   videoTitulo: "Claude de 0 a Experto: La Guía Completa 2026 (mejor que ChatGPT)",
   videoDuracion: "~50 min · Español · Guía completa actualizada 2026",
-  slidesUrl: "",
+  slidesUrl: "https://gamma.app/docs/qklihlcx7quorp7",
   teoria: `ChatGPT y Claude son los dos modelos de lenguaje más usados profesionalmente en el mundo en 2026. Ambos parten de la arquitectura Transformer, ambos cuestan similar, ambos tienen versiones gratuitas — pero tienen filosofías, fortalezas y debilidades muy distintas. Como profesional, elegir bien según la tarea puede multiplicar tu productividad o frustrarte sin saber por qué.
 
 LAS DOS EMPRESAS DETRÁS
@@ -1692,7 +1692,7 @@ const tema10: TemaC1 = {
   videoEmbed: "https://www.youtube.com/embed/Jvy7U2UUCIs",
   videoTitulo: "Creación de imágenes con IA — DALL·E, Midjourney y Stable Diffusion",
   videoDuracion: "~40 min · Español · Tutorial completo de las 3 herramientas",
-  slidesUrl: "",
+  slidesUrl: "https://gamma.app/docs/05dgs3hbl7pokm6",
   teoria: `La generación de imágenes con IA ha pasado de ser una curiosidad académica a una industria que está transformando el diseño gráfico, la publicidad, el cine y el marketing en menos de cinco años. En 2026, cualquier profesional ecuatoriano que sepa usar estas herramientas ahorra horas de trabajo, contrata menos diseñadores externos y produce más contenido visual que su competencia.
 
 CÓMO FUNCIONA LA GENERACIÓN DE IMÁGENES CON IA
@@ -1901,7 +1901,7 @@ const tema11: TemaC1 = {
   videoEmbed: "https://www.youtube.com/embed/bMmVZFd7HA4",
   videoTitulo: "Curso de Cursor: Editor IA, Todo Lo Que Necesitas Saber",
   videoDuracion: "~50 min · Español · Curso completo del editor con IA",
-  slidesUrl: "",
+  slidesUrl: "https://gamma.app/docs/sshk37q0cbo2ey6",
   teoria: `La generación de código con IA es la disrupción más profunda en el mundo del desarrollo de software desde la invención del compilador. En 2026, un programador junior con buen uso de Cursor o Copilot produce el equivalente al output de un programador semi-senior de 2022 — con menos errores, mejor documentación y más rapidez. Y no es exclusivo de programadores: profesionales de todas las áreas usan IA para automatizar tareas, crear scripts y analizar datos.
 
 LAS DOS HERRAMIENTAS QUE DOMINAN EL MERCADO

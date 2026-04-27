@@ -53,6 +53,8 @@ export interface DominioData {
   porcentajeEnExamen: number;
   lecciones: LeccionTeorica[];
   video: VideoCurado;
+  /** URL de presentación generada en Gamma (para iframe embed) */
+  slidesUrl?: string;
   preguntasPractica: PreguntaSimulacro[];
   preguntasSimulacro: PreguntaSimulacro[];
 }
@@ -131,6 +133,7 @@ export const awsCloudPractitionerData: CertificacionData = {
         notas:
           "Validar duración y calidad antes de publicar. Si no cumple, marcar como GRABACIÓN PROPIA NECESARIA.",
       },
+      slidesUrl: "https://gamma.app/docs/wpfzcuic9zly8oh",
       lecciones: [
         {
           id: "1.1",
@@ -220,6 +223,7 @@ Conceptos finales: alta disponibilidad, tolerancia a fallos, escalabilidad verti
         notas:
           "GRABACIÓN PROPIA NECESARIA. No se ha encontrado un video en español de calidad consistente con duración 50-60 min y cobertura completa de IAM + WAF/Shield + Macie/GuardDuty + Artifact.",
       },
+      slidesUrl: "https://gamma.app/docs/vqii3knvkxf632p",
       lecciones: [
         {
           id: "2.1",
@@ -317,6 +321,7 @@ IAM es **global** y **gratuito**. Por defecto niega todo (implicit deny); un den
         notas:
           "Validar duración y autoría del canal antes de publicar.",
       },
+      slidesUrl: "https://gamma.app/docs/o1ufwe30jnncirs",
       lecciones: [
         {
           id: "3.1",
@@ -422,6 +427,7 @@ IAM es **global** y **gratuito**. Por defecto niega todo (implicit deny); un den
         notas:
           "GRABACIÓN PROPIA NECESARIA. Los videos en español sobre billing AWS suelen ser fragmentados (<20 min) o cubren solo 1-2 herramientas. Conviene grabar uno propio que cubra Free Tier, modelos EC2, Cost Explorer, Budgets, Pricing Calculator y planes de soporte.",
       },
+      slidesUrl: "https://gamma.app/docs/4uv6hf6g0zjmbg0",
       lecciones: [
         {
           id: "4.1",
