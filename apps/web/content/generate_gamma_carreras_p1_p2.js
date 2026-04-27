@@ -1250,7 +1250,7 @@ print(isinstance(laptop, Producto)) # True
 \`\`\`python
 productos = [laptop, celular, tablet]
 for p in productos:
-    print(f"{p.nombre} — ${p.precio:.2f} ({p.stock} unidades)")
+    print(f"{p.nombre} — \${p.precio:.2f} ({p.stock} unidades)")
 \`\`\`
 La POO modela el inventario como una lista de objetos.
 
@@ -1311,7 +1311,7 @@ Los métodos son funciones que viven dentro del objeto.
 ## Slide 5 — __str__ y __repr__
 \`\`\`python
 def __str__(self):
-    return f"{self.nombre} — ${self.precio:.2f}"
+    return f"{self.nombre} — \${self.precio:.2f}"
 
 print(laptop)  # Llama a __str__
 \`\`\`
