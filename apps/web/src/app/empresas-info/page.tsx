@@ -252,6 +252,16 @@ export default function EmpresasInfoPage() {
 
       <PublicHeader />
         {/* Login access — prominent banner */}
+        <div className="text-center py-4 px-4 bg-gradient-to-r from-[#FBBC0C]/10 via-[#FBBC0C]/15 to-[#FBBC0C]/10 border-b border-[#FBBC0C]/20">
+          <a href="/login?module=empresas" className="inline-flex items-center gap-3 group">
+            <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-[#FBBC0C]/20 group-hover:bg-[#FBBC0C]/30 transition-colors">
+              <svg className="w-4 h-4 text-[#FBBC0C]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5zm0 0v7" /></svg>
+            </span>
+            <span className="text-white font-semibold text-sm sm:text-base">¿Ya eres estudiante ITSEIA?</span>
+            <span className="text-[#FBBC0C] font-bold text-sm sm:text-base group-hover:underline">Accede al portal empresarial →</span>
+          </a>
+        </div>
+        {/* Login access — prominent banner */}
         <div className="text-center py-4 px-4 bg-gradient-to-r from-[#73B8E7]/10 via-[#73B8E7]/15 to-[#73B8E7]/10 border-b border-[#73B8E7]/20">
           <a href="/login?module=b2b" className="inline-flex items-center gap-3 group">
             <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-[#73B8E7]/20 group-hover:bg-[#73B8E7]/30 transition-colors">
