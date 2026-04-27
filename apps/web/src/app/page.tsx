@@ -1435,18 +1435,8 @@ export default function HomePage() {
           <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8 mb-8">
             {/* Brand */}
             <div className="sm:col-span-2 md:col-span-1">
-              <div className="flex items-center gap-2 mb-3">
-                <svg viewBox="0 0 32 32" fill="none" className="w-7 h-7">
-                  <circle cx="8" cy="16" r="3.5" fill="#FBBC0C"/>
-                  <circle cx="16" cy="7" r="2.5" fill="#73B8E7"/>
-                  <circle cx="16" cy="25" r="2.5" fill="#F0846D"/>
-                  <circle cx="24" cy="16" r="3" fill="#FBBC0C" opacity="0.7"/>
-                  <line x1="8" y1="16" x2="16" y2="7" stroke="#FBBC0C" strokeWidth="1.2" opacity="0.7"/>
-                  <line x1="8" y1="16" x2="16" y2="25" stroke="#73B8E7" strokeWidth="1.2" opacity="0.7"/>
-                  <line x1="16" y1="7" x2="24" y2="16" stroke="#FBBC0C" strokeWidth="1.2" opacity="0.6"/>
-                  <line x1="16" y1="25" x2="24" y2="16" stroke="#F0846D" strokeWidth="1.2" opacity="0.6"/>
-                </svg>
-                <span className="text-white font-extrabold text-base" style={{fontFamily:"var(--font-space-grotesk)"}}>ITSEIA</span>
+              <div className="flex items-center mb-3">
+                <img src="/logo_itseia.svg" alt="ITSEIA" className="h-8 w-auto" />
               </div>
               <p className="text-white/30 text-xs leading-relaxed">
                 Instituto Ecuatoriano de Inteligencia Artificial.<br />

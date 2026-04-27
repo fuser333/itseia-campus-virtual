@@ -168,6 +168,132 @@ const MODULE_CONFIGS: Record<string, ModuleConfig> = {
     badge: "Panel Docente",
     imagePrompt: "Profesor ecuatoriano en aula tech moderna con estudiantes usando IA, ambiente coral/navy, educacion del futuro",
   },
+  bootcamp: {
+    id: "bootcamp",
+    icon: Zap,
+    accentColor: "yellow",
+    accentHex: "#FBBC0C",
+    gradientFrom: "from-[#0A1628]",
+    gradientVia: "via-[#1F2F58]",
+    gradientTo: "to-[#3A2048]",
+    headline: "Tu Bootcamp\ncomienza aqui",
+    subheadline: "12 semanas para transformarte en profesional IA",
+    description: "16 sesiones por mes (live + grabado), proyectos reales con empresas partner H3L, ImagemIA y Strata. Certificado al completar.",
+    features: [
+      { icon: Zap, text: "Live + grabado, intensivo", highlight: "16 sesiones/mes" },
+      { icon: Brain, text: "Partners reales: H3L, ImagemIA, Strata", highlight: "Casos reales" },
+      { icon: Star, text: "Proyecto integrador cada mes", highlight: "Portafolio real" },
+    ],
+    stats: [
+      { value: "12", label: "semanas", suffix: "" },
+      { value: "48", label: "sesiones", suffix: "" },
+      { value: "3", label: "proyectos", suffix: "" },
+    ],
+    cta: "Accede a tu cohorte",
+    badge: "Bootcamp Intensivo",
+    imagePrompt: "Bootcamp tech intensivo con jovenes profesionales aprendiendo IA en pantallas multiples, energia ambar/navy",
+  },
+  "cursos-mdt": {
+    id: "cursos-mdt",
+    icon: Award,
+    accentColor: "yellow",
+    accentHex: "#FBBC0C",
+    gradientFrom: "from-[#0A1628]",
+    gradientVia: "via-[#1F2F58]",
+    gradientTo: "to-[#2A3F6E]",
+    headline: "Tus cursos MDT\nte esperan",
+    subheadline: "15 cursos certificados Ministerio del Trabajo",
+    description: "Certificacion oficial reconocida en todo Ecuador. Modalidad online a tu ritmo. Desde $99 por curso completo con AI Lab incluido.",
+    features: [
+      { icon: Award, text: "Certificado MDT oficial", highlight: "Ecuador" },
+      { icon: Zap, text: "100% online, a tu ritmo", highlight: "Sin horarios" },
+      { icon: Brain, text: "AI Lab incluido sin costo extra", highlight: "ChatGPT, Claude" },
+    ],
+    stats: [
+      { value: "15", label: "cursos", suffix: "" },
+      { value: "$99", label: "desde", suffix: "" },
+      { value: "MDT", label: "certificado", suffix: "" },
+    ],
+    cta: "Accede a tus cursos MDT",
+    badge: "Certificacion MDT",
+    imagePrompt: "Profesional ecuatoriano completando curso online con certificado digital MDT en pantalla, navy/dorado",
+  },
+  "cursos-pro": {
+    id: "cursos-pro",
+    icon: BookOpen,
+    accentColor: "yellow",
+    accentHex: "#FBBC0C",
+    gradientFrom: "from-[#0A1628]",
+    gradientVia: "via-[#1F2F58]",
+    gradientTo: "to-[#2A3F6E]",
+    headline: "Tus cursos\nProfesionales",
+    subheadline: "Express, Estandar y Completo desde $97",
+    description: "Cursos profesionales adaptados a tu industria. 40 a 80 horas con instructor real, proyecto aplicado y certificado MDT.",
+    features: [
+      { icon: BookOpen, text: "Express, Estandar y Completo", highlight: "$97-$297" },
+      { icon: Users, text: "Instructor real con seguimiento", highlight: "1-on-1" },
+      { icon: Award, text: "Certificado MDT al finalizar", highlight: "Validez nacional" },
+    ],
+    stats: [
+      { value: "40-80", label: "horas", suffix: "" },
+      { value: "$97", label: "desde", suffix: "" },
+      { value: "MDT", label: "certificado", suffix: "" },
+    ],
+    cta: "Accede a tus cursos pro",
+    badge: "Cursos Profesionales",
+    imagePrompt: "Profesional ecuatoriano completando curso especializado con instructor en videollamada, estilo premium navy/dorado",
+  },
+  empresas: {
+    // alias de b2b — para usar desde /empresas-info
+    id: "empresas",
+    icon: Building2,
+    accentColor: "light-blue",
+    accentHex: "#73B8E7",
+    gradientFrom: "from-[#0A1628]",
+    gradientVia: "via-[#1a2a4a]",
+    gradientTo: "to-[#1F3A5F]",
+    headline: "Transforma tu\nEmpresa con IA",
+    subheadline: "3 soluciones probadas en 7 paises",
+    description: "H3L identifica $150K-$800K en capacidad atrapada. ImagemIA reduce inasistencias 30%. Strata: tu cerebro digital desde $19.99/mes.",
+    features: [
+      { icon: Target, text: "H3L — Auditoria operativa IA", highlight: "$150K-$800K ahorros" },
+      { icon: Shield, text: "ImagemIA — IA predictiva medica", highlight: "-30% inasistencias" },
+      { icon: Sparkles, text: "Strata — Cerebro digital", highlight: "Desde $19.99/mes" },
+    ],
+    stats: [
+      { value: "7", label: "paises", suffix: "" },
+      { value: "$150K", label: "ahorro min", suffix: "" },
+      { value: "9K", label: "docs", suffix: "+" },
+    ],
+    cta: "Accede al portal empresarial",
+    badge: "Diagnostico Gratis",
+    imagePrompt: "Ejecutivos en sala de reuniones con dashboard de IA en pantalla grande, estilo corporativo premium, tonos azul/navy",
+  },
+  demo: {
+    id: "demo",
+    icon: Sparkles,
+    accentColor: "coral",
+    accentHex: "#F0846D",
+    gradientFrom: "from-[#0A1628]",
+    gradientVia: "via-[#2A1F3F]",
+    gradientTo: "to-[#3A2048]",
+    headline: "Demo gratis\nde IGNITE",
+    subheadline: "Vive la primera semana del preuniversitario sin pagar",
+    description: "Acceso completo a la Semana 1 de IGNITE con videos, ejercicios y AI Lab. Las semanas 2-4 estan disponibles solo en la cohorte completa.",
+    features: [
+      { icon: Sparkles, text: "Semana 1 completa gratis", highlight: "5 dias" },
+      { icon: Brain, text: "AI Lab incluido en demo", highlight: "ChatGPT real" },
+      { icon: Rocket, text: "CTA directo a IGNITE completo", highlight: "$99 total" },
+    ],
+    stats: [
+      { value: "5", label: "dias gratis", suffix: "" },
+      { value: "$99", label: "completo", suffix: "" },
+      { value: "20", label: "dias total", suffix: "" },
+    ],
+    cta: "Entra al demo",
+    badge: "Demo Gratis",
+    imagePrompt: "Joven ecuatoriano probando demo IA en laptop con interfaz limpia, ambiente coral/navy, descubrimiento",
+  },
 };
 
 // Default config (generic login)
@@ -201,8 +327,12 @@ interface ModuleConfig {
 
 // Detect module from redirect path
 function detectModule(redirect: string): ModuleConfig {
-  if (redirect.startsWith("/b2b")) return MODULE_CONFIGS.b2b;
+  if (redirect.startsWith("/b2b") || redirect.startsWith("/empresas")) return MODULE_CONFIGS.b2b;
+  if (redirect.startsWith("/bootcamp")) return MODULE_CONFIGS.bootcamp;
+  if (redirect.startsWith("/cursos-mdt")) return MODULE_CONFIGS["cursos-mdt"];
+  if (redirect.startsWith("/cursos-pro")) return MODULE_CONFIGS["cursos-pro"];
   if (redirect.startsWith("/preuni")) return MODULE_CONFIGS.preuni;
+  if (redirect.startsWith("/demo")) return MODULE_CONFIGS.demo;
   if (redirect.startsWith("/mi-curso") || redirect.startsWith("/cursos")) return MODULE_CONFIGS.cursos;
   if (redirect.startsWith("/certificaciones")) return MODULE_CONFIGS.certificaciones;
   if (redirect.startsWith("/teacher")) return MODULE_CONFIGS.docentes;
@@ -222,7 +352,8 @@ function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const redirectTo = searchParams.get("redirect") || "/dashboard";
-  const moduleParam = searchParams.get("module");
+  // Accept both ?module= and ?from= for module detection
+  const moduleParam = searchParams.get("module") || searchParams.get("from");
   const urlError = searchParams.get("error");
 
   // Determine which module to show
