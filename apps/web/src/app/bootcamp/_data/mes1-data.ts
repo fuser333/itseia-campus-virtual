@@ -78,7 +78,7 @@ const sesion1: SesionBootcamp = {
   moduloNum: 1,
   videoEmbed: "",
   videoTitulo: "Qué es la Inteligencia Artificial — Bienvenida al Bootcamp ITSEIA",
-  slidesUrl: undefined,
+  slidesUrl: "https://gamma.app/docs/ah21inbb2w2fn3p",
   teoria: `La Inteligencia Artificial es, en su definición operativa más útil, todo software que ejecuta tareas que antes requerían inteligencia humana. Esta definición evita el debate filosófico sobre conciencia y se enfoca en lo único que importa al profesional: capacidad de ejecutar trabajo cognitivo. Cuando un sistema lee un correo, lo entiende y responde con criterio, está haciendo IA. Cuando una hoja de cálculo aplica una fórmula, no.
 
 La historia reciente ha visto tres olas de IA. La primera, en los años ochenta, fueron los sistemas expertos: programas que codificaban reglas escritas por humanos en formato SI-ENTONCES. Funcionaban bien en dominios cerrados como diagnóstico médico, pero eran frágiles fuera de su área. La segunda ola, en los años dos mil, fue el Machine Learning estadístico: en lugar de programar reglas, los sistemas aprendían patrones a partir de grandes volúmenes de datos. Esto permitió detección de fraude, recomendaciones de Netflix y traducción automática decente. La tercera ola, que arranca con los Transformers en 2017 y explota públicamente con ChatGPT en noviembre de 2022, es la era del Deep Learning a gran escala y los Modelos de Lenguaje Grande (LLMs).
@@ -151,7 +151,7 @@ const sesion2: SesionBootcamp = {
   moduloNum: 1,
   videoEmbed: "",
   videoTitulo: "Anatomía de un LLM — Tokens, parámetros y ventana de contexto",
-  slidesUrl: undefined,
+  slidesUrl: "https://gamma.app/docs/9tlnuzz9ko6dbk7",
   teoria: `Para usar un LLM con criterio profesional necesitas entender tres conceptos técnicos clave: token, parámetro y ventana de contexto. Sin estos tres conceptos cualquier conversación sobre costos, límites o calidad será superficial. Con ellos podrás tomar decisiones de arquitectura que ahorren miles de dólares al año.
 
 Un token es la unidad mínima que procesa un LLM. No es una palabra, no es una letra, es algo intermedio. La palabra "ingeniería" se descompone aproximadamente en tres tokens. La palabra "casa" suele ser un solo token. Un párrafo de texto en español de cien palabras consume entre ciento veinte y ciento sesenta tokens. Esto importa por dos razones: los modelos cobran por token (entrada y salida) y tienen un límite máximo de tokens por conversación. Si trabajas a diario con LLMs, deberías saber estimar tokens al ojo igual que estimas tiempo o costo.
@@ -224,7 +224,7 @@ const sesion3: SesionBootcamp = {
   moduloNum: 1,
   videoEmbed: "",
   videoTitulo: "Stack personal IA 2026 — Las 50 herramientas que importan",
-  slidesUrl: undefined,
+  slidesUrl: "https://gamma.app/docs/nczbvnybilbaj4z",
   teoria: `El ecosistema de IA en 2026 supera las cinco mil herramientas listadas en directorios como futurepedia.io. Intentar conocer todas es imposible y contraproducente: el llamado FOMO de herramientas (fear of missing out) lleva a profesionales a saltar de plataforma en plataforma sin profundizar en ninguna. La estrategia ganadora es construir un stack mínimo viable de cinco a ocho herramientas dominadas a fondo, no veinte usadas a medias.
 
 Las herramientas se agrupan en seis categorías funcionales que cubren el noventa y cinco por ciento de los casos de uso profesionales. La primera es conversación general: ChatGPT, Claude y Gemini son los tres pilares; cualquiera funciona como asistente diario, con preferencias personales por estilo de respuesta. La segunda es búsqueda con IA: Perplexity y You.com responden con citas verificables, ideales para investigación que necesita fuentes. La tercera es generación de imagen: Midjourney lidera en estética artística, DALL-E 3 (incluido en ChatGPT Plus) es el más fácil de usar, y Leonardo.ai destaca en imágenes comerciales con plan freemium generoso.
@@ -297,7 +297,7 @@ const sesion4: SesionBootcamp = {
   moduloNum: 1,
   videoEmbed: "",
   videoTitulo: "Riesgos legales y éticos de la IA — LOPDP Ecuador y casos reales",
-  slidesUrl: undefined,
+  slidesUrl: "https://gamma.app/docs/1bmweatl92et5pj",
   teoria: `Cinco riesgos definen el uso profesional de la IA generativa: alucinación, sesgo, fuga de datos, dependencia y propiedad intelectual. Conocerlos no es paranoia: es competencia profesional. Un abogado que pegó una sentencia inventada por ChatGPT en una corte de Estados Unidos en 2023 fue sancionado y perdió el caso. Casos similares ya ocurren en Latinoamérica.
 
 La alucinación es el riesgo más visible y subestimado. Un LLM siempre produce una respuesta, incluso cuando no sabe. La respuesta suena autoritativa porque el modelo está entrenado para sonar autoritativo, no para reconocer ignorancia. Una alucinación típica: pedirle a ChatGPT jurisprudencia ecuatoriana sobre un caso específico, y recibir cuatro sentencias inventadas con números de gaceta judicial falsos pero verosímiles. Cómo detectarla: nunca confiar en cifras, fechas, nombres propios o citas legales sin verificación independiente. La regla práctica: si vas a usar el dato en algo que importa, verifícalo en la fuente primaria.
@@ -372,7 +372,7 @@ const sesion5: SesionBootcamp = {
   moduloNum: 2,
   videoEmbed: "",
   videoTitulo: "Las 6 capas del prompt profesional — Anatomía y plantilla maestra",
-  slidesUrl: undefined,
+  slidesUrl: "https://gamma.app/docs/d8pq76gjx0v546e",
   teoria: `Un prompt profesional no es una pregunta lanzada al chat. Es una pieza de comunicación estructurada que combina seis capas independientes y verificables: rol, contexto, tarea, formato, restricciones y ejemplos. Esta estructura, replicada por equipos avanzados en Anthropic, OpenAI y empresas como Stripe o Klarna, distingue resultados profesionales reproducibles de respuestas mediocres tipo demo.
 
 La primera capa es el rol. Define quién es la IA: "Eres un abogado laboralista ecuatoriano con quince años de experiencia". El rol activa patrones específicos en el modelo, calibra registro y vocabulario, y establece autoridad. Sin rol explícito, el modelo asume un rol genérico que produce respuestas genéricas. La regla práctica: el rol debe ser específico (no "experto en negocios" sino "consultor financiero PYME en Ecuador") y reflejar la realidad del problema.
@@ -447,7 +447,7 @@ const sesion6: SesionBootcamp = {
   moduloNum: 2,
   videoEmbed: "",
   videoTitulo: "Chain of Thought y técnicas avanzadas de razonamiento con LLMs",
-  slidesUrl: undefined,
+  slidesUrl: "https://gamma.app/docs/r1v75ka3rxliudk",
   teoria: `Las técnicas avanzadas de prompting transforman a un LLM de "asistente de respuestas" en "compañero de razonamiento". Tres técnicas dominan la práctica profesional: Chain of Thought (CoT), Self-Consistency y Tree of Thoughts (ToT). Cada una resuelve una clase distinta de problemas y conocer cuándo aplicar cada una es lo que diferencia al usuario casual del profesional.
 
 Chain of Thought es la técnica más simple y poderosa. Consiste en pedirle al modelo que explique su razonamiento paso a paso antes de dar la respuesta final. La frase mágica es "piensa paso a paso" o "explica tu razonamiento". El paper original (Wei et al., Google, 2022) demostró que CoT mejora la precisión hasta cuarenta por ciento en problemas matemáticos, lógicos y de planificación. La intuición: forzar al modelo a verbalizar pasos intermedios reduce la probabilidad de errores que ocurren cuando intenta saltar directamente al resultado.
@@ -522,7 +522,7 @@ const sesion7: SesionBootcamp = {
   moduloNum: 2,
   videoEmbed: "",
   videoTitulo: "Prompts profesionales en cadena — De Perplexity a entrega final",
-  slidesUrl: undefined,
+  slidesUrl: "https://gamma.app/docs/y1c4lw5bjktobfi",
   teoria: `La diferencia entre un usuario que tiene ChatGPT abierto todo el día y un profesional que produce el doble de output es la posesión de prompts probados para diez tareas de alto valor. No prompts nuevos cada vez, no improvisación: prompts versionados, mejorados con uso, listos para copy-paste. Construir esa biblioteca personal es lo que entrega esta sesión.
 
 Las diez tareas profesionales de alto valor se distribuyen en tres familias. Comunicación: redactar correos profesionales, resumir reuniones grabadas, traducir documentos manteniendo tono. Análisis: analizar contratos identificando riesgos, generar reportes a partir de datos brutos, evaluar candidatos a partir de currículums. Creatividad y producción: generar propuestas comerciales, crear contenido para redes sociales, preparar presentaciones, redactar políticas internas. Cada una tiene un patrón de prompt estable que, una vez calibrado, sirve durante meses.
@@ -597,7 +597,7 @@ const sesion8: SesionBootcamp = {
   moduloNum: 2,
   videoEmbed: "",
   videoTitulo: "Versionado de prompts con Git — Prompts are code",
-  slidesUrl: undefined,
+  slidesUrl: "https://gamma.app/docs/puchyo85b97cgya",
   teoria: `Un prompt es código. Esta afirmación, popularizada por el equipo de ingeniería de Anthropic, cambia cómo gestionas tu trabajo con LLMs. Si es código, debe versionarse, testearse, revisarse y compartirse con disciplina. Sin esa disciplina, perdés conocimiento valioso, repetís errores y no podés escalar tu uso de IA al equipo.
 
 La estructura de carpetas para una biblioteca personal de prompts sigue tres dimensiones: dominio, nivel y idioma. Por dominio: comunicación, análisis, generación, automatización. Por nivel: básico (single prompt), intermedio (con CoT o few-shot), avanzado (cadenas o agentes). Por idioma: español Ecuador, español neutro, inglés. Una estructura típica en Notion u Obsidian: /prompts/comunicacion/correos-b2b-es-ec.md, /prompts/analisis/contratos-laborales-es-ec.md. Cada archivo Markdown contiene metadata, prompt, ejemplo de input, ejemplo de salida y notas de versión.
@@ -674,7 +674,7 @@ const sesion9: SesionBootcamp = {
   moduloNum: 3,
   videoEmbed: "",
   videoTitulo: "Automatización con IA — Triggers, acciones y cálculo de ROI",
-  slidesUrl: undefined,
+  slidesUrl: "https://gamma.app/docs/5jzsb15afljqkq5",
   teoria: `Una automatización es la ejecución automática de un proceso que antes requería intervención humana. En el mundo moderno, esa ejecución casi siempre incluye un componente de IA que toma decisiones que las macros y reglas tradicionales no podían tomar. Antes de construir nada, necesitas dominar tres conceptos: trigger, acción y flujo. Sin ese vocabulario claro, hablar con desarrolladores, vendedores de software o tu equipo es ineficiente.
 
 Un trigger es el evento que dispara la automatización. Puede ser temporal ("cada lunes a las 8 AM"), ser un cambio en otra herramienta ("nuevo correo en Gmail con etiqueta x"), ser una acción del usuario ("se llenó este formulario") o ser un webhook ("alguien hizo un POST a esta URL"). El trigger correcto evita ejecuciones innecesarias y consume menos recursos. El trigger equivocado ejecuta de más, falla o pierde eventos. Identificar el trigger más eficiente es el primer paso de cualquier diseño.
@@ -749,7 +749,7 @@ const sesion10: SesionBootcamp = {
   moduloNum: 3,
   videoEmbed: "",
   videoTitulo: "Make + OpenAI — Tu primer flujo de IA en producción",
-  slidesUrl: undefined,
+  slidesUrl: "https://gamma.app/docs/sqg9n6w0aoltwlp",
   teoria: `Make, antes conocida como Integromat, es la plataforma de automatización visual que mejor balance ofrece entre potencia y curva de aprendizaje. Es la opción recomendada para profesionales no programadores en Ecuador por tres razones: plan gratuito de mil operaciones mensuales, interfaz visual intuitiva, y conectores con todas las herramientas que usás (Gmail, WhatsApp, Sheets, Drive, Notion). Esta sesión construye en vivo tu primer flujo profesional con IA.
 
 Comparado con sus competidores, Make tiene ventajas y limitaciones claras. Make vs Zapier: Zapier tiene más conectores (más de seis mil) pero es más caro y menos visual. Make vs n8n: n8n es open-source y self-hosted (privacidad total) pero requiere mantener infraestructura. Make vs Power Automate: Power Automate se integra mejor con Microsoft 365 pero es menos amigable para flujos creativos. Para empezar y para el ochenta por ciento de los casos en PYME, Make gana. Para producto en producción con datos sensibles, n8n vale el esfuerzo extra.
@@ -824,7 +824,7 @@ const sesion11: SesionBootcamp = {
   moduloNum: 3,
   videoEmbed: "",
   videoTitulo: "WhatsApp Cloud API + Notion + Calendar — Flujos avanzados",
-  slidesUrl: undefined,
+  slidesUrl: "https://gamma.app/docs/kfh8vuowmvyuotq",
   teoria: `Los conectores avanzados son lo que distingue una automatización de escritorio (correo, hoja de cálculo) de una automatización que toca el corazón de tu operación (mensajería con clientes, calendario, repositorio de documentos). Cuatro conectores merecen dominio profesional en Ecuador: WhatsApp Cloud API, Notion, Google Calendar y Google Drive. Esta sesión los integra en un flujo único.
 
 WhatsApp Cloud API es la API oficial de Meta y es la única que cumple términos de servicio para uso empresarial profesional. Diferencia clave con WhatsApp Business app: la app es para soporte ligero con interfaz manual; la Cloud API permite enviar y recibir mensajes programáticamente, integrar con CRM, atender mil clientes simultáneos. El costo en 2026 es por conversación: las primeras mil conversaciones de servicio mensuales son gratuitas, después cuesta entre 0.005 y 0.05 dólares por conversación según tipo (utilidad, marketing, autenticación). Para una PYME ecuatoriana con cien clientes activos, el costo mensual es típicamente USD 5-30.
@@ -899,7 +899,7 @@ const sesion12: SesionBootcamp = {
   moduloNum: 3,
   videoEmbed: "",
   videoTitulo: "Agentes autónomos con Lindy y Strata — Cuándo automatizar y cuándo agentizar",
-  slidesUrl: undefined,
+  slidesUrl: "https://gamma.app/docs/tdm54zhtddq3jgn",
   teoria: `Un agente de IA no es lo mismo que una automatización. La diferencia es radical y entenderla evita gastar dinero en ingeniería innecesaria. Una automatización es determinista: dado el mismo input, produce el mismo output, siguiendo pasos predefinidos. Un agente es no determinista: percibe el entorno, razona sobre las opciones, decide la mejor acción y la ejecuta, todo con autonomía limitada. Cuándo conviene cada uno define la arquitectura de tu solución.
 
 La definición operativa de agente: software que percibe, razona, decide y actúa con autonomía limitada para cumplir un objetivo. Tiene cuatro componentes esenciales. Un LLM como cerebro, encargado del razonamiento. Memoria de corto plazo (contexto de la conversación actual) y de largo plazo (base vectorial con conocimiento histórico, como Pinecone o Weaviate). Herramientas (tools): funciones que el agente puede invocar (buscar en internet, leer correo, escribir en Sheets, ejecutar código). Bucle de razonamiento que permite al agente iterar: pensar, actuar, observar resultado, replantear, hasta cumplir el objetivo.
@@ -977,7 +977,7 @@ const sesion13: SesionBootcamp = {
   moduloNum: 4,
   videoEmbed: "",
   videoTitulo: "Cómo escribir un PRD ganador para tu proyecto integrador",
-  slidesUrl: undefined,
+  slidesUrl: "https://gamma.app/docs/en2unhwcbmrbw1t",
   teoria: `El módulo 4 es donde todo lo aprendido en las tres semanas anteriores se aplica en un proyecto único, real, defendible y publicable. La diferencia entre un alumno que termina con portafolio y uno que termina con notas es la calidad de la definición del proyecto. Esta sesión enseña la disciplina de escribir un PRD (Product Requirements Document) de una página antes de tocar una sola herramienta.
 
 El primer paso es elegir un problema real propio. La consigna: el problema debe ser algo que tú o tu organización viven con dolor recurrente. No imaginar un problema teórico, no copiar un caso de Twitter. Si no podés explicar en treinta segundos a quién le duele este problema y cuántas veces a la semana, no es un problema real para el bootcamp. Tipos de problema válidos: una tarea repetitiva propia, una pregunta frecuente que recibís, un proceso de tu equipo que falla, una oportunidad de servicio que no podés escalar manualmente.
@@ -1053,7 +1053,7 @@ const sesion14: SesionBootcamp = {
   moduloNum: 4,
   videoEmbed: "",
   videoTitulo: "Construyendo el cerebro del asistente — System prompt y RAG simple",
-  slidesUrl: undefined,
+  slidesUrl: "https://gamma.app/docs/wehw2ahshtl1esm",
   teoria: `Con el PRD aprobado en la sesión anterior, esta sesión construye el cerebro del asistente: la fuente de datos, el system prompt maestro y la batería de pruebas de razonamiento. Tres componentes que, una vez calibrados, definen la calidad del asistente más que cualquier otra decisión técnica posterior.
 
 La decisión sobre fuente de datos depende del volumen y la naturaleza del conocimiento. Cuatro opciones por orden de complejidad creciente. Primero: archivo plano (Markdown o texto), ideal cuando todo el conocimiento cabe en cinco a quince mil tokens y se incluye directamente en el system prompt. Segundo: base Notion u otra base de datos liviana, cuando el conocimiento es estructurado y cabe en cien a cinco mil filas. Tercero: base de datos relacional (PostgreSQL, MySQL), cuando el conocimiento es transaccional. Cuarto: RAG simple (Retrieval Augmented Generation) con base vectorial como Pinecone, Weaviate o Chroma, cuando el conocimiento supera quince mil tokens y necesita búsqueda semántica.
@@ -1128,7 +1128,7 @@ const sesion15: SesionBootcamp = {
   moduloNum: 4,
   videoEmbed: "",
   videoTitulo: "Publicando tu asistente IA en WhatsApp, web o Slack",
-  slidesUrl: undefined,
+  slidesUrl: "https://gamma.app/docs/7r7ffenh1ceaa37",
   teoria: `El asistente con tasa de aciertos del setenta y cinco por ciento o más está listo para conectarse con usuarios reales. Esta sesión cubre tres tareas clave: elegir el canal correcto, embeber el asistente en ese canal, y agregar logging para monitorear y mejorar continuamente. Sin estas tres tareas, el asistente queda como demo personal sin valor profesional.
 
 La decisión de canal sigue tres criterios prácticos. Primer criterio: dónde está tu audiencia. En Ecuador, WhatsApp domina el contacto cliente-empresa con más del noventa por ciento de adopción; ningún otro canal se acerca para B2C masivo. Web embebido es ideal cuando ya tenés tráfico en tu landing y querés capturar interés sin pedir el número. Slack interno es la opción para asistentes corporativos que sirven a empleados. Telegram funciona como alternativa técnica simple cuando WhatsApp Cloud API es muy complejo de configurar.
@@ -1203,7 +1203,7 @@ const sesion16: SesionBootcamp = {
   moduloNum: 4,
   videoEmbed: "",
   videoTitulo: "Demo Day — Pitch de 5 minutos para tu proyecto IA",
-  slidesUrl: undefined,
+  slidesUrl: "https://gamma.app/docs/qynggtzmhz9zea9",
   teoria: `El Demo Day cierra el Mes 1 y es el evento más importante del bootcamp para tu portafolio. Cinco minutos de presentación frente a un jurado simulado (instructor más compañeros) deciden si tu proyecto se mueve a la siguiente fase con confianza o regresás a iterar. Esta sesión enseña la estructura del pitch, las técnicas de storytelling, la preparación de demo y la rúbrica de evaluación cruzada.
 
 La estructura del pitch de cinco minutos es rígida y probada. Primer bloque, problema (cuarenta y cinco segundos): describí a la persona afectada y el dolor concreto, con números si los tenés (cuántas horas pierde, cuánto dinero deja de ganar). Segundo bloque, solución (sesenta segundos): qué hace tu asistente en una sola frase, seguida de cómo lo hace en tres puntos. Tercer bloque, demo en vivo (ciento veinte segundos): mostrás el asistente funcionando con tres consultas reales, no scripted, eligiendo casos representativos. Cuarto bloque, métricas (cuarenta y cinco segundos): tasa de aciertos, tiempo ahorrado, retroalimentación de los cinco usuarios. Quinto bloque, próximos pasos (treinta segundos): qué iterás, cómo escalás, qué necesitás para llevarlo a producción.
