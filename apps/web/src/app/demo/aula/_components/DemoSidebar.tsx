@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { createClient } from "@/lib/supabase/client";
 import {
   LayoutDashboard,
   Brain,
@@ -76,19 +77,43 @@ export default function DemoSidebar({
   const [collapsed, setCollapsed] = useState(false);
 
   useEffect(() => {
-    try {
-      const raw = window.localStorage.getItem("itseia_demo_user");
-      if (!raw) {
-        router.replace("/demo");
+    const supabase = createClient();
+    let active = true;
+    (async () => {
+      const { data } = await supabase.auth.getUser();
+      if (!active) return;
+      if (!data.user) {
+        // Compatibilidad con el demo viejo (localStorage)
+        try {
+          const raw = window.localStorage.getItem("itseia_demo_user");
+          if (raw) {
+            setUser(JSON.parse(raw));
+            return;
+          }
+        } catch {}
+        router.replace("/login?module=demo");
         return;
       }
-      setUser(JSON.parse(raw));
-    } catch {
-      router.replace("/demo");
-    }
+      const meta = (data.user.user_metadata ?? {}) as {
+        full_name?: string;
+        name?: string;
+      };
+      setUser({
+        email: data.user.email ?? "demo@itseia.ai",
+        name: meta.full_name || meta.name || "Demo ITSEIA",
+        loggedAt: Date.now(),
+      });
+    })();
+    return () => {
+      active = false;
+    };
   }, [router]);
 
-  function handleLogout() {
+  async function handleLogout() {
+    const supabase = createClient();
+    try {
+      await supabase.auth.signOut();
+    } catch {}
     try {
       window.localStorage.removeItem("itseia_demo_user");
     } catch {}

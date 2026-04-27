@@ -12,6 +12,7 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import { IGNITE_WEEKS } from "./_data/ignite";
+import { createClient } from "@/lib/supabase/client";
 
 type DemoUser = {
   email: string;
@@ -23,10 +24,31 @@ export default function DemoAulaDashboard() {
   const [user, setUser] = useState<DemoUser | null>(null);
 
   useEffect(() => {
-    try {
-      const raw = window.localStorage.getItem("itseia_demo_user");
-      if (raw) setUser(JSON.parse(raw));
-    } catch {}
+    const supabase = createClient();
+    let active = true;
+    (async () => {
+      const { data } = await supabase.auth.getUser();
+      if (!active) return;
+      if (data.user) {
+        const meta = (data.user.user_metadata ?? {}) as {
+          full_name?: string;
+          name?: string;
+        };
+        setUser({
+          email: data.user.email ?? "demo@itseia.ai",
+          name: meta.full_name || meta.name || "Demo ITSEIA",
+          loggedAt: Date.now(),
+        });
+        return;
+      }
+      try {
+        const raw = window.localStorage.getItem("itseia_demo_user");
+        if (raw) setUser(JSON.parse(raw));
+      } catch {}
+    })();
+    return () => {
+      active = false;
+    };
   }, []);
 
   const firstName = user?.name?.split(" ")[0] ?? "estudiante";

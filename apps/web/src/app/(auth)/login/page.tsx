@@ -351,9 +351,25 @@ export default function LoginPage() {
 function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const redirectTo = searchParams.get("redirect") || "/dashboard";
   // Accept both ?module= and ?from= for module detection
   const moduleParam = searchParams.get("module") || searchParams.get("from");
+  // Default landing por módulo (sobre todo para demo, que NO debe ir al dashboard general)
+  const MODULE_HOME: Record<string, string> = {
+    demo: "/demo/aula",
+    preuni: "/preuni",
+    bootcamp: "/bootcamp",
+    "cursos-mdt": "/cursos-mdt",
+    "cursos-pro": "/cursos-pro",
+    certificaciones: "/certificaciones",
+    b2b: "/b2b",
+    docentes: "/teacher",
+    carreras: "/dashboard",
+    cursos: "/dashboard",
+  };
+  const redirectTo =
+    searchParams.get("redirect") ||
+    (moduleParam && MODULE_HOME[moduleParam]) ||
+    "/dashboard";
   const urlError = searchParams.get("error");
 
   // Determine which module to show
@@ -383,7 +399,7 @@ function LoginForm() {
     if (authError) {
       setLoading(false);
       if (authError.message === "Invalid login credentials") {
-        setError("Credenciales incorrectas. Verifica tu email y contrasena.");
+        setError("Credenciales incorrectas. Verifica tu email y contraseña.");
       } else if (authError.message === "Email not confirmed") {
         setError("Tu email no ha sido confirmado. Revisa tu bandeja de entrada.");
       } else {
@@ -547,7 +563,7 @@ function LoginForm() {
           {/* Form header */}
           <div className="mb-8">
             <h2 className="text-2xl font-bold font-[family-name:var(--font-space-grotesk)]">
-              Iniciar sesion
+              Iniciar sesión
             </h2>
             <p className="text-muted-foreground mt-2 text-sm">
               {config.cta}
@@ -564,7 +580,7 @@ function LoginForm() {
           <form onSubmit={handleLogin} className="space-y-5">
             <div className="space-y-2">
               <Label htmlFor="email" className="text-sm">
-                Correo electronico
+                Correo electrónico
               </Label>
               <Input
                 id="email"
@@ -585,21 +601,21 @@ function LoginForm() {
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <Label htmlFor="password" className="text-sm">
-                  Contrasena
+                  Contraseña
                 </Label>
                 <Link
                   href="/forgot-password"
                   className="text-xs transition-colors"
                   style={{ color: config.accentHex }}
                 >
-                  Olvidaste tu contrasena?
+                  ¿Olvidaste tu contraseña?
                 </Link>
               </div>
               <div className="relative">
                 <Input
                   id="password"
                   type={showPassword ? "text" : "password"}
-                  placeholder="Tu contrasena"
+                  placeholder="Tu contraseña"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
