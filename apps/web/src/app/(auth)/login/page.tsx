@@ -309,7 +309,7 @@ const DEFAULT_CONFIG: ModuleConfig = {
 
 interface ModuleConfig {
   id: string;
-  icon: React.ComponentType<{ className?: string }>;
+  icon: React.ComponentType<{ className?: string; style?: React.CSSProperties }>;
   accentColor: string;
   accentHex: string;
   gradientFrom: string;
@@ -318,7 +318,7 @@ interface ModuleConfig {
   headline: string;
   subheadline: string;
   description: string;
-  features: { icon: React.ComponentType<{ className?: string }>; text: string; highlight: string }[];
+  features: { icon: React.ComponentType<{ className?: string; style?: React.CSSProperties }>; text: string; highlight: string }[];
   stats: { value: string; label: string; suffix: string }[];
   cta: string;
   badge: string;

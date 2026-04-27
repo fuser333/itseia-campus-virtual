@@ -255,20 +255,10 @@ export default function EmpresasInfoPage() {
         <div className="text-center py-4 px-4 bg-gradient-to-r from-[#FBBC0C]/10 via-[#FBBC0C]/15 to-[#FBBC0C]/10 border-b border-[#FBBC0C]/20">
           <a href="/login?module=empresas" className="inline-flex items-center gap-3 group">
             <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-[#FBBC0C]/20 group-hover:bg-[#FBBC0C]/30 transition-colors">
-              <svg className="w-4 h-4 text-[#FBBC0C]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5zm0 0v7" /></svg>
+              <svg className="w-4 h-4 text-[#FBBC0C]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
             </span>
-            <span className="text-white font-semibold text-sm sm:text-base">¿Ya eres estudiante ITSEIA?</span>
-            <span className="text-[#FBBC0C] font-bold text-sm sm:text-base group-hover:underline">Accede al portal empresarial →</span>
-          </a>
-        </div>
-        {/* Login access — prominent banner */}
-        <div className="text-center py-4 px-4 bg-gradient-to-r from-[#73B8E7]/10 via-[#73B8E7]/15 to-[#73B8E7]/10 border-b border-[#73B8E7]/20">
-          <a href="/login?module=b2b" className="inline-flex items-center gap-3 group">
-            <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-[#73B8E7]/20 group-hover:bg-[#73B8E7]/30 transition-colors">
-              <svg className="w-4 h-4 text-[#73B8E7]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
-            </span>
-            <span className="text-white font-semibold text-sm sm:text-base">¿Ya eres cliente empresarial?</span>
-            <span className="text-[#73B8E7] font-bold text-sm sm:text-base group-hover:underline">Accede al portal B2B →</span>
+            <span className="text-white font-semibold text-sm sm:text-base">¿Ya eres cliente empresarial ITSEIA?</span>
+            <span className="text-[#FBBC0C] font-bold text-sm sm:text-base group-hover:underline">Accede al portal corporativo →</span>
           </a>
         </div>
 

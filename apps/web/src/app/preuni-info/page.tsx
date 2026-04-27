@@ -32,7 +32,7 @@ export default function PreuniInfoPage() {
 
       {/* Login access — prominent banner */}
       <div className="text-center py-4 px-4 bg-gradient-to-r from-[#FBBC0C]/10 via-[#FBBC0C]/15 to-[#FBBC0C]/10 border-b border-[#FBBC0C]/20">
-        <a href="/login?module=preuni" className="inline-flex items-center gap-3 group">
+        <a href="/login?module=preuni&redirect=/preuni" className="inline-flex items-center gap-3 group">
           <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-[#FBBC0C]/20 group-hover:bg-[#FBBC0C]/30 transition-colors">
             <Rocket className="w-4 h-4 text-[#FBBC0C]" />
           </span>
@@ -84,7 +84,7 @@ export default function PreuniInfoPage() {
               <ArrowRight className="w-4 h-4" />
             </a>
             <Link
-              href="/login?module=preuni"
+              href="/login?module=preuni&redirect=/preuni"
               className="px-8 py-4 bg-white/5 hover:bg-white/10 border border-white/10 text-white font-semibold rounded-xl transition-all"
             >
               Ya soy estudiante

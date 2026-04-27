@@ -78,10 +78,10 @@ const MENU: NavSection[] = [
   {
     sectionLabel: "DESCUBRE ITSEIA",
     items: [
-      { href: "/carreras-info",             label: "Carreras",      icon: GraduationCap },
-      { href: "/cursos-pro-info",           label: "Cursos MDT",    icon: BookOpen },
-      { href: "/bootcamp",                  label: "Bootcamp",      icon: Zap },
-      { href: "/b2b",                       label: "B2B",           icon: Building2 },
+      { href: "/carreras-info",             label: "Carreras",            icon: GraduationCap },
+      { href: "/cursos-pro-info",           label: "Cursos Profesionales", icon: BookOpen },
+      { href: "/bootcamp",                  label: "Bootcamp",            icon: Zap },
+      { href: "/b2b",                       label: "B2B",                 icon: Building2 },
       { href: "https://h3l.ai", label: "H3L", icon: Brain, external: true },
     ],
   },

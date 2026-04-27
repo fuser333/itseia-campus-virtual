@@ -280,7 +280,7 @@ export default async function CursosMdtPage() {
             Explora el catálogo y elige el primero — todos desde $99.
           </p>
           <Link
-            href="/cursos-mdt/catalogo"
+            href="/cursos-mdt-info"
             className="mt-5 inline-flex items-center gap-2 rounded-xl bg-[#FBBC0C] px-6 py-2.5 text-sm font-bold text-[#0A1628] hover:bg-[#f5b300] transition-colors"
           >
             Ver catálogo completo
