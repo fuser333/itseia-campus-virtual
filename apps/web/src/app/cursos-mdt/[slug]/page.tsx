@@ -23,6 +23,25 @@ import SlideViewer from "@/components/session/SlideViewer";
 import { CURSOS_MDT } from "../data";
 import { C1_TEMAS, C1_MODULOS } from "../c1-data";
 import type { TemaC1 } from "../c1-data";
+import { C9_TEMAS, C9_MODULOS } from "../c9-data";
+import { C10_TEMAS, C10_MODULOS } from "../c10-data";
+import { C11_TEMAS, C11_MODULOS } from "../c11-data";
+import { C12_TEMAS, C12_MODULOS } from "../c12-data";
+import { C13_TEMAS, C13_MODULOS } from "../c13-data";
+import { C14_TEMAS, C14_MODULOS } from "../c14-data";
+import { C15_TEMAS, C15_MODULOS } from "../c15-data";
+
+// Mapa slug → { temas, modulos } para soportar cualquier curso C1-C15
+const COURSE_DATA: Record<string, { temas: any[]; modulos: any[] }> = {
+  c1: { temas: C1_TEMAS, modulos: C1_MODULOS },
+  c9: { temas: C9_TEMAS, modulos: C9_MODULOS },
+  c10: { temas: C10_TEMAS, modulos: C10_MODULOS },
+  c11: { temas: C11_TEMAS, modulos: C11_MODULOS },
+  c12: { temas: C12_TEMAS, modulos: C12_MODULOS },
+  c13: { temas: C13_TEMAS, modulos: C13_MODULOS },
+  c14: { temas: C14_TEMAS, modulos: C14_MODULOS },
+  c15: { temas: C15_TEMAS, modulos: C15_MODULOS },
+};
 
 // ─── Slug → índice en CURSOS_MDT (c1=índice 0, c2=índice 1, ...) ─────────────
 
@@ -612,10 +631,13 @@ export default function CursoMdtPage({ params }: PageProps) {
     });
   }
 
-  // Para C1: usar datos reales de módulos y temas
-  const isC1 = slug === "c1";
-  const modulos = isC1 ? C1_MODULOS : [];
-  const temas = isC1 ? C1_TEMAS : [];
+  // Datos del curso por slug (c1, c9, c10, c11, c12, c13, c14, c15 inicialmente).
+  // C2-C8 se agregan cuando el subagent los publica.
+  const courseData = COURSE_DATA[slug] ?? { temas: [], modulos: [] };
+  const modulos = courseData.modulos;
+  const temas = courseData.temas;
+  // Compat con código legacy que usaba `isC1` para condicionar render
+  const isC1 = temas.length > 0;
 
   // Buscar en qué módulo está el tema expandido (para breadcrumb)
   const expandedTema = expandedSesion ? temas.find(t => t.id === expandedSesion) : null;

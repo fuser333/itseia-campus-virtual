@@ -563,12 +563,6 @@ const tema3: TemaC9 = {
     },
     {
       pregunta: "¿Por qué se recomienda siempre presupuestar tres escenarios en el contexto ecuatoriano?",
-      opcoles: [
-        "Por requisito del SRI",
-        "La incertidumbre política, cambios de tasas y otros factores hacen necesario planificar para múltiples futuros",
-        "Es un requisito de la SUPERCIAS",
-        "Solo se aplica a empresas exportadoras",
-      ],
       opciones: [
         "Por requisito del SRI",
         "La incertidumbre política, cambios de tasas y otros factores hacen necesario planificar para múltiples futuros",
