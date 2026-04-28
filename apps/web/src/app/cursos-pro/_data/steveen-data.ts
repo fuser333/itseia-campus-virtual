@@ -2110,26 +2110,28 @@ Para motores eléctricos, la **regla de los 10°C** es crítica: cada 10°C de a
 El flujo práctico para analizar datos de sensores tiene cuatro pasos:
 
 **Paso 1 — Importar y visualizar:**
-```python
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
 
-df = pd.read_csv('vibration_motor_01.csv')
-df['timestamp'] = pd.to_datetime(df['timestamp'])
-df.plot(x='timestamp', y=['vib_x', 'vib_y', 'temp_bearing'])
-```
+[Código python]
+    import pandas as pd
+    import numpy as np
+    import matplotlib.pyplot as plt
+    
+    df = pd.read_csv('vibration_motor_01.csv')
+    df['timestamp'] = pd.to_datetime(df['timestamp'])
+    df.plot(x='timestamp', y=['vib_x', 'vib_y', 'temp_bearing'])
+[/Código]
 
 **Paso 2 — Calcular estadísticos de señal:**
 Los más útiles para diagnóstico de rodamientos son: RMS (energía total), Kurtosis (detecta impactos — valores >4 indican defecto), Crest Factor (ratio pico/RMS — normal <3, con defecto >6).
 
 **Paso 3 — Detección de anomalías:**
-```python
-from sklearn.ensemble import IsolationForest
-model = IsolationForest(contamination=0.05, random_state=42)
-df['anomaly'] = model.fit_predict(df[['vib_rms', 'temp_bearing']])
-# -1 = anomalía, 1 = normal
-```
+
+[Código python]
+    from sklearn.ensemble import IsolationForest
+    model = IsolationForest(contamination=0.05, random_state=42)
+    df['anomaly'] = model.fit_predict(df[['vib_rms', 'temp_bearing']])
+    # -1 = anomalía, 1 = normal
+[/Código]
 
 **Paso 4 — Interpretar con IA:**
 Exporta las anomalías detectadas y el resumen estadístico, luego usa Claude con el prompt: *"Analiza estos datos de vibración de un motor trifásico de 30 kW a 1750 RPM. RMS promedio: [X] mm/s, Kurtosis máxima: [Y], temperatura rodamiento delantero: [Z]°C. ¿Qué modos de falla son probables? ¿Qué acción correctiva recomendarías?"*
@@ -2367,12 +2369,13 @@ Exporta los datos de sensores a Excel o CSV con estructura: timestamp, equipo_id
 En Tableau Public, File → Connect to Data → Microsoft Excel (o Text/CSV). Arrastra la tabla al área de diseño.
 
 **Paso 3 — Crear campo calculado para semáforo:**
-```
-IF [vib_rms] > 4.5 OR [temp_rodamiento] > 80 THEN "CRÍTICO"
-ELSEIF [vib_rms] > 2.8 OR [temp_rodamiento] > 65 THEN "ALERTA"
-ELSE "NORMAL"
-END
-```
+
+[Código ]
+    IF [vib_rms] > 4.5 OR [temp_rodamiento] > 80 THEN "CRÍTICO"
+    ELSEIF [vib_rms] > 2.8 OR [temp_rodamiento] > 65 THEN "ALERTA"
+    ELSE "NORMAL"
+    END
+[/Código]
 
 **Paso 4 — Construir visualizaciones:**
 - Semáforo: Drag equipo a Columns, arrastrar Estado a Color (verde/amarillo/rojo)
@@ -2551,24 +2554,1795 @@ Una florícola mediana con 15 equipos clave en su área de pos-cosecha implement
     ],
   },
 
-  // M6 — Control de calidad (placeholders)
-  placeholder(26, "SPC y gráficos de control con Minitab IA", MOD6, 6),
-  placeholder(27, "Reglas Western Electric y detección de tendencias", MOD6, 6),
-  placeholder(28, "Cp/Cpk y capacidad de proceso con IA", MOD6, 6),
-  placeholder(29, "Análisis Pareto de defectos con ChatGPT", MOD6, 6),
-  placeholder(30, "Reportes de calidad automatizados (5W+1H)", MOD6, 6),
+  // M6 — Control de calidad con IA
+  {
+    id: 26,
+    titulo: "SPC y gráficos de control con Minitab IA",
+    modulo: MOD6,
+    moduloNum: 6,
+    videoEmbed: "https://www.youtube.com/embed/PLACEHOLDER",
+    videoTitulo: "SPC y gráficos de control con Minitab IA",
+    teoria: `## Control Estadístico de Procesos: la ciencia que separa variación normal de señales reales
 
-  // M7 — Cadena de suministro (placeholders)
-  placeholder(31, "Pronóstico de demanda con Copilot Excel", MOD7, 7),
-  placeholder(32, "Variables externas que afectan la demanda", MOD7, 7),
-  placeholder(33, "Clasificación ABC/XYZ de inventario con IA", MOD7, 7),
-  placeholder(34, "EOQ y punto de reorden optimizado con Claude", MOD7, 7),
-  placeholder(35, "NotebookLM como base de conocimiento supply chain", MOD7, 7),
+El Control Estadístico de Procesos (SPC — Statistical Process Control) es el conjunto de técnicas estadísticas desarrolladas por Walter Shewhart en los años 1920 y popularizadas globalmente por W. Edwards Deming, que permite monitorear y controlar la calidad de los procesos manufactureros de manera objetiva y sistemática.
 
-  // M8 — Integración y proyecto final (placeholders)
-  placeholder(36, "Automatización de procesos con n8n e IA", MOD8, 8),
-  placeholder(37, "Conectar herramientas: Excel → ChatGPT → Power BI", MOD8, 8),
-  placeholder(38, "Copilot Excel avanzado para ingeniería industrial", MOD8, 8),
-  placeholder(39, "Proyecto integrador: diagnóstico IA de tu empresa", MOD8, 8),
-  placeholder(40, "Presentación de resultados y plan de implementación", MOD8, 8),
+La premisa fundamental del SPC es que todo proceso tiene variación. La pregunta clave no es "¿hay variación?" sino "¿esta variación es normal (aleatoria) o hay una causa especial (asignable) que debo eliminar?" Los gráficos de control son la herramienta visual que responde esa pregunta.
+
+### El gráfico de control: anatomía y lógica
+
+Un gráfico de control Shewhart tiene tres elementos estructurales:
+
+**Línea Central (CL):** El promedio del proceso cuando opera bajo control estadístico. Es la referencia del comportamiento esperado.
+
+**Límites de Control Superior (UCL) e Inferior (LCL):** Calculados como ±3σ (tres desviaciones estándar) alrededor de la línea central. Si el proceso está bajo control estadístico, el 99.73% de los puntos deben caer dentro de estos límites por pura probabilidad estadística.
+
+**Los puntos de datos:** Mediciones individuales o estadísticos de subgrupos (promedios, rangos, proporciones) graficados en el tiempo.
+
+La lógica es elegante: si un punto cae fuera de los límites de ±3σ, la probabilidad de que sea solo ruido aleatorio es 0.27% (1 en 370). Algo más que azar está actuando. Esa es la causa especial que hay que investigar y eliminar.
+
+### Tipos de gráficos de control y cuándo usar cada uno
+
+**Para variables continuas (medidas con número):**
+- **Gráfico X̄-R (Xbar-R):** Para subgrupos de tamaño 2-10. El más común en manufactura. Monitorea promedio del subgrupo (X̄) y rango (R).
+- **Gráfico X̄-S:** Para subgrupos de tamaño ≥10. Usa desviación estándar (S) en lugar del rango para mayor precisión estadística.
+- **Gráfico I-MR (Individuals-Moving Range):** Para observaciones individuales sin subgrupos. Ideal cuando medir más de una unidad por período es impractical (producción lenta, análisis de laboratorio costoso).
+
+**Para atributos (conteos, proporciones):**
+- **Gráfico p:** Fracción defectiva cuando el tamaño del subgrupo varía. Ejemplo: porcentaje de facturas con error por lote de facturación.
+- **Gráfico np:** Número de defectivos cuando el subgrupo es constante.
+- **Gráfico c:** Número de defectos por unidad cuando el tamaño de la unidad es constante.
+- **Gráfico u:** Número de defectos por unidad cuando el tamaño varía.
+
+### Minitab IA: automatización del análisis SPC
+
+Minitab es el software estadístico estándar en manufactura y calidad para SPC. Sus capacidades de IA en las versiones recientes incluyen:
+
+**Asistente Estadístico:** Guía interactiva que pregunta "¿qué quieres analizar?" y selecciona automáticamente el tipo de gráfico correcto, ejecuta el análisis y genera un informe en lenguaje plain text interpretando los resultados y señalando puntos fuera de control.
+
+**Companion AI:** Funcionalidad que analiza los gráficos de control generados y sugiere causas posibles para las señales detectadas, basándose en la base de conocimiento de Minitab sobre causas comunes por industria.
+
+**Detección automática de señales:** Minitab identifica y resalta automáticamente todos los puntos que violan las reglas de detección (no solo los puntos fuera de límites, sino también patrones como corridas, tendencias y puntos estratificados).
+
+Para Ecuador, donde Minitab tiene licencias académicas disponibles a través de distribuidores como Qualitas Consultores, la versión de prueba de 30 días es completamente funcional y suficiente para dominar los fundamentos.
+
+### Proceso de implementación de SPC en una línea de producción
+
+1. **Seleccionar la característica crítica de calidad (CTQ):** La variable que más impacta la satisfacción del cliente o el costo de no calidad. Para una embotelladora: volumen de llenado. Para una metalmecánica: dimensión crítica de tolerancia.
+
+2. **Definir el plan de muestreo:** Tamaño del subgrupo (n), frecuencia de muestreo, responsable de la medición, instrumento de medición con calibración verificada.
+
+3. **Fase de análisis (Fase I):** Recolectar 20-25 subgrupos históricos para establecer los límites de control iniciales. Identificar y eliminar causas especiales en los datos históricos antes de usar esos límites para monitoreo futuro.
+
+4. **Fase de monitoreo (Fase II):** Con los límites establecidos, monitorear el proceso en tiempo real. Responder a señales según el plan de respuesta definido.
+
+5. **Mejorar y recalcular:** Después de implementar mejoras, recalcular los límites de control con los nuevos datos para reflejar el proceso mejorado.
+
+### ChatGPT como intérprete de gráficos SPC
+
+Una vez que Minitab genera el gráfico y señala los puntos fuera de control, ChatGPT puede ayudar a interpretar las posibles causas. El prompt efectivo:
+
+*"En mi proceso de [descripción del proceso] el gráfico X̄-R muestra: [descripción de señales — por ejemplo: 'punto 14 fuera de UCL, puntos 18-22 con tendencia ascendente, punto 27 fuera de LCL']. Las variables del proceso son: [temperatura, velocidad, operador, turno, materia prima]. ¿Qué causas asignables investigarías primero para cada señal? ¿Qué preguntas le harías al operador?"*`,
+    presentacionSlides: [
+      { titulo: "SPC: separar ruido de señal en el proceso", contenido: "Premisa: todo proceso tiene variación. La pregunta clave: ¿es variación aleatoria normal o una causa especial? Los gráficos de control ±3σ responden objetivamente. Si punto fuera de límites: probabilidad de ser ruido = 0.27%." },
+      { titulo: "Anatomía de un gráfico de control", contenido: "CL (Línea Central): promedio del proceso bajo control. UCL: +3σ. LCL: -3σ. Regla básica: 99.73% de puntos deben estar dentro si solo hay variación aleatoria. Punto fuera = causa especial = investigar." },
+      { titulo: "¿Qué gráfico usar en cada situación?", contenido: "Variables continuas, subgrupos 2-10: X̄-R. Variables, subgrupos ≥10: X̄-S. Observaciones individuales: I-MR. Fracción defectiva: gráfico p. Número defectivos (n fijo): np. Defectos por unidad: c o u." },
+      { titulo: "Minitab Asistente Estadístico: SPC sin ser estadístico", contenido: "El Asistente pregunta: '¿Qué tipo de dato tienes?' y elige el gráfico. Ejecuta el análisis. Genera informe en lenguaje plain text. Señala señales y posibles causas. Disponible en prueba 30 días gratis." },
+      { titulo: "Las 5 fases de implementación de SPC", contenido: "1. Seleccionar CTQ (característica crítica). 2. Definir plan de muestreo (n, frecuencia). 3. Fase I: 20-25 subgrupos históricos para límites iniciales. 4. Fase II: monitoreo en tiempo real. 5. Mejorar y recalcular." },
+      { titulo: "Minitab Companion AI: diagnóstico de causas", contenido: "Analiza señales en gráficos de control y sugiere causas posibles por tipo de industria. Complementa el diagnóstico del ingeniero con la base de conocimiento de miles de casos documentados." },
+      { titulo: "Prompt para interpretar señales con ChatGPT", contenido: "Describir: proceso, tipo de gráfico, señales detectadas (puntos fuera, tendencias, corridas), variables del proceso (turno, operador, material, temperatura). ChatGPT sugiere causas asignables prioritarias a investigar." },
+      { titulo: "SPC en Ecuador: sectores de aplicación", contenido: "Industria alimentaria (ARCSA exige control de proceso). Floricultura (calibres de tallos, longitudes). Metalmecánica (tolerancias dimensionales). Textil (resistencia de tela). Cualquier proceso repetitivo con especificación." },
+    ],
+    quiz: [
+      { pregunta: "¿Qué significa que un punto caiga fuera de los límites de control ±3σ en un gráfico de Shewhart?", opciones: ["El producto está dentro de especificación del cliente", "La probabilidad de que sea solo variación aleatoria es 0.27%, indicando una causa especial", "El proceso está funcionando perfectamente", "Se debe detener la producción obligatoriamente"], respuesta: 1, explicacion: "Los límites ±3σ se calculan para que el 99.73% de los puntos caigan dentro si solo hay variación aleatoria. Un punto fuera tiene apenas 0.27% de probabilidad de ser ruido, lo que estadísticamente indica una causa especial que debe investigarse." },
+      { pregunta: "¿Cuándo se debe usar el gráfico I-MR en lugar del gráfico X̄-R?", opciones: ["Cuando el tamaño del subgrupo es mayor a 10", "Cuando las observaciones son individuales (sin subgrupos), por ejemplo en análisis de laboratorio costosos o producción lenta", "Solo para datos de atributos (defectivos)", "Cuando el proceso tiene alta variación estacional"], respuesta: 1, explicacion: "El gráfico I-MR (Individuals - Moving Range) se usa cuando medir más de una unidad por período no es práctico o económico: análisis de laboratorio costosos, producción de piezas únicas o procesos lentos donde solo hay una medición disponible por período." },
+      { pregunta: "¿Cuántos subgrupos históricos se necesitan en la Fase I del SPC para establecer límites de control confiables?", opciones: ["5 a 10 subgrupos", "20 a 25 subgrupos", "50 a 100 subgrupos", "Al menos 500 observaciones individuales"], respuesta: 1, explicacion: "La práctica estándar del SPC requiere 20-25 subgrupos en la Fase I para tener suficiente información estadística para calcular límites de control confiables. Con menos de 20 subgrupos, los límites son inestables y pueden generar falsas alarmas." },
+      { pregunta: "¿Para qué tipo de dato es más apropiado el gráfico p en SPC?", opciones: ["Medidas de temperatura en grados centígrados", "Fracción defectiva (porcentaje de unidades defectuosas) cuando el tamaño del subgrupo varía", "Número de defectos por unidad cuando el tamaño de la unidad es constante", "Dimensiones mecánicas en milímetros"], respuesta: 1, explicacion: "El gráfico p monitorea la fracción defectiva (proporción de unidades defectuosas) y es el correcto cuando el tamaño del subgrupo varía de un período al otro, porque sus límites de control se recalculan para cada punto según el n de ese subgrupo." },
+      { pregunta: "¿Qué ventaja ofrece el Asistente Estadístico de Minitab sobre hacer el análisis SPC manualmente?", opciones: ["Es más barato que Excel", "Selecciona automáticamente el tipo de gráfico correcto, ejecuta el análisis y genera un informe en lenguaje natural interpretando los resultados sin que el usuario necesite conocer la teoría estadística en detalle", "Solo funciona para la industria automotriz", "No tiene ventajas reales sobre el análisis manual"], respuesta: 1, explicacion: "El Asistente de Minitab guía al usuario con preguntas sobre el tipo de dato y objetivo del análisis, selecciona el gráfico estadísticamente correcto y genera un informe en lenguaje plain text que interpreta señales y sugiere causas, haciendo el SPC accesible para ingenieros sin formación estadística avanzada." },
+    ],
+    ejercicio: {
+      titulo: "Gráfico de control X̄-R con Minitab o Python para proceso real",
+      objetivo: "Construir un gráfico de control X̄-R para una característica de calidad real o simulada, interpretar las señales y usar ChatGPT para proponer causas asignables.",
+      herramientas: "Minitab (prueba 30 días en minitab.com) o Python con matplotlib/numpy, ChatGPT o Claude",
+      pasos: [
+        "Selecciona una característica de calidad de un proceso que conozcas (peso de llenado, dimensión, tiempo de ciclo) o simula datos de llenado de botellas de agua: 25 subgrupos de n=5, con un promedio objetivo de 500 ml y desviación estándar de 3 ml. Para introducir señales, en los subgrupos 12-16 aumenta el promedio a 507 ml (simula cambio de operario).",
+        "Si usas Minitab: ingresa los datos en columnas, ve a Stat → Control Charts → Variables Charts for Subgroups → Xbar-R. Selecciona las columnas de datos, define n=5, ejecuta. Si usas Python: usa numpy para generar los datos y matplotlib para graficar con líneas horizontales para UCL, LCL y CL calculados.",
+        "Identifica visualmente todos los puntos o patrones que indican causa especial. Anótalos: número de subgrupo, tipo de señal (fuera de límite, tendencia, corrida).",
+        "Copia las señales detectadas y usa ChatGPT con el prompt: 'En mi proceso de llenado de botellas de 500 ml, el gráfico X̄-R muestra: [describe las señales exactas que encontraste]. Las variables del proceso son: operario, turno, temperatura ambiente, lote de materia prima. ¿Qué causas asignables investigarías para cada señal? Enuméralas por prioridad.'",
+        "Documenta las causas sugeridas por ChatGPT. Para cada causa, escribe qué dato necesitarías recolectar para confirmarla (hoja de verificación, registro de cambios de turno, temperatura del almacén, etc.).",
+        "Reflexión final: ¿qué acción correctiva implementarías si la causa real fuera un cambio de operario sin capacitación suficiente? ¿Cómo lo documentarías en el sistema de calidad?",
+      ],
+      resultado: "Gráfico X̄-R con señales identificadas, análisis de causas de ChatGPT documentado, plan de investigación con datos a recolectar y propuesta de acción correctiva.",
+      criterios: [
+        { criterio: "Gráfico X̄-R construido correctamente con UCL, LCL, CL visibles y datos en subgrupos", puntos: 30 },
+        { criterio: "Señales de causa especial identificadas correctamente con número de subgrupo y tipo", puntos: 25 },
+        { criterio: "Prompt bien construido y causas de ChatGPT documentadas con evaluación", puntos: 25 },
+        { criterio: "Plan de investigación y propuesta de acción correctiva documentados", puntos: 20 },
+      ],
+    },
+    recursos: [
+      { titulo: "Minitab — Prueba gratuita 30 días", url: "https://www.minitab.com/en-us/products/minitab/free-trial/", tipo: "herramienta", descripcion: "Descarga la versión de prueba completa de Minitab Statistical Software, el estándar industrial para SPC y análisis de calidad." },
+      { titulo: "ASQ — SPC Handbook online", url: "https://asq.org/quality-resources/statistical-process-control", tipo: "documentacion", descripcion: "Recursos de la American Society for Quality sobre SPC: guías, ejemplos y casos de uso por industria." },
+      { titulo: "NIST/SEMATECH e-Handbook of Statistical Methods — SPC", url: "https://www.itl.nist.gov/div898/handbook/pmc/pmc.htm", tipo: "lectura", descripcion: "Manual gratuito del NIST (Instituto Nacional de Estándares de EE.UU.) sobre métodos estadísticos para control de procesos." },
+    ],
+  },
+
+  {
+    id: 27,
+    titulo: "Reglas Western Electric y detección de tendencias",
+    modulo: MOD6,
+    moduloNum: 6,
+    videoEmbed: "https://www.youtube.com/embed/PLACEHOLDER",
+    videoTitulo: "Reglas Western Electric y detección de tendencias",
+    teoria: `## Más allá del punto fuera de control: las 8 reglas que detectan todo
+
+Un error común al implementar SPC es pensar que solo los puntos fuera de los límites ±3σ indican problemas. En realidad, un proceso puede estar "degradándose silenciosamente" con todos sus puntos dentro de los límites, pero mostrando patrones que estadísticamente no son aleatorios. Las **Reglas Western Electric** (también conocidas como Reglas de Nelson o Reglas de AT&T) son el conjunto estandarizado de criterios para detectar estas señales no aleatorias.
+
+### Las 8 reglas Western Electric
+
+Las reglas se aplican simultáneamente al mismo gráfico de control. Cada una detecta un tipo diferente de comportamiento no aleatorio:
+
+**Regla 1 — Punto fuera de ±3σ:** Un punto fuera de los límites de control. La más conocida. Indica cambio drástico o abrupto en el proceso.
+
+**Regla 2 — Corrida de 9 puntos al mismo lado de la línea central:** Nueve o más puntos consecutivos todos por encima O todos por debajo del CL. La probabilidad de que 9 lanzamientos de moneda den el mismo resultado es (0.5)^9 = 0.2%. Indica un cambio sostenido en el promedio del proceso.
+
+**Regla 3 — Tendencia de 6 puntos:** Seis puntos consecutivos monotónicamente crecientes O decrecientes. Indica una tendencia sistemática (desgaste de herramienta, temperatura que sube gradualmente, contaminación acumulativa).
+
+**Regla 4 — 14 puntos alternantes:** Catorce puntos que alternan hacia arriba y hacia abajo. Indica mezcla de dos poblaciones diferentes (dos máquinas, dos turnos, dos operadores medidos alternadamente).
+
+**Regla 5 — Dos de tres en zona A:** Dos de los últimos tres puntos en la zona A (entre 2σ y 3σ, del mismo lado). Señal de cambio moderado en el proceso.
+
+**Regla 6 — Cuatro de cinco en zona B:** Cuatro de los últimos cinco puntos en la zona B o zona A (más allá de 1σ, del mismo lado). Señal de shift moderado sostenido.
+
+**Regla 7 — 15 puntos en zona C:** Quince puntos consecutivos dentro de la zona C (entre la línea central y ±1σ). Paradójicamente, demasiada estabilidad también es sospechosa: indica estratificación (posiblemente los subgrupos mezclan datos de procesos diferentes).
+
+**Regla 8 — 8 puntos en zonas A o B (ambos lados):** Ocho puntos consecutivos fuera de la zona C (ninguno cerca del centro). Confirma mezcla de dos procesos o poblaciones distintas.
+
+### ¿Por qué importan estas reglas en la industria ecuatoriana?
+
+En Ecuador, los procesos manufactureros frecuentemente operan con:
+- Múltiples turnos (A, B, C) con diferente nivel de experiencia
+- Materias primas de diferentes proveedores o lotes con variabilidad
+- Equipos con mantenimiento irregular que se degradan gradualmente
+- Ambientes con temperatura variable (especialmente en instalaciones sin climatización)
+
+Estos factores generan exactamente los patrones que las Reglas Western Electric detectan. Sin estas reglas, el ingeniero de calidad puede mirar el gráfico y concluir "todo está dentro de los límites, no hay problema" mientras el proceso se deteriora gradualmente.
+
+### Implementación práctica
+
+**En Minitab:** Las reglas Western Electric se activan en las opciones del gráfico de control. Al ejecutar Stat → Control Charts, en el diálogo aparece el botón "Tests". Seleccionar las 8 reglas y Minitab automáticamente señala con un número (1-8) cada punto que viola la regla correspondiente y lista las violaciones en el output de la sesión.
+
+**En Python:**
+
+[Código python]
+    import numpy as np
+    
+    def check_western_electric(data, cl, ucl, lcl, sigma):
+        violations = []
+        n = len(data)
+    
+        # Regla 1: Punto fuera de ±3σ
+        for i, x in enumerate(data):
+            if x > ucl or x < lcl:
+                violations.append((i, 'Regla 1: Punto fuera de 3σ'))
+    
+        # Regla 2: 9 puntos consecutivos al mismo lado del CL
+        for i in range(8, n):
+            segment = data[i-8:i+1]
+            if all(x > cl for x in segment) or all(x < cl for x in segment):
+                violations.append((i, 'Regla 2: Corrida de 9 puntos'))
+    
+        # Regla 3: 6 puntos en tendencia creciente o decreciente
+        for i in range(5, n):
+            segment = data[i-5:i+1]
+            if all(segment[j] < segment[j+1] for j in range(5)):
+                violations.append((i, 'Regla 3: Tendencia creciente'))
+            if all(segment[j] > segment[j+1] for j in range(5)):
+                violations.append((i, 'Regla 3: Tendencia decreciente'))
+    
+        return violations
+[/Código]
+
+**Con ChatGPT:** Si pegas una lista de 25-30 puntos de un gráfico de control y los valores de CL, UCL y LCL, ChatGPT puede verificar todas las reglas Western Electric y explicar qué causa probable genera cada violación detectada.
+
+### Interpretación de las causas más comunes
+
+| Regla violada | Causa más frecuente en manufactura |
+|---------------|-----------------------------------|
+| Regla 1 | Cambio de material, falla de equipo, error de medición |
+| Regla 2 | Cambio de turno/operador, ajuste no documentado |
+| Regla 3 | Desgaste de herramienta, temperatura ambiental, degradación |
+| Regla 4 | Mezcla de dos máquinas o dos operadores en datos alternos |
+| Reglas 5 y 6 | Shift gradual por ajuste excesivo o cambio de proveedor |
+| Regla 7 | Muestreo incorrecto (subgrupos de diferentes procesos mezclados) |
+| Regla 8 | Dos turnos con diferente media pero sin distinción en el gráfico |`,
+    presentacionSlides: [
+      { titulo: "Reglas Western Electric: detectar lo que el ojo no ve", contenido: "Un proceso puede degradarse con todos los puntos DENTRO de los límites si muestra patrones no aleatorios. Las 8 reglas Western Electric detectan corridas, tendencias, mezclas y estratificación que el ojo humano ignora." },
+      { titulo: "Las 4 reglas más importantes", contenido: "Regla 1: Punto fuera ±3σ (cambio abrupto). Regla 2: 9 puntos al mismo lado del CL (shift sostenido). Regla 3: 6 puntos en tendencia (desgaste gradual). Regla 4: 14 alternantes (mezcla de 2 poblaciones)." },
+      { titulo: "Regla 7: demasiada estabilidad también es sospechosa", contenido: "15 puntos consecutivos en zona C (±1σ): paradoja SPC. Tanta estabilidad indica que los subgrupos mezclan datos de procesos diferentes. El gráfico parece 'perfecto' pero en realidad hay un problema de muestreo." },
+      { titulo: "Causas por tipo de regla", contenido: "Regla 1: falla equipo, material diferente. Regla 2: cambio turno/operador. Regla 3: desgaste herramienta, temperatura. Regla 4: mezcla de máquinas alternadas. Reglas 5-6: ajuste excesivo, cambio proveedor." },
+      { titulo: "Activar las 8 reglas en Minitab", contenido: "Stat → Control Charts → [tipo de gráfico] → botón Tests. Seleccionar las 8 reglas. Minitab señala con número 1-8 cada violación y lista todas en el output de sesión. Sin este paso, se pierden el 60% de las señales." },
+      { titulo: "Python: verificar reglas automáticamente", contenido: "Función check_western_electric(data, cl, ucl, lcl, sigma). Recorre los datos, aplica lógica de cada regla, devuelve lista de (índice, descripción_violación). Automatiza lo que sería revisión visual tediosa." },
+      { titulo: "ChatGPT para diagnóstico diferencial de causas", contenido: "Pegar lista de valores del gráfico + CL/UCL/LCL. ChatGPT verifica todas las reglas y para cada violación propone: causas más probables por sector, datos a recolectar para confirmar, acción correctiva prioritaria." },
+      { titulo: "Impacto en industria ecuatoriana", contenido: "Turnos múltiples con diferente experiencia → Regla 4 o Regla 8. Proveedores variables → Regla 5-6. Equipos sin mantenimiento → Regla 3 (tendencia). Sin estas reglas: proceso 'parece ok' mientras la calidad se degrada." },
+    ],
+    quiz: [
+      { pregunta: "¿Qué detecta la Regla 2 de Western Electric (corrida de 9 puntos al mismo lado del CL)?", opciones: ["Una falla catastrófica del equipo", "Un cambio sostenido en el promedio del proceso (shift), aunque todos los puntos estén dentro de los límites ±3σ", "Un error de calibración del instrumento de medición", "Variación normal del proceso sin ninguna causa especial"], respuesta: 1, explicacion: "La Regla 2 detecta que 9 puntos consecutivos están todos por encima o todos por debajo de la línea central. La probabilidad estadística de esto por azar es 0.2%, indicando un shift sostenido en el promedio del proceso, típicamente por cambio de operador, turno, materia prima o ajuste no documentado." },
+      { pregunta: "¿Qué problema de proceso indica la Regla 7 (15 puntos consecutivos en la zona C, dentro de ±1σ)?", opciones: ["El proceso es extremadamente estable y preciso, lo cual es siempre deseable", "Estratificación: los subgrupos posiblemente mezclan datos de dos procesos o poblaciones distintas", "El proceso está fuera de control estadístico y debe pararse", "Los límites de control están mal calculados por una σ demasiado grande"], respuesta: 1, explicacion: "La Regla 7 es la 'paradoja de la estabilidad': 15 puntos dentro de ±1σ es estadísticamente imposible por pura aleatoriedad. Indica estratificación — los subgrupos probablemente mezclan mediciones de dos procesos distintos que se cancelan mutuamente, creando una falsa apariencia de estabilidad." },
+      { pregunta: "Un gráfico de control muestra 6 puntos consecutivos creciendo monotónicamente, todos dentro de los límites ±3σ. ¿Qué regla Western Electric viola este patrón?", opciones: ["Regla 1 — Punto fuera de límites", "Regla 3 — Tendencia de 6 puntos consecutivos", "Regla 4 — 14 puntos alternantes", "Regla 7 — 15 puntos en zona C"], respuesta: 1, explicacion: "La Regla 3 detecta 6 o más puntos consecutivos monotónicamente crecientes o decrecientes. Es la firma clásica de tendencia sistemática causada por desgaste de herramienta, temperatura ambiental que sube gradualmente o contaminación acumulativa." },
+      { pregunta: "En el contexto de manufactura ecuatoriana con múltiples turnos (A, B, C), ¿qué patrón Western Electric es más probable que aparezca si los tres turnos tienen diferentes niveles de habilidad del operador?", opciones: ["Regla 3 (tendencia) porque los operadores mejoran con el tiempo", "Regla 4 (14 puntos alternantes) o Regla 8 (8 puntos en zonas A/B ambos lados), porque mezclan datos de procesos con diferentes medias", "Regla 1 (punto fuera de límites) siempre y en todos los turnos", "Regla 7 (15 puntos en zona C) porque la mezcla centra los datos"], respuesta: 1, explicacion: "Cuando tres turnos con diferentes niveles de habilidad se mezclan en el mismo gráfico, el resultado típico es la aparición de Regla 4 (alternancia entre alto y bajo) o Regla 8 (puntos consistentemente alejados del centro en ambas direcciones), reflejando la mezcla de dos o tres poblaciones con diferentes medias." },
+      { pregunta: "¿Cuál es la ventaja de activar las 8 reglas Western Electric en Minitab versus solo revisar puntos fuera de ±3σ?", opciones: ["Las 8 reglas son más fáciles de calcular manualmente que los límites ±3σ", "Se detectan el 60% adicional de señales de causa especial que no generan puntos fuera de límites pero sí muestran patrones no aleatorios", "Las 8 reglas eliminan la necesidad de calcular límites de control", "Solo la Regla 1 es estadísticamente válida; las otras 7 son opcionales"], respuesta: 1, explicacion: "Las Reglas 2-8 detectan causas especiales que NO generan puntos fuera de los límites ±3σ. Un proceso con shift gradual, tendencia de desgaste o mezcla de turnos puede verse 'dentro de control' revisando solo puntos fuera de límites, mientras se está deteriorando silenciosamente." },
+    ],
+    ejercicio: {
+      titulo: "Aplicar las 8 reglas Western Electric a un gráfico de control",
+      objetivo: "Identificar todas las violaciones de reglas Western Electric en un dataset de control de calidad y diagnosticar las causas probables con la ayuda de IA.",
+      herramientas: "Python (Google Colab) o Minitab, ChatGPT o Claude",
+      pasos: [
+        "Genera un dataset de 30 subgrupos de n=5 para un proceso de llenado de cajas de chocolates (peso objetivo 250g, σ=2g). En los subgrupos 8-16, añade una tendencia creciente de 0.3g por subgrupo (simula desgaste de dosificador). En los subgrupos 20-28, añade una corrida donde todos los promedios están 1.5σ por encima del CL (simula cambio de turno con operario nuevo).",
+        "Calcula el CL, UCL y LCL a partir de los primeros 7 subgrupos 'normales'. Grafica todos los 30 subgrupos con las líneas de control.",
+        "Aplica manualmente (o con la función Python del tema) las 8 reglas Western Electric. Para cada violación, anota: número de subgrupo, regla violada, descripción del patrón.",
+        "Usa ChatGPT con el prompt: 'Analiza estas violaciones de reglas Western Electric en mi proceso de llenado de cajas de chocolates (250g objetivo): [lista tus violaciones]. ¿Qué causa probable sugiere cada patrón? ¿Qué datos de proceso recopilarías para confirmar tu hipótesis?'",
+        "Para cada causa sugerida por ChatGPT, escribe qué acción correctiva implementarías: ¿Es un ajuste de calibración, capacitación del operario, mantenimiento del dosificador o cambio de proveedor de material?",
+        "Reflexiona: ¿cuántas señales hubieras detectado revisando solo puntos fuera de ±3σ? ¿Cuántas adicionales detectaste con las reglas 2-8? ¿Cuál es el impacto económico estimado de detectar cada tipo de señal una semana antes?",
+      ],
+      resultado: "Dataset con gráfico de control, lista completa de violaciones Western Electric identificadas, diagnóstico de causas de ChatGPT y plan de acciones correctivas documentado.",
+      criterios: [
+        { criterio: "Dataset generado con tendencia y corrida simuladas, gráfico con líneas de control visibles", puntos: 25 },
+        { criterio: "Todas las violaciones Western Electric identificadas correctamente con número de regla", puntos: 30 },
+        { criterio: "Diagnóstico de causas con ChatGPT documentado con evaluación crítica", puntos: 25 },
+        { criterio: "Plan de acciones correctivas y reflexión sobre valor de las reglas adicionales", puntos: 20 },
+      ],
+    },
+    recursos: [
+      { titulo: "Western Electric Statistical Quality Control Handbook (PDF original)", url: "https://www.westernelectric.com/support/quality", tipo: "lectura", descripcion: "El manual original de Western Electric donde se publicaron por primera vez estas reglas en 1956. Referencia histórica y técnica fundamental." },
+      { titulo: "ASQ — Control Chart Rules and Patterns", url: "https://asq.org/quality-resources/control-chart", tipo: "documentacion", descripcion: "Guía de la American Society for Quality sobre todas las reglas de detección de señales en gráficos de control con ejemplos visuales." },
+      { titulo: "Statsmodels Python — Process Control", url: "https://www.statsmodels.org/stable/stats.html", tipo: "herramienta", descripcion: "Librería Python que incluye funciones para construir gráficos de control y verificar reglas de detección de señales." },
+    ],
+  },
+
+  {
+    id: 28,
+    titulo: "Cp/Cpk y capacidad de proceso con IA",
+    modulo: MOD6,
+    moduloNum: 6,
+    videoEmbed: "https://www.youtube.com/embed/PLACEHOLDER",
+    videoTitulo: "Cp/Cpk y capacidad de proceso con IA",
+    teoria: `## Capacidad de proceso: ¿puede tu proceso cumplir las especificaciones del cliente?
+
+Los gráficos de control responden "¿está el proceso bajo control estadístico?" La capacidad de proceso responde la siguiente pregunta: "Si el proceso está bajo control, ¿es suficientemente bueno para cumplir los requerimientos del cliente?" Estas son preguntas distintas. Un proceso puede estar perfectamente bajo control estadístico y sin embargo ser incapaz de cumplir las especificaciones.
+
+### Los índices Cp y Cpk: definición y cálculo
+
+**Cp (Índice de Capacidad Potencial):**
+
+Cp = (LSE − LIE) / (6σ)
+
+Donde LSE = Límite Superior de Especificación (del cliente), LIE = Límite Inferior de Especificación, σ = desviación estándar del proceso.
+
+Cp mide cuántas veces cabe la amplitud de ±3σ del proceso dentro de la tolerancia del cliente. Un Cp = 1.0 significa que el proceso usa exactamente el 100% de la tolerancia. Un Cp = 1.33 significa que el proceso usa el 75% de la tolerancia, dejando un margen de seguridad.
+
+**Cpk (Índice de Capacidad Real):**
+
+Cpk = mín [ (LSE − X̄) / 3σ, (X̄ − LIE) / 3σ ]
+
+Cpk es el Cp ajustado por el centrado del proceso. Mientras Cp asume que el proceso está perfectamente centrado (promedio = punto medio de la tolerancia), Cpk considera la distancia real del promedio al límite más cercano. Cpk ≤ Cp siempre. Si Cpk = Cp, el proceso está perfectamente centrado.
+
+### Valores de referencia e interpretación
+
+| Cpk | Interpretación | Partes Por Millón (PPM) defectuosas |
+|-----|----------------|-------------------------------------|
+| < 1.0 | Proceso incapaz — genera defectos | > 2,700 |
+| 1.0 | Mínimo aceptable (norma antigua) | 2,700 |
+| 1.33 | Mínimo en industria moderna | 63 |
+| 1.67 | Proceso capaz con margen | 0.57 |
+| 2.0 | Seis Sigma (σ de proceso = 1/6 de tolerancia) | 0.002 |
+
+En Ecuador, la norma INEN para muchos productos alimentarios requiere Cpk ≥ 1.33 como mínimo. La industria automotriz (normas IATF 16949) exige Cpk ≥ 1.67 para características críticas de seguridad.
+
+### La diferencia práctica entre Cp y Cpk
+
+Imaginemos un proceso de llenado de bebidas con especificación 500 ± 10 ml (LIE=490, LSE=510). El proceso tiene σ=2 ml.
+
+- Cp = (510-490)/(6×2) = 20/12 = **1.67** → proceso potencialmente capaz
+- Si el promedio real es 506 ml (descentrado hacia arriba):
+- Cpk = mín[(510-506)/(3×2), (506-490)/(3×2)] = mín[0.67, 2.67] = **0.67** → proceso incapaz en la práctica
+
+El proceso tiene suficiente "anchura" (Cp=1.67) pero está tan descentrado que supera el límite superior. La solución no es reducir la variación (ya es pequeña) sino centrar el proceso: ajustar la dosificadora para que el promedio sea 500 ml.
+
+Este diagnóstico (centrar vs. reducir variación) es exactamente lo que distingue a un ingeniero de calidad efectivo, y es el tipo de análisis que ChatGPT y Claude pueden ayudar a estructurar.
+
+### Pp y Ppk: capacidad de largo plazo
+
+Además de Cp/Cpk (que usan σ estimado de rangos internos del subgrupo — variación a corto plazo), existen los índices Pp y Ppk que usan la desviación estándar total del proceso incluyendo variación entre subgrupos (largo plazo):
+
+- Pp/Ppk ≤ Cp/Cpk siempre
+- Si Pp/Ppk es mucho menor que Cp/Cpk, el proceso tiene variación adicional a largo plazo (cambios de turno, de lote, de operador) que no se captura a corto plazo
+
+Comparar Cp con Pp revela el "potencial oculto" del proceso: cuánto podría mejorar Cpk si se eliminaran las fuentes de variación entre subgrupos.
+
+### Análisis de capacidad con ChatGPT
+
+ChatGPT puede calcular y interpretar índices de capacidad cuando se le proveen:
+1. Tamaño de muestra (n) y datos o estadísticos resumidos (X̄, σ o Rango)
+2. Límites de especificación del cliente (LIE, LSE)
+3. Contexto del producto (industria, norma aplicable)
+
+**Prompt modelo:**
+*"Tengo datos de un proceso de llenado de fundas de arroz de 1 kg. En 25 subgrupos de n=5, el promedio global es X̄=1,003 g, la desviación estándar estimada por rangos es σ̂=2.5 g. La especificación del cliente es 1,000 ± 8 g (LIE=992, LSE=1,008). Calcula Cp, Cpk, Pp y Ppk. Interpreta si el proceso es capaz, indica cuántas PPM defectuosas se esperan y recomienda la acción prioritaria: centrar el proceso o reducir su variabilidad."*
+
+### Capacidad de proceso para atributos: índice Z y DPMO
+
+Cuando la característica de calidad es un atributo (defectivo/no defectivo) en lugar de una variable continua, la métrica de capacidad equivalente es el **DPMO** (Defects Per Million Opportunities — Defectos Por Millón de Oportunidades):
+
+DPMO = (Total de defectos / Total de oportunidades) × 1,000,000
+
+Y el índice Sigma equivalente se obtiene de tablas estándar. Un proceso con 66,807 DPMO opera a 3σ (Cpk=1.0). Un proceso con 3.4 DPMO opera a 6σ (Cpk=2.0).`,
+    presentacionSlides: [
+      { titulo: "Cp vs Cpk: dos preguntas diferentes", contenido: "Cp: ¿tiene el proceso suficiente anchura para la tolerancia? Cpk: considerando dónde está centrado el promedio, ¿cuántos defectos genera realmente? Cp=1.67 con Cpk=0.67 → proceso potencialmente bueno pero mal centrado." },
+      { titulo: "Fórmulas Cp y Cpk", contenido: "Cp = (LSE - LIE) / 6σ. Cpk = mín[(LSE - X̄)/3σ, (X̄ - LIE)/3σ]. Cpk ≤ Cp siempre. Si Cpk = Cp → proceso perfectamente centrado. La diferencia Cp-Cpk revela el problema de centrado." },
+      { titulo: "Tabla de referencia: Cpk → PPM defectuosas", contenido: "<1.0: >2,700 PPM (proceso incapaz). 1.0: 2,700 PPM (mínimo histórico). 1.33: 63 PPM (mínimo industria moderna). 1.67: 0.57 PPM. 2.0: 0.002 PPM (Seis Sigma). INEN Ecuador: mínimo 1.33." },
+      { titulo: "Diagnóstico: ¿centrar o reducir variación?", contenido: "Cpk bajo porque Cp bajo → hay que REDUCIR variación (menor σ: mejor proceso, mejor equipo). Cpk bajo aunque Cp sea alto → hay que CENTRAR el proceso (ajustar promedio al punto medio de la tolerancia). Diagnóstico antes de acción." },
+      { titulo: "Pp vs Ppk: corto vs largo plazo", contenido: "Cp/Cpk: variación interna del subgrupo (corto plazo). Pp/Ppk: variación total incluyendo entre subgrupos (largo plazo). Diferencia grande = hay fuentes de variación entre turnos/lotes/operadores que controlar." },
+      { titulo: "DPMO: capacidad para atributos", contenido: "DPMO = (defectos / oportunidades) × 1,000,000. 66,807 DPMO = 3σ = Cpk 1.0. 6,210 DPMO = 4σ = Cpk 1.33. 233 DPMO = 5σ = Cpk 1.67. 3.4 DPMO = 6σ = Cpk 2.0. Para procesos de inspección visual." },
+      { titulo: "Prompt para análisis de capacidad con ChatGPT", contenido: "Incluir: X̄, σ o rango promedio, tamaño de subgrupo, LIE y LSE del cliente, industria y norma aplicable. ChatGPT calcula Cp, Cpk, PPM esperadas, y recomienda: centrar vs. reducir variación. Diagnóstico en segundos." },
+      { titulo: "Normativa ecuatoriana de capacidad de proceso", contenido: "INEN: normas sectoriales alimentarias requieren Cpk ≥ 1.33. ARCSA: para industria farmacéutica y alimentos procesados. IATF 16949: Cpk ≥ 1.67 para características de seguridad en automotriz (plantas en Ecuador)." },
+    ],
+    quiz: [
+      { pregunta: "Un proceso tiene Cp=1.8 y Cpk=0.9. ¿Cuál es el diagnóstico correcto y la acción recomendada?", opciones: ["El proceso es capaz; no se requiere ninguna acción", "El proceso tiene suficiente amplitud pero está descentrado; la acción es ajustar el promedio hacia el punto medio de la tolerancia", "Hay que reducir la variabilidad del proceso porque σ es muy grande", "El proceso está bajo control estadístico y es capaz"], respuesta: 1, explicacion: "Cp=1.8 significa el proceso tiene suficiente amplitud (usa solo el 56% de la tolerancia). Cpk=0.9 significa está descentrado y genera defectos. La diferencia grande Cp-Cpk indica que el problema no es σ (ya es pequeño) sino el centrado del promedio. Acción: ajustar el promedio sin cambiar la variabilidad." },
+      { pregunta: "¿Qué significa un Cpk=1.33 en términos de partes defectuosas?", opciones: ["El proceso genera 2,700 partes defectuosas por millón", "El proceso genera aproximadamente 63 partes defectuosas por millón", "El proceso es perfecto: 0 defectos por millón", "El proceso genera el 1.33% de defectos"], respuesta: 1, explicacion: "Cpk=1.33 corresponde a un proceso a 4σ, que genera aproximadamente 63 partes por millón de oportunidades (63 PPM) fuera de especificación. Este es el mínimo exigido por la mayoría de las normas de calidad modernas, incluyendo muchos estándares INEN." },
+      { pregunta: "¿Cuál es la diferencia entre Cpk (corto plazo) y Ppk (largo plazo)?", opciones: ["Son exactamente iguales; solo difieren en el nombre según el software usado", "Cpk usa la variación interna del subgrupo; Ppk usa la variación total del proceso incluyendo variación entre subgrupos (turnos, lotes, operadores)", "Ppk siempre es mayor que Cpk", "Cpk se usa para variables y Ppk para atributos"], respuesta: 1, explicacion: "Cpk estima σ a partir de los rangos internos de los subgrupos, capturando solo variación a corto plazo dentro del turno. Ppk usa la desviación estándar total del dataset, incluyendo variación entre subgrupos. Si Ppk << Cpk, hay fuentes de variación entre turnos o lotes que reducen la capacidad real del proceso." },
+      { pregunta: "Una planta de alimentos en Ecuador tiene un proceso con DPMO=6,210. ¿A qué nivel Sigma opera y cuál es el Cpk equivalente?", opciones: ["2 Sigma, Cpk=0.67", "3 Sigma, Cpk=1.0", "4 Sigma, Cpk=1.33", "6 Sigma, Cpk=2.0"], respuesta: 2, explicacion: "6,210 DPMO corresponde a 4 Sigma, equivalente a Cpk=1.33. Este es el nivel que la mayoría de las normas INEN y estándares de calidad alimentaria ecuatorianos consideran el mínimo aceptable para producción comercial." },
+      { pregunta: "¿Por qué es incorrecto intentar reducir la variabilidad (σ) de un proceso cuyo problema principal es de centrado (Cp alto pero Cpk bajo)?", opciones: ["Porque reducir σ es siempre incorrecto en calidad", "Porque el recurso se gasta en la acción equivocada: el problema es que el promedio no está en el centro de la tolerancia, no que σ sea grande", "Porque la norma ISO prohíbe reducir variabilidad en procesos capaces", "Porque Cpk no depende de σ sino solo de la especificación del cliente"], respuesta: 1, explicacion: "Cuando Cp es alto pero Cpk es bajo, el proceso ya tiene suficiente variabilidad controlada. El problema es el centrado: el promedio está desviado del centro de la tolerancia. Invertir recursos en reducir σ no resuelve el problema; solo ajustar el promedio mejora Cpk de manera efectiva." },
+    ],
+    ejercicio: {
+      titulo: "Cálculo de capacidad Cp/Cpk y diagnóstico con ChatGPT",
+      objetivo: "Calcular los índices Cp y Cpk para un proceso industrial, diagnosticar si el problema es de variabilidad o de centrado, y obtener recomendaciones de mejora de ChatGPT.",
+      herramientas: "Excel o Google Sheets, ChatGPT o Claude",
+      pasos: [
+        "Elige un proceso con especificación definida. Opción A: usa datos reales de tu empresa. Opción B: usa este dataset simulado de llenado de bolsas de azúcar (especificación: 1,000 ± 15 g): genera 25 subgrupos de n=5 con promedio X̄=1,008 g y σ=4 g (el proceso está descentrado hacia arriba).",
+        "En Excel, calcula: σ̂ usando el método de rangos (R̄/d2, donde d2=2.326 para n=5). Luego calcula: Cp = (LSE - LIE) / (6 × σ̂). Cpk = MIN[(LSE - X̄)/(3×σ̂), (X̄ - LIE)/(3×σ̂)]. Muestra todas las fórmulas visibles en la hoja.",
+        "Interpreta los resultados: ¿Cuál es la causa del problema (variabilidad vs centrado)? ¿Cuántas PPM defectuosas esperarías? ¿Cuál es la acción prioritaria?",
+        "Usa ChatGPT con el prompt completo: incluye el proceso, los valores de LIE, LSE, X̄, σ̂, Cp y Cpk calculados. Pide: confirmación del diagnóstico, PPM esperadas, y un plan de acción concreto de 3 pasos para mejorar Cpk al nivel de 1.33 mínimo.",
+        "Evalúa el plan de ChatGPT: ¿Es técnicamente correcto? ¿Es aplicable a una empresa ecuatoriana con presupuesto limitado? ¿Qué ajustarías con tu conocimiento del proceso real?",
+        "Calcula el ahorro económico potencial: si el proceso genera actualmente X% de producto fuera de especificación y mejoras Cpk a 1.33, ¿cuánto material se ahorra al mes? Usa el costo del producto para hacer el cálculo.",
+      ],
+      resultado: "Hoja de cálculo con Cp/Cpk calculados con fórmulas visibles, diagnóstico documentado, plan de ChatGPT evaluado críticamente y cálculo de ahorro económico potencial.",
+      criterios: [
+        { criterio: "Cp y Cpk calculados correctamente con fórmulas visibles en Excel (no solo resultado)", puntos: 30 },
+        { criterio: "Diagnóstico correcto de causa raíz (variabilidad vs centrado) con justificación", puntos: 25 },
+        { criterio: "Prompt bien construido, respuesta de ChatGPT documentada con evaluación crítica", puntos: 25 },
+        { criterio: "Cálculo de ahorro económico potencial con supuestos explicitados", puntos: 20 },
+      ],
+    },
+    recursos: [
+      { titulo: "iSixSigma — Process Capability (Cp, Cpk) Reference", url: "https://www.isixsigma.com/dictionary/process-capability-cpk/", tipo: "documentacion", descripcion: "Referencia completa de iSixSigma sobre índices de capacidad de proceso con ejemplos y tabla de PPM por nivel Cpk." },
+      { titulo: "Quality-One — Capability Analysis Guide", url: "https://quality-one.com/capability-analysis/", tipo: "lectura", descripcion: "Guía práctica de análisis de capacidad de proceso con ejemplos industriales y diferencia entre Cp/Cpk y Pp/Ppk." },
+      { titulo: "Minitab Blog — Capability Analysis", url: "https://blog.minitab.com/en/statistics-and-quality-data-analysis/process-capability-analysis-using-minitab-1", tipo: "lectura", descripcion: "Tutorial oficial de Minitab para ejecutar análisis de capacidad de proceso con interpretación paso a paso." },
+    ],
+  },
+
+  {
+    id: 29,
+    titulo: "Análisis Pareto de defectos con ChatGPT",
+    modulo: MOD6,
+    moduloNum: 6,
+    videoEmbed: "https://www.youtube.com/embed/PLACEHOLDER",
+    videoTitulo: "Análisis Pareto de defectos con ChatGPT",
+    teoria: `## El principio de Pareto: el 80/20 que transforma la gestión de calidad
+
+Vilfredo Pareto, economista italiano del siglo XIX, observó que el 80% de la riqueza de Italia pertenecía al 20% de la población. Joseph Juran, uno de los padres de la calidad moderna, aplicó este principio a los defectos industriales y acuñó el concepto: en casi cualquier proceso, el **80% de los defectos provienen del 20% de las causas**.
+
+Esta observación tiene una implicación práctica poderosa: no es necesario resolver todos los problemas de calidad para obtener mejoras dramáticas. Basta con identificar y eliminar las pocas causas vitales que generan la mayoría de los defectos.
+
+### El diagrama de Pareto: construcción e interpretación
+
+El diagrama de Pareto combina un gráfico de barras con una curva acumulativa de porcentaje. Su construcción sigue cinco pasos:
+
+1. **Recolectar datos:** Registrar todos los defectos por tipo durante un período definido (una semana, un lote, un mes).
+
+2. **Ordenar de mayor a menor:** Calcular la frecuencia de cada tipo de defecto y ordenar en forma decreciente.
+
+3. **Calcular porcentaje acumulado:** Para cada tipo de defecto, el porcentaje acumulado es la suma de su frecuencia más todas las frecuencias anteriores, dividida entre el total.
+
+4. **Graficar:** Barras ordenadas de mayor a menor (eje izquierdo: frecuencia absoluta), curva de porcentaje acumulado (eje derecho: 0-100%).
+
+5. **Identificar el punto 80%:** El tipo de defecto donde la curva cruza el 80% es la línea divisoria. Todo lo que está a la izquierda es el "vital few" — las pocas causas vitales. Todo lo que está a la derecha es el "useful many".
+
+### Pareto en dos niveles: encontrar la causa raíz
+
+El Pareto estratificado (también llamado Pareto de segundo nivel o drill-down Pareto) es la técnica que lleva el análisis de "cuáles son los defectos más frecuentes" a "cuáles son las causas raíz de esos defectos frecuentes".
+
+**Nivel 1 — Pareto de tipos de defecto:**
+Identifica que el defecto "Peso fuera de especificación" representa el 67% de todos los defectos.
+
+**Nivel 2 — Pareto de causas del defecto principal:**
+Para las instancias de "Peso fuera de especificación", analiza qué causas las originaron: Turno A (42%), Turno C (31%), Materia prima Proveedor B (18%), Calibración de balanza (9%).
+
+**Nivel 3 (si aplica) — Pareto de causas de la causa principal:**
+Para el "Turno A", ¿qué específicamente causa el problema de peso? Operador con menos de 3 meses de entrenamiento (71%), máquina dosificadora #3 sin mantenimiento reciente (29%).
+
+Este drill-down de tres niveles convierte datos crudos de calidad en causas raíz accionables con alta precisión y bajo riesgo de atacar el síntoma en lugar de la causa.
+
+### ChatGPT como analista de Pareto
+
+ChatGPT acelera significativamente el análisis de Pareto cuando se le proporciona el dataset correctamente:
+
+**Para construir el diagrama:**
+*"Aquí están los defectos de mi línea de producción del último mes: [lista tipos y frecuencias]. Ordénalos en formato de diagrama de Pareto, calcula el porcentaje acumulado para cada tipo y dime cuáles son las causas vitales (el 80% acumulado)."*
+
+**Para investigar causas raíz:**
+*"El defecto 'Sellado incompleto' representa el 52% de los defectos en mi empacadora de alimentos. Las instancias registradas muestran este patrón: [datos por turno, máquina, temperatura, operador]. Haz un Pareto de segundo nivel e identifica las 2-3 causas más probables a investigar primero."*
+
+**Para redactar el plan de acción:**
+*"Basado en el Pareto de segundo nivel, las causas prioritarias son: [lista causas]. Redacta un plan de acción SMART (Específico, Medible, Alcanzable, Relevante, con Tiempo definido) para eliminar cada causa en las próximas 4 semanas. Considera que somos una empresa mediana en Ecuador con 3 técnicos de calidad disponibles."*
+
+### Pareto para costos de calidad
+
+Una variante poderosa del Pareto analiza no la frecuencia de defectos sino su **costo**: defecto poco frecuente pero costoso puede aparecer en el primer lugar del Pareto de costos aunque ocupe el quinto lugar en el Pareto de frecuencias.
+
+Los componentes del costo de calidad (Modelo PAF — Prevention, Appraisal, Failure):
+- **Costos de Prevención:** Capacitación, calibración, AMEF, auditorías de proceso
+- **Costos de Evaluación:** Inspección, pruebas, laboratorio
+- **Costos de Falla Interna:** Reproceso, scrap, reinspección
+- **Costos de Falla Externa:** Devoluciones, garantías, pérdida de cliente
+
+En la mayoría de las empresas ecuatorianas medianas, los costos de calidad totales representan entre el 5% y el 20% de las ventas. El Pareto de costos de calidad frecuentemente revela que las fallas externas (devoluciones, garantías) son el componente más costoso, aunque el equipo de calidad pasa la mayor parte del tiempo en evaluación (inspección).`,
+    presentacionSlides: [
+      { titulo: "Principio de Pareto en calidad industrial", contenido: "El 80% de los defectos proviene del 20% de las causas. Implicación: no resolver todos los problemas para obtener mejoras dramáticas. Identificar y eliminar las 'pocas causas vitales' (vital few). Joseph Juran aplicó el principio de Pareto a la calidad." },
+      { titulo: "Construir el diagrama de Pareto: 5 pasos", contenido: "1. Recolectar defectos por tipo. 2. Ordenar de mayor a menor frecuencia. 3. Calcular % acumulado. 4. Graficar barras + curva acumulada. 5. Marcar el 80%: todo a la izquierda = vital few a atacar." },
+      { titulo: "Pareto en 3 niveles: de síntoma a causa raíz", contenido: "Nivel 1: ¿Cuál defecto es el más frecuente? Nivel 2: ¿Cuál es la causa de ese defecto? (turno, máquina, proveedor). Nivel 3: ¿Qué específicamente causa esa causa? Drill-down hasta la causa raíz accionable." },
+      { titulo: "ChatGPT para construir el Pareto de segundo nivel", contenido: "Pegar datos de defectos por tipo + variables de proceso (turno, máquina, operador). ChatGPT ordena, calcula % acumulado, identifica vital few y propone el Pareto de segundo nivel con causas probables a investigar." },
+      { titulo: "Pareto de costos vs Pareto de frecuencias", contenido: "Frecuencia: cuántas veces ocurre cada defecto. Costo: cuánto cuesta cada defecto. Un defecto raro pero costoso puede ser el más importante económicamente. Hacer AMBOS análisis antes de priorizar acciones." },
+      { titulo: "Modelo PAF: los 4 componentes del costo de calidad", contenido: "Prevención (capacitación, calibración). Evaluación (inspección, laboratorio). Falla Interna (reproceso, scrap). Falla Externa (devoluciones, garantías). En empresas medianas Ecuador: costos de calidad = 5-20% de ventas." },
+      { titulo: "Prompt para plan de acción SMART con ChatGPT", contenido: "Causas prioritarias del Pareto + contexto empresa (tamaño, sector, recursos disponibles). ChatGPT redacta plan SMART por causa: acción específica, métrica, responsable, fecha límite, costo estimado." },
+      { titulo: "Pareto en Excel: gráfico nativo desde 2016", contenido: "Excel 2016+: seleccionar datos de defectos → Insertar → Gráfico → Histograma/Pareto. Excel ordena automáticamente y traza la curva acumulada. Para drill-down: Pareto separado por turno, máquina o proveedor." },
+    ],
+    quiz: [
+      { pregunta: "¿Qué representa el punto donde la curva acumulada del diagrama de Pareto cruza el 80%?", opciones: ["El defecto más frecuente en valor absoluto", "La línea divisoria entre las 'pocas causas vitales' (vital few) que generan el 80% de los defectos y el resto", "El máximo nivel de calidad alcanzable por el proceso", "El punto donde el Cpk del proceso es igual a 1.0"], respuesta: 1, explicacion: "El punto donde la curva acumulada cruza el 80% separa las pocas causas vitales (a la izquierda) que generan la mayoría de los defectos, de las muchas causas triviales (a la derecha). Atacar las causas a la izquierda del 80% produce el mayor impacto con el menor esfuerzo." },
+      { pregunta: "¿Para qué sirve el Pareto de segundo nivel (drill-down)?", opciones: ["Para hacer el mismo análisis con datos del segundo mes", "Para identificar las causas raíz del defecto más frecuente, desagregando por variables como turno, máquina o proveedor", "Para calcular el Cpk de cada tipo de defecto", "Para comparar dos plantas diferentes entre sí"], respuesta: 1, explicacion: "El Pareto de segundo nivel toma el defecto más frecuente del primer nivel y analiza qué causas lo originan (turno, máquina, operador, proveedor). Este drill-down convierte la información de 'qué defecto es más frecuente' en 'qué causa específica hay que eliminar'." },
+      { pregunta: "Una empresa analiza sus defectos por frecuencia y por costo. El defecto 'Etiqueta mal colocada' es el más frecuente (40% de defectos) pero barato de reparar. El defecto 'Contaminación de producto' ocurre solo el 5% de las veces pero genera devoluciones del 100% del lote. ¿Cuál debe atacarse primero?", opciones: ["Etiqueta mal colocada, porque es el más frecuente", "Contaminación de producto, porque el costo económico es mucho mayor aunque ocurra menos", "Son igualmente prioritarios", "Ninguno, porque juntos no llegan al 80% en frecuencia"], respuesta: 1, explicacion: "El Pareto de costos puede diferir del Pareto de frecuencias. Un defecto con alto costo por unidad (devolución del lote completo) puede ser mucho más impactante económicamente que un defecto frecuente pero barato. Siempre hacer los dos análisis antes de priorizar." },
+      { pregunta: "¿Qué información debe incluir el prompt a ChatGPT para obtener un análisis de Pareto de segundo nivel útil?", opciones: ["Solo el nombre del defecto más frecuente", "La lista de defectos con frecuencias del primer nivel, más los datos del defecto principal desagregados por variables de proceso (turno, máquina, proveedor, operador)", "El precio de venta de cada producto defectuoso", "El manual de calidad de la empresa en formato PDF"], respuesta: 1, explicacion: "Para un Pareto de segundo nivel útil, ChatGPT necesita: (1) los datos del Pareto de primer nivel para identificar el defecto principal, y (2) los datos del defecto principal desagregados por las variables de proceso relevantes (turno, máquina, proveedor) para construir el segundo nivel." },
+      { pregunta: "¿Cuál de los 4 componentes del costo de calidad (modelo PAF) suele ser el más costoso en empresas ecuatorianas medianas sin un sistema de calidad maduro?", opciones: ["Costos de prevención (capacitación y calibración)", "Costos de evaluación (inspección y laboratorio)", "Costos de falla externa (devoluciones y garantías)", "Costos de falla interna (reproceso y scrap)"], respuesta: 2, explicacion: "En empresas sin sistema de calidad maduro, los costos de falla externa (devoluciones, garantías, pérdida de clientes) son típicamente los más altos. Aunque el equipo de calidad pasa la mayor parte del tiempo en evaluación (inspección), el mayor costo económico proviene de los defectos que llegan al cliente." },
+    ],
+    ejercicio: {
+      titulo: "Análisis Pareto de dos niveles con ChatGPT para proceso real",
+      objetivo: "Construir un diagrama de Pareto de defectos, identificar las causas vitales, ejecutar un drill-down de segundo nivel y redactar un plan de acción SMART con la ayuda de ChatGPT.",
+      herramientas: "Excel o Google Sheets, ChatGPT o Claude",
+      pasos: [
+        "Recolecta o simula datos de defectos de un proceso. Opción recomendada: una línea de empaque de frutas exportadas con los siguientes defectos en 1,000 cajas inspeccionadas: Peso fuera de rango: 87 cajas; Daño mecánico: 53 cajas; Color incorrecto: 41 cajas; Etiqueta defectuosa: 28 cajas; Caja dañada: 19 cajas; Otros: 12 cajas. Total: 240 cajas con defecto.",
+        "En Excel, construye el Pareto de primer nivel: ordena defectos de mayor a menor, calcula % individual y % acumulado, crea el gráfico combinado (barras + línea acumulada) y marca el umbral del 80%.",
+        "Identifica los 'vital few' — los defectos que superan el 80% acumulado. Para el defecto más frecuente ('Peso fuera de rango'), asume estos datos de segundo nivel (desagregados por turno): Turno A: 39; Turno C: 28; Turno B: 14; Sin datos turno: 6. Construye el Pareto de segundo nivel.",
+        "Usa ChatGPT con el prompt: 'Analiza este Pareto de segundo nivel de defectos de peso fuera de rango en una empacadora de frutas de exportación en Ecuador. Turno A: 39 casos (50%), Turno C: 28 (36%), Turno B: 14 (18%). ¿Qué causas investigarías en el Turno A? ¿Qué preguntas le harías al supervisor del Turno A? Redacta un plan de acción SMART de 3 acciones para las próximas 4 semanas con responsable, métrica de éxito y presupuesto máximo de $500.'",
+        "Documenta el plan de ChatGPT. Evalúa: ¿es aplicable a una empacadora mediana en Ecuador? ¿Cuál de las 3 acciones tiene el mayor impacto potencial con el menor costo?",
+        "Calcula el impacto económico: si el proceso genera 240 defectos en 1,000 cajas (24% tasa de defectos) y el plan reduce los defectos del Turno A en un 70%, ¿cuántas cajas adicionales se exportarían por mes si la planta produce 15,000 cajas/mes? A $8/caja exportada, ¿cuál es el ingreso adicional mensual?",
+      ],
+      resultado: "Pareto de primer y segundo nivel en Excel, plan de acción SMART de ChatGPT documentado con evaluación, cálculo de impacto económico.",
+      criterios: [
+        { criterio: "Pareto de primer nivel correcto con gráfico combinado barras+línea acumulada y umbral 80% marcado", puntos: 25 },
+        { criterio: "Pareto de segundo nivel del defecto principal con datos desagregados por variable", puntos: 25 },
+        { criterio: "Prompt bien construido y plan SMART de ChatGPT documentado con evaluación crítica", puntos: 25 },
+        { criterio: "Cálculo de impacto económico con supuestos explicitados", puntos: 25 },
+      ],
+    },
+    recursos: [
+      { titulo: "ASQ — Pareto Chart Tutorial", url: "https://asq.org/quality-resources/pareto", tipo: "documentacion", descripcion: "Tutorial oficial de la American Society for Quality sobre el diagrama de Pareto con ejemplos de construcción e interpretación." },
+      { titulo: "iSixSigma — Cost of Quality (PAF Model)", url: "https://www.isixsigma.com/dictionary/cost-of-quality-coq/", tipo: "lectura", descripcion: "Explicación detallada del modelo PAF de costos de calidad con benchmark de porcentajes de ventas típicos por industria." },
+      { titulo: "Excel — Crear gráfico de Pareto (soporte Microsoft)", url: "https://support.microsoft.com/es-es/office/crear-un-diagrama-de-pareto-a1512496-6dba-4743-9ab1-df5012972856", tipo: "documentacion", descripcion: "Instrucciones oficiales de Microsoft para crear diagramas de Pareto directamente en Excel 2016 y versiones posteriores." },
+    ],
+  },
+
+  {
+    id: 30,
+    titulo: "Reportes de calidad automatizados (5W+1H)",
+    modulo: MOD6,
+    moduloNum: 6,
+    videoEmbed: "https://www.youtube.com/embed/PLACEHOLDER",
+    videoTitulo: "Reportes de calidad automatizados (5W+1H)",
+    teoria: `## Reportes de calidad con IA: del dato crudo al informe ejecutivo en minutos
+
+Un reporte de calidad efectivo no es solo una colección de datos y gráficos. Es una narrativa estructurada que lleva al lector desde la evidencia del problema hasta la causa raíz y las acciones correctivas, permitiendo tomar decisiones informadas con rapidez. La combinación del framework **5W+1H** con herramientas de IA transforma la redacción de reportes de una tarea que tomaba horas en un proceso de 15-20 minutos.
+
+### El framework 5W+1H en calidad industrial
+
+El 5W+1H (What, Who, When, Where, Why, How — Qué, Quién, Cuándo, Dónde, Por qué, Cómo) es el framework periodístico adaptado a la solución de problemas de calidad. Cada pregunta estructura una sección del reporte:
+
+**What (¿Qué ocurrió?):** Descripción específica del defecto o desviación. No "hubo problema de calidad" sino "el 23% de los lotes del turno A presentaron peso inferior al límite de especificación mínima de 992g, con promedio de 988g".
+
+**Who (¿Quién está involucrado?):** Operadores, turnos, clientes afectados, áreas de la planta. Incluye quién detectó el problema, quién lo reportó y quién es responsable de la corrección.
+
+**When (¿Cuándo ocurrió?):** Período específico, fecha de primera detección, si el problema es nuevo o recurrente. La línea de tiempo del defecto frecuentemente revela la causa.
+
+**Where (¿Dónde ocurrió?):** Línea de producción, máquina específica, área de la planta, lote de producto. Localizar el problema es el primer paso para encontrar la causa.
+
+**Why (¿Por qué ocurrió?):** Esta es la sección más crítica. Aquí se aplica el análisis de causa raíz: los 5 Porqués, el diagrama de Ishikawa, el análisis de Pareto. ChatGPT y Claude son especialmente útiles en esta sección.
+
+**How (¿Cómo se resuelve?):** Acciones correctivas (eliminar la causa) y preventivas (evitar recurrencia). Incluye responsable, fecha límite y métrica de verificación.
+
+### Los 5 Porqués con asistencia de IA
+
+La técnica de los **5 Porqués** de Toyota consiste en preguntar "¿por qué?" de forma iterativa hasta alcanzar la causa raíz sistémica, no solo el síntoma superficial:
+
+Problema: el producto salió fuera de peso.
+- Por qué 1: la dosificadora entregó menos material
+- Por qué 2: el tornillo dosificador tenía desgaste acumulado
+- Por qué 3: el mantenimiento preventivo estaba atrasado 3 semanas
+- Por qué 4: el técnico de mantenimiento asignado estuvo enfermo y no hubo reemplazo
+- Por qué 5: el procedimiento de sustitución de personal de mantenimiento no existe en el sistema
+
+La causa raíz es sistémica: **falta de procedimiento de contingencia de personal de mantenimiento**. La acción correctiva es crear y documentar ese procedimiento, no solo arreglar el tornillo.
+
+**Prompt para 5 Porqués con ChatGPT:**
+*"Ayúdame a aplicar los 5 Porqués para este problema de calidad: [descripción del problema con datos concretos — qué pasó, cuándo, en qué equipo, con qué resultado medible]. El proceso involucra [descripción breve del proceso]. Variables conocidas: [operadores, máquinas, materiales, turno]. Guíame a través de los 5 Porqués hasta la causa raíz sistémica y propone la acción correctiva para esa causa raíz."*
+
+### Automatización del reporte con Claude
+
+Claude es especialmente efectivo para redactar reportes ejecutivos de calidad porque puede:
+1. Tomar datos brutos (tabla de defectos, resultados de análisis Pareto, conclusiones del 5 Porqués) y organizarlos en el formato 5W+1H
+2. Adaptar el lenguaje al audiencia (técnico para el equipo de calidad, ejecutivo para la gerencia)
+3. Generar múltiples versiones del mismo reporte para diferentes destinatarios
+
+**Prompt para reporte ejecutivo:**
+*"Redacta un reporte de calidad ejecutivo usando el formato 5W+1H para la siguiente situación en nuestra planta en Ecuador: [datos del problema, resultados del análisis, causa raíz encontrada, acciones propuestas]. El reporte es para la gerencia general que no tiene formación técnica en calidad. Debe ser conciso (máximo 400 palabras), sin jerga estadística, con énfasis en el impacto económico y las acciones concretas."*
+
+### Automatización con Excel + Power Query + ChatGPT
+
+Para empresas con volumen alto de reportes de calidad, el flujo automatizado es:
+
+1. **Excel/Power Query:** Consolidar datos de defectos de múltiples fuentes (registros de producción, hojas de inspección, sistema de devoluciones) en una tabla maestra
+2. **Cálculos automáticos:** COUNTIF, SUMIF y tablas dinámicas que actualizan los indicadores de calidad en tiempo real
+3. **ChatGPT/Claude via API:** Para empresas con capacidad técnica, usar la API de OpenAI o Anthropic para generar automáticamente la narrativa del reporte desde los datos de la tabla
+
+**Prompt para narrativa desde datos:**
+*"Eres el analista de calidad de una empresa manufacturera en Ecuador. Basado en estos indicadores del mes de [mes]: [tabla de datos con defectos, CPK, Pareto top 3, DPMO], redacta el párrafo de análisis ejecutivo para el informe mensual de calidad. Compara con el mes anterior y destaca los 2 hallazgos más importantes y las 2 acciones prioritarias."*
+
+### Cumplimiento normativo con IA
+
+En Ecuador, la **ARCSA** (Agencia Nacional de Regulación, Control y Vigilancia Sanitaria) requiere que las empresas de alimentos y cosméticos mantengan registros de control de calidad en formatos específicos. Claude puede ayudar a adaptar los reportes a los formatos requeridos:
+
+*"Tengo este reporte de control de calidad de proceso. Adaptalo al formato de registro que exige la ARCSA para empresas de alimentos procesados según el Reglamento de Buenas Prácticas de Manufactura. Incluye todos los campos requeridos por la normativa ecuatoriana."*`,
+    presentacionSlides: [
+      { titulo: "5W+1H: el framework que estructura cualquier reporte de calidad", contenido: "What (¿Qué?): defecto específico con datos. Who (¿Quién?): operadores, turnos, clientes. When (¿Cuándo?): período, primera detección. Where (¿Dónde?): máquina, línea, lote. Why (¿Por qué?): causa raíz. How (¿Cómo?): acciones correctivas." },
+      { titulo: "5 Porqués: de síntoma a causa raíz sistémica", contenido: "Toyota: preguntar '¿por qué?' 5 veces hasta la causa sistémica. Ejemplo: producto fuera de peso → dosificadora desgastada → mantenimiento atrasado → técnico enfermo → NO HAY PROCEDIMIENTO DE CONTINGENCIA. La acción correctiva es el procedimiento, no el tornillo." },
+      { titulo: "Prompt para 5 Porqués con ChatGPT", contenido: "Describir el problema con datos concretos + proceso + variables conocidas. ChatGPT guía iterativamente a través de los 5 Porqués. Pedir explícitamente que llegue a la causa raíz SISTÉMICA, no al síntoma superficial." },
+      { titulo: "Claude para reporte ejecutivo: un prompt, un informe", contenido: "Datos brutos + causa raíz + acciones → Claude redacta 5W+1H completo. Pedir versión para gerencia (sin jerga, con impacto económico) y versión técnica (con datos estadísticos para el equipo de calidad). Un input, dos outputs." },
+      { titulo: "Automatización: Excel + ChatGPT API", contenido: "Power Query consolida datos de múltiples hojas. COUNTIF/tablas dinámicas calculan indicadores automáticamente. API de OpenAI/Anthropic genera narrativa desde los datos. Resultado: informe mensual de calidad en <15 minutos vs. 3-4 horas manuales." },
+      { titulo: "ARCSA Ecuador: cumplimiento normativo con IA", contenido: "ARCSA exige registros de control de calidad en formatos específicos para alimentos y cosméticos. Claude adapta reportes existentes al formato requerido si le provees el reporte actual y la normativa aplicable. Ahorra horas de reformateo manual." },
+      { titulo: "Ishikawa + IA: causa raíz en 4 categorías", contenido: "El diagrama de causa-efecto (espina de pescado) organiza causas en: Máquina, Material, Método, Mano de obra, Medio ambiente, Medición (6M). Pide a Claude que genere el diagrama Ishikawa para tu defecto principal: lista de causas posibles por cada M." },
+      { titulo: "Estructura del reporte completo en 6 secciones", contenido: "1. Resumen ejecutivo (3 puntos). 2. Descripción del problema (What/When/Where/Who). 3. Análisis de causa raíz (Why: 5 Porqués + Pareto). 4. Acciones correctivas (How: SMART). 5. Indicadores de seguimiento. 6. Aprobaciones/firmas." },
+    ],
+    quiz: [
+      { pregunta: "¿Cuál es el objetivo principal de los 5 Porqués en el análisis de causa raíz?", opciones: ["Hacer exactamente 5 preguntas y no más", "Llegar a la causa raíz sistémica del problema, no quedarse en el síntoma superficial", "Identificar a los 5 operadores responsables del defecto", "Calcular los 5 indicadores de calidad más importantes"], respuesta: 1, explicacion: "Los 5 Porqués buscan la causa raíz sistémica preguntando '¿por qué?' de forma iterativa. El número 5 es orientativo; el objetivo es seguir preguntando hasta identificar una causa sobre la que se puede actuar sistémicamente para prevenir recurrencias, no solo corregir el síntoma." },
+      { pregunta: "En el framework 5W+1H para reportes de calidad, ¿cuál de las 6 preguntas aborda la causa raíz del problema?", opciones: ["What (¿Qué ocurrió?)", "When (¿Cuándo ocurrió?)", "Why (¿Por qué ocurrió?)", "How (¿Cómo se resuelve?)"], respuesta: 2, explicacion: "'Why' (¿Por qué?) es la sección de análisis de causa raíz del reporte, donde se aplican los 5 Porqués, el diagrama de Ishikawa y el análisis de Pareto. Esta sección es la más crítica porque determina la acción correctiva correcta." },
+      { pregunta: "¿Qué diferencia a una 'acción correctiva' de una 'acción preventiva' en un reporte de calidad?", opciones: ["Son sinónimos; se usan indistintamente en reportes de calidad", "Acción correctiva: elimina la causa del problema actual. Acción preventiva: evita que el mismo tipo de problema ocurra en el futuro en otros procesos o productos", "Acción correctiva la hace el operador; acción preventiva la hace el gerente", "Acción preventiva se aplica antes de producir; acción correctiva durante la producción"], respuesta: 1, explicacion: "La acción correctiva elimina la causa del problema que ya ocurrió (reparar el dosificador, crear el procedimiento de contingencia). La acción preventiva extiende la solución para prevenir que el mismo tipo de causa raíz genere problemas en otros procesos o productos similares." },
+      { pregunta: "¿Por qué Claude es más efectivo que solo Excel para generar reportes ejecutivos de calidad?", opciones: ["Porque Claude puede imprimir los reportes directamente", "Porque Claude convierte datos brutos en narrativa estructurada en lenguaje natural, adaptable a diferentes audiencias (técnica vs. gerencial) en minutos", "Porque Claude reemplaza completamente al analista de calidad", "Porque Excel no puede hacer análisis estadístico"], respuesta: 1, explicacion: "Excel maneja cálculos y tablas eficientemente, pero generar la narrativa interpretativa (qué significan los datos, cuáles son las implicaciones, qué acciones se recomiendan) requiere tiempo humano. Claude genera esa narrativa en segundos a partir de los datos y el contexto del problema." },
+      { pregunta: "¿Para qué tipo de empresa ecuatoriana es más relevante adaptar reportes de calidad al formato ARCSA?", opciones: ["Empresas de servicios financieros y seguros", "Empresas de alimentos procesados, cosméticos y productos farmacéuticos sujetos a regulación sanitaria", "Empresas de construcción civil", "Cualquier empresa con más de 50 empleados"], respuesta: 1, explicacion: "La ARCSA (Agencia Nacional de Regulación, Control y Vigilancia Sanitaria) regula alimentos procesados, cosméticos y productos farmacéuticos en Ecuador, exigiendo registros de control de calidad en formatos específicos. Las empresas de estos sectores deben cumplir estas regulaciones para operar legalmente." },
+    ],
+    ejercicio: {
+      titulo: "Reporte de calidad completo 5W+1H con 5 Porqués y Claude",
+      objetivo: "Redactar un reporte de calidad ejecutivo completo usando el framework 5W+1H, aplicar los 5 Porqués para identificar la causa raíz y generar el informe con la asistencia de Claude.",
+      herramientas: "Claude.ai (claude.ai/chat), Word o Google Docs",
+      pasos: [
+        "Selecciona un problema de calidad real de tu empresa o usa este caso: Una fábrica de galletas en Ambato recibió una devolución de 450 cajas (15% del lote) de un supermercado de Quito porque el peso neto era inferior al declarado en el empaque (300g declarado, promedio medido: 288g). El defecto se detectó el 15 de abril durante auditoría del cliente. Las galletas fueron producidas en los turnos A y C del 10 al 12 de abril en la máquina dosificadora #2.",
+        "Aplica los 5 Porqués al problema. Usa este prompt con Claude: 'Guíame a través de los 5 Porqués para el siguiente problema de calidad en una galleta ecuatoriana: peso neto 12g inferior al declarado, detectado en devolución de supermercado, producido en dosificadora #2 turnos A y C. Empieza con el primer porqué y espera mi respuesta para continuar al siguiente.' Documenta cada paso del diálogo.",
+        "Una vez identificada la causa raíz (después de ~5 iteraciones), solicita a Claude: 'Basado en la causa raíz que identificamos, propón 3 acciones correctivas SMART con responsable, fecha límite (dentro de 30 días) y métrica de verificación. Considera que la empresa es una PYME en Ecuador con 25 empleados.'",
+        "Solicita a Claude que redacte el reporte completo: 'Redacta el reporte ejecutivo de calidad 5W+1H para este problema. Versión para gerencia: máximo 350 palabras, sin jerga estadística, con énfasis en impacto económico (costo de la devolución, riesgo de pérdida del cliente). Incluye el análisis de los 5 Porqués de forma resumida y las 3 acciones correctivas SMART.'",
+        "Edita el reporte generado: ajusta el tono, agrega datos específicos de tu contexto ecuatoriano, verifica que las acciones sean realmente aplicables. El ingeniero siempre revisa y mejora el output de la IA.",
+        "Compara el tiempo invertido: ¿cuánto tiempo tomó generar el reporte con Claude vs. cuánto tiempo estimarías que tomaría sin IA? ¿Qué porción del trabajo total hizo la IA y qué porción fue tu criterio profesional?",
+      ],
+      resultado: "Reporte de calidad ejecutivo completo en formato 5W+1H con 5 Porqués documentados, 3 acciones SMART y reflexión sobre el valor de la IA en la generación de reportes.",
+      criterios: [
+        { criterio: "Diálogo de 5 Porqués documentado con causa raíz sistémica identificada", puntos: 30 },
+        { criterio: "Reporte ejecutivo 5W+1H completo con las 6 secciones requeridas", puntos: 30 },
+        { criterio: "3 acciones correctivas SMART con responsable, fecha y métrica de verificación", puntos: 25 },
+        { criterio: "Reflexión sobre división del trabajo ingeniero/IA y ajustes realizados al output de Claude", puntos: 15 },
+      ],
+    },
+    recursos: [
+      { titulo: "Claude.ai — Asistente para análisis de causa raíz", url: "https://claude.ai/chat", tipo: "herramienta", descripcion: "Interfaz web de Claude para ejecutar los 5 Porqués de forma iterativa y generar reportes de calidad estructurados." },
+      { titulo: "ASQ — 5 Whys Template and Guide", url: "https://asq.org/quality-resources/five-whys", tipo: "documentacion", descripcion: "Guía oficial de la American Society for Quality sobre la técnica de los 5 Porqués con plantillas descargables y ejemplos industriales." },
+      { titulo: "ARCSA Ecuador — Normativa BPM alimentos", url: "https://www.controlsanitario.gob.ec/buenas-practicas-de-manufactura/", tipo: "documentacion", descripcion: "Sitio oficial de la ARCSA con el Reglamento de Buenas Prácticas de Manufactura vigente en Ecuador para industria alimentaria." },
+    ],
+  },
+
+  // M7 — Cadena de suministro inteligente
+  {
+    id: 31,
+    titulo: "Pronóstico de demanda con Copilot Excel",
+    modulo: MOD7,
+    moduloNum: 7,
+    videoEmbed: "https://www.youtube.com/embed/PLACEHOLDER",
+    videoTitulo: "Pronóstico de demanda con Copilot Excel",
+    teoria: `## Pronóstico de demanda: el punto de partida de toda la cadena de suministro
+
+Todo en la cadena de suministro empieza con el pronóstico de demanda. Cuánto producir, cuánto comprar, cuántos trabajadores contratar, cuánto espacio de almacén necesitar: todas estas decisiones dependen de qué tan bien la empresa predice cuánto van a comprar sus clientes.
+
+Un error del 20% en el pronóstico de demanda puede significar, según un lado, 20% de producto no vendido que ocupa almacén y genera costos financieros (exceso de inventario), o 20% de demanda insatisfecha que genera ventas perdidas y clientes frustrados (ruptura de stock). En Ecuador, donde los márgenes en muchos sectores como alimentos, textil y consumo masivo son estrechos, la precisión del pronóstico tiene impacto directo en la rentabilidad.
+
+### Métodos de pronóstico: de simple a avanzado
+
+**Métodos cuantitativos básicos (series de tiempo):**
+
+- **Promedio móvil simple:** Promedia los últimos N períodos. Simple pero lento para detectar cambios de tendencia. Útil para demanda estable sin tendencia ni estacionalidad.
+
+- **Promedio móvil ponderado:** Asigna más peso a los períodos recientes. Más responsive que el simple pero requiere definir los pesos.
+
+- **Suavizamiento exponencial simple (SES):** El método más usado en la práctica por su balance entre simplicidad y efectividad. Una constante α (entre 0 y 1) determina cuánto peso se da a los datos más recientes vs. el historial. α alto (>0.5) = más reactivo, mejor para demanda volátil. α bajo (<0.3) = más suavizado, mejor para demanda estable.
+
+- **Holt-Winters:** Extensión del suavizamiento exponencial que maneja tendencia y estacionalidad simultáneamente. Tres constantes: α (nivel), β (tendencia), γ (estacionalidad). El método de elección para productos con estacionalidad marcada como helados, bebidas gaseosas, útiles escolares.
+
+**Métodos causales:**
+La regresión lineal usa variables explicativas (precio, gasto en publicidad, PIB, temperatura, festivos) para predecir la demanda. Más poderoso que las series de tiempo puras pero requiere identificar las variables correctas y recolectar sus datos.
+
+### Copilot en Excel: pronóstico sin programar
+
+Microsoft 365 Copilot en Excel puede construir modelos de pronóstico conversacionalmente. El flujo práctico:
+
+1. **Preparar los datos:** Tabla con columnas Período (fecha o número de mes) y Ventas (unidades o valor). Al menos 24 períodos históricos para capturar dos ciclos de estacionalidad.
+
+2. **Usar la función FORECAST.ETS nativa de Excel:** Esta función de Excel (disponible desde 2016) implementa el algoritmo ETS (Error, Trend, Seasonality) automáticamente:
+   
+[Código ]
+       =FORECAST.ETS(fecha_futura, valores_históricos, fechas_históricas, [estacionalidad], [tipo_datos])
+       
+       Con el parámetro de estacionalidad=12 para datos mensuales, Excel detecta automáticamente el patrón estacional.
+    
+    3. **Copilot para interpretar y mejorar:** Con datos en la tabla, pregunta a Copilot: "Analiza las tendencias en mis datos de ventas y crea una proyección para los próximos 6 meses" o "¿Qué factores podrían estar causando los picos en los meses de diciembre y julio?" Copilot genera gráficas y texto explicativo automáticamente.
+    
+    4. **Hoja de pronóstico inteligente:** Data → Forecast Sheet en Excel crea una hoja completa con pronóstico, intervalos de confianza y gráfica, sin necesidad de Copilot.
+    
+    ### Métricas de precisión del pronóstico
+    
+    Un pronóstico sin medición de precisión es incompleto. Las tres métricas más usadas:
+    
+    **MAE (Mean Absolute Error):**
+    MAE = (1/n) × Σ|Demanda_real − Pronóstico|
+    Fácil de interpretar: promedio del error absoluto en las mismas unidades que la demanda.
+    
+    **MAPE (Mean Absolute Percentage Error):**
+    MAPE = (1/n) × Σ|(Demanda_real − Pronóstico) / Demanda_real| × 100%
+    Permite comparar precisión entre productos con diferentes escalas de demanda. Un MAPE de 10% significa que el pronóstico se equivoca en promedio un 10%. En industria de consumo masivo, MAPE < 15% se considera aceptable.
+    
+    **RMSE (Root Mean Square Error):**
+    RMSE = √[(1/n) × Σ(Demanda_real − Pronóstico)²]
+    Penaliza más los errores grandes. Útil cuando el costo de errores grandes es desproporcionadamente alto.
+    
+    ### ChatGPT para interpretar el pronóstico
+    
+    Una vez que Excel genera el pronóstico, ChatGPT ayuda a contextualizar los resultados:
+    
+    *"Mi producto tiene ventas históricas de los últimos 24 meses con un MAPE del 18% usando promedio móvil de 3 meses. El pronóstico para los próximos 3 meses es [valores]. Soy una empresa de alimentos en Ecuador y el período proyectado incluye las fiestas de agosto en Quito y el regreso a clases. ¿Qué ajustes al pronóstico recomendarías basándote en estos factores de mercado local? ¿Qué método de pronóstico podría reducir el MAPE por debajo de 15%?"*`,
+        presentacionSlides: [
+          { titulo: "El pronóstico de demanda: base de toda la cadena", contenido: "Cuánto producir, comprar, almacenar y contratar: todo depende del pronóstico. Error 20%: exceso de inventario (capital inmovilizado) o ruptura de stock (ventas perdidas). En Ecuador: márgenes estrechos = impacto directo en rentabilidad." },
+          { titulo: "4 métodos cuantitativos: de simple a avanzado", contenido: "Promedio móvil simple: estable, sin tendencia. Promedio móvil ponderado: más reactivo. Suavizamiento exponencial (SES): balance simplicidad/precisión, α controla reactividad. Holt-Winters: tendencia + estacionalidad simultánea." },
+          { titulo: "FORECAST.ETS en Excel: pronóstico con un solo clic", contenido: "Función nativa Excel 2016+. Algoritmo ETS detecta automáticamente tendencia y estacionalidad. Parámetro estacionalidad=12 para datos mensuales. Data → Forecast Sheet: hoja completa con intervalos de confianza en segundos." },
+          { titulo: "Copilot Excel: pronóstico conversacional", contenido: "Con datos en tabla: 'Analiza tendencias y proyecta 6 meses.' 'Explica los picos de diciembre.' 'Compara suavizamiento exponencial vs promedio móvil para estos datos.' Copilot genera gráficas + texto interpretativo automáticamente." },
+          { titulo: "MAPE: la métrica de precisión más usada", contenido: "MAPE = promedio de |error / real| × 100%. Permite comparar productos de diferente escala. MAPE <10%: excelente. 10-15%: aceptable en consumo masivo. 15-25%: mejorable. >25%: modelo incorrecto o datos insuficientes." },
+          { titulo: "α en suavizamiento exponencial: cómo elegirlo", contenido: "α alto (>0.5): pronóstico más reactivo a cambios recientes. Mejor para demanda volátil o con tendencia cambiante. α bajo (<0.3): más suavizado. Mejor para demanda estable. Excel Solver puede optimizar α para minimizar MAPE con datos históricos." },
+          { titulo: "Prompt para ajuste de pronóstico con ChatGPT", contenido: "Incluir: método actual + MAPE + valores proyectados + factores locales Ecuador (fiestas locales, temporadas, eventos). ChatGPT propone ajustes cuantitativos y recomienda método alternativo si MAPE es alto." },
+          { titulo: "Estacionalidad en Ecuador: factores clave", contenido: "Regreso a clases (febrero + septiembre). Fiestas de Quito (diciembre). Carnaval (febrero/marzo). Exportaciones floricultura (San Valentín, Día de la Madre). Bananeras: ciclicidad de precios internacionales. Cada sector tiene su patrón." },
+        ],
+        quiz: [
+          { pregunta: "¿Qué impacto tiene un error del 20% en el pronóstico de demanda en una empresa de alimentos en Ecuador?", opciones: ["Ninguno, el mercado ecuatoriano es muy estable", "Exceso de inventario (capital inmovilizado y producto perecible) o ruptura de stock (ventas perdidas y clientes frustrados)", "Solo impacta el área de marketing, no la cadena de suministro", "Solo es relevante para empresas exportadoras"], respuesta: 1, explicacion: "Un error de 20% en pronóstico genera problemas en ambos lados: sobreestimación produce exceso de inventario con costos financieros y riesgo de vencimiento en productos perecibles; subestimación genera ruptura de stock, ventas perdidas y posible pérdida de clientes a la competencia." },
+          { pregunta: "¿Para qué tipo de producto es más adecuado el método Holt-Winters?", opciones: ["Productos con demanda perfectamente constante mes a mes", "Productos con tendencia y estacionalidad marcada, como helados, bebidas gaseosas o útiles escolares", "Productos nuevos sin historial de ventas", "Materias primas industriales con demanda derivada"], respuesta: 1, explicacion: "Holt-Winters es el método de elección cuando la serie de tiempo tiene simultáneamente tendencia (crecimiento o decrecimiento sostenido) y estacionalidad (patrón que se repite periódicamente). Maneja tres constantes: α para el nivel, β para la tendencia y γ para la estacionalidad." },
+          { pregunta: "¿Qué MAPE indica una precisión aceptable para un producto de consumo masivo en Ecuador?", opciones: ["Menos del 1%", "Menos del 15%", "Menos del 30%", "Menos del 50%"], respuesta: 1, explicacion: "Un MAPE inferior al 15% se considera aceptable para productos de consumo masivo, donde la demanda tiene inherente variabilidad. Para productos especiales de alta rotación o en industrias con cadenas de suministro largas, se busca MAPE < 10%." },
+          { pregunta: "¿Qué hace la función FORECAST.ETS de Excel?", opciones: ["Solo calcula promedios móviles simples", "Implementa automáticamente el algoritmo ETS que detecta tendencia y estacionalidad en los datos históricos para generar pronósticos con intervalos de confianza", "Conecta Excel con datos de ventas de Salesforce en tiempo real", "Genera gráficas de dispersión de los datos históricos"], respuesta: 1, explicacion: "FORECAST.ETS implementa el algoritmo Error-Trend-Seasonality (ETS) de forma automática. Detecta los componentes de tendencia y estacionalidad en los datos históricos y genera pronósticos con intervalos de confianza superior e inferior, sin que el usuario necesite conocer la estadística." },
+          { pregunta: "Un analista tiene α=0.8 en su modelo de suavizamiento exponencial. ¿Qué significa esto y en qué tipo de demanda es apropiado?", opciones: ["El modelo promedia los últimos 8 meses de datos", "El modelo da 80% de peso al período más reciente y 20% al historial acumulado; es apropiado para demanda volátil o con cambios rápidos de tendencia", "El modelo tiene un error del 80% en sus pronósticos", "El modelo solo funciona con datos de los últimos 8 semanas"], respuesta: 1, explicacion: "En suavizamiento exponencial, α determina el peso relativo del dato más reciente. Con α=0.8, el 80% del pronóstico se basa en la última observación y solo el 20% en el historial acumulado. Esto hace el modelo muy reactivo, apropiado cuando la demanda cambia rápidamente o hay cambios de tendencia frecuentes." },
+        ],
+        ejercicio: {
+          titulo: "Modelo de pronóstico de demanda con FORECAST.ETS y Copilot Excel",
+          objetivo: "Construir un modelo de pronóstico en Excel para un producto con estacionalidad, calcular el MAPE y usar Copilot para interpretar los resultados y mejorar el pronóstico.",
+          herramientas: "Excel con Microsoft 365 (o Excel 2019+), Copilot Excel (si disponible), ChatGPT como alternativa",
+          pasos: [
+            "Crea una tabla en Excel con 36 meses de datos históricos de ventas (enero 2022 a diciembre 2024) para un producto con estacionalidad marcada. Usa este patrón para simularlo: demanda base de 1,000 unidades, más una tendencia creciente de 5 unidades/mes, más estacionalidad multiplicativa (diciembre ×1.8, noviembre ×1.4, julio ×1.3, febrero ×0.7, enero ×0.8, resto ×1.0), más ruido aleatorio ±5%.",
+            "Usa FORECAST.ETS para pronosticar los próximos 6 meses (enero-junio 2025). En una celda de fecha futura: =FORECAST.ETS(F37, $B$2:$B$37, $A$2:$A$37, 12, 1). Repite para los 6 meses futuros. También usa Data → Forecast Sheet para obtener la hoja completa con intervalos de confianza.",
+            "Valida el modelo usando los últimos 12 meses como holdout: aplica FORECAST.ETS usando solo los primeros 24 meses de datos para pronosticar meses 25-36. Compara los pronósticos con los valores reales para esos 12 meses. Calcula MAE y MAPE para evaluar la precisión.",
+            "Si tienes Copilot Excel activo: selecciona la tabla y pregunta 'Analiza la estacionalidad de estos datos y dime cuáles son los meses de mayor y menor demanda. ¿El modelo FORECAST.ETS captura bien la estacionalidad?' Si no tienes Copilot, usa ChatGPT: pega los datos del MAPE calculado y pide interpretación.",
+            "Optimiza el coeficiente α para SES usando Excel Solver: minimiza el MAPE usando Solver con α como variable de decisión (restricción: 0 < α < 1). Compara el MAPE del SES optimizado vs. FORECAST.ETS automático.",
+            "Escribe un resumen de 150 palabras: ¿qué método fue más preciso para este tipo de demanda? ¿Cómo usarías este pronóstico para tomar decisiones de compra de materias primas con 8 semanas de lead time?",
+          ],
+          resultado: "Modelo de pronóstico en Excel con FORECAST.ETS, validación con holdout, MAPE calculado, optimización de α con Solver e interpretación con Copilot/ChatGPT.",
+          criterios: [
+            { criterio: "Dataset de 36 meses correctamente construido con tendencia y estacionalidad", puntos: 20 },
+            { criterio: "FORECAST.ETS aplicado correctamente para 6 meses futuros con hoja de pronóstico completa", puntos: 25 },
+            { criterio: "Validación holdout con MAE y MAPE calculados correctamente", puntos: 30 },
+            { criterio: "Interpretación con Copilot/ChatGPT documentada + reflexión sobre uso en decisiones de compra", puntos: 25 },
+          ],
+        },
+        recursos: [
+          { titulo: "Microsoft — FORECAST.ETS function reference", url: "https://support.microsoft.com/es-es/office/función-pronostico-ets-15389b8b-677e-4fbd-bd95-21d464333f41", tipo: "documentacion", descripcion: "Documentación oficial de Microsoft en español para la función FORECAST.ETS con ejemplos y parámetros detallados." },
+          { titulo: "Copilot in Excel — Getting started", url: "https://support.microsoft.com/es-es/topic/copilot-en-excel-principios-básicos-d7110502-0334-4b4f-a175-a73abdfc118a", tipo: "herramienta", descripcion: "Guía oficial de Microsoft para usar Copilot en Excel para análisis de datos y creación de pronósticos conversacionales." },
+          { titulo: "Forecasting Principles and Practice — Textbook online gratuito", url: "https://otexts.com/fpp3/", tipo: "lectura", descripcion: "Libro de texto gratuito en inglés sobre métodos de pronóstico (Holt-Winters, ARIMA, ML) con ejemplos en R. Referencia académica estándar." },
+        ],
+      },
+    
+      {
+        id: 32,
+        titulo: "Variables externas que afectan la demanda",
+        modulo: MOD7,
+        moduloNum: 7,
+        videoEmbed: "https://www.youtube.com/embed/PLACEHOLDER",
+        videoTitulo: "Variables externas que afectan la demanda",
+        teoria: `## Más allá del historial: las variables externas que cambian la demanda
+    
+    Los métodos de series de tiempo como el suavizamiento exponencial o FORECAST.ETS asumen que el futuro es similar al pasado. Esta suposición falla cuando ocurren eventos externos que cambian estructuralmente el comportamiento de la demanda: un cambio en el precio de la competencia, una campaña publicitaria masiva, una crisis económica, una variación climática extrema o un cambio en la política arancelaria ecuatoriana.
+    
+    Incorporar estas variables externas al modelo de pronóstico — pasando de un enfoque univariado (solo historial de ventas) a uno multivariado (ventas + variables explicativas) — puede reducir el MAPE en 20-40% en muchos contextos industriales.
+    
+    ### Tipos de variables externas más relevantes para Ecuador
+    
+    **Variables macroeconómicas:**
+    - **Inflación mensual (BCE):** Afecta el poder adquisitivo del consumidor y el costo de materias primas. En Ecuador, la inflación tiene correlación documentada con la demanda de productos de primera necesidad.
+    - **Tasa de desempleo (INEC):** Indicador rezagado pero potente para bienes durables y de consumo discrecional. La tasa de desempleo en Ecuador fue ~4.5% en 2024 con variación regional significativa.
+    - **PIB per cápita y consumo privado (BCE):** Indicadores de capacidad de gasto de los hogares. Alta correlación con demanda de bienes de consumo no básico.
+    - **Tipo de cambio implícito:** Aunque Ecuador usa el dólar, las variaciones del peso colombiano y el sol peruano afectan el comercio fronterizo y la competencia de productos importados.
+    
+    **Variables sectoriales:**
+    - **Precio del petróleo WTI:** Afecta directamente el costo de plásticos, fertilizantes y transporte en Ecuador.
+    - **Precio del banano y las flores FOB:** Para empresas de exportación e insumos para esos sectores.
+    - **Índice de precios al productor (IPP) del BCE:** Variación de precios de materias primas industriales.
+    
+    **Variables climáticas:**
+    - **Precipitación mensual (INAMHI):** Crítica para agricultura, agroind industria, bebidas y turismo. El fenómeno El Niño en Ecuador tiene efectos dramáticos en la producción agrícola con rezago de 3-6 meses.
+    - **Temperatura media en las ciudades principales:** Correlaciona con consumo de helados, bebidas frías, ropa de abrigo.
+    
+    **Variables de mercado:**
+    - **Precio de la competencia:** La elasticidad precio-demanda permite cuantificar cómo un cambio del 10% en el precio del competidor afecta las ventas propias.
+    - **Inversión publicitaria propia y de la competencia:** Con un rezago de 2-4 semanas típicamente.
+    - **Días de festividades y eventos:** Fiestas de Quito (6 de diciembre), Carnaval, Semana Santa, regreso a clases (septiembre, febrero), Navidad.
+    
+    ### Regresión lineal múltiple: incorporar las variables externas
+    
+    La regresión lineal múltiple es el método estadístico para modelar la relación entre la demanda y múltiples variables explicativas simultáneamente:
+    
+    **Demanda = β₀ + β₁×PIB + β₂×Precio_propio + β₃×Publicidad + β₄×Meses_desde_enero + β₅×Es_diciembre + ε**
+    
+    Donde:
+    - β₀ es la demanda base (intercepto)
+    - Cada βᵢ es el coeficiente que indica cuánto cambia la demanda por cada unidad de cambio en la variable correspondiente
+    - Es_diciembre es una variable dummy (0/1) que captura el efecto estacional de ese mes
+    
+    **En Excel:**
+    Datos → Análisis de Datos → Regresión (requiere activar el complemento Analysis ToolPak). Seleccionar rango Y (ventas), rango X (variables explicativas), y Excel genera automáticamente coeficientes, R², valor-p para cada variable y residuales.
+    
+    ### ChatGPT para identificar variables y construir el modelo
+    
+    ChatGPT puede ayudar a identificar qué variables externas son más relevantes para tu negocio específico y cómo estructurar el modelo:
+    
+    *"Soy gerente de producción de una empresa de helados en Guayaquil, Ecuador. Quiero mejorar mi pronóstico de demanda incorporando variables externas. Actualmente uso solo el historial de ventas de 24 meses con MAPE del 22%. ¿Qué variables externas específicas para Ecuador recomendarías incluir en un modelo de regresión? ¿Dónde consigo los datos de esas variables gratuitamente? ¿Cómo construiría el modelo en Excel?"*
+    
+    ### Fuentes de datos de variables externas en Ecuador
+    
+    | Variable | Fuente | Frecuencia | URL |
+    |----------|--------|------------|-----|
+    | Inflación | BCE | Mensual | estadisticas.bce.fin.ec |
+    | Desempleo | INEC | Trimestral | ecuadorencifras.gob.ec |
+    | PIB y consumo | BCE | Trimestral | contenido.bce.fin.ec |
+    | Precipitación | INAMHI | Mensual | inamhi.gob.ec |
+    | Precio petróleo | EIA USA | Diario | eia.gov/dnav/pet |
+    | Festivos Ecuador | Gobierno | Anual | gob.ec/feriados |
+    
+    ### Validación del modelo multivariado
+    
+    Un modelo más complejo no siempre es mejor. Para validar si las variables externas mejoran realmente el pronóstico:
+    
+    1. **R² ajustado:** El R² normal siempre aumenta cuando se agregan variables. El R² ajustado penaliza por el número de variables. Si R² ajustado no mejora al agregar una variable, esa variable no aporta.
+    2. **Valor-p de cada coeficiente:** Si p > 0.05, la variable no es estadísticamente significativa y probablemente no aporta al modelo.
+    3. **Comparar MAPE en holdout:** El MAPE en datos no usados para entrenar el modelo es el verdadero indicador de si el modelo multivariado es mejor que el univariado.`,
+        presentacionSlides: [
+          { titulo: "Series de tiempo vs. modelos causales", contenido: "Series de tiempo: el futuro se parece al pasado. Modelos causales: incorporan variables que CAMBIAN el futuro. Reducción de MAPE potencial: 20-40%. Necesario cuando hay eventos externos relevantes para el sector." },
+          { titulo: "Variables macroeconómicas de Ecuador para pronóstico", contenido: "Inflación BCE (poder adquisitivo). Desempleo INEC (bienes durables). PIB/consumo privado BCE (bienes no básicos). Tipo de cambio implícito (comercio fronterizo). Todas disponibles gratuitamente en portales del gobierno." },
+          { titulo: "Variables climáticas: críticas para agroindustria", contenido: "Precipitación mensual INAMHI: agricultura, bebidas, turismo. Fenómeno El Niño: efecto dramático con rezago 3-6 meses en producción agrícola. Temperatura: helados, bebidas frías, ropa. INAMHI.gob.ec: datos históricos gratuitos." },
+          { titulo: "Regresión lineal múltiple en Excel", contenido: "Activar Analysis ToolPak. Datos → Análisis de Datos → Regresión. Y: ventas históricas. X: variables explicativas. Output: coeficientes β, R², valor-p, residuales. Todo en segundos sin programar." },
+          { titulo: "Cómo interpretar el R² ajustado", contenido: "R² normal SIEMPRE sube al agregar variables. R² ajustado penaliza por variables extras. Si R² ajustado no mejora → la variable no aporta. Buscar R² ajustado >0.70 para modelo aceptable en pronóstico de demanda." },
+          { titulo: "Variables dummy para estacionalidad y eventos", contenido: "Diciembre=1 resto=0 captura el efecto navidad. Feria_Quito=1 captura el mes de fiestas. Regreso_clases=1 para septiembre y febrero. Cada dummy agrega un coeficiente que mide el impacto exacto del evento en unidades vendidas." },
+          { titulo: "Fuentes de datos externos: todo gratis en Ecuador", contenido: "BCE (estadisticas.bce.fin.ec): inflación, PIB, consumo. INEC (ecuadorencifras.gob.ec): desempleo, censos. INAMHI (inamhi.gob.ec): clima, precipitación. EIA (eia.gov): precio petróleo. Gobierno (gob.ec): calendario festivos." },
+          { titulo: "Prompt para identificar variables con ChatGPT", contenido: "Sector + ciudad + productos + MAPE actual. ChatGPT recomienda: qué variables externas incluir, dónde conseguir los datos en Ecuador, cómo estructurar el modelo en Excel, qué rezagos temporales considerar (efecto del clima sobre ventas puede tardar 2-3 meses)." },
+        ],
+        quiz: [
+          { pregunta: "¿Por qué los modelos de series de tiempo pueden fallar en Ecuador durante un año de fenómeno El Niño?", opciones: ["Porque Excel no puede procesar datos climáticos", "Porque El Niño genera cambios estructurales en la demanda agrícola e industrial que no se reflejan en el historial normal de ventas", "Porque la inflación de Ecuador siempre sube durante El Niño", "Porque los datos del INEC no están disponibles durante esos períodos"], respuesta: 1, explicacion: "Los modelos de series de tiempo asumen que el futuro es similar al pasado. El fenómeno El Niño genera cambios drásticos en la producción agrícola, los precios de materias primas y el poder adquisitivo que no están en el historial normal de ventas, haciendo que el modelo univariado falle significativamente." },
+          { pregunta: "¿Para qué sirve una variable dummy en un modelo de regresión para pronóstico de demanda?", opciones: ["Para reemplazar los valores faltantes en el dataset", "Para capturar el efecto de eventos discretos (festivos, estaciones, campañas) mediante variables binarias (0/1)", "Para suavizar la serie de tiempo automáticamente", "Para conectar Excel con datos externos de internet"], respuesta: 1, explicacion: "Las variables dummy son variables binarias (0=no ocurre, 1=ocurre) que permiten incluir efectos de eventos discretos en el modelo de regresión. Por ejemplo, 'Es_diciembre' captura el efecto navideño: el coeficiente β de esa dummy representa exactamente cuántas unidades adicionales se venden en diciembre vs. un mes sin ese evento." },
+          { pregunta: "¿Por qué es preferible usar el R² ajustado en lugar del R² simple al evaluar un modelo de regresión con múltiples variables?", opciones: ["Porque el R² ajustado siempre da valores más altos", "Porque el R² simple siempre aumenta al agregar más variables aunque no sean relevantes; el R² ajustado penaliza por el número de variables y solo mejora si la variable realmente aporta", "Porque Excel solo calcula R² ajustado, no R² simple", "Porque el R² simple es solo para modelos de series de tiempo"], respuesta: 1, explicacion: "El R² simple matemáticamente solo puede aumentar (nunca bajar) cuando se agrega una variable, incluso si es ruido aleatorio. El R² ajustado incorpora una penalización por el número de variables, solo mejorando cuando la variable añadida genera una mejora real en el poder explicativo del modelo." },
+          { pregunta: "Una empresa de distribución de bebidas en Guayaquil quiere mejorar su pronóstico incorporando variables externas. ¿Cuál de las siguientes variables externas tiene mayor probabilidad de ser relevante para su demanda?", opciones: ["El precio del petróleo WTI en Chicago", "La temperatura media mensual en Guayaquil y el calendario de festivos y eventos deportivos nacionales", "El PIB de Colombia", "La tasa de inflación de Argentina"], respuesta: 1, explicacion: "Para una empresa de bebidas en Guayaquil, las variables más directamente relevantes son la temperatura (a mayor temperatura, mayor consumo de bebidas frías) y el calendario de eventos (partidos de fútbol, fiestas locales, festivos) que generan picos de consumo. El precio del petróleo de Chicago tiene efecto muy indirecto comparado con estas variables." },
+          { pregunta: "¿Cómo se obtienen gratuitamente los datos de inflación mensual de Ecuador para incluirlos en un modelo de pronóstico?", opciones: ["No hay datos de inflación disponibles públicamente en Ecuador", "Del portal del Banco Central del Ecuador (estadisticas.bce.fin.ec) que publica series históricas mensuales de inflación y otros indicadores macroeconómicos", "Solo en el INEC, por solicitud formal con costo de $50", "En la Cámara de Comercio de Quito, con actualización anual"], respuesta: 1, explicacion: "El Banco Central del Ecuador publica en su portal estadisticas.bce.fin.ec series históricas de inflación mensual, tipo de cambio implícito, PIB, consumo privado y otros indicadores macroeconómicos de forma gratuita y descargable en Excel." },
+        ],
+        ejercicio: {
+          titulo: "Modelo de regresión con variables externas para pronóstico de demanda",
+          objetivo: "Construir un modelo de regresión lineal múltiple en Excel que incorpore al menos 3 variables externas relevantes para Ecuador y comparar su MAPE con el modelo univariado de series de tiempo.",
+          herramientas: "Excel con Analysis ToolPak activado, ChatGPT o Claude",
+          pasos: [
+            "Selecciona un producto o sector para modelar. Opción recomendada: ventas mensuales de helados en una ciudad de la costa ecuatoriana (Guayaquil o Manta), donde temperatura y estacionalidad son muy relevantes.",
+            "Construye el dataset de 36 meses con las siguientes columnas: Mes (1-36), Ventas (variable Y), Temperatura_media (26-31°C con variación estacional), Ingreso_percapita_relativo (índice 100=promedio, con ciclo económico), Variable_dummy_verano (1 en meses junio-agosto), Variable_dummy_navidad (1 en diciembre).",
+            "Activa el Analysis ToolPak en Excel: Archivo → Opciones → Complementos → Ir → Analysis ToolPak. Luego: Datos → Análisis de Datos → Regresión. Y: columna Ventas. X: las 4 variables explicativas. Ejecuta y analiza el output: R² ajustado, coeficientes β y valores-p.",
+            "Identifica cuáles variables son estadísticamente significativas (valor-p < 0.05). Elimina las no significativas y recorre el modelo. Compara el R² ajustado del modelo completo vs. el modelo reducido.",
+            "Calcula el MAPE del modelo de regresión usando los últimos 12 meses como holdout (igual que hiciste con FORECAST.ETS en el tema anterior). Compara los dos MAPE: ¿el modelo multivariado mejora la precisión?",
+            "Usa ChatGPT con el prompt: 'Tengo un modelo de regresión para ventas de helados en Guayaquil. R² ajustado=0.78. Variables significativas: temperatura (β=+45, p=0.002), dummy_navidad (β=+380, p=0.001). Variables no significativas: ingreso (p=0.34), dummy_verano (p=0.28). ¿Cómo interpreto estos coeficientes en lenguaje de negocio? ¿Qué variables adicionales debería probar para mejorar el R² ajustado?'",
+          ],
+          resultado: "Modelo de regresión en Excel con al menos 3 variables externas, output de regresión completo, comparación de MAPE vs. modelo univariado e interpretación de coeficientes con ChatGPT.",
+          criterios: [
+            { criterio: "Dataset de 36 meses con 4 variables explicativas correctamente construido", puntos: 20 },
+            { criterio: "Regresión ejecutada correctamente con Analysis ToolPak, output completo analizado", puntos: 30 },
+            { criterio: "Interpretación de R² ajustado, coeficientes significativos y valores-p", puntos: 25 },
+            { criterio: "Comparación de MAPE con modelo univariado y conclusión sobre qué modelo usar", puntos: 25 },
+          ],
+        },
+        recursos: [
+          { titulo: "BCE Ecuador — Portal de estadísticas macroeconómicas", url: "https://estadisticas.bce.fin.ec/", tipo: "herramienta", descripcion: "Portal oficial del Banco Central del Ecuador con series históricas descargables de inflación, PIB, consumo, tipo de cambio y más." },
+          { titulo: "INAMHI Ecuador — Datos climáticos históricos", url: "https://www.inamhi.gob.ec/", tipo: "herramienta", descripcion: "Instituto Nacional de Meteorología e Hidrología del Ecuador. Series históricas de temperatura, precipitación y eventos climáticos por estación." },
+          { titulo: "Excel Analysis ToolPak — Guía de regresión", url: "https://support.microsoft.com/es-es/office/usar-las-herramientas-para-análisis-para-realizar-análisis-de-datos-complejos-6c67ccf0-f4a9-487c-8dec-bdb5a2cefab6", tipo: "documentacion", descripcion: "Guía oficial de Microsoft para usar el Analysis ToolPak de Excel, incluyendo el módulo de regresión lineal múltiple." },
+        ],
+      },
+    
+      {
+        id: 33,
+        titulo: "Clasificación ABC/XYZ de inventario con IA",
+        modulo: MOD7,
+        moduloNum: 7,
+        videoEmbed: "https://www.youtube.com/embed/PLACEHOLDER",
+        videoTitulo: "Clasificación ABC/XYZ de inventario con IA",
+        teoria: `## ABC/XYZ: la clasificación que prioriza tu gestión de inventario
+    
+    Gestionar todos los ítems del inventario con el mismo nivel de atención es un desperdicio de recursos. La clasificación **ABC/XYZ** combina dos dimensiones de análisis para identificar qué productos merecen gestión intensiva, cuáles pueden manejarse con políticas estándar y cuáles son candidatos para simplificación o eliminación.
+    
+    ### Clasificación ABC: el eje del valor
+    
+    La clasificación ABC aplica el principio de Pareto al inventario, analizando la contribución de cada ítem al valor total del inventario o las ventas:
+    
+    **Clase A:** Los ítems que representan el 70-80% del valor total pero solo el 10-20% del número de ítems. Son los productos más críticos para el negocio. Requieren gestión intensiva: control de stock en tiempo real, revisión frecuente del punto de reorden, relaciones cercanas con proveedores.
+    
+    **Clase B:** 15-25% del valor total y 30% de los ítems. Gestión estándar: revisiones periódicas, políticas de reorden automático razonables.
+    
+    **Clase C:** Solo 5-10% del valor total pero el 50-70% del número de ítems. Son los muchos productos de bajo valor. Política simplificada: revisiones menos frecuentes, lotes de reorden más grandes, posible eliminación de ítems de muy bajo movimiento.
+    
+    **Cálculo de la clasificación ABC en Excel:**
+    
+    1. Calcular para cada ítem: Valor anual consumido = Cantidad consumida/año × Precio unitario
+    2. Ordenar de mayor a menor valor anual
+    3. Calcular % individual y % acumulado del valor total
+    4. Asignar clase: A si % acumulado ≤ 80%, B si ≤ 95%, C si > 95%
+    
+    ### Clasificación XYZ: el eje de la variabilidad de la demanda
+    
+    La clasificación XYZ mide qué tan predecible es la demanda de cada ítem usando el **coeficiente de variación (CV)**:
+    
+    **CV = Desviación estándar de la demanda mensual / Media de la demanda mensual**
+    
+    **Clase X:** CV < 0.2. Demanda muy estable y predecible. El pronóstico es altamente confiable. Política: JIT (Just In Time), stocks mínimos, reposición automática.
+    
+    **Clase Y:** 0.2 ≤ CV < 0.5. Demanda con variabilidad moderada pero tendencia identificable. Política: suavizamiento exponencial, stock de seguridad moderado.
+    
+    **Clase Z:** CV ≥ 0.5. Demanda altamente irregular e impredecible. El pronóstico tiene alta incertidumbre. Política: stock de seguridad alto, o gestión bajo demanda (no mantener inventario permanente).
+    
+    ### La matriz ABC/XYZ: 9 celdas, 9 políticas
+    
+    La combinación de ambas clasificaciones crea una matriz 3×3:
+    
+    | | X (estable) | Y (moderada) | Z (irregular) |
+    |--|-------------|--------------|---------------|
+    | **A (alto valor)** | AX: control máximo + JIT | AY: SES + stock seguridad moderado | AZ: revisión diaria + colaboración proveedor |
+    | **B (valor medio)** | BX: reorden automático | BY: revisión semanal | BZ: revisar si justifica mantener |
+    | **C (bajo valor)** | CX: lote grande, revisión mensual | CY: revisión trimestral | CZ: candidato a eliminar |
+    
+    Los ítems **AZ** (alto valor + demanda impredecible) son los más peligrosos del inventario: costosos de mantener en exceso y críticos si faltan. Merecen atención especial y colaboración directa con el proveedor.
+    
+    ### ChatGPT para construir y analizar la clasificación ABC/XYZ
+    
+    **Para construir la clasificación:**
+    *"Tengo un dataset de 120 SKUs con consumo mensual de los últimos 12 meses en unidades y costo unitario de cada uno. ¿Puedo pegarte la tabla y que me ayudes a calcular la clasificación ABC/XYZ completa, identificar los ítems AZ que requieren atención urgente y proponer políticas de gestión para cada categoría?"*
+    
+    **Para política de inventario:**
+    *"Mis ítems AX son: [lista de productos]. Son materia prima para una empresa de alimentos en Quito, con proveedor principal en Colombia. ¿Qué política de inventario recomiendas para maximizar disponibilidad minimizando el capital inmovilizado? Considera un lead time de 15 días y una demanda mensual promedio de [X] unidades."*
+    
+    ### Implementación en Python para grandes datasets
+    
+    Para empresas con catálogos de cientos o miles de SKUs, Python automatiza la clasificación completa:
+    
+[/Código]python
+import pandas as pd
+import numpy as np
+
+def clasificar_abc_xyz(df):
+    # ABC: por valor anual
+    df['valor_anual'] = df['demanda_anual'] * df['costo_unitario']
+    df = df.sort_values('valor_anual', ascending=False)
+    df['pct_acumulado'] = df['valor_anual'].cumsum() / df['valor_anual'].sum() * 100
+    df['clase_abc'] = pd.cut(df['pct_acumulado'], bins=[0, 80, 95, 100],
+                              labels=['A', 'B', 'C'])
+    # XYZ: por coeficiente de variación
+    meses_cols = [c for c in df.columns if c.startswith('mes_')]
+    df['cv'] = df[meses_cols].std(axis=1) / df[meses_cols].mean(axis=1)
+    df['clase_xyz'] = pd.cut(df['cv'], bins=[0, 0.2, 0.5, np.inf],
+                              labels=['X', 'Y', 'Z'])
+    df['clasificacion'] = df['clase_abc'].astype(str) + df['clase_xyz'].astype(str)
+    return df
+`,
+    presentacionSlides: [
+      { titulo: "ABC: clasificar por valor de consumo", contenido: "A: 70-80% del valor, 10-20% de ítems → gestión intensiva. B: 15-25% del valor → gestión estándar. C: 5-10% del valor, 50-70% de ítems → simplificada. Pareto aplicado al inventario: no gestionar todo igual." },
+      { titulo: "XYZ: clasificar por variabilidad de la demanda", contenido: "X (CV<0.2): demanda estable → JIT, stock mínimo. Y (CV 0.2-0.5): variabilidad moderada → SES + stock seguridad. Z (CV>0.5): demanda irregular → stock alto o gestión bajo demanda. CV = σ / μ de la demanda mensual." },
+      { titulo: "La matriz ABC/XYZ: 9 políticas de gestión", contenido: "AX: control máximo + JIT. AY: SES + stock moderado. AZ: ¡CRÍTICO! revisión diaria + colaboración proveedor. BX: reorden automático. CZ: candidato a eliminar. Una política diferente para cada cuadrante." },
+      { titulo: "Por qué los ítems AZ son los más peligrosos", contenido: "Alto valor (costoso tener en exceso) + demanda impredecible (difícil de pronosticar) = combinación explosiva. Una rotura de stock de un ítem AZ detiene la producción. Un exceso inmoviliza capital crítico. Necesitan gestión especial: VMI, Kanban con proveedor." },
+      { titulo: "Cálculo ABC/XYZ en Excel: paso a paso", contenido: "ABC: valor_anual = demanda_anual × costo_unitario. Ordenar descendente. % acumulado. Cortes en 80% y 95%. XYZ: CV = DESVEST.M / PROMEDIO de los 12 meses de demanda. Clasificar por umbrales 0.2 y 0.5. Concatenar: 'A' & 'X' = 'AX'." },
+      { titulo: "Automatización en Python para 1,000+ SKUs", contenido: "pd.cut para clasificación ABC/XYZ automática. .std(axis=1) y .mean(axis=1) para CV por filas (un cálculo por SKU). Output: DataFrame con clasificación completa lista para filtrar y analizar. ChatGPT escribe el código en segundos." },
+      { titulo: "Prompt para política de inventario con ChatGPT", contenido: "Ítem + clasificación ABC/XYZ + lead time proveedor + demanda promedio + CV + costo de rotura de stock. ChatGPT recomienda: stock de seguridad en unidades, punto de reorden exacto, frecuencia de revisión, política de colaboración con proveedor." },
+      { titulo: "ABC/XYZ en Ecuador: aplicación por sector", contenido: "Alimentos: AZ frecuente en insumos importados con alta variabilidad de precio. Floricultura: AX en fungicidas críticos para temporada. Manufactura: CZ son candidatos a estandarización o eliminación del catálogo." },
+    ],
+    quiz: [
+      { pregunta: "¿Qué criterio determina si un ítem es clase A, B o C en la clasificación ABC?", opciones: ["El peso físico del producto en kilogramos", "El valor monetario del consumo anual (cantidad consumida × precio unitario), ordenado y acumulado", "El número de unidades físicas en almacén en este momento", "La frecuencia con que se hace un pedido al proveedor"], respuesta: 1, explicacion: "La clasificación ABC ordena los ítems por valor de consumo anual (demanda × costo unitario) de mayor a menor, luego asigna A al conjunto de ítems que acumula hasta el 80% del valor total, B hasta el 95%, y C al resto." },
+      { pregunta: "¿Cómo se calcula el Coeficiente de Variación (CV) para la clasificación XYZ?", opciones: ["CV = Demanda máxima / Demanda mínima del año", "CV = Desviación estándar de la demanda mensual / Media de la demanda mensual", "CV = Cantidad en almacén / Cantidad pedida", "CV = Costo unitario / Precio de venta"], respuesta: 1, explicacion: "CV = σ/μ donde σ es la desviación estándar de la demanda mensual y μ es la media mensual. Un CV alto significa que la demanda varía mucho en relación a su promedio (alta incertidumbre). Un CV bajo indica demanda estable y predecible." },
+      { pregunta: "¿Por qué los ítems clasificados como AZ merecen atención especial?", opciones: ["Porque son los más baratos y más fáciles de conseguir", "Porque combinan alto valor monetario (críticos para el negocio) con demanda altamente impredecible (difícil gestionar el stock)", "Porque son los más vendidos en volumen de unidades", "Porque AZ significa que son ítems nuevos sin historial de demanda"], respuesta: 1, explicacion: "AZ es la combinación más crítica: alto valor (un exceso inmoviliza capital importante) + alta variabilidad (el pronóstico es poco confiable). Una rotura de stock en un ítem AZ puede detener la producción o generar pérdidas significativas, mientras un exceso representa capital inmovilizado costoso." },
+      { pregunta: "¿Cuál es la política de inventario recomendada para ítems CZ?", opciones: ["Control máximo con revisión diaria y colaboración estrecha con el proveedor", "Son candidatos a eliminación del catálogo o gestión bajo demanda; no justifican mantener inventario permanente", "JIT (Just In Time) con reposición automática muy frecuente", "Stock de seguridad alto para compensar la alta variabilidad"], respuesta: 1, explicacion: "CZ son ítems de bajo valor monetario (C) con demanda muy irregular (Z). La combinación no justifica mantener inventario permanente: el capital inmovilizado es pequeño pero el costo de gestión puede ser desproporcionado. Se recomienda gestión bajo pedido o eliminación del catálogo si el volumen no lo justifica." },
+      { pregunta: "Un producto tiene demanda mensual de: [80, 85, 82, 78, 200, 79, 83, 81, 190, 80, 84, 82] unidades. ¿Qué clasificación XYZ recibiría aproximadamente?", opciones: ["X (CV<0.2) — demanda muy estable", "Y (0.2≤CV<0.5) — variabilidad moderada", "Z (CV≥0.5) — demanda altamente irregular", "No se puede clasificar sin el costo unitario"], respuesta: 2, explicacion: "Los datos tienen media ~92 y desviación estándar ~47 (los dos picos de 200 y 190 aumentan mucho la variabilidad). CV ≈ 47/92 ≈ 0.51, que supera el umbral de 0.5 para clase Z. Los picos esporádicos (posiblemente pedidos especiales o estacionalidad fuerte) hacen la demanda muy irregular." },
+    ],
+    ejercicio: {
+      titulo: "Clasificación ABC/XYZ de inventario para una empresa ecuatoriana",
+      objetivo: "Aplicar la clasificación ABC/XYZ completa a un dataset de SKUs, identificar los ítems críticos por categoría y proponer políticas de gestión diferenciadas con la ayuda de ChatGPT.",
+      herramientas: "Excel o Google Sheets, ChatGPT o Claude",
+      pasos: [
+        "Prepara un dataset de 30 SKUs en Excel con columnas: Código_SKU, Descripción, Costo_Unitario (USD), y demanda mensual para 12 meses (enero-diciembre). Incluye variedad: algunos ítems de alto valor y demanda estable, otros de bajo valor y demanda irregular.",
+        "Calcula la Clasificación ABC: columna 'Valor_Anual' = SUMA(demandas 12 meses) × Costo_Unitario. Ordena de mayor a menor. Calcula '% individual' y '% acumulado'. Asigna clase A si % acumulado ≤80%, B si ≤95%, C si >95% usando función SI anidada.",
+        "Calcula la Clasificación XYZ: para cada SKU, calcula el CV = DESVEST.M(demandas 12 meses) / PROMEDIO(demandas 12 meses). Asigna X si CV<0.2, Y si CV<0.5, Z si CV≥0.5.",
+        "Crea la Clasificación Combinada concatenando las dos letras (ejemplo: 'A'&'X' = 'AX'). Usa tablas dinámicas para contar cuántos ítems hay en cada categoría y su valor total.",
+        "Identifica los 3 ítems AZ de tu dataset. Usa ChatGPT con el prompt: 'Tengo 3 ítems clasificados AZ en mi empresa en Ecuador: [nombres, costos, demanda promedio, CV]. El lead time de estos ítems es [X] días. ¿Qué política de inventario específica recomiendas para cada uno? Incluye stock de seguridad sugerido en unidades, punto de reorden, frecuencia de revisión y estrategia con el proveedor.'",
+        "Elabora una tabla resumen de políticas diferenciadas para cada categoría ABC/XYZ (las 9 combinaciones que tengas en tu dataset), con descripción de la política en 1-2 oraciones por categoría.",
+      ],
+      resultado: "Dataset de 30 SKUs con clasificación ABC/XYZ completa, conteo por categoría, política de ChatGPT para ítems AZ y tabla de políticas diferenciadas por categoría.",
+      criterios: [
+        { criterio: "Cálculo correcto de Valor Anual, % acumulado y clasificación ABC con fórmulas visibles", puntos: 25 },
+        { criterio: "Cálculo correcto de CV y clasificación XYZ para los 30 SKUs", puntos: 25 },
+        { criterio: "Identificación de ítems AZ y política de ChatGPT documentada con evaluación", puntos: 30 },
+        { criterio: "Tabla resumen de políticas diferenciadas para todas las categorías presentes en el dataset", puntos: 20 },
+      ],
+    },
+    recursos: [
+      { titulo: "Investopedia — ABC Analysis Inventory Management", url: "https://www.investopedia.com/terms/a/abc-analysis.asp", tipo: "lectura", descripcion: "Explicación completa del análisis ABC con ejemplos numéricos y comparación con otros métodos de clasificación de inventario." },
+      { titulo: "Lokad — XYZ Analysis Reference", url: "https://www.lokad.com/xyz-classification-definition", tipo: "documentacion", descripcion: "Referencia técnica sobre clasificación XYZ con fórmulas de CV, umbrales recomendados y combinación con ABC." },
+      { titulo: "APICS — Supply Chain Management Fundamentals", url: "https://www.ascm.org/supply-chain-management-resources/", tipo: "lectura", descripcion: "Recursos de la Asociación para la Gestión de la Cadena de Suministro (ASCM/APICS), referencia profesional estándar en gestión de inventario." },
+    ],
+  },
+
+  {
+    id: 34,
+    titulo: "EOQ y punto de reorden optimizado con Claude",
+    modulo: MOD7,
+    moduloNum: 7,
+    videoEmbed: "https://www.youtube.com/embed/PLACEHOLDER",
+    videoTitulo: "EOQ y punto de reorden optimizado con Claude",
+    teoria: `## EOQ y punto de reorden: los dos pilares cuantitativos de la gestión de inventario
+
+La gestión de inventario enfrenta un trade-off fundamental: pedir poco frecuentemente reduce el costo de ordenar pero aumenta el costo de mantener inventario. Pedir frecuentemente reduce el inventario promedio pero aumenta los costos de gestión de pedidos. El **EOQ** (Economic Order Quantity — Cantidad Económica de Pedido) resuelve este trade-off matemáticamente, encontrando el tamaño de lote que minimiza el costo total.
+
+### El modelo EOQ: fórmula y supuestos
+
+**Fórmula EOQ:**
+EOQ = √(2 × D × S / H)
+
+Donde:
+- **D** = Demanda anual en unidades
+- **S** = Costo de ordenar por pedido (USD/pedido): incluye tiempo del comprador, costo de procesamiento, envío fijo si aplica
+- **H** = Costo de mantener una unidad por año (USD/unidad/año): generalmente 20-30% del costo unitario como regla de dedo (incluye financiamiento, espacio, obsolescencia, seguros)
+
+**Ejemplo Ecuador — Empresa de alimentos en Ambato:**
+- Demanda anual de fundas de empaque especial: D = 12,000 unidades
+- Costo de ordenar (tiempo comprador + envío desde Guayaquil): S = $45/pedido
+- Costo unitario de la funda: $0.80 → H = 0.25 × $0.80 = $0.20/unidad/año
+
+EOQ = √(2 × 12,000 × 45 / 0.20) = √(5,400,000) = **2,324 unidades por pedido**
+
+Esto significa ordenar ~5 veces al año (12,000/2,324), no 12 veces (mensual) ni 52 veces (semanal).
+
+**Supuestos del modelo EOQ básico:**
+1. Demanda conocida y constante (D determinístico)
+2. Lead time de reposición conocido y constante
+3. Costo de ordenar y costo de mantener conocidos y constantes
+4. No se permiten quiebres de stock
+5. Los pedidos llegan todos a la vez (no entregas parciales)
+
+Estos supuestos son restrictivos. En la práctica, la demanda varía, los lead times fluctúan y los costos cambian. Las extensiones del modelo EOQ (con demanda estocástica, con descuentos por volumen, con entregas parciales) abordan estas limitaciones.
+
+### Punto de reorden (ROP): cuándo pedir
+
+El **punto de reorden** es el nivel de inventario que, cuando se alcanza, dispara una orden de compra. Debe calcularse para que cuando llegue el pedido, el inventario no se haya agotado:
+
+**ROP básico (lead time determinístico):**
+ROP = Demanda diaria promedio × Lead time (días)
+
+**ROP con stock de seguridad (lead time incierto):**
+ROP = Demanda diaria promedio × Lead time promedio + Stock de seguridad
+
+**Stock de seguridad = z × σ_demanda × √(Lead_time)**
+
+Donde z es el factor de servicio (z=1.65 para nivel de servicio del 95%, z=2.05 para 98%, z=2.33 para 99%).
+
+**Ejemplo continuando el caso anterior:**
+- Demanda diaria promedio = 12,000/365 = 32.9 unidades/día
+- Lead time promedio = 7 días
+- σ_demanda_diaria = 8 unidades (25% de CV)
+- Nivel de servicio objetivo = 95% → z = 1.65
+
+Stock de seguridad = 1.65 × 8 × √7 = 1.65 × 8 × 2.65 = **35 unidades**
+ROP = 32.9 × 7 + 35 = 230 + 35 = **265 unidades**
+
+Cuando el inventario llegue a 265 unidades, se lanza la orden de 2,324 unidades (EOQ).
+
+### Claude como asistente de optimización de inventario
+
+Claude es especialmente útil para:
+1. Calcular EOQ y ROP paso a paso con los datos de la empresa
+2. Sensibilizar el modelo: ¿qué pasa con el EOQ si el costo de ordenar sube 50%?
+3. Incorporar descuentos por volumen al análisis
+4. Construir la tabla de costos totales para comparar el EOQ vs. la política actual
+
+**Prompt modelo para cálculo con Claude:**
+*"Soy gerente de compras de una empresa manufacturera en Ecuador. Necesito optimizar el inventario de mi materia prima más importante. Datos: Demanda anual D=24,000 unidades, Costo unitario=$1.50, Costo de ordenar S=$60/pedido, Tasa de mantenimiento=25% anual, Lead time promedio=10 días, σ demanda diaria=15 unidades, Nivel de servicio objetivo=95%. Calcula: EOQ, número óptimo de pedidos por año, costo total anual con EOQ vs. mi política actual (un pedido mensual de 2,000 unidades), ROP con stock de seguridad. Muestra todos los pasos del cálculo y dime cuánto ahorro anual esperar si adopto el EOQ."*
+
+### Limitaciones del EOQ y alternativas modernas
+
+El EOQ asume demanda determinística y no considera múltiples niveles de la cadena. Las alternativas modernas para contextos más complejos son:
+
+- **EOQ con descuentos por volumen:** Cuando el proveedor ofrece mejor precio a mayor cantidad, el EOQ se recalcula para cada rango de precio y se elige el punto de menor costo total.
+- **Sistema de revisión continua (s, Q):** Revisar el inventario continuamente y pedir EOQ cuando llega al ROP. Más costoso de administrar pero menor stock de seguridad.
+- **Sistema de revisión periódica (R, S):** Revisar cada R períodos y pedir hasta S unidades. Más simple de administrar, requiere más stock de seguridad.
+- **MRP (Material Requirements Planning):** Para manufactura con estructura de producto (árbol de ensamble), el MRP calcula automáticamente las necesidades de componentes a partir del plan maestro de producción.`,
+    presentacionSlides: [
+      { titulo: "El trade-off fundamental del inventario", contenido: "Pedir más cantidad: menos pedidos (costo ordenar ↓) pero más inventario promedio (costo mantener ↑). Pedir menos: lo inverso. El EOQ es el punto exacto donde la suma de ambos costos es mínima. Matemática que reemplaza la intuición." },
+      { titulo: "Fórmula EOQ y sus tres variables", contenido: "EOQ = √(2 × D × S / H). D: demanda anual. S: costo por pedido (tiempo + envío). H: costo de mantener por unidad/año (25% del costo unitario como regla de dedo). Ejemplo Ecuador: D=12,000, S=$45, H=$0.20 → EOQ=2,324 unidades." },
+      { titulo: "Punto de reorden con stock de seguridad", contenido: "ROP básico = Demanda_diaria × Lead_time. Con incertidumbre: ROP = Demanda_diaria × LT + z × σ_demanda × √LT. z=1.65 para 95% servicio. z=2.05 para 98%. z=2.33 para 99%. Mayor nivel de servicio = mayor stock seguridad = más capital." },
+      { titulo: "EOQ vs. política actual: la tabla de costos", contenido: "Costo Total = Costo_ordenar_anual + Costo_mantener_anual. Con EOQ: ambos son iguales en el mínimo (propiedad matemática del modelo). Comparar con política actual (mensual, trimestral) muestra el ahorro exacto en dólares." },
+      { titulo: "Prompt para cálculo completo con Claude", contenido: "Incluir: D, costo unitario, S, tasa mantenimiento %, lead time días, σ demanda diaria, nivel de servicio %. Claude calcula: EOQ, pedidos/año, costo total actual vs. EOQ, ROP con stock seguridad, ahorro anual en USD." },
+      { titulo: "Sensibilización del modelo: ¿qué pasa si...?", contenido: "Si S sube 50%: EOQ aumenta √1.5 = 22%. Si H sube 50%: EOQ disminuye √1.5 = 18%. Si D se duplica: EOQ aumenta √2 = 41%. Estas relaciones no lineales (raíz cuadrada) sorprenden a muchos gerentes: el EOQ es robusto ante cambios moderados." },
+      { titulo: "EOQ con descuentos por volumen", contenido: "Proveedor ofrece: 0-999 unidades a $1.50, 1000-2999 a $1.35, ≥3000 a $1.25. Calcular EOQ para cada rango con su H correspondiente. Verificar si el EOQ cae en el rango. Calcular costo total incluyendo costo de compra. Elegir el punto de menor costo total." },
+      { titulo: "Sistemas de revisión: continua vs. periódica", contenido: "Continua (s,Q): revisar siempre, pedir EOQ cuando llega a ROP. Menor stock seguridad. Sistema de revisión periódica (R,S): revisar cada R días, pedir hasta S. Más fácil administrativamente. Más stock seguridad. Elegir según capacidad de monitoreo del equipo." },
+    ],
+    quiz: [
+      { pregunta: "Una empresa tiene D=6,000 unidades/año, S=$50/pedido, H=$0.40/unidad/año. ¿Cuál es el EOQ?", opciones: ["750 unidades", "866 unidades", "1,225 unidades", "600 unidades"], respuesta: 1, explicacion: "EOQ = √(2 × 6,000 × 50 / 0.40) = √(600,000 / 0.40) = √1,500,000 ≈ 1,225 unidades. No es 866, que sería EOQ = √(2 × 6,000 × 50 / 0.80). Verificar con H=0.40." },
+      { pregunta: "¿Qué representa el punto de reorden (ROP) en la gestión de inventario?", opciones: ["El máximo nivel de inventario permitido en el almacén", "El nivel de inventario al que, cuando se alcanza, se debe lanzar una orden de compra para no quedarse sin stock durante el lead time", "El EOQ dividido entre el número de pedidos por año", "El inventario promedio durante un año completo"], respuesta: 1, explicacion: "El ROP es el disparador de la orden de compra. Cuando el inventario disponible desciende hasta el ROP, se emite un pedido de EOQ unidades. Está calculado para que el inventario llegue a cero exactamente cuando el nuevo pedido arriba (sin stock de seguridad) o a nivel del stock de seguridad (con incertidumbre)." },
+      { pregunta: "¿Para qué sirve el factor z en el cálculo del stock de seguridad?", opciones: ["Para ajustar el EOQ cuando hay descuentos por volumen", "Para determinar cuántas unidades extra mantener en función del nivel de servicio deseado: mayor z = mayor servicio al cliente = más capital inmovilizado", "Para calcular el costo de ordenar ajustado por inflación", "Para convertir la demanda anual a demanda diaria"], respuesta: 1, explicacion: "El factor z viene de la distribución normal estándar. z=1.65 da 95% de probabilidad de no agotar el stock durante el lead time. z=2.33 da 99%. Mayor nivel de servicio requiere más stock de seguridad (más capital inmovilizado), este es el trade-off fundamental del ROP." },
+      { pregunta: "Si el costo de mantener inventario (H) se duplica, ¿en qué proporción cambia el EOQ?", opciones: ["El EOQ se reduce a la mitad", "El EOQ se reduce en √2 ≈ 29%", "El EOQ no cambia porque H no está en el numerador", "El EOQ se duplica"], respuesta: 1, explicacion: "EOQ = √(2DS/H). Si H se duplica: EOQ_nuevo = √(2DS/(2H)) = √(2DS/H) × (1/√2) = EOQ_original/√2. El EOQ se reduce en un factor de √2 ≈ 1.41, es decir, disminuye aproximadamente un 29%, no un 50%. La relación de raíz cuadrada amortigua los cambios." },
+      { pregunta: "¿Cuál es la propiedad matemática especial del EOQ que facilita verificar si el cálculo es correcto?", opciones: ["En el EOQ, el número de pedidos por año siempre es igual a 12", "En el EOQ, el costo anual de ordenar es igual al costo anual de mantener inventario (ambos representan el 50% del costo total)", "En el EOQ, el inventario promedio siempre es igual a la demanda semanal", "En el EOQ, el ROP siempre es igual al EOQ dividido entre dos"], respuesta: 1, explicacion: "En el punto EOQ, donde se minimiza el costo total, el costo anual de ordenar (D/EOQ × S) es exactamente igual al costo anual de mantener ((EOQ/2) × H). Esta propiedad permite verificar el cálculo: si los dos costos no son iguales, hay un error en la fórmula." },
+    ],
+    ejercicio: {
+      titulo: "Optimización de inventario EOQ + ROP con Claude para empresa ecuatoriana",
+      objetivo: "Calcular el EOQ y punto de reorden para los tres ítems clasificados como A de tu empresa, comparar con la política actual y cuantificar el ahorro potencial con la asistencia de Claude.",
+      herramientas: "Excel o Google Sheets, Claude.ai",
+      pasos: [
+        "Selecciona 3 ítems de inventario de alta importancia (clase A de la clasificación del tema anterior, o usa estos datos para una empresa de alimentos en Ecuador): Ítem 1: harina de trigo, D=36,000 kg/año, costo=$0.45/kg, S=$35/pedido, política actual=mensual. Ítem 2: azúcar, D=18,000 kg/año, costo=$0.62/kg, S=$40/pedido, política actual=quincenal. Ítem 3: envases plásticos, D=120,000 u/año, costo=$0.08/u, S=$55/pedido, política actual=mensual.",
+        "Para cada ítem, calcula en Excel con las fórmulas visibles: H = 25% × costo unitario. EOQ = RAIZ(2×D×S/H). Número de pedidos/año = D/EOQ. Costo anual de ordenar = (D/EOQ) × S. Costo anual de mantener = (EOQ/2) × H. Costo total con EOQ = ordenar + mantener.",
+        "Calcula el costo total con la política actual de cada ítem para comparar: política actual → tamaño de lote = D / (número de pedidos actuales). Costo con política actual = (D/Q_actual)×S + (Q_actual/2)×H.",
+        "Usa Claude con el siguiente prompt para cada ítem: 'Para un ítem con D=[X] unidades/año, costo unitario=$[Y], S=$[Z]/pedido, tasa de mantenimiento=25%: (1) Confirma mi EOQ calculado de [resultado], (2) Lead time=12 días, σ demanda diaria=[calc], nivel de servicio objetivo 97%: calcula ROP con stock de seguridad, (3) Cuantifica el ahorro mensual vs. la política actual de [descripción]. Muestra todo el proceso.'",
+        "Elabora una tabla comparativa de los 3 ítems con: EOQ, pedidos/año con EOQ, costo total actual, costo total con EOQ, ahorro anual en USD, ROP con stock de seguridad.",
+        "Calcula el ahorro total anual de adoptar EOQ para los 3 ítems. Si la empresa tiene 30 ítems clase A con ahorro promedio similar, estima el ahorro total de programa de optimización completo.",
+      ],
+      resultado: "Tabla comparativa de 3 ítems con EOQ, ROP, costo actual vs. EOQ, ahorro anual calculado y extrapolación del ahorro potencial del programa completo.",
+      criterios: [
+        { criterio: "EOQ calculado correctamente para los 3 ítems con fórmulas visibles en Excel", puntos: 30 },
+        { criterio: "ROP con stock de seguridad calculado correctamente con z apropiado para 97% de servicio", puntos: 25 },
+        { criterio: "Comparación cuantitativa costo actual vs. EOQ con ahorro en USD para cada ítem", puntos: 25 },
+        { criterio: "Diálogo con Claude documentado y extrapolación del ahorro potencial del programa completo", puntos: 20 },
+      ],
+    },
+    recursos: [
+      { titulo: "Investopedia — Economic Order Quantity (EOQ) Formula", url: "https://www.investopedia.com/terms/e/economicorderquantity.asp", tipo: "lectura", descripcion: "Explicación completa del EOQ con ejemplos numéricos, supuestos del modelo y variantes para descuentos por volumen." },
+      { titulo: "APICS Dictionary — Inventory Management Terms", url: "https://www.ascm.org/learning-development/apics-dictionary/", tipo: "documentacion", descripcion: "Diccionario oficial de APICS/ASCM con definiciones precisas de EOQ, ROP, stock de seguridad y todos los términos de gestión de inventario." },
+      { titulo: "MIT OpenCourseWare — Supply Chain Management", url: "https://ocw.mit.edu/courses/15-760b-introduction-to-operations-management-spring-2004/", tipo: "lectura", descripcion: "Curso gratuito del MIT sobre operaciones y cadena de suministro, incluyendo módulos completos sobre modelos de inventario." },
+    ],
+  },
+
+  {
+    id: 35,
+    titulo: "NotebookLM como base de conocimiento supply chain",
+    modulo: MOD7,
+    moduloNum: 7,
+    videoEmbed: "https://www.youtube.com/embed/PLACEHOLDER",
+    videoTitulo: "NotebookLM como base de conocimiento supply chain",
+    teoria: `## NotebookLM: tu base de conocimiento de cadena de suministro con IA
+
+NotebookLM es la herramienta de Google que transforma documentos estáticos (manuales, contratos, informes, normativas) en una base de conocimiento conversacional. Para un gerente de cadena de suministro o un ingeniero industrial, esto significa poder hacer preguntas en lenguaje natural sobre documentos técnicos complejos y obtener respuestas precisas citando la fuente, en lugar de buscar manualmente en cientos de páginas.
+
+### ¿Qué es NotebookLM y cómo funciona?
+
+NotebookLM (notebooklm.google.com) permite:
+1. **Subir fuentes de conocimiento:** PDFs, documentos Word, hojas de cálculo Google, páginas web (URLs), archivos de texto o grabaciones de audio
+2. **Generar un "modelo de lenguaje personalizado"** basado exclusivamente en esas fuentes
+3. **Hacer preguntas en lenguaje natural** y obtener respuestas fundamentadas citando el párrafo exacto de la fuente
+4. **Generar resúmenes, briefings y FAQs** automáticamente
+5. **Crear Audio Overviews:** NotebookLM puede convertir el contenido del notebook en un podcast de dos voces que explica los conceptos clave
+
+La diferencia crítica con ChatGPT o Claude es que NotebookLM solo responde basándose en los documentos que subiste. No "alucina" información de su entrenamiento general. Si la respuesta no está en tus documentos, lo dice explícitamente.
+
+### Aplicaciones en cadena de suministro
+
+**Base de conocimiento de proveedores:**
+Sube: contratos de proveedores, acuerdos de nivel de servicio (SLA), fichas técnicas de materiales, histórico de calidad, catálogos de precios. Luego pregunta: "¿Cuál es el tiempo de entrega garantizado por contrato del proveedor Acero del Ecuador para pedidos superiores a 5 toneladas?" NotebookLM responde citando el párrafo exacto del contrato.
+
+**Análisis de normativas y certificaciones:**
+Sube: normas INEN aplicables a tus productos, requisitos de importación del SENAE, normativa ARCSA para alimentos. Pregunta: "¿Qué documentación exige el SENAE para importar materiales de embalaje de China? ¿Exige certificación de origen preferencial?" NotebookLM analiza todas las normas simultáneamente.
+
+**Gestión de manuales técnicos:**
+En una planta con 50 equipos, los manuales de operación y mantenimiento pueden sumar miles de páginas. Sube los manuales a NotebookLM y pregunta: "¿Cuál es el torque de apriete para los pernos de la brida del compresor Atlas Copco GA37?" en lugar de buscar en 300 páginas.
+
+**Base de conocimiento de lecciones aprendidas:**
+Sube reportes de problemas pasados de calidad, incidentes con proveedores, informes de no conformidad. Pregunta: "¿Cuántas veces hemos tenido problemas con el proveedor Plásticos del Norte? ¿Cuáles fueron las causas y cómo se resolvieron?"
+
+**Análisis de informes de mercado y estudios sectoriales:**
+Sube reportes de cámaras de comercio, estudios del BCE sobre el sector, informes INEC, análisis de competencia. Pregunta: "¿Cuáles son las perspectivas de crecimiento del sector alimentos procesados en Ecuador para 2025-2026 según estos informes?"
+
+### Cómo construir un notebook efectivo de supply chain
+
+**Paso 1 — Organizar las fuentes:**
+Define el alcance del notebook. Para supply chain, tiene más valor un notebook enfocado (por ejemplo, "Gestión de proveedores nacionales") que uno genérico con 50 documentos de temas distintos. NotebookLM permite hasta 50 fuentes por notebook con hasta 500,000 palabras por fuente.
+
+**Paso 2 — Preparar los documentos:**
+Los documentos deben estar en formato digital (no imágenes escaneadas sin OCR). Para contratos y manuales en papel, usar Adobe Scan o la app de Google para digitalizar con OCR antes de subir.
+
+**Paso 3 — Definir las preguntas frecuentes:**
+NotebookLM genera automáticamente una FAQ del notebook. Revísala para verificar que las preguntas más críticas están cubiertas. Si falta algún tema, probablemente faltan documentos relevantes.
+
+**Paso 4 — Crear el Study Guide:**
+El botón "Study Guide" en NotebookLM genera automáticamente un documento estructurado con los conceptos clave, un glosario y preguntas de comprensión basados en tus documentos. Útil para onboarding de nuevos miembros del equipo de supply chain.
+
+**Paso 5 — Usar el Audio Overview:**
+Para equipos que prefieren audio o para absorber el contenido durante el traslado, el Audio Overview genera un podcast de 10-20 minutos que resume los documentos del notebook en un formato conversacional natural.
+
+### NotebookLM vs. ChatGPT para documentos internos: ¿cuándo usar cada uno?
+
+| Criterio | NotebookLM | ChatGPT |
+|----------|-----------|---------|
+| Fuentes de conocimiento | Solo tus documentos (confiable) | Su entrenamiento + documentos adjuntos |
+| Riesgo de alucinación | Muy bajo (cita la fuente) | Moderado sin documentos |
+| Tipo de preguntas | Específicas sobre tus documentos | Conceptuales y de razonamiento |
+| Mejor para | Contratos, manuales, normas, informes | Análisis, síntesis, cálculos |
+| Confidencialidad | Documentos van a servidores de Google | Igual |
+| Costo | Gratuito (con cuenta Google) | GPT-4: de pago |
+
+La combinación ideal: usa NotebookLM para extraer información específica de tus documentos internos, luego lleva esa información a ChatGPT o Claude para análisis, síntesis y toma de decisiones.`,
+    presentacionSlides: [
+      { titulo: "NotebookLM: IA que responde solo desde tus documentos", contenido: "No alucina información externa. Cita el párrafo exacto de la fuente. 50 fuentes × 500K palabras por notebook. PDFs, Word, Google Docs, URLs, audio. Gratuito con cuenta Google. notebooklm.google.com." },
+      { titulo: "5 aplicaciones clave en cadena de suministro", contenido: "1. Base de conocimiento de proveedores (contratos + SLAs). 2. Análisis de normativas INEN/SENAE/ARCSA. 3. Manuales técnicos (miles de páginas consultables en segundos). 4. Lecciones aprendidas (incidentes pasados). 5. Informes de mercado y estudios sectoriales." },
+      { titulo: "Audio Overview: el podcast de tus documentos", contenido: "NotebookLM genera automáticamente un podcast de 2 voces (10-20 min) que resume el contenido del notebook. Para absorber información durante traslados. Para onboarding de nuevos miembros del equipo. Para comunicar hallazgos al equipo sin leer informes completos." },
+      { titulo: "Construir el notebook en 5 pasos", contenido: "1. Definir alcance enfocado. 2. Digitalizar documentos en papel (Adobe Scan). 3. Revisar FAQ auto-generada. 4. Crear Study Guide para onboarding. 5. Usar Audio Overview para difusión al equipo." },
+      { titulo: "Preguntas potentes para supply chain en NotebookLM", contenido: "'¿Qué dice el contrato con [proveedor] sobre penalidades por entrega tardía?' '¿Cuáles son los requisitos SENAE para importar [material] desde [país]?' '¿Cuántas veces fallamos con el proveedor X en los últimos 2 años y cuáles fueron las causas?'" },
+      { titulo: "NotebookLM vs. ChatGPT: cuándo usar cada uno", contenido: "NotebookLM: preguntas específicas sobre tus documentos internos, bajo riesgo de alucinación, gratis. ChatGPT/Claude: análisis conceptual, síntesis, cálculos, razonamiento complejo. Combinación ideal: NotebookLM extrae → ChatGPT analiza." },
+      { titulo: "Limitación: no reemplaza el criterio del ingeniero", contenido: "NotebookLM puede malinterpretar contexto técnico complejo. Siempre verificar respuestas críticas leyendo el párrafo original citado. Para decisiones importantes (contratos, seguridad), el ingeniero lee el documento original. IA como asistente, no como árbitro." },
+      { titulo: "Caso práctico: notebook de proveedores en 30 minutos", contenido: "Subir 5 contratos de proveedores + 5 historiales de calidad + norma INEN relevante. Generar FAQ y Study Guide. Primera pregunta: 'Dame el ranking de mis proveedores por cumplimiento de entrega según los contratos y los históricos.' NotebookLM responde con citas específicas." },
+    ],
+    quiz: [
+      { pregunta: "¿Cuál es la diferencia fundamental entre NotebookLM y ChatGPT para analizar documentos de supply chain?", opciones: ["NotebookLM es de pago y ChatGPT es gratuito", "NotebookLM responde exclusivamente basándose en los documentos que subiste y cita la fuente; ChatGPT puede combinar información de entrenamiento general con los documentos, con mayor riesgo de alucinación", "NotebookLM solo funciona con documentos en inglés", "No hay diferencia práctica; ambos funcionan igual para documentos industriales"], respuesta: 1, explicacion: "NotebookLM es un sistema de recuperación aumentada por generación (RAG) que trabaja solo con los documentos del notebook y cita el párrafo exacto de la fuente para cada respuesta. Esto reduce drásticamente el riesgo de 'alucinaciones' (información inventada) comparado con ChatGPT en modo general." },
+      { pregunta: "¿Qué es el Audio Overview de NotebookLM y para qué es útil en un equipo de supply chain?", opciones: ["Es una función para transcribir grabaciones de voz a texto", "Genera automáticamente un podcast de dos voces (10-20 minutos) que resume el contenido del notebook; útil para onboarding de nuevos miembros o para absorber información durante traslados", "Es una alarma de audio que avisa cuando se actualiza un documento del notebook", "Solo está disponible para documentos en formato de audio; no funciona con PDFs"], respuesta: 1, explicacion: "El Audio Overview convierte el contenido de los documentos del notebook en un episodio de podcast conversacional de dos voces generado por IA, permitiendo absorber información durante el traslado, comunicar hallazgos al equipo o facilitar el onboarding sin necesidad de leer documentos extensos." },
+      { pregunta: "¿Por qué es importante que los documentos estén en formato digital con OCR antes de subirlos a NotebookLM?", opciones: ["Porque NotebookLM solo acepta documentos creados después de 2020", "Porque NotebookLM procesa texto digital; documentos escaneados como imágenes sin OCR no tienen texto legible para el modelo", "Porque los documentos en papel tienen derechos de autor y no se pueden digitalizar", "Solo aplica para documentos en chino o japonés"], respuesta: 1, explicacion: "NotebookLM procesa el contenido textual de los documentos. Un PDF escaneado que es solo una imagen (sin capa de texto OCR) no tiene texto que el modelo pueda leer. Usar Adobe Scan, Google PhotoScan u otras apps de OCR para convertir documentos en papel a PDF con texto digital antes de subirlos." },
+      { pregunta: "¿Cuál es la combinación óptima de NotebookLM y ChatGPT/Claude para analizar contratos de proveedores?", opciones: ["Usar solo ChatGPT para todo porque tiene más capacidad de razonamiento", "Usar NotebookLM para extraer información específica citando la fuente (condiciones de entrega, penalidades, precios) y luego llevar esa información a ChatGPT/Claude para análisis comparativo y toma de decisiones", "Usar solo NotebookLM porque es gratuito y ChatGPT es de pago", "Usar ambas herramientas por separado para el mismo análisis y comparar resultados"], respuesta: 1, explicacion: "La combinación óptima es secuencial: NotebookLM extrae información precisa y citada de los documentos (contratos, normas, manuales) sin alucinar. ChatGPT o Claude recibe esa información verificada y realiza el análisis comparativo, la síntesis de decisión o los cálculos que van más allá de recuperar información." },
+      { pregunta: "¿Para qué tipo de pregunta es más adecuado NotebookLM vs. Claude?", opciones: ["NotebookLM: '¿Cuánto es 2+2?'. Claude: '¿Qué dice el contrato?'", "NotebookLM: '¿Qué penalidades establece el contrato con Proveedor X por entrega tardía?'. Claude: '¿Cómo debería estructurar mi estrategia de negociación con proveedores?'", "Ambas herramientas son igualmente apropiadas para todos los tipos de preguntas", "NotebookLM para preguntas de ingeniería; Claude solo para preguntas de marketing"], respuesta: 1, explicacion: "NotebookLM es la herramienta ideal para preguntas que requieren información precisa de documentos específicos (contratos, manuales, normas). Claude y ChatGPT son superiores para preguntas que requieren razonamiento, síntesis, generación de estrategias o cálculos que van más allá de recuperar información de documentos." },
+    ],
+    ejercicio: {
+      titulo: "Construir una base de conocimiento de supply chain con NotebookLM",
+      objetivo: "Crear un notebook de supply chain con al menos 4 documentos relevantes, practicar preguntas específicas citadas en la fuente y generar un Audio Overview para el equipo.",
+      herramientas: "NotebookLM (notebooklm.google.com — gratuito con cuenta Google), documentos en PDF/Word",
+      pasos: [
+        "Accede a NotebookLM en notebooklm.google.com con tu cuenta de Google. Crea un nuevo notebook llamado 'Base de Conocimiento Supply Chain [tu empresa o sector]'.",
+        "Recopila y sube al menos 4 documentos relevantes. Opciones: (a) Un contrato de proveedor o modelo de contrato descargado de internet. (b) Una norma INEN en PDF (descargables desde normalizacion.gob.ec). (c) Un informe del BCE sobre el sector industrial o el Manual del Exportador del PRO ECUADOR. (d) El reglamento SENAE para importaciones (disponible en aduana.gob.ec). Digitaliza con OCR si es necesario.",
+        "Revisa la FAQ automática que genera NotebookLM. ¿Las preguntas cubren los temas más importantes de tus documentos? ¿Qué preguntas adicionales necesitas que el notebook pueda responder?",
+        "Ejecuta al menos 5 preguntas específicas al notebook. Ejemplos: '¿Cuáles son los plazos de entrega estipulados en el contrato de proveedor?', '¿Qué certificaciones exige la norma INEN [número] para [producto]?', '¿Cuál es el procedimiento para importar [material] según el SENAE?'. Copia las respuestas y verifica que incluyan la cita de la fuente.",
+        "Genera el Audio Overview del notebook. Escúchalo durante 10 minutos. ¿Captura los conceptos más importantes de tus documentos? ¿Cometió algún error conceptual que debas corregir añadiendo más contexto al notebook?",
+        "Reflexión final: ¿Cuánto tiempo te habría tomado encontrar manualmente las respuestas a tus 5 preguntas en los documentos originales? ¿Cuánto tiempo tomó con NotebookLM? ¿En qué situaciones de tu trabajo habitual te sería más útil esta herramienta?",
+      ],
+      resultado: "Notebook de NotebookLM con 4+ documentos, 5 preguntas con respuestas citadas documentadas, Audio Overview generado y reflexión sobre el tiempo ahorrado.",
+      criterios: [
+        { criterio: "Notebook creado con al menos 4 documentos relevantes de supply chain en Ecuador", puntos: 25 },
+        { criterio: "5 preguntas específicas con respuestas de NotebookLM documentadas, cada una con la cita de la fuente", puntos: 35 },
+        { criterio: "Audio Overview generado con evaluación de precisión y cobertura de contenido", puntos: 20 },
+        { criterio: "Reflexión sobre tiempo ahorrado y casos de uso prioritarios para la profesión del estudiante", puntos: 20 },
+      ],
+    },
+    recursos: [
+      { titulo: "NotebookLM — Plataforma gratuita de Google", url: "https://notebooklm.google.com/", tipo: "herramienta", descripcion: "Acceso directo a NotebookLM de Google. Gratuito con cuenta de Google. Crea tu primer notebook de supply chain en minutos." },
+      { titulo: "PRO ECUADOR — Manual del Exportador e informes sectoriales", url: "https://www.proecuador.gob.ec/exportaciones/informes/", tipo: "herramienta", descripcion: "Informes sectoriales y manuales del exportador ecuatoriano en PDF, ideales para subir a NotebookLM como base de conocimiento de comercio exterior." },
+      { titulo: "SENAE Ecuador — Normativa de importaciones y exportaciones", url: "https://www.aduana.gob.ec/para-exportar/normativa/", tipo: "documentacion", descripcion: "Portal del Servicio Nacional de Aduana del Ecuador con normativa vigente en PDF para importaciones y exportaciones, perfecta para NotebookLM." },
+    ],
+  },
+
+  // M8 — Integración y proyecto final aplicado
+  {
+    id: 36,
+    titulo: "Automatización de procesos con n8n e IA",
+    modulo: MOD8,
+    moduloNum: 8,
+    videoEmbed: "https://www.youtube.com/embed/PLACEHOLDER",
+    videoTitulo: "Automatización de procesos con n8n e IA",
+    teoria: `## n8n: automatización de procesos industriales sin programar
+
+La automatización de procesos es el siguiente nivel después de dominar las herramientas de IA individualmente. **n8n** (pronunciado "n-eight-n") es la plataforma de automatización de código abierto que permite conectar aplicaciones y servicios con flujos de trabajo visuales, integrando herramientas de IA como ChatGPT, Claude, Google Gemini con fuentes de datos industriales (Excel, bases de datos, correo electrónico, sistemas ERP) sin necesidad de programar.
+
+### ¿Qué es n8n y por qué es ideal para ingenieros industriales?
+
+n8n es una alternativa de código abierto a Zapier y Make (antes Integromat). Sus ventajas para el contexto industrial ecuatoriano:
+
+**Self-hosted gratuito:** A diferencia de Zapier, n8n puede instalarse en un servidor propio (incluyendo una PC en la red de la empresa) sin costo de licencia. Esto es crítico para procesos que involucran datos confidenciales de producción que no deben salir de la empresa.
+
+**Nodos de IA integrados:** n8n tiene nodos nativos para OpenAI (ChatGPT), Anthropic (Claude), Google Gemini y modelos locales (Ollama). No necesitas saber programar la API; arrastras el nodo y configuras el prompt.
+
+**Conectores con herramientas empresariales:** Google Sheets, Excel (via Microsoft 365), bases de datos SQL, correo electrónico (Gmail/Outlook), WhatsApp Business, Slack, Telegram. En Ecuador, donde muchas PYMEs operan con Google Workspace o Microsoft 365, estos conectores son inmediatamente aplicables.
+
+**Programación temporal:** Los flujos pueden ejecutarse automáticamente en horarios definidos (diariamente a las 6 AM, cada hora, al recibir un nuevo correo).
+
+### Casos de automatización industrial con n8n + IA
+
+**Caso 1 — Reporte de calidad diario automatizado:**
+Flujo: [Trigger: Cron 6 AM] → [Google Sheets: leer datos de defectos del día anterior] → [ChatGPT: generar análisis de Pareto y narrativa ejecutiva] → [Gmail: enviar reporte al jefe de calidad y gerencia]
+
+El ingeniero solo define el prompt una vez. Cada mañana la gerencia recibe el reporte de calidad sin que nadie tenga que generarlo manualmente.
+
+**Caso 2 — Alerta de mantenimiento predictivo:**
+Flujo: [Trigger: Webhook desde sensor IoT cada hora] → [Condición: si vibración > umbral] → [ChatGPT: generar diagnóstico de causa probable] → [WhatsApp Business: enviar alerta al técnico de turno]
+
+El técnico recibe en su WhatsApp no solo "equipo X con vibración alta" sino "Motor bomba #3: vibración 4.8 mm/s (zona C). Causa probable: desalineación del eje. Revisar acoplamiento antes del siguiente turno."
+
+**Caso 3 — Análisis de cotizaciones de proveedores:**
+Flujo: [Trigger: nuevo email de proveedor con PDF adjunto] → [PDF Extract: extraer texto del PDF] → [Claude: comparar cotización con especificaciones requeridas y últimas compras] → [Google Sheets: agregar a tabla comparativa] → [Email: responder al proveedor con confirmación de recibido]
+
+**Caso 4 — Dashboard de KPIs de producción:**
+Flujo: [Trigger: Cron cada 4 horas] → [SQL: leer datos de producción de ERP] → [ChatGPT: calcular OEE y detectar desviaciones] → [Google Sheets: actualizar dashboard] → [Slack: notificar si OEE < 80%]
+
+### Construir el primer flujo en n8n
+
+**Instalación rápida con Docker (opción técnica):**
+
+[Código bash]
+    docker run -it --rm --name n8n -p 5678:5678 n8nio/n8n
+[/Código]
+Luego accede en http://localhost:5678
+
+**Instalación sin Docker (opción simple):**
+- Instalar Node.js desde nodejs.org
+- npm install n8n -g
+- Ejecutar: n8n start
+- Acceder en http://localhost:5678
+
+**Estructura de un flujo básico:**
+1. **Trigger node:** Define cuándo se ejecuta el flujo (programado, webhook, evento)
+2. **Action nodes:** Los pasos del flujo (leer datos, llamar a IA, enviar resultado)
+3. **Condition nodes:** Lógica condicional (if vibración > umbral, then...)
+4. **Output nodes:** Qué hacer con el resultado (email, Google Sheets, WhatsApp)
+
+### n8n Cloud: la alternativa sin instalación
+
+Para empresas que no quieren gestionar la instalación, n8n Cloud ofrece:
+- Plan Starter: €20/mes con 2,500 ejecuciones/mes
+- Plan Pro: €50/mes con 50,000 ejecuciones/mes
+- Prueba gratuita de 14 días
+
+Para la mayoría de las empresas ecuatorianas medianas, el plan Starter es suficiente para automatizar reportes diarios, alertas de mantenimiento y análisis de cotizaciones.
+
+### ChatGPT para diseñar los flujos de automatización
+
+Antes de construir en n8n, ChatGPT puede ayudar a diseñar la lógica del flujo:
+
+*"Quiero automatizar el siguiente proceso en mi planta en Ecuador: cada lunes, consolidar los datos de producción de la semana anterior desde Google Sheets, calcular el OEE y el top 3 de defectos, generar un informe ejecutivo y enviarlo por email al equipo directivo. Diseña el flujo de automatización en n8n con los nodos específicos que necesito y el prompt exacto para el nodo de ChatGPT que genera el análisis."*`,
+    presentacionSlides: [
+      { titulo: "n8n: automatización visual sin programar", contenido: "Plataforma open-source que conecta aplicaciones + IA. Self-hosted gratuito (datos no salen de la empresa). Nodos nativos para ChatGPT, Claude, Gemini. Conectores con Google Sheets, Excel, email, WhatsApp Business, bases de datos SQL." },
+      { titulo: "4 casos de automatización industrial clave", contenido: "1. Reporte de calidad diario automático (Cron → Sheets → ChatGPT → Gmail). 2. Alerta predictiva en WhatsApp (sensor → condición → Claude → técnico). 3. Análisis de cotizaciones (email+PDF → Claude → Sheets). 4. Dashboard KPIs cada 4h (SQL → ChatGPT → Slack)." },
+      { titulo: "Estructura de un flujo n8n", contenido: "Trigger: cuándo ejecutar (horario, webhook, evento). Action: qué hacer (leer datos, llamar IA, procesar). Condition: lógica if/then. Output: qué hacer con el resultado (email, Sheets, WhatsApp). Cada nodo es un bloque visual que se arrastra y conecta." },
+      { titulo: "Instalación en 3 pasos", contenido: "Opción Docker: docker run n8nio/n8n → http://localhost:5678. Opción npm: npm install n8n -g → n8n start → http://localhost:5678. Opción cloud: n8n.io → plan Starter €20/mes → sin instalación. 14 días gratis." },
+      { titulo: "El nodo de OpenAI/Claude en n8n", contenido: "Arrastrar nodo 'OpenAI' o 'Anthropic'. Conectar API key (la misma de ChatGPT Plus). Definir el prompt usando datos del nodo anterior con {{$json.campo}}. El output del nodo de IA se conecta al siguiente paso del flujo." },
+      { titulo: "Prompt para diseñar flujos con ChatGPT", contenido: "Describir el proceso manual actual completo. Describir las herramientas disponibles (Google Sheets, qué ERP, qué email). ChatGPT diseña el flujo n8n con nodos específicos, lógica condicional y el prompt exacto para el nodo de IA." },
+      { titulo: "n8n vs. Zapier vs. Make: comparación rápida", contenido: "n8n: open-source, self-hosted gratuito, nodos IA nativos, más técnico. Zapier: más fácil, más integraciones, costoso en volumen. Make (Integromat): precio medio, muy visual, buen soporte. Para PYME Ecuador con datos sensibles: n8n self-hosted gana." },
+      { titulo: "ROI de automatizar con n8n", contenido: "Reporte manual diario: 1h/día × 20 días = 20h/mes. Con n8n: 0h/mes (automático). A $15/h de analista: ahorro $300/mes. N8n Cloud Starter: €20/mes. ROI: 15× en el primer mes. La automatización paga sola en días." },
+    ],
+    quiz: [
+      { pregunta: "¿Cuál es la principal ventaja de n8n self-hosted vs. Zapier para una empresa industrial en Ecuador?", opciones: ["n8n tiene más integraciones con software empresarial que Zapier", "n8n self-hosted es gratuito y los datos de producción permanecen en los servidores de la empresa, sin salir a la nube de un tercero", "Zapier no puede conectarse con Google Sheets", "n8n funciona sin internet mientras que Zapier necesita conexión permanente"], respuesta: 1, explicacion: "La ventaja crítica de n8n self-hosted es que puede instalarse en servidores propios de la empresa, manteniendo los datos de producción confidenciales internamente sin que salgan a servidores de terceros. Esto es especialmente importante para datos de producción, calidad y costos que no deben estar en la nube pública." },
+      { pregunta: "En n8n, ¿qué es un nodo 'Trigger'?", opciones: ["El nodo que envía el resultado final por email", "El nodo que define cuándo se inicia la ejecución del flujo (horario programado, webhook, nuevo correo)", "El nodo que llama a la API de ChatGPT", "El nodo que conecta con bases de datos SQL"], respuesta: 1, explicacion: "Un nodo Trigger es el punto de inicio de un flujo en n8n. Define el evento que dispara la ejecución: puede ser un horario (Cron), una llamada HTTP (Webhook), la llegada de un nuevo email, un cambio en una hoja de cálculo, etc. Sin un Trigger, el flujo nunca se ejecuta." },
+      { pregunta: "¿Cómo se pasan datos del nodo anterior al prompt del nodo de ChatGPT en n8n?", opciones: ["Hay que copiar y pegar los datos manualmente en el prompt cada vez", "Usando la sintaxis {{$json.nombre_campo}} dentro del prompt para referenciar dinámicamente los datos del nodo anterior", "No es posible combinar datos dinámicos con prompts en n8n", "Solo se pueden pasar datos numéricos, no texto"], respuesta: 1, explicacion: "En n8n, la sintaxis {{$json.campo}} dentro del texto de un prompt permite insertar dinámicamente el valor de cualquier campo del output del nodo anterior. Por ejemplo, un prompt podría decir: 'Analiza los siguientes defectos del día: {{$json.defectos}}', donde 'defectos' es una columna de la hoja de cálculo leída en el nodo anterior." },
+      { pregunta: "¿Cuál de los siguientes casos de automatización industrial con n8n tiene el ROI más inmediato y fácil de calcular?", opciones: ["Automatizar el inventario completo del almacén", "Automatizar la generación y envío del reporte diario de calidad que actualmente toma 1 hora manual por día", "Automatizar el control PLC de los equipos de producción", "Automatizar el sistema de nómina de los empleados"], respuesta: 1, explicacion: "La automatización de reportes periódicos (diarios, semanales) tiene ROI inmediato y fácil de calcular: horas manuales eliminadas × costo por hora del analista. Un reporte de 1h/día × 20 días = 20h/mes; a $15/h = $300/mes de valor creado vs. ~€20/mes del plan cloud de n8n." },
+      { pregunta: "¿Para qué sirve el nodo 'Condition' en un flujo de n8n de mantenimiento predictivo?", opciones: ["Para programar el horario de ejecución del flujo", "Para aplicar lógica condicional: si la vibración supera el umbral, ejecutar el camino de alerta; si no, ejecutar el camino normal de registro", "Para conectar con la API de los sensores IoT", "Para formatear el texto del mensaje antes de enviarlo por WhatsApp"], respuesta: 1, explicacion: "El nodo Condition (IF) en n8n permite dividir el flujo en dos caminos según una condición lógica. En mantenimiento predictivo: si vibración > umbral → enviar alerta a WhatsApp; si vibración ≤ umbral → solo registrar en base de datos. Sin nodos de condición, todos los registros generarían alertas." },
+    ],
+    ejercicio: {
+      titulo: "Diseñar y construir un flujo de automatización con n8n",
+      objetivo: "Diseñar un flujo de automatización industrial con n8n que integre al menos un nodo de IA, una fuente de datos y un canal de salida, probarlo en la plataforma y documentar el ROI.",
+      herramientas: "n8n Cloud (prueba gratuita 14 días en n8n.io) o n8n local (npm install n8n -g), ChatGPT para diseñar la lógica",
+      pasos: [
+        "Define el proceso que vas a automatizar. Elige uno de estos tres: (A) Reporte de calidad diario: leer datos de defectos de Google Sheets → ChatGPT genera análisis → Gmail envía reporte. (B) Alerta de inventario bajo: leer inventario de Google Sheets → si algún ítem < punto de reorden → Gmail envía alerta con la lista. (C) Análisis de texto de no conformidades: al recibir email con descripción de problema de calidad → Claude sugiere causas raíz y acciones → copiar respuesta a Google Sheets.",
+        "Usa ChatGPT para diseñar el flujo antes de construirlo: 'Quiero automatizar [el proceso elegido] usando n8n. Las herramientas disponibles son Google Sheets y Gmail (o Outlook). Diseña el flujo detallado con los nodos específicos de n8n que necesito, la lógica condicional (si aplica) y el prompt exacto para el nodo de OpenAI/Claude.'",
+        "Accede a n8n Cloud (prueba gratuita en app.n8n.io) o instala localmente con npm. Crea un nuevo workflow en blanco.",
+        "Construye el flujo nodo por nodo siguiendo el diseño de ChatGPT: Agrega el Trigger node (Manual o Cron). Agrega el nodo de Google Sheets para leer datos. Configura el nodo de OpenAI o Claude con el prompt diseñado (usa {{$json.campo}} para datos dinámicos). Agrega el nodo de Gmail para el output.",
+        "Ejecuta el flujo con el botón 'Test' y verifica cada nodo: ¿los datos se pasan correctamente? ¿El prompt de IA produce el output esperado? ¿El email llega correctamente? Corrige errores iterativamente.",
+        "Calcula el ROI: estima cuántas horas mensuales ahorra este flujo vs. hacerlo manualmente. Multiplica por el costo estimado por hora del profesional que actualmente hace este trabajo. Compara con el costo de n8n Cloud ($0 en self-hosted, ~€20/mes en cloud).",
+      ],
+      resultado: "Flujo de n8n funcionando con capturas de pantalla de cada nodo, resultado de la ejecución de prueba documentado y cálculo de ROI mensual.",
+      criterios: [
+        { criterio: "Flujo diseñado con ChatGPT documentado antes de la construcción en n8n", puntos: 20 },
+        { criterio: "Flujo construido en n8n con al menos 3 nodos (trigger + IA + output) y ejecutado exitosamente", puntos: 40 },
+        { criterio: "Capturas de pantalla del flujo y del resultado de ejecución (output generado por IA)", puntos: 20 },
+        { criterio: "Cálculo de ROI documentado con horas ahorradas y comparación costo/beneficio", puntos: 20 },
+      ],
+    },
+    recursos: [
+      { titulo: "n8n Docs — Getting Started", url: "https://docs.n8n.io/getting-started/", tipo: "documentacion", descripcion: "Documentación oficial de n8n para comenzar: instalación, primeros workflows y referencia de nodos incluyendo OpenAI y Anthropic." },
+      { titulo: "n8n Cloud — Prueba gratuita 14 días", url: "https://app.n8n.io/", tipo: "herramienta", descripcion: "Plataforma cloud de n8n con prueba gratuita de 14 días. La forma más rápida de comenzar sin instalación local." },
+      { titulo: "n8n Community — Workflows industriales", url: "https://community.n8n.io/", tipo: "lectura", descripcion: "Comunidad de n8n con miles de workflows compartidos, incluyendo automatizaciones de reportes, alertas y análisis de datos con IA." },
+    ],
+  },
+
+  {
+    id: 37,
+    titulo: "Conectar herramientas: Excel → ChatGPT → Power BI",
+    modulo: MOD8,
+    moduloNum: 8,
+    videoEmbed: "https://www.youtube.com/embed/PLACEHOLDER",
+    videoTitulo: "Conectar herramientas: Excel → ChatGPT → Power BI",
+    teoria: `## El stack de inteligencia de datos para ingeniería industrial
+
+Las herramientas individuales son poderosas. Su combinación en un flujo integrado es transformadora. El stack **Excel → ChatGPT → Power BI** representa el flujo de trabajo más práctico para ingenieros industriales que quieren convertir datos de producción en inteligencia accionable sin necesidad de un equipo de datos dedicado.
+
+### El flujo completo explicado
+
+**Capa 1 — Excel: recolección y estructura de datos**
+Excel sigue siendo la herramienta de captura de datos más usada en planta. Los operadores registran datos de producción, calidad y mantenimiento en hojas de cálculo. Power Query en Excel consolida automáticamente múltiples fuentes (varias hojas, varios archivos, datos de sistemas ERP simplificados) en una tabla maestra estructurada.
+
+**Capa 2 — ChatGPT: análisis e interpretación**
+La tabla maestra de Excel se convierte en el input para ChatGPT. El ingeniero copia los datos relevantes (o usa la API de OpenAI para automatizar este paso) y hace preguntas en lenguaje natural: "¿Qué turno tiene el mayor MTTR este mes? ¿Hay correlación entre la temperatura del día y los defectos de calidad? ¿Cuál es la tendencia del OEE en las últimas 6 semanas?"
+
+ChatGPT procesa el contexto, realiza los cálculos estadísticos necesarios y genera:
+- Análisis narrativo para el informe ejecutivo
+- Código Python o DAX para implementar los cálculos en la siguiente capa
+- Recomendaciones de mejora basadas en los patrones detectados
+
+**Capa 3 — Power BI: visualización y distribución**
+Power BI conecta directamente con Excel como fuente de datos, se actualiza automáticamente cuando el archivo Excel cambia, y distribuye los dashboards a toda la organización a través del navegador web o la app mobile, sin que cada usuario necesite tener Excel o Power BI Desktop instalado.
+
+### Técnicas de integración práctica
+
+**Excel → ChatGPT (manual — más accesible):**
+
+1. Exporta la tabla resumen de Excel como CSV o copia directamente las celdas
+2. Abre ChatGPT y pega los datos con el contexto del análisis
+3. Usa el prompt: *"Aquí están los datos de producción de las últimas 4 semanas de nuestra planta en Ecuador: [datos]. Analiza: 1) Tendencia del OEE semanal, 2) Correlación entre fallos y turno de producción, 3) Top 3 causas de paradas. Genera: análisis narrativo de 200 palabras para el informe ejecutivo, código DAX para calcular el OEE en Power BI."*
+
+**Excel → ChatGPT (automatizado con Apps Script):**
+
+Para Google Sheets (la alternativa gratuita a Excel con Microsoft 365):
+
+[Código javascript]
+    function analizarDatosConChatGPT() {
+      const hoja = SpreadsheetApp.getActiveSheet();
+      const datos = hoja.getDataRange().getValues();
+    
+      const respuesta = UrlFetchApp.fetch('https://api.openai.com/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Authorization': 'Bearer ' + PropertiesService.getScriptProperties().getProperty('OPENAI_KEY'),
+          'Content-Type': 'application/json'
+        },
+        payload: JSON.stringify({
+          model: 'gpt-4o',
+          messages: [{
+            role: 'user',
+            content: 'Analiza estos datos de producción: ' + JSON.stringify(datos)
+          }]
+        })
+      });
+    
+      const analisis = JSON.parse(respuesta.getContentText()).choices[0].message.content;
+      hoja.getRange('M1').setValue(analisis);
+    }
+[/Código]
+
+**Power BI → ChatGPT (narración automática con Power BI AI):**
+
+Power BI tiene una funcionalidad nativa de "Smart Narrative" (Narrativa inteligente) que genera automáticamente texto descriptivo de un visual. Para funcionalidades más avanzadas, el Power BI Copilot (disponible en Microsoft 365 Copilot) puede:
+- Generar resúmenes ejecutivos del dashboard
+- Responder preguntas en lenguaje natural sobre los datos del informe
+- Sugerir visualizaciones adicionales basándose en los datos
+
+### Caso práctico: OEE mensual integrado
+
+**Excel:** El supervisor de turno llena diariamente: tiempo disponible, paradas (tiempo + causa), velocidad real vs. nominal, unidades buenas vs. defectuosas.
+
+**Power Query (Excel):** Consolida los 30 archivos diarios del mes en una sola tabla con columnas: Fecha, Turno, Tiempo_disponible, Tiempo_paradas, Velocidad_real, Velocidad_nominal, Unidades_buenas, Unidades_totales.
+
+**ChatGPT:** Con la tabla consolidada, genera: Disponibilidad = (Tiempo_disp - Tiempo_paradas) / Tiempo_disp. Rendimiento = Velocidad_real / Velocidad_nominal. Calidad = Unidades_buenas / Unidades_totales. OEE = Disponibilidad × Rendimiento × Calidad. Análisis de causas de paradas con Pareto. Comparativo por turno y semana.
+
+**Power BI:** Dashboard con el OEE diario, semanal y mensual en gráficas de línea. Semáforo de disponibilidad, rendimiento y calidad. Pareto de causas de paradas. Accesible desde el celular del gerente de planta en tiempo real.
+
+### DAX: el lenguaje de cálculo de Power BI
+
+ChatGPT puede escribir medidas DAX complejas que serían difíciles de crear sin conocer el lenguaje. Ejemplo:
+
+**Prompt:** *"Necesito una medida DAX en Power BI que calcule el OEE mensual acumulado solo para el turno A. Los campos disponibles son: Disponibilidad, Rendimiento, Calidad y Turno."*
+
+**ChatGPT genera:**
+
+[Código dax]
+    OEE_TurnoA =
+    CALCULATE(
+        AVERAGEX(
+            VALUES('Produccion'[Fecha]),
+            CALCULATE(
+                [Disponibilidad] * [Rendimiento] * [Calidad]
+            )
+        ),
+        'Produccion'[Turno] = "A"
+    )
+[/Código]
+
+Sin DAX y sin ChatGPT, este cálculo requeriría conocimientos avanzados de Power BI. Con ChatGPT, el ingeniero industrial lo implementa en 2 minutos describiendo qué quiere en lenguaje natural.`,
+    presentacionSlides: [
+      { titulo: "El stack industrial: Excel → ChatGPT → Power BI", contenido: "Excel: captura y estructura de datos (donde ya viven los datos en planta). ChatGPT: análisis, interpretación y código. Power BI: visualización y distribución a la organización. Tres herramientas que el 80% de las empresas ya tienen o pueden acceder gratis." },
+      { titulo: "Power Query: consolidar 30 archivos en segundos", contenido: "Datos → Obtener datos → Desde carpeta → Seleccionar carpeta con archivos Excel del mes. Power Query consolida automáticamente todos los archivos con estructura consistente. Sin fórmulas manuales, sin copiar y pegar. Actualización con un clic." },
+      { titulo: "ChatGPT para análisis: 3 outputs clave", contenido: "1. Análisis narrativo para el informe ejecutivo (200 palabras listas para copiar). 2. Código DAX para implementar cálculos en Power BI. 3. Recomendaciones accionables basadas en patrones detectados. Un prompt, tres entregables." },
+      { titulo: "Integración automática con Google Apps Script", contenido: "Google Sheets + Apps Script + API de OpenAI = análisis automático sin copiar/pegar. Botón en la hoja: 'Analizar con ChatGPT'. Resultado aparece en celda M1. Escalable a análisis diarios automáticos vía trigger temporal." },
+      { titulo: "Power BI Smart Narrative: texto automático desde el visual", contenido: "En cualquier visual de Power BI: clic derecho → Agregar narrativa inteligente. Power BI genera automáticamente texto descriptivo del gráfico. Copilot (Microsoft 365) va más lejos: responde preguntas en lenguaje natural sobre el informe." },
+      { titulo: "Caso OEE mensual integrado", contenido: "Excel: 30 archivos diarios de turno. Power Query: consolida en tabla maestra. ChatGPT: calcula OEE, analiza causas, genera código DAX. Power BI: dashboard desde el celular del gerente. Ciclo completo: Excel crudo → insight en tiempo real." },
+      { titulo: "DAX con ChatGPT: de lenguaje natural a cálculo", contenido: "Prompt: 'Calcula el OEE mensual solo para el Turno A usando campos Disponibilidad, Rendimiento, Calidad, Turno.' ChatGPT genera la función CALCULATE + AVERAGEX + VALUES correctamente. El ingeniero la copia en Power BI y funciona." },
+      { titulo: "Herramientas disponibles en Ecuador sin costo extra", contenido: "Microsoft 365 Business Basic ($6/usuario/mes): Excel Online + Power BI Pro incluido. Google Workspace: Google Sheets + Data Studio gratuito. ChatGPT gratuito (GPT-3.5) o ChatGPT Plus ($20/mes). Stack completo por <$30/mes/usuario." },
+    ],
+    quiz: [
+      { pregunta: "¿Cuál es el rol de Power Query de Excel en el stack Excel → ChatGPT → Power BI?", opciones: ["Es el motor de visualización que genera los gráficos del dashboard", "Consolida automáticamente múltiples archivos o fuentes de datos en una tabla maestra estructurada, eliminando la necesidad de copiar y pegar manualmente", "Llama a la API de ChatGPT directamente desde Excel", "Reemplaza a Power BI para la visualización de KPIs"], respuesta: 1, explicacion: "Power Query es el motor de transformación de datos de Excel que permite conectar, consolidar y transformar datos de múltiples fuentes (30 archivos diarios, varias hojas, bases de datos) en una tabla maestra limpia y estructurada automáticamente, que luego sirve como input para ChatGPT y Power BI." },
+      { pregunta: "¿Cuál es la ventaja principal de usar ChatGPT para generar código DAX para Power BI?", opciones: ["DAX es más fácil de aprender con ChatGPT que con la documentación oficial", "El ingeniero industrial puede describir en lenguaje natural qué cálculo necesita y obtener el código DAX correcto en segundos, sin necesidad de conocer la sintaxis del lenguaje", "ChatGPT puede conectarse directamente a Power BI para implementar el código automáticamente", "Power BI no tiene fórmulas propias, solo usa las que genera ChatGPT"], respuesta: 1, explicacion: "DAX (Data Analysis Expressions) tiene una sintaxis específica con funciones como CALCULATE, FILTER, VALUES que requieren experiencia para usar correctamente. ChatGPT permite describir el cálculo en lenguaje natural ('OEE mensual solo para Turno A') y obtener el código DAX funcional listo para copiar en Power BI." },
+      { pregunta: "¿Qué hace la función 'Narrativa inteligente' de Power BI?", opciones: ["Traduce los datos del dashboard al idioma del usuario automáticamente", "Genera automáticamente texto descriptivo en lenguaje natural que explica las tendencias y valores clave de una visualización", "Conecta el informe de Power BI con ChatGPT para análisis avanzado", "Permite al usuario hacer preguntas de voz al dashboard"], respuesta: 1, explicacion: "La Narrativa inteligente (Smart Narrative) de Power BI analiza los datos de un visual y genera automáticamente un párrafo descriptivo que explica los puntos clave: valores más altos/bajos, tendencias principales, comparaciones relevantes. Es la capa de IA nativa de Power BI para comunicación de datos." },
+      { pregunta: "En el caso del OEE mensual integrado, ¿por qué es importante que Excel use Power Query para consolidar los 30 archivos diarios en lugar de fórmulas manuales?", opciones: ["Power Query es obligatorio para conectar con Power BI", "Power Query actualiza automáticamente la tabla consolidada cuando se agregan nuevos archivos diarios, mientras que las fórmulas manuales requieren intervención humana cada día", "Las fórmulas manuales no pueden calcular el OEE correctamente", "Power Query funciona sin necesitar Excel instalado"], respuesta: 1, explicacion: "Power Query crea una conexión automática con la carpeta de archivos. Cuando se agrega el archivo del día siguiente, al hacer clic en 'Actualizar', Power Query detecta el nuevo archivo y lo incorpora automáticamente a la tabla consolidada. Esto elimina el trabajo diario de copiar y pegar datos manualmente." },
+      { pregunta: "¿Cuál es el costo aproximado del stack completo Excel + ChatGPT + Power BI para un profesional en Ecuador?", opciones: ["Más de $500 al mes", "Gratis sin ningún costo", "Aproximadamente $20-30 al mes por usuario con las opciones de pago mínimas", "Requiere licencia empresarial de más de $1,000 al año"], respuesta: 2, explicacion: "Microsoft 365 Business Basic (~$6/mes) incluye Excel Online y Power BI Pro. ChatGPT Plus ($20/mes) agrega GPT-4. Total: ~$26/mes por usuario. Opción aún más económica: Google Workspace + Google Sheets gratuito + Google Looker Studio gratuito + ChatGPT gratuito (GPT-3.5) = prácticamente $0 adicionales." },
+    ],
+    ejercicio: {
+      titulo: "Implementar el stack Excel → ChatGPT → Power BI para OEE",
+      objetivo: "Construir el flujo completo de datos de producción desde Excel hasta un dashboard de Power BI, usando ChatGPT para el análisis intermedio y la generación de código DAX.",
+      herramientas: "Excel con Power Query (Microsoft 365 u Office 2019+), ChatGPT o Claude, Power BI Desktop (gratuito, powerbi.microsoft.com)",
+      pasos: [
+        "Prepara en Excel 4 archivos simulando datos diarios de una semana (lunes a jueves). Cada archivo debe tener: Turno, Tiempo_disponible_min, Tiempo_paradas_min, Velocidad_real_unid_min, Velocidad_nominal_unid_min, Unidades_buenas, Unidades_totales. Incluye variación entre turnos para hacer el análisis interesante.",
+        "Usa Power Query para consolidar los 4 archivos: Datos → Obtener datos → Desde carpeta. Selecciona la carpeta donde guardaste los 4 archivos. Power Query detecta y consolida automáticamente. Agrega una columna calculada 'OEE' = (Tiempo_disp-Tiempo_paradas)/Tiempo_disp × Vel_real/Vel_nominal × Unid_buenas/Unid_totales. Cierra y carga la tabla consolidada.",
+        "Copia la tabla consolidada (máximo 30 filas) y pégala en ChatGPT. Usa el prompt: 'Aquí están mis datos de producción semanal. Analiza: 1) OEE promedio por turno y día, 2) Cuál es el principal componente que reduce el OEE (disponibilidad, rendimiento o calidad), 3) Genera el análisis narrativo para el informe semanal (150 palabras). 4) Escribe las medidas DAX para Power BI: OEE_Promedio, OEE_TurnoA, OEE_TurnoB, OEE_TurnoC.'",
+        "Instala Power BI Desktop (gratuito en powerbi.microsoft.com/desktop). Conecta con el archivo Excel: Obtener datos → Excel. Importa la tabla consolidada de Power Query.",
+        "En Power BI, crea las medidas DAX que ChatGPT generó. Construye el dashboard con: gráfico de línea con OEE diario por turno, tarjetas con OEE promedio por turno, gráfico de barras de los 3 componentes (disponibilidad, rendimiento, calidad). Agrega la Narrativa inteligente para el resumen automático.",
+        "Exporta una captura del dashboard completo. Compara el análisis de ChatGPT con lo que ves visualmente en Power BI. ¿Coinciden las conclusiones? ¿Qué acción concreta tomarías basándote en este análisis para mejorar el OEE la próxima semana?",
+      ],
+      resultado: "Archivos Excel consolidados con Power Query, análisis de ChatGPT documentado con medidas DAX, dashboard de Power BI funcional con captura de pantalla y recomendación accionable.",
+      criterios: [
+        { criterio: "Power Query consolidando 4 archivos correctamente con columna OEE calculada", puntos: 25 },
+        { criterio: "Prompt bien construido y análisis de ChatGPT con medidas DAX documentadas", puntos: 30 },
+        { criterio: "Dashboard de Power BI funcionando con los 3 visuales requeridos y medidas DAX implementadas", puntos: 30 },
+        { criterio: "Recomendación accionable de mejora fundamentada en el análisis del dashboard", puntos: 15 },
+      ],
+    },
+    recursos: [
+      { titulo: "Power BI Desktop — Descarga gratuita", url: "https://powerbi.microsoft.com/es-es/desktop/", tipo: "herramienta", descripcion: "Descarga gratuita de Power BI Desktop para crear dashboards profesionales conectados a Excel, bases de datos y servicios en la nube." },
+      { titulo: "DAX Guide — Referencia completa de funciones DAX", url: "https://dax.guide/", tipo: "documentacion", descripcion: "Referencia completa y gratuita de todas las funciones DAX de Power BI con ejemplos, anotaciones y casos de uso." },
+      { titulo: "Microsoft Learn — Power Query Tutorial", url: "https://learn.microsoft.com/es-es/power-query/power-query-what-is-power-query", tipo: "documentacion", descripcion: "Tutorial oficial de Microsoft en español sobre Power Query: cómo consolidar datos de múltiples fuentes en Excel y Power BI." },
+    ],
+  },
+
+  {
+    id: 38,
+    titulo: "Copilot Excel avanzado para ingeniería industrial",
+    modulo: MOD8,
+    moduloNum: 8,
+    videoEmbed: "https://www.youtube.com/embed/PLACEHOLDER",
+    videoTitulo: "Copilot Excel avanzado para ingeniería industrial",
+    teoria: `## Copilot en Excel: el asistente de IA que vive dentro de tu hoja de cálculo
+
+Microsoft 365 Copilot en Excel representa una evolución cualitativa en el uso de hojas de cálculo para ingeniería industrial. A diferencia de ChatGPT (al que debes llevar los datos externamente), Copilot vive dentro de Excel, tiene acceso directo a todos los datos de la hoja activa y puede realizar análisis complejos, crear fórmulas, generar gráficas y escribir código Python directamente en el contexto de tu trabajo.
+
+### ¿Qué puede hacer Copilot en Excel?
+
+**Análisis de datos en lenguaje natural:**
+Selecciona una tabla con datos de producción y escribe en el panel de Copilot: "¿Qué turno tiene el mayor número de paradas por mantenimiento?" o "Muéstrame la correlación entre la temperatura y los defectos de calidad". Copilot analiza la tabla y responde con texto e, cuando aplica, crea automáticamente una gráfica o tabla dinámica que visualiza la respuesta.
+
+**Generación de fórmulas complejas:**
+Describe en lenguaje natural qué quieres calcular: "Calcula el MAPE del pronóstico comparando la columna B (pronóstico) con la columna C (real), mostrando el porcentaje de error para cada fila y el promedio total". Copilot genera la fórmula exacta de Excel lista para usar.
+
+**Python en Excel (nativo desde 2024):**
+Una de las funcionalidades más revolucionarias: Copilot puede escribir código Python que se ejecuta directamente dentro de Excel sin instalación adicional. El ingeniero describe el análisis en lenguaje natural y Copilot escribe y ejecuta el código:
+
+*"Entrena un modelo de regresión lineal con los datos de las columnas A-F para predecir la variable de la columna G. Muestra los coeficientes, R² y grafíca la línea de regresión."*
+
+Copilot genera el código scikit-learn equivalente, lo ejecuta en la nube de Microsoft y devuelve los resultados directamente en la hoja de Excel.
+
+**Identificación de tendencias e insights:**
+Al hacer clic en "Identificar insights" sobre un dataset, Copilot analiza automáticamente y lista los patrones más relevantes: "El Turno C tiene un OEE 12% menor que los otros turnos. Los lunes muestran consistentemente más paradas no planificadas. La velocidad de la línea 2 ha disminuido 8% en las últimas 4 semanas."
+
+**Limpieza y transformación de datos:**
+"Elimina las filas donde la columna de OEE esté en blanco. Convierte los valores de la columna de fecha al formato DD/MM/YYYY. Agrega una columna que clasifique cada registro como 'Turno A', 'Turno B' o 'Turno C' según los valores de la columna de hora de inicio."
+
+### Casos de uso avanzados para ingeniería industrial
+
+**Análisis de regresión para parámetros de proceso:**
+"Analiza si existe correlación estadística entre la presión de laminación (columna B), la temperatura del rodillo (columna C) y el grosor final de la lámina (columna D). Identifica cuál variable tiene mayor influencia y calcula el coeficiente de determinación R²."
+
+**Optimización de turnos con datos históricos:**
+"Con los datos de los últimos 3 meses, identifica las 5 combinaciones de [turno + máquina + producto] que producen mayor número de defectos. Para cada combinación, muestra también el MTBF del equipo en ese turno y la experiencia promedio del operador."
+
+**Análisis de varianza (ANOVA) simplificado:**
+"Determina si hay diferencia estadísticamente significativa en el OEE promedio entre los tres turnos (A, B, C) usando los datos de la hoja. Explica el resultado en lenguaje no estadístico para presentarlo a la gerencia."
+
+### Limitaciones y buenas prácticas
+
+**Limitación 1 — Disponibilidad:**
+Microsoft 365 Copilot requiere licencia Copilot ($30/usuario/mes adicional sobre Microsoft 365). En Ecuador, el acceso es a través de distribuidores Microsoft locales. Para uso educativo, muchas universidades tienen acuerdos que incluyen Copilot.
+
+**Limitación 2 — Datos sensibles:**
+Los datos ingresados en Copilot se procesan en los servidores de Microsoft Azure. Para datos extremadamente confidenciales (fórmulas propietarias, precios de contratos), evaluar si es apropiado según la política de datos de la empresa.
+
+**Limitación 3 — Verificación siempre necesaria:**
+Copilot puede cometer errores en fórmulas complejas o análisis estadísticos avanzados. Siempre verificar los resultados de Copilot con lógica de ingeniería antes de tomar decisiones basadas en ellos. Copilot es un asistente, no un árbitro.
+
+**Buena práctica — Prompt iterativo:**
+Si la primera respuesta de Copilot no es exactamente lo que necesitas, refina el prompt: "El cálculo anterior está bien pero necesito que también muestre el intervalo de confianza del 95% para cada predicción". Copilot puede refinar su output conversacionalmente.
+
+### Alternativa gratuita: Claude + Google Colab
+
+Para quienes no tienen acceso a Copilot, la alternativa gratuita de igual potencia es:
+1. Exportar los datos de Excel a CSV
+2. Subir el CSV a Claude (que acepta archivos adjuntos con suscripción Pro)
+3. Hacer el análisis conversacionalmente en Claude, que generará código Python ejecutable en Google Colab
+4. Copiar los resultados de vuelta a Excel
+
+Esta alternativa requiere más pasos pero es completamente gratuita con las versiones base de las herramientas.`,
+    presentacionSlides: [
+      { titulo: "Copilot en Excel: IA que vive en tu hoja de cálculo", contenido: "Acceso directo a todos los datos de la hoja activa. Análisis en lenguaje natural sin exportar. Genera fórmulas complejas desde descripción. Python en Excel (sin instalación). Identifica insights automáticamente. Requiere Microsoft 365 Copilot ($30/usuario/mes extra)." },
+      { titulo: "Las 5 capacidades más poderosas para ingeniería industrial", contenido: "1. Análisis de correlación entre parámetros de proceso. 2. Generación de fórmulas MAPE, Cp/Cpk, MTBF desde descripción natural. 3. Python en Excel para regresión y ML. 4. Insights automáticos (turno con peor OEE, tendencias). 5. Limpieza de datos conversacional." },
+      { titulo: "Python en Excel: ML sin instalar nada", contenido: "Copilot escribe el código Python (scikit-learn, pandas, matplotlib) que se ejecuta en la nube de Microsoft. El ingeniero describe: 'Entrena un modelo de regresión para predecir defectos desde temperatura y velocidad.' Copilot genera, ejecuta y devuelve resultados en la hoja." },
+      { titulo: "Análisis de varianza (ANOVA) en lenguaje natural", contenido: "'¿Hay diferencia significativa en OEE entre los tres turnos?' Copilot ejecuta el ANOVA, interpreta el p-value y entrega la conclusión en lenguaje para gerencia: 'Sí existe diferencia estadísticamente significativa. El Turno B tiene un OEE 11% menor (p=0.003).'" },
+      { titulo: "Alternativa gratuita sin Copilot", contenido: "Claude Pro acepta archivos CSV adjuntos. Google Colab ejecuta Python gratis. Flujo: Excel → CSV → subir a Claude → análisis conversacional → código Python en Colab → resultados de vuelta a Excel. Más pasos, igual potencia, sin costo adicional." },
+      { titulo: "Buenas prácticas de prompts en Copilot Excel", contenido: "Ser específico con las columnas: 'columna B (vibración)' en lugar de 'los datos de vibración'. Pedir el formato de salida: 'como tabla', 'como gráfica', 'como fórmula'. Iterar: 'el análisis anterior está bien pero agrega el intervalo de confianza del 95%'." },
+      { titulo: "Limitaciones importantes a recordar", contenido: "Copilot puede cometer errores en fórmulas avanzadas. Verificar SIEMPRE con lógica de ingeniería. Datos confidenciales → revisar política de seguridad antes de usar. Disponibilidad: $30/usuario/mes extra. En Ecuador: distribuidores Microsoft locales." },
+      { titulo: "Casos clave para el ingeniero industrial ecuatoriano", contenido: "OEE por turno/máquina/producto: análisis que tomaría 2h manual → 5 min con Copilot. Correlación parámetros de proceso: sin saber estadística avanzada. Pronóstico con ML integrado. Reporte ejecutivo desde datos brutos. Identificar outliers en producción." },
+    ],
+    quiz: [
+      { pregunta: "¿Cuál es la diferencia fundamental entre usar Copilot en Excel vs. ChatGPT para analizar datos industriales?", opciones: ["No hay diferencia práctica; ambos analizan datos de la misma manera", "Copilot en Excel accede directamente a los datos de la hoja activa sin necesidad de exportarlos o copiarlos; ChatGPT requiere que el usuario lleve los datos externamente al chat", "ChatGPT tiene mayor precisión en análisis estadísticos que Copilot", "Copilot solo funciona para datos de ventas, no para datos industriales"], respuesta: 1, explicacion: "Copilot vive dentro de Excel y tiene acceso directo al contexto completo de la hoja activa: todas las tablas, nombres de columnas, fórmulas existentes. ChatGPT requiere que el usuario exporte o copie los datos manualmente al chat. Esta diferencia de contexto hace a Copilot significativamente más conveniente para análisis iterativos." },
+      { pregunta: "¿Qué permite la funcionalidad de 'Python en Excel' disponible con Copilot?", opciones: ["Ejecutar scripts de Python previamente escritos en un IDE externo", "Escribir y ejecutar código Python (pandas, scikit-learn, matplotlib) directamente dentro de Excel sin instalación adicional, con los resultados devueltos a la hoja", "Conectar Excel con un servidor Python externo de la empresa", "Solo generar gráficos de Python que se insertan como imágenes en Excel"], respuesta: 1, explicacion: "Python en Excel (disponible desde 2024) ejecuta código Python en la nube de Microsoft Fabric directamente desde una celda de Excel. Copilot puede escribir el código (regresión, clustering, análisis de series de tiempo) y los resultados aparecen en la hoja como valores o gráficas, sin necesidad de instalar Python ni Jupyter." },
+      { pregunta: "¿Qué limitación es más importante considerar al usar Copilot Excel con datos de producción sensibles en una empresa ecuatoriana?", opciones: ["Copilot solo funciona con datos en inglés", "Los datos procesados por Copilot se envían a servidores de Microsoft Azure, por lo que datos extremadamente confidenciales deben evaluarse bajo la política de seguridad de datos de la empresa", "Copilot no puede analizar más de 100 filas de datos", "Copilot en Excel solo está disponible en Windows, no en Mac"], respuesta: 1, explicacion: "Copilot procesa los datos en los servidores de Microsoft Azure. Para la mayoría de los datos de producción esto es aceptable (Microsoft tiene certificaciones ISO 27001 y SOC 2). Sin embargo, para datos que incluyan secretos industriales, fórmulas propietarias o información contractual sensible, la empresa debe evaluar si está cómoda con el procesamiento en la nube." },
+      { pregunta: "¿Cuál es la alternativa gratuita a Copilot Excel para análisis estadístico avanzado en datos de producción?", opciones: ["No existe alternativa gratuita con capacidades similares", "Exportar datos a CSV → subir a Claude Pro (que acepta archivos adjuntos) → análisis conversacional → código Python ejecutable en Google Colab gratuito", "Usar solo las funciones estadísticas nativas de Excel sin IA", "Descargar Power BI Desktop que incluye Copilot gratuito"], respuesta: 1, explicacion: "La alternativa gratuita de igual potencia: Claude Pro acepta archivos CSV adjuntos, puede analizar los datos conversacionalmente y generar código Python ejecutable en Google Colab (completamente gratuito). Requiere más pasos que Copilot en Excel pero ofrece capacidades análogas sin costo de licencia adicional." },
+      { pregunta: "Un ingeniero industrial describe en Copilot Excel: 'Determina si hay diferencia estadísticamente significativa en el número de defectos entre los tres turnos'. ¿Qué análisis estadístico debería ejecutar Copilot?", opciones: ["Una regresión lineal simple entre turno y número de defectos", "Un análisis de varianza (ANOVA) de un factor para comparar las medias de defectos entre tres grupos independientes (turnos)", "Un análisis de correlación de Pearson entre turno y defectos", "Un gráfico de control SPC para comparar los tres turnos"], respuesta: 1, explicacion: "Para comparar las medias de una variable continua (número de defectos) entre tres grupos independientes (Turno A, B, C), el análisis estadístico correcto es el ANOVA (Analysis of Variance) de un factor. El resultado es un valor-p: si p<0.05, las diferencias son estadísticamente significativas y no debidas al azar." },
+    ],
+    ejercicio: {
+      titulo: "Análisis avanzado con Copilot Excel (o Claude como alternativa)",
+      objetivo: "Usar Copilot Excel o Claude para realizar análisis de correlación entre parámetros de proceso, generar fórmulas complejas automáticamente e identificar insights accionables en datos industriales.",
+      herramientas: "Excel con Microsoft 365 Copilot (o alternativa gratuita: Claude Pro con archivo adjunto + Google Colab)",
+      pasos: [
+        "Prepara un dataset de proceso industrial en Excel con 60 registros y estas columnas: Fecha, Turno (A/B/C), Temperatura_proceso (°C), Velocidad_linea (m/min), Presion_hidraulica (bar), Num_defectos, OEE (%).",
+        "Si tienes Copilot Excel: selecciona la tabla completa y usa el panel de Copilot para preguntar: (a) '¿Cuál de las tres variables de proceso (temperatura, velocidad, presión) tiene mayor correlación con el número de defectos?' (b) 'Crea una columna que calcule el índice de eficiencia combinado: OEE × (1 - Num_defectos/100)'. (c) '¿Hay diferencia estadísticamente significativa en el OEE entre los tres turnos? Explica para un gerente no técnico.'",
+        "Si usas Claude como alternativa: exporta el dataset a CSV. En Claude, adjunta el CSV y usa prompts equivalentes. Para el análisis de correlación, pide que genere código Python ejecutable en Google Colab. Ejecuta el código en colab.research.google.com y copia los resultados de vuelta a Excel.",
+        "Genera la fórmula de MAPE usando Copilot/Claude: 'Escribe la fórmula de Excel para calcular el MAPE entre la columna de OEE real y la columna de OEE objetivo (que es 85% constante), mostrando el error porcentual absoluto para cada fila y el promedio en la última fila.'",
+        "Usa Copilot/Claude para identificar los 5 registros con mayor número de defectos. Para cada uno, pide que identifique si existe algún patrón en las variables de proceso que los diferencie de los registros con pocos defectos.",
+        "Elabora un resumen ejecutivo de 200 palabras usando Copilot/Claude: 'Basándote en el análisis completo de este dataset de producción, redacta el párrafo de conclusiones para el informe mensual del jefe de producción, destacando los 3 hallazgos más importantes y las 2 acciones prioritarias.'",
+      ],
+      resultado: "Dataset analizado con correlaciones calculadas, fórmula MAPE implementada, análisis de varianza entre turnos documentado y resumen ejecutivo generado con Copilot o Claude.",
+      criterios: [
+        { criterio: "Dataset preparado correctamente con 60 registros y las 7 columnas requeridas", puntos: 15 },
+        { criterio: "Análisis de correlación realizado con identificación de la variable de mayor influencia", puntos: 25 },
+        { criterio: "Fórmula MAPE implementada correctamente con Copilot/Claude", puntos: 25 },
+        { criterio: "Análisis de varianza entre turnos con interpretación para gerencia no técnica", puntos: 20 },
+        { criterio: "Resumen ejecutivo de 200 palabras con hallazgos y acciones", puntos: 15 },
+      ],
+    },
+    recursos: [
+      { titulo: "Microsoft Learn — Copilot in Excel", url: "https://learn.microsoft.com/es-es/copilot/microsoft-365/microsoft-365-copilot-excel", tipo: "documentacion", descripcion: "Documentación oficial de Microsoft en español sobre Copilot en Excel: funcionalidades, requisitos y guías de uso paso a paso." },
+      { titulo: "Python in Excel — Microsoft Documentation", url: "https://support.microsoft.com/en-us/office/introduction-to-python-in-excel-55643c2e-ff56-4168-b1ce-9428c8308545", tipo: "documentacion", descripcion: "Guía oficial de Microsoft para usar Python directamente dentro de Excel, incluyendo bibliotecas disponibles y ejemplos de análisis de datos." },
+      { titulo: "Google Colab — Entorno Python gratuito", url: "https://colab.research.google.com/", tipo: "herramienta", descripcion: "Alternativa gratuita a Python en Excel. Ejecuta notebooks Python en la nube de Google con acceso a pandas, scikit-learn, matplotlib y más." },
+    ],
+  },
+
+  {
+    id: 39,
+    titulo: "Proyecto integrador: diagnóstico IA de tu empresa",
+    modulo: MOD8,
+    moduloNum: 8,
+    videoEmbed: "https://www.youtube.com/embed/PLACEHOLDER",
+    videoTitulo: "Proyecto integrador: diagnóstico IA de tu empresa",
+    teoria: `## El proyecto integrador: convertir el aprendizaje en transformación real
+
+El proyecto integrador es el punto culminante del curso. No es un ejercicio teórico sino un diagnóstico real de tu empresa (o de una empresa que conozcas) usando todas las herramientas y metodologías aprendidas en los 8 módulos. El objetivo es demostrar que puedes aplicar la IA de forma integral para resolver problemas industriales reales, no solo manejar herramientas en aislamiento.
+
+### ¿Qué es un diagnóstico IA de empresa industrial?
+
+Un diagnóstico IA es una evaluación sistemática de los procesos industriales de una empresa, usando herramientas de inteligencia artificial para:
+
+1. **Identificar las oportunidades de mejora más valiosas** (donde la IA puede tener mayor impacto)
+2. **Cuantificar el potencial de mejora** (en términos de ahorro de costos, mejora de calidad, reducción de tiempo)
+3. **Proponer el roadmap de implementación** (qué implementar primero, segundo y tercero, con qué herramientas y qué inversión)
+
+### Los 5 áreas de análisis del diagnóstico
+
+**Área 1 — Producción y OEE:**
+¿Cuál es el OEE actual? ¿Cuáles son los componentes que más lo reducen (disponibilidad, rendimiento o calidad)? ¿Cuáles son las principales causas de paradas? ¿Cómo se podría mejorar el OEE con las herramientas aprendidas (análisis de restricciones, chatGPT para diagnóstico, Power BI para monitoreo)?
+
+**Área 2 — Calidad:**
+¿Cuál es la tasa de defectos actual? ¿Existe un sistema SPC o los procesos no están bajo control estadístico? ¿Cuál es el Cpk de los procesos críticos? ¿Qué herramientas de calidad (SPC, Pareto, análisis de capacidad) están ausentes o son manuales y podrían automatizarse con IA?
+
+**Área 3 — Mantenimiento:**
+¿Se hace mantenimiento correctivo, preventivo o predictivo? ¿Cuál es el MTBF y MTTR de los equipos críticos? ¿Hay datos de sensores disponibles o solo datos de fallas registradas? ¿Cuál sería el ROI de implementar monitoreo predictivo?
+
+**Área 4 — Cadena de suministro:**
+¿Cómo se hacen los pronósticos de demanda actualmente? ¿Qué MAPE tienen? ¿Existe clasificación ABC/XYZ del inventario? ¿Se usa EOQ para definir los lotes de compra? ¿Cuántos ítems están en categoría AZ (alto valor, alta variabilidad) sin política de gestión específica?
+
+**Área 5 — Automatización e integración:**
+¿Qué procesos manuales repetitivos existen (reportes, análisis, alertas) que podrían automatizarse con n8n, Python o el stack Excel → ChatGPT → Power BI? ¿Qué datos existen pero no se están usando para tomar decisiones?
+
+### Metodología del diagnóstico: el proceso de 6 pasos
+
+**Paso 1 — Recolección de datos:**
+Entrevistar al gerente de planta, jefe de producción, jefe de calidad y jefe de mantenimiento (o tú mismo si trabajas en esas áreas). Recopilar los datos disponibles: registros de producción, hojas de control de calidad, órdenes de mantenimiento, registros de inventario.
+
+**Paso 2 — Análisis con herramientas aprendidas:**
+Aplicar cada metodología del curso a los datos recolectados: calcular el OEE real, construir el Pareto de defectos, calcular el MTBF de los equipos críticos, hacer la clasificación ABC/XYZ del inventario, calcular el EOQ para los ítems A.
+
+**Paso 3 — Asistencia con IA para el análisis:**
+Para cada área, usar ChatGPT o Claude para profundizar el análisis. "Aquí están los datos de defectos de mi planta de [sector] en Ecuador. Identifica las 3 oportunidades de mejora de calidad más impactantes y cuantifica el ahorro potencial para cada una." "Analiza mi cadena de suministro basándote en estos indicadores. ¿Qué herramienta de IA tendría el mayor impacto en reducir los costos de inventario?"
+
+**Paso 4 — Cuantificación de oportunidades:**
+Para cada oportunidad identificada, estimar: el impacto en ahorro de costos (USD/mes), el esfuerzo de implementación (bajo/medio/alto) y el tiempo para ver resultados (semanas/meses). Este análisis costo-beneficio es la base del roadmap.
+
+**Paso 5 — Roadmap de implementación:**
+Priorizar las oportunidades por: impacto × facilidad de implementación. Las de alto impacto y bajo esfuerzo son las "victorias rápidas" (Quick Wins) para implementar en el primer mes. Las de alto impacto y mayor esfuerzo son los proyectos estratégicos del trimestre.
+
+**Paso 6 — Presentación ejecutiva:**
+El diagnóstico se entrega como un documento de 8-12 páginas con: resumen ejecutivo (1 página), análisis por área (1 página cada una), roadmap visual con timeline, análisis costo-beneficio total, y próximos 3 pasos concretos con responsables y fechas.
+
+### Claude como asistente principal del diagnóstico
+
+Claude es especialmente adecuado para el diagnóstico integrado porque puede:
+1. Mantener el contexto de toda la conversación (empresa, sector, datos, hallazgos anteriores)
+2. Integrar información de múltiples áreas para identificar conexiones que el análisis aislado pierde
+3. Generar el documento de diagnóstico completo desde los datos recolectados
+
+**Prompt inicial del diagnóstico:**
+*"Voy a realizar el diagnóstico IA de mi empresa. Te voy a dar información de las 5 áreas de análisis en los próximos mensajes. Después de recibir toda la información, me ayudarás a: (1) identificar las 3 principales oportunidades de mejora con IA, (2) cuantificar el ahorro potencial de cada una, (3) proponer el roadmap de implementación con Quick Wins y proyectos estratégicos. ¿Estás listo para empezar? Empiezo con el área de Producción y OEE."*`,
+    presentacionSlides: [
+      { titulo: "El proyecto integrador: del aprendizaje a la transformación", contenido: "No es un ejercicio teórico. Es un diagnóstico real de tu empresa usando todos los módulos del curso. Objetivo: identificar oportunidades de mejora, cuantificarlas en USD y proponer el roadmap de implementación." },
+      { titulo: "Las 5 áreas del diagnóstico IA", contenido: "1. Producción y OEE: ¿cuánto se pierde en paradas y velocidad reducida? 2. Calidad: ¿existe SPC? ¿cuál es el Cpk? 3. Mantenimiento: ¿predictivo o solo correctivo? 4. Cadena de suministro: ¿MAPE del pronóstico? ¿EOQ implementado? 5. Automatización: ¿qué procesos manuales son automatizables?" },
+      { titulo: "Metodología: 6 pasos del diagnóstico", contenido: "1. Recolectar datos (entrevistas + registros existentes). 2. Analizar con herramientas del curso (OEE, Pareto, MTBF, ABC/XYZ, EOQ). 3. Profundizar con ChatGPT/Claude. 4. Cuantificar oportunidades en USD/mes. 5. Priorizar por impacto × facilidad. 6. Presentación ejecutiva 8-12 páginas." },
+      { titulo: "Quick Wins vs. Proyectos Estratégicos", contenido: "Quick Wins: alto impacto + bajo esfuerzo = implementar en el primer mes. Ejemplo: automatizar el reporte diario de calidad con n8n. Proyectos estratégicos: alto impacto + mayor esfuerzo = trimestre. Ejemplo: implementar SPC completo con límites de control." },
+      { titulo: "Cuantificar el ahorro: el lenguaje de la gerencia", contenido: "Producción: OEE actual 72% → objetivo 80% = +8% de capacidad. A $1,000/h de producción → $160,000/año adicionales. Calidad: defectos 5% → 1.5% con SPC = 3.5% menos reproceso → ahorro en materiales y tiempo. Los números justifican la inversión." },
+      { titulo: "Prompt inicial del diagnóstico con Claude", contenido: "Iniciar la sesión con el contexto completo de la empresa. Enviar datos de cada área en mensajes separados. Al final pedir: (1) top 3 oportunidades, (2) ahorro cuantificado, (3) roadmap con timeline y responsables. Claude mantiene el contexto completo de la conversación." },
+      { titulo: "El entregable final: 8-12 páginas ejecutivas", contenido: "Resumen ejecutivo (1 página) con hallazgo principal y ahorro total potencial. Análisis por área (5 páginas). Roadmap visual con timeline (1 página). Análisis costo-beneficio total (1 página). Próximos 3 pasos con responsables y fechas (1 página)." },
+      { titulo: "¿Por qué este proyecto es tu mejor carta de presentación?", contenido: "Demuestra no solo conocer herramientas de IA sino saber aplicarlas a problemas reales de ingeniería industrial. El diagnóstico con datos reales de tu empresa vale más que cualquier certificado. Es el puente entre el curso y el impacto profesional real." },
+    ],
+    quiz: [
+      { pregunta: "¿Cuál es el objetivo principal del diagnóstico IA de empresa industrial?", opciones: ["Demostrar que se conocen todas las herramientas de IA del curso", "Identificar las oportunidades de mejora más valiosas con IA, cuantificarlas en términos económicos y proponer el roadmap de implementación", "Generar el manual de calidad de la empresa con IA", "Reemplazar al personal de producción con sistemas automatizados"], respuesta: 1, explicacion: "El diagnóstico IA no es un ejercicio académico: es una evaluación sistemática de los procesos industriales que identifica dónde la IA puede tener mayor impacto económico, cuantifica ese impacto en USD y prioriza las acciones de implementación para que la gerencia pueda tomar decisiones de inversión." },
+      { pregunta: "¿Qué diferencia a una 'Victoria Rápida' (Quick Win) de un 'Proyecto Estratégico' en el roadmap del diagnóstico?", opciones: ["Las victorias rápidas solo se pueden hacer con herramientas gratuitas", "Las victorias rápidas tienen alto impacto y bajo esfuerzo de implementación (primeras en ejecutar); los proyectos estratégicos tienen alto impacto pero requieren mayor esfuerzo y tiempo", "Las victorias rápidas son las de menor impacto económico", "No hay diferencia práctica entre ambos tipos de iniciativas"], respuesta: 1, explicacion: "La priorización por impacto × facilidad identifica las Quick Wins: iniciativas de alto valor que se pueden implementar rápidamente (primer mes) con recursos existentes. Los proyectos estratégicos requieren más inversión, tiempo y coordinación pero tienen impacto transformacional a mediano plazo." },
+      { pregunta: "¿Por qué Claude es especialmente adecuado para asistir en el diagnóstico integrado de empresa vs. ChatGPT?", opciones: ["Claude es más barato que ChatGPT", "Claude puede mantener el contexto de toda la conversación del diagnóstico (empresa, datos de las 5 áreas, hallazgos de cada análisis) e integrar la información para identificar conexiones entre áreas", "ChatGPT no puede analizar datos industriales", "Claude tiene integración nativa con sistemas ERP industriales"], respuesta: 1, explicacion: "Claude tiene una ventana de contexto extensa que permite mantener coherencia a través de una conversación larga de diagnóstico (empresa, sector, datos de producción, calidad, mantenimiento, cadena de suministro, automatización) e integrar la información de todas las áreas para identificar conexiones que el análisis aislado pierde." },
+      { pregunta: "¿Cuál es la estructura recomendada para el entregable del diagnóstico IA?", opciones: ["Una presentación de PowerPoint de 50 diapositivas con todos los gráficos", "Un documento de 8-12 páginas con: resumen ejecutivo, análisis por área (5), roadmap visual, análisis costo-beneficio y próximos 3 pasos con responsables", "Solo un correo electrónico con las conclusiones principales", "Un dashboard de Power BI sin texto narrativo"], respuesta: 1, explicacion: "El diagnóstico debe ser lo suficientemente completo para sustentar decisiones de inversión pero conciso para que los tomadores de decisión lo lean. 8-12 páginas con el resumen ejecutivo al frente, análisis por área, roadmap visual y próximos pasos concretos es el formato ejecutivo estándar para presentaciones de mejora industrial." },
+      { pregunta: "Si el OEE actual de una planta es 68% y el objetivo con mejoras de IA es 78%, ¿cómo se cuantifica el ahorro potencial si la planta opera 16 horas/día, 25 días/mes y el costo de oportunidad de producción es $800/hora?", opciones: ["Ahorro = (78% - 68%) × $800 = $80/hora", "Ahorro mensual = (0.78 - 0.68) × 16h/día × 25 días × $800/h = $32,000/mes de capacidad productiva adicional", "Ahorro = 10% de $800 = $80/día", "No se puede cuantificar sin conocer el número de productos"], respuesta: 1, explicacion: "Ahorro mensual = ΔoEE × horas/mes × costo/hora = (0.78-0.68) × (16×25)h × $800 = 0.10 × 400h × $800 = $32,000/mes de capacidad productiva recuperada. Este es el valor anualizable para el análisis costo-beneficio de la inversión en herramientas de IA." },
+    ],
+    ejercicio: {
+      titulo: "Diagnóstico IA: 5 áreas de análisis con Claude",
+      objetivo: "Realizar un diagnóstico IA completo de tu empresa o un caso industrial ecuatoriano, identificar las 3 principales oportunidades de mejora cuantificadas en USD y proponer el roadmap de implementación.",
+      herramientas: "Claude.ai (claude.ai/chat), Word o Google Docs para el documento final, Excel para los análisis cuantitativos",
+      pasos: [
+        "Define el contexto empresarial. Opción A: usa tu empresa actual. Opción B: usa este caso: Empresa ALIMECUADOR S.A., procesadora de snacks en Quito. 45 empleados. OEE actual: 71%. Tasa de defectos: 4.8%. Mantenimiento: 100% correctivo. Pronóstico de demanda: Excel mensual manual con MAPE estimado ~25%. Sin clasificación ABC/XYZ. Sin dashboards de KPIs. 3 reportes manuales diarios de 45 min cada uno.",
+        "Inicia el diagnóstico con Claude con el prompt: 'Voy a realizar el diagnóstico IA de ALIMECUADOR S.A. (o tu empresa). Te enviaré datos de 5 áreas. Después identificarás las 3 principales oportunidades de mejora con IA, cuantificarás el ahorro potencial en USD/mes para cada una y propondrás el roadmap de implementación. ¿Listo? Comienzo con Producción: OEE=71%, principales paradas: [descripción], turno con peor rendimiento: [turno C, OEE=63%].'",
+        "Envía los datos de las 5 áreas a Claude en mensajes separados (Producción, Calidad, Mantenimiento, Cadena de suministro, Automatización). Para cada área, incluye los datos numéricos disponibles y pide a Claude que calcule el indicador principal (OEE real, MTBF, MAPE estimado, etc.).",
+        "Una vez enviadas las 5 áreas, pide a Claude: 'Basándote en el análisis completo de las 5 áreas, identifica: (1) Las 3 principales oportunidades de mejora ordenadas por impacto económico. (2) Para cada oportunidad: ahorro mensual estimado en USD, herramienta de IA a usar, esfuerzo de implementación (bajo/medio/alto), tiempo para ver resultados. (3) Roadmap con Quick Wins (primer mes) y proyectos estratégicos (trimestre 1 y trimestre 2).'",
+        "Con el output de Claude, construye el documento de diagnóstico en Word/Google Docs siguiendo la estructura: portada, resumen ejecutivo (1 pág.), análisis por área (1 pág. cada una), roadmap visual, análisis costo-beneficio total (suma de ahorros vs. inversión estimada), próximos 3 pasos con responsables y fechas.",
+        "Calcula el ROI total del programa: suma todos los ahorros mensuales de las oportunidades identificadas. Estima el costo de implementación (herramientas, tiempo de ingeniería, capacitación). Calcula el período de recuperación de la inversión: Inversión / Ahorro mensual = N meses.",
+      ],
+      resultado: "Documento de diagnóstico de 8-12 páginas con análisis de 5 áreas, 3 oportunidades cuantificadas en USD, roadmap de implementación y cálculo de ROI del programa.",
+      criterios: [
+        { criterio: "Diálogo con Claude documentado con datos reales o coherentes de empresa ecuatoriana", puntos: 20 },
+        { criterio: "Análisis cuantitativo de las 5 áreas con indicadores calculados (OEE, MTBF, MAPE, ABC/XYZ)", puntos: 25 },
+        { criterio: "3 oportunidades identificadas con ahorro cuantificado, herramienta de IA y esfuerzo estimados", puntos: 25 },
+        { criterio: "Roadmap con Quick Wins y proyectos estratégicos + cálculo de ROI total del programa", puntos: 30 },
+      ],
+    },
+    recursos: [
+      { titulo: "Claude.ai — Asistente para diagnóstico empresarial integral", url: "https://claude.ai/chat", tipo: "herramienta", descripcion: "Interfaz web de Claude para el diagnóstico integrado. La suscripción Pro permite conversaciones largas con contexto completo del análisis." },
+      { titulo: "McKinsey — AI in Manufacturing Report", url: "https://www.mckinsey.com/industries/advanced-electronics/our-insights/smart-manufacturing-and-industry-4-0", tipo: "lectura", descripcion: "Informe de McKinsey sobre la adopción de IA en manufactura con benchmarks de ROI por caso de uso, útil para validar los ahorros estimados en el diagnóstico." },
+      { titulo: "MIPRO Ecuador — Diagnósticos industriales para PYMES", url: "https://www.produccion.gob.ec/mipro/", tipo: "documentacion", descripcion: "El Ministerio de Producción del Ecuador ofrece programas de diagnóstico para PYMES industriales. Referencia para contextualizar el diagnóstico en el ecosistema industrial ecuatoriano." },
+    ],
+  },
+
+  {
+    id: 40,
+    titulo: "Presentación de resultados y plan de implementación",
+    modulo: MOD8,
+    moduloNum: 8,
+    videoEmbed: "https://www.youtube.com/embed/PLACEHOLDER",
+    videoTitulo: "Presentación de resultados y plan de implementación",
+    teoria: `## Presentar resultados de IA a la gerencia: de los datos al sí
+
+Identificar las oportunidades de mejora con IA es solo la mitad del trabajo. La otra mitad es comunicarlas efectivamente a quienes deben aprobar la implementación: la gerencia general, el directorio o los dueños de la empresa. En Ecuador, donde la adopción de IA en la industria todavía está en etapas tempranas, la presentación de resultados tiene un componente adicional de educación: el tomador de decisiones frecuentemente necesita primero entender qué puede hacer la IA para luego evaluar si le conviene invertir.
+
+### El framework de presentación para proyectos de IA industrial
+
+La estructura más efectiva para presentar resultados de diagnóstico IA a gerencia usa el modelo **Situación → Complicación → Resolución** (SCR) de McKinsey, adaptado al contexto industrial:
+
+**Situación (1-2 minutos):**
+El estado actual documentado con números: "Nuestra planta opera con un OEE del 71%, una tasa de defectos del 4.8% y tres informes diarios que consumen 2.25 horas de tiempo calificado cada día. Estos son los datos de los últimos 6 meses."
+
+No comenzar con "hablemos de inteligencia artificial". Comenzar con los problemas del negocio que la gerencia ya conoce y reconoce.
+
+**Complicación (1-2 minutos):**
+Por qué el statu quo es insostenible: "Con un OEE de 71% frente al benchmark de la industria de 82%, perdemos $28,000 mensuales en capacidad productiva no aprovechada. Si los competidores que ya están usando IA para mantenimiento predictivo reducen sus paradas un 30%, su OEE llegaría a 85%, lo que les daría una ventaja de costo de 12% sobre nosotros."
+
+**Resolución (el resto de la presentación):**
+Las 3 iniciativas de IA propuestas con su ROI específico, el roadmap de implementación y la inversión requerida.
+
+### Los 4 principios de comunicación para gerencia no técnica
+
+**Principio 1 — Dinero, no tecnología:**
+La gerencia no necesita entender cómo funciona el suavizamiento exponencial o el Isolation Forest. Necesita entender que "mejorar el pronóstico de demanda con IA reduce el inventario promedio un 18%, liberando $45,000 en capital de trabajo". Traducir todo al idioma del negocio.
+
+**Principio 2 — Mostrar el riesgo de no actuar:**
+En la cultura empresarial ecuatoriana, es más motivador mostrar el riesgo de no implementar que el beneficio de implementar: "Si no mejoramos el Cpk de este proceso de aquí a 6 meses, la certificación de cliente X está en riesgo. Eso representa el 23% de nuestras ventas."
+
+**Principio 3 — Quick Wins primero:**
+Proponer primero las iniciativas de bajo esfuerzo y resultado rápido (automatizar los 3 reportes diarios con n8n, ahorro inmediato de 45h/mes = $675/mes) construye credibilidad antes de proponer los proyectos más ambiciosos (mantenimiento predictivo con IoT).
+
+**Principio 4 — Piloto antes de escalar:**
+En lugar de pedir aprobación para implementar toda la hoja de ruta, proponer: "Empecemos con un piloto de 60 días en la línea 2. Inversión: $800. Si el OEE de esa línea sube al menos 3 puntos, escalamos a toda la planta." Los pilotos reducen el riesgo percibido y aceleran la aprobación.
+
+### Estructura de la presentación: 12 diapositivas
+
+1. **Portada:** Nombre de la empresa, "Diagnóstico IA: Oportunidades de Mejora Industrial", fecha
+2. **Resumen ejecutivo:** 3 oportunidades + ahorro total mensual + inversión total requerida + período de recuperación
+3. **Situación actual — Producción:** OEE actual, benchmark, brecha, costo de la brecha mensual
+4. **Situación actual — Calidad:** Tasa de defectos, Cpk si está disponible, costo de no calidad
+5. **Situación actual — Mantenimiento:** MTBF/MTTR actuales, costo de paradas no planificadas
+6. **Situación actual — Cadena de suministro:** MAPE actual, costo de exceso de inventario o roturas de stock
+7. **Oportunidad 1 — Quick Win:** Nombre, herramienta IA, ahorro mensual, inversión, período de recuperación
+8. **Oportunidad 2 — Proyecto estratégico:** Igual que anterior con mayor impacto y mayor inversión
+9. **Oportunidad 3 — Proyecto estratégico:** Igual
+10. **Roadmap:** Timeline visual (Gantt) con las 3 iniciativas a lo largo de 6 meses
+11. **Análisis costo-beneficio consolidado:** Tabla comparativa de inversión total vs. ahorro total en 12 meses
+12. **Próximos 3 pasos:** Acciones concretas con responsable y fecha de inicio (primera semana)
+
+### ChatGPT para preparar la presentación
+
+ChatGPT puede asistir en múltiples aspectos de la preparación:
+
+**Para las diapositivas:**
+*"Aquí está el análisis completo del diagnóstico IA de mi empresa [datos]. Redacta el contenido de las diapositivas 7, 8 y 9 (las tres oportunidades) usando el framework SCR, en lenguaje ejecutivo no técnico, con énfasis en el ROI y el período de recuperación."*
+
+**Para anticipar objeciones:**
+*"Voy a presentar este diagnóstico IA a la gerencia de una empresa manufacturera ecuatoriana tradicional. ¿Cuáles son las 5 objeciones más probables que presentará el gerente general y cómo las respondería de forma convincente?"*
+
+**Para el análisis de sensibilidad:**
+*"El gerente preguntará '¿qué pasa si el ahorro real es solo la mitad del estimado?' Prepara el análisis de sensibilidad: si el ahorro real del proyecto de OEE es 50%, 75% y 100% del estimado, ¿cuál es el período de recuperación en cada escenario?"*
+
+### Cerrar con un plan de acción concreto
+
+La presentación debe terminar no con "gracias por su atención" sino con tres preguntas accionables:
+
+1. "¿Aprobamos el piloto de la línea 2 esta semana?"
+2. "¿Quién sería el responsable interno de coordinar la implementación?"
+3. "¿Qué información adicional necesitan para tomar la decisión?"
+
+El objetivo no es que la gerencia "entienda la IA". El objetivo es que diga "aprobado, empecemos".`,
+    presentacionSlides: [
+      { titulo: "El framework SCR para presentar proyectos de IA", contenido: "Situación: el estado actual con números documentados. Complicación: por qué el statu quo es insostenible (costo de la brecha, riesgo competitivo). Resolución: las 3 iniciativas con ROI específico y roadmap. Nunca empezar con 'inteligencia artificial': empezar con el problema del negocio." },
+      { titulo: "4 principios para gerencia no técnica", contenido: "1. Dinero, no tecnología: traducir todo a USD/mes y período de recuperación. 2. Mostrar el riesgo de NO actuar más que el beneficio de actuar. 3. Quick Wins primero: credibilidad antes de proyectos ambiciosos. 4. Piloto antes de escalar: reduce el riesgo percibido, acelera la aprobación." },
+      { titulo: "Las 12 diapositivas de la presentación ejecutiva", contenido: "1. Portada. 2. Resumen ejecutivo (ahorro total + inversión + ROI). 3-6. Situación actual por área (producción, calidad, mantenimiento, supply chain). 7-9. Las 3 oportunidades con ROI individual. 10. Roadmap Gantt 6 meses. 11. Costo-beneficio consolidado. 12. Próximos 3 pasos con fecha." },
+      { titulo: "Cómo proponer el piloto para acelerar la aprobación", contenido: "'Empecemos con un piloto de 60 días en la línea 2. Inversión: $800. Si el OEE sube ≥3 puntos, escalamos a toda la planta.' Criterio de éxito medible + riesgo acotado + tiempo definido = la fórmula para obtener el primer sí en empresas conservadoras." },
+      { titulo: "ChatGPT para anticipar objeciones de gerencia", contenido: "Prompt: 'Voy a presentar este diagnóstico a una empresa manufacturera ecuatoriana tradicional. ¿Cuáles son las 5 objeciones más probables del gerente general y cómo las respondería?' Prepara las respuestas con datos. La reunión con objeciones respondidas de antemano no tiene sorpresas." },
+      { titulo: "Análisis de sensibilidad: 50-75-100% del ahorro estimado", contenido: "Gerente: '¿Y si los resultados son la mitad de lo esperado?' Tu respuesta preparada: 'Con 50% del ahorro estimado, el período de recuperación es 8 meses en lugar de 4. Con 75%, son 5 meses. El peor escenario razonable sigue siendo rentable.' ChatGPT calcula los tres escenarios automáticamente." },
+      { titulo: "Cierre accionable: 3 preguntas de compromiso", contenido: "No 'gracias por su atención'. Terminar con: '¿Aprobamos el piloto esta semana?' '¿Quién coordina internamente?' '¿Qué información adicional necesitan?' El objetivo no es que entiendan la IA: es que digan 'aprobado, empecemos'." },
+      { titulo: "La presentación es el comienzo, no el fin", contenido: "Un diagnóstico aprobado es el inicio de un programa de transformación, no un proyecto único. Cada Quick Win implementado genera datos para el siguiente análisis. En 12 meses, la empresa que empieza un diagnóstico IA hoy puede tener un sistema de mejora continua impulsado por datos que se autoalimenta." },
+    ],
+    quiz: [
+      { pregunta: "¿Por qué el framework SCR (Situación-Complicación-Resolución) recomienda comenzar con el problema del negocio en lugar de con 'la inteligencia artificial'?", opciones: ["Porque la gerencia generalmente desconoce qué es la inteligencia artificial", "Porque comenzar con el problema crea inmediato contexto emocional y relevancia en los tomadores de decisión, mientras que empezar con tecnología genera distancia o escepticismo", "Porque el framework SCR prohíbe mencionar tecnologías en la apertura", "Porque en Ecuador la IA tiene mala reputación en el sector industrial"], respuesta: 1, explicacion: "El framework SCR comienza con la Situación porque los tomadores de decisión se conectan inmediatamente con problemas que ya conocen (OEE bajo, defectos, costos de inventario). Comenzar con tecnología activa el filtro de 'otra moda tecnológica'; comenzar con el problema activa el filtro de 'esto afecta mis resultados, prestemos atención'." },
+      { pregunta: "¿Cuál de los 4 principios de comunicación para gerencia no técnica es más relevante en el contexto cultural empresarial ecuatoriano?", opciones: ["Principio 1: Dinero, no tecnología", "Principio 2: Mostrar el riesgo de no actuar más que el beneficio de actuar", "Principio 3: Quick Wins primero", "Principio 4: Piloto antes de escalar"], respuesta: 1, explicacion: "En la cultura empresarial ecuatoriana, donde la aversión al riesgo y la preferencia por lo probado son características frecuentes, mostrar el riesgo de no implementar (certificación en riesgo, competidores adelantándose, pérdidas mensuales cuantificadas) suele ser más motivador que mostrar los beneficios potenciales, que son percibidos como inciertos." },
+      { pregunta: "¿Por qué es estratégicamente mejor proponer un piloto de 60 días que pedir aprobación para implementar toda la hoja de ruta desde el inicio?", opciones: ["Porque los pilotos son más baratos de implementar que el programa completo", "Porque limita el riesgo percibido del gerente: une inversión pequeña + criterio de éxito medible + tiempo definido = decisión más fácil de aprobar; el éxito del piloto construye credibilidad para escalar", "Porque la legislación ecuatoriana requiere pilotos antes de implementaciones grandes", "Porque un programa completo siempre falla; solo los pilotos tienen éxito"], respuesta: 1, explicacion: "El piloto acotado reduce el riesgo percibido: si falla, el costo es pequeño. Si tiene éxito, la decisión de escalar se vuelve obvia. Pedir aprobación para un programa grande implica pedir confianza en algo no probado, lo que activa resistencias. El piloto exitoso convierte la promesa en evidencia." },
+      { pregunta: "¿Para qué sirve preparar el análisis de sensibilidad (escenarios 50-75-100% del ahorro) antes de la presentación ejecutiva?", opciones: ["Para mostrar que el análisis fue realizado con metodología formal", "Para responder de antemano la objeción más frecuente de la gerencia ('¿y si los resultados son la mitad de lo esperado?') con datos que demuestran que incluso el escenario conservador es rentable", "Solo para el caso en que el gerente sea del área financiera", "Para calcular cuántos empleados se pueden reducir si se implementa la IA"], respuesta: 1, explicacion: "La objeción 'pero ¿y si no funciona igual de bien?' es la más frecuente en presentaciones de proyectos de mejora. Preparar los tres escenarios (50%, 75%, 100% del ahorro estimado) con sus respectivos períodos de recuperación permite responder con datos que muestran que incluso el caso pesimista es favorable para la empresa." },
+      { pregunta: "¿Cuál debe ser el cierre ideal de una presentación de diagnóstico IA a la gerencia?", opciones: ["'Gracias por su atención. Están libres de hacer preguntas.'", "'En resumen, la inteligencia artificial tiene un brillante futuro en la industria ecuatoriana.'", "Tres preguntas accionables: ¿Aprobamos el piloto esta semana? ¿Quién coordina internamente? ¿Qué información adicional necesitan para decidir?'", "'Les enviaré el análisis completo por email para que lo revisen con calma.'"], respuesta: 2, explicacion: "El cierre con tres preguntas accionables es la diferencia entre una presentación 'interesante' y una que genera compromisos. Las tres preguntas convierten la reunión en una decisión: ¿sí al piloto?, ¿quién lo coordina?, ¿qué falta para decidir? Sin estas preguntas, la respuesta típica es 'lo pensamos' y el proyecto se congela." },
+    ],
+    ejercicio: {
+      titulo: "Presentación ejecutiva del diagnóstico IA: 12 diapositivas con ChatGPT",
+      objetivo: "Construir la presentación ejecutiva completa de 12 diapositivas del diagnóstico IA, usando ChatGPT para el contenido y practicar las respuestas a las 5 objeciones más probables de la gerencia.",
+      herramientas: "ChatGPT o Claude, PowerPoint o Google Slides, opcionalmente Gamma.app para diseño automatizado",
+      pasos: [
+        "Toma el diagnóstico IA desarrollado en el tema anterior (o el caso de ALIMECUADOR) como base. Usa ChatGPT con el prompt: 'Basándote en este diagnóstico: [resumen de las 3 oportunidades con sus datos], redacta el contenido completo de las 12 diapositivas de la presentación ejecutiva usando el framework SCR. Incluye el texto de cada diapositiva en lenguaje ejecutivo, con énfasis en USD y ROI. El audiencia es el gerente general de una empresa manufacturera ecuatoriana sin conocimiento técnico de IA.'",
+        "Crea la presentación en PowerPoint, Google Slides o Gamma.app. Usa los colores corporativos de la empresa si los tienes, o un diseño profesional y limpio. Cada diapositiva debe tener: título claro, 3-5 puntos clave en bullets o números, y cuando aplique, gráfica o tabla. Menos texto es más.",
+        "Construye el análisis de sensibilidad para las 3 oportunidades: usa ChatGPT para calcular el período de recuperación si el ahorro real es 50%, 75% y 100% del estimado. Agrega esta tabla a la diapositiva 11 (costo-beneficio consolidado).",
+        "Usa ChatGPT para anticipar objeciones: 'Las 5 objeciones más probables que presentará el gerente general de ALIMECUADOR a este diagnóstico IA, y la respuesta más convincente para cada una con datos del análisis.' Prepara las respuestas y tenlas listas como notas del presentador en las diapositivas correspondientes.",
+        "Practica la presentación completa: grábate durante 15-20 minutos presentando las 12 diapositivas sin leer las notas. Evalúa: ¿cada diapositiva se puede explicar en ≤90 segundos? ¿Las transiciones entre diapositivas son fluidas? ¿Las diapositivas 7-9 (las oportunidades) comunican claramente el ROI?",
+        "Reflexión final: ¿Qué parte del diagnóstico fue más fácil de hacer con IA y cuál requirió más criterio de ingeniería propio? ¿Qué aprendizaje del curso (módulo 1 al 8) se aplicó más directamente en este proyecto final?",
+      ],
+      resultado: "Presentación de 12 diapositivas completa y lista para presentar a gerencia, análisis de sensibilidad incluido, 5 objeciones con respuestas preparadas y reflexión del proceso de aprendizaje.",
+      criterios: [
+        { criterio: "Presentación de 12 diapositivas con estructura SCR y las secciones requeridas", puntos: 30 },
+        { criterio: "Análisis de sensibilidad con escenarios 50-75-100% del ahorro estimado", puntos: 20 },
+        { criterio: "5 objeciones de gerencia con respuestas documentadas y fundamentadas", puntos: 25 },
+        { criterio: "Reflexión sobre el proceso de aprendizaje: qué módulos se aplicaron más y cuál fue el aporte específico del ingeniero vs. la IA", puntos: 25 },
+      ],
+    },
+    recursos: [
+      { titulo: "Gamma.app — Presentaciones con IA en minutos", url: "https://gamma.app/", tipo: "herramienta", descripcion: "Plataforma de IA para crear presentaciones ejecutivas profesionales desde texto. El ingeniero describe el contenido y Gamma genera el diseño completo." },
+      { titulo: "McKinsey — How to present like McKinsey", url: "https://www.mckinsey.com/capabilities/mckinsey-design/our-insights/the-art-of-saying-more-with-less", tipo: "lectura", descripcion: "Principios de comunicación ejecutiva de McKinsey para presentar proyectos de mejora a la alta dirección de manera convincente y concisa." },
+      { titulo: "ITSEIA — Recursos de presentación ejecutiva", url: "https://itseia.ai/cursos", tipo: "herramienta", descripcion: "Plataforma ITSEIA con recursos complementarios para la presentación de proyectos de IA industrial, incluyendo plantillas y casos de éxito en Ecuador." },
+    ],
+  },
 ];

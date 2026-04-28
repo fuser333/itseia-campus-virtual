@@ -23,6 +23,13 @@ import SlideViewer from "@/components/session/SlideViewer";
 import { CURSOS_MDT } from "../data";
 import { C1_TEMAS, C1_MODULOS } from "../c1-data";
 import type { TemaC1 } from "../c1-data";
+import { C2_TEMAS, C2_MODULOS } from "../c2-data";
+import { C3_TEMAS, C3_MODULOS } from "../c3-data";
+import { C4_TEMAS, C4_MODULOS } from "../c4-data";
+import { C5_TEMAS, C5_MODULOS } from "../c5-data";
+import { C6_TEMAS, C6_MODULOS } from "../c6-data";
+import { C7_TEMAS, C7_MODULOS } from "../c7-data";
+import { C8_TEMAS, C8_MODULOS } from "../c8-data";
 import { C9_TEMAS, C9_MODULOS } from "../c9-data";
 import { C10_TEMAS, C10_MODULOS } from "../c10-data";
 import { C11_TEMAS, C11_MODULOS } from "../c11-data";
@@ -31,9 +38,16 @@ import { C13_TEMAS, C13_MODULOS } from "../c13-data";
 import { C14_TEMAS, C14_MODULOS } from "../c14-data";
 import { C15_TEMAS, C15_MODULOS } from "../c15-data";
 
-// Mapa slug → { temas, modulos } para soportar cualquier curso C1-C15
+// Mapa slug → { temas, modulos } para los 15 cursos MDT
 const COURSE_DATA: Record<string, { temas: any[]; modulos: any[] }> = {
   c1: { temas: C1_TEMAS, modulos: C1_MODULOS },
+  c2: { temas: C2_TEMAS, modulos: C2_MODULOS },
+  c3: { temas: C3_TEMAS, modulos: C3_MODULOS },
+  c4: { temas: C4_TEMAS, modulos: C4_MODULOS },
+  c5: { temas: C5_TEMAS, modulos: C5_MODULOS },
+  c6: { temas: C6_TEMAS, modulos: C6_MODULOS },
+  c7: { temas: C7_TEMAS, modulos: C7_MODULOS },
+  c8: { temas: C8_TEMAS, modulos: C8_MODULOS },
   c9: { temas: C9_TEMAS, modulos: C9_MODULOS },
   c10: { temas: C10_TEMAS, modulos: C10_MODULOS },
   c11: { temas: C11_TEMAS, modulos: C11_MODULOS },
