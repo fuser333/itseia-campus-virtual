@@ -46,13 +46,20 @@ import {
   type CertificacionData,
   type DominioData,
 } from "./_data/aws-data";
+import { googleAiEssentialsData } from "./_data/google-ai-data";
+import { azureAiFundamentalsData } from "./_data/azure-data";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
 
-// AWS Orange para acentos del proveedor (manteniendo branding ITSEIA en lo demás)
-const AWS_ORANGE = "#FF9900";
+// Colores de acento por proveedor
+const PROVIDER_COLORS: Record<string, string> = {
+  "aws-cloud-practitioner": "#FF9900",
+  "google-ai-essentials": "#4285F4",
+  "azure-ai-fundamentals": "#0078D4",
+};
+const DEFAULT_ACCENT = "#FBBC0C";
 
 const LEVEL_LABELS: Record<string, { label: string; color: string }> = {
   basico: { label: "Básico", color: "text-emerald-400 bg-emerald-500/10 border-emerald-500/20" },
@@ -88,7 +95,7 @@ function youtubeEmbedFromUrl(url: string | null): string | null {
 // ─────────────────────────────────────────────────────────────────────────────
 // Componente: contenido expandido de un dominio (7 tabs)
 // ─────────────────────────────────────────────────────────────────────────────
-function DominioContent({ dominio, slug }: { dominio: DominioData; slug: string }) {
+function DominioContent({ dominio, slug, accentColor }: { dominio: DominioData; slug: string; accentColor: string }) {
   const [activeTab, setActiveTab] = useState<string>("video");
   const [expandedSections, setExpandedSections] = useState<Set<string>>(new Set());
   const [quizAnswers, setQuizAnswers] = useState<Record<number, number>>({});
@@ -242,13 +249,20 @@ function DominioContent({ dominio, slug }: { dominio: DominioData; slug: string 
 
   // ── Ejercicio (link al examen completo) ──
   const ejercicioContent = (
-    <div className="rounded-xl border border-[#FF9900]/25 bg-gradient-to-br from-[#FF9900]/5 to-white p-5">
+    <div
+      className="rounded-xl border p-5 bg-gradient-to-br to-white"
+      style={{
+        borderColor: `${accentColor}40`,
+        background: `linear-gradient(135deg, ${accentColor}0D, white)`,
+      }}
+    >
       <p className="text-sm font-bold text-[#0A1628] mb-1">
         Practica el dominio en el simulacro completo
       </p>
       <p className="text-xs text-[#1F2F58]/65 mb-3 leading-relaxed">
-        El simulacro mezcla preguntas de los 4 dominios con el peso real del examen
-        CLF-C02. Tendrás 90 minutos y necesitas 70 % para aprobar.
+        El simulacro mezcla preguntas de todos los dominios con el peso real del
+        examen oficial. Necesitas superar el umbral de aprobación para validar tu
+        preparación.
       </p>
       <Link
         href={`/certificaciones/${slug}/examen`}
@@ -277,48 +291,47 @@ function DominioContent({ dominio, slug }: { dominio: DominioData; slug: string 
     </div>
   );
 
-  // ── Recursos ──
+  // ── Recursos (por proveedor) ──
+  const RECURSOS_BY_SLUG: Record<string, { href: string; tipo: string; label: string }[]> = {
+    "aws-cloud-practitioner": [
+      { href: "https://aws.amazon.com/es/certification/certified-cloud-practitioner/", tipo: "oficial", label: "Guía oficial del examen CLF-C02" },
+      { href: "https://explore.skillbuilder.aws/learn/course/external/view/elearning/134/aws-cloud-practitioner-essentials-spanish-latin-american", tipo: "curso", label: "AWS Cloud Practitioner Essentials (Skill Builder, español)" },
+      { href: "https://aws.amazon.com/es/architecture/well-architected/", tipo: "documentación", label: "AWS Well-Architected Framework" },
+    ],
+    "google-ai-essentials": [
+      { href: "https://grow.google/certificates/ai-essentials/", tipo: "oficial", label: "Google AI Essentials — página oficial del programa" },
+      { href: "https://cloud.google.com/learn/training/machinelearning-ai", tipo: "curso", label: "Google Cloud AI Learning Path" },
+      { href: "https://ai.google/responsibility/responsible-ai-practices/", tipo: "documentación", label: "Prácticas de IA Responsable — Google" },
+    ],
+    "azure-ai-fundamentals": [
+      { href: "https://learn.microsoft.com/es-es/certifications/azure-ai-fundamentals/", tipo: "oficial", label: "Guía oficial del examen AI-900" },
+      { href: "https://learn.microsoft.com/es-es/training/paths/get-started-with-artificial-intelligence-on-azure/", tipo: "curso", label: "Ruta de aprendizaje AI-900 en Microsoft Learn" },
+      { href: "https://azure.microsoft.com/es-es/products/ai-services/", tipo: "documentación", label: "Azure AI Services — documentación oficial" },
+    ],
+  };
+  const recursosLinks = RECURSOS_BY_SLUG[slug] ?? RECURSOS_BY_SLUG["aws-cloud-practitioner"];
   const recursosContent = (
     <div className="space-y-2">
-      <a
-        href="https://aws.amazon.com/es/certification/certified-cloud-practitioner/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="block p-3 rounded-lg bg-white border border-[#1F2F58]/10 hover:border-[#FF9900]/40 transition-all"
-      >
-        <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-[#FF9900]/10 text-[#FF9900] mr-2">
-          oficial
-        </span>
-        <span className="text-sm font-semibold text-[#1F2F58]">
-          Guía oficial del examen CLF-C02
-        </span>
-      </a>
-      <a
-        href="https://explore.skillbuilder.aws/learn/course/external/view/elearning/134/aws-cloud-practitioner-essentials-spanish-latin-american"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="block p-3 rounded-lg bg-white border border-[#1F2F58]/10 hover:border-[#73B8E7]/40 transition-all"
-      >
-        <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-[#73B8E7]/10 text-[#73B8E7] mr-2">
-          curso
-        </span>
-        <span className="text-sm font-semibold text-[#1F2F58]">
-          AWS Cloud Practitioner Essentials (Skill Builder, español)
-        </span>
-      </a>
-      <a
-        href="https://aws.amazon.com/es/architecture/well-architected/"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="block p-3 rounded-lg bg-white border border-[#1F2F58]/10 hover:border-[#73B8E7]/40 transition-all"
-      >
-        <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-[#73B8E7]/10 text-[#73B8E7] mr-2">
-          documentación
-        </span>
-        <span className="text-sm font-semibold text-[#1F2F58]">
-          AWS Well-Architected Framework
-        </span>
-      </a>
+      {recursosLinks.map((r) => (
+        <a
+          key={r.href}
+          href={r.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block p-3 rounded-lg bg-white border border-[#1F2F58]/10 transition-all"
+          style={{ ["--tw-border-opacity" as string]: "1" }}
+          onMouseEnter={(e) => (e.currentTarget.style.borderColor = `${accentColor}66`)}
+          onMouseLeave={(e) => (e.currentTarget.style.borderColor = "")}
+        >
+          <span
+            className="text-[10px] font-semibold px-2 py-0.5 rounded-full mr-2"
+            style={{ backgroundColor: `${accentColor}1A`, color: accentColor }}
+          >
+            {r.tipo}
+          </span>
+          <span className="text-sm font-semibold text-[#1F2F58]">{r.label}</span>
+        </a>
+      ))}
     </div>
   );
 
@@ -408,20 +421,27 @@ function DominioCard({
   isExpanded,
   onToggle,
   slug,
+  accentColor,
 }: {
   dominio: DominioData;
   isExpanded: boolean;
   onToggle: () => void;
   slug: string;
+  accentColor: string;
 }) {
   return (
     <div
       className={cn(
         "rounded-2xl border transition-all overflow-hidden",
         isExpanded
-          ? "border-[#FF9900]/40 bg-[#F9F6E7]/40 shadow-sm"
-          : "border-[#1F2F58]/10 bg-white hover:border-[#FF9900]/30 hover:shadow-sm"
+          ? "bg-[#F9F6E7]/40 shadow-sm"
+          : "border-[#1F2F58]/10 bg-white hover:shadow-sm"
       )}
+      style={
+        isExpanded
+          ? { borderColor: `${accentColor}66` }
+          : undefined
+      }
     >
       <button
         onClick={onToggle}
@@ -435,7 +455,7 @@ function DominioCard({
           )}
         >
           {isExpanded ? (
-            <CheckCircle2 className="size-5 text-[#FF9900]" />
+            <CheckCircle2 className="size-5" style={{ color: accentColor }} />
           ) : (
             <span
               className="text-sm font-black text-[#1F2F58]/60"
@@ -451,15 +471,6 @@ function DominioCard({
             <h3 className="text-sm sm:text-base font-bold text-[#0A1628] leading-snug">
               Dominio {dominio.orden}: {dominio.nombre}
             </h3>
-            <span
-              className="inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-bold"
-              style={{
-                backgroundColor: `${AWS_ORANGE}1A`,
-                color: AWS_ORANGE,
-              }}
-            >
-              {dominio.porcentajeEnExamen}% del examen
-            </span>
           </div>
           <p className="text-xs text-[#1F2F58]/60 leading-relaxed">
             {dominio.descripcion}
@@ -469,7 +480,18 @@ function DominioCard({
               Video · Presentación · Teoría · Quiz · Ejercicio · AI Lab · Recursos
             </p>
           )}
-          <div className="mt-1.5 flex items-center gap-3 text-[10px] text-[#1F2F58]/45">
+          <div className="mt-1.5 flex flex-wrap items-center gap-1.5 mb-1">
+            <span
+              className="inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-bold"
+              style={{
+                backgroundColor: `${accentColor}1A`,
+                color: accentColor,
+              }}
+            >
+              {dominio.porcentajeEnExamen}% del examen
+            </span>
+          </div>
+          <div className="mt-1 flex items-center gap-3 text-[10px] text-[#1F2F58]/45">
             <span className="flex items-center gap-1">
               <BookOpen className="size-3" />
               {dominio.lecciones.length} lecciones
@@ -495,7 +517,7 @@ function DominioCard({
 
       {isExpanded && (
         <div className="px-4 pb-4 sm:px-5 sm:pb-5">
-          <DominioContent dominio={dominio} slug={slug} />
+          <DominioContent dominio={dominio} slug={slug} accentColor={accentColor} />
         </div>
       )}
     </div>
@@ -505,7 +527,7 @@ function DominioCard({
 // ─────────────────────────────────────────────────────────────────────────────
 // Vista AWS — datos estáticos
 // ─────────────────────────────────────────────────────────────────────────────
-function AwsCertView({ data, slug }: { data: CertificacionData; slug: string }) {
+function AwsCertView({ data, slug, accentColor }: { data: CertificacionData; slug: string; accentColor: string }) {
   const router = useRouter();
   const [expandedDominio, setExpandedDominio] = useState<number | null>(null);
 
@@ -543,7 +565,7 @@ function AwsCertView({ data, slug }: { data: CertificacionData; slug: string }) 
             className="w-16 h-16 rounded-xl flex items-center justify-center text-xl font-black flex-shrink-0"
             style={{
               backgroundColor: "#1F2F58",
-              color: AWS_ORANGE,
+              color: accentColor,
             }}
           >
             AWS
@@ -553,7 +575,7 @@ function AwsCertView({ data, slug }: { data: CertificacionData; slug: string }) 
             <div className="flex items-center gap-2 flex-wrap mb-1">
               <p
                 className="text-[11px] font-semibold uppercase tracking-widest"
-                style={{ color: AWS_ORANGE }}
+                style={{ color: accentColor }}
               >
                 {data.proveedor} · {data.examOficialCodigo}
               </p>
@@ -616,7 +638,7 @@ function AwsCertView({ data, slug }: { data: CertificacionData; slug: string }) 
             <Button
               onClick={() => router.push(`/certificaciones/${slug}/examen`)}
               className="text-[#0A1628] font-bold gap-2 hover:opacity-90 px-5 py-6 text-base"
-              style={{ backgroundColor: AWS_ORANGE }}
+              style={{ backgroundColor: accentColor }}
             >
               <PlayCircle className="w-5 h-5" />
               Iniciar simulacro
@@ -659,6 +681,7 @@ function AwsCertView({ data, slug }: { data: CertificacionData; slug: string }) 
                 )
               }
               slug={slug}
+              accentColor={accentColor}
             />
           ))}
         </div>
@@ -676,13 +699,13 @@ function AwsCertView({ data, slug }: { data: CertificacionData; slug: string }) 
               {data.totalPreguntasSimulacro} preguntas en{" "}
               {data.duracionSimulacroMin} minutos. Necesitas{" "}
               {data.umbralAprobacionPorcentaje}% para aprobar — igual que el
-              examen oficial CLF-C02.
+              examen oficial {data.examOficialCodigo}.
             </p>
           </div>
           <Button
             onClick={() => router.push(`/certificaciones/${slug}/examen`)}
             className="text-[#0A1628] font-bold gap-2 hover:opacity-90 px-6 py-6 text-base shrink-0"
-            style={{ backgroundColor: AWS_ORANGE }}
+            style={{ backgroundColor: accentColor }}
           >
             <PlayCircle className="w-5 h-5" />
             Iniciar simulacro
@@ -917,11 +940,19 @@ function LegacyApiCertView({ slug }: { slug: string }) {
 // ─────────────────────────────────────────────────────────────────────────────
 // Componente principal
 // ─────────────────────────────────────────────────────────────────────────────
+const STATIC_CERT_DATA: Record<string, CertificacionData> = {
+  "aws-cloud-practitioner": awsCloudPractitionerData,
+  "google-ai-essentials": googleAiEssentialsData,
+  "azure-ai-fundamentals": azureAiFundamentalsData,
+};
+
 export default function CertificationDetailPage({ params }: PageProps) {
   const { slug } = use(params);
+  const staticData = STATIC_CERT_DATA[slug];
 
-  if (slug === "aws-cloud-practitioner") {
-    return <AwsCertView data={awsCloudPractitionerData} slug={slug} />;
+  if (staticData) {
+    const accentColor = PROVIDER_COLORS[slug] ?? DEFAULT_ACCENT;
+    return <AwsCertView data={staticData} slug={slug} accentColor={accentColor} />;
   }
 
   return <LegacyApiCertView slug={slug} />;
