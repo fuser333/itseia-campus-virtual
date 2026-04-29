@@ -10,10 +10,9 @@ const WA_COTIZAR =
 const WA_INFO =
   "https://wa.me/593990709009?text=Quiero%20info%20de%20programas%20B2B%20de%20ITSEIA";
 
-// TODO: Reemplazar con video propio de B2B cuando esté disponible.
-// Actualmente usa video Bootcamp como placeholder.
-// El CEO va a generar el video con Gemini Veo y subir a YouTube.
-const YOUTUBE_ID = "QVoO3cY_BPQ"; // PLACEHOLDER
+// Video oficial B2B con Héctor Velasco hablando — capacitación corporativa.
+// Subido a YouTube canal ITSEIA el 2026-04-28.
+const YOUTUBE_ID = "Um2CBAbbv-o";
 
 const BENEFICIOS = [
   "Programa diseñado a la medida de tu empresa",
