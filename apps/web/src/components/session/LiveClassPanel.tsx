@@ -2,7 +2,7 @@
 
 // ============================================================
 // ITSEIA Academy — LiveClassPanel
-// Panel completo de clase sincronica para la pagina de sesion
+// Panel completo de clase sincrónica para la página de sesión
 // Orquesta: JoinClassButton + LiveClassRoom + RecordingPlayer
 // Carga datos de /api/sessions/[id]/live y refresca en polling
 // ============================================================
@@ -83,7 +83,7 @@ export default function LiveClassPanel({
   useEffect(() => {
     fetchLiveState();
 
-    // Polling mientras el componente esta montado
+    // Polling mientras el componente está montado
     const interval = setInterval(fetchLiveState, POLLING_INTERVAL_MS);
     return () => clearInterval(interval);
   }, [fetchLiveState]);
@@ -97,12 +97,11 @@ export default function LiveClassPanel({
   function handleRoomEnded() {
     setActiveLiveSession(null);
     setShowRoom(false);
-    // Refrescar historial despues de un momento (recording puede tardar)
+    // Refrescar historial después de un momento (recording puede tardar)
     setTimeout(fetchLiveState, 3000);
   }
 
   function handleJoin(roomUrl: string) {
-    // Verificar que la URL es valida antes de mostrar el iframe
     if (roomUrl) {
       setShowRoom(true);
     }
@@ -115,8 +114,8 @@ export default function LiveClassPanel({
   // ── Loading ──
   if (loading) {
     return (
-      <div className="flex h-48 items-center justify-center gap-2 text-[#1F2F58]/40">
-        <Loader2 className="size-5 animate-spin" />
+      <div className="flex h-48 items-center justify-center gap-2 text-[#F9F6E7]/50">
+        <Loader2 className="size-5 animate-spin text-[#FBBC0C]" />
         <span className="text-sm">Verificando estado de la clase...</span>
       </div>
     );
@@ -140,14 +139,14 @@ export default function LiveClassPanel({
         <>
           {/* ── Header del panel ── */}
           <div className="flex items-center gap-3">
-            <div className="flex size-10 items-center justify-center rounded-xl bg-[#1F2F58]/8">
-              <Video className="size-5 text-[#1F2F58]" />
+            <div className="flex size-10 items-center justify-center rounded-xl bg-[#FBBC0C]/15">
+              <Video className="size-5 text-[#FBBC0C]" />
             </div>
             <div>
-              <h3 className="text-base font-semibold text-[#1F2F58]">
-                Clase Sincronica
+              <h3 className="text-base font-semibold text-[#F9F6E7]">
+                Clase Sincrónica
               </h3>
-              <p className="text-xs text-[#1F2F58]/50">
+              <p className="text-xs text-[#F9F6E7]/50">
                 {activeLiveSession
                   ? "Clase en progreso — conéctate ahora"
                   : "Videoconferencia en tiempo real con tu docente"}
@@ -155,7 +154,7 @@ export default function LiveClassPanel({
             </div>
           </div>
 
-          {/* ── Boton de accion ── */}
+          {/* ── Botón de acción ── */}
           <JoinClassButton
             sessionId={sessionId}
             userRole={normalizedRole as "docente" | "estudiante" | "admin" | "coordinacion" | null}
@@ -172,7 +171,7 @@ export default function LiveClassPanel({
       {/* ── Grabaciones anteriores ── */}
       {history.length > 0 && (
         <div className="space-y-3">
-          <h4 className="text-sm font-semibold text-[#1F2F58]">
+          <h4 className="text-sm font-semibold text-[#FBBC0C]">
             Grabaciones de clases anteriores
           </h4>
           <RecordingPlayer pastSessions={history} />
@@ -181,17 +180,17 @@ export default function LiveClassPanel({
 
       {/* Google Meet — siempre disponible como alternativa */}
       {!activeLiveSession && (
-        <div className="rounded-xl border border-[#73B8E7]/20 bg-gradient-to-br from-[#73B8E7]/5 to-[#1F2F58]/5 p-5">
+        <div className="rounded-xl border border-[#73B8E7]/25 bg-gradient-to-br from-[#1F2F58]/50 to-[#0D1B30]/80 p-5">
           <div className="flex items-center gap-3 mb-3">
-            <div className="flex size-10 items-center justify-center rounded-lg bg-[#1F2F58]/8">
+            <div className="flex size-10 items-center justify-center rounded-lg bg-[#73B8E7]/15">
               <Video className="size-5 text-[#73B8E7]" />
             </div>
             <div>
-              <h4 className="text-sm font-semibold text-[#1F2F58]">
+              <h4 className="text-sm font-semibold text-[#F9F6E7]">
                 Clase por Google Meet
               </h4>
-              <p className="text-xs text-[#1F2F58]/50">
-                Conectate a la sala de clases en vivo de ITSEIA
+              <p className="text-xs text-[#F9F6E7]/50">
+                Conéctate a la sala de clases en vivo de ITSEIA
               </p>
             </div>
           </div>
@@ -199,13 +198,13 @@ export default function LiveClassPanel({
             href="https://meet.google.com/fzx-fqns-ayc"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 w-full rounded-lg bg-[#1F2F58] px-4 py-3 text-sm font-semibold text-white hover:bg-[#2A3F6E] transition-colors"
+            className="flex items-center justify-center gap-2 w-full rounded-lg bg-[#FBBC0C] px-4 py-3 text-sm font-semibold text-[#0A1628] hover:bg-[#FBBC0C]/90 transition-colors shadow-md shadow-[#FBBC0C]/20"
           >
             <Video className="size-4" />
             Unirse a Google Meet
           </a>
-          <p className="mt-2 text-[10px] text-[#1F2F58]/40 text-center">
-            El docente indicara el horario de las clases en vivo
+          <p className="mt-2 text-[10px] text-[#F9F6E7]/30 text-center">
+            El docente indicará el horario de las clases en vivo
           </p>
         </div>
       )}

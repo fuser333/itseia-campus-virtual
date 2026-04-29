@@ -47,19 +47,51 @@ export default function TheoryContent({
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <BookOpen className="size-4 text-[#FBBC0C]" />
-            <h3 className="text-sm font-semibold text-[#0A1628]">{title}</h3>
+            <h3 className="text-sm font-semibold text-[#FBBC0C]">{title}</h3>
           </div>
           {hasRead && (
-            <span className="flex items-center gap-1 text-xs text-emerald-500">
+            <span className="flex items-center gap-1 text-xs text-emerald-400">
               <CheckCircle2 className="size-3" />
-              Leido
+              Leído
             </span>
           )}
         </div>
       )}
 
-      {/* Markdown content */}
-      <article className="prose prose-lg max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-[#0A1628] prose-h2:text-xl prose-h2:mt-8 prose-h2:mb-4 prose-h3:text-lg prose-h3:mt-6 prose-h3:mb-3 prose-p:text-[#1F2F58] prose-p:leading-relaxed prose-a:text-[#73B8E7] prose-a:no-underline hover:prose-a:underline prose-strong:text-[#0A1628] prose-code:rounded-md prose-code:bg-[#1F2F58]/5 prose-code:px-1.5 prose-code:py-0.5 prose-code:text-[#F0846D] prose-code:text-sm prose-code:before:content-none prose-code:after:content-none prose-pre:rounded-xl prose-pre:border prose-pre:border-[#1F2F58]/10 prose-pre:bg-[#0A1628] prose-pre:text-white/80 prose-pre:text-sm prose-img:rounded-xl prose-blockquote:border-l-[#FBBC0C] prose-blockquote:bg-[#FBBC0C]/5 prose-blockquote:py-1 prose-blockquote:text-[#1F2F58] prose-li:text-[#1F2F58] prose-table:text-sm prose-th:bg-[#1F2F58]/5 prose-th:text-[#0A1628] prose-td:text-[#1F2F58] prose-hr:border-[#1F2F58]/10 prose-ul:marker:text-[#FBBC0C]">
+      {/* Markdown content — dark theme palette */}
+      <article
+        className={cn(
+          "prose prose-invert prose-lg max-w-none",
+          // Headings: amarillo brillante
+          "prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-[#FBBC0C]",
+          "prose-h2:text-xl prose-h2:mt-8 prose-h2:mb-4",
+          "prose-h3:text-lg prose-h3:text-[#73B8E7] prose-h3:mt-6 prose-h3:mb-3",
+          // Párrafos: beige legible
+          "prose-p:text-[#F9F6E7] prose-p:leading-relaxed",
+          // Links: azul claro ITSEIA
+          "prose-a:text-[#73B8E7] prose-a:no-underline hover:prose-a:text-[#FBBC0C] hover:prose-a:underline",
+          // Bold
+          "prose-strong:text-[#FBBC0C] prose-strong:font-bold",
+          // Code inline
+          "prose-code:rounded-md prose-code:bg-[#1F2F58] prose-code:px-1.5 prose-code:py-0.5",
+          "prose-code:text-[#F0846D] prose-code:text-sm prose-code:before:content-none prose-code:after:content-none",
+          // Code blocks
+          "prose-pre:rounded-xl prose-pre:border prose-pre:border-[#1F2F58]/60",
+          "prose-pre:bg-[#0D1B30] prose-pre:text-[#F9F6E7]/90 prose-pre:text-sm",
+          // Listas
+          "prose-li:text-[#F9F6E7] prose-ul:marker:text-[#FBBC0C] prose-ol:marker:text-[#FBBC0C]",
+          // Tablas
+          "prose-table:text-sm prose-th:bg-[#1F2F58] prose-th:text-[#FBBC0C]",
+          "prose-td:text-[#F9F6E7] prose-td:border-[#1F2F58]/40",
+          // Blockquote
+          "prose-blockquote:border-l-[#FBBC0C] prose-blockquote:bg-[#1F2F58]/30",
+          "prose-blockquote:py-1 prose-blockquote:text-[#F9F6E7]/80",
+          // HR
+          "prose-hr:border-[#1F2F58]/40",
+          // Imágenes
+          "prose-img:rounded-xl"
+        )}
+      >
         <ReactMarkdown
           components={{
             a: ({ href, children, ...props }) => {
@@ -75,6 +107,29 @@ export default function TheoryContent({
                 </a>
               );
             },
+            table: ({ children, ...props }) => (
+              <div className="overflow-x-auto rounded-xl border border-[#1F2F58]/40 my-4">
+                <table {...props} className="w-full border-collapse text-sm">
+                  {children}
+                </table>
+              </div>
+            ),
+            th: ({ children, ...props }) => (
+              <th
+                {...props}
+                className="px-4 py-2 text-left font-semibold text-[#FBBC0C] bg-[#1F2F58] border-b border-[#1F2F58]/60"
+              >
+                {children}
+              </th>
+            ),
+            td: ({ children, ...props }) => (
+              <td
+                {...props}
+                className="px-4 py-2 text-[#F9F6E7] border-b border-[#1F2F58]/20"
+              >
+                {children}
+              </td>
+            ),
           }}
         >
           {content}

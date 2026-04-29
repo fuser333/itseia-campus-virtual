@@ -298,29 +298,29 @@
 }
 
 /* ========================================
-   Force dark text on light backgrounds
-   The body uses text-foreground (#F0F2F5 white)
-   for the dark theme, but content areas on beige
-   backgrounds need dark text forced via CSS.
+   Force dark text on light backgrounds ONLY
+   The .light class wraps light-theme sections.
+   prose-invert handles dark-theme sections.
    ======================================== */
-.prose p,
-.prose li,
-.prose td,
-.prose th,
-.prose blockquote,
-.prose dd,
-.prose dt,
-.prose figcaption {
+.light .prose p,
+.light .prose li,
+.light .prose td,
+.light .prose th,
+.light .prose blockquote,
+.light .prose dd,
+.light .prose dt,
+.light .prose figcaption {
   color: #1F2F58 !important;
 }
-.prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6,
-.prose strong, .prose b {
+.light .prose h1, .light .prose h2, .light .prose h3,
+.light .prose h4, .light .prose h5, .light .prose h6,
+.light .prose strong, .light .prose b {
   color: #0A1628 !important;
 }
-.prose a {
+.light .prose a {
   color: #73B8E7 !important;
 }
-.prose code:not(pre code) {
+.light .prose code:not(pre code) {
   color: #F0846D !important;
 }
 

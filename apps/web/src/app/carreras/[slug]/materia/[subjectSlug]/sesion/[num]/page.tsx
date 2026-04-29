@@ -18,6 +18,7 @@ import AssignmentPanel from "@/components/session/AssignmentPanel";
 import AILabPanel from "@/components/session/AILabPanel";
 import ResourceList from "@/components/session/ResourceList";
 import LiveClassPanel from "@/components/session/LiveClassPanel";
+import GrabacionesTab from "@/components/session/GrabacionesTab";
 import LibrarySuggest from "@/components/library/LibrarySuggest";
 
 import type {
@@ -445,6 +446,16 @@ export default function SessionPage({ params }: PageProps) {
           userRole={userRole}
           isEnrolled={isEnrolled || ["docente", "admin", "coordinacion", "super_admin", "finanzas"].includes(userRole || "")}
         />
+      ),
+    },
+    {
+      id: "recordings",
+      label: "Grabaciones",
+      icon: "recordings" as SessionTab["icon"],
+      completed: false,
+      available: true, // Siempre visible — muestra estado vacío elegante si no hay
+      content: (
+        <GrabacionesTab sessionId={session.id} />
       ),
     },
   ];

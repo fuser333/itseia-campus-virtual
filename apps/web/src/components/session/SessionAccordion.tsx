@@ -11,6 +11,7 @@ import {
   Link2,
   Package,
   Video,
+  Youtube,
   ChevronDown,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -25,6 +26,7 @@ const iconMap: Record<SessionTab["icon"], React.ComponentType<{ className?: stri
   ailab: Sparkles,
   resources: Link2,
   live: Video,
+  recordings: Youtube,
 };
 
 interface AccordionItemProps {
@@ -38,15 +40,12 @@ function AccordionItem({ tab, isOpen, onToggle }: AccordionItemProps) {
   const contentRef = useRef<HTMLDivElement>(null);
   const [height, setHeight] = useState<number | undefined>(undefined);
 
-  // Measure content height whenever it opens/closes
   useEffect(() => {
     if (!contentRef.current) return;
     if (isOpen) {
       setHeight(contentRef.current.scrollHeight);
     } else {
-      // First snapshot actual height, then collapse
       setHeight(contentRef.current.scrollHeight);
-      // Next frame: set to 0 so transition fires
       requestAnimationFrame(() => {
         setHeight(0);
       });
@@ -58,8 +57,8 @@ function AccordionItem({ tab, isOpen, onToggle }: AccordionItemProps) {
       className={cn(
         "rounded-xl border transition-colors duration-200",
         isOpen
-          ? "border-[#FBBC0C]/30 bg-white shadow-sm"
-          : "border-[#1F2F58]/8 bg-white/60 hover:border-[#1F2F58]/15 hover:bg-white"
+          ? "border-[#FBBC0C]/30 bg-[#1F2F58]/50 shadow-md"
+          : "border-white/8 bg-[#1F2F58]/25 hover:border-white/15 hover:bg-[#1F2F58]/35"
       )}
     >
       {/* Header */}
@@ -73,8 +72,8 @@ function AccordionItem({ tab, isOpen, onToggle }: AccordionItemProps) {
           className={cn(
             "flex size-8 shrink-0 items-center justify-center rounded-lg transition-colors",
             isOpen
-              ? "bg-[#FBBC0C]/15 text-[#1F2F58]"
-              : "bg-[#1F2F58]/5 text-[#1F2F58]/50"
+              ? "bg-[#FBBC0C]/20 text-[#FBBC0C]"
+              : "bg-white/8 text-[#F9F6E7]/40"
           )}
         >
           <Icon className="size-4" />
@@ -85,7 +84,7 @@ function AccordionItem({ tab, isOpen, onToggle }: AccordionItemProps) {
           <span
             className={cn(
               "text-sm font-semibold truncate",
-              isOpen ? "text-[#0A1628]" : "text-[#1F2F58]/60"
+              isOpen ? "text-[#F9F6E7]" : "text-[#F9F6E7]/55"
             )}
           >
             {tab.label}
@@ -101,7 +100,7 @@ function AccordionItem({ tab, isOpen, onToggle }: AccordionItemProps) {
         {/* Chevron */}
         <ChevronDown
           className={cn(
-            "size-4 shrink-0 text-[#1F2F58]/30 transition-transform duration-300",
+            "size-4 shrink-0 text-[#F9F6E7]/30 transition-transform duration-300",
             isOpen && "rotate-180 text-[#FBBC0C]"
           )}
         />
@@ -112,7 +111,7 @@ function AccordionItem({ tab, isOpen, onToggle }: AccordionItemProps) {
         className="overflow-hidden transition-[max-height] duration-300 ease-in-out"
         style={{ maxHeight: isOpen ? (height ?? "none") : 0 }}
       >
-        <div ref={contentRef} className="border-t border-[#1F2F58]/6 px-4 py-5">
+        <div ref={contentRef} className="border-t border-white/6 px-4 py-5">
           {tab.content}
         </div>
       </div>
@@ -126,7 +125,6 @@ interface SessionAccordionProps {
 }
 
 export default function SessionAccordion({ tabs, className }: SessionAccordionProps) {
-  // Only show available tabs
   const available = tabs.filter((t) => t.available);
   const [openIds, setOpenIds] = useState<Set<string>>(new Set());
 
@@ -148,11 +146,11 @@ export default function SessionAccordion({ tabs, className }: SessionAccordionPr
     <div className={cn("space-y-2", className)}>
       {/* Section header */}
       <div className="flex items-center gap-2 px-1 pb-1">
-        <div className="h-px flex-1 bg-[#1F2F58]/8" />
-        <span className="text-[11px] font-medium uppercase tracking-widest text-[#1F2F58]/70">
-          Mas contenido
+        <div className="h-px flex-1 bg-white/8" />
+        <span className="text-[11px] font-medium uppercase tracking-widest text-[#F9F6E7]/40">
+          Más contenido
         </span>
-        <div className="h-px flex-1 bg-[#1F2F58]/8" />
+        <div className="h-px flex-1 bg-white/8" />
       </div>
 
       {/* Accordion items */}

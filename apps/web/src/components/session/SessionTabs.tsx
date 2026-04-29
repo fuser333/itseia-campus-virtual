@@ -11,6 +11,7 @@ import {
   Link2,
   Package,
   Video,
+  Youtube,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import SessionAccordion from "./SessionAccordion";
@@ -18,7 +19,7 @@ import SessionAccordion from "./SessionAccordion";
 export interface SessionTab {
   id: string;
   label: string;
-  icon: "video" | "slides" | "theory" | "quiz" | "assignment" | "ailab" | "resources" | "live";
+  icon: "video" | "slides" | "theory" | "quiz" | "assignment" | "ailab" | "resources" | "live" | "recordings";
   completed: boolean;
   available: boolean;
   content: ReactNode;
@@ -38,6 +39,7 @@ const iconMap: Record<SessionTab["icon"], React.ComponentType<{ className?: stri
   ailab: Sparkles,
   resources: Link2,
   live: Video,
+  recordings: Youtube,
 };
 
 export default function SessionTabs({ tabs, className }: SessionTabsProps) {
@@ -62,10 +64,10 @@ export default function SessionTabs({ tabs, className }: SessionTabsProps) {
   );
 
   return (
-    <div className={cn("flex flex-col h-full", className)}>
+    <div className={cn("flex flex-col h-full bg-[#0A1628]", className)}>
 
       {/* ── Tab bar (sticky) ─────────────────────────────────── */}
-      <div className="sticky top-0 z-10 border-b border-[#1F2F58]/8 bg-white shadow-sm">
+      <div className="sticky top-0 z-10 border-b border-white/8 bg-[#0D1B30] shadow-lg shadow-black/20">
         <div className="overflow-x-auto scrollbar-hide">
           <div className="flex min-w-max px-4 gap-0.5">
             {tabs.map((tab) => {
@@ -82,10 +84,10 @@ export default function SessionTabs({ tabs, className }: SessionTabsProps) {
                   className={cn(
                     "relative flex items-center gap-1.5 px-3 py-3 text-sm font-medium transition-all whitespace-nowrap",
                     isActive
-                      ? "text-[#0A1628]"
+                      ? "text-[#F9F6E7]"
                       : tab.available
-                      ? "text-[#1F2F58]/40 hover:text-[#1F2F58]/70"
-                      : "text-[#1F2F58]/20 cursor-not-allowed"
+                      ? "text-[#F9F6E7]/40 hover:text-[#F9F6E7]/70"
+                      : "text-[#F9F6E7]/15 cursor-not-allowed"
                   )}
                 >
                   <Icon className="size-4" />
@@ -108,7 +110,7 @@ export default function SessionTabs({ tabs, className }: SessionTabsProps) {
       </div>
 
       {/* ── Scrollable body ──────────────────────────────────── */}
-      <div className="flex-1 overflow-y-auto text-[#1F2F58]">
+      <div className="flex-1 overflow-y-auto text-[#F9F6E7]">
         <div className="mx-auto max-w-4xl px-4 py-6 sm:px-6 lg:px-8 space-y-10">
 
           {/* Keep visited tabs mounted but hidden — prevents iframe reload */}
@@ -153,11 +155,11 @@ function EmptyState() {
       <div className="flex size-16 items-center justify-center rounded-2xl bg-[#FBBC0C]/10">
         <Package className="size-8 text-[#FBBC0C]" />
       </div>
-      <h3 className="text-base font-semibold text-[#0A1628]">
-        Contenido en preparacion
+      <h3 className="text-base font-semibold text-[#F9F6E7]">
+        Contenido en preparación
       </h3>
-      <p className="max-w-sm text-sm text-[#1F2F58]/50">
-        Estamos trabajando en este contenido. Estara disponible pronto.
+      <p className="max-w-sm text-sm text-[#F9F6E7]/50">
+        Estamos trabajando en este contenido. Estará disponible pronto.
       </p>
     </div>
   );

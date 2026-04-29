@@ -86,7 +86,7 @@ export const AI_MODELS = {
 
 export type AIModelId = keyof typeof AI_MODELS;
 
-export const DEFAULT_MODEL: AIModelId = "gemini-2.0-flash";
+export const DEFAULT_MODEL: AIModelId = "gemini-2.5-flash";
 
 export const MODEL_IDS = Object.keys(AI_MODELS) as AIModelId[];
 

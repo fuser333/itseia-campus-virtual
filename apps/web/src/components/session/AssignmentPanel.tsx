@@ -44,7 +44,6 @@ export default function AssignmentPanel({
     setLoading(true);
     const supabase = createClient();
 
-    // Get assignment
     const { data: assignmentData } = await supabase
       .from("assignments")
       .select("*")
@@ -55,7 +54,6 @@ export default function AssignmentPanel({
       setAssignment(assignmentData);
     }
 
-    // Check existing submission
     const {
       data: { user },
     } = await supabase.auth.getUser();
@@ -111,16 +109,14 @@ export default function AssignmentPanel({
   function validateAndSetFile(file: File) {
     if (!assignment) return;
 
-    // Check file size
     const maxBytes = assignment.max_file_size_mb * 1024 * 1024;
     if (file.size > maxBytes) {
       setError(
-        `El archivo excede el tamano maximo de ${assignment.max_file_size_mb}MB.`
+        `El archivo excede el tamaño máximo de ${assignment.max_file_size_mb}MB.`
       );
       return;
     }
 
-    // Check file type
     const ext = file.name.split(".").pop()?.toLowerCase() || "";
     const allowedTypes = assignment.allowed_file_types || [];
     if (
@@ -165,7 +161,7 @@ export default function AssignmentPanel({
       setSelectedFile(null);
       onSubmitted?.();
     } catch {
-      setError("Error de conexion. Intenta de nuevo.");
+      setError("Error de conexión. Intenta de nuevo.");
     } finally {
       setUploading(false);
     }
@@ -182,9 +178,9 @@ export default function AssignmentPanel({
   if (!assignment) {
     return (
       <div className="flex h-64 flex-col items-center justify-center gap-3 text-center">
-        <FileText className="size-8 text-[#1F2F58]/40" />
-        <p className="text-sm text-[#1F2F58]/70">
-          Ejercicio no disponible aun.
+        <FileText className="size-8 text-[#F9F6E7]/25" />
+        <p className="text-sm text-[#F9F6E7]/50">
+          Ejercicio no disponible aún.
         </p>
       </div>
     );
@@ -194,13 +190,13 @@ export default function AssignmentPanel({
     <div className={cn("space-y-6", className)}>
       {/* Assignment header */}
       <div>
-        <h3 className="text-base font-semibold text-[#0A1628]">
+        <h3 className="text-base font-semibold text-[#FBBC0C]">
           {assignment.title}
         </h3>
         {assignment.due_date && (
-          <p className="mt-1 flex items-center gap-1 text-xs text-[#1F2F58]/80">
+          <p className="mt-1 flex items-center gap-1 text-xs text-[#F9F6E7]/60">
             <Clock className="size-3" />
-            Fecha limite:{" "}
+            Fecha límite:{" "}
             {new Date(assignment.due_date).toLocaleDateString("es-EC", {
               day: "numeric",
               month: "long",
@@ -210,12 +206,12 @@ export default function AssignmentPanel({
         )}
       </div>
 
-      {/* Instructions */}
-      <div className="rounded-xl border border-[#1F2F58]/8 bg-[#F9F6E7]/30 p-5">
-        <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-[#1F2F58]/80">
+      {/* Instructions — dark prose */}
+      <div className="rounded-xl border border-[#1F2F58]/50 bg-[#1F2F58]/30 p-5">
+        <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-[#73B8E7]">
           Instrucciones
         </p>
-        <div className="prose prose-sm max-w-none prose-headings:text-[#0A1628] prose-p:text-[#1F2F58] prose-li:text-[#1F2F58] prose-code:text-[#F0846D] prose-code:bg-[#1F2F58]/5 prose-code:px-1 prose-code:py-0.5 prose-code:rounded-md prose-code:before:content-none prose-code:after:content-none">
+        <div className="prose prose-invert prose-sm max-w-none prose-headings:text-[#FBBC0C] prose-p:text-[#F9F6E7] prose-li:text-[#F9F6E7] prose-strong:text-[#FBBC0C] prose-code:text-[#F0846D] prose-code:bg-[#0D1B30] prose-code:px-1 prose-code:py-0.5 prose-code:rounded-md prose-code:before:content-none prose-code:after:content-none">
           <ReactMarkdown>{assignment.instructions_markdown || "No hay instrucciones disponibles."}</ReactMarkdown>
         </div>
       </div>
@@ -226,20 +222,20 @@ export default function AssignmentPanel({
           className={cn(
             "rounded-xl border p-4",
             submission.status === "graded"
-              ? "border-emerald-200 bg-emerald-50/30"
+              ? "border-emerald-500/30 bg-emerald-500/10"
               : submission.status === "returned"
-              ? "border-[#F0846D]/20 bg-[#F0846D]/5"
-              : "border-[#73B8E7]/20 bg-[#73B8E7]/5"
+              ? "border-[#F0846D]/30 bg-[#F0846D]/10"
+              : "border-[#73B8E7]/25 bg-[#73B8E7]/10"
           )}
         >
           <div className="flex items-start justify-between">
             <div className="flex items-center gap-2">
-              <FileText className="size-4 text-[#1F2F58]/50" />
+              <FileText className="size-4 text-[#F9F6E7]/50" />
               <div>
-                <p className="text-sm font-medium text-[#0A1628]">
+                <p className="text-sm font-medium text-[#F9F6E7]">
                   {submission.file_name || "Archivo enviado"}
                 </p>
-                <p className="text-xs text-[#1F2F58]/40">
+                <p className="text-xs text-[#F9F6E7]/40">
                   Enviado el{" "}
                   {new Date(submission.submitted_at).toLocaleDateString(
                     "es-EC",
@@ -252,10 +248,10 @@ export default function AssignmentPanel({
               className={cn(
                 "border-none text-[10px] font-semibold uppercase tracking-wider",
                 submission.status === "graded"
-                  ? "bg-emerald-100 text-emerald-700"
+                  ? "bg-emerald-500/20 text-emerald-400"
                   : submission.status === "returned"
-                  ? "bg-[#F0846D]/10 text-[#F0846D]"
-                  : "bg-[#73B8E7]/10 text-[#73B8E7]"
+                  ? "bg-[#F0846D]/20 text-[#F0846D]"
+                  : "bg-[#73B8E7]/15 text-[#73B8E7]"
               )}
             >
               {submission.status === "graded"
@@ -268,24 +264,24 @@ export default function AssignmentPanel({
 
           {/* Grade */}
           {submission.status === "graded" && submission.grade !== null && (
-            <div className="mt-3 flex items-center gap-3 rounded-lg bg-white p-3">
+            <div className="mt-3 flex items-center gap-3 rounded-lg bg-[#0D1B30] p-3">
               <Star className="size-5 text-[#FBBC0C]" />
               <div>
-                <p className="text-lg font-bold text-[#0A1628] font-[family-name:var(--font-space-grotesk)]">
+                <p className="text-lg font-bold text-[#FBBC0C] font-[family-name:var(--font-space-grotesk)]">
                   {submission.grade}/{assignment.max_grade}
                 </p>
-                <p className="text-xs text-[#1F2F58]/40">Calificacion</p>
+                <p className="text-xs text-[#F9F6E7]/40">Calificación</p>
               </div>
             </div>
           )}
 
           {/* Feedback */}
           {submission.feedback && (
-            <div className="mt-3 rounded-lg bg-white p-3">
+            <div className="mt-3 rounded-lg bg-[#0D1B30] p-3">
               <p className="text-xs font-semibold uppercase tracking-wider text-[#FBBC0C] mb-1">
-                Retroalimentacion del docente
+                Retroalimentación del docente
               </p>
-              <p className="text-sm text-[#1F2F58]/70">{submission.feedback}</p>
+              <p className="text-sm text-[#F9F6E7]/70">{submission.feedback}</p>
             </div>
           )}
         </div>
@@ -303,8 +299,8 @@ export default function AssignmentPanel({
             className={cn(
               "relative cursor-pointer rounded-xl border-2 border-dashed p-8 text-center transition-all",
               dragActive
-                ? "border-[#FBBC0C] bg-[#FBBC0C]/5"
-                : "border-[#1F2F58]/15 bg-white hover:border-[#73B8E7]/40 hover:bg-[#73B8E7]/5"
+                ? "border-[#FBBC0C] bg-[#FBBC0C]/10"
+                : "border-white/15 bg-[#1F2F58]/20 hover:border-[#73B8E7]/40 hover:bg-[#1F2F58]/30"
             )}
           >
             <input
@@ -319,10 +315,10 @@ export default function AssignmentPanel({
               <div className="flex items-center justify-center gap-3">
                 <FileText className="size-6 text-[#73B8E7]" />
                 <div className="text-left">
-                  <p className="text-sm font-medium text-[#0A1628]">
+                  <p className="text-sm font-medium text-[#F9F6E7]">
                     {selectedFile.name}
                   </p>
-                  <p className="text-xs text-[#1F2F58]/60">
+                  <p className="text-xs text-[#F9F6E7]/50">
                     {(selectedFile.size / 1024 / 1024).toFixed(2)} MB
                   </p>
                 </div>
@@ -331,19 +327,19 @@ export default function AssignmentPanel({
                     e.stopPropagation();
                     setSelectedFile(null);
                   }}
-                  className="rounded-lg p-1 text-[#1F2F58]/60 hover:bg-[#1F2F58]/5 hover:text-[#1F2F58]"
+                  className="rounded-lg p-1 text-[#F9F6E7]/50 hover:bg-white/10 hover:text-[#F9F6E7]"
                 >
                   <X className="size-4" />
                 </button>
               </div>
             ) : (
               <>
-                <Upload className="mx-auto size-8 text-[#1F2F58]/40" />
-                <p className="mt-3 text-sm font-medium text-[#0A1628]">
-                  Arrastra tu archivo aqui o haz clic para seleccionar
+                <Upload className="mx-auto size-8 text-[#F9F6E7]/30" />
+                <p className="mt-3 text-sm font-medium text-[#F9F6E7]">
+                  Arrastra tu archivo aquí o haz clic para seleccionar
                 </p>
-                <p className="mt-1 text-xs text-[#1F2F58]/70">
-                  Tipos: {(assignment.allowed_file_types || []).join(", ")} | Max:{" "}
+                <p className="mt-1 text-xs text-[#F9F6E7]/50">
+                  Tipos: {(assignment.allowed_file_types || []).join(", ")} | Máx:{" "}
                   {assignment.max_file_size_mb}MB
                 </p>
               </>
@@ -370,7 +366,7 @@ export default function AssignmentPanel({
 
       {/* Error */}
       {error && (
-        <div className="flex items-start gap-2 rounded-lg bg-[#F0846D]/5 border border-[#F0846D]/20 p-3">
+        <div className="flex items-start gap-2 rounded-lg bg-[#F0846D]/10 border border-[#F0846D]/30 p-3">
           <AlertCircle className="size-4 mt-0.5 shrink-0 text-[#F0846D]" />
           <p className="text-sm text-[#F0846D]">{error}</p>
         </div>
