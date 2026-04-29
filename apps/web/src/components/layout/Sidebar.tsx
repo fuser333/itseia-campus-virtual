@@ -180,14 +180,25 @@ const MENU_CURSOS_PRO: NavSection[] = [
 ];
 
 /**
- * EXPLORAR section — injected into all student menus so users can
- * discover other programs (Cursos MDT, Bootcamp).
+ * DESCUBRE ITSEIA section — injected into all student menus so users can
+ * discover other programs through the public /descubre/* landing pages.
+ * Each link goes to a promo page with video + info + WhatsApp CTA.
  */
 const SECTION_EXPLORAR: NavSection = {
-  label: "EXPLORAR",
+  label: "DESCUBRE ITSEIA",
   items: [
-    { href: "/cursos-mdt", label: "Cursos MDT",  icon: BookOpen },
-    { href: "/bootcamp",   label: "Bootcamp",    icon: FlaskConical },
+    { href: "/descubre/carreras",        label: "Carreras de IA (3)",     icon: GraduationCap },
+    { href: "/descubre/cursos-mdt",      label: "Cursos MDT (15)",        icon: BookOpen },
+    { href: "/descubre/cursos-pro",      label: "Cursos Profesionales",   icon: Sparkles },
+    { href: "/descubre/bootcamp",        label: "Bootcamp 120h",          icon: FlaskConical },
+    { href: "/descubre/certificaciones", label: "Certificaciones",        icon: Award },
+    { href: "/b2b",                      label: "B2B Empresas",           icon: Building2 },
+    {
+      href: "https://h3l.ai",
+      label: "H3L Diagnóstico IA",
+      icon: ExternalLink,
+      external: true,
+    },
   ],
 };
 
