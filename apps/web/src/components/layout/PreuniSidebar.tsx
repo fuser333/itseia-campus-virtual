@@ -174,7 +174,7 @@ export default function PreuniSidebar({
   async function handleLogout() {
     const supabase = createClient();
     await supabase.auth.signOut();
-    router.push("/login");
+    router.push("/login?module=preuni");
     router.refresh();
   }
 

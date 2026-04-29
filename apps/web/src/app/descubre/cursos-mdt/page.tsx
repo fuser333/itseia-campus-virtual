@@ -1,7 +1,6 @@
 "use client";
 
-import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import BackButton from "@/components/descubre/BackButton";
 
 // ─── Constantes ───────────────────────────────────────────────────────────────
 
@@ -46,13 +45,7 @@ export default function DescubreCursosMdtPage() {
       {/* ── Header ── */}
       <header className="sticky top-0 z-40 bg-[#0D1B30]/90 backdrop-blur-xl border-b border-white/[0.06]">
         <div className="max-w-6xl mx-auto px-5 h-16 flex items-center justify-between gap-4">
-          <Link
-            href="/dashboard"
-            className="flex items-center gap-2 text-white/60 hover:text-white transition-colors text-sm font-medium"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Volver al dashboard
-          </Link>
+          <BackButton />
           <img src="/logo_itseia.svg" alt="ITSEIA" className="h-7 w-auto" />
           <a
             href={WA_LINK}

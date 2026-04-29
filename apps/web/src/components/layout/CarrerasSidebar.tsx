@@ -131,7 +131,7 @@ export default function CarrerasSidebar({
   async function handleLogout() {
     const supabase = createClient();
     await supabase.auth.signOut();
-    router.push("/login");
+    router.push("/login?module=carrera");
     router.refresh();
   }
 

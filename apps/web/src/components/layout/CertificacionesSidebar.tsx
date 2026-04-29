@@ -120,7 +120,7 @@ export default function CertificacionesSidebar({
   async function handleLogout() {
     const supabase = createClient();
     await supabase.auth.signOut();
-    router.push("/login");
+    router.push("/login?module=certificacion");
     router.refresh();
   }
 

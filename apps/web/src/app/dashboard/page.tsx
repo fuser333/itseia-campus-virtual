@@ -73,6 +73,44 @@ export default async function DashboardPage() {
     .eq("status", "active")
     .order("enrolled_at", { ascending: false });
 
+  // Redirect students directly to their module dashboard (no generic dashboard)
+  // The /dashboard "fantasma" should not exist for students who have a clear track
+  if (profile?.role === "estudiante" || !profile?.role) {
+    const activeEnrollments = enrollments || [];
+
+    // Sin matriculas activas: mandarlo a descubrir productos
+    if (activeEnrollments.length === 0) {
+      redirect("/descubre/carreras");
+    }
+
+    // Una sola matricula: mandarlo directo al modulo correcto
+    if (activeEnrollments.length === 1) {
+      const program = activeEnrollments[0].programs as Program | null;
+      const programType = (program?.type ?? "") as string;
+      const programSlug = program?.slug ?? "";
+
+      if (programType === "preuni" || programSlug === "preuniversitario-ia") {
+        redirect("/carreras/preuniversitario-ia");
+      }
+      if (programType === "bootcamp") {
+        redirect("/bootcamp");
+      }
+      if (programType === "curso" || programType === "curso_pro") {
+        redirect("/cursos-pro");
+      }
+      if (programType === "curso_mdt") {
+        redirect("/cursos-mdt");
+      }
+      if (programType === "certificacion") {
+        redirect("/certificaciones");
+      }
+      if (programType === "carrera" && programSlug) {
+        redirect(`/carreras/${programSlug}`);
+      }
+    }
+    // Multiples matriculas: dejar /dashboard generico (caso raro pero valido)
+  }
+
   // Fetch all completed lessons count
   const { count: completedLessonsCount } = await supabase
     .from("progress")
