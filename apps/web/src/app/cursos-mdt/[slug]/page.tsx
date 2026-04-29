@@ -18,8 +18,10 @@ import {
   FolderOpen,
   CheckCircle2,
   MessageCircle,
+  Youtube,
 } from "lucide-react";
 import SlideViewer from "@/components/session/SlideViewer";
+import GrabacionesTab from "@/components/session/GrabacionesTab";
 import { CURSOS_MDT } from "../data";
 import { C1_TEMAS, C1_MODULOS } from "../c1-data";
 import type { TemaC1 } from "../c1-data";
@@ -117,11 +119,12 @@ interface TabDef {
 const SESSION_TABS: TabDef[] = [
   { id: "video",        label: "Video",         icon: <Play className="size-3.5" />,          color: "#73B8E7" },
   { id: "presentacion", label: "Presentación",  icon: <FileText className="size-3.5" />,      color: "#517CBE" },
-  { id: "teoria",       label: "Teoría",        icon: <BookOpen className="size-3.5" />,      color: "#1F2F58" },
+  { id: "teoria",       label: "Teoría",        icon: <BookOpen className="size-3.5" />,      color: "#FBBC0C" },
   { id: "quiz",         label: "Quiz",          icon: <ClipboardList className="size-3.5" />, color: "#FBBC0C" },
   { id: "ejercicio",    label: "Ejercicio",     icon: <Pencil className="size-3.5" />,        color: "#F0846D" },
   { id: "ailab",        label: "AI Lab",        icon: <FlaskConical className="size-3.5" />,  color: "#73B8E7" },
   { id: "recursos",     label: "Recursos",      icon: <FolderOpen className="size-3.5" />,   color: "#517CBE" },
+  { id: "grabaciones",  label: "Grabaciones",   icon: <Youtube className="size-3.5" />,       color: "#FBBC0C" },
 ];
 
 // ─── Componente: contenido de sesión (formato Julio Cruz) ───────────────────
@@ -130,7 +133,7 @@ const SESSION_TABS: TabDef[] = [
 // Así el estudiante puede ver Video grande arriba Y expandir Teoría/Quiz debajo
 // sin perder el video. Mismo patrón que Julio Cruz B2B.
 
-function SesionContent({ sesionTitulo, temaData }: { sesionTitulo: string; temaData?: TemaC1 }) {
+function SesionContent({ sesionTitulo, temaData, slug, temaId }: { sesionTitulo: string; temaData?: TemaC1; slug: string; temaId?: number }) {
   const [activeTab, setActiveTab] = useState<string>("video");
   const [expandedSections, setExpandedSections] = useState<Set<string>>(new Set());
   const [quizAnswers, setQuizAnswers] = useState<Record<number, number>>({});
@@ -151,10 +154,10 @@ function SesionContent({ sesionTitulo, temaData }: { sesionTitulo: string; temaD
   if (!hasContent || !temaData) {
     return (
       <div className="flex flex-col items-center justify-center py-8 text-center">
-        <div className="mb-4 flex size-12 items-center justify-center rounded-full bg-[#1F2F58]/5">
-          <Brain className="size-6 text-[#1F2F58]/20" />
+        <div className="mb-4 flex size-12 items-center justify-center rounded-full bg-[#1F2F58]/30">
+          <Brain className="size-6 text-[#F9F6E7]/25" />
         </div>
-        <p className="text-sm text-[#1F2F58]/50">Contenido próximamente</p>
+        <p className="text-sm text-[#F9F6E7]/55">Contenido próximamente</p>
       </div>
     );
   }
@@ -162,9 +165,9 @@ function SesionContent({ sesionTitulo, temaData }: { sesionTitulo: string; temaD
   // ── Video content (puede ir arriba o como acordeón) ──
   const videoContent = (
     <div>
-      <h4 className="text-sm font-bold text-[#0A1628] mb-1">{temaData.videoTitulo}</h4>
+      <h4 className="text-sm font-bold text-[#F9F6E7] mb-1">{temaData.videoTitulo}</h4>
       {temaData.videoDuracion && (
-        <p className="text-xs text-[#1F2F58]/50 mb-3">{temaData.videoDuracion}</p>
+        <p className="text-xs text-[#F9F6E7]/55 mb-3">{temaData.videoDuracion}</p>
       )}
       <div className="rounded-xl overflow-hidden" style={{ aspectRatio: "16/9" }}>
         <iframe
@@ -192,31 +195,50 @@ function SesionContent({ sesionTitulo, temaData }: { sesionTitulo: string; temaD
     }
     const slides = temaData.presentacionSlides;
     if (!slides || slides.length === 0) {
-      return <p className="text-sm text-[#1F2F58]/50">Presentación próximamente</p>;
+      // Fix 2 — fallback bonito cuando no hay presentación
+      return (
+        <div className="flex flex-col items-center gap-5 rounded-xl border border-[#FBBC0C]/25 bg-gradient-to-br from-[#1F2F58]/60 to-[#0A1628]/80 p-8 text-center">
+          <div className="flex size-16 items-center justify-center rounded-2xl bg-[#FBBC0C]/15">
+            <FileText className="size-8 text-[#FBBC0C]" />
+          </div>
+          <div>
+            <p className="font-semibold text-[#F9F6E7]">Presentación en preparación</p>
+            <p className="mt-1.5 text-sm text-[#F9F6E7]/65 max-w-xs">
+              Este contenido estará disponible próximamente. Mientras tanto, revisa la teoría y los ejercicios.
+            </p>
+          </div>
+          <button
+            onClick={() => setActiveTab("teoria")}
+            className="text-sm font-semibold text-[#73B8E7] hover:text-[#FBBC0C] transition-colors"
+          >
+            Ir a Teoría →
+          </button>
+        </div>
+      );
     }
     const currentSlide = slides[slideIndex] ?? slides[0];
     return (
       <div>
         <div className="flex items-center justify-between mb-3">
-          <span className="text-xs text-[#1F2F58]/50">{slides.length} slides (vista previa)</span>
-          <span className="text-xs font-semibold text-[#517CBE] bg-[#517CBE]/10 px-2 py-0.5 rounded-full">
+          <span className="text-xs text-[#F9F6E7]/50">{slides.length} slides (vista previa)</span>
+          <span className="text-xs font-semibold text-[#73B8E7] bg-[#73B8E7]/15 px-2 py-0.5 rounded-full">
             {slideIndex + 1} / {slides.length}
           </span>
         </div>
-        <div className="rounded-xl border-2 border-[#1F2F58]/10 bg-gradient-to-b from-[#F9F6E7]/60 to-white overflow-hidden">
+        <div className="rounded-xl border border-[#1F2F58]/50 bg-[#0D1B30] overflow-hidden">
           <div className="bg-[#1F2F58] px-5 py-3">
             <p className="text-xs font-semibold text-[#FBBC0C] tracking-wide uppercase">Slide {slideIndex + 1}</p>
             <h5 className="text-base font-bold text-white mt-0.5">{currentSlide.titulo}</h5>
           </div>
           <div className="px-5 py-4">
-            <div className="text-sm text-[#1F2F58] leading-relaxed whitespace-pre-line">{currentSlide.contenido}</div>
+            <div className="text-sm text-[#F9F6E7]/85 leading-relaxed whitespace-pre-line">{currentSlide.contenido}</div>
           </div>
         </div>
         <div className="flex items-center justify-between mt-3">
           <button
             onClick={() => setSlideIndex(Math.max(0, slideIndex - 1))}
             disabled={slideIndex === 0}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all disabled:opacity-30 disabled:cursor-not-allowed bg-[#1F2F58]/5 text-[#1F2F58] hover:bg-[#1F2F58]/10"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all disabled:opacity-30 disabled:cursor-not-allowed bg-[#1F2F58]/30 text-[#F9F6E7] hover:bg-[#1F2F58]/50"
           >
             <ChevronUp className="size-3.5 -rotate-90" /> Anterior
           </button>
@@ -225,14 +247,14 @@ function SesionContent({ sesionTitulo, temaData }: { sesionTitulo: string; temaD
               <button
                 key={i}
                 onClick={() => setSlideIndex(i)}
-                className={`size-2 rounded-full transition-all ${i === slideIndex ? "bg-[#FBBC0C] scale-125" : "bg-[#1F2F58]/15 hover:bg-[#1F2F58]/30"}`}
+                className={`size-2 rounded-full transition-all ${i === slideIndex ? "bg-[#FBBC0C] scale-125" : "bg-[#F9F6E7]/15 hover:bg-[#F9F6E7]/30"}`}
               />
             ))}
           </div>
           <button
             onClick={() => setSlideIndex(Math.min(slides.length - 1, slideIndex + 1))}
             disabled={slideIndex === slides.length - 1}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all disabled:opacity-30 disabled:cursor-not-allowed bg-[#FBBC0C]/10 text-[#0A1628] hover:bg-[#FBBC0C]/20"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all disabled:opacity-30 disabled:cursor-not-allowed bg-[#FBBC0C]/15 text-[#FBBC0C] hover:bg-[#FBBC0C]/25"
           >
             Siguiente <ChevronDown className="size-3.5 -rotate-90" />
           </button>
@@ -243,7 +265,7 @@ function SesionContent({ sesionTitulo, temaData }: { sesionTitulo: string; temaD
 
   // ── Teoría content ──
   const teoriaContent = (
-    <div className="prose prose-sm max-w-none text-[#1F2F58] leading-relaxed whitespace-pre-line">
+    <div className="prose prose-sm prose-invert max-w-none text-[#F9F6E7] leading-relaxed whitespace-pre-line prose-headings:text-[#FBBC0C] prose-strong:text-[#FBBC0C] prose-a:text-[#73B8E7]">
       {temaData.teoria}
     </div>
   );
@@ -251,10 +273,10 @@ function SesionContent({ sesionTitulo, temaData }: { sesionTitulo: string; temaD
   // ── Quiz content ──
   const quizContent = (
     <div>
-      <p className="text-xs text-[#1F2F58]/50 mb-4">{temaData.quiz.length} preguntas</p>
+      <p className="text-xs text-[#F9F6E7]/55 mb-4">{temaData.quiz.length} preguntas</p>
       {temaData.quiz.map((q, qi) => (
-        <div key={qi} className="mb-5 p-4 rounded-lg bg-[#F9F6E7]/80 border border-[#1F2F58]/10">
-          <p className="text-sm font-semibold text-[#0A1628] mb-3">{qi + 1}. {q.pregunta}</p>
+        <div key={qi} className="mb-5 p-4 rounded-lg bg-[#1F2F58]/30 border border-[#1F2F58]/40">
+          <p className="text-sm font-semibold text-[#F9F6E7] mb-3">{qi + 1}. {q.pregunta}</p>
           {q.opciones.map((op, oi) => {
             const selected = quizAnswers[qi] === oi;
             const isCorrect = showResults && oi === q.respuesta;
@@ -264,17 +286,17 @@ function SesionContent({ sesionTitulo, temaData }: { sesionTitulo: string; temaD
                 key={oi}
                 onClick={() => setQuizAnswers(prev => ({ ...prev, [qi]: oi }))}
                 className={`block w-full text-left px-3 py-2 mb-1.5 rounded-lg text-sm transition-all border ${
-                  isCorrect ? "bg-green-50 border-green-400 text-green-800" :
-                  isWrong ? "bg-red-50 border-red-400 text-red-800" :
-                  selected ? "bg-[#FBBC0C]/10 border-[#FBBC0C] text-[#0A1628]" :
-                  "bg-white border-[#1F2F58]/10 text-[#1F2F58] hover:bg-[#F9F6E7]"
+                  isCorrect ? "bg-green-900/40 border-green-500/60 text-green-300" :
+                  isWrong ? "bg-red-900/40 border-red-500/60 text-red-300" :
+                  selected ? "bg-[#FBBC0C]/15 border-[#FBBC0C]/60 text-[#FBBC0C]" :
+                  "bg-[#1F2F58]/30 border-[#1F2F58]/50 text-[#F9F6E7] hover:bg-[#1F2F58]/50"
                 }`}
               >
                 {op}
               </button>
             );
           })}
-          {showResults && <p className="mt-2 text-xs text-[#1F2F58]/60 italic">{q.explicacion}</p>}
+          {showResults && <p className="mt-2 text-xs text-[#F9F6E7]/55 italic">{q.explicacion}</p>}
         </div>
       ))}
       <button
@@ -289,32 +311,32 @@ function SesionContent({ sesionTitulo, temaData }: { sesionTitulo: string; temaD
   // ── Ejercicio content ──
   const ejercicioContent = (
     <div>
-      <p className="text-sm font-semibold text-[#0A1628] mb-1">{temaData.ejercicio.titulo || "Ejercicio Práctico"}</p>
-      <p className="text-sm text-[#1F2F58]/70 mb-1"><strong>Objetivo:</strong> {temaData.ejercicio.objetivo}</p>
-      <p className="text-sm text-[#1F2F58]/70 mb-3"><strong>Herramientas:</strong> {temaData.ejercicio.herramientas}</p>
+      <p className="text-sm font-semibold text-[#FBBC0C] mb-1">{temaData.ejercicio.titulo || "Ejercicio Práctico"}</p>
+      <p className="text-sm text-[#F9F6E7]/75 mb-1"><strong className="text-[#F9F6E7]">Objetivo:</strong> {temaData.ejercicio.objetivo}</p>
+      <p className="text-sm text-[#F9F6E7]/75 mb-3"><strong className="text-[#F9F6E7]">Herramientas:</strong> {temaData.ejercicio.herramientas}</p>
       {temaData.ejercicio.datosEjemplo && (
-        <div className="p-3 rounded-lg bg-[#73B8E7]/5 border border-[#73B8E7]/20 mb-4">
-          <p className="text-xs font-semibold text-[#517CBE] mb-1.5">Datos de ejemplo</p>
-          <div className="text-xs text-[#1F2F58]/70 whitespace-pre-line">{temaData.ejercicio.datosEjemplo}</div>
+        <div className="p-3 rounded-lg bg-[#73B8E7]/10 border border-[#73B8E7]/25 mb-4">
+          <p className="text-xs font-semibold text-[#73B8E7] mb-1.5">Datos de ejemplo</p>
+          <div className="text-xs text-[#F9F6E7]/70 whitespace-pre-line">{temaData.ejercicio.datosEjemplo}</div>
         </div>
       )}
-      <p className="text-xs font-semibold text-[#0A1628] mb-2">Pasos a seguir:</p>
+      <p className="text-xs font-semibold text-[#F9F6E7] mb-2">Pasos a seguir:</p>
       <ol className="list-decimal list-inside space-y-2 mb-4">
         {temaData.ejercicio.pasos.map((p, i) => (
-          <li key={i} className="text-sm text-[#1F2F58]">{p}</li>
+          <li key={i} className="text-sm text-[#F9F6E7]/80">{p}</li>
         ))}
       </ol>
       <div className="p-3 rounded-lg bg-[#FBBC0C]/10 border border-[#FBBC0C]/30 mb-4">
-        <p className="text-xs font-semibold text-[#0A1628]">Resultado esperado:</p>
-        <p className="text-xs text-[#1F2F58]">{temaData.ejercicio.resultado}</p>
+        <p className="text-xs font-semibold text-[#FBBC0C]">Resultado esperado:</p>
+        <p className="text-xs text-[#F9F6E7]/80">{temaData.ejercicio.resultado}</p>
       </div>
       {temaData.ejercicio.criterios && temaData.ejercicio.criterios.length > 0 && (
-        <div className="p-3 rounded-lg bg-[#1F2F58]/[0.03] border border-[#1F2F58]/10">
-          <p className="text-xs font-semibold text-[#0A1628] mb-2">Criterios de evaluación (/100 puntos)</p>
+        <div className="p-3 rounded-lg bg-[#1F2F58]/40 border border-[#1F2F58]/50">
+          <p className="text-xs font-semibold text-[#F9F6E7] mb-2">Criterios de evaluación (/100 puntos)</p>
           <div className="space-y-1.5">
             {temaData.ejercicio.criterios.map((c, ci) => (
               <div key={ci} className="flex items-center justify-between">
-                <span className="text-xs text-[#1F2F58]">{c.criterio}</span>
+                <span className="text-xs text-[#F9F6E7]/75">{c.criterio}</span>
                 <span className="text-xs font-bold text-[#FBBC0C] ml-2 shrink-0">{c.puntos} pts</span>
               </div>
             ))}
@@ -328,34 +350,46 @@ function SesionContent({ sesionTitulo, temaData }: { sesionTitulo: string; temaD
   const ailabContent = (
     <div className="text-center py-4">
       <FlaskConical className="size-8 text-[#73B8E7] mx-auto mb-2" />
-      <p className="text-sm text-[#1F2F58]/60 mb-3">Practica con IA en vivo — ChatGPT, Claude y Gemini incluidos.</p>
-      <Link href="/ai-lab" className="inline-flex items-center gap-2 bg-[#73B8E7] text-white px-4 py-2 rounded-lg font-semibold text-sm hover:bg-[#5BA0D0]">
+      <p className="text-sm text-[#F9F6E7]/70 mb-3">Practica con IA en vivo — ChatGPT, Claude y Gemini incluidos.</p>
+      <Link href="/ai-lab" className="inline-flex items-center gap-2 bg-[#73B8E7] text-[#0A1628] px-4 py-2 rounded-lg font-semibold text-sm hover:bg-[#5BA0D0]">
         Abrir AI Lab
       </Link>
     </div>
   );
 
   // ── Recursos content ──
-  const recursosContent = (
+  const recursosContent = temaData.recursos.length === 0 ? (
+    <div className="flex flex-col items-center py-6 text-center">
+      <FolderOpen className="size-8 text-[#F9F6E7]/25 mb-2" />
+      <p className="text-sm text-[#F9F6E7]/55">Recursos en preparación.</p>
+    </div>
+  ) : (
     <div>
-      <p className="text-xs text-[#1F2F58]/50 mb-3">{temaData.recursos.length} recursos seleccionados</p>
+      <p className="text-xs text-[#F9F6E7]/50 mb-3">{temaData.recursos.length} recursos seleccionados</p>
       {temaData.recursos.map((r, ri) => (
         <a key={ri} href={r.url} target="_blank" rel="noopener noreferrer"
-          className="block p-3 mb-2 rounded-lg bg-white border border-[#1F2F58]/10 hover:border-[#73B8E7]/40 transition-all group">
+          className="block p-3 mb-2 rounded-lg bg-[#1F2F58]/30 border border-[#1F2F58]/40 hover:border-[#73B8E7]/50 transition-all group">
           <div className="flex items-center gap-3">
             <span className={`text-[10px] font-semibold px-2 py-0.5 rounded-full shrink-0 ${
-              r.tipo === "documentacion" ? "bg-[#73B8E7]/10 text-[#73B8E7]" :
-              r.tipo === "herramienta" ? "bg-[#FBBC0C]/10 text-[#0A1628]" :
-              "bg-[#F0846D]/10 text-[#F0846D]"
+              r.tipo === "documentacion" ? "bg-[#73B8E7]/20 text-[#73B8E7]" :
+              r.tipo === "herramienta" ? "bg-[#FBBC0C]/20 text-[#FBBC0C]" :
+              "bg-[#F0846D]/20 text-[#F0846D]"
             }`}>{r.tipo}</span>
-            <span className="text-sm text-[#1F2F58] font-medium group-hover:text-[#517CBE] transition-colors">{r.titulo}</span>
+            <span className="text-sm text-[#F9F6E7] font-medium group-hover:text-[#73B8E7] transition-colors">{r.titulo}</span>
           </div>
           {r.descripcion && (
-            <p className="mt-1.5 ml-[calc(0.75rem+4px)] text-xs text-[#1F2F58]/50 leading-relaxed">{r.descripcion}</p>
+            <p className="mt-1.5 ml-[calc(0.75rem+4px)] text-xs text-[#F9F6E7]/55 leading-relaxed">{r.descripcion}</p>
           )}
         </a>
       ))}
     </div>
+  );
+
+  // ── Grabaciones content ──
+  const grabacionesContent = (
+    <GrabacionesTab
+      sessionId={`curso-mdt-${slug}-${temaId ?? "0"}`}
+    />
   );
 
   // ── Mapa de contenidos por tab id ──
@@ -367,15 +401,16 @@ function SesionContent({ sesionTitulo, temaData }: { sesionTitulo: string; temaD
     ejercicio: ejercicioContent,
     ailab: ailabContent,
     recursos: recursosContent,
+    grabaciones: grabacionesContent,
   };
 
   // ── Las "otras" tabs (no la activa) van como acordeones abajo ──
   const otherTabs = SESSION_TABS.filter((t) => t.id !== activeTab);
 
   return (
-    <div className="mt-3 border border-[#1F2F58]/10 rounded-xl overflow-hidden bg-white">
+    <div className="mt-3 border border-[#1F2F58]/40 rounded-xl overflow-hidden bg-[#0D1B30]">
       {/* ── Tab bar — clic cambia el contenido principal ── */}
-      <div className="flex overflow-x-auto border-b border-[#1F2F58]/10 bg-[#F9F6E7]/60">
+      <div className="flex overflow-x-auto border-b border-[#1F2F58]/40 bg-[#0A1628]/80">
         {SESSION_TABS.map((tab) => {
           const isActive = activeTab === tab.id;
           return (
@@ -384,8 +419,8 @@ function SesionContent({ sesionTitulo, temaData }: { sesionTitulo: string; temaD
               onClick={() => setActiveTab(tab.id)}
               className={`flex items-center gap-1.5 px-3 py-2.5 text-xs font-semibold whitespace-nowrap transition-all border-b-2 ${
                 isActive
-                  ? "border-[#FBBC0C] text-[#0A1628] bg-white"
-                  : "border-transparent text-[#1F2F58]/50 hover:text-[#1F2F58]/80 hover:bg-white/60"
+                  ? "border-[#FBBC0C] text-[#F9F6E7] bg-[#1F2F58]/30"
+                  : "border-transparent text-[#F9F6E7]/45 hover:text-[#F9F6E7]/75 hover:bg-[#1F2F58]/20"
               }`}
             >
               <span style={{ color: isActive ? tab.color : undefined }}>{tab.icon}</span>
@@ -402,29 +437,29 @@ function SesionContent({ sesionTitulo, temaData }: { sesionTitulo: string; temaD
       </div>
 
       {/* ── MÁS CONTENIDO divider ── */}
-      <div className="flex items-center gap-3 px-5 py-2 bg-[#F9F6E7]/40 border-t border-[#1F2F58]/8">
-        <div className="flex-1 border-t border-[#1F2F58]/8" />
-        <span className="text-[10px] font-semibold uppercase tracking-widest text-[#1F2F58]/30 select-none">
+      <div className="flex items-center gap-3 px-5 py-2 bg-[#0A1628]/60 border-t border-[#1F2F58]/30">
+        <div className="flex-1 border-t border-[#1F2F58]/30" />
+        <span className="text-[10px] font-semibold uppercase tracking-widest text-[#F9F6E7]/25 select-none">
           Más contenido
         </span>
-        <div className="flex-1 border-t border-[#1F2F58]/8" />
+        <div className="flex-1 border-t border-[#1F2F58]/30" />
       </div>
 
       {/* ── Acordeones — las OTRAS pestañas (no la activa) ── */}
       {otherTabs.map((tab) => {
         const isOpen = expandedSections.has(tab.id);
         return (
-          <div key={tab.id} className="border-t border-[#1F2F58]/8 first:border-t-0">
+          <div key={tab.id} className="border-t border-[#1F2F58]/30 first:border-t-0">
             <button
               onClick={() => toggleSection(tab.id)}
-              className="w-full flex items-center gap-3 px-5 py-3.5 text-left hover:bg-[#F9F6E7]/40 transition-colors"
+              className="w-full flex items-center gap-3 px-5 py-3.5 text-left hover:bg-[#1F2F58]/20 transition-colors"
             >
               <span style={{ color: tab.color }} className="shrink-0">{tab.icon}</span>
-              <span className="text-sm font-semibold text-[#0A1628] flex-1">{tab.label}</span>
+              <span className="text-sm font-semibold text-[#F9F6E7] flex-1">{tab.label}</span>
               {isOpen ? (
-                <ChevronUp className="size-4 text-[#1F2F58]/30" />
+                <ChevronUp className="size-4 text-[#F9F6E7]/30" />
               ) : (
-                <ChevronDown className="size-4 text-[#1F2F58]/30" />
+                <ChevronDown className="size-4 text-[#F9F6E7]/30" />
               )}
             </button>
             {isOpen && <div className="px-5 pb-5">{contentMap[tab.id]}</div>}
@@ -444,6 +479,7 @@ function SesionCard({
   onToggle,
   temaData,
   sesionLabel,
+  slug,
 }: {
   numero: number;
   titulo: string;
@@ -451,13 +487,14 @@ function SesionCard({
   onToggle: () => void;
   temaData?: TemaC1;
   sesionLabel?: string;
+  slug: string;
 }) {
   return (
     <div
       className={`rounded-xl border transition-all ${
         isExpanded
-          ? "border-[#73B8E7]/40 bg-[#F9F6E7]/60 shadow-sm"
-          : "border-[#1F2F58]/8 bg-white hover:border-[#73B8E7]/30 hover:shadow-sm"
+          ? "border-[#73B8E7]/40 bg-[#1F2F58]/20 shadow-sm"
+          : "border-[#1F2F58]/30 bg-[#1F2F58]/10 hover:border-[#73B8E7]/30 hover:shadow-sm"
       }`}
     >
       {/* Header — clickable */}
@@ -468,13 +505,13 @@ function SesionCard({
         {/* Number badge */}
         <div
           className={`flex size-10 shrink-0 items-center justify-center rounded-lg transition-colors ${
-            isExpanded ? "bg-[#1F2F58] text-white" : "bg-[#1F2F58]/5"
+            isExpanded ? "bg-[#FBBC0C]/20 text-[#FBBC0C]" : "bg-[#1F2F58]/30"
           }`}
         >
           {isExpanded ? (
-            <CheckCircle2 className="size-5" />
+            <CheckCircle2 className="size-5 text-[#FBBC0C]" />
           ) : (
-            <span className="text-sm font-bold text-[#1F2F58]/60 font-[family-name:var(--font-space-grotesk)]">
+            <span className="text-sm font-bold text-[#F9F6E7]/60 font-[family-name:var(--font-space-grotesk)]">
               {numero}
             </span>
           )}
@@ -482,12 +519,12 @@ function SesionCard({
 
         {/* Title */}
         <div className="flex-1 min-w-0">
-          <h3 className="text-sm font-semibold text-[#0A1628] leading-snug">
+          <h3 className="text-sm font-semibold text-[#F9F6E7] leading-snug">
             {titulo}
           </h3>
           {!isExpanded && (
-            <p className="mt-0.5 text-[10px] text-[#1F2F58]/40">
-              Video · Presentación · Teoría · Quiz · Ejercicio · AI Lab · Recursos
+            <p className="mt-0.5 text-[10px] text-[#F9F6E7]/40">
+              Video · Presentación · Teoría · Quiz · Ejercicio · AI Lab · Recursos · Grabaciones
             </p>
           )}
           {sesionLabel && !isExpanded && (
@@ -496,7 +533,7 @@ function SesionCard({
         </div>
 
         {/* Chevron */}
-        <div className="shrink-0 text-[#1F2F58]/30">
+        <div className="shrink-0 text-[#F9F6E7]/30">
           {isExpanded ? (
             <ChevronUp className="size-4" />
           ) : (
@@ -508,7 +545,7 @@ function SesionCard({
       {/* Expanded content */}
       {isExpanded && (
         <div className="px-4 pb-4">
-          <SesionContent sesionTitulo={titulo} temaData={temaData} />
+          <SesionContent sesionTitulo={titulo} temaData={temaData} slug={slug} temaId={temaData?.id} />
         </div>
       )}
     </div>
@@ -533,10 +570,10 @@ function OtrosCursosSection({ currentSlug }: { currentSlug: string }) {
   return (
     <section className="mt-10">
       <div className="mb-5">
-        <h2 className="text-xl font-bold text-[#0A1628] font-[family-name:var(--font-space-grotesk)]">
+        <h2 className="text-xl font-bold text-[#F9F6E7] font-[family-name:var(--font-space-grotesk)]">
           Otros Cursos MDT
         </h2>
-        <p className="mt-1 text-sm text-[#1F2F58]/60">
+        <p className="mt-1 text-sm text-[#F9F6E7]/60">
           Amplía tus habilidades con más cursos del catálogo.
         </p>
       </div>
@@ -553,11 +590,11 @@ function OtrosCursosSection({ currentSlug }: { currentSlug: string }) {
             <Link
               key={s}
               href={`/cursos-mdt/${s}`}
-              className="group flex flex-col rounded-xl border border-[#1F2F58]/8 bg-white p-4 transition-all hover:border-[#73B8E7]/40 hover:shadow-md hover:-translate-y-0.5"
+              className="group flex flex-col rounded-xl border border-[#1F2F58]/40 bg-[#1F2F58]/20 p-4 transition-all hover:border-[#73B8E7]/40 hover:shadow-md hover:-translate-y-0.5"
             >
               {/* Label badge */}
               <div className="mb-3 flex items-center justify-between">
-                <span className="inline-flex rounded-md bg-[#1F2F58]/5 px-2 py-0.5 text-[10px] font-bold text-[#1F2F58]/50">
+                <span className="inline-flex rounded-md bg-[#1F2F58]/40 px-2 py-0.5 text-[10px] font-bold text-[#F9F6E7]/50">
                   {label}
                 </span>
                 <span className="text-[10px] text-[#FBBC0C] font-semibold">
@@ -565,15 +602,15 @@ function OtrosCursosSection({ currentSlug }: { currentSlug: string }) {
                 </span>
               </div>
 
-              <h3 className="flex-1 text-sm font-bold text-[#0A1628] leading-snug group-hover:text-[#1F2F58] transition-colors line-clamp-2">
+              <h3 className="flex-1 text-sm font-bold text-[#F9F6E7] leading-snug group-hover:text-[#73B8E7] transition-colors line-clamp-2">
                 {curso.nombre}
               </h3>
 
-              <div className="mt-3 flex items-center gap-2 text-[10px] text-[#1F2F58]/40">
+              <div className="mt-3 flex items-center gap-2 text-[10px] text-[#F9F6E7]/40">
                 <Clock className="size-3" />
                 <span>{curso.horas}h</span>
-                <span className="size-0.5 rounded-full bg-[#1F2F58]/20" />
-                <span className="inline-flex rounded-full bg-[#73B8E7]/10 px-1.5 py-0.5 text-[#73B8E7] font-medium">
+                <span className="size-0.5 rounded-full bg-[#F9F6E7]/20" />
+                <span className="inline-flex rounded-full bg-[#73B8E7]/15 px-1.5 py-0.5 text-[#73B8E7] font-medium">
                   {curso.categoria}
                 </span>
               </div>
@@ -661,10 +698,10 @@ export default function CursoMdtPage({ params }: PageProps) {
     <div className="space-y-8">
 
       {/* ── Breadcrumb (con contexto de módulo) ─────────────────────────── */}
-      <nav className="flex items-center gap-1.5 text-xs text-[#1F2F58]/50 flex-wrap">
+      <nav className="flex items-center gap-1.5 text-xs text-[#F9F6E7]/50 flex-wrap">
         <Link
           href="/cursos-mdt"
-          className="hover:text-[#1F2F58] transition-colors flex items-center gap-1"
+          className="hover:text-[#F9F6E7] transition-colors flex items-center gap-1"
         >
           <ArrowLeft className="size-3" />
           Cursos MDT
@@ -674,19 +711,19 @@ export default function CursoMdtPage({ params }: PageProps) {
           <>
             <button
               onClick={() => setExpandedSesion(null)}
-              className="hover:text-[#1F2F58] transition-colors"
+              className="hover:text-[#F9F6E7] transition-colors"
             >
               {courseLabel}. {isC1 ? "Intro IA Aplicada" : curso.nombre}
             </button>
             <span>/</span>
             <span className="text-[#73B8E7] font-medium">M{expandedModuloInfo.num}</span>
             <span>/</span>
-            <span className="text-[#0A1628] font-medium truncate max-w-[200px]">
+            <span className="text-[#F9F6E7] font-medium truncate max-w-[200px]">
               {expandedTema?.titulo}
             </span>
           </>
         ) : (
-          <span className="text-[#0A1628] font-medium">
+          <span className="text-[#F9F6E7] font-medium">
             {courseLabel}. {isC1 ? "Intro IA Aplicada" : curso.nombre}
           </span>
         )}
@@ -744,11 +781,11 @@ export default function CursoMdtPage({ params }: PageProps) {
         /* ── Estructura por módulos (C1 y cursos con datos completos) ── */
         <section>
           <div className="mb-4 flex items-center justify-between">
-            <h2 className="text-lg font-bold text-[#0A1628] font-[family-name:var(--font-space-grotesk)]">
+            <h2 className="text-lg font-bold text-[#F9F6E7] font-[family-name:var(--font-space-grotesk)]">
               Contenido del curso ({temas.length} temas · {modulos.length} módulos)
             </h2>
-            <span className="text-xs text-[#1F2F58]/40">
-              Haz clic en un tema para ver las 7 pestañas
+            <span className="text-xs text-[#F9F6E7]/40">
+              Haz clic en un tema para ver las 8 pestañas
             </span>
           </div>
 
@@ -761,12 +798,12 @@ export default function CursoMdtPage({ params }: PageProps) {
               return (
                 <div
                   key={modulo.num}
-                  className="rounded-2xl border border-[#1F2F58]/10 overflow-hidden bg-white"
+                  className="rounded-2xl border border-[#1F2F58]/40 overflow-hidden bg-[#0D1B30]"
                 >
                   {/* ── Header del módulo ── */}
                   <button
                     onClick={() => toggleModulo(modulo.num)}
-                    className="w-full flex items-center gap-4 p-4 sm:p-5 text-left bg-gradient-to-r from-[#F9F6E7]/60 to-white hover:from-[#F9F6E7] transition-all"
+                    className="w-full flex items-center gap-4 p-4 sm:p-5 text-left bg-gradient-to-r from-[#1F2F58]/40 to-[#0D1B30] hover:from-[#1F2F58]/60 transition-all"
                   >
                     {/* Badge M1, M2... */}
                     <div className={`flex size-11 shrink-0 items-center justify-center rounded-xl transition-colors ${
@@ -780,10 +817,10 @@ export default function CursoMdtPage({ params }: PageProps) {
                     </div>
 
                     <div className="flex-1 min-w-0">
-                      <h3 className="text-sm sm:text-base font-bold text-[#0A1628] leading-snug">
+                      <h3 className="text-sm sm:text-base font-bold text-[#F9F6E7] leading-snug">
                         {modulo.nombre}
                       </h3>
-                      <div className="mt-1 flex items-center gap-3 text-[10px] text-[#1F2F58]/40">
+                      <div className="mt-1 flex items-center gap-3 text-[10px] text-[#F9F6E7]/40">
                         <span className="flex items-center gap-1">
                           <Clock className="size-3" />
                           {modulo.horas}h
@@ -799,7 +836,7 @@ export default function CursoMdtPage({ params }: PageProps) {
 
                     {/* Progress bar mini */}
                     <div className="hidden sm:flex items-center gap-2 shrink-0">
-                      <div className="w-16 h-1.5 rounded-full bg-[#1F2F58]/5 overflow-hidden">
+                      <div className="w-16 h-1.5 rounded-full bg-[#1F2F58]/30 overflow-hidden">
                         <div
                           className="h-full rounded-full bg-[#FBBC0C] transition-all"
                           style={{ width: `${(temasCompletados / modulo.temas) * 100}%` }}
@@ -807,7 +844,7 @@ export default function CursoMdtPage({ params }: PageProps) {
                       </div>
                     </div>
 
-                    <div className="shrink-0 text-[#1F2F58]/30">
+                    <div className="shrink-0 text-[#F9F6E7]/30">
                       {isModuloOpen ? (
                         <ChevronUp className="size-5" />
                       ) : (
@@ -828,6 +865,7 @@ export default function CursoMdtPage({ params }: PageProps) {
                           onToggle={() => toggleSesion(tema.id)}
                           temaData={tema}
                           sesionLabel={`Sesión ${idx + 1} de ${modulo.temas}`}
+                          slug={slug}
                         />
                       ))}
                     </div>
@@ -841,11 +879,11 @@ export default function CursoMdtPage({ params }: PageProps) {
         /* ── Lista plana (cursos sin datos de módulos) ── */
         <section>
           <div className="mb-4 flex items-center justify-between">
-            <h2 className="text-lg font-bold text-[#0A1628] font-[family-name:var(--font-space-grotesk)]">
+            <h2 className="text-lg font-bold text-[#F9F6E7] font-[family-name:var(--font-space-grotesk)]">
               Sesiones de clase ({curso.sesiones.length})
             </h2>
-            <span className="text-xs text-[#1F2F58]/40">
-              Haz clic en una sesión para ver las 7 pestañas
+            <span className="text-xs text-[#F9F6E7]/40">
+              Haz clic en una sesión para ver las 8 pestañas
             </span>
           </div>
 
@@ -857,6 +895,7 @@ export default function CursoMdtPage({ params }: PageProps) {
                 titulo={sesion.titulo}
                 isExpanded={expandedSesion === sesion.numero}
                 onToggle={() => toggleSesion(sesion.numero)}
+                slug={slug}
               />
             ))}
           </div>

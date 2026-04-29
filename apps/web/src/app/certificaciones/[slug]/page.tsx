@@ -30,12 +30,14 @@ import {
   CheckCircle2,
   Languages,
   GraduationCap,
+  Youtube,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { createClient } from "@/lib/supabase/client";
 import DomainList from "@/components/certifications/DomainList";
 import ExamHistoryChart from "@/components/certifications/ExamHistoryChart";
 import SlideViewer from "@/components/session/SlideViewer";
+import GrabacionesTab from "@/components/session/GrabacionesTab";
 import { cn } from "@/lib/utils";
 import type {
   CertificationProgramWithDomains,
@@ -78,11 +80,12 @@ interface TabDef {
 const DOMAIN_TABS: TabDef[] = [
   { id: "video",        label: "Video",        icon: <Play className="size-3.5" />,          color: "#73B8E7" },
   { id: "presentacion", label: "Presentación", icon: <FileText className="size-3.5" />,      color: "#517CBE" },
-  { id: "teoria",       label: "Teoría",       icon: <BookOpen className="size-3.5" />,      color: "#1F2F58" },
+  { id: "teoria",       label: "Teoría",       icon: <BookOpen className="size-3.5" />,      color: "#FBBC0C" },
   { id: "quiz",         label: "Quiz",         icon: <ClipboardList className="size-3.5" />, color: "#FBBC0C" },
   { id: "ejercicio",    label: "Ejercicio",    icon: <Pencil className="size-3.5" />,        color: "#F0846D" },
   { id: "ailab",        label: "AI Lab",       icon: <FlaskConical className="size-3.5" />,  color: "#73B8E7" },
   { id: "recursos",     label: "Recursos",     icon: <FolderOpen className="size-3.5" />,    color: "#517CBE" },
+  { id: "grabaciones",  label: "Grabaciones",  icon: <Youtube className="size-3.5" />,       color: "#FBBC0C" },
 ];
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
@@ -114,9 +117,9 @@ function DominioContent({ dominio, slug, accentColor }: { dominio: DominioData; 
   const embedUrl = youtubeEmbedFromUrl(dominio.video.url);
   const videoContent = (
     <div>
-      <h4 className="text-sm font-bold text-[#0A1628] mb-1">{dominio.video.titulo}</h4>
+      <h4 className="text-sm font-bold text-[#F9F6E7] mb-1">{dominio.video.titulo}</h4>
       {dominio.video.canal && (
-        <p className="text-xs text-[#1F2F58]/50 mb-3">
+        <p className="text-xs text-[#F9F6E7]/55 mb-3">
           {dominio.video.canal} · {dominio.video.duracionMin} min
         </p>
       )}
@@ -130,18 +133,18 @@ function DominioContent({ dominio, slug, accentColor }: { dominio: DominioData; 
           />
         </div>
       ) : (
-        <div className="rounded-xl border border-[#FBBC0C]/30 bg-[#FBBC0C]/5 p-5 text-center">
+        <div className="rounded-xl border border-[#FBBC0C]/30 bg-[#FBBC0C]/10 p-5 text-center">
           <AlertTriangle className="size-6 text-[#FBBC0C] mx-auto mb-2" />
-          <p className="text-sm font-semibold text-[#0A1628]">Grabación propia próximamente</p>
+          <p className="text-sm font-semibold text-[#F9F6E7]">Grabación propia próximamente</p>
           {dominio.video.notas && (
-            <p className="mt-1 text-xs text-[#1F2F58]/60 leading-relaxed">{dominio.video.notas}</p>
+            <p className="mt-1 text-xs text-[#F9F6E7]/60 leading-relaxed">{dominio.video.notas}</p>
           )}
         </div>
       )}
     </div>
   );
 
-  // ── Presentación (Gamma) ──
+  // ── Fix 2 — Presentación con fallback dark ──
   const presentacionContent = dominio.slidesUrl ? (
     <SlideViewer
       slidesUrl={dominio.slidesUrl}
@@ -149,27 +152,43 @@ function DominioContent({ dominio, slug, accentColor }: { dominio: DominioData; 
       title={`Presentación — ${dominio.nombre}`}
     />
   ) : (
-    <p className="text-sm text-[#1F2F58]/50">Presentación próximamente.</p>
+    <div className="flex flex-col items-center gap-5 rounded-xl border border-[#FBBC0C]/25 bg-gradient-to-br from-[#1F2F58]/60 to-[#0A1628]/80 p-8 text-center">
+      <div className="flex size-16 items-center justify-center rounded-2xl bg-[#FBBC0C]/15">
+        <FileText className="size-8 text-[#FBBC0C]" />
+      </div>
+      <div>
+        <p className="font-semibold text-[#F9F6E7]">Presentación en preparación</p>
+        <p className="mt-1.5 text-sm text-[#F9F6E7]/65 max-w-xs">
+          Este contenido estará disponible próximamente. Mientras tanto, revisa la teoría y los ejercicios.
+        </p>
+      </div>
+      <button
+        onClick={() => setActiveTab("teoria")}
+        className="text-sm font-semibold text-[#73B8E7] hover:text-[#FBBC0C] transition-colors"
+      >
+        Ir a Teoría →
+      </button>
+    </div>
   );
 
-  // ── Teoría (lecciones) ──
+  // ── Fix 1 — Teoría lecciones dark theme ──
   const teoriaContent = (
     <div className="space-y-4">
       {dominio.lecciones.map((leccion) => (
         <div
           key={leccion.id}
-          className="rounded-lg border border-[#1F2F58]/10 bg-[#F9F6E7]/40 p-4"
+          className="rounded-lg border border-[#1F2F58]/40 bg-[#1F2F58]/20 p-4"
         >
           <div className="flex items-baseline justify-between gap-3 mb-2">
-            <h5 className="text-sm font-bold text-[#0A1628]">
+            <h5 className="text-sm font-bold text-[#FBBC0C]">
               {leccion.id} · {leccion.titulo}
             </h5>
-            <span className="text-[10px] text-[#1F2F58]/50 shrink-0 flex items-center gap-1">
+            <span className="text-[10px] text-[#F9F6E7]/50 shrink-0 flex items-center gap-1">
               <Clock className="size-3" />
               {leccion.duracionLecturaMin} min
             </span>
           </div>
-          <div className="prose prose-sm max-w-none text-[#1F2F58] leading-relaxed whitespace-pre-line text-sm">
+          <div className="prose prose-sm prose-invert max-w-none text-[#F9F6E7]/85 leading-relaxed whitespace-pre-line text-sm prose-headings:text-[#FBBC0C] prose-strong:text-[#FBBC0C] prose-a:text-[#73B8E7]">
             {leccion.contenidoMarkdown}
           </div>
         </div>
@@ -177,18 +196,18 @@ function DominioContent({ dominio, slug, accentColor }: { dominio: DominioData; 
     </div>
   );
 
-  // ── Quiz interactivo (10 preguntasPractica) ──
+  // ── Fix 1 — Quiz dark theme ──
   const quizContent = (
     <div>
-      <p className="text-xs text-[#1F2F58]/50 mb-4">
+      <p className="text-xs text-[#F9F6E7]/55 mb-4">
         {dominio.preguntasPractica.length} preguntas de práctica
       </p>
       {dominio.preguntasPractica.map((preg, qi) => (
         <div
           key={preg.id}
-          className="mb-5 p-4 rounded-lg bg-[#F9F6E7]/80 border border-[#1F2F58]/10"
+          className="mb-5 p-4 rounded-lg bg-[#1F2F58]/30 border border-[#1F2F58]/40"
         >
-          <p className="text-sm font-semibold text-[#0A1628] mb-3">
+          <p className="text-sm font-semibold text-[#F9F6E7] mb-3">
             {qi + 1}. {preg.enunciado}
           </p>
           {preg.opciones.map((op, oi) => {
@@ -204,16 +223,12 @@ function DominioContent({ dominio, slug, accentColor }: { dominio: DominioData; 
                 }
                 className={cn(
                   "block w-full text-left px-3 py-2 mb-1.5 rounded-lg text-sm transition-all border",
-                  isCorrect && "bg-green-50 border-green-400 text-green-800",
-                  isWrong && "bg-red-50 border-red-400 text-red-800",
-                  !isCorrect &&
-                    !isWrong &&
-                    selected &&
-                    "bg-[#FBBC0C]/10 border-[#FBBC0C] text-[#0A1628]",
-                  !isCorrect &&
-                    !isWrong &&
-                    !selected &&
-                    "bg-white border-[#1F2F58]/10 text-[#1F2F58] hover:bg-[#F9F6E7]"
+                  isCorrect && "bg-green-900/40 border-green-500/60 text-green-300",
+                  isWrong && "bg-red-900/40 border-red-500/60 text-red-300",
+                  !isCorrect && !isWrong && selected &&
+                    "bg-[#FBBC0C]/15 border-[#FBBC0C]/60 text-[#FBBC0C]",
+                  !isCorrect && !isWrong && !selected &&
+                    "bg-[#1F2F58]/30 border-[#1F2F58]/50 text-[#F9F6E7] hover:bg-[#1F2F58]/50"
                 )}
               >
                 {op.text}
@@ -221,7 +236,7 @@ function DominioContent({ dominio, slug, accentColor }: { dominio: DominioData; 
             );
           })}
           {showResults && (
-            <p className="mt-2 text-xs text-[#1F2F58]/60 italic">
+            <p className="mt-2 text-xs text-[#F9F6E7]/55 italic">
               {preg.explicacion}
             </p>
           )}
@@ -239,7 +254,7 @@ function DominioContent({ dominio, slug, accentColor }: { dominio: DominioData; 
             setQuizAnswers({});
             setShowResults(false);
           }}
-          className="bg-white border border-[#1F2F58]/15 text-[#1F2F58] px-4 py-2 rounded-lg font-semibold text-sm hover:bg-[#F9F6E7]"
+          className="bg-[#1F2F58]/40 border border-[#1F2F58]/60 text-[#F9F6E7] px-4 py-2 rounded-lg font-semibold text-sm hover:bg-[#1F2F58]/60"
         >
           Reiniciar quiz
         </button>
@@ -247,28 +262,28 @@ function DominioContent({ dominio, slug, accentColor }: { dominio: DominioData; 
     </div>
   );
 
-  // ── Ejercicio (link al examen completo) ──
+  // ── Fix 1 — Ejercicio dark theme ──
   const ejercicioContent = (
     <div
-      className="rounded-xl border p-5 bg-gradient-to-br to-white"
+      className="rounded-xl border p-5"
       style={{
         borderColor: `${accentColor}40`,
-        background: `linear-gradient(135deg, ${accentColor}0D, white)`,
+        background: `linear-gradient(135deg, ${accentColor}0D, rgba(10,22,40,0.8))`,
       }}
     >
-      <p className="text-sm font-bold text-[#0A1628] mb-1">
+      <p className="text-sm font-bold text-[#F9F6E7] mb-1">
         Practica el dominio en el simulacro completo
       </p>
-      <p className="text-xs text-[#1F2F58]/65 mb-3 leading-relaxed">
+      <p className="text-xs text-[#F9F6E7]/65 mb-3 leading-relaxed">
         El simulacro mezcla preguntas de todos los dominios con el peso real del
         examen oficial. Necesitas superar el umbral de aprobación para validar tu
         preparación.
       </p>
       <Link
         href={`/certificaciones/${slug}/examen`}
-        className="inline-flex items-center gap-2 bg-[#1F2F58] text-white px-4 py-2 rounded-lg font-semibold text-sm hover:bg-[#0A1628]"
+        className="inline-flex items-center gap-2 bg-[#FBBC0C] text-[#0A1628] px-4 py-2 rounded-lg font-semibold text-sm hover:bg-[#E5AB00]"
       >
-        <PlayCircle className="size-4 text-[#FBBC0C]" />
+        <PlayCircle className="size-4" />
         Ir al simulacro
       </Link>
     </div>
@@ -278,13 +293,13 @@ function DominioContent({ dominio, slug, accentColor }: { dominio: DominioData; 
   const ailabContent = (
     <div className="text-center py-4">
       <FlaskConical className="size-8 text-[#73B8E7] mx-auto mb-2" />
-      <p className="text-sm text-[#1F2F58]/60 mb-3">
+      <p className="text-sm text-[#F9F6E7]/70 mb-3">
         Profundiza en los conceptos del dominio con IA — pega tus dudas en
         ChatGPT, Claude o Gemini desde el AI Lab integrado.
       </p>
       <Link
         href="/ai-lab"
-        className="inline-flex items-center gap-2 bg-[#73B8E7] text-white px-4 py-2 rounded-lg font-semibold text-sm hover:bg-[#5BA0D0]"
+        className="inline-flex items-center gap-2 bg-[#73B8E7] text-[#0A1628] px-4 py-2 rounded-lg font-semibold text-sm hover:bg-[#5BA0D0]"
       >
         Abrir AI Lab
       </Link>
@@ -318,8 +333,7 @@ function DominioContent({ dominio, slug, accentColor }: { dominio: DominioData; 
           href={r.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="block p-3 rounded-lg bg-white border border-[#1F2F58]/10 transition-all"
-          style={{ ["--tw-border-opacity" as string]: "1" }}
+          className="block p-3 rounded-lg bg-[#1F2F58]/30 border border-[#1F2F58]/40 transition-all hover:border-[#73B8E7]/50"
           onMouseEnter={(e) => (e.currentTarget.style.borderColor = `${accentColor}66`)}
           onMouseLeave={(e) => (e.currentTarget.style.borderColor = "")}
         >
@@ -329,10 +343,15 @@ function DominioContent({ dominio, slug, accentColor }: { dominio: DominioData; 
           >
             {r.tipo}
           </span>
-          <span className="text-sm font-semibold text-[#1F2F58]">{r.label}</span>
+          <span className="text-sm font-semibold text-[#F9F6E7]">{r.label}</span>
         </a>
       ))}
     </div>
+  );
+
+  // ── Fix 4 — Grabaciones tab ──
+  const grabacionesContent = (
+    <GrabacionesTab sessionId={`cert-${slug}-dominio-${dominio.orden}`} />
   );
 
   const contentMap: Record<string, React.ReactNode> = {
@@ -343,14 +362,15 @@ function DominioContent({ dominio, slug, accentColor }: { dominio: DominioData; 
     ejercicio: ejercicioContent,
     ailab: ailabContent,
     recursos: recursosContent,
+    grabaciones: grabacionesContent,
   };
 
   const otherTabs = DOMAIN_TABS.filter((t) => t.id !== activeTab);
 
   return (
-    <div className="mt-3 border border-[#1F2F58]/10 rounded-xl overflow-hidden bg-white">
-      {/* Tab bar */}
-      <div className="flex overflow-x-auto border-b border-[#1F2F58]/10 bg-[#F9F6E7]/60">
+    <div className="mt-3 border border-[#1F2F58]/40 rounded-xl overflow-hidden bg-[#0D1B30]">
+      {/* Tab bar dark */}
+      <div className="flex overflow-x-auto border-b border-[#1F2F58]/40 bg-[#0A1628]/80">
         {DOMAIN_TABS.map((tab) => {
           const isActive = activeTab === tab.id;
           return (
@@ -360,8 +380,8 @@ function DominioContent({ dominio, slug, accentColor }: { dominio: DominioData; 
               className={cn(
                 "flex items-center gap-1.5 px-3 py-2.5 text-xs font-semibold whitespace-nowrap transition-all border-b-2",
                 isActive
-                  ? "border-[#FBBC0C] text-[#0A1628] bg-white"
-                  : "border-transparent text-[#1F2F58]/50 hover:text-[#1F2F58]/80 hover:bg-white/60"
+                  ? "border-[#FBBC0C] text-[#F9F6E7] bg-[#1F2F58]/30"
+                  : "border-transparent text-[#F9F6E7]/45 hover:text-[#F9F6E7]/75 hover:bg-[#1F2F58]/20"
               )}
             >
               <span style={{ color: isActive ? tab.color : undefined }}>
@@ -376,33 +396,33 @@ function DominioContent({ dominio, slug, accentColor }: { dominio: DominioData; 
       {/* Contenido principal */}
       <div className="p-5">{contentMap[activeTab]}</div>
 
-      {/* Más contenido */}
-      <div className="flex items-center gap-3 px-5 py-2 bg-[#F9F6E7]/40 border-t border-[#1F2F58]/8">
-        <div className="flex-1 border-t border-[#1F2F58]/10" />
-        <span className="text-[10px] font-semibold uppercase tracking-widest text-[#1F2F58]/30 select-none">
+      {/* Más contenido dark */}
+      <div className="flex items-center gap-3 px-5 py-2 bg-[#0A1628]/60 border-t border-[#1F2F58]/30">
+        <div className="flex-1 border-t border-[#1F2F58]/30" />
+        <span className="text-[10px] font-semibold uppercase tracking-widest text-[#F9F6E7]/25 select-none">
           Más contenido
         </span>
-        <div className="flex-1 border-t border-[#1F2F58]/10" />
+        <div className="flex-1 border-t border-[#1F2F58]/30" />
       </div>
 
       {otherTabs.map((tab) => {
         const isOpen = expandedSections.has(tab.id);
         return (
-          <div key={tab.id} className="border-t border-[#1F2F58]/10 first:border-t-0">
+          <div key={tab.id} className="border-t border-[#1F2F58]/30 first:border-t-0">
             <button
               onClick={() => toggleSection(tab.id)}
-              className="w-full flex items-center gap-3 px-5 py-3.5 text-left hover:bg-[#F9F6E7]/40 transition-colors"
+              className="w-full flex items-center gap-3 px-5 py-3.5 text-left hover:bg-[#1F2F58]/20 transition-colors"
             >
               <span style={{ color: tab.color }} className="shrink-0">
                 {tab.icon}
               </span>
-              <span className="text-sm font-semibold text-[#0A1628] flex-1">
+              <span className="text-sm font-semibold text-[#F9F6E7] flex-1">
                 {tab.label}
               </span>
               {isOpen ? (
-                <ChevronUp className="size-4 text-[#1F2F58]/30" />
+                <ChevronUp className="size-4 text-[#F9F6E7]/30" />
               ) : (
-                <ChevronDown className="size-4 text-[#1F2F58]/30" />
+                <ChevronDown className="size-4 text-[#F9F6E7]/30" />
               )}
             </button>
             {isOpen && <div className="px-5 pb-5">{contentMap[tab.id]}</div>}
@@ -434,8 +454,8 @@ function DominioCard({
       className={cn(
         "rounded-2xl border transition-all overflow-hidden",
         isExpanded
-          ? "bg-[#F9F6E7]/40 shadow-sm"
-          : "border-[#1F2F58]/10 bg-white hover:shadow-sm"
+          ? "bg-[#1F2F58]/20 shadow-sm"
+          : "border-[#1F2F58]/40 bg-[#1F2F58]/10 hover:shadow-sm"
       )}
       style={
         isExpanded
@@ -451,14 +471,14 @@ function DominioCard({
         <div
           className={cn(
             "flex size-12 shrink-0 items-center justify-center rounded-xl transition-colors",
-            isExpanded ? "bg-[#1F2F58]" : "bg-[#1F2F58]/5"
+            isExpanded ? "bg-[#FBBC0C]/20" : "bg-[#1F2F58]/30"
           )}
         >
           {isExpanded ? (
             <CheckCircle2 className="size-5" style={{ color: accentColor }} />
           ) : (
             <span
-              className="text-sm font-black text-[#1F2F58]/60"
+              className="text-sm font-black text-[#F9F6E7]/60"
               style={{ fontFamily: "var(--font-space-grotesk)" }}
             >
               D{dominio.orden}
@@ -468,16 +488,16 @@ function DominioCard({
 
         <div className="flex-1 min-w-0">
           <div className="flex flex-wrap items-center gap-2 mb-1">
-            <h3 className="text-sm sm:text-base font-bold text-[#0A1628] leading-snug">
+            <h3 className="text-sm sm:text-base font-bold text-[#F9F6E7] leading-snug">
               Dominio {dominio.orden}: {dominio.nombre}
             </h3>
           </div>
-          <p className="text-xs text-[#1F2F58]/60 leading-relaxed">
+          <p className="text-xs text-[#F9F6E7]/60 leading-relaxed">
             {dominio.descripcion}
           </p>
           {!isExpanded && (
-            <p className="mt-1.5 text-[10px] text-[#1F2F58]/40">
-              Video · Presentación · Teoría · Quiz · Ejercicio · AI Lab · Recursos
+            <p className="mt-1.5 text-[10px] text-[#F9F6E7]/40">
+              Video · Presentación · Teoría · Quiz · Ejercicio · AI Lab · Recursos · Grabaciones
             </p>
           )}
           <div className="mt-1.5 flex flex-wrap items-center gap-1.5 mb-1">
@@ -491,22 +511,22 @@ function DominioCard({
               {dominio.porcentajeEnExamen}% del examen
             </span>
           </div>
-          <div className="mt-1 flex items-center gap-3 text-[10px] text-[#1F2F58]/45">
+          <div className="mt-1 flex items-center gap-3 text-[10px] text-[#F9F6E7]/45">
             <span className="flex items-center gap-1">
               <BookOpen className="size-3" />
               {dominio.lecciones.length} lecciones
             </span>
-            <span className="size-0.5 rounded-full bg-[#1F2F58]/20" />
+            <span className="size-0.5 rounded-full bg-[#F9F6E7]/20" />
             <span className="flex items-center gap-1">
               <ClipboardList className="size-3" />
               {dominio.preguntasPractica.length} práctica
             </span>
-            <span className="size-0.5 rounded-full bg-[#1F2F58]/20" />
+            <span className="size-0.5 rounded-full bg-[#F9F6E7]/20" />
             <span>{dominio.preguntasSimulacro.length} simulacro</span>
           </div>
         </div>
 
-        <div className="shrink-0 text-[#1F2F58]/30">
+        <div className="shrink-0 text-[#F9F6E7]/30">
           {isExpanded ? (
             <ChevronUp className="size-5" />
           ) : (
@@ -663,8 +683,8 @@ function AwsCertView({ data, slug, accentColor }: { data: CertificacionData; slu
               Dominios del examen ({data.dominios.length})
             </h2>
             <p className="text-xs text-white/40 mt-1">
-              Haz clic en un dominio para abrir las 7 pestañas: video, Gamma,
-              teoría, quiz, ejercicio, AI Lab y recursos.
+              Haz clic en un dominio para abrir las 8 pestañas: video, presentación,
+              teoría, quiz, ejercicio, AI Lab, recursos y grabaciones.
             </p>
           </div>
         </div>

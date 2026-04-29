@@ -5,6 +5,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ChevronLeft, ChevronRight, Lock, Target, Sparkles, Clock } from "lucide-react";
 import SessionTabs, { type SessionTab } from "@/components/session/SessionTabs";
+import GrabacionesTab from "@/components/session/GrabacionesTab";
 import Breadcrumb from "@/components/academic/Breadcrumb";
 import {
   getSessionByNumber,
@@ -27,7 +28,6 @@ export default function DemoSessionPage({ params }: PageProps) {
   const weekNumber = getWeekNumberForSession(sessionNumber);
   const totalSessions = getTotalSessions();
 
-  // Prev / next navigation
   const prevSession =
     sessionNumber > 1 ? getSessionByNumber(sessionNumber - 1) : null;
   const nextSession =
@@ -95,15 +95,20 @@ export default function DemoSessionPage({ params }: PageProps) {
       available: false,
       content: <LockedContent title="Clase en Vivo" description="Zoom con Héctor Velasco + cohorte. 2h sincrónicas + 1h de proyecto autónomo." />,
     },
+    {
+      id: "recordings",
+      label: "Grabaciones",
+      icon: "recordings",
+      completed: false,
+      available: true,
+      content: <GrabacionesTab sessionId={`demo-ignite-sesion-${sessionNumber}`} />,
+    },
   ];
 
   return (
-    <div className="flex flex-col" style={{ color: "#1F2F58" }}>
-      {/* Top bar with breadcrumb and session title — mismo estilo que /carreras */}
-      <header
-        className="border-b bg-white px-4 py-3 shadow-sm -mx-4 sm:-mx-6 lg:-mx-8 -mt-8 lg:-mt-12 mb-6"
-        style={{ borderColor: "#1F2F5814" }}
-      >
+    <div className="flex flex-col">
+      {/* Top bar with breadcrumb and session title */}
+      <header className="border-b border-[#1F2F58]/20 bg-[#0D1B30] px-4 py-3 shadow-sm -mx-4 sm:-mx-6 lg:-mx-8 -mt-8 lg:-mt-12 mb-6">
         <div className="hidden md:flex items-center gap-1 mb-1">
           <Breadcrumb
             items={[
@@ -114,18 +119,15 @@ export default function DemoSessionPage({ params }: PageProps) {
           />
         </div>
         <div className="flex items-center justify-between">
-          <h1
-            className="text-sm font-semibold truncate max-w-[70%]"
-            style={{ color: "#0A1628" }}
-          >
+          <h1 className="text-sm font-semibold truncate max-w-[70%] text-[#F9F6E7]">
             Día {session.number}: {session.title}
           </h1>
-          <p className="text-[10px] flex-shrink-0" style={{ color: "#1F2F5860" }}>
+          <p className="text-[10px] flex-shrink-0 text-[#F9F6E7]/40">
             Sesión {session.number} de {totalSessions}
           </p>
         </div>
         <div className="md:hidden mt-0.5">
-          <p className="text-[10px] font-medium truncate" style={{ color: "#73B8E7" }}>
+          <p className="text-[10px] font-medium truncate text-[#73B8E7]">
             Semana {weekNumber}: {IGNITE_WEEKS[weekNumber - 1].name}
           </p>
         </div>
@@ -136,13 +138,12 @@ export default function DemoSessionPage({ params }: PageProps) {
         <SessionTabs tabs={tabs} />
       </div>
 
-      {/* Bottom navigation — mismo estilo que SessionNav */}
+      {/* Bottom navigation */}
       <div className="mt-6 flex items-center justify-between gap-3">
         {prevSession && prevAvailable ? (
           <Link
             href={`/demo/aula/sesion/${prevSession.number}`}
-            className="flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-lg border transition-colors hover:bg-white"
-            style={{ borderColor: "#1F2F5820", color: "#1F2F58" }}
+            className="flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-lg border border-[#1F2F58]/30 text-[#F9F6E7] hover:bg-[#1F2F58]/20 transition-colors"
           >
             <ChevronLeft className="w-4 h-4" />
             <span className="truncate max-w-[160px]">
@@ -152,8 +153,7 @@ export default function DemoSessionPage({ params }: PageProps) {
         ) : (
           <Link
             href={`/demo/aula/semana-${weekNumber}`}
-            className="flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-lg border transition-colors hover:bg-white"
-            style={{ borderColor: "#1F2F5820", color: "#1F2F58" }}
+            className="flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-lg border border-[#1F2F58]/30 text-[#F9F6E7] hover:bg-[#1F2F58]/20 transition-colors"
           >
             <ChevronLeft className="w-4 h-4" />
             Semana {weekNumber}
@@ -163,8 +163,7 @@ export default function DemoSessionPage({ params }: PageProps) {
         {nextSession && nextAvailable ? (
           <Link
             href={`/demo/aula/sesion/${nextSession.number}`}
-            className="flex items-center gap-2 text-sm font-semibold px-5 py-2 rounded-lg transition-opacity hover:opacity-80"
-            style={{ backgroundColor: "#FBBC0C", color: "#0A1628" }}
+            className="flex items-center gap-2 text-sm font-semibold px-5 py-2 rounded-lg bg-[#FBBC0C] text-[#0A1628] hover:opacity-80 transition-opacity"
           >
             <span className="truncate max-w-[160px]">
               Día {nextSession.number}
@@ -174,8 +173,7 @@ export default function DemoSessionPage({ params }: PageProps) {
         ) : (
           <Link
             href="/demo/aula"
-            className="flex items-center gap-2 text-sm font-semibold px-5 py-2 rounded-lg transition-opacity hover:opacity-80"
-            style={{ backgroundColor: "#FBBC0C", color: "#0A1628" }}
+            className="flex items-center gap-2 text-sm font-semibold px-5 py-2 rounded-lg bg-[#FBBC0C] text-[#0A1628] hover:opacity-80 transition-opacity"
           >
             Dashboard
             <ChevronRight className="w-4 h-4" />
@@ -197,10 +195,7 @@ function VideoContent({
   return (
     <div className="p-4 sm:p-6 space-y-4">
       {session.videoEmbed ? (
-        <div
-          className="aspect-video w-full rounded-2xl overflow-hidden border"
-          style={{ borderColor: "#1F2F5815" }}
-        >
+        <div className="aspect-video w-full rounded-2xl overflow-hidden border border-[#1F2F58]/30">
           <iframe
             src={session.videoEmbed}
             title={session.title}
@@ -210,34 +205,25 @@ function VideoContent({
           />
         </div>
       ) : (
-        <div
-          className="aspect-video w-full rounded-2xl flex items-center justify-center border"
-          style={{
-            borderColor: "#1F2F5815",
-            backgroundColor: "#F9F6E7",
-          }}
-        >
+        <div className="aspect-video w-full rounded-2xl flex items-center justify-center border border-[#FBBC0C]/20 bg-[#1F2F58]/20">
           <div className="text-center">
-            <div
-              className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-3"
-              style={{ backgroundColor: "#FBBC0C22" }}
-            >
-              <Clock className="w-6 h-6" style={{ color: "#FBBC0C" }} />
+            <div className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-3 bg-[#FBBC0C]/15">
+              <Clock className="w-6 h-6 text-[#FBBC0C]" />
             </div>
-            <p className="text-sm font-semibold" style={{ color: "#0A1628" }}>
+            <p className="text-sm font-semibold text-[#F9F6E7]">
               Video del Día {session.number} disponible con tu cohorte
             </p>
-            <p className="text-xs mt-1" style={{ color: "#1F2F5880" }}>
+            <p className="text-xs mt-1 text-[#F9F6E7]/55">
               Grabación + chat en vivo con Héctor Velasco
             </p>
           </div>
         </div>
       )}
       <div>
-        <h2 className="text-base font-bold" style={{ color: "#0A1628" }}>
+        <h2 className="text-base font-bold text-[#FBBC0C]">
           {session.title}
         </h2>
-        <p className="text-sm mt-1" style={{ color: "#1F2F5880" }}>
+        <p className="text-sm mt-1 text-[#F9F6E7]/70">
           {session.description}
         </p>
       </div>
@@ -254,75 +240,47 @@ function TheoryContent({
   return (
     <div className="p-4 sm:p-6 space-y-5">
       {session.emotionalGoal && (
-        <div
-          className="rounded-2xl p-5 border"
-          style={{
-            borderColor: "#F0846D30",
-            backgroundColor: "#F0846D10",
-          }}
-        >
+        <div className="rounded-2xl p-5 border border-[#F0846D]/30 bg-[#F0846D]/10">
           <div className="flex items-center gap-2 mb-2">
-            <Sparkles className="w-4 h-4" style={{ color: "#F0846D" }} />
-            <span
-              className="text-[10px] font-bold uppercase tracking-widest"
-              style={{ color: "#F0846D" }}
-            >
+            <Sparkles className="w-4 h-4 text-[#F0846D]" />
+            <span className="text-[10px] font-bold uppercase tracking-widest text-[#F0846D]">
               Objetivo emocional
             </span>
           </div>
-          <p className="text-sm leading-relaxed" style={{ color: "#0A1628" }}>
+          <p className="text-sm leading-relaxed text-[#F9F6E7]">
             {session.emotionalGoal}
           </p>
         </div>
       )}
       {session.technicalGoal && (
-        <div
-          className="rounded-2xl p-5 border"
-          style={{
-            borderColor: "#73B8E730",
-            backgroundColor: "#73B8E710",
-          }}
-        >
+        <div className="rounded-2xl p-5 border border-[#73B8E7]/30 bg-[#73B8E7]/10">
           <div className="flex items-center gap-2 mb-2">
-            <Target className="w-4 h-4" style={{ color: "#1F2F58" }} />
-            <span
-              className="text-[10px] font-bold uppercase tracking-widest"
-              style={{ color: "#1F2F58" }}
-            >
+            <Target className="w-4 h-4 text-[#73B8E7]" />
+            <span className="text-[10px] font-bold uppercase tracking-widest text-[#73B8E7]">
               Objetivo técnico
             </span>
           </div>
-          <p className="text-sm leading-relaxed" style={{ color: "#0A1628" }}>
+          <p className="text-sm leading-relaxed text-[#F9F6E7]">
             {session.technicalGoal}
           </p>
         </div>
       )}
       {session.tools.length > 0 && (
         <div>
-          <h3
-            className="text-sm font-bold uppercase tracking-widest mb-3"
-            style={{ color: "#1F2F58" }}
-          >
+          <h3 className="text-sm font-bold uppercase tracking-widest mb-3 text-[#FBBC0C]">
             Herramientas del día
           </h3>
           <div className="grid gap-3 sm:grid-cols-3">
             {session.tools.map((tool) => (
               <div
                 key={tool.name}
-                className="rounded-2xl p-4 border"
-                style={{
-                  borderColor: "#1F2F5815",
-                  backgroundColor: "#fff",
-                }}
+                className="rounded-2xl p-4 border border-[#1F2F58]/40 bg-[#1F2F58]/20"
               >
                 <div className="text-2xl mb-2">{tool.emoji}</div>
-                <p className="text-sm font-bold" style={{ color: "#0A1628" }}>
+                <p className="text-sm font-bold text-[#F9F6E7]">
                   {tool.name}
                 </p>
-                <p
-                  className="text-xs mt-1 leading-relaxed"
-                  style={{ color: "#1F2F5880" }}
-                >
+                <p className="text-xs mt-1 leading-relaxed text-[#F9F6E7]/60">
                   {tool.desc}
                 </p>
               </div>
@@ -344,38 +302,20 @@ function AssignmentContent({
     <div className="p-4 sm:p-6 space-y-5">
       {session.agenda.length > 0 && (
         <div>
-          <h3
-            className="text-sm font-bold uppercase tracking-widest mb-3"
-            style={{ color: "#1F2F58" }}
-          >
+          <h3 className="text-sm font-bold uppercase tracking-widest mb-3 text-[#FBBC0C]">
             Agenda del día · {session.durationMinutes} min
           </h3>
-          <ul
-            className="rounded-2xl border divide-y overflow-hidden"
-            style={{ borderColor: "#1F2F5815", backgroundColor: "#fff" }}
-          >
+          <ul className="rounded-2xl border border-[#1F2F58]/40 divide-y divide-[#1F2F58]/30 overflow-hidden bg-[#1F2F58]/20">
             {session.agenda.map((item, idx) => (
               <li key={idx} className="p-4 flex items-start gap-4">
-                <span
-                  className="text-[10px] font-bold flex-shrink-0 mt-0.5 px-2 py-1 rounded-full"
-                  style={{
-                    backgroundColor: "#FBBC0C22",
-                    color: "#0A1628",
-                  }}
-                >
+                <span className="text-[10px] font-bold flex-shrink-0 mt-0.5 px-2 py-1 rounded-full bg-[#FBBC0C]/20 text-[#FBBC0C]">
                   {item.time}
                 </span>
                 <div className="flex-1 min-w-0">
-                  <p
-                    className="text-sm font-semibold"
-                    style={{ color: "#0A1628" }}
-                  >
+                  <p className="text-sm font-semibold text-[#F9F6E7]">
                     {item.title}
                   </p>
-                  <p
-                    className="text-xs mt-0.5 leading-relaxed"
-                    style={{ color: "#1F2F5880" }}
-                  >
+                  <p className="text-xs mt-0.5 leading-relaxed text-[#F9F6E7]/55">
                     {item.description}
                   </p>
                 </div>
@@ -385,37 +325,19 @@ function AssignmentContent({
         </div>
       )}
       {session.assignment && (
-        <div
-          className="rounded-2xl p-5 border"
-          style={{
-            borderColor: "#FBBC0C40",
-            backgroundColor: "#FBBC0C10",
-          }}
-        >
-          <span
-            className="text-[10px] font-bold uppercase tracking-widest"
-            style={{ color: "#0A1628" }}
-          >
+        <div className="rounded-2xl p-5 border border-[#FBBC0C]/30 bg-[#FBBC0C]/10">
+          <span className="text-[10px] font-bold uppercase tracking-widest text-[#FBBC0C]">
             Tu proyecto del día
           </span>
-          <p
-            className="text-sm mt-2 leading-relaxed"
-            style={{ color: "#0A1628" }}
-          >
+          <p className="text-sm mt-2 leading-relaxed text-[#F9F6E7]">
             {session.assignment}
           </p>
           {session.deliverable && (
-            <div className="mt-3 pt-3 border-t" style={{ borderColor: "#FBBC0C40" }}>
-              <span
-                className="text-[10px] font-bold uppercase tracking-widest"
-                style={{ color: "#1F2F58" }}
-              >
+            <div className="mt-3 pt-3 border-t border-[#FBBC0C]/30">
+              <span className="text-[10px] font-bold uppercase tracking-widest text-[#73B8E7]">
                 Entregable
               </span>
-              <p
-                className="text-xs mt-1 leading-relaxed"
-                style={{ color: "#1F2F58" }}
-              >
+              <p className="text-xs mt-1 leading-relaxed text-[#F9F6E7]/70">
                 {session.deliverable}
               </p>
             </div>
@@ -435,29 +357,19 @@ function LockedContent({
 }) {
   return (
     <div className="p-8">
-      <div
-        className="rounded-2xl border p-8 text-center"
-        style={{ borderColor: "#1F2F5815", backgroundColor: "#fff" }}
-      >
-        <div
-          className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-3"
-          style={{ backgroundColor: "#1F2F5810" }}
-        >
-          <Lock className="w-6 h-6" style={{ color: "#1F2F58" }} />
+      <div className="rounded-2xl border border-[#1F2F58]/40 bg-[#1F2F58]/20 p-8 text-center">
+        <div className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-3 bg-[#1F2F58]/40">
+          <Lock className="w-6 h-6 text-[#F9F6E7]/40" />
         </div>
-        <h3 className="text-base font-bold" style={{ color: "#0A1628" }}>
+        <h3 className="text-base font-bold text-[#F9F6E7]">
           {title}
         </h3>
-        <p
-          className="text-sm mt-1 leading-relaxed max-w-md mx-auto"
-          style={{ color: "#1F2F5880" }}
-        >
+        <p className="text-sm mt-1 leading-relaxed max-w-md mx-auto text-[#F9F6E7]/55">
           {description}
         </p>
         <Link
           href="/preuni-info"
-          className="inline-flex items-center gap-1.5 mt-4 text-xs font-semibold transition-opacity hover:opacity-70"
-          style={{ color: "#0A1628" }}
+          className="inline-flex items-center gap-1.5 mt-4 text-xs font-semibold text-[#FBBC0C] hover:text-[#73B8E7] transition-colors"
         >
           Ver programa completo
           <ChevronRight className="w-3.5 h-3.5" />
