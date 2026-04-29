@@ -6,21 +6,27 @@
 
 CREATE TABLE IF NOT EXISTS recordings (
   id                uuid         PRIMARY KEY DEFAULT gen_random_uuid(),
-  module_type       text         NOT NULL CHECK (
-    module_type IN ('carrera', 'bootcamp', 'curso_mdt', 'curso_pro', 'certificacion', 'preuni', 'demo')
+  -- Para módulos non-carrera: tipo y slug del módulo
+  module_type       text         DEFAULT NULL CHECK (
+    module_type IS NULL OR module_type IN ('carrera', 'bootcamp', 'curso_mdt', 'curso_pro', 'certificacion', 'preuni', 'demo')
   ),
-  module_slug       text         NOT NULL,          -- e.g. "c1", "steveen-pinchao", "aws-cloud-practitioner"
-  session_id        text         NOT NULL,          -- número de sesión como texto, o ID de dominio
+  module_slug       text         DEFAULT NULL,
+  -- session_id: UUID de sesión (para carreras) o número de sesión como texto
+  session_id        text         NOT NULL,
   youtube_url       text         NOT NULL,
-  youtube_id        text         NOT NULL,          -- ID del video en YouTube (11 caracteres)
+  youtube_id        text         NOT NULL,
   title             text         NOT NULL,
   description       text         NOT NULL DEFAULT '',
   duration_seconds  integer      NOT NULL DEFAULT 0,
-  recorded_at       timestamptz  NOT NULL,
+  recorded_at       timestamptz  DEFAULT now(),
   created_at        timestamptz  NOT NULL DEFAULT now()
 );
 
--- Índice principal: buscar grabaciones de un módulo + sesión
+-- Índice principal: buscar grabaciones por sesión (UUID o texto)
+CREATE INDEX IF NOT EXISTS recordings_session_idx
+  ON recordings (session_id);
+
+-- Índice para búsqueda por módulo + sesión (cursos no-carrera)
 CREATE INDEX IF NOT EXISTS recordings_lookup_idx
   ON recordings (module_type, module_slug, session_id);
 
@@ -33,27 +39,21 @@ CREATE INDEX IF NOT EXISTS recordings_recorded_at_idx
 ALTER TABLE recordings ENABLE ROW LEVEL SECURITY;
 
 -- Lectura: cualquier usuario autenticado puede ver grabaciones
--- (el control de acceso al módulo ya lo hace la app)
 CREATE POLICY "recordings_read_authenticated"
   ON recordings
   FOR SELECT
   TO authenticated
   USING (true);
 
--- Escritura: solo service_role (admins via supabaseAdmin)
--- No creamos política de INSERT/UPDATE/DELETE para anon/authenticated
--- → se gestiona desde el panel de admin o via supabaseAdmin
-
 -- ── Comentarios de documentación ─────────────────────────────────────────────
 
 COMMENT ON TABLE recordings IS
   'Grabaciones de clases en YouTube para todos los módulos del campus ITSEIA. '
-  'module_type identifica el tipo de módulo; module_slug el curso específico; '
-  'session_id el número/ID de la sesión o dominio.';
+  'Para carreras: session_id = UUID de sessions. '
+  'Para otros módulos: module_type + module_slug + session_id (texto).';
 
 COMMENT ON COLUMN recordings.youtube_id IS
-  'ID de 11 caracteres del video en YouTube. Se deriva de youtube_url pero '
-  'se almacena separado para construir embeds sin parsear la URL cada vez.';
+  'ID de 11 caracteres del video en YouTube.';
 
 COMMENT ON COLUMN recordings.duration_seconds IS
   'Duración del video en segundos. 0 = desconocida.';
