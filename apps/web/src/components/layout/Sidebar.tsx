@@ -192,7 +192,7 @@ const SECTION_EXPLORAR: NavSection = {
     { href: "/descubre/cursos-pro",      label: "Cursos Profesionales",   icon: Sparkles },
     { href: "/descubre/bootcamp",        label: "Bootcamp 120h",          icon: FlaskConical },
     { href: "/descubre/certificaciones", label: "Certificaciones",        icon: Award },
-    { href: "/b2b",                      label: "B2B Empresas",           icon: Building2 },
+    { href: "/descubre/b2b",              label: "B2B Empresas",           icon: Building2 },
     {
       href: "https://h3l.ai",
       label: "H3L Diagnóstico IA",
@@ -487,7 +487,7 @@ export default function Sidebar({
   function isActive(href: string): boolean {
     if (href.startsWith("http")) return false;
     if (href === "/dashboard") return pathname === "/dashboard";
-    if (href === "/b2b") return pathname === "/b2b";
+    if (href === "/descubre/b2b") return pathname === "/descubre/b2b";
     if (href === "/admin" && pathname !== "/admin") return false;
     return pathname === href || pathname.startsWith(href + "/");
   }

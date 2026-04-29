@@ -6,6 +6,8 @@ import BackButton from "@/components/descubre/BackButton";
 
 const WA_LINK = "https://wa.me/593990709009?text=Hola%2C%20me%20interesan%20los%20Cursos%20MDT%20de%20ITSEIA.%20%C2%BFPodr%C3%ADan%20darme%20m%C3%A1s%20informaci%C3%B3n%3F";
 
+const WA_INFO = "https://wa.me/593990709009?text=Quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20los%20Cursos%20MDT%20de%20ITSEIA";
+
 const CURSOS = [
   { id: "C1",  nombre: "Introducción a la IA Aplicada",      color: "#FBBC0C" },
   { id: "C2",  nombre: "Python para Datos",                  color: "#73B8E7" },
@@ -28,6 +30,15 @@ const PLANES = [
   { nombre: "Express",   precio: "$97",  desc: "1 curso a elección", color: "#73B8E7" },
   { nombre: "Estándar",  precio: "$197", desc: "5 cursos a elección", color: "#FBBC0C" },
   { nombre: "Completo",  precio: "$297", desc: "Los 15 cursos MDT", color: "#F0846D" },
+];
+
+const BENEFICIOS = [
+  "15 cursos sobre las herramientas de IA más demandadas",
+  "100% online — aprende a tu ritmo, sin horarios fijos",
+  "Acceso de por vida — sin fecha de caducidad",
+  "Proyectos reales desde el primer día",
+  "Sin prerequisitos — desde cero hasta avanzado",
+  "Certificado de finalización descargable por curso",
 ];
 
 // ─── Componente ───────────────────────────────────────────────────────────────
@@ -91,43 +102,133 @@ export default function DescubreCursosMdtPage() {
           </p>
         </div>
 
-        {/* ── Video principal ── */}
-        <div className="mb-14">
-          <div className="relative rounded-2xl overflow-hidden border border-white/[0.08] shadow-2xl" style={{ paddingBottom: "56.25%" }}>
-            <iframe
-              src="https://www.youtube.com/embed/GWqRRq3iqFU?autoplay=0&rel=0&modestbranding=1"
-              title="Cursos MDT — ITSEIA"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              className="absolute inset-0 w-full h-full"
-            />
-          </div>
-        </div>
+        {/* ── Layout 2 columnas: info + video ── */}
+        <div className="grid lg:grid-cols-2 gap-10 mb-14 items-start">
 
-        {/* ── Stats ── */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-14">
-          {[
-            { value: "15", label: "Cursos disponibles" },
-            { value: "100%", label: "Online — a tu ritmo" },
-            { value: "$97", label: "Desde por curso" },
-            { value: "∞", label: "Acceso de por vida" },
-          ].map((s) => (
-            <div key={s.label} className="rounded-xl border border-white/[0.08] bg-white/[0.03] p-5 text-center">
-              <div
-                className="text-3xl font-extrabold mb-1"
-                style={{
-                  fontFamily: "var(--font-space-grotesk)",
-                  background: "linear-gradient(135deg, #73B8E7, #FBBC0C)",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                }}
-              >
-                {s.value}
+          {/* Columna izquierda — descripción y beneficios */}
+          <div>
+            <div className="rounded-2xl border border-white/[0.08] bg-white/[0.03] p-7 mb-6">
+              <p className="text-white/70 leading-relaxed text-base mb-6">
+                Aprende las herramientas de IA más demandadas del mercado en días,
+                no meses. Desde Python hasta Claude Code, Cursor AI, Big Data y más.
+                Cada curso es independiente — compra solo lo que necesitas.
+              </p>
+              <div className="grid gap-3">
+                {BENEFICIOS.map((item) => (
+                  <div key={item} className="flex items-start gap-3 text-white/80 text-sm">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="#73B8E7"
+                      strokeWidth={2.5}
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="w-4 h-4 shrink-0 mt-0.5"
+                    >
+                      <path d="M20 6L9 17l-5-5" />
+                    </svg>
+                    {item}
+                  </div>
+                ))}
               </div>
-              <div className="text-white/45 text-xs">{s.label}</div>
             </div>
-          ))}
+
+            {/* Pricing card */}
+            <div
+              className="rounded-2xl border border-[#73B8E7]/30 p-7 text-center"
+              style={{
+                background:
+                  "linear-gradient(145deg, rgba(115,184,231,0.08) 0%, rgba(31,47,88,0.25) 100%)",
+                backdropFilter: "blur(12px)",
+              }}
+            >
+              <div className="inline-flex items-center gap-2 bg-[#73B8E7]/10 border border-[#73B8E7]/20 rounded-full px-3 py-1.5 mb-4">
+                <span className="text-[#73B8E7] text-xs font-bold uppercase tracking-wider">
+                  Planes de acceso
+                </span>
+              </div>
+              <div className="grid grid-cols-3 gap-3 mb-5">
+                {PLANES.map((p) => (
+                  <div key={p.nombre} className="text-center">
+                    <div className="text-2xl font-extrabold" style={{ fontFamily: "var(--font-space-grotesk)", color: p.color }}>{p.precio}</div>
+                    <div className="text-white/50 text-xs mt-0.5">{p.desc}</div>
+                    <div
+                      className="text-xs font-bold uppercase tracking-wider mt-1"
+                      style={{ color: p.color }}
+                    >
+                      {p.nombre}
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                <a
+                  href={WA_LINK}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 bg-[#FBBC0C] text-[#0A1628] px-6 py-3 rounded-xl font-bold text-sm hover:bg-[#E5AB00] transition-all hover:scale-[1.02] shadow-lg shadow-[#FBBC0C]/25"
+                >
+                  <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 shrink-0">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z" />
+                  </svg>
+                  Inscribirme
+                </a>
+                <a
+                  href={WA_INFO}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 border border-white/15 text-white/80 px-6 py-3 rounded-xl font-semibold text-sm hover:bg-white/[0.05] transition-all"
+                >
+                  Más información
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* Columna derecha — video */}
+          <div className="flex flex-col gap-6">
+            <div
+              className="relative rounded-2xl overflow-hidden border border-white/[0.08] shadow-2xl"
+              style={{ paddingBottom: "56.25%" }}
+            >
+              <iframe
+                src="https://www.youtube.com/embed/GWqRRq3iqFU?autoplay=0&rel=0&modestbranding=1"
+                title="Cursos MDT — ITSEIA"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="absolute inset-0 w-full h-full"
+              />
+            </div>
+
+            {/* Stats rápidos */}
+            <div className="grid grid-cols-2 gap-3">
+              {[
+                { value: "15",   label: "cursos disponibles" },
+                { value: "100%", label: "online — tu ritmo" },
+                { value: "$97",  label: "desde por curso" },
+                { value: "∞",    label: "acceso de por vida" },
+              ].map((s) => (
+                <div
+                  key={s.label}
+                  className="rounded-xl border border-white/[0.08] bg-white/[0.03] p-4 text-center"
+                >
+                  <div
+                    className="text-2xl font-extrabold mb-1"
+                    style={{
+                      fontFamily: "var(--font-space-grotesk)",
+                      background: "linear-gradient(135deg, #73B8E7, #FBBC0C)",
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                      backgroundClip: "text",
+                    }}
+                  >
+                    {s.value}
+                  </div>
+                  <div className="text-white/45 text-xs">{s.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
 
         {/* ── Catálogo de cursos ── */}
@@ -156,78 +257,6 @@ export default function DescubreCursosMdtPage() {
           </div>
         </section>
 
-        {/* ── Planes y precios ── */}
-        <section className="mb-14">
-          <h2
-            className="text-2xl font-extrabold text-white mb-6 text-center"
-            style={{ fontFamily: "var(--font-space-grotesk)" }}
-          >
-            Planes de acceso
-          </h2>
-          <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            {PLANES.map((p) => (
-              <div
-                key={p.nombre}
-                className="rounded-2xl border p-7 text-center"
-                style={{
-                  borderColor: `${p.color}30`,
-                  background: `linear-gradient(145deg, ${p.color}08 0%, rgba(31,47,88,0.25) 100%)`,
-                  backdropFilter: "blur(12px)",
-                }}
-              >
-                <div
-                  className="inline-flex items-center gap-2 rounded-full px-3 py-1.5 mb-4 text-xs font-bold uppercase tracking-wider"
-                  style={{ background: `${p.color}15`, color: p.color, border: `1px solid ${p.color}25` }}
-                >
-                  {p.nombre}
-                </div>
-                <div className="text-4xl font-extrabold text-white mb-1" style={{ fontFamily: "var(--font-space-grotesk)" }}>{p.precio}</div>
-                <div className="text-white/50 text-sm mb-4">{p.desc}</div>
-                <a
-                  href={WA_LINK}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block w-full py-2.5 rounded-lg font-bold text-sm transition-all"
-                  style={{ background: p.color, color: "#0A1628" }}
-                >
-                  Inscribirme
-                </a>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* ── Qué incluye ── */}
-        <section className="mb-14">
-          <div className="rounded-2xl border border-[#73B8E7]/20 p-8" style={{ background: "linear-gradient(145deg, rgba(115,184,231,0.06) 0%, rgba(31,47,88,0.25) 100%)", backdropFilter: "blur(12px)" }}>
-            <h2
-              className="text-2xl font-extrabold text-white mb-6 text-center"
-              style={{ fontFamily: "var(--font-space-grotesk)" }}
-            >
-              Qué incluye cada curso MDT
-            </h2>
-            <div className="grid sm:grid-cols-2 gap-3">
-              {[
-                "Videos en HD con explicaciones paso a paso",
-                "Ejercicios prácticos con proyectos reales",
-                "Certificado de finalización descargable",
-                "Soporte por WhatsApp con docentes",
-                "Acceso de por vida — sin caducidad",
-                "Actualizaciones de contenido incluidas",
-                "Compatible con PC, tablet y celular",
-                "Sin prerequisitos — desde cero",
-              ].map((item) => (
-                <div key={item} className="flex items-start gap-3 text-white/70 text-sm">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="#73B8E7" strokeWidth={2.5} strokeLinecap="round" strokeLinejoin="round" className="w-4 h-4 shrink-0 mt-0.5">
-                    <path d="M20 6L9 17l-5-5"/>
-                  </svg>
-                  {item}
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* ── CTA final ── */}
         <section className="text-center">
           <div className="rounded-2xl border border-[#FBBC0C]/25 p-10" style={{ background: "linear-gradient(145deg, rgba(251,188,12,0.08) 0%, rgba(10,22,40,0.9) 100%)", backdropFilter: "blur(16px)" }}>
@@ -253,7 +282,7 @@ export default function DescubreCursosMdtPage() {
                 Hablar con Héctor ahora
               </a>
               <a
-                href={WA_LINK}
+                href={WA_INFO}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 border border-white/15 text-white/80 px-8 py-4 rounded-xl font-semibold text-base hover:bg-white/[0.05] transition-all"

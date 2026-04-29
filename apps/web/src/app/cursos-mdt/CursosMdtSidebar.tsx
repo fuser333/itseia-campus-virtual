@@ -94,7 +94,7 @@ const MENU: NavSection[] = [
       { href: "/descubre/bootcamp",         label: "Bootcamp 120h",           icon: Zap,           labelColor: "#73B8E7" },
       { href: "/descubre/preuniversitario", label: "Preuniversitario IGNITE", icon: Lightbulb,     labelColor: "#73B8E7" },
       { href: "/descubre/certificaciones",  label: "Certificaciones",         icon: Award,         labelColor: "#73B8E7" },
-      { href: "/b2b",                       label: "B2B Empresas",            icon: Building2,     labelColor: "#73B8E7" },
+      { href: "/descubre/b2b",              label: "B2B Empresas",            icon: Building2,     labelColor: "#73B8E7" },
       { href: "https://h3l.ai",             label: "H3L Diagnóstico IA",      icon: Brain,         labelColor: "#F0846D", external: true },
     ],
   },

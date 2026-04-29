@@ -4,66 +4,36 @@ import BackButton from "@/components/descubre/BackButton";
 
 // ─── Constantes ───────────────────────────────────────────────────────────────
 
-// Video oficial de Certificaciones generado con Gemini Veo (8 seg).
-// Subido a YouTube canal ITSEIA el 2026-04-28.
-const YOUTUBE_ID = "9w9Ax0v1uFE";
-
-const WA_CERTIFICACION =
-  "https://wa.me/593990709009?text=Hola%2C%20quiero%20certificarme%20con%20ITSEIA";
+const WA_COTIZAR =
+  "https://wa.me/593990709009?text=Hola%2C%20quiero%20cotizar%20una%20capacitaci%C3%B3n%20B2B%20de%20IA%20para%20mi%20empresa";
 
 const WA_INFO =
-  "https://wa.me/593990709009?text=Info%20de%20certificaciones%20ITSEIA";
+  "https://wa.me/593990709009?text=Quiero%20info%20de%20programas%20B2B%20de%20ITSEIA";
+
+// TODO: Reemplazar con video propio de B2B cuando esté disponible.
+// Actualmente usa video Bootcamp como placeholder.
+// El CEO va a generar el video con Gemini Veo y subir a YouTube.
+const YOUTUBE_ID = "QVoO3cY_BPQ"; // PLACEHOLDER
 
 const BENEFICIOS = [
-  "AWS Cloud Practitioner ($147)",
-  "Google Cloud Digital Leader ($147)",
-  "Azure AI Fundamentals ($147)",
-  "Material oficial actualizado",
-  "+200 simulacros de examen",
-  "Clases en vivo + sesiones de dudas",
-  "Garantía: si no apruebas, te repetimos el curso gratis",
-];
-
-const CERTS = [
-  {
-    abbr: "AWS",
-    color: "#FBBC0C",
-    borderColor: "rgba(251,188,12,0.25)",
-    glowColor: "rgba(251,188,12,0.06)",
-    name: "AWS Cloud Practitioner",
-    desc: "La certificación de entrada más reconocida en la nube. Valida tu comprensión de los servicios y arquitectura de Amazon Web Services.",
-    topics: ["Cloud Computing", "S3 & EC2", "IAM", "VPC", "Billing", "Servicios Core"],
-  },
-  {
-    abbr: "GCP",
-    color: "#73B8E7",
-    borderColor: "rgba(115,184,231,0.25)",
-    glowColor: "rgba(115,184,231,0.06)",
-    name: "Google Cloud Digital Leader",
-    desc: "Demuestra que puedes transformar organizaciones con las herramientas de Google Cloud, BigQuery, Vertex AI y más.",
-    topics: ["BigQuery", "Vertex AI", "Cloud Functions", "Data Studio", "Gemini API", "GKE"],
-  },
-  {
-    abbr: "AZ",
-    color: "#F0846D",
-    borderColor: "rgba(240,132,109,0.25)",
-    glowColor: "rgba(240,132,109,0.06)",
-    name: "Azure AI Fundamentals",
-    desc: "Certifícate en inteligencia artificial y machine learning con Microsoft Azure: la nube más demandada en empresas corporativas.",
-    topics: ["Azure ML", "Cognitive Services", "Computer Vision", "NLP Azure", "Bot Service", "OpenAI on Azure"],
-  },
+  "Programa diseñado a la medida de tu empresa",
+  "Casos reales de tu industria (banca, salud, retail, manufactura, gobierno)",
+  "De 5 hasta 200+ personas capacitadas",
+  "Certificación MDT para todo el equipo",
+  "Sesiones online + live + portafolio",
+  "ROI medible en 60 días",
 ];
 
 // ─── Componente ───────────────────────────────────────────────────────────────
 
-export default function DescubreCertificacionesPage() {
+export default function DescubreB2BPage() {
   return (
     <div className="min-h-screen bg-[#0A1628] text-white overflow-x-hidden">
 
       {/* Gradientes de fondo */}
       <div className="fixed inset-0 pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full bg-[#73B8E7]/[0.03] blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] rounded-full bg-[#FBBC0C]/[0.04] blur-3xl" />
+        <div className="absolute top-0 right-1/4 w-[600px] h-[600px] rounded-full bg-[#FBBC0C]/[0.03] blur-3xl" />
+        <div className="absolute bottom-1/4 left-1/4 w-[500px] h-[500px] rounded-full bg-[#73B8E7]/[0.04] blur-3xl" />
       </div>
 
       {/* ── Header ── */}
@@ -72,12 +42,12 @@ export default function DescubreCertificacionesPage() {
           <BackButton />
           <img src="/logo_itseia.svg" alt="ITSEIA" className="h-7 w-auto" />
           <a
-            href={WA_CERTIFICACION}
+            href={WA_COTIZAR}
             target="_blank"
             rel="noopener noreferrer"
             className="bg-[#FBBC0C] text-[#0A1628] px-4 py-2 rounded-lg font-bold text-sm hover:bg-[#E5AB00] transition-colors"
           >
-            Inscribirme
+            Cotizar ahora
           </a>
         </div>
       </header>
@@ -100,21 +70,21 @@ export default function DescubreCertificacionesPage() {
             className="text-4xl sm:text-5xl font-extrabold text-white leading-tight tracking-tight mb-4"
             style={{ fontFamily: "var(--font-space-grotesk)" }}
           >
-            Certificaciones{" "}
+            Capacitación B2B{" "}
             <span
               style={{
                 background:
-                  "linear-gradient(135deg, #FBBC0C 0%, #73B8E7 60%, #F0846D 100%)",
+                  "linear-gradient(135deg, #FBBC0C 0%, #F0846D 60%, #73B8E7 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
               }}
             >
-              · AWS · Google · Azure
+              · Tu equipo dominando IA
             </span>
           </h1>
           <p className="text-white/55 text-lg max-w-2xl mx-auto leading-relaxed">
-            Las credenciales internacionales que las empresas buscan en LinkedIn
+            Programas a medida para empresas que NO pueden quedarse atrás
           </p>
         </div>
 
@@ -125,9 +95,9 @@ export default function DescubreCertificacionesPage() {
           <div>
             <div className="rounded-2xl border border-white/[0.08] bg-white/[0.03] p-7 mb-6">
               <p className="text-white/70 leading-relaxed text-base mb-6">
-                Prepárate para las 3 certificaciones más demandadas en data e IA.
-                Material oficial + simulacros + clases en vivo. Garantía: si no
-                apruebas, repites el curso GRATIS.
+                Diseñamos un programa de capacitación en IA específico para tu
+                industria. Para 5 a 200+ personas. Casos reales de tu sector.
+                Certificación MDT al graduar al equipo.
               </p>
               <div className="grid gap-3">
                 {BENEFICIOS.map((item) => (
@@ -160,27 +130,21 @@ export default function DescubreCertificacionesPage() {
             >
               <div className="inline-flex items-center gap-2 bg-[#FBBC0C]/10 border border-[#FBBC0C]/20 rounded-full px-3 py-1.5 mb-4">
                 <span className="text-[#FBBC0C] text-xs font-bold uppercase tracking-wider">
-                  Precio por certificación
+                  Cotización personalizada
                 </span>
               </div>
               <div
-                className="text-[#FBBC0C] text-5xl font-extrabold mb-1"
+                className="text-white/70 text-xl font-semibold mb-1"
                 style={{ fontFamily: "var(--font-space-grotesk)" }}
               >
-                $147
+                Desde $3,000 por contrato
               </div>
-              <div className="text-white/50 text-sm mb-3">por certificación</div>
-              <div
-                className="inline-flex items-center gap-2 bg-[#F0846D]/10 border border-[#F0846D]/20 rounded-xl px-4 py-2 mb-5"
-              >
-                <span className="text-[#F0846D] text-sm font-bold">Pack 3 certificaciones</span>
-                <span className="text-white/70 text-sm">→</span>
-                <span className="text-[#F0846D] text-lg font-extrabold" style={{ fontFamily: "var(--font-space-grotesk)" }}>$397</span>
-                <span className="text-white/40 text-xs">(ahorra $44)</span>
+              <div className="text-white/45 text-sm mb-5">
+                Próximas cohortes mensuales · Grupos de 5 a 200+ personas
               </div>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 <a
-                  href={WA_CERTIFICACION}
+                  href={WA_COTIZAR}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 bg-[#FBBC0C] text-[#0A1628] px-6 py-3 rounded-xl font-bold text-sm hover:bg-[#E5AB00] transition-all hover:scale-[1.02] shadow-lg shadow-[#FBBC0C]/25"
@@ -188,7 +152,7 @@ export default function DescubreCertificacionesPage() {
                   <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 shrink-0">
                     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z" />
                   </svg>
-                  Quiero certificarme
+                  Cotizar para mi empresa
                 </a>
                 <a
                   href={WA_INFO}
@@ -208,9 +172,12 @@ export default function DescubreCertificacionesPage() {
               className="relative rounded-2xl overflow-hidden border border-white/[0.08] shadow-2xl"
               style={{ paddingBottom: "56.25%" }}
             >
+              {/* TODO: Reemplazar con video propio de B2B cuando esté disponible.
+                  Actualmente usa video Bootcamp (QVoO3cY_BPQ) como placeholder.
+                  El CEO va a generar el video con Gemini Veo y subir a YouTube. */}
               <iframe
                 src={`https://www.youtube.com/embed/${YOUTUBE_ID}?autoplay=0&rel=0&modestbranding=1`}
-                title="Certificaciones AWS · Google · Azure — ITSEIA"
+                title="Capacitación B2B en IA — ITSEIA"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
                 className="absolute inset-0 w-full h-full"
@@ -220,9 +187,9 @@ export default function DescubreCertificacionesPage() {
             {/* Stats rápidos */}
             <div className="grid grid-cols-3 gap-3">
               {[
-                { value: "3", label: "certificaciones" },
-                { value: "+200", label: "simulacros" },
-                { value: "100%", label: "garantía aprobación" },
+                { value: "200+", label: "personas por contrato" },
+                { value: "60d",  label: "ROI medible" },
+                { value: "MDT",  label: "certificación oficial" },
               ].map((s) => (
                 <div
                   key={s.label}
@@ -232,7 +199,7 @@ export default function DescubreCertificacionesPage() {
                     className="text-2xl font-extrabold mb-1"
                     style={{
                       fontFamily: "var(--font-space-grotesk)",
-                      background: "linear-gradient(135deg, #FBBC0C, #73B8E7)",
+                      background: "linear-gradient(135deg, #FBBC0C, #F0846D)",
                       WebkitBackgroundClip: "text",
                       WebkitTextFillColor: "transparent",
                       backgroundClip: "text",
@@ -247,94 +214,90 @@ export default function DescubreCertificacionesPage() {
           </div>
         </div>
 
-        {/* ── 3 Certificaciones detalle ── */}
+        {/* ── Sectores ── */}
         <section className="mb-14">
           <h2
             className="text-2xl font-extrabold text-white mb-6 text-center"
             style={{ fontFamily: "var(--font-space-grotesk)" }}
           >
-            Las 3 certificaciones del programa
+            Sectores donde ya trabajamos
           </h2>
-          <div className="grid md:grid-cols-3 gap-6">
-            {CERTS.map((c) => (
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+            {[
+              { nombre: "Banca y finanzas",   color: "#FBBC0C" },
+              { nombre: "Salud e imágenes médicas", color: "#73B8E7" },
+              { nombre: "Retail y logística", color: "#F0846D" },
+              { nombre: "Manufactura",        color: "#FBBC0C" },
+              { nombre: "Gobierno y público", color: "#73B8E7" },
+              { nombre: "Educación",          color: "#F0846D" },
+            ].map((s) => (
               <div
-                key={c.abbr}
-                className="rounded-2xl border p-6"
-                style={{
-                  borderColor: c.borderColor,
-                  background: `linear-gradient(145deg, ${c.glowColor} 0%, rgba(31,47,88,0.25) 100%)`,
-                  backdropFilter: "blur(12px)",
-                }}
+                key={s.nombre}
+                className="rounded-xl border border-white/[0.07] bg-white/[0.03] px-4 py-3 text-center hover:bg-white/[0.06] transition-colors"
               >
                 <div
-                  className="inline-flex items-center justify-center w-10 h-10 rounded-lg mb-4 font-extrabold text-[#0A1628] text-base"
-                  style={{
-                    background: c.color,
-                    fontFamily: "var(--font-space-grotesk)",
-                  }}
-                >
-                  {c.abbr}
-                </div>
-                <h3 className="text-lg font-bold text-white mb-2 leading-snug">{c.name}</h3>
-                <p className="text-white/55 text-sm leading-relaxed mb-4">{c.desc}</p>
-                <div className="flex flex-wrap gap-1.5">
-                  {c.topics.map((t) => (
-                    <span
-                      key={t}
-                      className="px-2 py-0.5 rounded-md text-xs font-medium"
-                      style={{
-                        background: `${c.color}15`,
-                        color: c.color,
-                        border: `1px solid ${c.color}20`,
-                      }}
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
+                  className="inline-block w-2 h-2 rounded-full mb-2"
+                  style={{ background: s.color }}
+                />
+                <p className="text-white/75 text-xs leading-snug">{s.nombre}</p>
               </div>
             ))}
           </div>
         </section>
 
-        {/* ── Garantía ── */}
+        {/* ── Cómo funciona ── */}
         <section className="mb-14">
           <div
-            className="rounded-2xl border border-[#FBBC0C]/20 p-8 text-center"
+            className="rounded-2xl border border-[#FBBC0C]/20 p-8"
             style={{
               background:
                 "linear-gradient(145deg, rgba(251,188,12,0.06) 0%, rgba(31,47,88,0.25) 100%)",
               backdropFilter: "blur(12px)",
             }}
           >
-            <div
-              className="inline-flex items-center justify-center w-14 h-14 rounded-2xl mb-4"
-              style={{ background: "rgba(251,188,12,0.15)" }}
-            >
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#FBBC0C"
-                strokeWidth={2}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="w-7 h-7"
-              >
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                <path d="M9 12l2 2 4-4" />
-              </svg>
-            </div>
             <h2
-              className="text-2xl font-extrabold text-white mb-3"
+              className="text-2xl font-extrabold text-white mb-6 text-center"
               style={{ fontFamily: "var(--font-space-grotesk)" }}
             >
-              Garantía de aprobación
+              Cómo funciona
             </h2>
-            <p className="text-white/60 max-w-xl mx-auto text-base leading-relaxed">
-              Si estudias el material, haces los simulacros y no apruebas el examen
-              oficial, <span className="text-white font-semibold">repetimos el curso completo sin costo adicional</span>.
-              Así de seguros estamos de nuestro método.
-            </p>
+            <div className="grid sm:grid-cols-2 gap-6">
+              {[
+                {
+                  paso: "01",
+                  título: "Diagnóstico gratuito",
+                  desc: "Analizamos tu industria, el tamaño de tu equipo y los procesos donde la IA genera mayor impacto.",
+                },
+                {
+                  paso: "02",
+                  título: "Programa a la medida",
+                  desc: "Diseñamos un currículo con casos reales de tu sector. Nada genérico: cada módulo aplica directamente a tu negocio.",
+                },
+                {
+                  paso: "03",
+                  título: "Implementación y seguimiento",
+                  desc: "Sesiones online + live + portafolio. Acompañamos al equipo durante todo el proceso de aprendizaje.",
+                },
+                {
+                  paso: "04",
+                  título: "Certificación y ROI",
+                  desc: "Todo el equipo obtiene su Certificación MDT. Medimos el impacto en productividad a los 60 días.",
+                },
+              ].map((item) => (
+                <div key={item.paso} className="flex items-start gap-4">
+                  <div
+                    className="flex-shrink-0 w-10 h-10 rounded-lg flex items-center justify-center font-extrabold text-[#0A1628] text-sm"
+                    style={{ background: "#FBBC0C", fontFamily: "var(--font-space-grotesk)" }}
+                  >
+                    {item.paso}
+                  </div>
+                  <div>
+                    <h3 className="text-white font-semibold mb-1">{item.título}</h3>
+                    <p className="text-white/50 text-sm leading-relaxed">{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -352,15 +315,17 @@ export default function DescubreCertificacionesPage() {
               className="text-3xl font-extrabold text-white mb-3"
               style={{ fontFamily: "var(--font-space-grotesk)" }}
             >
-              ¿Listo para certificarte?
+              Tu equipo no puede quedarse atrás.
+              <br />
+              <span className="text-[#FBBC0C]">La IA ya está transformando tu industria.</span>
             </h2>
             <p className="text-white/50 mb-8 max-w-lg mx-auto">
-              Las certificaciones cloud son el diferenciador que más piden las
-              empresas en Ecuador y LATAM. Escríbenos y te orientamos sin compromiso.
+              Escríbenos ahora y en menos de 24 horas te enviamos una propuesta
+              personalizada para tu empresa.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href={WA_CERTIFICACION}
+                href={WA_COTIZAR}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 bg-[#FBBC0C] text-[#0A1628] px-8 py-4 rounded-xl font-bold text-base hover:bg-[#E5AB00] transition-all hover:scale-[1.02] shadow-xl shadow-[#FBBC0C]/25"
@@ -368,7 +333,7 @@ export default function DescubreCertificacionesPage() {
                 <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 shrink-0">
                   <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z" />
                 </svg>
-                Quiero certificarme
+                Cotizar para mi empresa
               </a>
               <a
                 href={WA_INFO}

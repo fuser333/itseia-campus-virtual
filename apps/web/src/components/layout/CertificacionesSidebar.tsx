@@ -78,7 +78,7 @@ const SECTIONS: NavSection[] = [
       { href: "/descubre/cursos-pro",       label: "Cursos Profesionales",    icon: Wrench },
       { href: "/descubre/bootcamp",         label: "Bootcamp 120h",           icon: Rocket },
       { href: "/descubre/preuniversitario", label: "Preuniversitario IGNITE", icon: Lightbulb },
-      { href: "/b2b",                       label: "B2B Empresas",            icon: Building2 },
+      { href: "/descubre/b2b",              label: "B2B Empresas",            icon: Building2 },
       {
         href: "https://h3l.ai",
         label: "H3L Diagnóstico IA",
