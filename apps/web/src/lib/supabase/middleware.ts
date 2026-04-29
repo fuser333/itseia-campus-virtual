@@ -1,5 +1,12 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
+import {
+  isPublicPath,
+  isProtectedPath,
+  isPrivilegedRole,
+  evaluateAccess,
+  type UserAuthMeta,
+} from "@/lib/auth/access";
 
 export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({ request });
@@ -13,7 +20,7 @@ export async function updateSession(request: NextRequest) {
           return request.cookies.getAll();
         },
         setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value, options }) =>
+          cookiesToSet.forEach(({ name, value }) =>
             request.cookies.set(name, value)
           );
           supabaseResponse = NextResponse.next({ request });
@@ -25,62 +32,108 @@ export async function updateSession(request: NextRequest) {
     }
   );
 
+  const pathname = request.nextUrl.pathname;
+
+  // ── 1. Rutas públicas: siempre pasar sin sesión ──────────────────────────
+  if (isPublicPath(pathname)) {
+    // Aún así refrescamos la sesión si existe (SSR cookie sync)
+    await supabase.auth.getUser();
+    return supabaseResponse;
+  }
+
+  // ── 2. Obtener usuario ────────────────────────────────────────────────────
   const {
     data: { user },
+    error: authError,
   } = await supabase.auth.getUser();
 
-  // Public info pages — never redirect to login
-  const publicInfoPaths = ["/carreras-info", "/preuni-info", "/cursos-mdt-info", "/cursos-pro-info", "/bootcamp-info", "/certificaciones-info", "/docentes-info", "/empresas-info", "/demo-info"];
-  const isPublicInfo = publicInfoPaths.some((path) => request.nextUrl.pathname.startsWith(path));
-  if (isPublicInfo) return supabaseResponse;
+  // ── 3. Sin sesión → login con redirect ────────────────────────────────────
+  if (!user || authError) {
+    if (isProtectedPath(pathname)) {
+      const url = request.nextUrl.clone();
+      url.pathname = "/login";
+      // Preservar destino para redirect post-login
+      url.searchParams.set("redirect", pathname);
+      // Sesión vencida: añadir indicador para que el cliente muestre mensaje
+      if (authError) {
+        url.searchParams.set("expired", "1");
+      }
+      return NextResponse.redirect(url);
+    }
+    return supabaseResponse;
+  }
 
-  // Protected routes - redirect to login if not authenticated
-  const protectedPaths = ["/dashboard", "/courses", "/ai-lab", "/profile", "/payments", "/certificates", "/admin", "/teacher", "/biblioteca", "/carreras", "/cohorte", "/portfolio", "/flashcards", "/b2b", "/preuni", "/mi-curso", "/foros", "/certificaciones", "/calendario", "/cursos-mdt", "/cursos-pro", "/bootcamp"];
-  const isProtected = protectedPaths.some((path) =>
-    request.nextUrl.pathname.startsWith(path)
-  );
+  // ── 4. Construir metadata del usuario ─────────────────────────────────────
+  const meta: UserAuthMeta = {
+    role: (user.user_metadata?.role as string | undefined) ?? undefined,
+    track: (user.user_metadata?.track as string | undefined) ?? undefined,
+  };
 
-  if (isProtected && !user) {
+  // ── 5. Admin/staff: bypass completo de restricciones por track ────────────
+  if (isPrivilegedRole(meta)) {
+    // Redirigir lejos de login/register si ya están autenticados
+    if (pathname === "/login" || pathname === "/register") {
+      const url = request.nextUrl.clone();
+      url.pathname = "/dashboard";
+      return NextResponse.redirect(url);
+    }
+
+    // Admin routes: verificar role en DB (doble check para /admin)
+    if (pathname.startsWith("/admin")) {
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("role")
+        .eq("id", user.id)
+        .single();
+
+      if (
+        !profile ||
+        !["super_admin", "admin", "coordinacion"].includes(profile.role as string)
+      ) {
+        const url = request.nextUrl.clone();
+        url.pathname = "/dashboard";
+        return NextResponse.redirect(url);
+      }
+    }
+
+    // Teacher routes: verificar role en DB
+    if (pathname.startsWith("/teacher")) {
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("role")
+        .eq("id", user.id)
+        .single();
+
+      if (
+        !profile ||
+        !["super_admin", "admin", "coordinacion", "docente"].includes(
+          profile.role as string
+        )
+      ) {
+        const url = request.nextUrl.clone();
+        url.pathname = "/dashboard";
+        return NextResponse.redirect(url);
+      }
+    }
+
+    return supabaseResponse;
+  }
+
+  // ── 6. Usuarios autenticados fuera de login/register ─────────────────────
+  if (pathname === "/login" || pathname === "/register") {
     const url = request.nextUrl.clone();
-    url.pathname = "/login";
-    url.searchParams.set("redirect", request.nextUrl.pathname);
+    url.pathname = "/dashboard";
     return NextResponse.redirect(url);
   }
 
-  // Admin routes - check role
-  if (request.nextUrl.pathname.startsWith("/admin") && user) {
-    const { data: profile } = await supabase
-      .from("profiles")
-      .select("role")
-      .eq("id", user.id)
-      .single();
+  // ── 7. Evaluación de acceso por track ─────────────────────────────────────
+  const accessResult = evaluateAccess(pathname, meta);
 
-    if (!profile || !["super_admin", "admin", "coordinacion"].includes(profile.role)) {
-      const url = request.nextUrl.clone();
-      url.pathname = "/dashboard";
-      return NextResponse.redirect(url);
-    }
-  }
-
-  // Teacher routes - check role (docente, admin, coordinacion, super_admin)
-  if (request.nextUrl.pathname.startsWith("/teacher") && user) {
-    const { data: profile } = await supabase
-      .from("profiles")
-      .select("role")
-      .eq("id", user.id)
-      .single();
-
-    if (!profile || !["super_admin", "admin", "coordinacion", "docente"].includes(profile.role)) {
-      const url = request.nextUrl.clone();
-      url.pathname = "/dashboard";
-      return NextResponse.redirect(url);
-    }
-  }
-
-  // Redirect logged-in users away from auth pages
-  if (user && (request.nextUrl.pathname === "/login" || request.nextUrl.pathname === "/register")) {
+  if (accessResult !== null && !accessResult.allowed) {
     const url = request.nextUrl.clone();
-    url.pathname = "/dashboard";
+    url.pathname = accessResult.redirect;
+    // Limpiar query params para no filtrar info sensible
+    url.search = "";
     return NextResponse.redirect(url);
   }
 

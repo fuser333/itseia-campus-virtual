@@ -16,6 +16,7 @@ import {
   ClipboardList,
   GraduationCap,
   BookOpen,
+  BookMarked,
   Zap,
   Building2,
   MessageCircle,
@@ -24,6 +25,9 @@ import {
   LogOut,
   Brain,
   ExternalLink,
+  Rocket,
+  Award,
+  Lightbulb,
 } from "lucide-react";
 
 // ─── Nav types ────────────────────────────────────────────────────────────────
@@ -78,11 +82,13 @@ const MENU: NavSection[] = [
   {
     sectionLabel: "DESCUBRE ITSEIA",
     items: [
-      { href: "/carreras-info",             label: "Carreras",            icon: GraduationCap },
-      { href: "/cursos-pro-info",           label: "Cursos Profesionales", icon: BookOpen },
-      { href: "/bootcamp",                  label: "Bootcamp",            icon: Zap },
-      { href: "/b2b",                       label: "B2B",                 icon: Building2 },
-      { href: "https://h3l.ai", label: "H3L", icon: Brain, external: true },
+      { href: "/descubre/carreras",         label: "Carreras de IA (3)",      icon: GraduationCap },
+      { href: "/descubre/cursos-mdt",       label: "Cursos MDT (15)",         icon: BookMarked },
+      { href: "/descubre/bootcamp",         label: "Bootcamp 120h",           icon: Rocket },
+      { href: "/descubre/preuniversitario", label: "Preuniversitario IGNITE", icon: Lightbulb },
+      { href: "/descubre/certificaciones",  label: "Certificaciones",         icon: Award },
+      { href: "/b2b",                       label: "B2B Empresas",            icon: Building2 },
+      { href: "https://h3l.ai",             label: "H3L Diagnóstico IA",      icon: Brain, external: true },
     ],
   },
   {

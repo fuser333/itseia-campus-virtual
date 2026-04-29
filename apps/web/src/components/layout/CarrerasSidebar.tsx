@@ -24,6 +24,9 @@ import {
   ChevronLeft,
   ChevronRight,
   LogOut,
+  Wrench,
+  Award,
+  Lightbulb,
 } from "lucide-react";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -82,10 +85,12 @@ const SECTIONS: NavSection[] = [
   {
     label: "DESCUBRE ITSEIA",
     items: [
-      { href: "/cursos-mdt",      label: "Cursos MDT (15)",      icon: BookMarked, badge: "15" },
-      { href: "/mi-curso",        label: "Cursos Profesionales", icon: BookOpen },
-      { href: "/bootcamp",        label: "Bootcamp Intensivo",   icon: Rocket },
-      { href: "/b2b",             label: "B2B Empresas",         icon: Building2 },
+      { href: "/descubre/cursos-mdt",       label: "Cursos MDT (15)",         icon: BookMarked, badge: "15" },
+      { href: "/descubre/cursos-pro",       label: "Cursos Profesionales",    icon: Wrench },
+      { href: "/descubre/bootcamp",         label: "Bootcamp 120h",           icon: Rocket },
+      { href: "/descubre/certificaciones",  label: "Certificaciones",         icon: Award },
+      { href: "/descubre/preuniversitario", label: "Preuniversitario IGNITE", icon: Lightbulb },
+      { href: "/b2b",                       label: "B2B Empresas",            icon: Building2 },
       {
         href: "https://h3l.ai",
         label: "H3L Diagnóstico IA",
