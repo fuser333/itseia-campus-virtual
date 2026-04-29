@@ -1,7 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { supabaseAdmin } from "@/lib/supabase/admin";
 import PublicHeader from "@/components/layout/PublicHeader";
-import CarrerasSidebar from "@/components/layout/CarrerasSidebar";
+import CarrerasSidebarSelector from "@/components/layout/CarrerasSidebarSelector";
 
 export default async function CarrerasLayout({
   children,
@@ -25,7 +25,13 @@ export default async function CarrerasLayout({
 
     return (
       <div className="flex h-screen overflow-hidden bg-background">
-        <CarrerasSidebar
+        {/*
+          CarrerasSidebarSelector es un Client Component que detecta la ruta
+          en tiempo de renderizado y muestra:
+            - PreuniSidebar  → para /carreras/preuniversitario-ia/*
+            - CarrerasSidebar → para cualquier otra ruta /carreras/*
+        */}
+        <CarrerasSidebarSelector
           userName={profile?.full_name ?? undefined}
           userEmail={user.email ?? undefined}
         />

@@ -42,60 +42,110 @@ interface NavSection {
   items: NavItem[];
 }
 
-// ─── Menu definition ──────────────────────────────────────────────────────────
+// ─── Helpers ──────────────────────────────────────────────────────────────────
 
-const SECTIONS: NavSection[] = [
-  {
-    label: "ITSEIA IGNITE",
-    items: [
-      { href: "/preuni",          label: "Dashboard Ignite", icon: LayoutDashboard },
-      { href: "/preuni/progreso", label: "Mi Progreso",      icon: TrendingUp },
-    ],
-  },
-  {
-    label: "MÓDULOS (20 DÍAS)",
-    items: [
-      { href: "/preuni/semana-1", label: "Día 1-4: Descubre la IA",     icon: Zap },
-      { href: "/preuni/semana-2", label: "Día 5-8: Herramientas IA",    icon: Wrench },
-      { href: "/preuni/semana-3", label: "Día 9-12: Tu Carrera Ideal",  icon: Target },
-      { href: "/preuni/semana-4", label: "Día 13-16: Proyecto Práctico", icon: FlaskConical },
-      { href: "/preuni/evaluacion", label: "Día 17-20: Evaluación Final", icon: Trophy },
-    ],
-  },
-  {
-    label: "DESCUBRE ITSEIA",
-    items: [
-      {
-        href: "/carreras",
-        label: "Carreras de IA",
-        icon: GraduationCap,
-        highlight: true,
-      },
-      { href: "/cursos-mdt",          label: "Cursos MDT (15)",       icon: BookMarked, badge: "15" },
-      { href: "/cursos-pro",          label: "Cursos Profesionales",  icon: BookOpen },
-      { href: "/bootcamp",            label: "Bootcamp Intensivo",    icon: Rocket },
-      { href: "/b2b",                 label: "B2B Empresas",          icon: Building2 },
-      {
-        href: "https://h3l.ai",
-        label: "H3L Diagnóstico IA",
-        icon: Stethoscope,
-        external: true,
-      },
-    ],
-  },
-  {
-    label: "CUENTA",
-    items: [
-      {
-        href: "https://wa.me/593959892034?text=Hola%2C%20necesito%20soporte%20con%20ITSEIA%20Ignite",
-        label: "Chat Soporte",
-        icon: MessageCircle,
-        external: true,
-      },
-      { href: "/payments", label: "Mis Pagos", icon: CreditCard },
-    ],
-  },
-];
+/**
+ * Detecta si la ruta actual corresponde al programa preuniversitario
+ * accedido a través de /carreras/[slug]/ (campus DB) en lugar de la
+ * ruta legacy /preuni/. Ajusta los links de módulos según el contexto.
+ *
+ * Contextos posibles:
+ *   A) /preuni/*                          → links a /preuni/semana-X (legacy)
+ *   B) /carreras/preuniversitario-ia/*    → links a /carreras/preuniversitario-ia/ (DB)
+ *   C) /demo/aula/*                       → usa DemoSidebar propio (no llega aquí)
+ */
+function buildSections(pathname: string): NavSection[] {
+  const isCarrerasContext = pathname.startsWith("/carreras/preuniversitario");
+
+  // Raíz del dashboard del preuniversitario según el contexto
+  const dashRoot = isCarrerasContext
+    ? "/carreras/preuniversitario-ia"
+    : "/preuni";
+
+  // Los módulos apuntan a la ruta correcta según contexto
+  const moduloItems: NavItem[] = isCarrerasContext
+    ? [
+        {
+          href: `${dashRoot}/materia/preuni-semana-1-fundamentos-ia`,
+          label: "Día 1-4: Descubre la IA",
+          icon: Zap,
+        },
+        {
+          href: `${dashRoot}/materia/preuni-semana-2-herramientas-ia`,
+          label: "Día 5-8: Herramientas IA",
+          icon: Wrench,
+        },
+        {
+          href: `${dashRoot}/materia/preuni-semana-3-tu-carrera-ideal`,
+          label: "Día 9-12: Tu Carrera Ideal",
+          icon: Target,
+        },
+        {
+          href: `${dashRoot}/materia/preuni-semana-4-proyecto-practico`,
+          label: "Día 13-16: Proyecto Práctico",
+          icon: FlaskConical,
+        },
+        {
+          href: `${dashRoot}/materia/preuni-semana-5-evaluacion-final`,
+          label: "Día 17-20: Evaluación Final",
+          icon: Trophy,
+        },
+      ]
+    : [
+        { href: "/preuni/semana-1",   label: "Día 1-4: Descubre la IA",      icon: Zap },
+        { href: "/preuni/semana-2",   label: "Día 5-8: Herramientas IA",     icon: Wrench },
+        { href: "/preuni/semana-3",   label: "Día 9-12: Tu Carrera Ideal",   icon: Target },
+        { href: "/preuni/semana-4",   label: "Día 13-16: Proyecto Práctico", icon: FlaskConical },
+        { href: "/preuni/evaluacion", label: "Día 17-20: Evaluación Final",  icon: Trophy },
+      ];
+
+  return [
+    {
+      label: "ITSEIA IGNITE",
+      items: [
+        { href: dashRoot,               label: "Dashboard Ignite", icon: LayoutDashboard },
+        { href: `${dashRoot}/progreso`, label: "Mi Progreso",      icon: TrendingUp },
+      ],
+    },
+    {
+      label: "MÓDULOS (20 DÍAS)",
+      items: moduloItems,
+    },
+    {
+      label: "DESCUBRE ITSEIA",
+      items: [
+        {
+          href: "/carreras",
+          label: "Carreras de IA",
+          icon: GraduationCap,
+          highlight: true,
+        },
+        { href: "/cursos-mdt", label: "Cursos MDT (15)",      icon: BookMarked, badge: "15" },
+        { href: "/cursos-pro", label: "Cursos Profesionales", icon: BookOpen },
+        { href: "/bootcamp",   label: "Bootcamp Intensivo",   icon: Rocket },
+        { href: "/b2b",        label: "B2B Empresas",         icon: Building2 },
+        {
+          href: "https://h3l.ai",
+          label: "H3L Diagnóstico IA",
+          icon: Stethoscope,
+          external: true,
+        },
+      ],
+    },
+    {
+      label: "CUENTA",
+      items: [
+        {
+          href: "https://wa.me/593959892034?text=Hola%2C%20necesito%20soporte%20con%20ITSEIA%20Ignite",
+          label: "Chat Soporte",
+          icon: MessageCircle,
+          external: true,
+        },
+        { href: "/payments", label: "Mis Pagos", icon: CreditCard },
+      ],
+    },
+  ];
+}
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
@@ -112,6 +162,13 @@ export default function PreuniSidebar({
   const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(false);
 
+  // Generar las secciones según el contexto de la ruta actual
+  const sections = buildSections(pathname);
+
+  // Detectar el dashboard raíz según el contexto
+  const isCarrerasContext = pathname.startsWith("/carreras/preuniversitario");
+  const dashRoot = isCarrerasContext ? "/carreras/preuniversitario-ia" : "/preuni";
+
   async function handleLogout() {
     const supabase = createClient();
     await supabase.auth.signOut();
@@ -121,7 +178,8 @@ export default function PreuniSidebar({
 
   function isActive(href: string): boolean {
     if (href.startsWith("http")) return false;
-    if (href === "/preuni") return pathname === "/preuni";
+    // Raíz exacta del preuniversitario según contexto
+    if (href === dashRoot) return pathname === dashRoot;
     return pathname === href || pathname.startsWith(href + "/");
   }
 
@@ -145,7 +203,7 @@ export default function PreuniSidebar({
       {/* ── Logo ──────────────────────────────────────────────────────────── */}
       <div className="h-16 flex items-center px-4 border-b border-white/[0.06] flex-shrink-0">
         <Link
-          href="/preuni"
+          href={dashRoot}
           className="flex items-center gap-2.5 group overflow-hidden"
         >
           {collapsed ? (
@@ -174,7 +232,7 @@ export default function PreuniSidebar({
 
       {/* ── Navigation ──────────────────────────────────────────────────── */}
       <nav className="flex-1 overflow-y-auto scrollbar-hide py-4 px-3">
-        {SECTIONS.map((section, sectionIndex) => (
+        {sections.map((section, sectionIndex) => (
           <div
             key={`${section.label}-${sectionIndex}`}
             className={sectionIndex > 0 ? "mt-6" : ""}
