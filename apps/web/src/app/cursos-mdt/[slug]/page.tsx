@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 import SlideViewer from "@/components/session/SlideViewer";
 import GrabacionesTab from "@/components/session/GrabacionesTab";
+import AILabPanel from "@/components/session/AILabPanel";
 import { CURSOS_MDT } from "../data";
 import { C1_TEMAS, C1_MODULOS } from "../c1-data";
 import type { TemaC1 } from "../c1-data";
@@ -348,12 +349,14 @@ function SesionContent({ sesionTitulo, temaData, slug, temaId }: { sesionTitulo:
 
   // ── AI Lab content ──
   const ailabContent = (
-    <div className="text-center py-4">
-      <FlaskConical className="size-8 text-[#73B8E7] mx-auto mb-2" />
-      <p className="text-sm text-[#F9F6E7]/70 mb-3">Practica con IA en vivo — ChatGPT, Claude y Gemini incluidos.</p>
-      <Link href="/ai-lab" className="inline-flex items-center gap-2 bg-[#73B8E7] text-[#0A1628] px-4 py-2 rounded-lg font-semibold text-sm hover:bg-[#5BA0D0]">
-        Abrir AI Lab
-      </Link>
+    <div className="min-h-[480px] flex flex-col">
+      <AILabPanel
+        sessionContext={`Curso MDT ${slug.toUpperCase()}: ${sesionTitulo}. ${temaData?.teoria ? `Contenido: ${temaData.teoria.substring(0, 2000)}` : ""}`}
+        suggestedPrompt={`Explícame el tema "${sesionTitulo}" con un ejemplo práctico aplicado a Ecuador.`}
+        sessionId={`curso-mdt-${slug}-${temaId ?? "0"}`}
+        sessionTitle={sesionTitulo}
+        className="flex-1"
+      />
     </div>
   );
 

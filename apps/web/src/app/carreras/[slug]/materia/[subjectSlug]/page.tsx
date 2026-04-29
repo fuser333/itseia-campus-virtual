@@ -177,7 +177,7 @@ export default async function SubjectPage({
               </span>
               <span>
                 {subject.hours_docencia}h docencia / {subject.hours_practica}h
-                practica / {subject.hours_autonomo}h autonomo
+                práctica / {subject.hours_autonomo}h autónomo
               </span>
               <span className="size-1 rounded-full bg-white/20" />
               <span>{subject.credit_hours} creditos</span>
@@ -345,11 +345,11 @@ export default async function SubjectPage({
                 <CardContent className="flex flex-col items-center py-12 text-center">
                   <BookOpen className="size-12 text-[#1F2F58]/10 mb-4" />
                   <h3 className="text-base font-semibold text-[#0A1628]">
-                    Sesiones en preparacion
+                    Sesiones en preparación
                   </h3>
                   <p className="mt-1 max-w-sm text-sm text-[#1F2F58]/80">
-                    El contenido de esta materia esta siendo preparado por el equipo
-                    docente. Estara disponible pronto.
+                    El contenido de esta materia está siendo preparado por el equipo
+                    docente. Estará disponible pronto.
                   </p>
                 </CardContent>
               </Card>

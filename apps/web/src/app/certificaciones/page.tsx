@@ -26,7 +26,7 @@ import type { CertificationProgram } from "@/types/database";
 export const metadata: Metadata = {
   title: "Panel Certificaciones | ITSEIA Academy",
   description:
-    "Dashboard de certificaciones ITSEIA — revisa tu progreso, certificados obtenidos y programas disponibles.",
+    "Dashboard de certificaciones ITSEIA — revisa tu progreso, certificados obtenidos y programas disponibles. AWS, Google y Azure.",
 };
 
 // ─── Certification program cards (static catalog visible to all) ───────────────
@@ -44,15 +44,15 @@ const CERT_PROGRAMS = [
       "Domina los fundamentos de la nube de Amazon. Examen CLF-C02 reconocido mundialmente.",
   },
   {
-    slug: "google-data-analytics",
-    nombre: "Google Data Analytics",
+    slug: "google-ai-essentials",
+    nombre: "Google AI Essentials",
     proveedor: "Google",
     nivel: "Profesional",
     horas: 60,
     color: "from-[#4285F4]/20 to-[#4285F4]/5",
     accent: "#4285F4",
     description:
-      "Analisis de datos con herramientas Google. Certificacion del programa profesional de Google.",
+      "Fundamentos de IA con herramientas Google. Certificación del programa profesional de Google.",
   },
   {
     slug: "azure-ai-fundamentals",
@@ -63,7 +63,7 @@ const CERT_PROGRAMS = [
     color: "from-[#00A4EF]/20 to-[#00A4EF]/5",
     accent: "#00A4EF",
     description:
-      "Fundamentos de IA en la nube de Microsoft. Examen AI-900 reconocido en 190 paises.",
+      "Fundamentos de IA en la nube de Microsoft. Examen AI-900 reconocido en 190 países.",
   },
 ];
 

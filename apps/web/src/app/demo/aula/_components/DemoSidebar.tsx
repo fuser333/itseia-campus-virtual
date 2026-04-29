@@ -1,147 +1,117 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter, usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
-import { createClient } from "@/lib/supabase/client";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
 import {
   LayoutDashboard,
-  Brain,
-  BarChart2,
-  BrainCircuit,
-  Sparkles,
-  Bot,
-  BookOpen,
-  LogOut,
-  Menu,
-  X,
+  Zap,
+  Wrench,
+  Target,
+  FlaskConical,
+  Trophy,
+  GraduationCap,
+  BookMarked,
+  Rocket,
+  Award,
+  Building2,
+  Stethoscope,
+  MessageCircle,
   ChevronLeft,
   ChevronRight,
-  MessageSquare,
-  Users,
-  Award,
+  ExternalLink,
+  Menu,
+  X,
 } from "lucide-react";
 
-type DemoUser = {
-  email: string;
-  name: string;
-  loggedAt: number;
-};
+// ─── Tipos ────────────────────────────────────────────────────────────────────
 
-type NavItem = {
+interface NavItem {
   href: string;
   label: string;
-  icon: typeof LayoutDashboard;
-  disabled?: boolean;
-};
+  icon: React.ComponentType<{ className?: string }>;
+  badge?: string;
+  external?: boolean;
+  highlight?: boolean;
+}
 
-type NavSection = { label: string; items: NavItem[] };
+interface NavSection {
+  label: string;
+  items: NavItem[];
+}
 
-const MENU: NavSection[] = [
+// ─── Secciones del menú (replica PreuniSidebar para el demo público) ──────────
+
+const SECTIONS: NavSection[] = [
   {
-    label: "MI PREUNIVERSITARIO",
+    label: "ITSEIA IGNITE DEMO",
     items: [
-      { href: "/demo/aula", label: "Dashboard", icon: LayoutDashboard },
-      { href: "/demo/aula/semana-1", label: "Semana 1: Ignición", icon: Brain },
-      { href: "/demo/aula/semana-2", label: "Semana 2: Construcción", icon: BarChart2 },
-      { href: "/demo/aula/semana-3", label: "Semana 3: Automatización", icon: BrainCircuit },
-      { href: "/demo/aula/semana-4", label: "Semana 4: Lanzamiento", icon: Sparkles },
+      { href: "/demo/aula", label: "Dashboard Demo", icon: LayoutDashboard },
     ],
   },
   {
-    label: "HERRAMIENTAS",
+    label: "MÓDULOS (20 DÍAS)",
     items: [
-      { href: "#ai-lab", label: "AI Lab", icon: Bot, disabled: true },
-      { href: "#biblioteca", label: "Biblioteca", icon: BookOpen, disabled: true },
+      { href: "/demo/aula/semana-1", label: "Día 1-4: Descubre la IA",      icon: Zap },
+      { href: "/demo/aula/semana-2", label: "Día 5-8: Herramientas IA",     icon: Wrench },
+      { href: "/demo/aula/semana-3", label: "Día 9-12: Tu Carrera Ideal",   icon: Target },
+      { href: "/demo/aula/semana-4", label: "Día 13-20: Lanzamiento",       icon: FlaskConical },
     ],
   },
   {
-    label: "COMUNIDAD",
+    label: "DESCUBRE ITSEIA",
     items: [
-      { href: "#foro", label: "Foros", icon: MessageSquare, disabled: true },
-      { href: "#cohorte", label: "Mi cohorte", icon: Users, disabled: true },
-      { href: "#certificado", label: "Certificados", icon: Award, disabled: true },
+      {
+        href: "/descubre/carreras",
+        label: "Carreras de IA (3)",
+        icon: GraduationCap,
+        highlight: true,
+      },
+      { href: "/descubre/cursos-mdt",      label: "Cursos MDT (15)",         icon: BookMarked, badge: "15" },
+      { href: "/descubre/bootcamp",        label: "Bootcamp 120h",           icon: Rocket },
+      { href: "/descubre/certificaciones", label: "Certificaciones",         icon: Award },
+      { href: "/descubre/b2b",             label: "B2B Empresas",            icon: Building2 },
+      {
+        href: "https://h3l.ai",
+        label: "H3L Diagnóstico IA",
+        icon: Stethoscope,
+        external: true,
+      },
+    ],
+  },
+  {
+    label: "SOPORTE",
+    items: [
+      {
+        href: "https://wa.me/593990709009?text=Hola%2C+quiero+saber+m%C3%A1s+sobre+el+preuniversitario+ITSEIA+Ignite",
+        label: "Hablar con Sofía",
+        icon: MessageCircle,
+        external: true,
+      },
     ],
   },
 ];
+
+// ─── Componente ───────────────────────────────────────────────────────────────
 
 export default function DemoSidebar({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const router = useRouter();
   const pathname = usePathname();
-  const [user, setUser] = useState<DemoUser | null>(null);
-  const [mobileOpen, setMobileOpen] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
-  useEffect(() => {
-    const supabase = createClient();
-    let active = true;
-    (async () => {
-      const { data } = await supabase.auth.getUser();
-      if (!active) return;
-      if (!data.user) {
-        // Compatibilidad con el demo viejo (localStorage)
-        try {
-          const raw = window.localStorage.getItem("itseia_demo_user");
-          if (raw) {
-            setUser(JSON.parse(raw));
-            return;
-          }
-        } catch {}
-        router.replace("/login?module=demo");
-        return;
-      }
-      const meta = (data.user.user_metadata ?? {}) as {
-        full_name?: string;
-        name?: string;
-      };
-      setUser({
-        email: data.user.email ?? "demo@itseia.ai",
-        name: meta.full_name || meta.name || "Demo ITSEIA",
-        loggedAt: Date.now(),
-      });
-    })();
-    return () => {
-      active = false;
-    };
-  }, [router]);
-
-  async function handleLogout() {
-    const supabase = createClient();
-    try {
-      await supabase.auth.signOut();
-    } catch {}
-    try {
-      window.localStorage.removeItem("itseia_demo_user");
-    } catch {}
-    router.replace("/demo-info");
+  function isActive(href: string): boolean {
+    if (href.startsWith("http")) return false;
+    if (href === "/demo/aula") return pathname === "/demo/aula";
+    return pathname === href || pathname.startsWith(href + "/");
   }
-
-  if (!user) {
-    return (
-      <div className="min-h-screen bg-[#F9F6E7] text-[#1F2F58] flex items-center justify-center">
-        <div className="text-sm text-[#1F2F58]/50">Cargando demo...</div>
-      </div>
-    );
-  }
-
-  const initials = user.name
-    .split(" ")
-    .map((n) => n[0])
-    .slice(0, 2)
-    .join("")
-    .toUpperCase();
-
-  const sidebarWidth = collapsed ? "w-20" : "w-72";
 
   return (
-    <div
-      className="flex h-screen overflow-hidden bg-[#F9F6E7] text-[#1F2F58]"
-      style={{ color: "#1F2F58" }}
-    >
+    <div className="flex h-screen overflow-hidden bg-[#F9F6E7] text-[#1F2F58]">
+
       {/* Mobile toggle */}
       <button
         type="button"
@@ -152,91 +122,120 @@ export default function DemoSidebar({
         {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
       </button>
 
-      {/* Sidebar */}
+      {/* ── Sidebar ─────────────────────────────────────────────────────────── */}
       <aside
-        className={`fixed lg:sticky top-0 h-screen ${sidebarWidth} shrink-0 bg-[#0A1628] text-white border-r border-white/[0.06] flex flex-col z-40 transition-all duration-200 ${
-          mobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
-        }`}
+        className={`fixed lg:sticky top-0 h-screen shrink-0 bg-[#0D1B30] text-white border-r border-white/[0.06] flex flex-col z-40 transition-all duration-300 ${
+          collapsed ? "w-[68px]" : "w-64"
+        } ${mobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}`}
       >
-        {/* Brand */}
-        <div className="px-4 py-5 border-b border-white/[0.06] flex items-center justify-between">
+        {/* ── Logo ── */}
+        <div className="h-16 flex items-center px-4 border-b border-white/[0.06] flex-shrink-0">
           <Link
             href="/demo/aula"
-            className={`flex items-center gap-3 ${collapsed ? "justify-center" : ""}`}
-          >
-            <div
-              className="shrink-0 flex items-center justify-center rounded-lg"
-              style={{ background: "rgba(255,255,255,0.95)", padding: "4px 6px" }}
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/logo_itseia.svg" alt="ITSEIA" className="h-6 w-auto" />
-            </div>
-            {!collapsed && (
-              <div>
-                <div className="text-sm font-bold">ITSEIA</div>
-                <div className="text-[10px] text-[#73B8E7] uppercase tracking-widest">
-                  Academy · Demo
-                </div>
-              </div>
-            )}
-          </Link>
-          <button
-            type="button"
-            onClick={() => setCollapsed((v) => !v)}
-            className="hidden lg:block p-1.5 rounded-md text-white/40 hover:text-white hover:bg-white/[0.06] transition-colors"
-            aria-label="Toggle sidebar"
+            className="flex items-center gap-2.5 group overflow-hidden"
           >
             {collapsed ? (
-              <ChevronRight className="w-4 h-4" />
+              <div className="w-9 h-9 rounded-lg bg-[#FBBC0C] flex items-center justify-center flex-shrink-0 transition-transform duration-200 group-hover:scale-105">
+                <svg viewBox="0 0 24 24" fill="none" className="w-5 h-5" aria-hidden="true">
+                  <rect x="10" y="4" width="4" height="16" rx="1" fill="#0A1628" />
+                  <rect x="6"  y="4" width="12" height="3"  rx="1" fill="#0A1628" />
+                  <rect x="6"  y="17" width="12" height="3" rx="1" fill="#0A1628" />
+                </svg>
+              </div>
             ) : (
-              <ChevronLeft className="w-4 h-4" />
+              /* eslint-disable-next-line @next/next/no-img-element */
+              <img src="/logo_itseia.svg" alt="ITSEIA Academy" className="h-8 w-auto" />
             )}
-          </button>
+          </Link>
+          {!collapsed && (
+            <div className="ml-auto flex items-center gap-1">
+              <span className="text-[9px] uppercase tracking-widest font-bold text-[#FBBC0C]/70 bg-[#FBBC0C]/10 px-1.5 py-0.5 rounded-full">
+                DEMO
+              </span>
+            </div>
+          )}
         </div>
 
-        {/* Nav */}
-        <nav className="flex-1 overflow-y-auto px-3 py-4">
-          {MENU.map((section) => (
-            <div key={section.label} className="mb-6">
+        {/* ── Navigation ── */}
+        <nav className="flex-1 overflow-y-auto scrollbar-hide py-4 px-3">
+          {SECTIONS.map((section, sectionIndex) => (
+            <div
+              key={`${section.label}-${sectionIndex}`}
+              className={sectionIndex > 0 ? "mt-6" : ""}
+            >
+              {/* Section header */}
               {!collapsed && (
-                <div className="px-3 mb-2 text-[10px] font-bold tracking-[0.2em] uppercase text-white/40">
+                <p className="px-3 mb-2 text-[10px] font-semibold uppercase tracking-widest text-white/30 select-none">
                   {section.label}
-                </div>
+                </p>
               )}
-              <div className="space-y-1">
+              {collapsed && sectionIndex > 0 && (
+                <div className="mx-2 mb-3 border-t border-white/[0.06]" />
+              )}
+
+              {/* Items */}
+              <div className="space-y-0.5">
                 {section.items.map((item) => {
-                  const active = pathname === item.href;
-                  const Icon = item.icon;
+                  const Icon   = item.icon;
+                  const active = isActive(item.href);
+                  const linkProps = item.external
+                    ? { href: item.href, target: "_blank", rel: "noopener noreferrer" }
+                    : { href: item.href };
+
+                  // Highlighted CTA (Carreras de IA)
+                  if (item.highlight && !collapsed) {
+                    return (
+                      <Link
+                        key={`${item.href}-${item.label}`}
+                        {...linkProps}
+                        onClick={() => setMobileOpen(false)}
+                        className="group flex items-center gap-3 rounded-lg px-3 py-2.5 transition-all duration-200 bg-[#FBBC0C]/[0.15] border border-[#FBBC0C]/30 text-[#FBBC0C] hover:bg-[#FBBC0C]/[0.25]"
+                      >
+                        <Icon className="w-[18px] h-[18px] flex-shrink-0 text-[#FBBC0C]" />
+                        <span className="text-sm font-semibold truncate flex-1 leading-none">
+                          {item.label}
+                        </span>
+                        <div className="h-1.5 w-1.5 rounded-full bg-[#FBBC0C] flex-shrink-0 animate-pulse" />
+                      </Link>
+                    );
+                  }
+
                   return (
                     <Link
-                      key={item.label}
-                      href={item.disabled ? "#" : item.href}
-                      onClick={(e) => {
-                        if (item.disabled) {
-                          e.preventDefault();
-                        } else {
-                          setMobileOpen(false);
-                        }
-                      }}
+                      key={`${item.href}-${item.label}`}
+                      {...linkProps}
                       title={collapsed ? item.label : undefined}
-                      className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-all ${
+                      onClick={() => setMobileOpen(false)}
+                      className={`group flex items-center gap-3 rounded-lg transition-all duration-200 ${
+                        collapsed ? "justify-center px-0 py-2.5" : "px-3 py-2.5"
+                      } ${
                         active
-                          ? "bg-[#FBBC0C]/10 text-[#FBBC0C] border border-[#FBBC0C]/20"
-                          : item.disabled
-                            ? "text-white/25 cursor-not-allowed"
-                            : "text-white/60 hover:bg-white/[0.06] hover:text-white"
-                      } ${collapsed ? "justify-center" : ""}`}
+                          ? "bg-[#FBBC0C]/[0.12] text-[#FBBC0C]"
+                          : "text-white/70 hover:text-white hover:bg-white/[0.04]"
+                      }`}
                     >
-                      <Icon className="w-4 h-4 shrink-0" />
+                      <Icon
+                        className={`w-[18px] h-[18px] flex-shrink-0 transition-colors ${
+                          active
+                            ? "text-[#FBBC0C]"
+                            : "text-white/50 group-hover:text-white/80"
+                        }`}
+                      />
                       {!collapsed && (
-                        <>
-                          <span className="flex-1 truncate">{item.label}</span>
-                          {item.disabled && (
-                            <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-white/5 text-white/40 font-semibold uppercase tracking-wider">
-                              soon
-                            </span>
-                          )}
-                        </>
+                        <span className="text-sm font-medium truncate flex-1 leading-none">
+                          {item.label}
+                        </span>
+                      )}
+                      {!collapsed && item.badge && (
+                        <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded-full bg-[#73B8E7]/15 text-[#73B8E7] flex-shrink-0">
+                          {item.badge}
+                        </span>
+                      )}
+                      {!collapsed && item.external && (
+                        <ExternalLink className="w-3 h-3 text-white/30 flex-shrink-0" />
+                      )}
+                      {active && !collapsed && (
+                        <div className="h-1.5 w-1.5 rounded-full bg-[#FBBC0C] flex-shrink-0" />
                       )}
                     </Link>
                   );
@@ -246,45 +245,51 @@ export default function DemoSidebar({
           ))}
         </nav>
 
-        {/* User footer */}
-        <div className="border-t border-white/[0.06] p-4">
-          <div
-            className={`flex items-center gap-3 px-2 py-2 ${
-              collapsed ? "justify-center" : ""
+        {/* ── CTA inscripción + collapse toggle ── */}
+        <div className="border-t border-white/[0.06] p-3 flex-shrink-0 space-y-3">
+          {/* CTA grande — Inscríbete por $99 */}
+          {!collapsed && (
+            <a
+              href="https://wa.me/593990709009?text=Hola%2C+quiero+inscribirme+al+preuniversitario+ITSEIA+Ignite+por+%2499"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-[#FBBC0C] text-[#0A1628] text-sm font-bold hover:bg-[#FBBC0C]/90 transition-colors shadow-lg shadow-[#FBBC0C]/20"
+            >
+              <MessageCircle className="w-4 h-4" />
+              Inscríbete por $99
+            </a>
+          )}
+
+          {/* Collapse toggle */}
+          <button
+            onClick={() => setCollapsed(!collapsed)}
+            className={`w-full flex items-center gap-2 rounded-lg py-2 text-white/30 hover:text-white/60 hover:bg-white/[0.04] transition-colors ${
+              collapsed ? "justify-center px-0" : "px-3"
             }`}
+            aria-label={collapsed ? "Expandir menú" : "Colapsar menú"}
           >
-            <div className="w-9 h-9 rounded-full bg-[#FBBC0C] text-[#0A1628] flex items-center justify-center font-bold text-sm shrink-0">
-              {initials}
-            </div>
-            {!collapsed && (
+            {collapsed ? (
+              <ChevronRight className="w-4 h-4" />
+            ) : (
               <>
-                <div className="flex-1 min-w-0">
-                  <div className="text-sm font-semibold truncate">
-                    {user.name}
-                  </div>
-                  <div className="text-[10px] text-[#73B8E7] truncate">
-                    {user.email}
-                  </div>
-                </div>
-                <button
-                  type="button"
-                  onClick={handleLogout}
-                  className="p-2 rounded-lg text-white/40 hover:text-[#F0846D] hover:bg-[#F0846D]/10 transition-colors"
-                  aria-label="Salir del demo"
-                >
-                  <LogOut className="w-4 h-4" />
-                </button>
+                <ChevronLeft className="w-4 h-4" />
+                <span className="text-xs">Colapsar</span>
               </>
             )}
-          </div>
+          </button>
         </div>
       </aside>
 
-      {/* Main content — matches /preuni layout exactly */}
-      <main
-        className="flex-1 overflow-y-auto"
-        style={{ color: "#1F2F58" }}
-      >
+      {/* Mobile overlay */}
+      {mobileOpen && (
+        <div
+          className="fixed inset-0 z-30 bg-black/50 lg:hidden"
+          onClick={() => setMobileOpen(false)}
+        />
+      )}
+
+      {/* ── Main content ── */}
+      <main className="flex-1 overflow-y-auto" style={{ color: "#1F2F58" }}>
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
           {children}
         </div>

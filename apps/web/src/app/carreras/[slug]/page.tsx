@@ -64,9 +64,9 @@ export async function generateMetadata({
 }
 
 const levelConfig: Record<string, { label: string; color: string; bg: string }> = {
-  basic: { label: "Basico", color: "text-[#73B8E7]", bg: "bg-[#73B8E7]/10" },
+  basic: { label: "Básico", color: "text-[#73B8E7]", bg: "bg-[#73B8E7]/10" },
   professional: { label: "Profesional", color: "text-[#FBBC0C]", bg: "bg-[#FBBC0C]/10" },
-  integration: { label: "Integracion", color: "text-[#F0846D]", bg: "bg-[#F0846D]/10" },
+  integration: { label: "Integración", color: "text-[#F0846D]", bg: "bg-[#F0846D]/10" },
 };
 
 export default async function ProgramPage({
@@ -350,10 +350,10 @@ export default async function ProgramPage({
         <div className="flex flex-col items-center justify-center py-16 text-center">
           <BookOpen className="size-12 text-[#1F2F58]/10 mb-4" />
           <h3 className="text-lg font-semibold text-[#0A1628]">
-            Estructura en preparacion
+            Estructura en preparación
           </h3>
           <p className="mt-1 max-w-sm text-sm text-[#1F2F58]/65">
-            El contenido de esta carrera se esta configurando. Estara disponible pronto.
+            El contenido de esta carrera se está configurando. Estará disponible pronto.
           </p>
         </div>
       )}

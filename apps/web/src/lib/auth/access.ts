@@ -171,6 +171,7 @@ export const PUBLIC_PATHS = [
   "/docentes-info",
   "/empresas-info",
   "/demo-info",
+  "/demo",
   "/catalogo",
   "/preuniversitario",
 ];

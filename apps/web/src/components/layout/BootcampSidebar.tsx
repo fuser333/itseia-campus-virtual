@@ -39,6 +39,7 @@ interface NavItem {
   icon: React.ComponentType<{ className?: string }>;
   badge?: string;
   external?: boolean;
+  highlight?: boolean;
 }
 
 interface NavSection {
@@ -92,7 +93,7 @@ const SECTIONS: NavSection[] = [
   {
     label: "DESCUBRE ITSEIA",
     items: [
-      { href: "/descubre/carreras",          label: "Carreras de IA (3)",       icon: GraduationCap },
+      { href: "/descubre/carreras",          label: "Carreras de IA (3)",       icon: GraduationCap, highlight: true },
       { href: "/descubre/cursos-mdt",        label: "Cursos MDT (15)",          icon: BookMarked },
       { href: "/descubre/cursos-pro",        label: "Cursos Profesionales",     icon: Wrench },
       { href: "/descubre/preuniversitario",  label: "Preuniversitario IGNITE",  icon: Lightbulb },
@@ -226,6 +227,23 @@ export default function BootcampSidebar({
                     ? { href: item.href, target: "_blank", rel: "noopener noreferrer" }
                     : { href: item.href };
 
+                  // Highlighted CTA (Carreras de IA — yellow background)
+                  if (item.highlight && !collapsed) {
+                    return (
+                      <Link
+                        key={`${item.href}-${item.label}`}
+                        {...linkProps}
+                        className="group flex items-center gap-3 rounded-lg px-3 py-2.5 transition-all duration-200 bg-[#FBBC0C]/[0.15] border border-[#FBBC0C]/30 text-[#FBBC0C] hover:bg-[#FBBC0C]/[0.25]"
+                      >
+                        <Icon className="w-[18px] h-[18px] flex-shrink-0 text-[#FBBC0C]" />
+                        <span className="text-sm font-semibold truncate flex-1 leading-none">
+                          {item.label}
+                        </span>
+                        <div className="h-1.5 w-1.5 rounded-full bg-[#FBBC0C] flex-shrink-0 animate-pulse" />
+                      </Link>
+                    );
+                  }
+
                   return (
                     <Link
                       key={`${item.href}-${item.label}`}
@@ -308,8 +326,8 @@ export default function BootcampSidebar({
             <button
               onClick={handleLogout}
               className="p-1.5 rounded-lg text-white/40 hover:text-[#F0846D] hover:bg-[#F0846D]/10 transition-colors flex-shrink-0"
-              aria-label="Cerrar sesion"
-              title="Cerrar sesion"
+              aria-label="Cerrar sesión"
+              title="Cerrar sesión"
             >
               <LogOut className="w-4 h-4" />
             </button>
@@ -322,8 +340,8 @@ export default function BootcampSidebar({
             <button
               onClick={handleLogout}
               className="p-2 rounded-lg text-white/40 hover:text-[#F0846D] hover:bg-[#F0846D]/10 transition-colors"
-              aria-label="Cerrar sesion"
-              title="Cerrar sesion"
+              aria-label="Cerrar sesión"
+              title="Cerrar sesión"
             >
               <LogOut className="w-4 h-4" />
             </button>
@@ -336,7 +354,7 @@ export default function BootcampSidebar({
           className={`w-full flex items-center gap-2 rounded-lg py-2 text-white/30 hover:text-white/60 hover:bg-white/[0.04] transition-colors ${
             collapsed ? "justify-center px-0" : "px-3"
           }`}
-          aria-label={collapsed ? "Expandir menu" : "Colapsar menu"}
+          aria-label={collapsed ? "Expandir menú" : "Colapsar menú"}
         >
           {collapsed ? (
             <ChevronRight className="w-4 h-4" />

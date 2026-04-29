@@ -19,7 +19,7 @@ export interface CursoMDT {
 
 export const CURSOS_MDT: CursoMDT[] = [
   {
-    slug: "fundamentos-ia-practica",
+    slug: "c1",
     nombre: "Fundamentos de IA Práctica",
     horas: 12,
     precio: "Desde $99",
@@ -36,7 +36,7 @@ export const CURSOS_MDT: CursoMDT[] = [
     ],
   },
   {
-    slug: "chatgpt-avanzado-negocios",
+    slug: "c2",
     nombre: "ChatGPT Avanzado para Negocios",
     horas: 10,
     precio: "Desde $99",
@@ -52,7 +52,7 @@ export const CURSOS_MDT: CursoMDT[] = [
     ],
   },
   {
-    slug: "automatizacion-make-zapier",
+    slug: "c3",
     nombre: "Automatización con Make y Zapier",
     horas: 14,
     precio: "Desde $99",
@@ -70,7 +70,7 @@ export const CURSOS_MDT: CursoMDT[] = [
     ],
   },
   {
-    slug: "python-para-analisis-datos",
+    slug: "c4",
     nombre: "Python para Análisis de Datos",
     horas: 18,
     precio: "Desde $99",
@@ -90,7 +90,7 @@ export const CURSOS_MDT: CursoMDT[] = [
     ],
   },
   {
-    slug: "excel-ia-dashboards",
+    slug: "c5",
     nombre: "Excel + IA: Dashboards Inteligentes",
     horas: 10,
     precio: "Desde $99",
@@ -106,7 +106,7 @@ export const CURSOS_MDT: CursoMDT[] = [
     ],
   },
   {
-    slug: "marketing-digital-ia",
+    slug: "c6",
     nombre: "Marketing Digital con IA",
     horas: 12,
     precio: "Desde $99",
@@ -123,7 +123,7 @@ export const CURSOS_MDT: CursoMDT[] = [
     ],
   },
   {
-    slug: "power-bi-visualizacion",
+    slug: "c7",
     nombre: "Power BI: Visualización Profesional",
     horas: 12,
     precio: "Desde $99",
@@ -140,7 +140,7 @@ export const CURSOS_MDT: CursoMDT[] = [
     ],
   },
   {
-    slug: "creacion-contenido-ia",
+    slug: "c8",
     nombre: "Creación de Contenido con IA",
     horas: 8,
     precio: "Desde $99",
@@ -155,7 +155,7 @@ export const CURSOS_MDT: CursoMDT[] = [
     ],
   },
   {
-    slug: "bases-datos-sql",
+    slug: "c9",
     nombre: "Bases de Datos y SQL para Profesionales",
     horas: 14,
     precio: "Desde $99",
@@ -173,7 +173,7 @@ export const CURSOS_MDT: CursoMDT[] = [
     ],
   },
   {
-    slug: "inteligencia-negocios-bi",
+    slug: "c10",
     nombre: "Inteligencia de Negocios (BI) Aplicada",
     horas: 14,
     precio: "Desde $99",
@@ -191,7 +191,7 @@ export const CURSOS_MDT: CursoMDT[] = [
     ],
   },
   {
-    slug: "ia-recursos-humanos",
+    slug: "c11",
     nombre: "IA Aplicada a Recursos Humanos",
     horas: 10,
     precio: "Desde $99",
@@ -207,7 +207,7 @@ export const CURSOS_MDT: CursoMDT[] = [
     ],
   },
   {
-    slug: "ciberseguridad-ia",
+    slug: "c12",
     nombre: "Ciberseguridad en la Era de la IA",
     horas: 10,
     precio: "Desde $99",
@@ -223,7 +223,7 @@ export const CURSOS_MDT: CursoMDT[] = [
     ],
   },
   {
-    slug: "emprendimiento-ia",
+    slug: "c13",
     nombre: "Emprendimiento con IA",
     horas: 12,
     precio: "Desde $99",
@@ -240,7 +240,7 @@ export const CURSOS_MDT: CursoMDT[] = [
     ],
   },
   {
-    slug: "no-code-ia-apps",
+    slug: "c14",
     nombre: "No-Code + IA: Crea Apps sin Programar",
     horas: 12,
     precio: "Desde $99",
@@ -257,7 +257,7 @@ export const CURSOS_MDT: CursoMDT[] = [
     ],
   },
   {
-    slug: "liderazgo-ia-organizaciones",
+    slug: "c15",
     nombre: "Liderazgo e IA en Organizaciones",
     horas: 8,
     precio: "Desde $99",

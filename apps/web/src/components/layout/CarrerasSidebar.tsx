@@ -45,13 +45,16 @@ interface NavSection {
 }
 
 // ─── Static materias (hardcoded until dynamic enrollment is wired) ────────────
+// Rutas correctas: /carreras/[carrera-slug]/materia/[subject-slug]
+// Estos ítems apuntan a la carrera de Inteligencia Artificial (semestre 1) por defecto.
+// Cuando se implemente la matrícula dinámica, se reemplazarán con el slug real del alumno.
 
 const MATERIAS_SEMESTRE: NavItem[] = [
-  { href: "/carreras/materias/fundamentos-ia",      label: "Fundamentos de IA",       icon: Brain },
-  { href: "/carreras/materias/matematicas-ia",      label: "Matemáticas para IA",     icon: BarChart2 },
-  { href: "/carreras/materias/programacion-python", label: "Programación Python",      icon: Code2 },
-  { href: "/carreras/materias/estadistica-aplicada",label: "Estadística Aplicada",     icon: TrendingUp },
-  { href: "/carreras/materias/proyecto-integrador", label: "Proyecto Integrador I",   icon: FolderKanban },
+  { href: "/carreras/inteligencia-artificial/materia/fundamentos-de-ia",          label: "Fundamentos de IA",       icon: Brain },
+  { href: "/carreras/inteligencia-artificial/materia/matematicas-para-ia",        label: "Matemáticas para IA",     icon: BarChart2 },
+  { href: "/carreras/inteligencia-artificial/materia/programacion-python",        label: "Programación Python",      icon: Code2 },
+  { href: "/carreras/inteligencia-artificial/materia/estadistica-aplicada",       label: "Estadística Aplicada",     icon: TrendingUp },
+  { href: "/carreras/inteligencia-artificial/materia/proyecto-integrador-i",      label: "Proyecto Integrador I",   icon: FolderKanban },
 ];
 
 // ─── Menu definition ──────────────────────────────────────────────────────────
@@ -282,8 +285,8 @@ export default function CarrerasSidebar({
             <button
               onClick={handleLogout}
               className="p-1.5 rounded-lg text-white/40 hover:text-[#F0846D] hover:bg-[#F0846D]/10 transition-colors flex-shrink-0"
-              aria-label="Cerrar sesion"
-              title="Cerrar sesion"
+              aria-label="Cerrar sesión"
+              title="Cerrar sesión"
             >
               <LogOut className="w-4 h-4" />
             </button>
@@ -296,8 +299,8 @@ export default function CarrerasSidebar({
             <button
               onClick={handleLogout}
               className="p-2 rounded-lg text-white/40 hover:text-[#F0846D] hover:bg-[#F0846D]/10 transition-colors"
-              aria-label="Cerrar sesion"
-              title="Cerrar sesion"
+              aria-label="Cerrar sesión"
+              title="Cerrar sesión"
             >
               <LogOut className="w-4 h-4" />
             </button>
@@ -310,7 +313,7 @@ export default function CarrerasSidebar({
           className={`w-full flex items-center gap-2 rounded-lg py-2 text-white/30 hover:text-white/60 hover:bg-white/[0.04] transition-colors ${
             collapsed ? "justify-center px-0" : "px-3"
           }`}
-          aria-label={collapsed ? "Expandir menu" : "Colapsar menu"}
+          aria-label={collapsed ? "Expandir menú" : "Colapsar menú"}
         >
           {collapsed ? (
             <ChevronRight className="w-4 h-4" />

@@ -18,7 +18,7 @@ import { Badge } from "@/components/ui/badge";
 export const metadata: Metadata = {
   title: "Carreras | ITSEIA Academy",
   description:
-    "3 carreras tecnologicas de IA en Ecuador: Inteligencia Artificial, Ciencia de Datos y Big Data. Titulo IST, 6 semestres, AI Lab incluido.",
+    "3 carreras tecnológicas de IA en Ecuador: Inteligencia Artificial, Ciencia de Datos y Big Data. Título IST, 6 semestres, AI Lab incluido.",
 };
 
 // Icons per known career slug
@@ -41,8 +41,8 @@ const slugDescriptions: Record<string, string> = {
 // Style config for "carrera" type
 const groupConfig = {
   carrera: {
-    label: "Carreras Tecnologicas",
-    description: "Formacion de nivel superior con titulo IST avalado por legalmente reconocido. 6 semestres, AI Lab integrado y proyectos reales con empresas.",
+    label: "Carreras Tecnológicas",
+    description: "Formación de nivel superior con título IST avalado y legalmente reconocido. 6 semestres, AI Lab integrado y proyectos reales con empresas.",
     icon: GraduationCap,
     color: "text-[#FBBC0C]",
     bgColor: "bg-[#FBBC0C]/10",
@@ -114,11 +114,11 @@ export default async function ProgramasPage() {
           </span>
         </div>
         <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#0A1628]">
-          Carreras Academicas
+          Carreras Académicas
         </h1>
         <p className="mt-3 text-base text-[#1F2F58]/70 max-w-2xl leading-relaxed">
-          Formacion tecnologica real en Inteligencia Artificial, Ciencia de Datos y Big Data.
-          Titulo IST reconocido, AI Lab incluido desde el primer dia.
+          Formación tecnológica real en Inteligencia Artificial, Ciencia de Datos y Big Data.
+          Título IST reconocido, AI Lab incluido desde el primer día.
         </p>
       </div>
 
@@ -132,7 +132,7 @@ export default async function ProgramasPage() {
             <p className="text-2xl font-bold text-[#0A1628] font-[family-name:var(--font-space-grotesk)]">
               {totalCarreras}
             </p>
-            <p className="text-xs font-medium text-[#1F2F58]/80">Carreras Tecnologicas</p>
+            <p className="text-xs font-medium text-[#1F2F58]/80">Carreras Tecnológicas</p>
           </div>
         </div>
         <div className="flex items-center gap-3 rounded-xl border border-[#1F2F58]/10 bg-white shadow-sm p-4">
@@ -143,7 +143,7 @@ export default async function ProgramasPage() {
             <p className="text-2xl font-bold text-[#0A1628] font-[family-name:var(--font-space-grotesk)]">
               {totalMaterias}
             </p>
-            <p className="text-xs font-medium text-[#1F2F58]/80">Materias en total</p>
+            <p className="text-xs font-medium text-[#1F2F58]/80">Materias en Total</p>
           </div>
         </div>
         <div className="flex items-center gap-3 rounded-xl border border-[#1F2F58]/10 bg-white shadow-sm p-4">

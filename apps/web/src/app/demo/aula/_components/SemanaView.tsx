@@ -49,7 +49,7 @@ export default function SemanaView({ week }: { week: IgniteWeek }) {
               Semana {week.number}: {week.name}
             </h1>
             <p className="mt-1 text-sm" style={{ color: "#1F2F58AA" }}>
-              {week.subjects.length} materia{week.subjects.length !== 1 ? "s" : ""} &middot; {totalSessions} sesion{totalSessions !== 1 ? "es" : ""}
+              {week.subjects.length} materia{week.subjects.length !== 1 ? "s" : ""} &middot; {totalSessions} sesión{totalSessions !== 1 ? "es" : ""}
             </p>
           </div>
         </div>

@@ -26,12 +26,18 @@ export default async function BootcampLayout({
     .single();
 
   return (
-    <div className="flex h-screen overflow-hidden bg-background">
+    <div
+      className="flex h-screen overflow-hidden bg-[#F9F6E7] text-[#1F2F58]"
+      style={{ color: "#1F2F58" }}
+    >
       <BootcampSidebar
         userName={profile?.full_name ?? undefined}
         userEmail={user.email ?? undefined}
       />
-      <main className="flex-1 overflow-y-auto">
+      <main
+        className="flex-1 overflow-y-auto"
+        style={{ color: "#1F2F58" }}
+      >
         <div className="mx-auto max-w-7xl px-6 py-8 lg:px-10">
           {children}
         </div>

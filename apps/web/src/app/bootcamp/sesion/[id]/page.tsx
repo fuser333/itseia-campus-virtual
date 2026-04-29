@@ -20,6 +20,7 @@ import {
   Youtube,
 } from "lucide-react";
 import SlideViewer from "@/components/session/SlideViewer";
+import AILabPanel from "@/components/session/AILabPanel";
 import GrabacionesTab from "@/components/session/GrabacionesTab";
 import {
   BOOTCAMP_MES1_SESIONES,
@@ -27,7 +28,7 @@ import {
 } from "../../_data/mes1-data";
 import type { SesionBootcamp } from "../../_data/mes1-data";
 
-// ─── Las 7 pestañas de cada sesión ───────────────────────────────────────────
+// ─── Las 8 pestañas de cada sesión ───────────────────────────────────────────
 
 interface TabDef {
   id: string;
@@ -308,18 +309,16 @@ function SesionContent({ sesionData, sesionId }: { sesionData: SesionBootcamp; s
   );
 
   // ── AI Lab content ──
+  const sessionContext = `Bootcamp Intensivo de IA — Mes 1\nMódulo: ${sesionData.modulo}\nSesión: ${sesionData.titulo}\n\nTeoría:\n${sesionData.teoria}`;
   const ailabContent = (
-    <div className="text-center py-4">
-      <FlaskConical className="size-8 text-[#73B8E7] mx-auto mb-2" />
-      <p className="text-sm text-[#F9F6E7]/70 mb-3">
-        Practica con IA en vivo — ChatGPT, Claude y Gemini incluidos.
-      </p>
-      <Link
-        href="/ai-lab"
-        className="inline-flex items-center gap-2 bg-[#73B8E7] text-[#0A1628] px-4 py-2 rounded-lg font-semibold text-sm hover:bg-[#5BA0D0]"
-      >
-        Abrir AI Lab
-      </Link>
+    <div style={{ minHeight: "520px" }} className="flex flex-col">
+      <AILabPanel
+        sessionContext={sessionContext}
+        suggestedPrompt={`Explícame con ejemplos prácticos el tema: "${sesionData.titulo}"`}
+        sessionId={`bootcamp-mes1-${sesionData.id}`}
+        sessionTitle={sesionData.titulo}
+        className="flex-1"
+      />
     </div>
   );
 
@@ -548,7 +547,7 @@ export default function BootcampSesionPage({ params }: PageProps) {
               </span>
               <span className="size-1 rounded-full bg-white/20" />
               <span className="flex items-center gap-1">
-                <BookOpen className="size-3" />7 pestañas
+                <BookOpen className="size-3" />8 pestañas
               </span>
               <span className="size-1 rounded-full bg-white/20" />
               <span>Nivel: Intensivo</span>
@@ -575,7 +574,7 @@ export default function BootcampSesionPage({ params }: PageProps) {
         {sesionPrev ? (
           <Link
             href={`/bootcamp/sesion/${sesionPrev.id}`}
-            className="group flex items-center gap-3 rounded-xl border border-[#1F2F58]/8 bg-white p-4 transition-all hover:border-[#73B8E7]/40 hover:shadow-sm"
+            className="group flex items-center gap-3 rounded-xl border border-[#1F2F58]/[0.08] bg-white p-4 transition-all hover:border-[#73B8E7]/40 hover:shadow-sm"
           >
             <ArrowLeft className="size-4 text-[#1F2F58]/40 group-hover:-translate-x-0.5 group-hover:text-[#73B8E7] transition-all shrink-0" />
             <div className="min-w-0">
@@ -593,7 +592,7 @@ export default function BootcampSesionPage({ params }: PageProps) {
         {sesionNext ? (
           <Link
             href={`/bootcamp/sesion/${sesionNext.id}`}
-            className="group flex items-center justify-end gap-3 rounded-xl border border-[#1F2F58]/8 bg-white p-4 text-right transition-all hover:border-[#73B8E7]/40 hover:shadow-sm"
+            className="group flex items-center justify-end gap-3 rounded-xl border border-[#1F2F58]/[0.08] bg-white p-4 text-right transition-all hover:border-[#73B8E7]/40 hover:shadow-sm"
           >
             <div className="min-w-0">
               <p className="text-[10px] font-semibold uppercase tracking-widest text-[#1F2F58]/40">

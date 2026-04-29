@@ -35,13 +35,13 @@ export default async function CursosProLayout({
     .toUpperCase();
 
   return (
-    <div className="flex h-screen overflow-hidden bg-background">
+    <div className="flex h-screen overflow-hidden bg-[#0D1B30]">
       <CursosProSidebar
         userName={fullName}
         userEmail={email}
         userInitials={initials}
       />
-      <main className="flex-1 overflow-y-auto">
+      <main className="flex-1 overflow-y-auto bg-[#F9F6E7] text-[#1F2F58]">
         <div className="mx-auto max-w-7xl px-6 py-8 lg:px-10">
           {children}
         </div>

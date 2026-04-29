@@ -58,7 +58,7 @@ const SECTIONS: NavSection[] = [
     label: "PROGRAMAS",
     items: [
       { href: "/certificaciones/aws-cloud-practitioner",   label: "AWS Cloud Practitioner",    icon: Cloud },
-      { href: "/certificaciones/google-data-analytics",    label: "Google Data Analytics",     icon: Database },
+      { href: "/certificaciones/google-ai-essentials",      label: "Google AI Essentials",       icon: Database },
       { href: "/certificaciones/azure-ai-fundamentals",    label: "Azure AI Fundamentals",     icon: Brain },
     ],
   },

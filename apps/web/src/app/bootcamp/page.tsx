@@ -171,11 +171,11 @@ export default async function BootcampPage() {
       <section>
         <div className="mb-5 flex items-center justify-between">
           <div>
-            <h2 className="text-xl font-bold text-foreground flex items-center gap-2">
+            <h2 className="text-xl font-bold text-[#0A1628] flex items-center gap-2">
               <Calendar className="size-5 text-[#73B8E7]" />
               Mes 1 — Contenido del Bootcamp
             </h2>
-            <p className="text-sm text-muted-foreground mt-1">
+            <p className="text-sm text-[#1F2F58]/70 mt-1">
               4 módulos × 4 sesiones — cada sesión tiene presentación Gamma, quiz y ejercicio práctico.
             </p>
           </div>
@@ -247,11 +247,11 @@ export default async function BootcampPage() {
 
       {/* ── Descubre ITSEIA ────────────────────────────────────────────── */}
       <section>
-        <h2 className="mb-1 text-xl font-bold text-foreground flex items-center gap-2">
+        <h2 className="mb-1 text-xl font-bold text-[#0A1628] flex items-center gap-2">
           <Briefcase className="size-5 text-[#73B8E7]" />
           Descubre ITSEIA
         </h2>
-        <p className="mb-6 text-sm text-muted-foreground">
+        <p className="mb-6 text-sm text-[#1F2F58]/70">
           Más opciones para acelerar tu carrera en Inteligencia Artificial.
         </p>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -304,7 +304,7 @@ export default async function BootcampPage() {
 
       {/* ── Cuenta quick actions ───────────────────────────────────────── */}
       <section>
-        <h2 className="mb-4 text-xl font-bold text-foreground">
+        <h2 className="mb-4 text-xl font-bold text-[#0A1628]">
           Mi Cuenta
         </h2>
         <div className="grid gap-4 sm:grid-cols-3">

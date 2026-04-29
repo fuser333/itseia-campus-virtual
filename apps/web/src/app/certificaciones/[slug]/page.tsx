@@ -43,6 +43,7 @@ import type {
   CertificationProgramWithDomains,
   ExamAttempt,
 } from "@/types/database";
+import AILabPanel from "@/components/session/AILabPanel";
 import {
   awsCloudPractitionerData,
   type CertificacionData,
@@ -289,20 +290,16 @@ function DominioContent({ dominio, slug, accentColor }: { dominio: DominioData; 
     </div>
   );
 
-  // ── AI Lab ──
+  // ── AI Lab — panel integrado (gemini-2.5-flash por defecto) ──
   const ailabContent = (
-    <div className="text-center py-4">
-      <FlaskConical className="size-8 text-[#73B8E7] mx-auto mb-2" />
-      <p className="text-sm text-[#F9F6E7]/70 mb-3">
-        Profundiza en los conceptos del dominio con IA — pega tus dudas en
-        ChatGPT, Claude o Gemini desde el AI Lab integrado.
-      </p>
-      <Link
-        href="/ai-lab"
-        className="inline-flex items-center gap-2 bg-[#73B8E7] text-[#0A1628] px-4 py-2 rounded-lg font-semibold text-sm hover:bg-[#5BA0D0]"
-      >
-        Abrir AI Lab
-      </Link>
+    <div className="min-h-[480px] flex flex-col">
+      <AILabPanel
+        sessionContext={`Certificación: ${dominio.nombre}. ${dominio.descripcion}. ${dominio.lecciones.map((l) => l.contenidoMarkdown).join(" ").substring(0, 3000)}`}
+        suggestedPrompt={`Explícame los conceptos clave del dominio "${dominio.nombre}" para el examen de certificación. Dame ejemplos prácticos y puntos clave para memorizar.`}
+        sessionId={`cert-${slug}-dominio-${dominio.orden}`}
+        sessionTitle={`${dominio.nombre} — Certificación`}
+        className="flex-1"
+      />
     </div>
   );
 

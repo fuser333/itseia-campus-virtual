@@ -17,7 +17,6 @@ import {
   GraduationCap,
   BookOpen,
   BookMarked,
-  Zap,
   Building2,
   MessageCircle,
   Download,
@@ -29,6 +28,9 @@ import {
   Award,
   Lightbulb,
 } from "lucide-react";
+
+// Slug del único curso activo publicado (piloto Steveen Pinchao)
+const CURSO_ACTIVO_SLUG = "steveen-pinchao";
 
 // ─── Nav types ────────────────────────────────────────────────────────────────
 
@@ -49,13 +51,27 @@ interface NavSection {
 }
 
 // ─── Menu definition ──────────────────────────────────────────────────────────
+// Los 8 módulos del curso piloto Steveen Pinchao apuntan todos al mismo [slug]
+// page (que contiene el acordeón por módulos). Cada item lleva el estado del
+// módulo en el hash (#m1…#m8) para futura navegación directa.
+
+const MODULO_ITEMS: NavItem[] = [
+  { href: `/cursos-pro/${CURSO_ACTIVO_SLUG}`, label: "M1: Fundamentos de IA",          icon: Brain },
+  { href: `/cursos-pro/${CURSO_ACTIVO_SLUG}`, label: "M2: ChatGPT — Dominio Pro",       icon: Wand2 },
+  { href: `/cursos-pro/${CURSO_ACTIVO_SLUG}`, label: "M3: Claude — Análisis Avanzado",  icon: Brain },
+  { href: `/cursos-pro/${CURSO_ACTIVO_SLUG}`, label: "M4: Optimización Producción",     icon: Wrench },
+  { href: `/cursos-pro/${CURSO_ACTIVO_SLUG}`, label: "M5: Mantenimiento Predictivo",    icon: ClipboardList },
+  { href: `/cursos-pro/${CURSO_ACTIVO_SLUG}`, label: "M6: Control de Calidad",          icon: ClipboardList },
+  { href: `/cursos-pro/${CURSO_ACTIVO_SLUG}`, label: "M7: Cadena de Suministro",        icon: Wrench },
+  { href: `/cursos-pro/${CURSO_ACTIVO_SLUG}`, label: "M8: Proyecto Final Aplicado",     icon: Award },
+];
 
 const MENU: NavSection[] = [
   {
     sectionLabel: "MI CURSO",
     items: [
-      { href: "/cursos-pro",           label: "Dashboard",           icon: LayoutDashboard },
-      { href: "/cursos-pro/progreso",  label: "Mi Progreso",         icon: TrendingUp },
+      { href: "/cursos-pro",           label: "Dashboard",            icon: LayoutDashboard },
+      { href: "/cursos-pro/progreso",  label: "Mi Progreso",          icon: TrendingUp },
       { href: "/cursos-pro/asesorias", label: "Asesorías con Héctor", icon: CalendarCheck },
     ],
   },
@@ -64,39 +80,39 @@ const MENU: NavSection[] = [
     expandable: true,
     defaultOpen: false,
     items: [],
-    subItems: [
-      { href: "/cursos-pro/modulo/1", label: "Módulo 1: Fundamentos IA",    icon: Brain },
-      { href: "/cursos-pro/modulo/2", label: "Módulo 2: Prompt Engineering", icon: Wand2 },
-      { href: "/cursos-pro/modulo/3", label: "Módulo 3: Automatización",     icon: Wrench },
-      { href: "/cursos-pro/modulo/4", label: "Módulo 4: Proyecto Final",     icon: ClipboardList },
-    ],
+    subItems: MODULO_ITEMS,
   },
   {
     sectionLabel: "RECURSOS",
     items: [
-      { href: "/cursos-pro/prompts",   label: "Prompts Especializados", icon: Wand2 },
-      { href: "/cursos-pro/tools",     label: "Herramientas IA",        icon: Wrench },
-      { href: "/cursos-pro/proyecto",  label: "Proyecto Final",         icon: ClipboardList },
+      { href: "/cursos-pro/prompts",  label: "Prompts Especializados", icon: Wand2 },
+      { href: "/cursos-pro/tools",    label: "Herramientas IA",         icon: Wrench },
+      { href: "/cursos-pro/proyecto", label: "Proyecto Final",          icon: ClipboardList },
     ],
   },
   {
     sectionLabel: "DESCUBRE ITSEIA",
     items: [
-      { href: "/descubre/carreras",         label: "Carreras de IA (3)",      icon: GraduationCap },
-      { href: "/descubre/cursos-mdt",       label: "Cursos MDT (15)",         icon: BookMarked },
-      { href: "/descubre/bootcamp",         label: "Bootcamp 120h",           icon: Rocket },
-      { href: "/descubre/preuniversitario", label: "Preuniversitario IGNITE", icon: Lightbulb },
-      { href: "/descubre/certificaciones",  label: "Certificaciones",         icon: Award },
-      { href: "/descubre/b2b",              label: "B2B Empresas",            icon: Building2 },
-      { href: "https://h3l.ai",             label: "H3L Diagnóstico IA",      icon: Brain, external: true },
+      { href: "/descubre/carreras",         label: "Carreras de IA (3)",       icon: GraduationCap },
+      { href: "/descubre/cursos-mdt",       label: "Cursos MDT (15)",          icon: BookMarked },
+      { href: "/descubre/bootcamp",         label: "Bootcamp 120h",            icon: Rocket },
+      { href: "/descubre/preuniversitario", label: "Preuniversitario IGNITE",  icon: Lightbulb },
+      { href: "/descubre/certificaciones",  label: "Certificaciones",          icon: Award },
+      { href: "/descubre/b2b",              label: "B2B Empresas",             icon: Building2 },
+      { href: "https://h3l.ai",             label: "H3L Diagnóstico IA",       icon: Brain, external: true },
     ],
   },
   {
     sectionLabel: "CUENTA",
     items: [
-      { href: "/cursos-pro/soporte",      label: "Chat Soporte",          icon: MessageCircle },
-      { href: "/certificates",            label: "Descargar Certificados", icon: Download },
-      { href: "/payments",                label: "Mis Pagos",              icon: CreditCard },
+      {
+        href: "https://wa.me/593959892034?text=Hola%2C%20necesito%20soporte%20con%20mi%20Curso%20Pro%20ITSEIA",
+        label: "Chat Soporte",
+        icon: MessageCircle,
+        external: true,
+      },
+      { href: "/certificates", label: "Descargar Certificados", icon: Download },
+      { href: "/payments",     label: "Mis Pagos",               icon: CreditCard },
     ],
   },
 ];

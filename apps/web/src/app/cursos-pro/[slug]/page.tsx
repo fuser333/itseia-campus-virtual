@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 import SlideViewer from "@/components/session/SlideViewer";
 import GrabacionesTab from "@/components/session/GrabacionesTab";
+import AILabPanel from "@/components/session/AILabPanel";
 import {
   STEVEEN_TEMAS,
   STEVEEN_MODULOS,
@@ -79,30 +80,47 @@ interface TabDef {
 }
 
 const SESSION_TABS: TabDef[] = [
-  { id: "video",        label: "Video",         icon: <Play className="size-3.5" />,          color: "#73B8E7" },
-  { id: "presentacion", label: "Presentación",  icon: <FileText className="size-3.5" />,      color: "#517CBE" },
-  { id: "teoria",       label: "Teoría",        icon: <BookOpen className="size-3.5" />,      color: "#FBBC0C" },
-  { id: "quiz",         label: "Quiz",          icon: <ClipboardList className="size-3.5" />, color: "#FBBC0C" },
-  { id: "ejercicio",    label: "Ejercicio",     icon: <Pencil className="size-3.5" />,        color: "#F0846D" },
-  { id: "ailab",        label: "AI Lab",        icon: <FlaskConical className="size-3.5" />,  color: "#73B8E7" },
-  { id: "recursos",     label: "Recursos",      icon: <FolderOpen className="size-3.5" />,    color: "#517CBE" },
-  { id: "grabaciones",  label: "Grabaciones",   icon: <Youtube className="size-3.5" />,       color: "#FBBC0C" },
+  { id: "video",        label: "Video",        icon: <Play className="size-3.5" />,          color: "#73B8E7" },
+  { id: "presentacion", label: "Presentación", icon: <FileText className="size-3.5" />,      color: "#517CBE" },
+  { id: "teoria",       label: "Teoría",       icon: <BookOpen className="size-3.5" />,      color: "#FBBC0C" },
+  { id: "quiz",         label: "Quiz",         icon: <ClipboardList className="size-3.5" />, color: "#FBBC0C" },
+  { id: "ejercicio",    label: "Ejercicio",    icon: <Pencil className="size-3.5" />,        color: "#F0846D" },
+  { id: "ailab",        label: "AI Lab",       icon: <FlaskConical className="size-3.5" />,  color: "#73B8E7" },
+  { id: "recursos",     label: "Recursos",     icon: <FolderOpen className="size-3.5" />,    color: "#517CBE" },
+  { id: "grabaciones",  label: "Grabaciones",  icon: <Youtube className="size-3.5" />,       color: "#FBBC0C" },
 ];
+
+/** Determina si un tab tiene contenido real para este tema */
+function tabHasContent(tabId: string, tema: TemaProSteveen | undefined): boolean {
+  if (!tema) return tabId === "ailab";
+  switch (tabId) {
+    case "video":        return tema.videoEmbed !== "";
+    case "presentacion": return !!(tema.slidesUrl && tema.slidesUrl !== "") || (tema.presentacionSlides?.length ?? 0) > 0;
+    case "teoria":       return !!(tema.teoria && tema.teoria !== "Contenido en desarrollo — disponible próximamente.");
+    case "quiz":         return tema.quiz.length > 0;
+    case "ejercicio":    return tema.ejercicio.pasos.length > 0;
+    case "ailab":        return true; // siempre disponible
+    case "recursos":     return tema.recursos.length > 0;
+    case "grabaciones":  return false; // carga async — siempre empieza sin contenido
+    default:             return false;
+  }
+}
 
 // ─── Componente: contenido de sesión ────────────────────────────────────────
 
 function SesionContent({ temaData, slug }: { temaData?: TemaProSteveen; slug: string }) {
-  const [activeTab, setActiveTab] = useState<string>("video");
+  // Abrir en "video" si hay video; sino "teoria" si hay teoría; sino "ailab" (siempre disponible)
+  const defaultTab =
+    temaData?.videoEmbed
+      ? "video"
+      : temaData?.teoria && temaData.teoria !== "Contenido en desarrollo — disponible próximamente."
+      ? "teoria"
+      : "ailab";
+  const [activeTab, setActiveTab] = useState<string>(defaultTab);
   const [expandedSections, setExpandedSections] = useState<Set<string>>(new Set());
   const [quizAnswers, setQuizAnswers] = useState<Record<number, number>>({});
   const [showResults, setShowResults] = useState(false);
   const [slideIndex, setSlideIndex] = useState(0);
-
-  const hasContent =
-    !!temaData &&
-    (temaData.videoEmbed !== "" ||
-      (temaData.slidesUrl && temaData.slidesUrl !== "") ||
-      (temaData.teoria && temaData.teoria !== "Contenido en desarrollo — disponible próximamente."));
 
   const toggleSection = (id: string) => {
     setExpandedSections((prev) => {
@@ -113,8 +131,8 @@ function SesionContent({ temaData, slug }: { temaData?: TemaProSteveen; slug: st
     });
   };
 
-  // ── Fix 1 — estado vacío dark theme ──
-  if (!hasContent || !temaData) {
+  // Si no hay temaData en absoluto, mostramos estado vacío mínimo
+  if (!temaData) {
     return (
       <div className="flex flex-col items-center justify-center py-10 text-center">
         <div className="mb-4 flex size-12 items-center justify-center rounded-full bg-[#1F2F58]/30">
@@ -360,19 +378,19 @@ function SesionContent({ temaData, slug }: { temaData?: TemaProSteveen; slug: st
       </div>
     );
 
-  // ── AI Lab content ──
+  // ── AI Lab — Tutor IA con gemini-2.5-flash (DEFAULT_MODEL) ──
+  const sessionContext = temaData
+    ? `Curso Pro ITSEIA — ${temaData.modulo}\nTema: ${temaData.titulo}\n\nTeoría:\n${temaData.teoria}\n\nEjercicio: ${temaData.ejercicio.objetivo}`
+    : `Curso Pro ITSEIA — IA Aplicada para Ingeniería Industrial`;
+
   const ailabContent = (
-    <div className="text-center py-4">
-      <FlaskConical className="size-8 text-[#73B8E7] mx-auto mb-2" />
-      <p className="text-sm text-[#F9F6E7]/70 mb-3">
-        Practica con IA en vivo — ChatGPT, Claude y Gemini incluidos.
-      </p>
-      <Link
-        href="/ai-lab"
-        className="inline-flex items-center gap-2 bg-[#73B8E7] text-[#0A1628] px-4 py-2 rounded-lg font-semibold text-sm hover:bg-[#5BA0D0]"
-      >
-        Abrir AI Lab
-      </Link>
+    <div className="h-[520px]">
+      <AILabPanel
+        sessionContext={sessionContext}
+        suggestedPrompt={`Explícame el tema "${temaData?.titulo ?? "IA Aplicada"}" con un ejemplo práctico de ingeniería industrial`}
+        sessionId={`curso-pro-${slug}-${temaData?.id ?? "general"}`}
+        sessionTitle={temaData?.titulo ?? "IA Aplicada para Ingeniería Industrial"}
+      />
     </div>
   );
 
@@ -458,7 +476,9 @@ function SesionContent({ temaData, slug }: { temaData?: TemaProSteveen; slug: st
             >
               <span style={{ color: isActive ? tab.color : undefined }}>{tab.icon}</span>
               {tab.label}
-              <span className="size-1.5 rounded-full bg-green-400" />
+              {tabHasContent(tab.id, temaData) && (
+                <span className="size-1.5 rounded-full bg-green-400" />
+              )}
             </button>
           );
         })}
@@ -610,7 +630,7 @@ export default function CursoProPage({ params }: PageProps) {
     : null;
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 rounded-2xl bg-[#0D1B30] p-4 sm:p-6 -mx-2 sm:-mx-4">
 
       {/* ── Breadcrumb dark ── */}
       <nav className="flex items-center gap-1.5 text-xs text-[#F9F6E7]/50 flex-wrap">
