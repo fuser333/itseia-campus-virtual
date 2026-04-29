@@ -26,7 +26,7 @@ Día de decisiones estratégicas masivas: precios definidos con teoría de juego
 - Expert post con infografía matplotlib REAL (datos Ecuador): 4/4 plataformas
 - Reply en X con links a todas las empresas partner
 - Infografía "Brecha Talento IA Ecuador" con datos duros (1,700 vs 250)
-- WhatsApp corregido: 0997489821
+- WhatsApp corregido: 0990709009
 
 ### 4. LIVE LOVABLE — JUEVES 9 ABRIL
 - 6 personas conectadas, 2 participaron, 0 desconexiones
@@ -64,7 +64,7 @@ Día de decisiones estratégicas masivas: precios definidos con teoría de juego
 ## Guardrails Nuevos
 - SIEMPRE adjuntar imagen al post (nunca solo OG card)
 - Infografías con datos REALES (matplotlib), no imágenes genéricas IA
-- WhatsApp business: 0997489821
+- WhatsApp business: 0990709009
 - Expert posts: mencionar ecosistema H3L+ImagemIA+Strata+Emprendedor
 - Reply con links a empresas partner (no en tweet principal)
 - Lives: martes + jueves (no lunes + jueves)
