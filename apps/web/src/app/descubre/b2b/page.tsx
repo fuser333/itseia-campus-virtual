@@ -10,9 +10,9 @@ const WA_COTIZAR =
 const WA_INFO =
   "https://wa.me/593990709009?text=Quiero%20info%20de%20programas%20B2B%20de%20ITSEIA";
 
-// Video oficial B2B con Héctor Velasco hablando — capacitación corporativa.
-// Subido a YouTube canal ITSEIA el 2026-04-28.
-const YOUTUBE_ID = "Um2CBAbbv-o";
+// Video oficial B2B "Cursos de IA personalizados para tu empresa — ITSEIA B2B"
+// Canal YouTube ITSEIA, publicado 2026-04-23.
+const YOUTUBE_ID = "envRi4B0BEo";
 
 const BENEFICIOS = [
   "Programa diseñado a la medida de tu empresa",
