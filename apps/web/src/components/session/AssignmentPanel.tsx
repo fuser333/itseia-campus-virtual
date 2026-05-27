@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState, useRef } from "react";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -212,7 +213,7 @@ export default function AssignmentPanel({
           Instrucciones
         </p>
         <div className="prose prose-invert prose-sm max-w-none prose-headings:text-[#FBBC0C] prose-p:text-[#F9F6E7] prose-li:text-[#F9F6E7] prose-strong:text-[#FBBC0C] prose-code:text-[#F0846D] prose-code:bg-[#0D1B30] prose-code:px-1 prose-code:py-0.5 prose-code:rounded-md prose-code:before:content-none prose-code:after:content-none">
-          <ReactMarkdown>{assignment.instructions_markdown || "No hay instrucciones disponibles."}</ReactMarkdown>
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>{assignment.instructions_markdown || "No hay instrucciones disponibles."}</ReactMarkdown>
         </div>
       </div>
 

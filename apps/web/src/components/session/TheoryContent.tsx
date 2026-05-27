@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { BookOpen, CheckCircle2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -93,6 +94,7 @@ export default function TheoryContent({
         )}
       >
         <ReactMarkdown
+          remarkPlugins={[remarkGfm]}
           components={{
             a: ({ href, children, ...props }) => {
               const isExternal = href && (href.startsWith("http") || href.startsWith("//"));
