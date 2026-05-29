@@ -101,7 +101,7 @@ export async function POST(request: Request) {
     messages,
     conversationId,
     sessionId,
-    model = "gemini-2.0-flash",
+    model = "kimi",
     esComparacion = false,
     title,
   } = body;

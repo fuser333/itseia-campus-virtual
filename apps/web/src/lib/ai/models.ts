@@ -5,7 +5,7 @@
 
 export interface AIModelConfig {
   name: string;
-  provider: "google" | "openrouter";
+  provider: "google" | "openrouter" | "kimi";
   modelId: string; // ID real del modelo en la API del provider
   description: string;
   costPer1kIn: number;
@@ -16,6 +16,17 @@ export interface AIModelConfig {
 }
 
 export const AI_MODELS = {
+  "kimi": {
+    name: "Kimi (Moonshot)",
+    provider: "kimi",
+    modelId: "moonshot-v1-32k",
+    description: "Moonshot — rapido y disponible",
+    costPer1kIn: 0.0002,
+    costPer1kOut: 0.0006,
+    icon: "🌙",
+    color: "#7C3AED",
+    maxTokens: 4096,
+  },
   "gemini-2.0-flash": {
     name: "Gemini 2.0 Flash",
     provider: "google",
@@ -86,7 +97,7 @@ export const AI_MODELS = {
 
 export type AIModelId = keyof typeof AI_MODELS;
 
-export const DEFAULT_MODEL: AIModelId = "gemini-2.5-flash";
+export const DEFAULT_MODEL: AIModelId = "kimi";
 
 export const MODEL_IDS = Object.keys(AI_MODELS) as AIModelId[];
 

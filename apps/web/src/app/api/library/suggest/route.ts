@@ -11,15 +11,17 @@ import { searchOpenAlex } from "@/features/library/openalex";
 import { searchArXiv } from "@/features/library/arxiv";
 import { mergeResults } from "@/features/library/merge";
 
-const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
-const GEMINI_MODEL = "gemini-2.0-flash";
+// Migrado Gemini → Kimi (Moonshot) 29 may 2026 — Gemini caído (404)
+const KIMI_API_KEY = process.env.KIMI_API_KEY;
+const KIMI_URL = "https://api.moonshot.ai/v1/chat/completions";
+const KIMI_MODEL = "moonshot-v1-8k";
 
 /**
  * Llama a Gemini para generar terminos de busqueda academica
  * desde el titulo/descripcion de una sesion.
  */
 async function generateSearchTerms(context: string): Promise<string[]> {
-  if (!GEMINI_API_KEY) {
+  if (!KIMI_API_KEY) {
     // Fallback: usar el contexto directo como query
     return [context.slice(0, 80)];
   }
@@ -35,22 +37,22 @@ Responde UNICAMENTE con los 3 terminos separados por comas, sin numeracion, sin 
 Ejemplo de formato correcto: neural networks, convolutional image classification, deep learning medical imaging`;
 
   const body = {
-    contents: [{ role: "user", parts: [{ text: prompt }] }],
-    generationConfig: {
-      temperature: 0.3,
-      maxOutputTokens: 100,
-    },
+    model: KIMI_MODEL,
+    temperature: 0.3,
+    max_tokens: 100,
+    messages: [{ role: "user", content: prompt }],
   };
 
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`;
-
   const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 5000);
+  const timeout = setTimeout(() => controller.abort(), 8000);
 
   try {
-    const res = await fetch(url, {
+    const res = await fetch(KIMI_URL, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${KIMI_API_KEY}`,
+      },
       body: JSON.stringify(body),
       signal: controller.signal,
     });
@@ -59,7 +61,7 @@ Ejemplo de formato correcto: neural networks, convolutional image classification
 
     const data = await res.json();
     const text: string =
-      data?.candidates?.[0]?.content?.parts?.[0]?.text || "";
+      data?.choices?.[0]?.message?.content || "";
 
     if (!text) return [context.slice(0, 80)];
 
