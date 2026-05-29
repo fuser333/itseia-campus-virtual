@@ -8,8 +8,10 @@
 
 import { createClient } from "@/lib/supabase/server";
 
-const GEMINI_API_URL =
-  "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
+// Migrado de Gemini → Kimi (Moonshot, compatible OpenAI) el 29 may 2026
+// porque Gemini dejó de responder en producción.
+const KIMI_API_URL = "https://api.moonshot.ai/v1/chat/completions";
+const KIMI_MODEL = "moonshot-v1-32k";
 
 type MaterialType = "flashcards" | "summary" | "quiz" | "comparison";
 
@@ -54,7 +56,7 @@ export async function POST(request: Request) {
 
   try {
     const prompt = buildPrompt(body.type, body.content, body.topic);
-    const result = await callGemini(prompt);
+    const result = await callKimi(prompt);
 
     return Response.json({
       type: body.type,
@@ -167,37 +169,48 @@ REGLAS:
   }
 }
 
-async function callGemini(prompt: string): Promise<Record<string, unknown>> {
-  const apiKey = process.env.GEMINI_API_KEY;
+async function callKimi(prompt: string): Promise<Record<string, unknown>> {
+  const apiKey = process.env.KIMI_API_KEY;
   if (!apiKey) {
-    throw new Error("GEMINI_API_KEY no configurada");
+    throw new Error("KIMI_API_KEY no configurada");
   }
 
-  const response = await fetch(`${GEMINI_API_URL}?key=${apiKey}`, {
+  const response = await fetch(KIMI_API_URL, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${apiKey}`,
+    },
     body: JSON.stringify({
-      contents: [{ parts: [{ text: prompt }] }],
-      generationConfig: {
-        temperature: 0.4,
-        maxOutputTokens: 4096,
-        responseMimeType: "application/json",
-      },
+      model: KIMI_MODEL,
+      temperature: 0.4,
+      max_tokens: 4096,
+      messages: [
+        {
+          role: "system",
+          content:
+            "Eres un asistente educativo de ITSEIA. Responde SIEMPRE con un único objeto JSON válido, sin texto antes ni después, sin code fences.",
+        },
+        { role: "user", content: prompt },
+      ],
     }),
   });
 
   if (!response.ok) {
     const errText = await response.text();
-    console.error("[Brain Generate] Gemini error:", errText);
-    throw new Error("Error al generar con Gemini");
+    console.error("[Brain Generate] Kimi error:", errText);
+    throw new Error("Error al generar con Kimi");
   }
 
   const data = (await response.json()) as {
-    candidates?: Array<{
-      content?: { parts?: Array<{ text?: string }> };
-    }>;
+    choices?: Array<{ message?: { content?: string } }>;
   };
-  const rawText = data.candidates?.[0]?.content?.parts?.[0]?.text || "{}";
+  let rawText = data.choices?.[0]?.message?.content || "{}";
+  // Aislar el objeto JSON (limpiar fences y texto extra)
+  rawText = rawText.replace(/```json\s*/gi, "").replace(/```\s*/g, "").trim();
+  const first = rawText.indexOf("{");
+  const last = rawText.lastIndexOf("}");
+  if (first !== -1 && last !== -1) rawText = rawText.slice(first, last + 1);
 
   try {
     return JSON.parse(rawText) as Record<string, unknown>;
