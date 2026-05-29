@@ -9,7 +9,9 @@ import { cookies } from "next/headers";
 import OpenAI from "openai";
 
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
+  // Placeholder: evita que el constructor rompa el BUILD si falta la key.
+  // En runtime, el handler valida OPENAI_API_KEY antes de usar este cliente.
+  apiKey: process.env.OPENAI_API_KEY || "sk-placeholder-build-only",
 });
 
 // Map module types to assistant IDs (populated after create_assistants.js runs)
