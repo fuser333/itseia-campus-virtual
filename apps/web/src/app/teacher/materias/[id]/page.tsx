@@ -254,9 +254,9 @@ export default function TeacherSubjectDetailPage({
               Volver a materias
             </Button>
           </Link>
-          <h1 className="text-2xl font-bold text-gray-900">{subject.name}</h1>
-          <p className="mt-1 text-sm text-gray-500">
-            <span className="font-medium text-gray-700">{subject.code}</span>
+          <h1 className="text-2xl font-bold text-white">{subject.name}</h1>
+          <p className="mt-1 text-sm text-gray-300">
+            <span className="font-medium text-gray-200">{subject.code}</span>
             {subject.semesters && (
               <span> &middot; Periodo {subject.semesters.number}</span>
             )}
@@ -266,7 +266,7 @@ export default function TeacherSubjectDetailPage({
           </p>
         </div>
 
-        <div className="flex items-center gap-4 text-sm text-gray-500">
+        <div className="flex items-center gap-4 text-sm text-gray-300">
           <div className="text-center">
             <p className="text-lg font-bold text-[#1F2F58]">{sessions.length}</p>
             <p className="text-xs">Sesiones</p>
@@ -294,7 +294,7 @@ export default function TeacherSubjectDetailPage({
           className={`flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-all ${
             activeTab === "sesiones"
               ? "bg-[#1F2F58] text-white shadow-sm"
-              : "text-gray-500 hover:text-gray-800 hover:bg-gray-100"
+              : "text-gray-300 hover:text-gray-800 hover:bg-gray-100"
           }`}
         >
           <BookOpen className="size-3.5" />
@@ -306,7 +306,7 @@ export default function TeacherSubjectDetailPage({
           className={`flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-all ${
             activeTab === "foro"
               ? "bg-[#1F2F58] text-white shadow-sm"
-              : "text-gray-500 hover:text-gray-800 hover:bg-gray-100"
+              : "text-gray-300 hover:text-gray-800 hover:bg-gray-100"
           }`}
         >
           <MessagesSquare className="size-3.5" />
@@ -323,7 +323,7 @@ export default function TeacherSubjectDetailPage({
           className={`flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-all ${
             activeTab === "asistencia"
               ? "bg-[#1F2F58] text-white shadow-sm"
-              : "text-gray-500 hover:text-gray-800 hover:bg-gray-100"
+              : "text-gray-300 hover:text-gray-800 hover:bg-gray-100"
           }`}
         >
           <ClipboardCheck className="size-3.5" />
@@ -338,7 +338,7 @@ export default function TeacherSubjectDetailPage({
           className={`flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-all ${
             activeTab === "analytics"
               ? "bg-[#1F2F58] text-white shadow-sm"
-              : "text-gray-500 hover:text-gray-800 hover:bg-gray-100"
+              : "text-gray-300 hover:text-gray-800 hover:bg-gray-100"
           }`}
         >
           <BarChart3 className="size-3.5" />
@@ -418,7 +418,7 @@ export default function TeacherSubjectDetailPage({
                   className={`flex items-center gap-2 rounded-lg px-3 py-1.5 text-xs font-medium transition-all ${
                     analyticsSubView === "risk"
                       ? "bg-[#1F2F58] text-white shadow-sm"
-                      : "text-gray-500 hover:text-gray-800 hover:bg-gray-100"
+                      : "text-gray-300 hover:text-gray-800 hover:bg-gray-100"
                   }`}
                 >
                   <AlertTriangle className="size-3.5" />
@@ -435,7 +435,7 @@ export default function TeacherSubjectDetailPage({
                   className={`flex items-center gap-2 rounded-lg px-3 py-1.5 text-xs font-medium transition-all ${
                     analyticsSubView === "quiz"
                       ? "bg-[#1F2F58] text-white shadow-sm"
-                      : "text-gray-500 hover:text-gray-800 hover:bg-gray-100"
+                      : "text-gray-300 hover:text-gray-800 hover:bg-gray-100"
                   }`}
                 >
                   <HelpCircle className="size-3.5" />
@@ -447,7 +447,7 @@ export default function TeacherSubjectDetailPage({
                   className={`flex items-center gap-2 rounded-lg px-3 py-1.5 text-xs font-medium transition-all ${
                     analyticsSubView === "engagement"
                       ? "bg-[#1F2F58] text-white shadow-sm"
-                      : "text-gray-500 hover:text-gray-800 hover:bg-gray-100"
+                      : "text-gray-300 hover:text-gray-800 hover:bg-gray-100"
                   }`}
                 >
                   <BarChart3 className="size-3.5" />
@@ -473,8 +473,8 @@ export default function TeacherSubjectDetailPage({
       {activeTab === "sesiones" && (
         <>
       {/* Legend */}
-      <div className="flex flex-wrap items-center gap-4 rounded-lg border border-gray-200 bg-white p-3 text-xs text-gray-500">
-        <span className="font-medium text-gray-700">Indicadores:</span>
+      <div className="flex flex-wrap items-center gap-4 rounded-lg border border-gray-200 bg-white p-3 text-xs text-gray-300">
+        <span className="font-medium text-gray-200">Indicadores:</span>
         <span className="flex items-center gap-1">
           <span className="inline-block size-2.5 rounded-full bg-emerald-500" />
           Tiene contenido
@@ -533,7 +533,7 @@ export default function TeacherSubjectDetailPage({
                   </TableCell>
                   <TableCell>
                     <div className="max-w-[300px]">
-                      <div className="truncate font-medium text-gray-900">
+                      <div className="truncate font-medium text-white">
                         {session.title}
                       </div>
                       {session.description && (

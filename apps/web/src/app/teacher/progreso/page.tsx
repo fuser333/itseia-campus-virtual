@@ -185,10 +185,10 @@ export default function TeacherProgresoPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">
+        <h1 className="text-2xl font-bold text-white">
           Progreso de Estudiantes
         </h1>
-        <p className="mt-1 text-sm text-gray-500">
+        <p className="mt-1 text-sm text-gray-300">
           Visualiza el avance de cada estudiante por sesion
         </p>
       </div>
@@ -212,7 +212,7 @@ export default function TeacherProgresoPage() {
             <select
               value={filterSubject}
               onChange={(e) => setFilterSubject(e.target.value)}
-              className="h-8 rounded-lg border border-gray-200 bg-white px-3 text-sm text-gray-700 outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50"
+              className="h-8 rounded-lg border border-gray-200 bg-white px-3 text-sm text-gray-200 outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50"
             >
               <option value="">Seleccionar materia</option>
               {subjects.map((s) => (
@@ -258,7 +258,7 @@ export default function TeacherProgresoPage() {
                         className="text-center min-w-[50px]"
                       >
                         <span
-                          className="text-xs font-medium text-gray-500"
+                          className="text-xs font-medium text-gray-300"
                           title={s.title}
                         >
                           S{s.number}
@@ -284,7 +284,7 @@ export default function TeacherProgresoPage() {
 
                     return (
                       <TableRow key={student.id}>
-                        <TableCell className="sticky left-0 z-10 bg-white font-medium text-gray-900">
+                        <TableCell className="sticky left-0 z-10 bg-white font-medium text-white">
                           {student.name}
                         </TableCell>
                         {sessions.map((s) => (
@@ -303,7 +303,7 @@ export default function TeacherProgresoPage() {
                                 ? "bg-emerald-100 text-emerald-700"
                                 : pct >= 50
                                   ? "bg-[#FBBC0C]/20 text-[#1F2F58]"
-                                  : "bg-gray-100 text-gray-500"
+                                  : "bg-gray-100 text-gray-300"
                             }`}
                           >
                             {pct}%
@@ -322,7 +322,7 @@ export default function TeacherProgresoPage() {
             <div className="grid gap-3 sm:grid-cols-3">
               <Card size="sm">
                 <CardContent>
-                  <p className="text-xs text-gray-500">Estudiantes</p>
+                  <p className="text-xs text-gray-300">Estudiantes</p>
                   <p className="text-lg font-bold text-[#1F2F58]">
                     {students.length}
                   </p>
@@ -330,7 +330,7 @@ export default function TeacherProgresoPage() {
               </Card>
               <Card size="sm">
                 <CardContent>
-                  <p className="text-xs text-gray-500">Sesiones</p>
+                  <p className="text-xs text-gray-300">Sesiones</p>
                   <p className="text-lg font-bold text-[#1F2F58]">
                     {sessions.length}
                   </p>
@@ -338,7 +338,7 @@ export default function TeacherProgresoPage() {
               </Card>
               <Card size="sm">
                 <CardContent>
-                  <p className="text-xs text-gray-500">Promedio completado</p>
+                  <p className="text-xs text-gray-300">Promedio completado</p>
                   <p className="text-lg font-bold text-emerald-600">
                     {sessions.length > 0
                       ? Math.round(

@@ -101,8 +101,8 @@ export default function MiCertificacionPage() {
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">Mi Certificacion</h1>
-        <p className="mt-1 text-sm text-gray-500">
+        <h1 className="text-2xl font-bold text-white">Mi Certificacion</h1>
+        <p className="mt-1 text-sm text-gray-300">
           Certificacion en Docencia Virtual Efectiva — Art. 61 RRA 2022 (CES Ecuador)
         </p>
       </div>
@@ -140,7 +140,7 @@ export default function MiCertificacionPage() {
             {/* Status */}
             <div className="flex-1 min-w-0">
               <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-3">
-                <p className="text-lg font-bold text-gray-900">
+                <p className="text-lg font-bold text-white">
                   Docencia Virtual Efectiva — 120 horas
                 </p>
                 {hasCertificate ? (
@@ -212,7 +212,7 @@ export default function MiCertificacionPage() {
 
       {/* What it covers */}
       <div>
-        <h2 className="mb-4 text-base font-semibold text-gray-900">
+        <h2 className="mb-4 text-base font-semibold text-white">
           Que cubre este certificado
         </h2>
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
@@ -231,7 +231,7 @@ export default function MiCertificacionPage() {
                 <div className="flex items-start gap-2">
                   <FileCheck className="size-4 shrink-0 text-[#73B8E7] mt-0.5" />
                   <div>
-                    <p className="text-xs font-medium text-gray-900">
+                    <p className="text-xs font-medium text-white">
                       {item.label}
                     </p>
                     <p className="text-[10px] text-gray-400 mt-0.5">
@@ -250,10 +250,10 @@ export default function MiCertificacionPage() {
         <div className="rounded-lg border border-[#FBBC0C]/30 bg-[#FBBC0C]/5 p-5">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <p className="font-semibold text-gray-900">
+              <p className="font-semibold text-white">
                 Completa tu capacitacion modulo a modulo
               </p>
-              <p className="mt-0.5 text-sm text-gray-500">
+              <p className="mt-0.5 text-sm text-gray-300">
                 Accede al curso completo con todos los modulos, contenido y seguimiento.
               </p>
             </div>

@@ -76,8 +76,8 @@ export default function ProgramarClasesPage() {
       {/* Header */}
       <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Programar Clases</h1>
-          <p className="mt-1 text-sm text-gray-500">
+          <h1 className="text-2xl font-bold text-white">Programar Clases</h1>
+          <p className="mt-1 text-sm text-gray-300">
             Agenda sesiones sincronicas para tus materias. Los estudiantes las veran
             en su calendario automaticamente.
           </p>
@@ -121,7 +121,7 @@ export default function ProgramarClasesPage() {
         </Card>
       ) : (
         <>
-          <h2 className="text-base font-semibold text-gray-900">
+          <h2 className="text-base font-semibold text-white">
             Selecciona una materia para programar una clase
           </h2>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -135,8 +135,8 @@ export default function ProgramarClasesPage() {
                   </CardHeader>
                   <CardContent>
                     <div className="flex items-center justify-between">
-                      <div className="text-xs text-gray-500">
-                        <span className="font-medium text-gray-700">
+                      <div className="text-xs text-gray-300">
+                        <span className="font-medium text-gray-200">
                           {subject.code}
                         </span>
                         {subject.semesters && (

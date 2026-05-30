@@ -255,10 +255,10 @@ export default function TeacherDashboardPage() {
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">
+        <h1 className="text-2xl font-bold text-white">
           Panel Docente
         </h1>
-        <p className="mt-1 text-sm text-gray-500">
+        <p className="mt-1 text-sm text-gray-300">
           Bienvenido al panel de gestión de materias y estudiantes
         </p>
       </div>
@@ -276,10 +276,10 @@ export default function TeacherDashboardPage() {
               <BookOpen className="size-5 text-[#1F2F58]" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-gray-900">
+              <p className="text-2xl font-bold text-white">
                 {stats.subjectCount}
               </p>
-              <p className="text-xs text-gray-500">Materias asignadas</p>
+              <p className="text-xs text-gray-300">Materias asignadas</p>
             </div>
           </CardContent>
         </Card>
@@ -290,10 +290,10 @@ export default function TeacherDashboardPage() {
               <FileCheck className="size-5 text-[#FBBC0C]" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-gray-900">
+              <p className="text-2xl font-bold text-white">
                 {stats.pendingSubmissions}
               </p>
-              <p className="text-xs text-gray-500">Entregas pendientes</p>
+              <p className="text-xs text-gray-300">Entregas pendientes</p>
             </div>
           </CardContent>
         </Card>
@@ -304,10 +304,10 @@ export default function TeacherDashboardPage() {
               <Users className="size-5 text-[#73B8E7]" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-gray-900">
+              <p className="text-2xl font-bold text-white">
                 {stats.studentCount}
               </p>
-              <p className="text-xs text-gray-500">Estudiantes</p>
+              <p className="text-xs text-gray-300">Estudiantes</p>
             </div>
           </CardContent>
         </Card>
@@ -318,10 +318,10 @@ export default function TeacherDashboardPage() {
               <Clock className="size-5 text-[#F0846D]" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-gray-900">
+              <p className="text-2xl font-bold text-white">
                 {stats.recentActivity.length}
               </p>
-              <p className="text-xs text-gray-500">Actividad reciente</p>
+              <p className="text-xs text-gray-300">Actividad reciente</p>
             </div>
           </CardContent>
         </Card>
@@ -329,7 +329,7 @@ export default function TeacherDashboardPage() {
 
       {/* Quick Links: Subjects */}
       <div>
-        <h2 className="mb-3 text-lg font-semibold text-gray-900">
+        <h2 className="mb-3 text-lg font-semibold text-white">
           Mis Materias
         </h2>
         {subjects.length === 0 ? (
@@ -354,8 +354,8 @@ export default function TeacherDashboardPage() {
                   </CardHeader>
                   <CardContent>
                     <div className="flex items-center justify-between">
-                      <div className="text-xs text-gray-500">
-                        <span className="font-medium text-gray-700">
+                      <div className="text-xs text-gray-300">
+                        <span className="font-medium text-gray-200">
                           {subject.code}
                         </span>
                         {subject.semesters && (
@@ -391,7 +391,7 @@ export default function TeacherDashboardPage() {
       {/* Recent Activity */}
       {stats.recentActivity.length > 0 && (
         <div>
-          <h2 className="mb-3 text-lg font-semibold text-gray-900">
+          <h2 className="mb-3 text-lg font-semibold text-white">
             Actividad Reciente
           </h2>
           <Card>
@@ -402,10 +402,10 @@ export default function TeacherDashboardPage() {
                   className="flex items-center justify-between py-3 first:pt-0 last:pb-0"
                 >
                   <div>
-                    <p className="text-sm font-medium text-gray-900">
+                    <p className="text-sm font-medium text-white">
                       {activity.student_name}
                     </p>
-                    <p className="text-xs text-gray-500">
+                    <p className="text-xs text-gray-300">
                       {activity.subject_name}
                     </p>
                   </div>
@@ -446,7 +446,7 @@ export default function TeacherDashboardPage() {
 
       {/* Mi Agenda — acceso rapido al calendario */}
       <div>
-        <h2 className="mb-3 text-lg font-semibold text-gray-900 flex items-center gap-2">
+        <h2 className="mb-3 text-lg font-semibold text-white flex items-center gap-2">
           <CalendarDays className="size-5 text-[#1F2F58]" />
           Mi Agenda
         </h2>
@@ -457,10 +457,10 @@ export default function TeacherDashboardPage() {
                 <CalendarDays className="size-6 text-[#1F2F58]" />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="font-semibold text-gray-900">
+                <p className="font-semibold text-white">
                   Planifica tus clases sincronicas
                 </p>
-                <p className="text-sm text-gray-500 mt-0.5">
+                <p className="text-sm text-gray-300 mt-0.5">
                   Crea y gestiona sesiones en el calendario. Tus estudiantes las veran
                   automaticamente en su agenda.
                 </p>
