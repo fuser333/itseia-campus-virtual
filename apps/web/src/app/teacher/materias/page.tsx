@@ -86,22 +86,21 @@ export default function TeacherMateriasPage() {
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {subjects.map((subject) => (
             <Link key={subject.id} href={`/teacher/materias/${subject.id}`}>
-              <Card className="transition-shadow hover:shadow-md">
+              <Card className="border-white/10 bg-[#1F2F58]/40 transition-all hover:border-[#FBBC0C]/40 hover:bg-[#1F2F58]/60 hover:shadow-md">
                 <CardHeader className="pb-2">
-                  <CardTitle className="text-sm font-semibold text-[#1F2F58]">
+                  <CardTitle className="text-sm font-semibold text-white">
                     {subject.name}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="flex items-center justify-between">
-                    <div className="text-xs text-gray-500">
-                      <span className="font-medium text-gray-700">
+                    <div className="text-xs text-gray-300">
+                      <span className="rounded bg-[#FBBC0C]/20 px-1.5 py-0.5 font-mono text-[11px] font-semibold text-[#FBBC0C]">
                         {subject.code}
                       </span>
                       {subject.semesters && (
-                        <span>
-                          {" "}
-                          &middot; Periodo {subject.semesters.number}
+                        <span className="ml-2">
+                          Periodo {subject.semesters.number}
                         </span>
                       )}
                       {subject.semesters?.programs && (
@@ -111,7 +110,7 @@ export default function TeacherMateriasPage() {
                         </span>
                       )}
                     </div>
-                    <ArrowRight className="size-4 text-gray-400" />
+                    <ArrowRight className="size-4 text-[#73B8E7]" />
                   </div>
                   <div className="mt-2 flex gap-2 text-[10px] text-gray-400">
                     <span>{subject.hours_docencia}h docencia</span>
