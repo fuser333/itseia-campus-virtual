@@ -196,7 +196,7 @@ export async function GET(
     // ── 8. Generar narrativa con Gemini ──
     let geminiNarrative = "";
     try {
-      const apiKey = process.env.GEMINI_API_KEY;
+      const apiKey = process.env.KIMI_API_KEY; // migrado de Gemini (caído) a Kimi
       if (apiKey) {
         const statsForGemini = attemptsSummary.map((a) => ({
           usuario: a.user_name,
@@ -219,13 +219,18 @@ ${suspiciousPairs.map((p) => `- ${p.user_a} y ${p.user_b}: ${p.similarity}% simi
 Genera un parrafo breve (maximo 4 oraciones) de observacion en español. Se objetivo, profesional y sin juzgar definitivamente a los estudiantes. Si no hay irregularidades, indicalo positivamente.`;
 
         const geminiRes = await fetch(
-          `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
+          "https://api.moonshot.ai/v1/chat/completions",
           {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${apiKey}`,
+            },
             body: JSON.stringify({
-              contents: [{ role: "user", parts: [{ text: prompt }] }],
-              generationConfig: { temperature: 0.4, maxOutputTokens: 512 },
+              model: "moonshot-v1-32k",
+              temperature: 0.4,
+              max_tokens: 512,
+              messages: [{ role: "user", content: prompt }],
             }),
           }
         );
@@ -233,7 +238,7 @@ Genera un parrafo breve (maximo 4 oraciones) de observacion en español. Se obje
         if (geminiRes.ok) {
           const geminiData = await geminiRes.json();
           geminiNarrative =
-            geminiData?.candidates?.[0]?.content?.parts?.[0]?.text ?? "";
+            geminiData?.choices?.[0]?.message?.content ?? "";
         }
       }
     } catch (geminiError) {

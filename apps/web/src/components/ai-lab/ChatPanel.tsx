@@ -58,24 +58,16 @@ export default function ChatPanel({
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const abortControllerRef = useRef<AbortController | null>(null);
 
-  // Auto-scroll al fondo cuando llegan mensajes nuevos
+  // Auto-scroll al fondo — instantáneo (no "smooth") para que fluya como ChatGPT
+  // sin rebote/jitter. Se dispara en cada cambio de mensajes (incl. cada token
+  // del streaming), así que NO necesita un setInterval aparte.
   const scrollToBottom = useCallback(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    messagesEndRef.current?.scrollIntoView({ behavior: "auto", block: "end" });
   }, []);
 
   useEffect(() => {
     scrollToBottom();
   }, [messages, scrollToBottom]);
-
-  // Auto-scroll durante streaming (cada vez que el contenido cambia)
-  useEffect(() => {
-    if (isStreaming) {
-      const interval = setInterval(() => {
-        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-      }, 300);
-      return () => clearInterval(interval);
-    }
-  }, [isStreaming]);
 
   // Cargar el prompt sugerido si existe
   useEffect(() => {

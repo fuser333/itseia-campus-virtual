@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import SessionAccordion from "./SessionAccordion";
+import ErrorBoundary from "@/components/ui/ErrorBoundary";
 
 export interface SessionTab {
   id: string;
@@ -125,7 +126,7 @@ export default function SessionTabs({ tabs, className }: SessionTabsProps) {
                 aria-label={tab.label}
                 style={{ display: isActive ? "block" : "none" }}
               >
-                {tab.content}
+                <ErrorBoundary label={tab.label}>{tab.content}</ErrorBoundary>
               </section>
             );
           })}
