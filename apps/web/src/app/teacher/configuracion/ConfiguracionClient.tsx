@@ -135,7 +135,7 @@ export default function ConfiguracionClient() {
       <Card>
         <CardContent className="py-12 text-center">
           <AlertTriangle className="mx-auto size-8 text-[#F0846D]" />
-          <p className="mt-2 text-sm font-medium text-gray-700">
+          <p className="mt-2 text-sm font-medium text-gray-200">
             No fue posible cargar tu perfil.
           </p>
           <p className="mt-1 text-xs text-gray-400">
@@ -162,8 +162,8 @@ export default function ConfiguracionClient() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">Configuración</h1>
-        <p className="mt-1 text-sm text-gray-500">
+        <h1 className="text-2xl font-bold text-white">Configuración</h1>
+        <p className="mt-1 text-sm text-gray-300">
           Actualiza tu perfil docente, biografía y revisa tus materias asignadas.
         </p>
       </div>
@@ -172,7 +172,7 @@ export default function ConfiguracionClient() {
         {/* Columna izquierda: avatar + identidad */}
         <Card className="lg:col-span-1">
           <CardHeader>
-            <CardTitle className="text-sm font-semibold text-gray-700">
+            <CardTitle className="text-sm font-semibold text-gray-200">
               Identidad
             </CardTitle>
           </CardHeader>
@@ -193,10 +193,10 @@ export default function ConfiguracionClient() {
                 </div>
               )}
               <div className="text-center">
-                <p className="font-semibold text-gray-900">
+                <p className="font-semibold text-white">
                   {form.full_name || "Docente"}
                 </p>
-                <p className="text-xs text-gray-500">{form.email}</p>
+                <p className="text-xs text-gray-300">{form.email}</p>
                 <Badge className="mt-2 bg-[#1F2F58] text-white">
                   {roleLabel}
                 </Badge>
@@ -227,7 +227,7 @@ export default function ConfiguracionClient() {
         {/* Columna derecha: datos editables */}
         <Card className="lg:col-span-2">
           <CardHeader>
-            <CardTitle className="text-sm font-semibold text-gray-700">
+            <CardTitle className="text-sm font-semibold text-gray-200">
               Información del perfil
             </CardTitle>
           </CardHeader>
@@ -311,7 +311,7 @@ export default function ConfiguracionClient() {
 
       {/* Materias asignadas */}
       <div>
-        <h2 className="mb-3 text-lg font-semibold text-gray-900 flex items-center gap-2">
+        <h2 className="mb-3 text-lg font-semibold text-white flex items-center gap-2">
           <BookOpen className="size-5 text-[#1F2F58]" />
           Materias asignadas
         </h2>
@@ -319,7 +319,7 @@ export default function ConfiguracionClient() {
           <Card>
             <CardContent className="py-10 text-center">
               <BookOpen className="mx-auto size-8 text-gray-300" />
-              <p className="mt-2 text-sm font-medium text-gray-500">
+              <p className="mt-2 text-sm font-medium text-gray-300">
                 Aún no tienes materias asignadas.
               </p>
               <p className="mt-1 text-xs text-gray-400">
@@ -335,10 +335,10 @@ export default function ConfiguracionClient() {
                   <p className="text-xs font-semibold text-[#1F2F58]">
                     {s.code}
                   </p>
-                  <p className="text-sm font-medium text-gray-900 line-clamp-2">
+                  <p className="text-sm font-medium text-white line-clamp-2">
                     {s.name}
                   </p>
-                  <p className="text-[11px] text-gray-500">
+                  <p className="text-[11px] text-gray-300">
                     {s.hours_total} horas totales
                   </p>
                 </CardContent>
@@ -350,7 +350,7 @@ export default function ConfiguracionClient() {
 
       {/* Tutorías y calendario */}
       <div>
-        <h2 className="mb-3 text-lg font-semibold text-gray-900 flex items-center gap-2">
+        <h2 className="mb-3 text-lg font-semibold text-white flex items-center gap-2">
           <CalendarDays className="size-5 text-[#1F2F58]" />
           Tutorías y disponibilidad
         </h2>

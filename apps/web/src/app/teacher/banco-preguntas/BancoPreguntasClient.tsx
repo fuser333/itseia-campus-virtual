@@ -195,8 +195,8 @@ export default function BancoPreguntasClient() {
       {/* Header */}
       <div className="flex items-start justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Banco de Preguntas</h1>
-          <p className="mt-1 text-sm text-gray-500">
+          <h1 className="text-2xl font-bold text-white">Banco de Preguntas</h1>
+          <p className="mt-1 text-sm text-gray-300">
             Repositorio de todas tus preguntas creadas. Reutilízalas en futuros
             quizzes y exámenes.
           </p>
@@ -217,8 +217,8 @@ export default function BancoPreguntasClient() {
               <HelpCircle className="size-5 text-[#1F2F58]" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-gray-900">{stats.total}</p>
-              <p className="text-xs text-gray-500">Preguntas totales</p>
+              <p className="text-2xl font-bold text-white">{stats.total}</p>
+              <p className="text-xs text-gray-300">Preguntas totales</p>
             </div>
           </CardContent>
         </Card>
@@ -228,8 +228,8 @@ export default function BancoPreguntasClient() {
               <CheckCircle2 className="size-5 text-[#FBBC0C]" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-gray-900">{stats.mc}</p>
-              <p className="text-xs text-gray-500">Opción múltiple</p>
+              <p className="text-2xl font-bold text-white">{stats.mc}</p>
+              <p className="text-xs text-gray-300">Opción múltiple</p>
             </div>
           </CardContent>
         </Card>
@@ -239,8 +239,8 @@ export default function BancoPreguntasClient() {
               <CheckCircle2 className="size-5 text-[#73B8E7]" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-gray-900">{stats.tf}</p>
-              <p className="text-xs text-gray-500">Verdadero / Falso</p>
+              <p className="text-2xl font-bold text-white">{stats.tf}</p>
+              <p className="text-xs text-gray-300">Verdadero / Falso</p>
             </div>
           </CardContent>
         </Card>
@@ -250,10 +250,10 @@ export default function BancoPreguntasClient() {
               <BookOpen className="size-5 text-[#F0846D]" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-gray-900">
+              <p className="text-2xl font-bold text-white">
                 {stats.subjectsWithQuestions}
               </p>
-              <p className="text-xs text-gray-500">Materias con preguntas</p>
+              <p className="text-xs text-gray-300">Materias con preguntas</p>
             </div>
           </CardContent>
         </Card>
@@ -263,7 +263,7 @@ export default function BancoPreguntasClient() {
       <div className="rounded-lg border border-gray-200 bg-white p-4">
         <div className="flex flex-wrap items-end gap-4">
           <div className="flex flex-col gap-1.5">
-            <label className="text-xs font-medium text-gray-500">
+            <label className="text-xs font-medium text-gray-300">
               <Filter className="inline size-3 mr-1" />
               Materia
             </label>
@@ -281,7 +281,7 @@ export default function BancoPreguntasClient() {
             </select>
           </div>
           <div className="flex flex-col gap-1.5">
-            <label className="text-xs font-medium text-gray-500">Tipo</label>
+            <label className="text-xs font-medium text-gray-300">Tipo</label>
             <select
               value={filterType}
               onChange={(e) =>
@@ -296,7 +296,7 @@ export default function BancoPreguntasClient() {
             </select>
           </div>
           <div className="flex flex-1 flex-col gap-1.5 min-w-[220px]">
-            <label className="text-xs font-medium text-gray-500">
+            <label className="text-xs font-medium text-gray-300">
               <Search className="inline size-3 mr-1" />
               Buscar
             </label>
@@ -320,7 +320,7 @@ export default function BancoPreguntasClient() {
         <Card>
           <CardContent className="py-12 text-center">
             <HelpCircle className="mx-auto size-8 text-gray-300" />
-            <p className="mt-2 text-sm font-medium text-gray-500">
+            <p className="mt-2 text-sm font-medium text-gray-300">
               {questions.length === 0
                 ? "Aún no tienes preguntas creadas."
                 : "No hay preguntas que coincidan con los filtros."}
@@ -358,7 +358,7 @@ export default function BancoPreguntasClient() {
               {filtered.map((q) => (
                 <tr key={q.id} className="hover:bg-gray-50">
                   <td className="px-4 py-3 max-w-md">
-                    <p className="text-sm text-gray-900 line-clamp-2">
+                    <p className="text-sm text-white line-clamp-2">
                       {q.question_text}
                     </p>
                   </td>
@@ -366,7 +366,7 @@ export default function BancoPreguntasClient() {
                     <Badge variant="secondary">{TYPE_LABEL[q.question_type]}</Badge>
                   </td>
                   <td className="px-4 py-3 text-xs text-gray-600">
-                    <span className="font-medium text-gray-700">
+                    <span className="font-medium text-gray-200">
                       {q.subject_code}
                     </span>{" "}
                     {q.subject_name}
@@ -374,7 +374,7 @@ export default function BancoPreguntasClient() {
                   <td className="px-4 py-3 text-xs text-gray-600 max-w-[200px] truncate">
                     {q.quiz_title}
                   </td>
-                  <td className="px-4 py-3 text-right text-sm font-medium text-gray-900">
+                  <td className="px-4 py-3 text-right text-sm font-medium text-white">
                     {q.points}
                   </td>
                 </tr>

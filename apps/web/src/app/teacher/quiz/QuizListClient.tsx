@@ -176,10 +176,10 @@ export default function QuizListClient() {
       {/* Header */}
       <div className="flex items-start justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">
+          <h1 className="text-2xl font-bold text-white">
             Quizzes y Exámenes
           </h1>
-          <p className="mt-1 text-sm text-gray-500">
+          <p className="mt-1 text-sm text-gray-300">
             Construye evaluaciones por sesión. Cada quiz pertenece a una sesión
             de tus materias.
           </p>
@@ -200,8 +200,8 @@ export default function QuizListClient() {
               <ClipboardCheck className="size-5 text-[#1F2F58]" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-gray-900">{stats.total}</p>
-              <p className="text-xs text-gray-500">Quizzes totales</p>
+              <p className="text-2xl font-bold text-white">{stats.total}</p>
+              <p className="text-xs text-gray-300">Quizzes totales</p>
             </div>
           </CardContent>
         </Card>
@@ -211,8 +211,8 @@ export default function QuizListClient() {
               <Sparkles className="size-5 text-emerald-600" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-gray-900">{stats.active}</p>
-              <p className="text-xs text-gray-500">Activos</p>
+              <p className="text-2xl font-bold text-white">{stats.active}</p>
+              <p className="text-xs text-gray-300">Activos</p>
             </div>
           </CardContent>
         </Card>
@@ -222,10 +222,10 @@ export default function QuizListClient() {
               <HelpCircle className="size-5 text-[#FBBC0C]" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-gray-900">
+              <p className="text-2xl font-bold text-white">
                 {stats.questions}
               </p>
-              <p className="text-xs text-gray-500">Preguntas en bancos</p>
+              <p className="text-xs text-gray-300">Preguntas en bancos</p>
             </div>
           </CardContent>
         </Card>
@@ -235,8 +235,8 @@ export default function QuizListClient() {
               <Clock className="size-5 text-[#F0846D]" />
             </div>
             <div>
-              <p className="text-2xl font-bold text-gray-900">{stats.timed}</p>
-              <p className="text-xs text-gray-500">Con límite de tiempo</p>
+              <p className="text-2xl font-bold text-white">{stats.timed}</p>
+              <p className="text-xs text-gray-300">Con límite de tiempo</p>
             </div>
           </CardContent>
         </Card>
@@ -246,7 +246,7 @@ export default function QuizListClient() {
       <div className="rounded-lg border border-gray-200 bg-white p-4">
         <div className="flex flex-wrap items-end gap-4">
           <div className="flex flex-col gap-1.5">
-            <label className="text-xs font-medium text-gray-500">Materia</label>
+            <label className="text-xs font-medium text-gray-300">Materia</label>
             <select
               value={subjectFilter}
               onChange={(e) => setSubjectFilter(e.target.value)}
@@ -261,7 +261,7 @@ export default function QuizListClient() {
             </select>
           </div>
           <div className="flex flex-col gap-1.5">
-            <label className="text-xs font-medium text-gray-500">Estado</label>
+            <label className="text-xs font-medium text-gray-300">Estado</label>
             <select
               value={stateFilter}
               onChange={(e) =>
@@ -286,7 +286,7 @@ export default function QuizListClient() {
         <Card>
           <CardContent className="py-12 text-center">
             <ClipboardCheck className="mx-auto size-8 text-gray-300" />
-            <p className="mt-2 text-sm font-medium text-gray-500">
+            <p className="mt-2 text-sm font-medium text-gray-300">
               {quizzes.length === 0
                 ? "Aún no tienes quizzes creados."
                 : "Ningún quiz coincide con los filtros."}
@@ -324,10 +324,10 @@ export default function QuizListClient() {
                     </Badge>
                   </div>
 
-                  <div className="text-xs text-gray-500 space-y-0.5">
+                  <div className="text-xs text-gray-300 space-y-0.5">
                     <p className="flex items-center gap-1">
                       <BookOpen className="size-3" />
-                      <span className="font-medium text-gray-700">
+                      <span className="font-medium text-gray-200">
                         {q.subject_code}
                       </span>{" "}
                       {q.subject_name}
