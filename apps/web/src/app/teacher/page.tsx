@@ -49,12 +49,25 @@ export default function TeacherDashboardPage() {
   const [trainingProgress, setTrainingProgress] = useState<TrainingProgressSummary | null>(null);
 
   useEffect(() => {
+    // Safety net: si por cualquier razón fetchDashboard NO termina en 10s,
+    // forzamos loading=false para que el dashboard salga del skeleton.
+    // Esto previene "pantalla infinita pulsando" si una query falla o cuelga.
+    // NO toca la lógica de separación de logins (alumnos / docentes / admin).
+    const safetyTimeout = setTimeout(() => {
+      console.warn("[TeacherDashboard] Safety timeout 10s — forzando salida del skeleton");
+      setLoading(false);
+    }, 10000);
+
     async function fetchDashboard() {
       // Get current user and role
       const {
         data: { user },
       } = await supabase.auth.getUser();
-      if (!user) return;
+      if (!user) {
+        clearTimeout(safetyTimeout);
+        setLoading(false);
+        return;
+      }
 
       const { data: profile } = await supabase
         .from("profiles")
@@ -215,10 +228,19 @@ export default function TeacherDashboardPage() {
         recentActivity,
       });
 
+      clearTimeout(safetyTimeout);
       setLoading(false);
     }
 
-    fetchDashboard();
+    // Envoltorio con try/catch: si CUALQUIER query falla, salimos del loading.
+    // Esto evita el skeleton infinito si una query no responde o lanza error.
+    fetchDashboard().catch((err) => {
+      console.error("[TeacherDashboard] Error cargando dashboard:", err);
+      clearTimeout(safetyTimeout);
+      setLoading(false);
+    });
+
+    return () => clearTimeout(safetyTimeout);
   }, []);
 
   if (loading) {

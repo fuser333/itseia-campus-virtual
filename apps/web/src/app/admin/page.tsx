@@ -238,7 +238,14 @@ export default async function AdminDashboard() {
   }
 
   // ── Forum metrics (Phase C) ──
-  const forumMetrics = await getForumMetricsAll();
+  // Safety net: timeout 8s. Si tarda más, devuelve [] y el dashboard no se cuelga.
+  // El fix real está en features/forums/queries.ts (paralelizado).
+  const forumMetrics = await Promise.race([
+    getForumMetricsAll().catch(() => [] as Awaited<ReturnType<typeof getForumMetricsAll>>),
+    new Promise<Awaited<ReturnType<typeof getForumMetricsAll>>>((resolve) =>
+      setTimeout(() => resolve([]), 8000)
+    ),
+  ]);
 
   // ── Biblioteca Virtual metrics (004-virtual-library) ──
   const { count: totalLibrarySearches } = await supabase
