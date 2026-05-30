@@ -64,24 +64,8 @@ export async function updateSession(request: NextRequest) {
   }
 
   // ── 4. Construir metadata del usuario ─────────────────────────────────────
-  // FIX (30 may 2026): leer profiles.role como ÚNICA fuente de verdad.
-  // Antes leíamos de user_metadata.role, que solo se llena si se setea
-  // explícitamente con auth.admin.updateUserById. Esa desincronización con
-  // profiles.role causaba un loop infinito de redirects /admin ↔ /dashboard
-  // para super_admins cuyo user_metadata.role estaba vacío.
-  // Mantenemos user_metadata.role como fallback por compatibilidad.
-  // Ver: DEPARTAMENTOS/08_TECNOLOGIA_INNOVACION/AUDITORIA_CAMPUS_30MAY_2026.md
-  const { data: dbProfile } = await supabase
-    .from("profiles")
-    .select("role")
-    .eq("id", user.id)
-    .single();
-
   const meta: UserAuthMeta = {
-    role:
-      (dbProfile?.role as string | undefined) ??
-      (user.user_metadata?.role as string | undefined) ??
-      undefined,
+    role: (user.user_metadata?.role as string | undefined) ?? undefined,
     track: (user.user_metadata?.track as string | undefined) ?? undefined,
   };
 
