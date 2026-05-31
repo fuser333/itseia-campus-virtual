@@ -259,7 +259,7 @@ export default function SubmissionsTable({ subjects }: SubmissionsTableProps) {
     switch (status) {
       case "submitted":
         return (
-          <span className="inline-flex rounded-full bg-[#FBBC0C]/20 px-2 py-0.5 text-[10px] font-medium text-[#1F2F58]">
+          <span className="inline-flex rounded-full bg-[#FBBC0C]/20 px-2 py-0.5 text-[10px] font-medium text-[#73B8E7]">
             Pendiente
           </span>
         );
@@ -283,7 +283,7 @@ export default function SubmissionsTable({ subjects }: SubmissionsTableProps) {
         );
       default:
         return (
-          <span className="inline-flex rounded-full bg-gray-100 px-2 py-0.5 text-[10px] font-medium text-gray-500">
+          <span className="inline-flex rounded-full bg-white/10 px-2 py-0.5 text-[10px] font-medium text-white/65">
             {status}
           </span>
         );
@@ -294,12 +294,12 @@ export default function SubmissionsTable({ subjects }: SubmissionsTableProps) {
     <div className="space-y-4">
       {/* Filters */}
       <div className="flex flex-wrap items-center gap-3">
-        <Filter className="size-4 text-gray-400" />
+        <Filter className="size-4 text-white/55" />
 
         <select
           value={filterSubject}
           onChange={(e) => setFilterSubject(e.target.value)}
-          className="h-8 rounded-lg border border-gray-200 bg-white px-3 text-sm text-gray-700 outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50"
+          className="h-8 rounded-lg border border-white/20 bg-[#0A1628]/80 px-3 text-sm text-white/85 outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50"
         >
           <option value="">Todas las materias</option>
           {subjects.map((s) => (
@@ -312,7 +312,7 @@ export default function SubmissionsTable({ subjects }: SubmissionsTableProps) {
         <select
           value={filterStatus}
           onChange={(e) => setFilterStatus(e.target.value)}
-          className="h-8 rounded-lg border border-gray-200 bg-white px-3 text-sm text-gray-700 outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50"
+          className="h-8 rounded-lg border border-white/20 bg-[#0A1628]/80 px-3 text-sm text-white/85 outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50"
         >
           <option value="">Todos los estados</option>
           <option value="submitted">Pendiente</option>
@@ -327,7 +327,7 @@ export default function SubmissionsTable({ subjects }: SubmissionsTableProps) {
               setFilterSubject("");
               setFilterStatus("");
             }}
-            className="text-xs text-gray-400 hover:text-gray-600"
+            className="text-xs text-white/55 hover:text-white/75"
           >
             Limpiar filtros
           </button>
@@ -335,10 +335,10 @@ export default function SubmissionsTable({ subjects }: SubmissionsTableProps) {
       </div>
 
       {/* Table */}
-      <div className="rounded-lg border border-gray-200 bg-white">
+      <div className="rounded-lg border border-white/20 bg-[#0A1628]/80">
         <Table>
           <TableHeader>
-            <TableRow className="bg-gray-50">
+            <TableRow className="bg-[#0A1628]/60">
               <TableHead>Estudiante</TableHead>
               <TableHead>Materia</TableHead>
               <TableHead>Sesion</TableHead>
@@ -353,14 +353,14 @@ export default function SubmissionsTable({ subjects }: SubmissionsTableProps) {
             {loading ? (
               <TableRow>
                 <TableCell colSpan={8} className="py-10 text-center">
-                  <Loader2 className="mx-auto size-5 animate-spin text-gray-400" />
+                  <Loader2 className="mx-auto size-5 animate-spin text-white/55" />
                 </TableCell>
               </TableRow>
             ) : submissions.length === 0 ? (
               <TableRow>
                 <TableCell
                   colSpan={8}
-                  className="py-10 text-center text-gray-400"
+                  className="py-10 text-center text-white/55"
                 >
                   No hay entregas registradas
                 </TableCell>
@@ -374,15 +374,15 @@ export default function SubmissionsTable({ subjects }: SubmissionsTableProps) {
                     onClick={() => toggleExpand(sub.id)}
                   >
                     <TableCell>
-                      <span className="font-medium text-gray-900">
+                      <span className="font-medium text-white">
                         {sub.student_name}
                       </span>
                     </TableCell>
-                    <TableCell className="text-sm text-gray-500">
+                    <TableCell className="text-sm text-white/65">
                       {sub.subject_name}
                     </TableCell>
                     <TableCell>
-                      <span className="text-sm text-gray-500">
+                      <span className="text-sm text-white/65">
                         S{sub.session_number}
                       </span>
                     </TableCell>
@@ -399,10 +399,10 @@ export default function SubmissionsTable({ subjects }: SubmissionsTableProps) {
                           {sub.file_name || "Descargar"}
                         </a>
                       ) : (
-                        <span className="text-xs text-gray-300">--</span>
+                        <span className="text-xs text-white/50">--</span>
                       )}
                     </TableCell>
-                    <TableCell className="text-xs text-gray-500">
+                    <TableCell className="text-xs text-white/65">
                       {new Date(sub.submitted_at).toLocaleDateString("es-EC", {
                         day: "numeric",
                         month: "short",
@@ -412,18 +412,18 @@ export default function SubmissionsTable({ subjects }: SubmissionsTableProps) {
                     <TableCell>{getStatusBadge(sub.status)}</TableCell>
                     <TableCell>
                       {sub.grade !== null ? (
-                        <span className="text-sm font-medium text-gray-900">
+                        <span className="text-sm font-medium text-white">
                           {sub.grade}/{sub.max_grade}
                         </span>
                       ) : (
-                        <span className="text-xs text-gray-300">--</span>
+                        <span className="text-xs text-white/50">--</span>
                       )}
                     </TableCell>
                     <TableCell>
                       {expandedId === sub.id ? (
-                        <ChevronUp className="size-4 text-gray-400" />
+                        <ChevronUp className="size-4 text-white/55" />
                       ) : (
-                        <ChevronDown className="size-4 text-gray-400" />
+                        <ChevronDown className="size-4 text-white/55" />
                       )}
                     </TableCell>
                   </TableRow>
@@ -433,7 +433,7 @@ export default function SubmissionsTable({ subjects }: SubmissionsTableProps) {
                     <TableRow key={`${sub.id}-grade`}>
                       <TableCell
                         colSpan={8}
-                        className="bg-gray-50/50 px-6 py-4"
+                        className="bg-[#0A1628]/60/50 px-6 py-4"
                       >
                         <div className="grid gap-4 sm:grid-cols-[200px_1fr_auto]">
                           <div className="grid gap-1.5">

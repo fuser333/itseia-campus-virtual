@@ -102,7 +102,7 @@ export default function MiCertificacionPage() {
       {/* Header */}
       <div>
         <h1 className="text-2xl font-bold text-white">Mi Certificacion</h1>
-        <p className="mt-1 text-sm text-gray-300">
+        <p className="mt-1 text-sm text-white/50">
           Certificacion en Docencia Virtual Efectiva — Art. 61 RRA 2022 (CES Ecuador)
         </p>
       </div>
@@ -133,7 +133,7 @@ export default function MiCertificacionPage() {
               {hasCertificate ? (
                 <Award className="size-9 text-emerald-600" />
               ) : (
-                <GraduationCap className="size-9 text-[#1F2F58]" />
+                <GraduationCap className="size-9 text-[#73B8E7]" />
               )}
             </div>
 
@@ -149,7 +149,7 @@ export default function MiCertificacionPage() {
                     Certificado obtenido
                   </span>
                 ) : (
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-[#FBBC0C]/20 px-3 py-1 text-xs font-semibold text-[#1F2F58]">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-[#FBBC0C]/20 px-3 py-1 text-xs font-semibold text-[#73B8E7]">
                     <Clock className="size-3.5" />
                     En progreso
                   </span>
@@ -158,14 +158,14 @@ export default function MiCertificacionPage() {
 
               <div className="mt-3">
                 <div className="flex items-center justify-between text-sm mb-2">
-                  <span className="text-gray-600">
+                  <span className="text-white/75">
                     {hoursCompleted} de {HOURS_TOTAL} horas completadas
                   </span>
-                  <span className="font-bold text-[#1F2F58]">
+                  <span className="font-bold text-[#73B8E7]">
                     {percentage}%
                   </span>
                 </div>
-                <div className="h-3 w-full max-w-sm rounded-full bg-gray-200">
+                <div className="h-3 w-full max-w-sm rounded-full bg-white/15">
                   <div
                     className={`h-3 rounded-full transition-all duration-700 ${
                       hasCertificate ? "bg-emerald-500" : "bg-[#1F2F58]"
@@ -174,7 +174,7 @@ export default function MiCertificacionPage() {
                   />
                 </div>
                 {!hasCertificate && (
-                  <p className="mt-1.5 text-xs text-gray-400">
+                  <p className="mt-1.5 text-xs text-white/55">
                     Faltan {(HOURS_TOTAL - hoursCompleted).toFixed(1)} horas para
                     obtener tu certificado
                   </p>
@@ -234,7 +234,7 @@ export default function MiCertificacionPage() {
                     <p className="text-xs font-medium text-white">
                       {item.label}
                     </p>
-                    <p className="text-[10px] text-gray-400 mt-0.5">
+                    <p className="text-[10px] text-white/55 mt-0.5">
                       {item.hours}
                     </p>
                   </div>
@@ -253,7 +253,7 @@ export default function MiCertificacionPage() {
               <p className="font-semibold text-white">
                 Completa tu capacitacion modulo a modulo
               </p>
-              <p className="mt-0.5 text-sm text-gray-300">
+              <p className="mt-0.5 text-sm text-white/50">
                 Accede al curso completo con todos los modulos, contenido y seguimiento.
               </p>
             </div>

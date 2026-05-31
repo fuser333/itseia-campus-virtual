@@ -188,7 +188,7 @@ export default function TeacherProgresoPage() {
         <h1 className="text-2xl font-bold text-white">
           Progreso de Estudiantes
         </h1>
-        <p className="mt-1 text-sm text-gray-300">
+        <p className="mt-1 text-sm text-white/50">
           Visualiza el avance de cada estudiante por sesion
         </p>
       </div>
@@ -197,8 +197,8 @@ export default function TeacherProgresoPage() {
         <Card>
           <CardContent>
             <div className="flex flex-col items-center gap-3 py-10 text-center">
-              <BarChart3 className="size-10 text-gray-300" />
-              <p className="text-sm text-gray-400">
+              <BarChart3 className="size-10 text-white/50" />
+              <p className="text-sm text-white/55">
                 No tienes materias asignadas.
               </p>
             </div>
@@ -208,11 +208,11 @@ export default function TeacherProgresoPage() {
         <>
           {/* Filter */}
           <div className="flex items-center gap-3">
-            <Filter className="size-4 text-gray-400" />
+            <Filter className="size-4 text-white/55" />
             <select
               value={filterSubject}
               onChange={(e) => setFilterSubject(e.target.value)}
-              className="h-8 rounded-lg border border-gray-200 bg-white px-3 text-sm text-gray-200 outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50"
+              className="h-8 rounded-lg border border-white/20 bg-[#0A1628]/80 px-3 text-sm text-white/80 outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50"
             >
               <option value="">Seleccionar materia</option>
               {subjects.map((s) => (
@@ -231,7 +231,7 @@ export default function TeacherProgresoPage() {
           ) : !filterSubject ? (
             <Card>
               <CardContent>
-                <p className="py-6 text-center text-sm text-gray-400">
+                <p className="py-6 text-center text-sm text-white/55">
                   Selecciona una materia para ver el progreso.
                 </p>
               </CardContent>
@@ -239,17 +239,17 @@ export default function TeacherProgresoPage() {
           ) : students.length === 0 ? (
             <Card>
               <CardContent>
-                <p className="py-6 text-center text-sm text-gray-400">
+                <p className="py-6 text-center text-sm text-white/55">
                   No hay estudiantes inscritos en esta materia.
                 </p>
               </CardContent>
             </Card>
           ) : (
-            <div className="overflow-x-auto rounded-lg border border-gray-200 bg-white">
+            <div className="overflow-x-auto rounded-lg border border-white/20 bg-[#0A1628]/80">
               <Table>
                 <TableHeader>
-                  <TableRow className="bg-gray-50">
-                    <TableHead className="sticky left-0 z-10 bg-gray-50 min-w-[180px]">
+                  <TableRow className="bg-[#0A1628]/60">
+                    <TableHead className="sticky left-0 z-10 bg-[#0A1628]/60 min-w-[180px]">
                       Estudiante
                     </TableHead>
                     {sessions.map((s) => (
@@ -258,7 +258,7 @@ export default function TeacherProgresoPage() {
                         className="text-center min-w-[50px]"
                       >
                         <span
-                          className="text-xs font-medium text-gray-300"
+                          className="text-xs font-medium text-white/50"
                           title={s.title}
                         >
                           S{s.number}
@@ -284,7 +284,7 @@ export default function TeacherProgresoPage() {
 
                     return (
                       <TableRow key={student.id}>
-                        <TableCell className="sticky left-0 z-10 bg-white font-medium text-white">
+                        <TableCell className="sticky left-0 z-10 bg-[#0A1628]/80 font-medium text-white">
                           {student.name}
                         </TableCell>
                         {sessions.map((s) => (
@@ -292,7 +292,7 @@ export default function TeacherProgresoPage() {
                             {student.completedSessions.has(s.id) ? (
                               <CheckCircle2 className="mx-auto size-4 text-emerald-500" />
                             ) : (
-                              <span className="mx-auto inline-block size-4 rounded-full border-2 border-gray-200" />
+                              <span className="mx-auto inline-block size-4 rounded-full border-2 border-white/20" />
                             )}
                           </TableCell>
                         ))}
@@ -302,8 +302,8 @@ export default function TeacherProgresoPage() {
                               pct >= 80
                                 ? "bg-emerald-100 text-emerald-700"
                                 : pct >= 50
-                                  ? "bg-[#FBBC0C]/20 text-[#1F2F58]"
-                                  : "bg-gray-100 text-gray-300"
+                                  ? "bg-[#FBBC0C]/20 text-[#73B8E7]"
+                                  : "bg-white/10 text-white/50"
                             }`}
                           >
                             {pct}%
@@ -322,23 +322,23 @@ export default function TeacherProgresoPage() {
             <div className="grid gap-3 sm:grid-cols-3">
               <Card size="sm">
                 <CardContent>
-                  <p className="text-xs text-gray-300">Estudiantes</p>
-                  <p className="text-lg font-bold text-[#1F2F58]">
+                  <p className="text-xs text-white/50">Estudiantes</p>
+                  <p className="text-lg font-bold text-[#73B8E7]">
                     {students.length}
                   </p>
                 </CardContent>
               </Card>
               <Card size="sm">
                 <CardContent>
-                  <p className="text-xs text-gray-300">Sesiones</p>
-                  <p className="text-lg font-bold text-[#1F2F58]">
+                  <p className="text-xs text-white/50">Sesiones</p>
+                  <p className="text-lg font-bold text-[#73B8E7]">
                     {sessions.length}
                   </p>
                 </CardContent>
               </Card>
               <Card size="sm">
                 <CardContent>
-                  <p className="text-xs text-gray-300">Promedio completado</p>
+                  <p className="text-xs text-white/50">Promedio completado</p>
                   <p className="text-lg font-bold text-emerald-600">
                     {sessions.length > 0
                       ? Math.round(

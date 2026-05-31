@@ -344,7 +344,7 @@ export default function SessionEditPage({
             Volver a materia
           </Button>
         </Link>
-        <p className="text-sm text-gray-400">Sesion no encontrada.</p>
+        <p className="text-sm text-white/55">Sesion no encontrada.</p>
       </div>
     );
   }
@@ -361,10 +361,10 @@ export default function SessionEditPage({
             Volver a {subject.name}
           </Button>
         </Link>
-        <h1 className="text-2xl font-bold text-gray-900">
+        <h1 className="text-2xl font-bold text-white">
           Sesión {sessionNumber}: {session.title}
         </h1>
-        <p className="mt-1 text-sm text-gray-500">
+        <p className="mt-1 text-sm text-white/65">
           {subject.code} &middot; {subject.name}
         </p>
       </div>
@@ -414,13 +414,13 @@ export default function SessionEditPage({
                   onChange={(e) => setVideoUrl(e.target.value)}
                   placeholder="https://www.youtube.com/watch?v=..."
                 />
-                <p className="text-xs text-gray-400">
+                <p className="text-xs text-white/55">
                   Formatos: youtube.com/watch?v=, youtu.be/, youtube.com/embed/
                 </p>
               </div>
 
               {embedUrl && (
-                <div className="aspect-video w-full overflow-hidden rounded-lg border border-gray-200">
+                <div className="aspect-video w-full overflow-hidden rounded-lg border border-white/20">
                   <iframe
                     src={embedUrl}
                     className="size-full"
@@ -445,7 +445,7 @@ export default function SessionEditPage({
               <div className="grid gap-1.5">
                 <Label>Subir PDF</Label>
                 <div className="flex items-center gap-3">
-                  <label className="flex cursor-pointer items-center gap-2 rounded-lg border border-dashed border-gray-300 px-4 py-3 text-sm text-gray-500 transition-colors hover:border-[#73B8E7] hover:text-[#73B8E7]">
+                  <label className="flex cursor-pointer items-center gap-2 rounded-lg border border-dashed border-white/25 px-4 py-3 text-sm text-white/65 transition-colors hover:border-[#73B8E7] hover:text-[#73B8E7]">
                     <Upload className="size-4" />
                     {uploading ? "Subiendo..." : "Seleccionar archivo PDF"}
                     <input
@@ -481,7 +481,7 @@ export default function SessionEditPage({
                       e.target.value as "pdf" | "google_slides" | "canva"
                     )
                   }
-                  className="h-8 w-fit rounded-lg border border-gray-200 bg-white px-3 text-sm text-gray-700 outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50"
+                  className="h-8 w-fit rounded-lg border border-white/20 bg-[#0A1628]/80 px-3 text-sm text-white/85 outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50"
                 >
                   <option value="pdf">PDF</option>
                   <option value="google_slides">Google Slides</option>
@@ -490,7 +490,7 @@ export default function SessionEditPage({
               </div>
 
               {slidesUrl && slidesType === "pdf" && (
-                <div className="h-[400px] w-full overflow-hidden rounded-lg border border-gray-200">
+                <div className="h-[400px] w-full overflow-hidden rounded-lg border border-white/20">
                   <iframe
                     src={slidesUrl}
                     className="size-full"
@@ -514,7 +514,7 @@ export default function SessionEditPage({
               <div className="grid gap-4 lg:grid-cols-2">
                 {/* Editor */}
                 <div className="grid gap-1.5">
-                  <span className="text-xs font-medium text-gray-500">
+                  <span className="text-xs font-medium text-white/65">
                     Editor
                   </span>
                   <Textarea
@@ -527,14 +527,14 @@ export default function SessionEditPage({
 
                 {/* Preview */}
                 <div className="grid gap-1.5">
-                  <span className="text-xs font-medium text-gray-500">
+                  <span className="text-xs font-medium text-white/65">
                     Vista previa
                   </span>
-                  <div className="prose prose-sm max-w-none overflow-y-auto rounded-lg border border-gray-200 bg-gray-50 p-4 min-h-[500px]">
+                  <div className="prose prose-sm max-w-none overflow-y-auto rounded-lg border border-white/20 bg-[#0A1628]/60 p-4 min-h-[500px]">
                     {theoryMarkdown ? (
                       <ReactMarkdown>{theoryMarkdown}</ReactMarkdown>
                     ) : (
-                      <p className="text-gray-400">
+                      <p className="text-white/55">
                         La vista previa aparecera aqui...
                       </p>
                     )}
@@ -585,11 +585,11 @@ export default function SessionEditPage({
                 {/* Preview */}
                 <div className="grid gap-1.5">
                   <Label>Vista previa</Label>
-                  <div className="prose prose-sm max-w-none overflow-y-auto rounded-lg border border-gray-200 bg-gray-50 p-4 min-h-[300px]">
+                  <div className="prose prose-sm max-w-none overflow-y-auto rounded-lg border border-white/20 bg-[#0A1628]/60 p-4 min-h-[300px]">
                     {assignmentInstructions ? (
                       <ReactMarkdown>{assignmentInstructions}</ReactMarkdown>
                     ) : (
-                      <p className="text-gray-400">
+                      <p className="text-white/55">
                         La vista previa aparecera aqui...
                       </p>
                     )}
@@ -610,7 +610,7 @@ export default function SessionEditPage({
                     }
                     placeholder="pdf,zip,py,ipynb,docx"
                   />
-                  <p className="text-xs text-gray-400">
+                  <p className="text-xs text-white/55">
                     Separados por coma
                   </p>
                 </div>
@@ -642,10 +642,10 @@ export default function SessionEditPage({
             <CardContent className="space-y-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-semibold text-gray-900">
+                  <p className="text-sm font-semibold text-white">
                     Sesion Sincronica (Videoconferencia)
                   </p>
-                  <p className="mt-0.5 text-xs text-gray-500">
+                  <p className="mt-0.5 text-xs text-white/65">
                     Gestiona las clases en vivo para esta sesion academica. Requisito CES: 51% creditos sincronicos.
                   </p>
                 </div>
@@ -660,7 +660,7 @@ export default function SessionEditPage({
               />
 
               {/* Formulario para programar clases */}
-              <div className="border-t border-gray-100 pt-4">
+              <div className="border-t border-white/15 pt-4">
                 {!showScheduleForm ? (
                   <Button
                     onClick={() => setShowScheduleForm(true)}
@@ -672,7 +672,7 @@ export default function SessionEditPage({
                     Programar clase sincronica
                   </Button>
                 ) : (
-                  <div className="rounded-xl border border-[#1F2F58]/10 bg-gray-50 p-4">
+                  <div className="rounded-xl border border-[#1F2F58]/10 bg-[#0A1628]/60 p-4">
                     <ScheduleClassForm
                       subjectId={subjectId}
                       sessionId={session.id}
@@ -694,22 +694,22 @@ export default function SessionEditPage({
 
               {/* Existing resources */}
               {resources.length > 0 && (
-                <div className="divide-y divide-gray-100 rounded-lg border border-gray-200">
+                <div className="divide-y divide-gray-100 rounded-lg border border-white/20">
                   {resources.map((resource, idx) => (
                     <div
                       key={resource.id}
                       className="flex items-center justify-between px-3 py-2"
                     >
                       <div className="flex items-center gap-3">
-                        <span className="inline-flex size-6 items-center justify-center rounded bg-gray-100 text-[10px] font-medium text-gray-500">
+                        <span className="inline-flex size-6 items-center justify-center rounded bg-white/10 text-[10px] font-medium text-white/65">
                           {idx + 1}
                         </span>
                         <div>
-                          <p className="text-sm font-medium text-gray-900">
+                          <p className="text-sm font-medium text-white">
                             {resource.title}
                           </p>
-                          <div className="flex items-center gap-2 text-xs text-gray-400">
-                            <span className="rounded bg-gray-100 px-1.5 py-0.5 text-[10px] font-medium uppercase">
+                          <div className="flex items-center gap-2 text-xs text-white/55">
+                            <span className="rounded bg-white/10 px-1.5 py-0.5 text-[10px] font-medium uppercase">
                               {resource.type}
                             </span>
                             <a
@@ -738,8 +738,8 @@ export default function SessionEditPage({
               )}
 
               {/* Add resource form */}
-              <div className="rounded-lg border border-dashed border-gray-300 p-4">
-                <p className="mb-3 text-xs font-medium text-gray-500">
+              <div className="rounded-lg border border-dashed border-white/25 p-4">
+                <p className="mb-3 text-xs font-medium text-white/65">
                   Agregar recurso
                 </p>
                 <div className="grid gap-3 sm:grid-cols-[1fr_1fr_auto_auto]">
@@ -758,7 +758,7 @@ export default function SessionEditPage({
                     onChange={(e) =>
                       setNewResourceType(e.target.value as ResourceType)
                     }
-                    className="h-8 rounded-lg border border-gray-200 bg-white px-3 text-sm text-gray-700 outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50"
+                    className="h-8 rounded-lg border border-white/20 bg-[#0A1628]/80 px-3 text-sm text-white/85 outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50"
                   >
                     <option value="link">Link</option>
                     <option value="pdf">PDF</option>

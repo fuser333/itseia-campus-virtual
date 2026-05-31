@@ -89,10 +89,10 @@ export default function NotasDocenteTab({ sessionId }: Props) {
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <StickyNote className="size-5 text-[#1F2F58]" />
-          <h3 className="text-base font-bold text-[#1F2F58]">Tus notas privadas</h3>
+          <StickyNote className="size-5 text-[#73B8E7]" />
+          <h3 className="text-base font-bold text-[#73B8E7]">Tus notas privadas</h3>
         </div>
-        <span className="text-xs text-gray-500">
+        <span className="text-xs text-white/65">
           Solo tú las ves. Markdown permitido.
         </span>
       </div>
@@ -102,7 +102,7 @@ export default function NotasDocenteTab({ sessionId }: Props) {
         onChange={(e) => setNota(e.target.value)}
         placeholder="Apunta aquí lo que quieras recordar de esta sesión: anécdotas que funcionan, preguntas frecuentes, ajustes para el próximo grupo, links a recursos extra…"
         rows={14}
-        className="w-full rounded-lg border border-gray-300 bg-white p-3 font-mono text-sm leading-relaxed focus:border-[#73B8E7] focus:outline-none focus:ring-2 focus:ring-[#73B8E7]/30"
+        className="w-full rounded-lg border border-white/25 bg-[#0A1628]/80 p-3 font-mono text-sm leading-relaxed focus:border-[#73B8E7] focus:outline-none focus:ring-2 focus:ring-[#73B8E7]/30"
       />
 
       {error && (
@@ -126,7 +126,7 @@ export default function NotasDocenteTab({ sessionId }: Props) {
           <button
             onClick={handleDelete}
             disabled={saving}
-            className="inline-flex items-center gap-2 rounded-lg border border-red-300 bg-white px-3 py-2 text-sm font-medium text-red-700 transition hover:bg-red-50 disabled:opacity-50"
+            className="inline-flex items-center gap-2 rounded-lg border border-red-300 bg-[#0A1628]/80 px-3 py-2 text-sm font-medium text-red-700 transition hover:bg-red-50 disabled:opacity-50"
           >
             <Trash2 className="size-4" />
             Borrar

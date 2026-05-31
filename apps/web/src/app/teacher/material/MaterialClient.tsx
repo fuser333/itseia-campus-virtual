@@ -58,7 +58,7 @@ const TYPE_META: Record<
   pdf: { label: "PDF", icon: FileText, color: "bg-red-100 text-red-700" },
   video: { label: "Video", icon: Video, color: "bg-purple-100 text-purple-700" },
   link: { label: "Enlace", icon: LinkIcon, color: "bg-sky-100 text-sky-700" },
-  github: { label: "GitHub", icon: Github, color: "bg-gray-200 text-gray-700" },
+  github: { label: "GitHub", icon: Github, color: "bg-white/15 text-white/85" },
   dataset: { label: "Dataset", icon: Database, color: "bg-amber-100 text-amber-700" },
   tool: { label: "Herramienta", icon: Wrench, color: "bg-emerald-100 text-emerald-700" },
 };
@@ -198,10 +198,10 @@ export default function MaterialClient() {
       {/* Header */}
       <div className="flex items-start justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">
+          <h1 className="text-2xl font-bold text-white">
             Material del Curso
           </h1>
-          <p className="mt-1 text-sm text-gray-500">
+          <p className="mt-1 text-sm text-white/65">
             PDFs, videos, enlaces y datasets que has compartido en tus sesiones.
           </p>
         </div>
@@ -227,10 +227,10 @@ export default function MaterialClient() {
                   <Icon className="size-4" />
                 </div>
                 <div>
-                  <p className="text-lg font-bold text-gray-900 leading-none">
+                  <p className="text-lg font-bold text-white leading-none">
                     {counts.get(t) ?? 0}
                   </p>
-                  <p className="text-[11px] text-gray-500 mt-0.5">
+                  <p className="text-[11px] text-white/65 mt-0.5">
                     {meta.label}
                   </p>
                 </div>
@@ -241,17 +241,17 @@ export default function MaterialClient() {
       </div>
 
       {/* Filtros */}
-      <div className="rounded-lg border border-gray-200 bg-white p-4">
+      <div className="rounded-lg border border-white/20 bg-[#0A1628]/80 p-4">
         <div className="flex flex-wrap items-end gap-4">
           <div className="flex flex-col gap-1.5">
-            <label className="text-xs font-medium text-gray-500">
+            <label className="text-xs font-medium text-white/65">
               <Filter className="inline size-3 mr-1" />
               Materia
             </label>
             <select
               value={subjectFilter}
               onChange={(e) => setSubjectFilter(e.target.value)}
-              className="h-8 min-w-[220px] rounded-lg border border-gray-200 bg-white px-2.5 text-sm outline-none"
+              className="h-8 min-w-[220px] rounded-lg border border-white/20 bg-[#0A1628]/80 px-2.5 text-sm outline-none"
             >
               <option value="">Todas</option>
               {subjects.map((s) => (
@@ -262,13 +262,13 @@ export default function MaterialClient() {
             </select>
           </div>
           <div className="flex flex-col gap-1.5">
-            <label className="text-xs font-medium text-gray-500">Tipo</label>
+            <label className="text-xs font-medium text-white/65">Tipo</label>
             <select
               value={typeFilter}
               onChange={(e) =>
                 setTypeFilter(e.target.value as "" | ResourceType)
               }
-              className="h-8 min-w-[180px] rounded-lg border border-gray-200 bg-white px-2.5 text-sm outline-none"
+              className="h-8 min-w-[180px] rounded-lg border border-white/20 bg-[#0A1628]/80 px-2.5 text-sm outline-none"
             >
               <option value="">Todos</option>
               {(Object.keys(TYPE_META) as ResourceType[]).map((t) => (
@@ -289,14 +289,14 @@ export default function MaterialClient() {
       ) : grouped.length === 0 ? (
         <Card>
           <CardContent className="py-12 text-center">
-            <FileText className="mx-auto size-8 text-gray-300" />
-            <p className="mt-2 text-sm font-medium text-gray-500">
+            <FileText className="mx-auto size-8 text-white/50" />
+            <p className="mt-2 text-sm font-medium text-white/65">
               {materials.length === 0
                 ? "Aún no has subido material a tus sesiones."
                 : "Ningún material coincide con los filtros."}
             </p>
             {materials.length === 0 && (
-              <p className="mt-1 text-xs text-gray-400">
+              <p className="mt-1 text-xs text-white/55">
                 Ingresa al editor de una sesión para subir PDFs, videos o
                 enlaces.
               </p>
@@ -308,9 +308,9 @@ export default function MaterialClient() {
           {grouped.map((g) => (
             <div key={g.subjectId}>
               <div className="mb-2 flex items-center gap-2">
-                <BookOpen className="size-4 text-[#1F2F58]" />
-                <h2 className="text-sm font-semibold text-gray-900">
-                  <span className="text-[#1F2F58]">{g.subjectCode}</span>{" "}
+                <BookOpen className="size-4 text-[#73B8E7]" />
+                <h2 className="text-sm font-semibold text-white">
+                  <span className="text-[#73B8E7]">{g.subjectCode}</span>{" "}
                   {g.subjectName}
                 </h2>
                 <Badge variant="secondary">{g.items.length}</Badge>
@@ -323,7 +323,7 @@ export default function MaterialClient() {
                     return (
                       <div
                         key={m.id}
-                        className="flex items-center gap-3 px-4 py-3 hover:bg-gray-50"
+                        className="flex items-center gap-3 px-4 py-3 hover:bg-[#0A1628]/60"
                       >
                         <div
                           className={`flex size-9 shrink-0 items-center justify-center rounded-lg ${meta.color}`}
@@ -331,10 +331,10 @@ export default function MaterialClient() {
                           <Icon className="size-4" />
                         </div>
                         <div className="min-w-0 flex-1">
-                          <p className="text-sm font-medium text-gray-900 truncate">
+                          <p className="text-sm font-medium text-white truncate">
                             {m.title}
                           </p>
-                          <p className="text-xs text-gray-500 truncate">
+                          <p className="text-xs text-white/65 truncate">
                             Sesión {m.session_number}: {m.session_title}
                           </p>
                         </div>
@@ -345,7 +345,7 @@ export default function MaterialClient() {
                           href={m.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="shrink-0 rounded-lg p-1.5 text-gray-400 hover:text-[#1F2F58] hover:bg-gray-100"
+                          className="shrink-0 rounded-lg p-1.5 text-white/55 hover:text-[#73B8E7] hover:bg-white/10"
                           aria-label="Abrir recurso"
                         >
                           <ExternalLink className="size-4" />

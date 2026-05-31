@@ -108,7 +108,7 @@ export function AnnouncementComposer({ subjects }: AnnouncementComposerProps) {
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-base">
-            <Megaphone className="size-4 text-[#1F2F58]" />
+            <Megaphone className="size-4 text-[#73B8E7]" />
             Nuevo Anuncio
           </CardTitle>
         </CardHeader>
@@ -119,7 +119,7 @@ export function AnnouncementComposer({ subjects }: AnnouncementComposerProps) {
             <select
               value={selectedSubjectId}
               onChange={(e) => setSelectedSubjectId(e.target.value)}
-              className="h-9 rounded-lg border border-gray-200 bg-white px-3 text-sm text-gray-700 outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50"
+              className="h-9 rounded-lg border border-white/20 bg-[#0A1628]/80 px-3 text-sm text-white/85 outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50"
             >
               {subjects.map((s) => (
                 <option key={s.id} value={s.id}>
@@ -184,7 +184,7 @@ export function AnnouncementComposer({ subjects }: AnnouncementComposerProps) {
 
       {/* Announcements history */}
       <div>
-        <h3 className="mb-3 text-sm font-semibold text-gray-700">
+        <h3 className="mb-3 text-sm font-semibold text-white/85">
           Anuncios publicados
         </h3>
 
@@ -195,8 +195,8 @@ export function AnnouncementComposer({ subjects }: AnnouncementComposerProps) {
         ) : announcements.length === 0 ? (
           <Card>
             <CardContent className="py-8 text-center">
-              <Megaphone className="mx-auto size-8 text-gray-300 mb-2" />
-              <p className="text-sm text-gray-400">
+              <Megaphone className="mx-auto size-8 text-white/50 mb-2" />
+              <p className="text-sm text-white/55">
                 No hay anuncios publicados para esta materia.
               </p>
             </CardContent>
@@ -212,16 +212,16 @@ export function AnnouncementComposer({ subjects }: AnnouncementComposerProps) {
                   <div className="flex items-start justify-between gap-3">
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 flex-wrap">
-                        <p className="font-semibold text-gray-900 text-sm truncate">
+                        <p className="font-semibold text-white text-sm truncate">
                           {ann.title}
                         </p>
                         {ann.is_archived && (
-                          <span className="inline-block rounded-full bg-gray-100 px-2 py-0.5 text-[10px] font-medium text-gray-500">
+                          <span className="inline-block rounded-full bg-white/10 px-2 py-0.5 text-[10px] font-medium text-white/65">
                             Archivado
                           </span>
                         )}
                       </div>
-                      <p className="text-xs text-gray-400 mt-0.5">
+                      <p className="text-xs text-white/55 mt-0.5">
                         {new Date(ann.published_at).toLocaleDateString("es-EC", {
                           day: "numeric",
                           month: "short",
@@ -230,14 +230,14 @@ export function AnnouncementComposer({ subjects }: AnnouncementComposerProps) {
                           minute: "2-digit",
                         })}
                       </p>
-                      <p className="mt-2 text-sm text-gray-600 line-clamp-2">
+                      <p className="mt-2 text-sm text-white/75 line-clamp-2">
                         {ann.body_markdown}
                       </p>
                     </div>
 
                     <div className="flex items-center gap-2 shrink-0">
                       {ann.read_count !== undefined && (
-                        <span className="inline-flex items-center gap-1 text-xs text-gray-400">
+                        <span className="inline-flex items-center gap-1 text-xs text-white/55">
                           <Eye className="size-3" />
                           {ann.read_count}
                         </span>
@@ -248,7 +248,7 @@ export function AnnouncementComposer({ subjects }: AnnouncementComposerProps) {
                           size="icon-sm"
                           disabled={archiving === ann.id}
                           onClick={() => handleArchive(ann.id)}
-                          className="text-gray-400 hover:text-gray-600"
+                          className="text-white/55 hover:text-white/75"
                           title="Archivar anuncio"
                         >
                           {archiving === ann.id ? (
@@ -259,7 +259,7 @@ export function AnnouncementComposer({ subjects }: AnnouncementComposerProps) {
                         </Button>
                       )}
                       {ann.is_archived && (
-                        <CheckCircle2 className="size-3.5 text-gray-300" />
+                        <CheckCircle2 className="size-3.5 text-white/50" />
                       )}
                     </div>
                   </div>

@@ -122,7 +122,7 @@ export default function CapacitacionPage() {
           </Button>
         </Link>
         <h1 className="text-2xl font-bold text-white">Mi Capacitacion Docente</h1>
-        <p className="mt-1 text-sm text-gray-300">
+        <p className="mt-1 text-sm text-white/50">
           Requisito Art. 61 RRA 2022 — Certificacion en docencia virtual (120 horas)
         </p>
       </div>
@@ -141,30 +141,30 @@ export default function CapacitacionPage() {
             {/* Stats */}
             <div className="flex gap-6">
               <div className="text-center">
-                <p className="text-3xl font-bold text-[#1F2F58]">
+                <p className="text-3xl font-bold text-[#73B8E7]">
                   {hoursCompleted.toFixed(1)}
                 </p>
-                <p className="text-xs text-gray-300">horas completadas</p>
+                <p className="text-xs text-white/50">horas completadas</p>
               </div>
               <div className="text-center">
-                <p className="text-3xl font-bold text-gray-400">{HOURS_TOTAL}</p>
-                <p className="text-xs text-gray-300">horas totales</p>
+                <p className="text-3xl font-bold text-white/55">{HOURS_TOTAL}</p>
+                <p className="text-xs text-white/50">horas totales</p>
               </div>
               <div className="text-center">
                 <p className="text-3xl font-bold text-[#FBBC0C]">
                   {modules.filter((m) => m.isCompleted).length}
                 </p>
-                <p className="text-xs text-gray-300">modulos completos</p>
+                <p className="text-xs text-white/50">modulos completos</p>
               </div>
             </div>
 
             {/* Progress bar */}
             <div className="flex-1">
               <div className="flex items-center justify-between text-sm mb-2">
-                <span className="font-medium text-gray-200">Progreso general</span>
-                <span className="font-bold text-[#1F2F58]">{percentage}%</span>
+                <span className="font-medium text-white/80">Progreso general</span>
+                <span className="font-bold text-[#73B8E7]">{percentage}%</span>
               </div>
-              <div className="h-4 w-full rounded-full bg-gray-200">
+              <div className="h-4 w-full rounded-full bg-white/15">
                 <div
                   className={`h-4 rounded-full transition-all duration-700 ${
                     hasCertificate ? "bg-emerald-500" : "bg-[#1F2F58]"
@@ -173,7 +173,7 @@ export default function CapacitacionPage() {
                 />
               </div>
               {!hasCertificate && (
-                <p className="mt-1 text-xs text-gray-400">
+                <p className="mt-1 text-xs text-white/55">
                   Faltan {(HOURS_TOTAL - hoursCompleted).toFixed(1)} horas para obtener tu certificado
                 </p>
               )}
@@ -210,11 +210,11 @@ export default function CapacitacionPage() {
         <Card>
           <CardContent className="flex items-center gap-3 py-4">
             <div className="flex size-9 items-center justify-center rounded-lg bg-[#1F2F58]/10">
-              <BookOpen className="size-4 text-[#1F2F58]" />
+              <BookOpen className="size-4 text-[#73B8E7]" />
             </div>
             <div>
               <p className="text-lg font-bold text-white">{modules.length}</p>
-              <p className="text-xs text-gray-300">Modulos totales</p>
+              <p className="text-xs text-white/50">Modulos totales</p>
             </div>
           </CardContent>
         </Card>
@@ -227,20 +227,20 @@ export default function CapacitacionPage() {
               <p className="text-lg font-bold text-white">
                 {(HOURS_TOTAL - hoursCompleted).toFixed(0)}h
               </p>
-              <p className="text-xs text-gray-300">Horas restantes</p>
+              <p className="text-xs text-white/50">Horas restantes</p>
             </div>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="flex items-center gap-3 py-4">
-            <div className={`flex size-9 items-center justify-center rounded-lg ${hasCertificate ? "bg-emerald-100" : "bg-gray-100"}`}>
-              <GraduationCap className={`size-4 ${hasCertificate ? "text-emerald-600" : "text-gray-400"}`} />
+            <div className={`flex size-9 items-center justify-center rounded-lg ${hasCertificate ? "bg-emerald-100" : "bg-white/10"}`}>
+              <GraduationCap className={`size-4 ${hasCertificate ? "text-emerald-600" : "text-white/55"}`} />
             </div>
             <div>
-              <p className={`text-sm font-bold ${hasCertificate ? "text-emerald-600" : "text-gray-300"}`}>
+              <p className={`text-sm font-bold ${hasCertificate ? "text-emerald-600" : "text-white/50"}`}>
                 {hasCertificate ? "Certificado" : "En progreso"}
               </p>
-              <p className="text-xs text-gray-300">Estado de certificacion</p>
+              <p className="text-xs text-white/50">Estado de certificacion</p>
             </div>
           </CardContent>
         </Card>
@@ -255,8 +255,8 @@ export default function CapacitacionPage() {
         {modules.length === 0 ? (
           <Card>
             <CardContent className="py-10 text-center">
-              <GraduationCap className="mx-auto size-10 text-gray-300 mb-3" />
-              <p className="text-sm text-gray-400">
+              <GraduationCap className="mx-auto size-10 text-white/50 mb-3" />
+              <p className="text-sm text-white/55">
                 El programa de capacitacion esta siendo configurado. Contacta al coordinador.
               </p>
             </CardContent>
@@ -295,20 +295,20 @@ export default function CapacitacionPage() {
                             </span>
                           </div>
                         ) : (
-                          <Circle className="size-6 text-gray-300" />
+                          <Circle className="size-6 text-white/50" />
                         )}
                       </div>
 
                       {/* Module info */}
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 flex-wrap">
-                          <span className="text-[10px] font-bold uppercase tracking-wide text-gray-400">
+                          <span className="text-[10px] font-bold uppercase tracking-wide text-white/55">
                             {mod.code}
                           </span>
-                          <span className="text-[10px] font-medium text-gray-400">
+                          <span className="text-[10px] font-medium text-white/55">
                             Modulo {mod.order}
                           </span>
-                          <span className="inline-flex items-center gap-1 rounded-full bg-[#73B8E7]/20 px-1.5 py-0.5 text-[10px] font-medium text-[#1F2F58]">
+                          <span className="inline-flex items-center gap-1 rounded-full bg-[#73B8E7]/20 px-1.5 py-0.5 text-[10px] font-medium text-[#73B8E7]">
                             <Clock className="size-2.5" />
                             {mod.hours}h
                           </span>
@@ -316,7 +316,7 @@ export default function CapacitacionPage() {
                         <CardTitle className="text-sm mt-0.5 font-semibold text-white">
                           {mod.name}
                         </CardTitle>
-                        <div className="mt-1.5 h-1.5 w-full max-w-xs rounded-full bg-gray-200">
+                        <div className="mt-1.5 h-1.5 w-full max-w-xs rounded-full bg-white/15">
                           <div
                             className={`h-1.5 rounded-full transition-all ${mod.isCompleted ? "bg-emerald-500" : "bg-[#1F2F58]"}`}
                             style={{ width: `${modPercentage}%` }}
@@ -325,7 +325,7 @@ export default function CapacitacionPage() {
                       </div>
 
                       {/* Expand icon */}
-                      <div className="shrink-0 text-gray-400">
+                      <div className="shrink-0 text-white/55">
                         {isExpanded ? (
                           <ChevronDown className="size-4" />
                         ) : (
@@ -338,7 +338,7 @@ export default function CapacitacionPage() {
                   {isExpanded && (
                     <CardContent className="pt-3">
                       {mod.description && (
-                        <p className="mb-3 text-sm text-gray-600 leading-relaxed">
+                        <p className="mb-3 text-sm text-white/75 leading-relaxed">
                           {mod.description}
                         </p>
                       )}
@@ -354,20 +354,20 @@ export default function CapacitacionPage() {
                               className={`flex items-center gap-3 rounded-lg border p-3 ${
                                 isSessionCompleted
                                   ? "border-emerald-200 bg-emerald-50"
-                                  : "border-gray-200 bg-white"
+                                  : "border-white/20 bg-[#0A1628]/80"
                               }`}
                             >
                               {isSessionCompleted ? (
                                 <CheckCircle2 className="size-4 shrink-0 text-emerald-500" />
                               ) : (
-                                <PlayCircle className="size-4 shrink-0 text-gray-300" />
+                                <PlayCircle className="size-4 shrink-0 text-white/50" />
                               )}
                               <div className="flex-1 min-w-0">
                                 <p className="text-sm font-medium text-white truncate">
                                   Sesion {sess.number}: {sess.title}
                                 </p>
                                 {sess.description && (
-                                  <p className="text-xs text-gray-400 mt-0.5 line-clamp-2">
+                                  <p className="text-xs text-white/55 mt-0.5 line-clamp-2">
                                     {sess.description}
                                   </p>
                                 )}
@@ -413,8 +413,8 @@ export default function CapacitacionPage() {
       {/* CES note */}
       <Card className="border-[#73B8E7]/20 bg-[#73B8E7]/5">
         <CardContent className="py-4">
-          <p className="text-xs text-gray-600 leading-relaxed">
-            <span className="font-semibold text-[#1F2F58]">Requisito CES:</span> El Art. 61
+          <p className="text-xs text-white/75 leading-relaxed">
+            <span className="font-semibold text-[#73B8E7]">Requisito CES:</span> El Art. 61
             del Reglamento de Regimen Academico (RRA) 2022 establece que los docentes de
             modalidad en linea deben acreditar al menos{" "}
             <span className="font-semibold">120 horas de capacitacion</span> en docencia

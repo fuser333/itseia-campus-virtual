@@ -124,8 +124,8 @@ export default function TeacherAsistenciaPage() {
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">Asistencia</h1>
-        <p className="mt-1 text-sm text-gray-500">
+        <h1 className="text-2xl font-bold text-white">Asistencia</h1>
+        <p className="mt-1 text-sm text-white/65">
           Consulta y exporta la asistencia de tus materias. Recibe alertas de estudiantes
           con inasistencia acumulada mayor al 30%.
         </p>
@@ -136,16 +136,16 @@ export default function TeacherAsistenciaPage() {
           <Loader2 className="size-6 animate-spin text-[#73B8E7]" />
         </div>
       ) : subjects.length === 0 ? (
-        <div className="rounded-lg border border-dashed border-gray-200 py-16 text-center">
-          <Users className="mx-auto size-8 text-gray-300" />
-          <p className="mt-2 text-sm text-gray-400">
+        <div className="rounded-lg border border-dashed border-white/20 py-16 text-center">
+          <Users className="mx-auto size-8 text-white/50" />
+          <p className="mt-2 text-sm text-white/55">
             No tienes materias asignadas como docente.
           </p>
         </div>
       ) : (
         <>
           {/* Tabs */}
-          <div className="flex items-center gap-1 rounded-xl border border-gray-200 bg-white p-1 w-fit">
+          <div className="flex items-center gap-1 rounded-xl border border-white/20 bg-[#0A1628]/80 p-1 w-fit">
             {TABS.map((tab) => (
               <button
                 key={tab.id}
@@ -154,7 +154,7 @@ export default function TeacherAsistenciaPage() {
                 className={`flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-all ${
                   activeTab === tab.id
                     ? "bg-[#1F2F58] text-white shadow-sm"
-                    : "text-gray-500 hover:text-gray-800 hover:bg-gray-100"
+                    : "text-white/65 hover:text-white hover:bg-white/10"
                 }`}
               >
                 <tab.icon className="size-3.5" />
@@ -167,10 +167,10 @@ export default function TeacherAsistenciaPage() {
           {activeTab === "reporte" && (
             <div className="space-y-5">
               {/* Filtros */}
-              <div className="rounded-lg border border-gray-200 bg-white p-4">
+              <div className="rounded-lg border border-white/20 bg-[#0A1628]/80 p-4">
                 <div className="flex flex-wrap items-end gap-4">
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-xs font-medium text-gray-500">
+                    <label className="text-xs font-medium text-white/65">
                       Materia
                     </label>
                     <select
@@ -187,23 +187,23 @@ export default function TeacherAsistenciaPage() {
                     </select>
                   </div>
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-xs font-medium text-gray-500">Desde</label>
+                    <label className="text-xs font-medium text-white/65">Desde</label>
                     <input
                       type="date"
                       value={reportFrom}
                       max={reportTo}
                       onChange={(e) => setReportFrom(e.target.value)}
-                      className="h-8 rounded-lg border border-gray-200 px-2.5 text-sm outline-none"
+                      className="h-8 rounded-lg border border-white/20 px-2.5 text-sm outline-none"
                     />
                   </div>
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-xs font-medium text-gray-500">Hasta</label>
+                    <label className="text-xs font-medium text-white/65">Hasta</label>
                     <input
                       type="date"
                       value={reportTo}
                       min={reportFrom}
                       onChange={(e) => setReportTo(e.target.value)}
-                      className="h-8 rounded-lg border border-gray-200 px-2.5 text-sm outline-none"
+                      className="h-8 rounded-lg border border-white/20 px-2.5 text-sm outline-none"
                     />
                   </div>
                   <Button
@@ -233,17 +233,17 @@ export default function TeacherAsistenciaPage() {
               {reportLoading && (
                 <div className="flex items-center justify-center py-16">
                   <Loader2 className="size-6 animate-spin text-[#73B8E7]" />
-                  <span className="ml-2 text-sm text-gray-400">Cargando asistencia...</span>
+                  <span className="ml-2 text-sm text-white/55">Cargando asistencia...</span>
                 </div>
               )}
 
               {report && !reportLoading && (
                 <div className="space-y-4">
                   <div>
-                    <h2 className="text-base font-bold text-gray-900">
+                    <h2 className="text-base font-bold text-white">
                       {report.subject_code} — {report.subject_name}
                     </h2>
-                    <p className="text-xs text-gray-500 mt-0.5">
+                    <p className="text-xs text-white/65 mt-0.5">
                       {report.sessions.length} sesiones &middot;{" "}
                       {report.students.length} estudiantes
                     </p>
@@ -260,7 +260,7 @@ export default function TeacherAsistenciaPage() {
               )}
 
               {!report && !reportLoading && selectedSubject && (
-                <div className="rounded-lg border border-dashed border-gray-200 py-12 text-center text-sm text-gray-400">
+                <div className="rounded-lg border border-dashed border-white/20 py-12 text-center text-sm text-white/55">
                   Selecciona el periodo y haz click en "Ver reporte".
                 </div>
               )}
@@ -270,10 +270,10 @@ export default function TeacherAsistenciaPage() {
           {/* ── TAB: Alertas ── */}
           {activeTab === "alertas" && (
             <div className="space-y-5">
-              <div className="rounded-lg border border-gray-200 bg-white p-4">
+              <div className="rounded-lg border border-white/20 bg-[#0A1628]/80 p-4">
                 <div className="flex flex-wrap items-end gap-4">
                   <div className="flex flex-col gap-1.5">
-                    <label className="text-xs font-medium text-gray-500">
+                    <label className="text-xs font-medium text-white/65">
                       Materia
                     </label>
                     <select
@@ -307,7 +307,7 @@ export default function TeacherAsistenciaPage() {
               {alertsLoading && (
                 <div className="flex items-center justify-center py-16">
                   <Loader2 className="size-6 animate-spin text-[#73B8E7]" />
-                  <span className="ml-2 text-sm text-gray-400">Verificando alertas...</span>
+                  <span className="ml-2 text-sm text-white/55">Verificando alertas...</span>
                 </div>
               )}
 
@@ -335,7 +335,7 @@ export default function TeacherAsistenciaPage() {
               )}
 
               {!alertsLoading && !alertSubject && (
-                <div className="rounded-lg border border-dashed border-gray-200 py-16 text-center text-sm text-gray-400">
+                <div className="rounded-lg border border-dashed border-white/20 py-16 text-center text-sm text-white/55">
                   Selecciona una materia para verificar alertas.
                 </div>
               )}
