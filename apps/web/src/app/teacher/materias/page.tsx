@@ -86,38 +86,43 @@ export default function TeacherMateriasPage() {
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {subjects.map((subject) => (
             <Link key={subject.id} href={`/teacher/materias/${subject.id}`}>
-              <Card className="border-white/10 bg-[#1F2F58]/40 transition-all hover:border-[#FBBC0C]/40 hover:bg-[#1F2F58]/60 hover:shadow-md">
+              <Card className="border-white/20 bg-[#0A1628]/80 transition-all hover:border-[#FBBC0C]/60 hover:bg-[#1F2F58]/80 hover:shadow-lg hover:shadow-[#FBBC0C]/10">
                 <CardHeader className="pb-2">
-                  <CardTitle className="text-sm font-semibold text-white">
+                  <CardTitle className="text-sm font-semibold leading-snug text-white">
                     {subject.name}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="flex items-center justify-between">
-                    <div className="text-xs text-gray-300">
-                      <span className="rounded bg-[#FBBC0C]/20 px-1.5 py-0.5 font-mono text-[11px] font-semibold text-[#FBBC0C]">
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="flex flex-wrap items-center gap-1.5 text-xs text-white/80">
+                      <span className="rounded bg-[#FBBC0C]/25 px-1.5 py-0.5 font-mono text-[11px] font-bold text-[#FBBC0C]">
                         {subject.code}
                       </span>
                       {subject.semesters && (
-                        <span className="ml-2">
+                        <span className="font-medium text-white/90">
                           Periodo {subject.semesters.number}
                         </span>
                       )}
                       {subject.semesters?.programs && (
-                        <span>
-                          {" "}
+                        <span className="text-white/70">
                           &middot; {subject.semesters.programs.name}
                         </span>
                       )}
                     </div>
-                    <ArrowRight className="size-4 text-[#73B8E7]" />
+                    <ArrowRight className="size-4 shrink-0 text-[#73B8E7]" />
                   </div>
-                  <div className="mt-2 flex gap-2 text-[10px] text-gray-400">
-                    <span>{subject.hours_docencia}h docencia</span>
-                    <span>&middot;</span>
-                    <span>{subject.hours_practica}h practica</span>
-                    <span>&middot;</span>
-                    <span>{subject.hours_total}h total</span>
+                  <div className="mt-2.5 flex flex-wrap gap-1.5 text-[11px] text-white/75">
+                    <span>
+                      <span className="font-semibold text-[#73B8E7]">{subject.hours_docencia}h</span> docencia
+                    </span>
+                    <span className="text-white/40">&middot;</span>
+                    <span>
+                      <span className="font-semibold text-[#73B8E7]">{subject.hours_practica}h</span> practica
+                    </span>
+                    <span className="text-white/40">&middot;</span>
+                    <span>
+                      <span className="font-semibold text-[#FBBC0C]">{subject.hours_total}h</span> total
+                    </span>
                   </div>
                 </CardContent>
               </Card>
