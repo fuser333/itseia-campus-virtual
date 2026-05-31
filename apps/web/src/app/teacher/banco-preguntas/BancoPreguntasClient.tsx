@@ -196,7 +196,7 @@ export default function BancoPreguntasClient() {
       <div className="flex items-start justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-white">Banco de Preguntas</h1>
-          <p className="mt-1 text-sm text-gray-300">
+          <p className="mt-1 text-sm text-white/50">
             Repositorio de todas tus preguntas creadas. Reutilízalas en futuros
             quizzes y exámenes.
           </p>
@@ -214,11 +214,11 @@ export default function BancoPreguntasClient() {
         <Card>
           <CardContent className="flex items-center gap-4">
             <div className="flex size-10 items-center justify-center rounded-lg bg-[#1F2F58]/10">
-              <HelpCircle className="size-5 text-[#1F2F58]" />
+              <HelpCircle className="size-5 text-[#73B8E7]" />
             </div>
             <div>
               <p className="text-2xl font-bold text-white">{stats.total}</p>
-              <p className="text-xs text-gray-300">Preguntas totales</p>
+              <p className="text-xs text-white/50">Preguntas totales</p>
             </div>
           </CardContent>
         </Card>
@@ -229,7 +229,7 @@ export default function BancoPreguntasClient() {
             </div>
             <div>
               <p className="text-2xl font-bold text-white">{stats.mc}</p>
-              <p className="text-xs text-gray-300">Opción múltiple</p>
+              <p className="text-xs text-white/50">Opción múltiple</p>
             </div>
           </CardContent>
         </Card>
@@ -240,7 +240,7 @@ export default function BancoPreguntasClient() {
             </div>
             <div>
               <p className="text-2xl font-bold text-white">{stats.tf}</p>
-              <p className="text-xs text-gray-300">Verdadero / Falso</p>
+              <p className="text-xs text-white/50">Verdadero / Falso</p>
             </div>
           </CardContent>
         </Card>
@@ -253,24 +253,24 @@ export default function BancoPreguntasClient() {
               <p className="text-2xl font-bold text-white">
                 {stats.subjectsWithQuestions}
               </p>
-              <p className="text-xs text-gray-300">Materias con preguntas</p>
+              <p className="text-xs text-white/50">Materias con preguntas</p>
             </div>
           </CardContent>
         </Card>
       </div>
 
       {/* Filtros */}
-      <div className="rounded-lg border border-gray-200 bg-white p-4">
+      <div className="rounded-lg border border-white/20 bg-[#0A1628]/80 p-4">
         <div className="flex flex-wrap items-end gap-4">
           <div className="flex flex-col gap-1.5">
-            <label className="text-xs font-medium text-gray-300">
+            <label className="text-xs font-medium text-white/50">
               <Filter className="inline size-3 mr-1" />
               Materia
             </label>
             <select
               value={filterSubject}
               onChange={(e) => setFilterSubject(e.target.value)}
-              className="h-8 min-w-[220px] rounded-lg border border-gray-200 bg-white px-2.5 text-sm outline-none"
+              className="h-8 min-w-[220px] rounded-lg border border-white/20 bg-[#0A1628]/80 px-2.5 text-sm outline-none"
             >
               <option value="">Todas</option>
               {subjects.map((s) => (
@@ -281,13 +281,13 @@ export default function BancoPreguntasClient() {
             </select>
           </div>
           <div className="flex flex-col gap-1.5">
-            <label className="text-xs font-medium text-gray-300">Tipo</label>
+            <label className="text-xs font-medium text-white/50">Tipo</label>
             <select
               value={filterType}
               onChange={(e) =>
                 setFilterType(e.target.value as "" | QuestionType)
               }
-              className="h-8 min-w-[180px] rounded-lg border border-gray-200 bg-white px-2.5 text-sm outline-none"
+              className="h-8 min-w-[180px] rounded-lg border border-white/20 bg-[#0A1628]/80 px-2.5 text-sm outline-none"
             >
               <option value="">Todos</option>
               <option value="multiple_choice">Opción múltiple</option>
@@ -296,7 +296,7 @@ export default function BancoPreguntasClient() {
             </select>
           </div>
           <div className="flex flex-1 flex-col gap-1.5 min-w-[220px]">
-            <label className="text-xs font-medium text-gray-300">
+            <label className="text-xs font-medium text-white/50">
               <Search className="inline size-3 mr-1" />
               Buscar
             </label>
@@ -305,7 +305,7 @@ export default function BancoPreguntasClient() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Texto de la pregunta..."
-              className="h-8 rounded-lg border border-gray-200 bg-white px-2.5 text-sm outline-none"
+              className="h-8 rounded-lg border border-white/20 bg-[#0A1628]/80 px-2.5 text-sm outline-none"
             />
           </div>
         </div>
@@ -319,44 +319,44 @@ export default function BancoPreguntasClient() {
       ) : filtered.length === 0 ? (
         <Card>
           <CardContent className="py-12 text-center">
-            <HelpCircle className="mx-auto size-8 text-gray-300" />
-            <p className="mt-2 text-sm font-medium text-gray-300">
+            <HelpCircle className="mx-auto size-8 text-white/50" />
+            <p className="mt-2 text-sm font-medium text-white/50">
               {questions.length === 0
                 ? "Aún no tienes preguntas creadas."
                 : "No hay preguntas que coincidan con los filtros."}
             </p>
             {questions.length === 0 && (
-              <p className="mt-1 text-xs text-gray-400">
+              <p className="mt-1 text-xs text-white/55">
                 Crea tu primer quiz para empezar a construir tu banco.
               </p>
             )}
           </CardContent>
         </Card>
       ) : (
-        <div className="rounded-lg border border-gray-200 bg-white overflow-hidden">
+        <div className="rounded-lg border border-white/20 bg-[#0A1628]/80 overflow-hidden">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-gray-200 bg-gray-50">
-                <th className="px-4 py-2.5 text-left text-xs font-semibold text-gray-600">
+              <tr className="border-b border-white/20 bg-[#0A1628]/60">
+                <th className="px-4 py-2.5 text-left text-xs font-semibold text-white/75">
                   Pregunta
                 </th>
-                <th className="px-4 py-2.5 text-left text-xs font-semibold text-gray-600">
+                <th className="px-4 py-2.5 text-left text-xs font-semibold text-white/75">
                   Tipo
                 </th>
-                <th className="px-4 py-2.5 text-left text-xs font-semibold text-gray-600">
+                <th className="px-4 py-2.5 text-left text-xs font-semibold text-white/75">
                   Materia
                 </th>
-                <th className="px-4 py-2.5 text-left text-xs font-semibold text-gray-600">
+                <th className="px-4 py-2.5 text-left text-xs font-semibold text-white/75">
                   Quiz
                 </th>
-                <th className="px-4 py-2.5 text-right text-xs font-semibold text-gray-600">
+                <th className="px-4 py-2.5 text-right text-xs font-semibold text-white/75">
                   Pts.
                 </th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100">
               {filtered.map((q) => (
-                <tr key={q.id} className="hover:bg-gray-50">
+                <tr key={q.id} className="hover:bg-[#0A1628]/60">
                   <td className="px-4 py-3 max-w-md">
                     <p className="text-sm text-white line-clamp-2">
                       {q.question_text}
@@ -365,13 +365,13 @@ export default function BancoPreguntasClient() {
                   <td className="px-4 py-3">
                     <Badge variant="secondary">{TYPE_LABEL[q.question_type]}</Badge>
                   </td>
-                  <td className="px-4 py-3 text-xs text-gray-600">
-                    <span className="font-medium text-gray-200">
+                  <td className="px-4 py-3 text-xs text-white/75">
+                    <span className="font-medium text-white/80">
                       {q.subject_code}
                     </span>{" "}
                     {q.subject_name}
                   </td>
-                  <td className="px-4 py-3 text-xs text-gray-600 max-w-[200px] truncate">
+                  <td className="px-4 py-3 text-xs text-white/75 max-w-[200px] truncate">
                     {q.quiz_title}
                   </td>
                   <td className="px-4 py-3 text-right text-sm font-medium text-white">

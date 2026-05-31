@@ -258,7 +258,7 @@ export default function TeacherDashboardPage() {
         <h1 className="text-2xl font-bold text-white">
           Panel Docente
         </h1>
-        <p className="mt-1 text-sm text-gray-300">
+        <p className="mt-1 text-sm text-white/50">
           Bienvenido al panel de gestión de materias y estudiantes
         </p>
       </div>
@@ -273,13 +273,13 @@ export default function TeacherDashboardPage() {
         <Card>
           <CardContent className="flex items-center gap-4">
             <div className="flex size-10 items-center justify-center rounded-lg bg-[#1F2F58]/10">
-              <BookOpen className="size-5 text-[#1F2F58]" />
+              <BookOpen className="size-5 text-[#73B8E7]" />
             </div>
             <div>
               <p className="text-2xl font-bold text-white">
                 {stats.subjectCount}
               </p>
-              <p className="text-xs text-gray-300">Materias asignadas</p>
+              <p className="text-xs text-white/50">Materias asignadas</p>
             </div>
           </CardContent>
         </Card>
@@ -293,7 +293,7 @@ export default function TeacherDashboardPage() {
               <p className="text-2xl font-bold text-white">
                 {stats.pendingSubmissions}
               </p>
-              <p className="text-xs text-gray-300">Entregas pendientes</p>
+              <p className="text-xs text-white/50">Entregas pendientes</p>
             </div>
           </CardContent>
         </Card>
@@ -307,7 +307,7 @@ export default function TeacherDashboardPage() {
               <p className="text-2xl font-bold text-white">
                 {stats.studentCount}
               </p>
-              <p className="text-xs text-gray-300">Estudiantes</p>
+              <p className="text-xs text-white/50">Estudiantes</p>
             </div>
           </CardContent>
         </Card>
@@ -321,7 +321,7 @@ export default function TeacherDashboardPage() {
               <p className="text-2xl font-bold text-white">
                 {stats.recentActivity.length}
               </p>
-              <p className="text-xs text-gray-300">Actividad reciente</p>
+              <p className="text-xs text-white/50">Actividad reciente</p>
             </div>
           </CardContent>
         </Card>
@@ -335,7 +335,7 @@ export default function TeacherDashboardPage() {
         {subjects.length === 0 ? (
           <Card>
             <CardContent>
-              <p className="py-6 text-center text-sm text-gray-400">
+              <p className="py-6 text-center text-sm text-white/55">
                 {isAdmin
                   ? "No hay materias registradas en el sistema."
                   : "No tienes materias asignadas. Contacta al coordinador."}
@@ -348,14 +348,14 @@ export default function TeacherDashboardPage() {
               <Link key={subject.id} href={`/teacher/materias/${subject.id}`}>
                 <Card className="transition-shadow hover:shadow-md">
                   <CardHeader className="pb-2">
-                    <CardTitle className="text-sm font-semibold text-[#1F2F58]">
+                    <CardTitle className="text-sm font-semibold text-[#73B8E7]">
                       {subject.name}
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
                     <div className="flex items-center justify-between">
-                      <div className="text-xs text-gray-300">
-                        <span className="font-medium text-gray-200">
+                      <div className="text-xs text-white/50">
+                        <span className="font-medium text-white/80">
                           {subject.code}
                         </span>
                         {subject.semesters && (
@@ -373,9 +373,9 @@ export default function TeacherDashboardPage() {
                           </span>
                         )}
                       </div>
-                      <ArrowRight className="size-4 text-gray-400" />
+                      <ArrowRight className="size-4 text-white/55" />
                     </div>
-                    <div className="mt-2 flex gap-2 text-[10px] text-gray-400">
+                    <div className="mt-2 flex gap-2 text-[10px] text-white/55">
                       <span>{subject.hours_docencia}h docencia</span>
                       <span>&middot;</span>
                       <span>{subject.hours_practica}h practica</span>
@@ -405,7 +405,7 @@ export default function TeacherDashboardPage() {
                     <p className="text-sm font-medium text-white">
                       {activity.student_name}
                     </p>
-                    <p className="text-xs text-gray-300">
+                    <p className="text-xs text-white/50">
                       {activity.subject_name}
                     </p>
                   </div>
@@ -414,12 +414,12 @@ export default function TeacherDashboardPage() {
                       className={`inline-block rounded-full px-2 py-0.5 text-[10px] font-medium ${
                         activity.type === "Calificado"
                           ? "bg-emerald-100 text-emerald-700"
-                          : "bg-[#FBBC0C]/20 text-[#1F2F58]"
+                          : "bg-[#FBBC0C]/20 text-[#73B8E7]"
                       }`}
                     >
                       {activity.type}
                     </span>
-                    <p className="mt-0.5 text-[10px] text-gray-400">
+                    <p className="mt-0.5 text-[10px] text-white/55">
                       {new Date(activity.created_at).toLocaleDateString("es-EC", {
                         day: "numeric",
                         month: "short",
@@ -447,20 +447,20 @@ export default function TeacherDashboardPage() {
       {/* Mi Agenda — acceso rapido al calendario */}
       <div>
         <h2 className="mb-3 text-lg font-semibold text-white flex items-center gap-2">
-          <CalendarDays className="size-5 text-[#1F2F58]" />
+          <CalendarDays className="size-5 text-[#73B8E7]" />
           Mi Agenda
         </h2>
         <Card>
           <CardContent className="py-6">
             <div className="flex flex-col items-center text-center gap-4 sm:flex-row sm:text-left sm:items-start sm:gap-6">
               <div className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-[#1F2F58]/10">
-                <CalendarDays className="size-6 text-[#1F2F58]" />
+                <CalendarDays className="size-6 text-[#73B8E7]" />
               </div>
               <div className="flex-1 min-w-0">
                 <p className="font-semibold text-white">
                   Planifica tus clases sincronicas
                 </p>
-                <p className="text-sm text-gray-300 mt-0.5">
+                <p className="text-sm text-white/50 mt-0.5">
                   Crea y gestiona sesiones en el calendario. Tus estudiantes las veran
                   automaticamente en su agenda.
                 </p>

@@ -39,10 +39,10 @@ export function StudentRiskTable({ students, subjectId }: StudentRiskTableProps)
 
   if (students.length === 0) {
     return (
-      <div className="rounded-xl border border-dashed border-gray-200 py-12 text-center">
+      <div className="rounded-xl border border-dashed border-white/20 py-12 text-center">
         <CheckCircle2 className="mx-auto size-10 text-emerald-400 mb-3" />
-        <p className="text-sm font-medium text-gray-700">Sin estudiantes en riesgo</p>
-        <p className="text-xs text-gray-400 mt-1">
+        <p className="text-sm font-medium text-white/85">Sin estudiantes en riesgo</p>
+        <p className="text-xs text-white/55 mt-1">
           Todos los estudiantes cumplen con los criterios de progreso, quizzes y asistencia.
         </p>
       </div>
@@ -51,7 +51,7 @@ export function StudentRiskTable({ students, subjectId }: StudentRiskTableProps)
 
   return (
     <div className="space-y-3">
-      <p className="text-sm text-gray-500">
+      <p className="text-sm text-white/65">
         {students.length} estudiante{students.length !== 1 ? "s" : ""} requiere{students.length === 1 ? "" : "n"} atención
       </p>
 
@@ -70,10 +70,10 @@ export function StudentRiskTable({ students, subjectId }: StudentRiskTableProps)
               <div className="flex-1 min-w-0">
                 <div className="flex items-start justify-between gap-2 flex-wrap">
                   <div>
-                    <p className="font-semibold text-gray-900 text-sm">
+                    <p className="font-semibold text-white text-sm">
                       {student.studentName}
                     </p>
-                    <p className="text-xs text-gray-400">{student.studentEmail}</p>
+                    <p className="text-xs text-white/55">{student.studentEmail}</p>
                   </div>
                   <div className="flex items-center gap-2">
                     {isSaved && (
@@ -103,7 +103,7 @@ export function StudentRiskTable({ students, subjectId }: StudentRiskTableProps)
                 </div>
 
                 {/* Stats row */}
-                <div className="mt-2 flex gap-4 text-xs text-gray-400">
+                <div className="mt-2 flex gap-4 text-xs text-white/55">
                   <span>Completitud: {student.sessionCompletion}%</span>
                   {student.quizAverage !== null && (
                     <span>Quiz: {student.quizAverage.toFixed(0)}%</span>
@@ -129,7 +129,7 @@ export function StudentRiskTable({ students, subjectId }: StudentRiskTableProps)
                 onClick={() =>
                   setExpandedStudent(isExpanded ? null : student.studentId)
                 }
-                className="shrink-0 flex items-center gap-1.5 rounded-lg bg-[#1F2F58]/10 hover:bg-[#1F2F58]/20 px-3 py-1.5 text-xs font-medium text-[#1F2F58] transition-colors"
+                className="shrink-0 flex items-center gap-1.5 rounded-lg bg-[#1F2F58]/10 hover:bg-[#1F2F58]/20 px-3 py-1.5 text-xs font-medium text-[#73B8E7] transition-colors"
               >
                 <MessageSquare className="size-3.5" />
                 Intervenir
@@ -141,8 +141,8 @@ export function StudentRiskTable({ students, subjectId }: StudentRiskTableProps)
 
             {/* Intervention form */}
             {isExpanded && (
-              <div className="border-t border-orange-200 bg-white/50 px-4 pb-4 pt-3">
-                <p className="text-xs font-medium text-gray-600 mb-2">
+              <div className="border-t border-orange-200 bg-[#0A1628]/80/50 px-4 pb-4 pt-3">
+                <p className="text-xs font-medium text-white/75 mb-2">
                   Nota de intervencion (privada, no visible al estudiante)
                 </p>
                 <Textarea

@@ -402,7 +402,7 @@ export default function QuizBuilder({ sessionId }: QuizBuilderProps) {
           <div className="rounded-xl border border-[#73B8E7]/20 bg-[#73B8E7]/5 p-4 space-y-4">
             <div className="flex items-center gap-2">
               <ShieldCheck className="size-4 text-[#73B8E7]" />
-              <span className="text-xs font-semibold text-[#1F2F58] uppercase tracking-wide">
+              <span className="text-xs font-semibold text-[#73B8E7] uppercase tracking-wide">
                 Integridad Academica (Art. 62 RRA 2022)
               </span>
             </div>
@@ -429,9 +429,9 @@ export default function QuizBuilder({ sessionId }: QuizBuilderProps) {
                   type="checkbox"
                   checked={shuffleQuestions}
                   onChange={(e) => setShuffleQuestions(e.target.checked)}
-                  className="h-4 w-4 rounded border-gray-300 text-[#FBBC0C] focus:ring-[#FBBC0C]"
+                  className="h-4 w-4 rounded border-white/25 text-[#FBBC0C] focus:ring-[#FBBC0C]"
                 />
-                <span className="text-sm text-[#1F2F58]">Aleatorizar orden de preguntas</span>
+                <span className="text-sm text-[#73B8E7]">Aleatorizar orden de preguntas</span>
               </label>
 
               <label className="flex items-center gap-3 cursor-pointer">
@@ -439,9 +439,9 @@ export default function QuizBuilder({ sessionId }: QuizBuilderProps) {
                   type="checkbox"
                   checked={shuffleOptions}
                   onChange={(e) => setShuffleOptions(e.target.checked)}
-                  className="h-4 w-4 rounded border-gray-300 text-[#FBBC0C] focus:ring-[#FBBC0C]"
+                  className="h-4 w-4 rounded border-white/25 text-[#FBBC0C] focus:ring-[#FBBC0C]"
                 />
-                <span className="text-sm text-[#1F2F58]">Aleatorizar opciones de respuesta</span>
+                <span className="text-sm text-[#73B8E7]">Aleatorizar opciones de respuesta</span>
               </label>
 
               <label className="flex items-center gap-3 cursor-pointer">
@@ -449,9 +449,9 @@ export default function QuizBuilder({ sessionId }: QuizBuilderProps) {
                   type="checkbox"
                   checked={showOneAtATime}
                   onChange={(e) => setShowOneAtATime(e.target.checked)}
-                  className="h-4 w-4 rounded border-gray-300 text-[#FBBC0C] focus:ring-[#FBBC0C]"
+                  className="h-4 w-4 rounded border-white/25 text-[#FBBC0C] focus:ring-[#FBBC0C]"
                 />
-                <span className="text-sm text-[#1F2F58]">Mostrar una pregunta a la vez</span>
+                <span className="text-sm text-[#73B8E7]">Mostrar una pregunta a la vez</span>
               </label>
 
               <label className="flex items-center gap-3 cursor-pointer">
@@ -459,9 +459,9 @@ export default function QuizBuilder({ sessionId }: QuizBuilderProps) {
                   type="checkbox"
                   checked={bankRotativo}
                   onChange={(e) => setBankRotativo(e.target.checked)}
-                  className="h-4 w-4 rounded border-gray-300 text-[#FBBC0C] focus:ring-[#FBBC0C]"
+                  className="h-4 w-4 rounded border-white/25 text-[#FBBC0C] focus:ring-[#FBBC0C]"
                 />
-                <span className="text-sm text-[#1F2F58]">Banco rotativo de preguntas</span>
+                <span className="text-sm text-[#73B8E7]">Banco rotativo de preguntas</span>
               </label>
 
               {bankRotativo && (
@@ -529,8 +529,8 @@ export default function QuizBuilder({ sessionId }: QuizBuilderProps) {
           <CardContent>
             {questions.length === 0 ? (
               <div className="flex flex-col items-center gap-2 py-8 text-center">
-                <HelpCircle className="size-8 text-gray-300" />
-                <p className="text-sm text-gray-400">No hay preguntas. Agrega la primera.</p>
+                <HelpCircle className="size-8 text-white/50" />
+                <p className="text-sm text-white/55">No hay preguntas. Agrega la primera.</p>
               </div>
             ) : (
               <div className="divide-y divide-gray-100">
@@ -543,21 +543,21 @@ export default function QuizBuilder({ sessionId }: QuizBuilderProps) {
                         <button
                           onClick={() => moveQuestion(q.id, "up")}
                           disabled={idx === 0}
-                          className="rounded p-0.5 text-gray-400 hover:bg-gray-100 hover:text-gray-600 disabled:opacity-30"
+                          className="rounded p-0.5 text-white/55 hover:bg-white/10 hover:text-white/75 disabled:opacity-30"
                         >
                           <ChevronUp className="size-3.5" />
                         </button>
-                        <span className="text-xs font-bold text-gray-400">{idx + 1}</span>
+                        <span className="text-xs font-bold text-white/55">{idx + 1}</span>
                         <button
                           onClick={() => moveQuestion(q.id, "down")}
                           disabled={idx === questions.length - 1}
-                          className="rounded p-0.5 text-gray-400 hover:bg-gray-100 hover:text-gray-600 disabled:opacity-30"
+                          className="rounded p-0.5 text-white/55 hover:bg-white/10 hover:text-white/75 disabled:opacity-30"
                         >
                           <ChevronDown className="size-3.5" />
                         </button>
                       </div>
                       <div className="flex-1">
-                        <p className="text-sm font-medium text-gray-900">{q.question_text}</p>
+                        <p className="text-sm font-medium text-white">{q.question_text}</p>
                         <div className="mt-1.5 flex flex-wrap gap-1.5">
                           {(opts.options || []).map((opt, oi) => (
                             <span
@@ -565,7 +565,7 @@ export default function QuizBuilder({ sessionId }: QuizBuilderProps) {
                               className={`inline-flex items-center gap-1 rounded px-2 py-0.5 text-xs ${
                                 oi === correctIdx
                                   ? "bg-emerald-100 font-medium text-emerald-700"
-                                  : "bg-gray-100 text-gray-600"
+                                  : "bg-white/10 text-white/75"
                               }`}
                             >
                               {getOptionLabel(oi)}) {opt.text}
@@ -574,7 +574,7 @@ export default function QuizBuilder({ sessionId }: QuizBuilderProps) {
                           ))}
                         </div>
                         {q.explanation && (
-                          <p className="mt-1 text-xs text-gray-400 italic">{q.explanation}</p>
+                          <p className="mt-1 text-xs text-white/55 italic">{q.explanation}</p>
                         )}
                       </div>
                       <div className="flex items-center gap-0.5">
@@ -629,7 +629,7 @@ export default function QuizBuilder({ sessionId }: QuizBuilderProps) {
                     className={`flex size-7 shrink-0 items-center justify-center rounded-full border-2 text-xs font-bold transition-colors ${
                       form.correct_index === i
                         ? "border-emerald-500 bg-emerald-500 text-white"
-                        : "border-gray-300 text-gray-400 hover:border-gray-400"
+                        : "border-white/25 text-white/55 hover:border-gray-400"
                     }`}
                   >
                     {getOptionLabel(i)}
@@ -692,11 +692,11 @@ export default function QuizBuilder({ sessionId }: QuizBuilderProps) {
           <div className="space-y-6 py-2">
             {quiz && (
               <div className="rounded-lg bg-[#1F2F58]/5 p-4">
-                <h3 className="font-semibold text-[#1F2F58]">{quiz.title}</h3>
+                <h3 className="font-semibold text-[#73B8E7]">{quiz.title}</h3>
                 {quiz.description && (
-                  <p className="mt-1 text-sm text-gray-500">{quiz.description}</p>
+                  <p className="mt-1 text-sm text-white/65">{quiz.description}</p>
                 )}
-                <p className="mt-2 text-xs text-gray-400">
+                <p className="mt-2 text-xs text-white/55">
                   Aprobar: {quiz.pass_percentage}% &middot; {quiz.max_attempts} intentos
                   {quiz.time_limit_seconds && ` &middot; ${Math.round(quiz.time_limit_seconds / 60)} min`}
                 </p>
@@ -706,7 +706,7 @@ export default function QuizBuilder({ sessionId }: QuizBuilderProps) {
               const opts = q.options as QuizQuestionOptions;
               return (
                 <div key={q.id} className="space-y-2">
-                  <p className="text-sm font-medium text-gray-900">
+                  <p className="text-sm font-medium text-white">
                     <span className="mr-1 text-[#73B8E7]">{idx + 1}.</span>
                     {q.question_text}
                   </p>
@@ -714,9 +714,9 @@ export default function QuizBuilder({ sessionId }: QuizBuilderProps) {
                     {(opts.options || []).map((opt, oi) => (
                       <label
                         key={oi}
-                        className="flex items-center gap-2 rounded-md border border-gray-200 px-3 py-2 text-sm text-gray-700 transition-colors hover:bg-gray-50"
+                        className="flex items-center gap-2 rounded-md border border-white/20 px-3 py-2 text-sm text-white/85 transition-colors hover:bg-[#0A1628]/60"
                       >
-                        <span className="flex size-5 items-center justify-center rounded-full border border-gray-300 text-[10px] font-medium">
+                        <span className="flex size-5 items-center justify-center rounded-full border border-white/25 text-[10px] font-medium">
                           {getOptionLabel(oi)}
                         </span>
                         {opt.text}
@@ -760,10 +760,10 @@ export default function QuizBuilder({ sessionId }: QuizBuilderProps) {
                   { label: "Puntaje prom.", value: `${integrityReport.avg_score_percentage}%` },
                 ].map((stat) => (
                   <div key={stat.label} className="rounded-xl bg-[#1F2F58]/5 p-3 text-center">
-                    <p className="text-xl font-bold text-[#1F2F58] font-[family-name:var(--font-space-grotesk)]">
+                    <p className="text-xl font-bold text-[#73B8E7] font-[family-name:var(--font-space-grotesk)]">
                       {stat.value}
                     </p>
-                    <p className="text-xs text-[#1F2F58]/50">{stat.label}</p>
+                    <p className="text-xs text-[#73B8E7]/50">{stat.label}</p>
                   </div>
                 ))}
               </div>
@@ -774,7 +774,7 @@ export default function QuizBuilder({ sessionId }: QuizBuilderProps) {
                   <p className="text-xs font-semibold uppercase tracking-wider text-[#73B8E7] mb-2">
                     Analisis IA
                   </p>
-                  <p className="text-sm text-[#1F2F58]/70 leading-relaxed">
+                  <p className="text-sm text-[#73B8E7]/70 leading-relaxed">
                     {integrityReport.gemini_narrative}
                   </p>
                 </div>
@@ -791,7 +791,7 @@ export default function QuizBuilder({ sessionId }: QuizBuilderProps) {
                   </div>
                   <div className="space-y-2">
                     {integrityReport.suspicious_pairs.map((pair, i) => (
-                      <div key={i} className="text-xs text-[#1F2F58]/70">
+                      <div key={i} className="text-xs text-[#73B8E7]/70">
                         <span className="font-medium">{pair.user_a}</span>
                         {" "}y{" "}
                         <span className="font-medium">{pair.user_b}</span>
@@ -805,15 +805,15 @@ export default function QuizBuilder({ sessionId }: QuizBuilderProps) {
 
               {/* Tabla de intentos */}
               <div>
-                <p className="text-sm font-semibold text-[#1F2F58] mb-3">
+                <p className="text-sm font-semibold text-[#73B8E7] mb-3">
                   Detalle por estudiante
                 </p>
                 <div className="overflow-x-auto">
                   <table className="w-full text-xs">
                     <thead>
-                      <tr className="border-b border-gray-100">
+                      <tr className="border-b border-white/15">
                         {["Estudiante", "Puntaje", "Integridad", "Cambios pestaña", "Estado"].map((h) => (
-                          <th key={h} className="py-2 px-3 text-left font-semibold text-[#1F2F58]/50">
+                          <th key={h} className="py-2 px-3 text-left font-semibold text-[#73B8E7]/50">
                             {h}
                           </th>
                         ))}
@@ -824,7 +824,7 @@ export default function QuizBuilder({ sessionId }: QuizBuilderProps) {
                         <tr key={attempt.attempt_id} className={attempt.flagged ? "bg-[#F0846D]/3" : ""}>
                           <td className="py-2 px-3">
                             <p className="font-medium text-[#0A1628]">{attempt.user_name}</p>
-                            <p className="text-[#1F2F58]/40">{attempt.user_email}</p>
+                            <p className="text-[#73B8E7]/40">{attempt.user_email}</p>
                           </td>
                           <td className="py-2 px-3">
                             <span className={`font-semibold ${attempt.passed ? "text-emerald-600" : "text-[#F0846D]"}`}>
@@ -837,7 +837,7 @@ export default function QuizBuilder({ sessionId }: QuizBuilderProps) {
                             </span>
                           </td>
                           <td className="py-2 px-3 text-center">
-                            <span className={attempt.tab_switches > 0 ? "text-[#F0846D] font-semibold" : "text-[#1F2F58]/40"}>
+                            <span className={attempt.tab_switches > 0 ? "text-[#F0846D] font-semibold" : "text-[#73B8E7]/40"}>
                               {attempt.tab_switches}
                             </span>
                           </td>
@@ -861,12 +861,12 @@ export default function QuizBuilder({ sessionId }: QuizBuilderProps) {
                 </div>
               </div>
 
-              <p className="text-xs text-[#1F2F58]/30 text-right">
+              <p className="text-xs text-[#73B8E7]/30 text-right">
                 Generado: {new Date(integrityReport.generated_at).toLocaleString("es-EC")}
               </p>
             </div>
           ) : (
-            <p className="py-8 text-center text-sm text-[#1F2F58]/40">
+            <p className="py-8 text-center text-sm text-[#73B8E7]/40">
               No se pudo cargar el reporte.
             </p>
           )}

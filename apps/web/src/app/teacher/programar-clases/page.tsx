@@ -77,7 +77,7 @@ export default function ProgramarClasesPage() {
       <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h1 className="text-2xl font-bold text-white">Programar Clases</h1>
-          <p className="mt-1 text-sm text-gray-300">
+          <p className="mt-1 text-sm text-white/50">
             Agenda sesiones sincronicas para tus materias. Los estudiantes las veran
             en su calendario automaticamente.
           </p>
@@ -93,12 +93,12 @@ export default function ProgramarClasesPage() {
       {/* Info card */}
       <div className="rounded-lg border border-[#73B8E7]/30 bg-[#73B8E7]/5 p-4">
         <div className="flex items-start gap-3">
-          <Video className="size-5 shrink-0 text-[#1F2F58] mt-0.5" />
+          <Video className="size-5 shrink-0 text-[#73B8E7] mt-0.5" />
           <div>
-            <p className="text-sm font-semibold text-[#1F2F58]">
+            <p className="text-sm font-semibold text-[#73B8E7]">
               Clases sincronicas por materia
             </p>
-            <p className="mt-0.5 text-sm text-gray-600">
+            <p className="mt-0.5 text-sm text-white/75">
               Para programar una clase, accede a la materia y usa la opcion
               "Programar clase" en el editor de sesion. Las clases usan la
               sala de video conferencia integrada.
@@ -112,8 +112,8 @@ export default function ProgramarClasesPage() {
         <Card>
           <CardContent>
             <div className="flex flex-col items-center gap-3 py-10 text-center">
-              <BookOpen className="size-10 text-gray-300" />
-              <p className="text-sm text-gray-400">
+              <BookOpen className="size-10 text-white/50" />
+              <p className="text-sm text-white/55">
                 No tienes materias asignadas para programar clases.
               </p>
             </div>
@@ -129,14 +129,14 @@ export default function ProgramarClasesPage() {
               <Link key={subject.id} href={`/teacher/materias/${subject.id}`}>
                 <Card className="group transition-all hover:shadow-md hover:border-[#1F2F58]/30">
                   <CardHeader className="pb-2">
-                    <CardTitle className="text-sm font-semibold text-[#1F2F58]">
+                    <CardTitle className="text-sm font-semibold text-[#73B8E7]">
                       {subject.name}
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
                     <div className="flex items-center justify-between">
-                      <div className="text-xs text-gray-300">
-                        <span className="font-medium text-gray-200">
+                      <div className="text-xs text-white/50">
+                        <span className="font-medium text-white/80">
                           {subject.code}
                         </span>
                         {subject.semesters && (
@@ -152,11 +152,11 @@ export default function ProgramarClasesPage() {
                           </span>
                         )}
                       </div>
-                      <ArrowRight className="size-4 text-gray-400 group-hover:text-[#1F2F58] transition-colors" />
+                      <ArrowRight className="size-4 text-white/55 group-hover:text-[#73B8E7] transition-colors" />
                     </div>
                     <div className="mt-3 flex items-center gap-1.5">
                       <Plus className="size-3.5 text-[#FBBC0C]" />
-                      <span className="text-xs font-medium text-[#1F2F58]">
+                      <span className="text-xs font-medium text-[#73B8E7]">
                         Programar clase en esta materia
                       </span>
                     </div>

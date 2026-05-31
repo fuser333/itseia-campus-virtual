@@ -57,8 +57,8 @@ export default function TeacherEntregasPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">Entregas</h1>
-        <p className="mt-1 text-sm text-gray-500">
+        <h1 className="text-2xl font-bold text-white">Entregas</h1>
+        <p className="mt-1 text-sm text-white/65">
           Revisa y califica las entregas de tus estudiantes
         </p>
       </div>
@@ -67,8 +67,8 @@ export default function TeacherEntregasPage() {
         <Card>
           <CardContent>
             <div className="flex flex-col items-center gap-3 py-10 text-center">
-              <FileCheck className="size-10 text-gray-300" />
-              <p className="text-sm text-gray-400">
+              <FileCheck className="size-10 text-white/50" />
+              <p className="text-sm text-white/55">
                 No tienes materias asignadas.
               </p>
             </div>

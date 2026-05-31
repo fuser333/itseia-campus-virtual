@@ -112,7 +112,7 @@ export default function TeacherSessionPage({ params }: PageProps) {
       <div className="flex h-[calc(100vh-64px)] items-center justify-center">
         <div className="flex flex-col items-center gap-3">
           <Loader2 className="size-8 animate-spin text-[#FBBC0C]" />
-          <p className="text-sm text-[#1F2F58]">Cargando sesion...</p>
+          <p className="text-sm text-[#73B8E7]">Cargando sesion...</p>
         </div>
       </div>
     );
@@ -122,8 +122,8 @@ export default function TeacherSessionPage({ params }: PageProps) {
     return (
       <div className="flex h-[calc(100vh-64px)] items-center justify-center">
         <div className="text-center">
-          <BookOpen className="mx-auto size-12 text-[#1F2F58]/30" />
-          <p className="mt-3 text-sm text-[#1F2F58]/70">No se encontro la sesion.</p>
+          <BookOpen className="mx-auto size-12 text-[#73B8E7]/30" />
+          <p className="mt-3 text-sm text-[#73B8E7]/70">No se encontro la sesion.</p>
           <Link href={`/teacher/materias/${subjectId}`} className="mt-4 inline-block">
             <Button variant="outline" size="sm">
               <ArrowLeft className="mr-1 size-3" />
@@ -223,7 +223,7 @@ export default function TeacherSessionPage({ params }: PageProps) {
           }))}
         />
       ) : (
-        <p className="p-4 text-sm text-gray-500">Esta sesion no tiene recursos.</p>
+        <p className="p-4 text-sm text-white/65">Esta sesion no tiene recursos.</p>
       ),
     },
     {
@@ -286,15 +286,15 @@ export default function TeacherSessionPage({ params }: PageProps) {
 
   return (
     <div className="flex h-screen flex-col">
-      <header className="border-b border-[#1F2F58]/10 bg-white px-4 py-2 shadow-sm">
+      <header className="border-b border-[#1F2F58]/10 bg-[#0A1628]/80 px-4 py-2 shadow-sm">
         <div className="flex items-center justify-between gap-3">
           <div className="flex min-w-0 items-center gap-2">
             <Link
               href={`/teacher/materias/${subjectId}`}
-              className="flex-shrink-0 rounded p-1 hover:bg-gray-100"
+              className="flex-shrink-0 rounded p-1 hover:bg-white/10"
               title="Volver a la materia"
             >
-              <ArrowLeft className="size-4 text-[#1F2F58]" />
+              <ArrowLeft className="size-4 text-[#73B8E7]" />
             </Link>
             <div className="min-w-0">
               <div className="flex items-center gap-1 text-[10px] uppercase tracking-wider text-[#73B8E7]">
@@ -307,13 +307,13 @@ export default function TeacherSessionPage({ params }: PageProps) {
             </div>
           </div>
           <div className="flex flex-shrink-0 items-center gap-2">
-            <span className="text-[10px] text-[#1F2F58]/50">
+            <span className="text-[10px] text-[#73B8E7]/50">
               Sesion {session.number}{totalSessions > 0 ? ` de ${totalSessions}` : ""}
             </span>
             {canWrite && (
               <Link
                 href={`/teacher/materias/${subjectId}/sesion/${num}/edit`}
-                className="inline-flex items-center gap-1 rounded-md border border-[#FBBC0C] bg-[#FBBC0C]/10 px-2 py-1 text-[11px] font-semibold text-[#1F2F58] hover:bg-[#FBBC0C]/20"
+                className="inline-flex items-center gap-1 rounded-md border border-[#FBBC0C] bg-[#FBBC0C]/10 px-2 py-1 text-[11px] font-semibold text-[#73B8E7] hover:bg-[#FBBC0C]/20"
               >
                 <Edit className="size-3" />
                 Editar

@@ -230,10 +230,10 @@ export default function AnalyticsClient() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">
+        <h1 className="text-2xl font-bold text-white">
           Analytics de Estudiantes
         </h1>
-        <p className="mt-1 text-sm text-gray-500">
+        <p className="mt-1 text-sm text-white/65">
           Indicadores agregados de desempeño y participación de tus materias.
         </p>
       </div>
@@ -241,11 +241,11 @@ export default function AnalyticsClient() {
       {!hasSubjects && (
         <Card>
           <CardContent className="py-12 text-center">
-            <BarChart3 className="mx-auto size-8 text-gray-300" />
-            <p className="mt-2 text-sm font-medium text-gray-500">
+            <BarChart3 className="mx-auto size-8 text-white/50" />
+            <p className="mt-2 text-sm font-medium text-white/65">
               No tienes materias asignadas todavía.
             </p>
-            <p className="mt-1 text-xs text-gray-400">
+            <p className="mt-1 text-xs text-white/55">
               Una vez se te asigne una materia, verás aquí las métricas.
             </p>
           </CardContent>
@@ -259,13 +259,13 @@ export default function AnalyticsClient() {
             <Card>
               <CardContent className="flex items-center gap-4">
                 <div className="flex size-10 items-center justify-center rounded-lg bg-[#1F2F58]/10">
-                  <Users className="size-5 text-[#1F2F58]" />
+                  <Users className="size-5 text-[#73B8E7]" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-gray-900">
+                  <p className="text-2xl font-bold text-white">
                     {metrics.activeStudents}
                   </p>
-                  <p className="text-xs text-gray-500">Estudiantes activos</p>
+                  <p className="text-xs text-white/65">Estudiantes activos</p>
                 </div>
               </CardContent>
             </Card>
@@ -275,10 +275,10 @@ export default function AnalyticsClient() {
                   <CheckCircle2 className="size-5 text-emerald-600" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-gray-900">
+                  <p className="text-2xl font-bold text-white">
                     {metrics.passRate == null ? "—" : `${metrics.passRate}%`}
                   </p>
-                  <p className="text-xs text-gray-500">
+                  <p className="text-xs text-white/65">
                     Aprobación en quizzes
                   </p>
                 </div>
@@ -290,12 +290,12 @@ export default function AnalyticsClient() {
                   <Activity className="size-5 text-[#73B8E7]" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-gray-900">
+                  <p className="text-2xl font-bold text-white">
                     {metrics.participationRate == null
                       ? "—"
                       : `${metrics.participationRate}%`}
                   </p>
-                  <p className="text-xs text-gray-500">Participación</p>
+                  <p className="text-xs text-white/65">Participación</p>
                 </div>
               </CardContent>
             </Card>
@@ -305,10 +305,10 @@ export default function AnalyticsClient() {
                   <AlertTriangle className="size-5 text-[#F0846D]" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold text-gray-900">
+                  <p className="text-2xl font-bold text-white">
                     {metrics.lowPerformers.length}
                   </p>
-                  <p className="text-xs text-gray-500">
+                  <p className="text-xs text-white/65">
                     Estudiantes en alerta
                   </p>
                 </div>
@@ -318,7 +318,7 @@ export default function AnalyticsClient() {
 
           {/* Detalle alertas */}
           <div>
-            <h2 className="mb-3 text-lg font-semibold text-gray-900 flex items-center gap-2">
+            <h2 className="mb-3 text-lg font-semibold text-white flex items-center gap-2">
               <AlertTriangle className="size-5 text-[#F0846D]" />
               Estudiantes con desempeño bajo
             </h2>
@@ -329,7 +329,7 @@ export default function AnalyticsClient() {
                   <p className="mt-2 text-sm font-medium text-emerald-700">
                     Sin alertas críticas
                   </p>
-                  <p className="mt-1 text-xs text-gray-400">
+                  <p className="mt-1 text-xs text-white/55">
                     {metrics.totalAttempts === 0
                       ? "Aún no hay intentos de quiz registrados."
                       : "Ningún estudiante tiene un promedio menor al 60%."}
@@ -345,10 +345,10 @@ export default function AnalyticsClient() {
                       className="flex items-center justify-between py-3 first:pt-0 last:pb-0"
                     >
                       <div>
-                        <p className="text-sm font-medium text-gray-900">
+                        <p className="text-sm font-medium text-white">
                           {s.name}
                         </p>
-                        <p className="text-xs text-gray-500">
+                        <p className="text-xs text-white/65">
                           Promedio en quizzes
                         </p>
                       </div>
@@ -364,27 +364,27 @@ export default function AnalyticsClient() {
 
           {/* Resumen actividad */}
           <div>
-            <h2 className="mb-3 text-lg font-semibold text-gray-900 flex items-center gap-2">
-              <TrendingUp className="size-5 text-[#1F2F58]" />
+            <h2 className="mb-3 text-lg font-semibold text-white flex items-center gap-2">
+              <TrendingUp className="size-5 text-[#73B8E7]" />
               Actividad acumulada
             </h2>
             <div className="grid gap-3 sm:grid-cols-2">
               <Card>
                 <CardContent className="py-4">
-                  <p className="text-xs uppercase tracking-wide text-gray-500">
+                  <p className="text-xs uppercase tracking-wide text-white/65">
                     Intentos de quiz completados
                   </p>
-                  <p className="mt-1 text-3xl font-bold text-[#1F2F58]">
+                  <p className="mt-1 text-3xl font-bold text-[#73B8E7]">
                     {metrics.totalAttempts}
                   </p>
                 </CardContent>
               </Card>
               <Card>
                 <CardContent className="py-4">
-                  <p className="text-xs uppercase tracking-wide text-gray-500">
+                  <p className="text-xs uppercase tracking-wide text-white/65">
                     Entregas registradas
                   </p>
-                  <p className="mt-1 text-3xl font-bold text-[#1F2F58]">
+                  <p className="mt-1 text-3xl font-bold text-[#73B8E7]">
                     {metrics.totalSubmissions}
                   </p>
                 </CardContent>

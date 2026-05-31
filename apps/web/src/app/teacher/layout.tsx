@@ -36,7 +36,7 @@ export default async function TeacherLayout({
       />
 
       {/* Main content */}
-      <main className="flex-1 overflow-y-auto bg-gray-50">
+      <main className="flex-1 overflow-y-auto bg-gradient-to-br from-[#070E1A] via-[#0A1628] to-[#1F2F58] text-white">
         <div className="mx-auto max-w-7xl px-6 py-6 lg:px-8">{children}</div>
       </main>
     </div>

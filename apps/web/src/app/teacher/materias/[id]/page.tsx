@@ -205,7 +205,7 @@ export default function TeacherSubjectDetailPage({
     return (
       <span
         className={`inline-block size-2.5 rounded-full ${
-          has ? "bg-emerald-500" : "bg-gray-200"
+          has ? "bg-emerald-500" : "bg-white/15"
         }`}
         title={has ? "Tiene contenido" : "Sin contenido"}
       />
@@ -229,7 +229,7 @@ export default function TeacherSubjectDetailPage({
             Volver a materias
           </Button>
         </Link>
-        <p className="text-sm text-gray-400">Materia no encontrada.</p>
+        <p className="text-sm text-white/55">Materia no encontrada.</p>
       </div>
     );
   }
@@ -255,8 +255,8 @@ export default function TeacherSubjectDetailPage({
             </Button>
           </Link>
           <h1 className="text-2xl font-bold text-white">{subject.name}</h1>
-          <p className="mt-1 text-sm text-gray-300">
-            <span className="font-medium text-gray-200">{subject.code}</span>
+          <p className="mt-1 text-sm text-white/50">
+            <span className="font-medium text-white/80">{subject.code}</span>
             {subject.semesters && (
               <span> &middot; Periodo {subject.semesters.number}</span>
             )}
@@ -266,9 +266,9 @@ export default function TeacherSubjectDetailPage({
           </p>
         </div>
 
-        <div className="flex items-center gap-4 text-sm text-gray-300">
+        <div className="flex items-center gap-4 text-sm text-white/50">
           <div className="text-center">
-            <p className="text-lg font-bold text-[#1F2F58]">{sessions.length}</p>
+            <p className="text-lg font-bold text-[#73B8E7]">{sessions.length}</p>
             <p className="text-xs">Sesiones</p>
           </div>
           <div className="text-center">
@@ -287,14 +287,14 @@ export default function TeacherSubjectDetailPage({
       </div>
 
       {/* Tab navigation */}
-      <div className="flex items-center gap-1 rounded-xl border border-gray-200 bg-white p-1 w-fit">
+      <div className="flex items-center gap-1 rounded-xl border border-white/20 bg-[#0A1628]/80 p-1 w-fit">
         <button
           type="button"
           onClick={() => setActiveTab("sesiones")}
           className={`flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-all ${
             activeTab === "sesiones"
               ? "bg-[#1F2F58] text-white shadow-sm"
-              : "text-gray-300 hover:text-gray-800 hover:bg-gray-100"
+              : "text-white/50 hover:text-white hover:bg-white/10"
           }`}
         >
           <BookOpen className="size-3.5" />
@@ -306,7 +306,7 @@ export default function TeacherSubjectDetailPage({
           className={`flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-all ${
             activeTab === "foro"
               ? "bg-[#1F2F58] text-white shadow-sm"
-              : "text-gray-300 hover:text-gray-800 hover:bg-gray-100"
+              : "text-white/50 hover:text-white hover:bg-white/10"
           }`}
         >
           <MessagesSquare className="size-3.5" />
@@ -323,7 +323,7 @@ export default function TeacherSubjectDetailPage({
           className={`flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-all ${
             activeTab === "asistencia"
               ? "bg-[#1F2F58] text-white shadow-sm"
-              : "text-gray-300 hover:text-gray-800 hover:bg-gray-100"
+              : "text-white/50 hover:text-white hover:bg-white/10"
           }`}
         >
           <ClipboardCheck className="size-3.5" />
@@ -338,7 +338,7 @@ export default function TeacherSubjectDetailPage({
           className={`flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-all ${
             activeTab === "analytics"
               ? "bg-[#1F2F58] text-white shadow-sm"
-              : "text-gray-300 hover:text-gray-800 hover:bg-gray-100"
+              : "text-white/50 hover:text-white hover:bg-white/10"
           }`}
         >
           <BarChart3 className="size-3.5" />
@@ -348,7 +348,7 @@ export default function TeacherSubjectDetailPage({
 
       {/* Foro tab */}
       {activeTab === "foro" && subject && (
-        <div className="rounded-xl border border-gray-200 bg-white p-5">
+        <div className="rounded-xl border border-white/20 bg-[#0A1628]/80 p-5">
           <SubjectForumTab
             subjectId={subject.id}
             currentUserId={currentUserId}
@@ -373,7 +373,7 @@ export default function TeacherSubjectDetailPage({
           {attendanceLoading && (
             <div className="flex items-center justify-center py-16">
               <Loader2 className="size-6 animate-spin text-[#73B8E7]" />
-              <span className="ml-2 text-sm text-gray-400">
+              <span className="ml-2 text-sm text-white/55">
                 Cargando asistencia...
               </span>
             </div>
@@ -391,7 +391,7 @@ export default function TeacherSubjectDetailPage({
           )}
 
           {!attendanceReport && !attendanceLoading && (
-            <div className="rounded-lg border border-dashed border-gray-200 py-12 text-center text-sm text-gray-400">
+            <div className="rounded-lg border border-dashed border-white/20 py-12 text-center text-sm text-white/55">
               No hay sesiones sincronicas registradas para esta materia en el periodo actual.
             </div>
           )}
@@ -404,21 +404,21 @@ export default function TeacherSubjectDetailPage({
           {analyticsLoading && (
             <div className="flex items-center justify-center py-16">
               <Loader2 className="size-6 animate-spin text-[#73B8E7]" />
-              <span className="ml-2 text-sm text-gray-400">Calculando analytics...</span>
+              <span className="ml-2 text-sm text-white/55">Calculando analytics...</span>
             </div>
           )}
 
           {!analyticsLoading && analyticsLoaded && (
             <>
               {/* Sub-view selector */}
-              <div className="flex items-center gap-1 rounded-xl border border-gray-200 bg-white p-1 w-fit">
+              <div className="flex items-center gap-1 rounded-xl border border-white/20 bg-[#0A1628]/80 p-1 w-fit">
                 <button
                   type="button"
                   onClick={() => setAnalyticsSubView("risk")}
                   className={`flex items-center gap-2 rounded-lg px-3 py-1.5 text-xs font-medium transition-all ${
                     analyticsSubView === "risk"
                       ? "bg-[#1F2F58] text-white shadow-sm"
-                      : "text-gray-300 hover:text-gray-800 hover:bg-gray-100"
+                      : "text-white/50 hover:text-white hover:bg-white/10"
                   }`}
                 >
                   <AlertTriangle className="size-3.5" />
@@ -435,7 +435,7 @@ export default function TeacherSubjectDetailPage({
                   className={`flex items-center gap-2 rounded-lg px-3 py-1.5 text-xs font-medium transition-all ${
                     analyticsSubView === "quiz"
                       ? "bg-[#1F2F58] text-white shadow-sm"
-                      : "text-gray-300 hover:text-gray-800 hover:bg-gray-100"
+                      : "text-white/50 hover:text-white hover:bg-white/10"
                   }`}
                 >
                   <HelpCircle className="size-3.5" />
@@ -447,7 +447,7 @@ export default function TeacherSubjectDetailPage({
                   className={`flex items-center gap-2 rounded-lg px-3 py-1.5 text-xs font-medium transition-all ${
                     analyticsSubView === "engagement"
                       ? "bg-[#1F2F58] text-white shadow-sm"
-                      : "text-gray-300 hover:text-gray-800 hover:bg-gray-100"
+                      : "text-white/50 hover:text-white hover:bg-white/10"
                   }`}
                 >
                   <BarChart3 className="size-3.5" />
@@ -473,42 +473,42 @@ export default function TeacherSubjectDetailPage({
       {activeTab === "sesiones" && (
         <>
       {/* Legend */}
-      <div className="flex flex-wrap items-center gap-4 rounded-lg border border-gray-200 bg-white p-3 text-xs text-gray-300">
-        <span className="font-medium text-gray-200">Indicadores:</span>
+      <div className="flex flex-wrap items-center gap-4 rounded-lg border border-white/20 bg-[#0A1628]/80 p-3 text-xs text-white/50">
+        <span className="font-medium text-white/80">Indicadores:</span>
         <span className="flex items-center gap-1">
           <span className="inline-block size-2.5 rounded-full bg-emerald-500" />
           Tiene contenido
         </span>
         <span className="flex items-center gap-1">
-          <span className="inline-block size-2.5 rounded-full bg-gray-200" />
+          <span className="inline-block size-2.5 rounded-full bg-white/15" />
           Sin contenido
         </span>
       </div>
 
       {/* Sessions Table */}
-      <div className="rounded-lg border border-gray-200 bg-white">
+      <div className="rounded-lg border border-white/20 bg-[#0A1628]/80">
         <Table>
           <TableHeader>
-            <TableRow className="bg-gray-50">
+            <TableRow className="bg-[#0A1628]/60">
               <TableHead className="w-12">#</TableHead>
               <TableHead>Titulo</TableHead>
               <TableHead className="text-center">
-                <Video className="mx-auto size-4 text-gray-400" />
+                <Video className="mx-auto size-4 text-white/55" />
               </TableHead>
               <TableHead className="text-center">
-                <FileText className="mx-auto size-4 text-gray-400" />
+                <FileText className="mx-auto size-4 text-white/55" />
               </TableHead>
               <TableHead className="text-center">
-                <BookOpenText className="mx-auto size-4 text-gray-400" />
+                <BookOpenText className="mx-auto size-4 text-white/55" />
               </TableHead>
               <TableHead className="text-center">
-                <HelpCircle className="mx-auto size-4 text-gray-400" />
+                <HelpCircle className="mx-auto size-4 text-white/55" />
               </TableHead>
               <TableHead className="text-center">
-                <ClipboardList className="mx-auto size-4 text-gray-400" />
+                <ClipboardList className="mx-auto size-4 text-white/55" />
               </TableHead>
               <TableHead className="text-center">
-                <Link2 className="mx-auto size-4 text-gray-400" />
+                <Link2 className="mx-auto size-4 text-white/55" />
               </TableHead>
               <TableHead className="text-right">Acciones</TableHead>
             </TableRow>
@@ -518,7 +518,7 @@ export default function TeacherSubjectDetailPage({
               <TableRow>
                 <TableCell
                   colSpan={9}
-                  className="py-10 text-center text-gray-400"
+                  className="py-10 text-center text-white/55"
                 >
                   No hay sesiones creadas para esta materia.
                 </TableCell>
@@ -527,7 +527,7 @@ export default function TeacherSubjectDetailPage({
               sessions.map((session) => (
                 <TableRow key={session.id}>
                   <TableCell>
-                    <span className="inline-flex size-7 items-center justify-center rounded bg-gray-100 text-xs font-bold text-gray-600">
+                    <span className="inline-flex size-7 items-center justify-center rounded bg-white/10 text-xs font-bold text-white/75">
                       {session.number}
                     </span>
                   </TableCell>
@@ -537,7 +537,7 @@ export default function TeacherSubjectDetailPage({
                         {session.title}
                       </div>
                       {session.description && (
-                        <div className="truncate text-xs text-gray-400">
+                        <div className="truncate text-xs text-white/55">
                           {session.description}
                         </div>
                       )}

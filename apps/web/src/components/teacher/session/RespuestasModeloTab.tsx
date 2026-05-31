@@ -71,7 +71,7 @@ export default function RespuestasModeloTab({ sessionId }: Props) {
 
   if (!hasContent) {
     return (
-      <div className="rounded-lg border border-gray-200 bg-gray-50 p-6 text-center text-sm text-gray-500">
+      <div className="rounded-lg border border-white/20 bg-[#0A1628]/60 p-6 text-center text-sm text-white/65">
         Esta sesión no tiene respuestas modelo cargadas todavía.
       </div>
     );
@@ -81,9 +81,9 @@ export default function RespuestasModeloTab({ sessionId }: Props) {
     <div className="space-y-6">
       {data?.ejercicio_modelo && (
         <>
-          <section className="rounded-xl border border-gray-200 bg-white p-5">
-            <h3 className="mb-2 text-base font-bold text-[#1F2F58]">Enunciado del ejercicio</h3>
-            <p className="whitespace-pre-wrap text-sm leading-relaxed text-gray-700">
+          <section className="rounded-xl border border-white/20 bg-[#0A1628]/80 p-5">
+            <h3 className="mb-2 text-base font-bold text-[#73B8E7]">Enunciado del ejercicio</h3>
+            <p className="whitespace-pre-wrap text-sm leading-relaxed text-white/85">
               {data.ejercicio_modelo.enunciado}
             </p>
           </section>
@@ -93,15 +93,15 @@ export default function RespuestasModeloTab({ sessionId }: Props) {
               <CheckCircle2 className="size-5 text-green-700" />
               <h3 className="text-base font-bold text-green-900">Respuesta modelo</h3>
             </div>
-            <p className="whitespace-pre-wrap text-sm leading-relaxed text-gray-800">
+            <p className="whitespace-pre-wrap text-sm leading-relaxed text-white">
               {data.ejercicio_modelo.respuesta_modelo}
             </p>
           </section>
 
           {data.ejercicio_modelo.criterio_evaluacion && (
             <section className="rounded-xl border border-[#FBBC0C]/40 bg-[#FBBC0C]/10 p-5">
-              <h3 className="mb-2 text-base font-bold text-[#1F2F58]">Criterio de evaluación</h3>
-              <p className="whitespace-pre-wrap text-sm leading-relaxed text-gray-800">
+              <h3 className="mb-2 text-base font-bold text-[#73B8E7]">Criterio de evaluación</h3>
+              <p className="whitespace-pre-wrap text-sm leading-relaxed text-white">
                 {data.ejercicio_modelo.criterio_evaluacion}
               </p>
             </section>
@@ -113,11 +113,11 @@ export default function RespuestasModeloTab({ sessionId }: Props) {
         <section>
           <div className="mb-3 flex items-center gap-2">
             <AlertTriangle className="size-5 text-amber-600" />
-            <h3 className="text-base font-bold text-[#1F2F58]">Errores típicos del alumno</h3>
+            <h3 className="text-base font-bold text-[#73B8E7]">Errores típicos del alumno</h3>
           </div>
           <ul className="space-y-2">
             {data.errores_tipicos.map((e, i) => (
-              <li key={i} className="rounded-lg border-l-4 border-amber-400 bg-amber-50 p-3 text-sm text-gray-700">
+              <li key={i} className="rounded-lg border-l-4 border-amber-400 bg-amber-50 p-3 text-sm text-white/85">
                 {e}
               </li>
             ))}
@@ -128,10 +128,10 @@ export default function RespuestasModeloTab({ sessionId }: Props) {
       {data?.intervencion_docente && (
         <section className="rounded-xl border border-[#73B8E7]/30 bg-[#73B8E7]/5 p-5">
           <div className="mb-2 flex items-center gap-2">
-            <MessageCircle className="size-5 text-[#1F2F58]" />
-            <h3 className="text-base font-bold text-[#1F2F58]">Intervención docente recomendada</h3>
+            <MessageCircle className="size-5 text-[#73B8E7]" />
+            <h3 className="text-base font-bold text-[#73B8E7]">Intervención docente recomendada</h3>
           </div>
-          <p className="whitespace-pre-wrap text-sm leading-relaxed text-gray-700">
+          <p className="whitespace-pre-wrap text-sm leading-relaxed text-white/85">
             {data.intervencion_docente}
           </p>
         </section>

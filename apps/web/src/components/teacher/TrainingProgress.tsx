@@ -32,15 +32,15 @@ export function TrainingProgress({ progress, compact = false }: TrainingProgress
     return (
       <Link href="/teacher/capacitacion" className="block">
         <div className="flex items-center gap-3 rounded-lg border border-[#1F2F58]/10 bg-[#1F2F58]/5 px-3 py-2 hover:bg-[#1F2F58]/10 transition-colors">
-          <GraduationCap className="size-4 shrink-0 text-[#1F2F58]" />
+          <GraduationCap className="size-4 shrink-0 text-[#73B8E7]" />
           <div className="flex-1 min-w-0">
             <div className="flex items-center justify-between text-xs mb-1">
-              <span className="font-medium text-[#1F2F58]">Capacitacion CES</span>
-              <span className={`font-semibold ${hasCertificate ? "text-emerald-600" : "text-gray-700"}`}>
+              <span className="font-medium text-[#73B8E7]">Capacitacion CES</span>
+              <span className={`font-semibold ${hasCertificate ? "text-emerald-600" : "text-white/85"}`}>
                 {hoursCompleted}/{hoursTotal}h
               </span>
             </div>
-            <div className="h-1.5 w-full rounded-full bg-gray-200">
+            <div className="h-1.5 w-full rounded-full bg-white/15">
               <div
                 className={`h-1.5 rounded-full transition-all ${barColor}`}
                 style={{ width: `${percentage}%` }}
@@ -60,13 +60,13 @@ export function TrainingProgress({ progress, compact = false }: TrainingProgress
       <CardContent>
         <div className="flex items-start gap-4">
           <div className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-[#1F2F58]/10">
-            <GraduationCap className="size-5 text-[#1F2F58]" />
+            <GraduationCap className="size-5 text-[#73B8E7]" />
           </div>
           <div className="flex-1 min-w-0">
             <div className="flex items-center justify-between gap-2 flex-wrap">
               <div>
-                <p className="font-semibold text-gray-900">Capacitacion Docente 120h</p>
-                <p className="text-xs text-gray-500 mt-0.5">
+                <p className="font-semibold text-white">Capacitacion Docente 120h</p>
+                <p className="text-xs text-white/65 mt-0.5">
                   Requisito Art. 61 RRA 2022 — CES Ecuador
                 </p>
               </div>
@@ -76,7 +76,7 @@ export function TrainingProgress({ progress, compact = false }: TrainingProgress
                   Certificado
                 </span>
               ) : (
-                <span className="inline-flex items-center gap-1 rounded-full bg-[#FBBC0C]/20 px-2.5 py-1 text-xs font-medium text-[#1F2F58]">
+                <span className="inline-flex items-center gap-1 rounded-full bg-[#FBBC0C]/20 px-2.5 py-1 text-xs font-medium text-[#73B8E7]">
                   En progreso
                 </span>
               )}
@@ -84,18 +84,18 @@ export function TrainingProgress({ progress, compact = false }: TrainingProgress
 
             <div className="mt-3">
               <div className="flex items-center justify-between text-sm mb-1.5">
-                <span className="text-gray-600">
+                <span className="text-white/75">
                   {hoursCompleted} de {hoursTotal} horas completadas
                 </span>
-                <span className="font-bold text-[#1F2F58]">{percentage}%</span>
+                <span className="font-bold text-[#73B8E7]">{percentage}%</span>
               </div>
-              <div className="h-3 w-full rounded-full bg-gray-200">
+              <div className="h-3 w-full rounded-full bg-white/15">
                 <div
                   className={`h-3 rounded-full transition-all duration-500 ${barColor}`}
                   style={{ width: `${percentage}%` }}
                 />
               </div>
-              <p className="mt-1.5 text-xs text-gray-400">
+              <p className="mt-1.5 text-xs text-white/55">
                 {hoursTotal - hoursCompleted > 0
                   ? `Faltan ${(hoursTotal - hoursCompleted).toFixed(1)} horas para completar la capacitacion`
                   : "Has completado todas las horas requeridas"}
@@ -105,7 +105,7 @@ export function TrainingProgress({ progress, compact = false }: TrainingProgress
             <div className="mt-3">
               <Link
                 href="/teacher/capacitacion"
-                className="inline-flex items-center gap-1.5 text-sm font-medium text-[#1F2F58] hover:text-[#2A3F6E] transition-colors"
+                className="inline-flex items-center gap-1.5 text-sm font-medium text-[#73B8E7] hover:text-[#2A3F6E] transition-colors"
               >
                 Ver mi capacitacion
                 <ArrowRight className="size-3.5" />

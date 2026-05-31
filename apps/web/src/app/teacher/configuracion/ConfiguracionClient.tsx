@@ -135,10 +135,10 @@ export default function ConfiguracionClient() {
       <Card>
         <CardContent className="py-12 text-center">
           <AlertTriangle className="mx-auto size-8 text-[#F0846D]" />
-          <p className="mt-2 text-sm font-medium text-gray-200">
+          <p className="mt-2 text-sm font-medium text-white/80">
             No fue posible cargar tu perfil.
           </p>
-          <p className="mt-1 text-xs text-gray-400">
+          <p className="mt-1 text-xs text-white/55">
             Recarga la página o contacta al administrador.
           </p>
         </CardContent>
@@ -163,7 +163,7 @@ export default function ConfiguracionClient() {
     <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-bold text-white">Configuración</h1>
-        <p className="mt-1 text-sm text-gray-300">
+        <p className="mt-1 text-sm text-white/50">
           Actualiza tu perfil docente, biografía y revisa tus materias asignadas.
         </p>
       </div>
@@ -172,7 +172,7 @@ export default function ConfiguracionClient() {
         {/* Columna izquierda: avatar + identidad */}
         <Card className="lg:col-span-1">
           <CardHeader>
-            <CardTitle className="text-sm font-semibold text-gray-200">
+            <CardTitle className="text-sm font-semibold text-white/80">
               Identidad
             </CardTitle>
           </CardHeader>
@@ -196,7 +196,7 @@ export default function ConfiguracionClient() {
                 <p className="font-semibold text-white">
                   {form.full_name || "Docente"}
                 </p>
-                <p className="text-xs text-gray-300">{form.email}</p>
+                <p className="text-xs text-white/50">{form.email}</p>
                 <Badge className="mt-2 bg-[#1F2F58] text-white">
                   {roleLabel}
                 </Badge>
@@ -206,7 +206,7 @@ export default function ConfiguracionClient() {
             <div className="space-y-2">
               <Label
                 htmlFor="avatar_url"
-                className="text-xs font-medium text-gray-600"
+                className="text-xs font-medium text-white/75"
               >
                 <ImageIcon className="inline size-3 mr-1" />
                 URL de la foto
@@ -227,7 +227,7 @@ export default function ConfiguracionClient() {
         {/* Columna derecha: datos editables */}
         <Card className="lg:col-span-2">
           <CardHeader>
-            <CardTitle className="text-sm font-semibold text-gray-200">
+            <CardTitle className="text-sm font-semibold text-white/80">
               Información del perfil
             </CardTitle>
           </CardHeader>
@@ -235,7 +235,7 @@ export default function ConfiguracionClient() {
             <div className="space-y-2">
               <Label
                 htmlFor="full_name"
-                className="text-xs font-medium text-gray-600"
+                className="text-xs font-medium text-white/75"
               >
                 <User className="inline size-3 mr-1" />
                 Nombre completo
@@ -253,18 +253,18 @@ export default function ConfiguracionClient() {
             <div className="space-y-2">
               <Label
                 htmlFor="email"
-                className="text-xs font-medium text-gray-600"
+                className="text-xs font-medium text-white/75"
               >
                 Correo electrónico
               </Label>
               <Input id="email" value={form.email} disabled />
-              <p className="text-[11px] text-gray-400">
+              <p className="text-[11px] text-white/55">
                 Para cambiar tu correo, contacta al administrador.
               </p>
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="bio" className="text-xs font-medium text-gray-600">
+              <Label htmlFor="bio" className="text-xs font-medium text-white/75">
                 Biografía corta
               </Label>
               <Textarea
@@ -274,7 +274,7 @@ export default function ConfiguracionClient() {
                 rows={4}
                 placeholder="Cuéntale a tus estudiantes sobre tu experiencia, especialidad y trayectoria..."
               />
-              <p className="text-[11px] text-gray-400">
+              <p className="text-[11px] text-white/55">
                 La biografía pública se mostrará a estudiantes en tu ficha.
               </p>
             </div>
@@ -312,17 +312,17 @@ export default function ConfiguracionClient() {
       {/* Materias asignadas */}
       <div>
         <h2 className="mb-3 text-lg font-semibold text-white flex items-center gap-2">
-          <BookOpen className="size-5 text-[#1F2F58]" />
+          <BookOpen className="size-5 text-[#73B8E7]" />
           Materias asignadas
         </h2>
         {subjects.length === 0 ? (
           <Card>
             <CardContent className="py-10 text-center">
-              <BookOpen className="mx-auto size-8 text-gray-300" />
-              <p className="mt-2 text-sm font-medium text-gray-300">
+              <BookOpen className="mx-auto size-8 text-white/50" />
+              <p className="mt-2 text-sm font-medium text-white/50">
                 Aún no tienes materias asignadas.
               </p>
-              <p className="mt-1 text-xs text-gray-400">
+              <p className="mt-1 text-xs text-white/55">
                 Solicita la asignación a coordinación académica.
               </p>
             </CardContent>
@@ -332,13 +332,13 @@ export default function ConfiguracionClient() {
             {subjects.map((s) => (
               <Card key={s.id}>
                 <CardContent className="space-y-1">
-                  <p className="text-xs font-semibold text-[#1F2F58]">
+                  <p className="text-xs font-semibold text-[#73B8E7]">
                     {s.code}
                   </p>
                   <p className="text-sm font-medium text-white line-clamp-2">
                     {s.name}
                   </p>
-                  <p className="text-[11px] text-gray-300">
+                  <p className="text-[11px] text-white/50">
                     {s.hours_total} horas totales
                   </p>
                 </CardContent>
@@ -351,12 +351,12 @@ export default function ConfiguracionClient() {
       {/* Tutorías y calendario */}
       <div>
         <h2 className="mb-3 text-lg font-semibold text-white flex items-center gap-2">
-          <CalendarDays className="size-5 text-[#1F2F58]" />
+          <CalendarDays className="size-5 text-[#73B8E7]" />
           Tutorías y disponibilidad
         </h2>
         <Card>
           <CardContent className="py-6">
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-white/75">
               Configura tu horario de tutorías sincrónicas y revisa tu
               calendario académico.
             </p>
