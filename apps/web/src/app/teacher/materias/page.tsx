@@ -65,18 +65,18 @@ export default function TeacherMateriasPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">Mis Materias</h1>
-        <p className="mt-1 text-sm text-gray-500">
+        <h1 className="text-2xl font-bold text-white">Mis Materias</h1>
+        <p className="mt-1 text-sm text-white/70">
           Gestiona el contenido de tus materias asignadas
         </p>
       </div>
 
       {subjects.length === 0 ? (
-        <Card>
+        <Card className="border-white/20 bg-[#0A1628]/80">
           <CardContent>
             <div className="flex flex-col items-center gap-3 py-10 text-center">
-              <BookOpen className="size-10 text-gray-300" />
-              <p className="text-sm text-gray-400">
+              <BookOpen className="size-10 text-white/40" />
+              <p className="text-sm text-white/60">
                 No tienes materias asignadas.
               </p>
             </div>
