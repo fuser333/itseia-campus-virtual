@@ -187,7 +187,7 @@ export default async function DocentePreuniPage() {
                 {scheduled.map((s) => (
                   <tr
                     key={s.id}
-                    className={`border-b border-white/5 last:border-b-0 transition-colors hover:bg-white/[0.04] ${
+                    className={`border-b border-white/5 last:border-b-0 transition-colors hover:bg-white/[0.06] ${
                       s.status === "live" ? "bg-[#F0846D]/10" : ""
                     }`}
                   >
@@ -197,15 +197,20 @@ export default async function DocentePreuniPage() {
                       </span>
                     </td>
                     <td className="px-4 py-3 align-top">
-                      <p className="font-medium text-white/90 leading-snug">
-                        {s.title}
-                      </p>
-                      <p className="mt-1 text-[10px] text-white/45 uppercase tracking-wider">
-                        {s.weekLabel}
-                      </p>
-                      <p className="sm:hidden mt-1 text-[11px] text-white/55">
-                        {formatDateShort(s.scheduledAt)}
-                      </p>
+                      <Link
+                        href={`/docente/preuni/sesion/${s.dayIndex}`}
+                        className="block group"
+                      >
+                        <p className="font-medium text-white/90 leading-snug group-hover:text-[#FBBC0C] transition-colors">
+                          {s.title}
+                        </p>
+                        <p className="mt-1 text-[10px] text-white/45 uppercase tracking-wider">
+                          {s.weekLabel} · abrir material →
+                        </p>
+                        <p className="sm:hidden mt-1 text-[11px] text-white/55">
+                          {formatDateShort(s.scheduledAt)}
+                        </p>
+                      </Link>
                     </td>
                     <td className="hidden sm:table-cell px-4 py-3 align-top text-white/65">
                       {formatDateShort(s.scheduledAt)}
@@ -214,15 +219,23 @@ export default async function DocentePreuniPage() {
                       <StatusPill status={s.status} />
                     </td>
                     <td className="px-4 py-3 align-top text-right">
-                      <a
-                        href={PREUNI_MEET_URL}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 rounded-lg border border-white/15 bg-white/[0.04] px-3 py-1.5 text-[11px] font-semibold text-white/80 hover:bg-[#FBBC0C]/20 hover:text-[#FBBC0C] hover:border-[#FBBC0C]/40 transition-all"
-                      >
-                        <Video className="size-3.5" />
-                        Unirse
-                      </a>
+                      <div className="flex flex-col items-end gap-1.5">
+                        <Link
+                          href={`/docente/preuni/sesion/${s.dayIndex}`}
+                          className="inline-flex items-center gap-1.5 rounded-lg border border-[#FBBC0C]/40 bg-[#FBBC0C]/10 px-3 py-1.5 text-[11px] font-semibold text-[#FBBC0C] hover:bg-[#FBBC0C]/20 hover:border-[#FBBC0C] transition-all"
+                        >
+                          Abrir clase
+                        </Link>
+                        <a
+                          href={PREUNI_MEET_URL}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 rounded-lg border border-white/15 bg-white/[0.04] px-3 py-1.5 text-[11px] font-semibold text-white/80 hover:bg-white/10 transition-all"
+                        >
+                          <Video className="size-3.5" />
+                          Meet
+                        </a>
+                      </div>
                     </td>
                   </tr>
                 ))}
