@@ -1,0 +1,74 @@
+# ============================================================================
+# Carreras · 3 carreras (IA, Ciencia de Datos, Big Data) · 5 semestres · Beca H3L
+# Cohorte anual · arranca oct 2026.
+# ============================================================================
+
+producto:
+  id: carreras
+  nombre: "Carreras de Tercer Nivel"
+  descripcion: "3 años · título de tercer nivel · certificaciones AWS+Google · Beca H3L disponible."
+  color_accent: "#73B8E7"        # sky ITSEIA
+  icono: "🎓"
+  url_publica: "https://carreras.itseia.ai"
+
+cohorte:
+  estructura: "anual"            # 1 cohorte por año académico
+  duracion_dias: 1095            # 3 años aprox
+  horario_default:
+    inicio_ec: "17:30"
+    fin_ec: "21:30"
+    dias_semana: ["lun", "mar", "mie", "jue", "vie"]
+  sesiones_totales: 600          # ~5 semestres × 120 sesiones/semestre
+
+alumno:
+  pestañas_sesion:
+    - video_resumen
+    - materiales
+    - ejercicios
+    - evaluacion
+  ai_lab: true
+  comunidad: true
+  asesorias: true
+
+docente:
+  pestañas_sesion:
+    - resumen
+    - plan_clase
+    - materiales_editar
+    - ejercicios_editar
+    - evaluacion_editar
+    - prompts
+    - recursos
+    - notas_privadas
+    - grabaciones
+  boton_grabar: true
+  asistencia: true
+
+pricing:
+  modelo: "mensual"
+  precio_usd: 300                # antes Beca H3L
+  precio_con_beca_h3l: 99        # NEXUS online; TITAN presencial $149
+  moneda: "USD"
+  beca_h3l: true
+  inscripcion_usd:
+    nexus_online: 49
+    titan_presencial: 99
+  total_semestres: 5
+  carreras_disponibles:
+    - "Inteligencia Artificial"
+    - "Ciencia de Datos"
+    - "Big Data e Inteligencia de Negocio"
+
+assignment_docente:
+  modo: "manual"
+
+cross_promo:
+  excluir_a_si_mismo: true
+  orden_otros:
+    - certificaciones
+    - bootcamp
+    - cursos-pro
+    - mdt
+    - preuni
+    - b2b
+    - demo

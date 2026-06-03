@@ -97,6 +97,36 @@
   --sidebar-accent-foreground: #F0F2F5;
   --sidebar-border: rgba(255, 255, 255, 0.06);
   --sidebar-ring: #FBBC0C;
+
+  /* ========================================
+     ITSEIA brand · paleta v2 (Campus v2)
+     Variables explícitas (no aliases) para
+     que se puedan usar como --itseia-* en
+     cualquier componente.
+     ======================================== */
+  --itseia-navy-dark:  #0A1628;
+  --itseia-navy:       #1F2F58;
+  --itseia-navy-light: #2A3F6E;
+  --itseia-gold:       #FBBC0C;
+  --itseia-sky:        #73B8E7;
+  --itseia-coral:      #F0846D;
+  --itseia-cream:      #F9F6E7;
+  --itseia-text:       #F0F2F5;
+
+  /* ========================================
+     Acentos por producto (Campus v2)
+     Cada producto YAML define color_accent;
+     estos defaults coinciden con esos YAML.
+     Usar como: color: var(--producto-preuni)
+     ======================================== */
+  --producto-carreras:        var(--itseia-sky);
+  --producto-preuni:          var(--itseia-coral);
+  --producto-cursos-pro:      var(--itseia-gold);
+  --producto-bootcamp:        #D45A3F;
+  --producto-mdt:             #4CAF50;
+  --producto-b2b:             var(--itseia-navy-light);
+  --producto-certificaciones: #C99300;
+  --producto-demo:            var(--itseia-cream);
 }
 
 /* Light theme override (if needed in future) */

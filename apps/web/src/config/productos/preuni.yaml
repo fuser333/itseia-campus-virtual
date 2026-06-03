@@ -1,0 +1,66 @@
+# ============================================================================
+# Preuniversitario IGNITE · Nivelación 20 días · $99 pago único
+# Fuente única de verdad del producto. NO hardcodear en código.
+# ============================================================================
+
+producto:
+  id: preuni
+  nombre: "Preuniversitario IGNITE"
+  descripcion: "Nivelación de 20 días para arrancar la carrera de IA a la par con tus compañeros."
+  color_accent: "#F0846D"        # coral ITSEIA
+  icono: "🔥"
+  url_publica: "https://itseia.ai/preuniversitario"
+
+cohorte:
+  estructura: "mensual"          # mensual | anual | unico | por_cliente
+  duracion_dias: 28
+  horario_default:
+    inicio_ec: "17:30"
+    fin_ec: "19:30"
+    dias_semana: ["lun", "mar", "mie", "jue", "vie"]
+  sesiones_totales: 20
+
+alumno:
+  pestañas_sesion:
+    - video_resumen
+    - materiales
+    - ejercicios
+    - evaluacion
+  ai_lab: true
+  comunidad: true
+  asesorias: true
+
+docente:
+  pestañas_sesion:
+    - resumen
+    - plan_clase
+    - materiales_editar
+    - ejercicios_editar
+    - evaluacion_editar
+    - prompts
+    - recursos
+    - notas_privadas
+    - grabaciones
+  boton_grabar: true
+  asistencia: true
+
+pricing:
+  modelo: "pago_unico"           # pago_unico | mensual | por_persona | a_la_medida
+  precio_usd: 99
+  moneda: "USD"
+  beca_h3l: false
+  cuenta_pago: "Produbanco 27059145711"
+
+assignment_docente:
+  modo: "manual"                 # manual | auto_unico
+
+cross_promo:
+  excluir_a_si_mismo: true
+  orden_otros:
+    - carreras
+    - cursos-pro
+    - bootcamp
+    - mdt
+    - b2b
+    - certificaciones
+    - demo
