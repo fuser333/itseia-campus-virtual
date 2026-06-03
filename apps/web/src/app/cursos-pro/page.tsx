@@ -84,16 +84,18 @@ export default async function CursosProDashboardPage() {
   const fullName  = profile?.full_name ?? user.email?.split("@")[0] ?? "Estudiante";
   const firstName = fullName.split(" ")[0];
 
-  // Verificar enrollment al curso Steveen $197.
+  // Verificar enrollment al curso piloto Steveen.
+  // Schema nuevo (migration 017): cursos_pro_enrollments(profile_id, course_id, status)
+  // → join con cursos_pro_courses para filtrar por slug.
   // No rompemos si la tabla aún no existe — devolvemos false y mostramos CTA "Inscríbete".
   let enrolledSteveen = false;
   try {
     const { data: enrollment } = await supabaseAdmin
       .from("cursos_pro_enrollments")
-      .select("curso_slug, estado")
-      .eq("user_id", user.id)
-      .eq("curso_slug", "steveen-pinchao")
-      .eq("estado", "activo")
+      .select("course_id, status, cursos_pro_courses!inner(slug)")
+      .eq("profile_id", user.id)
+      .eq("status", "active")
+      .eq("cursos_pro_courses.slug", "steveen-pinchao")
       .maybeSingle();
     enrolledSteveen = Boolean(enrollment);
   } catch {
@@ -125,6 +127,48 @@ export default async function CursosProDashboardPage() {
   }
 
   const cursoSteveen = CURSOS_PRO[0];
+
+  // ── Cursos comprados desde BD (cohorte real: Gisela + Josselin junio 2026) ──
+  // Devolvemos sus cursos activos para mostrarlos como cards al inicio.
+  type EnrolledCourse = {
+    slug: string;
+    name: string;
+    subtitle: string | null;
+    category: string | null;
+    price_usd: number;
+    total_modules: number;
+    total_sessions: number;
+    total_hours: number;
+    start_date: string;
+    end_date: string;
+  };
+  let cursosComprados: EnrolledCourse[] = [];
+  try {
+    const { data: enrollmentsRows } = await supabaseAdmin
+      .from("cursos_pro_enrollments")
+      .select(
+        "course_id, status, cursos_pro_courses!inner(slug, name, subtitle, category, price_usd, total_modules, total_sessions, total_hours, start_date, end_date, is_active)"
+      )
+      .eq("profile_id", user.id)
+      .eq("status", "active");
+    type Row = {
+      cursos_pro_courses:
+        | (EnrolledCourse & { is_active: boolean })
+        | (EnrolledCourse & { is_active: boolean })[]
+        | null;
+    };
+    cursosComprados = ((enrollmentsRows as Row[] | null) ?? [])
+      .map((r) => {
+        const c = Array.isArray(r.cursos_pro_courses)
+          ? r.cursos_pro_courses[0]
+          : r.cursos_pro_courses;
+        return c ?? null;
+      })
+      .filter((c): c is EnrolledCourse & { is_active: boolean } => Boolean(c && c.is_active))
+      .map(({ is_active: _ia, ...rest }) => rest);
+  } catch {
+    cursosComprados = [];
+  }
 
   return (
     <div className="space-y-10">
@@ -181,6 +225,49 @@ export default async function CursosProDashboardPage() {
           accent="bg-[#F0846D]/10"
         />
       </div>
+
+      {/* ── Cursos comprados (BD: cohorte real) ─────────────────────────────── */}
+      {cursosComprados.length > 0 && (
+        <section>
+          <h2 className="mb-4 text-xl font-bold text-foreground flex items-center gap-2">
+            <Sparkles className="size-5 text-[#FBBC0C]" />
+            Tus Cursos Activos
+          </h2>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {cursosComprados.map((c) => (
+              <Link
+                key={c.slug}
+                href={`/cursos-pro/${c.slug}`}
+                className="group block rounded-2xl border border-border bg-card p-6 shadow-sm hover:shadow-md hover:border-[#FBBC0C]/40 transition-all"
+              >
+                <div className="flex items-start justify-between gap-3 mb-2">
+                  <Badge className="border-none bg-[#FBBC0C]/15 text-[10px] font-semibold uppercase tracking-wider text-[#FBBC0C]">
+                    Curso Activo · ${c.price_usd}
+                  </Badge>
+                  <ArrowRight className="size-4 text-[#1F2F58]/40 group-hover:text-[#FBBC0C] group-hover:translate-x-1 transition-all" />
+                </div>
+                <h3 className="text-lg font-bold text-[#0A1628] leading-tight">
+                  {c.name}
+                </h3>
+                {c.subtitle && (
+                  <p className="mt-1 text-xs text-[#1F2F58]/60">{c.subtitle}</p>
+                )}
+                <div className="mt-4 flex items-center gap-4 text-[11px] font-medium text-[#1F2F58]/55">
+                  <span className="flex items-center gap-1">
+                    <Layers className="size-3" /> {c.total_modules} módulos
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <BookOpen className="size-3" /> {c.total_sessions} sesiones
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <Clock className="size-3" /> {c.total_hours}h
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* ── Curso Steveen card ──────────────────────────────────────────────── */}
       <section>
