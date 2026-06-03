@@ -330,7 +330,7 @@ export default function CarrerasInfoPage() {
               Inscribirme ahora
             </a>
             <a
-              href="https://meet.google.com/fzx-fqns-ayc"
+              href="https://meet.google.com/qox-bghu-mbe"
               target="_blank"
               rel="noopener noreferrer"
               className="border border-white/15 text-white/80 px-7 py-3.5 rounded-xl font-semibold text-base hover:bg-white/[0.05] transition-all"

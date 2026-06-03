@@ -414,7 +414,7 @@ export default function HomePage() {
               Inscribirme ahora
             </Link>
             <a
-              href="https://meet.google.com/fzx-fqns-ayc"
+              href="https://meet.google.com/qox-bghu-mbe"
               target="_blank"
               rel="noopener noreferrer"
               className="border border-white/15 text-white/80 px-7 py-3.5 rounded-xl font-semibold text-base hover:bg-white/[0.05] hover:border-white/25 transition-all"
@@ -519,7 +519,7 @@ export default function HomePage() {
                   ))}
                 </ul>
                 <a
-                  href="https://meet.google.com/fzx-fqns-ayc"
+                  href="https://meet.google.com/qox-bghu-mbe"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 bg-[#FBBC0C] text-[#0A1628] px-6 py-3 rounded-xl font-bold text-sm hover:bg-[#E5AB00] transition-colors"
@@ -1337,7 +1337,7 @@ export default function HomePage() {
                 </div>
                 <div className="flex flex-col gap-2">
                   <a
-                    href="https://meet.google.com/fzx-fqns-ayc"
+                    href="https://meet.google.com/qox-bghu-mbe"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-center gap-2 bg-[#FBBC0C] text-[#0A1628] px-7 py-3 rounded-xl font-bold text-sm hover:bg-[#E5AB00] transition-colors"
@@ -1402,7 +1402,7 @@ export default function HomePage() {
               Inscribirme ahora — $99/mes online · $149/mes presencial
             </Link>
             <a
-              href="https://meet.google.com/fzx-fqns-ayc"
+              href="https://meet.google.com/qox-bghu-mbe"
               target="_blank"
               rel="noopener noreferrer"
               className="border border-white/15 text-white/75 px-8 py-4 rounded-xl font-semibold text-base hover:bg-white/[0.05] hover:border-white/25 transition-all"
@@ -1502,7 +1502,7 @@ export default function HomePage() {
                 </li>
                 <li>
                   <a
-                    href="https://meet.google.com/fzx-fqns-ayc"
+                    href="https://meet.google.com/qox-bghu-mbe"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-[#73B8E7]/60 hover:text-[#73B8E7] text-xs transition-colors"

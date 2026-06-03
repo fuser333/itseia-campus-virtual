@@ -195,7 +195,7 @@ export default function LiveClassPanel({
             </div>
           </div>
           <a
-            href="https://meet.google.com/fzx-fqns-ayc"
+            href="https://meet.google.com/qox-bghu-mbe"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-center gap-2 w-full rounded-lg bg-[#FBBC0C] px-4 py-3 text-sm font-semibold text-[#0A1628] hover:bg-[#FBBC0C]/90 transition-colors shadow-md shadow-[#FBBC0C]/20"
