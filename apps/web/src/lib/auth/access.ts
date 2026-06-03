@@ -192,6 +192,7 @@ export const PROTECTED_PATHS = [
   "/certificates",
   "/admin",
   "/teacher",
+  "/docente",
   "/biblioteca",
   "/carreras",
   "/cohorte",

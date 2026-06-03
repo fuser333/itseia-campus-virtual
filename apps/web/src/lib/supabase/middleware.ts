@@ -113,7 +113,7 @@ export async function updateSession(request: NextRequest) {
     }
 
     // Teacher routes: verificar role en DB
-    if (pathname.startsWith("/teacher")) {
+    if (pathname.startsWith("/teacher") || pathname.startsWith("/docente")) {
       const { data: profile } = await supabase
         .from("profiles")
         .select("role")
