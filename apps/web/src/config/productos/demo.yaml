@@ -1,0 +1,57 @@
+# ============================================================================
+# Demo · Tour público del campus · sin matrícula
+# Acceso libre para que prospectos exploren el aula virtual.
+# ============================================================================
+
+producto:
+  id: demo
+  nombre: "Demo del Campus"
+  descripcion: "Tour interactivo del campus virtual · explora cómo funciona ITSEIA sin matricularte."
+  color_accent: "#F9F6E7"        # cream ITSEIA
+  icono: "👀"
+  url_publica: "https://itseia.ai/demo/aula"
+
+cohorte:
+  estructura: "unico"            # 1 sola cohorte demo permanente
+  duracion_dias: 0               # acceso indefinido
+  horario_default:
+    inicio_ec: "00:00"
+    fin_ec: "23:59"
+    dias_semana: ["lun", "mar", "mie", "jue", "vie", "sab", "dom"]
+  sesiones_totales: 3            # tour con 3 sesiones de muestra
+
+alumno:
+  pestañas_sesion:
+    - video_resumen
+    - materiales
+    - ejercicios
+    - evaluacion
+  ai_lab: false                  # AI Lab solo para matriculados
+  comunidad: false
+  asesorias: false
+
+docente:
+  pestañas_sesion: []            # no hay docente en demo
+  boton_grabar: false
+  asistencia: false
+
+pricing:
+  modelo: "gratis"
+  precio_usd: 0
+  moneda: "USD"
+  beca_h3l: false
+  acceso_publico: true
+
+assignment_docente:
+  modo: "auto_unico"             # cuenta del sistema
+
+cross_promo:
+  excluir_a_si_mismo: true
+  orden_otros:
+    - preuni
+    - cursos-pro
+    - carreras
+    - bootcamp
+    - mdt
+    - certificaciones
+    - b2b
