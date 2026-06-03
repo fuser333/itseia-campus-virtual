@@ -1,5 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 import DocentesSidebar from "@/components/layout/DocentesSidebar";
 
 export default async function TeacherLayout({
@@ -37,6 +39,33 @@ export default async function TeacherLayout({
 
       {/* Main content */}
       <main className="flex-1 overflow-y-auto bg-gradient-to-br from-[#070E1A] via-[#0A1628] to-[#1F2F58] text-white">
+        {/* Barra superior sticky · botón Volver al Panel Docente unificado */}
+        <div className="sticky top-0 z-30 border-b border-[#FBBC0C]/25 bg-[#0A1628]/95 backdrop-blur-sm px-6 py-3 lg:px-8">
+          <div className="mx-auto max-w-7xl flex items-center justify-between gap-4">
+            <Link
+              href="/docente"
+              className="inline-flex items-center gap-2 rounded-lg border border-[#FBBC0C]/40 bg-[#FBBC0C]/10 px-4 py-2 text-sm font-bold text-[#FBBC0C] hover:bg-[#FBBC0C]/20 hover:border-[#FBBC0C] transition-all"
+            >
+              <ArrowLeft className="size-4" />
+              Volver al Panel Docente
+            </Link>
+            <div className="hidden sm:flex items-center gap-3 text-xs text-white/50">
+              <Link
+                href="/docente/preuni"
+                className="hover:text-[#FBBC0C] transition-colors"
+              >
+                Preuni IGNITE
+              </Link>
+              <span className="text-white/20">·</span>
+              <Link
+                href="/cursos-pro/docente"
+                className="hover:text-[#FBBC0C] transition-colors"
+              >
+                Cursos Pro
+              </Link>
+            </div>
+          </div>
+        </div>
         <div className="mx-auto max-w-7xl px-6 py-6 lg:px-8">{children}</div>
       </main>
     </div>
