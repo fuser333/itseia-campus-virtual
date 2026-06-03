@@ -237,7 +237,7 @@ export default async function CursosProDashboardPage() {
             {cursosComprados.map((c) => (
               <Link
                 key={c.slug}
-                href={`/cursos-pro/${c.slug}`}
+                href={`/cursos-pro/c/${c.slug}`}
                 className="group block rounded-2xl border border-border bg-card p-6 shadow-sm hover:shadow-md hover:border-[#FBBC0C]/40 transition-all"
               >
                 <div className="flex items-start justify-between gap-3 mb-2">
