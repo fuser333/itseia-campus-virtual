@@ -29,9 +29,6 @@ import {
   Lightbulb,
 } from "lucide-react";
 
-// Slug del único curso activo publicado (piloto Steveen Pinchao)
-const CURSO_ACTIVO_SLUG = "steveen-pinchao";
-
 // ─── Nav types ────────────────────────────────────────────────────────────────
 
 interface NavItem {
@@ -50,23 +47,11 @@ interface NavSection {
   subItems?: NavItem[];
 }
 
-// ─── Menu definition ──────────────────────────────────────────────────────────
-// Los 8 módulos del curso piloto Steveen Pinchao apuntan todos al mismo [slug]
-// page (que contiene el acordeón por módulos). Cada item lleva el estado del
-// módulo en el hash (#m1…#m8) para futura navegación directa.
+// ─── Icono cíclico para módulos dinámicos ─────────────────────────────────────
+const MODULE_ICONS = [Brain, Wand2, Wrench, ClipboardList, Award, BookOpen];
 
-const MODULO_ITEMS: NavItem[] = [
-  { href: `/cursos-pro/${CURSO_ACTIVO_SLUG}`, label: "M1: Fundamentos de IA",          icon: Brain },
-  { href: `/cursos-pro/${CURSO_ACTIVO_SLUG}`, label: "M2: ChatGPT — Dominio Pro",       icon: Wand2 },
-  { href: `/cursos-pro/${CURSO_ACTIVO_SLUG}`, label: "M3: Claude — Análisis Avanzado",  icon: Brain },
-  { href: `/cursos-pro/${CURSO_ACTIVO_SLUG}`, label: "M4: Optimización Producción",     icon: Wrench },
-  { href: `/cursos-pro/${CURSO_ACTIVO_SLUG}`, label: "M5: Mantenimiento Predictivo",    icon: ClipboardList },
-  { href: `/cursos-pro/${CURSO_ACTIVO_SLUG}`, label: "M6: Control de Calidad",          icon: ClipboardList },
-  { href: `/cursos-pro/${CURSO_ACTIVO_SLUG}`, label: "M7: Cadena de Suministro",        icon: Wrench },
-  { href: `/cursos-pro/${CURSO_ACTIVO_SLUG}`, label: "M8: Proyecto Final Aplicado",     icon: Award },
-];
-
-const MENU: NavSection[] = [
+// ─── Menu fijo (secciones que NO dependen del curso activo) ──────────────────
+const MENU_BASE: NavSection[] = [
   {
     sectionLabel: "MI CURSO",
     items: [
@@ -74,13 +59,6 @@ const MENU: NavSection[] = [
       { href: "/cursos-pro/progreso",  label: "Mi Progreso",          icon: TrendingUp },
       { href: "/cursos-pro/asesorias", label: "Asesorías con Héctor", icon: CalendarCheck },
     ],
-  },
-  {
-    sectionLabel: "MI PROGRAMA",
-    expandable: true,
-    defaultOpen: false,
-    items: [],
-    subItems: MODULO_ITEMS,
   },
   {
     sectionLabel: "RECURSOS",
@@ -119,10 +97,17 @@ const MENU: NavSection[] = [
 
 // ─── Props ────────────────────────────────────────────────────────────────────
 
+interface ActiveCourse {
+  slug: string;
+  name: string;
+  modules: Array<{ num: number; name: string }>;
+}
+
 interface CursosProSidebarProps {
   userName: string;
   userEmail: string;
   userInitials: string;
+  activeCourse?: ActiveCourse | null;
 }
 
 // ─── Component ────────────────────────────────────────────────────────────────
@@ -131,7 +116,32 @@ export default function CursosProSidebar({
   userName,
   userEmail,
   userInitials,
+  activeCourse,
 }: CursosProSidebarProps) {
+  // Construye dinámicamente los items de módulos del curso activo del usuario.
+  // Si no hay curso activo (admin/docente sin enrollment), la sección
+  // "MI PROGRAMA" se omite del menú renderizado.
+  const moduloItems: NavItem[] = activeCourse
+    ? activeCourse.modules.map((m, i) => ({
+        href: `/cursos-pro/c/${activeCourse.slug}`,
+        label: `M${m.num}: ${m.name}`,
+        icon: MODULE_ICONS[i % MODULE_ICONS.length],
+      }))
+    : [];
+
+  const MENU: NavSection[] = activeCourse && moduloItems.length > 0
+    ? [
+        MENU_BASE[0],
+        {
+          sectionLabel: "MI PROGRAMA",
+          expandable: true,
+          defaultOpen: false,
+          items: [],
+          subItems: moduloItems,
+        },
+        ...MENU_BASE.slice(1),
+      ]
+    : MENU_BASE;
   const pathname = usePathname();
   const router   = useRouter();
   const [collapsed, setCollapsed]           = useState(false);
