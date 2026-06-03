@@ -335,7 +335,7 @@ function detectModule(redirect: string): ModuleConfig {
   if (redirect.startsWith("/demo")) return MODULE_CONFIGS.demo;
   if (redirect.startsWith("/mi-curso") || redirect.startsWith("/cursos")) return MODULE_CONFIGS.cursos;
   if (redirect.startsWith("/certificaciones")) return MODULE_CONFIGS.certificaciones;
-  if (redirect.startsWith("/teacher")) return MODULE_CONFIGS.docentes;
+  if (redirect.startsWith("/teacher") || redirect.startsWith("/docente")) return MODULE_CONFIGS.docentes;
   if (redirect.startsWith("/dashboard") || redirect.startsWith("/courses") || redirect.startsWith("/ai-lab") || redirect.startsWith("/carreras")) return MODULE_CONFIGS.carreras;
   return DEFAULT_CONFIG;
 }
@@ -362,7 +362,7 @@ function LoginForm() {
     "cursos-pro": "/cursos-pro",
     certificaciones: "/certificaciones",
     b2b: "/b2b",
-    docentes: "/teacher",
+    docentes: "/docente",
     carreras: "/dashboard",
     cursos: "/dashboard",
   };
