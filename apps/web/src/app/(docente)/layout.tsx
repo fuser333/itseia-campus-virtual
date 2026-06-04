@@ -8,9 +8,15 @@
  *  3. Carga las cohortes asignadas del docente y renderiza el sidebar árbol.
  *
  * IMPORTANTE: Este shell vive en route group `(docente)` y aún NO está
- * cableado en producción. Los URLs `/preuni`, `/cursos-pro`, etc. los siguen
- * sirviendo las rutas estáticas legacy. Solo `/mdt/...` y
- * `/dashboard-docente` caen acá (sandbox FASE 3 hasta FASE 5/6).
+ * cableado en producción. FASE 5 movió las rutas dinámicas a
+ * `(docente)/docente-shell/[producto]/...` para evitar conflicto con
+ * `(alumno)/[producto]/...` (Next 15 no admite dos route groups paralelos
+ * con la misma raíz dinámica). Las URLs reales sandbox son:
+ *   /dashboard-docente
+ *   /docente-shell/mdt
+ *   /docente-shell/mdt/<cohorte>
+ *   /docente-shell/mdt/<cohorte>/sesion/<num>
+ * Los URLs legacy `/teacher` y `/docente/preuni/...` siguen vivos en FASE 6.
  */
 
 import { redirect } from 'next/navigation';

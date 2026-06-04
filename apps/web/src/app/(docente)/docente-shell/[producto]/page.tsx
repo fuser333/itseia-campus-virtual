@@ -188,7 +188,7 @@ function CohorteRow({
   cohorte: CohorteConStatsRow;
   accent: string;
 }) {
-  const href = `/${cohorte.producto}/${cohorte.cohorte_slug}`;
+  const href = `/docente-shell/${cohorte.producto}/${cohorte.cohorte_slug}`;
   return (
     <li>
       <Link

@@ -8,6 +8,19 @@ import {
   type UserAuthMeta,
 } from "@/lib/auth/access";
 
+/**
+ * Resuelve la "home" preferida para un role privilegiado.
+ * FASE 5: super_admin/admin/coordinacion → /admin (compat) · docente → /docente.
+ */
+function homeForPrivilegedRole(role: string | undefined): string {
+  if (role === "docente") return "/docente";
+  if (role && ["super_admin", "admin", "coordinacion"].includes(role)) {
+    return "/admin";
+  }
+  // Fallback defensivo: si es privileged por otro role (staff/finanzas) → admin.
+  return "/admin";
+}
+
 export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({ request });
 
@@ -85,49 +98,36 @@ export async function updateSession(request: NextRequest) {
     track: (user.user_metadata?.track as string | undefined) ?? undefined,
   };
 
-  // ── 5. Admin/staff: bypass completo de restricciones por track ────────────
+  // ── 5. Admin/staff: bypass de restricciones por track ─────────────────────
   if (isPrivilegedRole(meta)) {
-    // Redirigir lejos de login/register si ya están autenticados
+    // Redirigir lejos de login/register si ya están autenticados.
+    // FASE 5: enrutar a la home del role en vez de /dashboard ciego.
     if (pathname === "/login" || pathname === "/register") {
       const url = request.nextUrl.clone();
-      url.pathname = "/dashboard";
+      url.pathname = homeForPrivilegedRole(meta.role);
       return NextResponse.redirect(url);
     }
 
-    // Admin routes: verificar role en DB (doble check para /admin)
+    // /admin: solo super_admin/admin/coordinacion. Docente puro → /docente.
     if (pathname.startsWith("/admin")) {
-      const { data: profile } = await supabase
-        .from("profiles")
-        .select("role")
-        .eq("id", user.id)
-        .single();
-
       if (
-        !profile ||
-        !["super_admin", "admin", "coordinacion"].includes(profile.role as string)
+        !meta.role ||
+        !["super_admin", "admin", "coordinacion"].includes(meta.role)
       ) {
         const url = request.nextUrl.clone();
-        url.pathname = "/dashboard";
+        url.pathname = homeForPrivilegedRole(meta.role);
         return NextResponse.redirect(url);
       }
     }
 
-    // Teacher routes: verificar role en DB
+    // /teacher | /docente: super_admin/admin/coordinacion/docente.
     if (pathname.startsWith("/teacher") || pathname.startsWith("/docente")) {
-      const { data: profile } = await supabase
-        .from("profiles")
-        .select("role")
-        .eq("id", user.id)
-        .single();
-
       if (
-        !profile ||
-        !["super_admin", "admin", "coordinacion", "docente"].includes(
-          profile.role as string
-        )
+        !meta.role ||
+        !["super_admin", "admin", "coordinacion", "docente"].includes(meta.role)
       ) {
         const url = request.nextUrl.clone();
-        url.pathname = "/dashboard";
+        url.pathname = homeForPrivilegedRole(meta.role);
         return NextResponse.redirect(url);
       }
     }
@@ -135,14 +135,33 @@ export async function updateSession(request: NextRequest) {
     return supabaseResponse;
   }
 
-  // ── 6. Usuarios autenticados fuera de login/register ─────────────────────
+  // ── 6. Usuarios autenticados NO privileged que llegan a /login o /register
+  // FASE 5: el routing inteligente (post-login-redirect) lo decide el form
+  //         del lado cliente con fetch a /api/auth/post-login-redirect.
+  //         Si llegan acá ya autenticados (cookie viva), los mandamos a
+  //         /dashboard como fallback predecible.
   if (pathname === "/login" || pathname === "/register") {
     const url = request.nextUrl.clone();
     url.pathname = "/dashboard";
     return NextResponse.redirect(url);
   }
 
-  // ── 7. Evaluación de acceso por track ─────────────────────────────────────
+  // ── 7. Bloqueo duro para estudiantes que intentan entrar a /admin /docente
+  // /teacher (rutas privilegiadas). Defense in depth: los layouts (alumno)/
+  // (docente) ya filtran, pero las rutas legacy /admin y /docente legacy NO
+  // tienen guard universal de role en su layout.
+  if (
+    pathname.startsWith("/admin") ||
+    pathname.startsWith("/docente") ||
+    pathname.startsWith("/teacher")
+  ) {
+    const url = request.nextUrl.clone();
+    url.pathname = "/dashboard";
+    url.search = "";
+    return NextResponse.redirect(url);
+  }
+
+  // ── 8. Evaluación de acceso por track (rutas de producto) ─────────────────
   const accessResult = evaluateAccess(pathname, meta);
 
   if (accessResult !== null && !accessResult.allowed) {

@@ -181,7 +181,7 @@ function CohorteCard({ cohorte }: { cohorte: CohorteConStats }) {
   const meta = PRODUCTO_ICONS[cohorte.producto];
   const Icon = meta.Icon;
   const accent = `var(${meta.cssVar})`;
-  const href = `/${cohorte.producto}/${cohorte.cohorte_slug}`;
+  const href = `/docente-shell/${cohorte.producto}/${cohorte.cohorte_slug}`;
 
   const proxima = cohorte.stats.proxima_sesion;
   const proximaFecha = proxima?.fecha_programada

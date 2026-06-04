@@ -127,10 +127,14 @@ export async function getEnrollmentsAlumno(userId: string): Promise<AlumnoEnroll
   }
 
   // ── 2. cursos_pro_enrollments (cursos profesionales) ────────────────────────
+  // FIX FASE 5: el schema 017 usa `profile_id` (NO `user_id`). Sin este fix,
+  // el helper nunca devolvía enrollments de cursos-pro y el endpoint
+  // post-login-redirect mandaba a Gisela/Josselin a /dashboard en vez de a
+  // /cursos-pro/c/inca-gisela.
   const { data: cpRows } = await supabaseAdmin
     .from('cursos_pro_enrollments')
     .select('id, enrolled_at, status, cursos_pro_courses!inner(id, slug, name, start_date)')
-    .eq('user_id', userId)
+    .eq('profile_id', userId)
     .eq('status', 'active')
     .order('enrolled_at', { ascending: false });
 

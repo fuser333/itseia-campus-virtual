@@ -51,7 +51,7 @@ export default async function SesionDocentePage({ params }: PageProps) {
   } = await supabase.auth.getUser();
   if (!user) {
     redirect(
-      `/login?redirect=/${productoId}/${cohorteSlug}/sesion/${numero}`
+      `/login?redirect=/docente-shell/${productoId}/${cohorteSlug}/sesion/${numero}`
     );
   }
 
@@ -112,7 +112,7 @@ export default async function SesionDocentePage({ params }: PageProps) {
     <div className="space-y-6">
       {/* ── Breadcrumb ─────────────────────────────────────── */}
       <Link
-        href={`/${productoId}/${cohorteSlug}`}
+        href={`/docente-shell/${productoId}/${cohorteSlug}`}
         className="inline-flex items-center gap-1 text-sm opacity-60 transition hover:opacity-100"
       >
         <ArrowLeft className="h-4 w-4" />
