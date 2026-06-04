@@ -49,8 +49,26 @@ export async function updateSession(request: NextRequest) {
 
   // ── 1. Rutas públicas: siempre pasar sin sesión ──────────────────────────
   if (isPublicPath(pathname)) {
-    // Aún así refrescamos la sesión si existe (SSR cookie sync)
-    await supabase.auth.getUser();
+    // FIX 4 jun 2026 — middleware timeout en /cursos-pro-info y otras públicas.
+    // No refrescar sesión si no hay cookies de Supabase (visita anónima).
+    // Si hay cookies, refrescamos con timeout corto para no exceder
+    // los 5s de Vercel middleware budget.
+    const hasSupabaseCookie = request.cookies
+      .getAll()
+      .some((c) => c.name.startsWith("sb-"));
+    if (hasSupabaseCookie) {
+      try {
+        await Promise.race([
+          supabase.auth.getUser(),
+          new Promise((_, reject) =>
+            setTimeout(() => reject(new Error("auth-timeout")), 1500)
+          ),
+        ]);
+      } catch {
+        // Si falla/timeout, seguimos sin sesión refrescada.
+        // El próximo request retrocederá al login si la sesión expiró.
+      }
+    }
     return supabaseResponse;
   }
 
