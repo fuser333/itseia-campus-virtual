@@ -408,7 +408,26 @@ function LoginForm() {
       return;
     }
 
-    router.push(redirectTo);
+    // Campus v2: si NO hay redirect explícito ni moduleParam, preguntar al
+    // endpoint server cuál es la home correcta según role + enrollment.
+    // Esto enruta a estudiantes a /<producto> (shell v2) automáticamente.
+    let target = redirectTo;
+    const explicitRedirect = searchParams.get("redirect");
+    if (!explicitRedirect && !moduleParam) {
+      try {
+        const res = await fetch("/api/auth/post-login-redirect", {
+          credentials: "include",
+        });
+        if (res.ok) {
+          const data = (await res.json()) as { url?: string };
+          if (data.url) target = data.url;
+        }
+      } catch {
+        // si el endpoint falla, caemos al redirectTo default
+      }
+    }
+
+    router.push(target);
     router.refresh();
   }
 
