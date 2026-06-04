@@ -91,7 +91,7 @@ export default async function CohorteDocentePage({ params }: PageProps) {
     <div className="space-y-8">
       {/* ── Breadcrumb ────────────────────────────────────── */}
       <Link
-        href={`/${productoId}`}
+        href={`/docente-shell/${productoId}`}
         className="inline-flex items-center gap-1 text-sm opacity-60 transition hover:opacity-100"
       >
         <ArrowLeft className="h-4 w-4" />
@@ -211,7 +211,7 @@ export default async function CohorteDocentePage({ params }: PageProps) {
               )}
             </div>
             <Link
-              href={`/${productoId}/${cohorteSlug}/sesion/${stats.proxima_sesion.numero}`}
+              href={`/docente-shell/${productoId}/${cohorteSlug}/sesion/${stats.proxima_sesion.numero}`}
               className="rounded-lg px-4 py-2 text-sm font-semibold transition hover:opacity-90"
               style={{
                 backgroundColor: 'var(--itseia-gold)',
@@ -247,7 +247,7 @@ export default async function CohorteDocentePage({ params }: PageProps) {
             {sesiones.map((s) => (
               <li key={s.id}>
                 <Link
-                  href={`/${productoId}/${cohorteSlug}/sesion/${s.numero}`}
+                  href={`/docente-shell/${productoId}/${cohorteSlug}/sesion/${s.numero}`}
                   className="group flex items-center gap-3 rounded-xl border p-4 transition hover:bg-white/5"
                   style={{
                     borderColor: 'rgba(255,255,255,0.10)',

@@ -408,15 +408,27 @@ function LoginForm() {
       return;
     }
 
-    // Campus v2: si NO hay redirect explícito ni moduleParam, preguntar al
-    // endpoint server cuál es la home correcta según role + enrollment.
-    // Esto enruta a estudiantes a /<producto> (shell v2) automáticamente.
+    // Campus v2 · FASE 5: routing inteligente post-login.
+    // Reglas:
+    //  · Si vino un `redirect=` explícito (middleware mandó al login porque
+    //    el usuario intentaba entrar a una ruta protegida), respetamos ese
+    //    destino. El middleware en el próximo hop ya valida que tenga acceso.
+    //  · Si vino un `module=` explícito (entró por landing de módulo), se
+    //    respeta esa intención.
+    //  · En cualquier otro caso (login limpio), preguntamos al endpoint
+    //    /api/auth/post-login-redirect para decidir el destino correcto
+    //    según role + enrollments:
+    //      - admin/super_admin/coordinacion → /admin
+    //      - docente                        → /docente
+    //      - estudiante 1 enrollment        → /<producto> ó /cursos-pro/c/<slug>
+    //      - estudiante 2+ enrollments      → /dashboard
     let target = redirectTo;
     const explicitRedirect = searchParams.get("redirect");
     if (!explicitRedirect && !moduleParam) {
       try {
         const res = await fetch("/api/auth/post-login-redirect", {
           credentials: "include",
+          cache: "no-store",
         });
         if (res.ok) {
           const data = (await res.json()) as { url?: string };
