@@ -1,3 +1,7 @@
+// LEGACY · pendiente de remover post FASE 8
+// Dashboard docente original. El reemplazo vive en src/app/(docente)/* (FASE 3).
+// Se mantiene activo porque Héctor entra a /teacher/materias/.../sesion/N en
+// vivo durante las clases del preuni-jun-2026. NO BORRAR.
 "use client";
 
 import { useEffect, useState } from "react";
