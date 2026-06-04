@@ -1,3 +1,8 @@
+// LEGACY · pendiente de remover post FASE 8
+// Reemplazado por shell unificado en src/app/(docente)/* (FASE 3 Campus v2).
+// Se mantiene vivo porque Héctor lo usa para dar clase del preuni en producción
+// (/teacher/materias/[subject_id]/sesion/[n]). NO BORRAR hasta migrar las clases
+// en vivo de la cohorte preuni-jun-2026 al shell nuevo.
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import Link from "next/link";

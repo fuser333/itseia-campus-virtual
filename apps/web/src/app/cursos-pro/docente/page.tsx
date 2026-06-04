@@ -1,3 +1,9 @@
+// LEGACY · pendiente de remover post FASE 8
+// Vista docente legacy de cursos-pro. El reemplazo vive en
+// src/app/(docente)/docente-shell/[producto]/* (FASE 3 + FASE 4 Campus v2).
+// Se mantiene viva porque el viernes 6 jun arranca la cohorte Gisela+Josselin
+// (admin-salud) y el flow productivo del docente usa /cursos-pro/docente/...
+// Migración planificada para FASE 8 una vez la cohorte v2 esté validada.
 import { createClient } from "@/lib/supabase/server";
 import { supabaseAdmin } from "@/lib/supabase/admin";
 import { redirect } from "next/navigation";

@@ -1,3 +1,7 @@
+// LEGACY · pendiente de remover post FASE 8
+// Vista docente curso individual (/cursos-pro/docente/[slug]). Reemplazo en
+// (docente)/docente-shell/[producto]/.... NO BORRAR hasta migrar admin-salud
+// (cohorte Gisela+Josselin viernes 6 jun) al shell v2.
 import { createClient } from "@/lib/supabase/server";
 import { supabaseAdmin } from "@/lib/supabase/admin";
 import { redirect, notFound } from "next/navigation";
