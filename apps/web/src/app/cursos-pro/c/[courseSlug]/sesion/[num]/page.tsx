@@ -1,7 +1,5 @@
 import { createClient } from "@/lib/supabase/server";
 import { redirect, notFound } from "next/navigation";
-import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
 import {
   getCourseBySlug,
   getUserEnrollment,
@@ -48,49 +46,35 @@ export default async function CursoProSesionPage({ params }: PageProps) {
   ]);
   if (!session) notFound();
 
-  const moduleOfSession = modules.find((m) => m.id === session.module_id) ?? null;
+  // modules se mantiene para posible uso futuro (módulo de la sesión)
+  void modules;
+
   const prev = sessions.find((s) => s.num === sessionNum - 1) ?? null;
   const next = sessions.find((s) => s.num === sessionNum + 1) ?? null;
 
+  // StudentSessionView ahora incluye su propio header + breadcrumb
+  // con el look del Campus v2 (borderLeft accent, fondo navy).
   return (
-    <div className="space-y-6">
-      <div>
-        <Link
-          href={`/cursos-pro/c/${courseSlug}`}
-          className="inline-flex items-center gap-1.5 text-xs font-medium text-[#1F2F58]/60 hover:text-[#1F2F58]"
-        >
-          <ArrowLeft className="size-3.5" />
-          Volver al curso
-        </Link>
-        <p className="mt-3 text-[10px] font-semibold uppercase tracking-widest text-[#73B8E7]">
-          {course.name}
-          {moduleOfSession ? ` · M${moduleOfSession.num} ${moduleOfSession.name}` : ""}
-        </p>
-        <h1 className="text-2xl sm:text-3xl font-bold text-[#0A1628] leading-tight">
-          Sesión {session.num} · {session.title}
-        </h1>
-      </div>
-
-      <StudentSessionView
-        session={{
-          id: session.id,
-          num: session.num,
-          title: session.title,
-          description: session.description,
-          scheduled_at: session.scheduled_at,
-          duration_minutes: session.duration_minutes,
-          meet_url: session.meet_url,
-          recording_url: session.recording_url,
-          theory_md: session.theory_md,
-          exercise_md: session.exercise_md,
-          quiz_json: session.quiz_json,
-          resources_json: session.resources_json,
-          status: session.status,
-        }}
-        enrollmentId={enrollment?.id ?? null}
-        prevHref={prev ? `/cursos-pro/c/${courseSlug}/sesion/${prev.num}` : null}
-        nextHref={next ? `/cursos-pro/c/${courseSlug}/sesion/${next.num}` : null}
-      />
-    </div>
+    <StudentSessionView
+      session={{
+        id: session.id,
+        num: session.num,
+        title: session.title,
+        description: session.description,
+        scheduled_at: session.scheduled_at,
+        duration_minutes: session.duration_minutes,
+        meet_url: session.meet_url,
+        recording_url: session.recording_url,
+        theory_md: session.theory_md,
+        exercise_md: session.exercise_md,
+        quiz_json: session.quiz_json,
+        resources_json: session.resources_json,
+        status: session.status,
+      }}
+      courseSlug={courseSlug}
+      enrollmentId={enrollment?.id ?? null}
+      prevHref={prev ? `/cursos-pro/c/${courseSlug}/sesion/${prev.num}` : null}
+      nextHref={next ? `/cursos-pro/c/${courseSlug}/sesion/${next.num}` : null}
+    />
   );
 }
