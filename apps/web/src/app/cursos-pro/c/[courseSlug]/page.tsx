@@ -81,7 +81,7 @@ export default async function CursoProDetailPage({ params }: PageProps) {
       <div>
         <Link
           href="/cursos-pro"
-          className="inline-flex items-center gap-1.5 text-xs font-medium text-[#1F2F58]/60 hover:text-[#1F2F58] mb-3"
+          className="inline-flex items-center gap-1.5 text-xs font-medium text-white/70 hover:text-[#1F2F58] mb-3"
         >
           <ArrowLeft className="size-3.5" />
           Mis cursos
@@ -150,7 +150,7 @@ export default async function CursoProDetailPage({ params }: PageProps) {
         </h2>
 
         {modules.length === 0 && (
-          <p className="text-sm text-[#1F2F58]/60">
+          <p className="text-sm text-white/70">
             Aún no hay módulos configurados para este curso.
           </p>
         )}
@@ -168,15 +168,15 @@ export default async function CursoProDetailPage({ params }: PageProps) {
                     <span className="text-[10px] font-bold uppercase tracking-widest text-[#73B8E7]">
                       M{m.num}
                     </span>
-                    <h3 className="text-base font-bold text-[#0A1628] flex-1">
+                    <h3 className="text-base font-bold text-white flex-1">
                       {m.name}
                     </h3>
-                    <span className="text-[10px] text-[#1F2F58]/50">
+                    <span className="text-[10px] text-white/60">
                       {m.hours}h
                     </span>
                   </div>
                   {m.description && (
-                    <p className="mt-1 text-xs text-[#1F2F58]/60">
+                    <p className="mt-1 text-xs text-white/70">
                       {m.description}
                     </p>
                   )}
@@ -191,14 +191,14 @@ export default async function CursoProDetailPage({ params }: PageProps) {
                           href={`/cursos-pro/c/${courseSlug}/sesion/${s.num}`}
                           className="group flex items-center gap-4 px-5 py-3.5 hover:bg-[#FBBC0C]/5 transition-colors"
                         >
-                          <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-[#1F2F58]/8 text-[11px] font-bold text-[#1F2F58]">
+                          <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-white/10 text-[11px] font-bold text-white">
                             S{s.num}
                           </span>
                           <div className="flex-1 min-w-0">
-                            <p className="text-sm font-semibold text-[#0A1628] truncate">
+                            <p className="text-sm font-semibold text-white truncate">
                               {s.title}
                             </p>
-                            <p className="text-[11px] text-[#1F2F58]/55 mt-0.5 flex items-center gap-3">
+                            <p className="text-[11px] text-white/65 mt-0.5 flex items-center gap-3">
                               <span className="flex items-center gap-1">
                                 <Calendar className="size-3" />
                                 {formatSessionDateTime(s.scheduled_at)}
@@ -224,15 +224,15 @@ export default async function CursoProDetailPage({ params }: PageProps) {
                           {done ? (
                             <CheckCircle2 className="size-4 text-[#FBBC0C] shrink-0" />
                           ) : (
-                            <Circle className="size-4 text-[#1F2F58]/20 shrink-0" />
+                            <Circle className="size-4 text-white/30 shrink-0" />
                           )}
-                          <Play className="size-4 text-[#1F2F58]/30 group-hover:text-[#FBBC0C] transition-colors shrink-0" />
+                          <Play className="size-4 text-white/40 group-hover:text-[#FBBC0C] transition-colors shrink-0" />
                         </Link>
                       </li>
                     );
                   })}
                   {moduleSessions.length === 0 && (
-                    <li className="px-5 py-4 text-[11px] text-[#1F2F58]/45 italic">
+                    <li className="px-5 py-4 text-[11px] text-white/50 italic">
                       No hay sesiones programadas en este módulo aún.
                     </li>
                   )}
@@ -251,7 +251,7 @@ export default async function CursoProDetailPage({ params }: PageProps) {
               <p className="text-[10px] font-bold uppercase tracking-widest text-[#FBBC0C]">
                 Vista docente
               </p>
-              <p className="mt-0.5 text-sm font-semibold text-[#0A1628]">
+              <p className="mt-0.5 text-sm font-semibold text-white">
                 Entra al panel del docente para esta cohorte
               </p>
             </div>

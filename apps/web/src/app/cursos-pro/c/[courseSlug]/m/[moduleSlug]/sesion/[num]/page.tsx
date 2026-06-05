@@ -27,6 +27,7 @@ import VideoPlayer from "@/components/session/VideoPlayer";
 import SlideViewer from "@/components/session/SlideViewer";
 import TheoryContent from "@/components/session/TheoryContent";
 import AILabPanel from "@/components/session/AILabPanel";
+import InlineQuizPanel, { type InlineQuizQuestion } from "@/components/session/InlineQuizPanel";
 import ResourceList from "@/components/session/ResourceList";
 import LiveClassPanel from "@/components/session/LiveClassPanel";
 import GrabacionesTab from "@/components/session/GrabacionesTab";
@@ -432,12 +433,11 @@ export default function CursoProSessionPage({ params }: PageProps) {
       completed: false,
       available: !!quizQuestions,
       content: quizQuestions ? (
-        <div className="prose max-w-none p-6">
-          <h3>Quiz de {quizQuestions.length} preguntas</h3>
-          <p className="text-sm text-[#1F2F58]/70">
-            Quiz embebido proximamente. Por ahora ver enunciados en pestaña Teoria.
-          </p>
-        </div>
+        <InlineQuizPanel
+          questions={quizQuestions as InlineQuizQuestion[]}
+          sessionTitle={session.title}
+          onPassed={() => {}}
+        />
       ) : null,
     },
     {
