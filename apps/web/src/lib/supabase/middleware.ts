@@ -8,6 +8,17 @@ import {
   type UserAuthMeta,
 } from "@/lib/auth/access";
 
+// Tipos mínimos para timeout race (evita import directo de @supabase/supabase-js
+// que añade peso al bundle del middleware).
+interface AuthUser {
+  id: string;
+  email?: string;
+  user_metadata?: { role?: string; track?: string } & Record<string, unknown>;
+}
+interface AuthErrorLike {
+  message: string;
+}
+
 /**
  * Resuelve la "home" preferida para un role privilegiado.
  * FASE 5: super_admin/admin/coordinacion → /admin (compat) · docente → /docente.
@@ -57,26 +68,75 @@ export async function updateSession(request: NextRequest) {
       .getAll()
       .some((c) => c.name.startsWith("sb-"));
     if (hasSupabaseCookie) {
+      // FIX 5-jun-2026: consistencia con la rama protegida (líneas 90+) —
+      // usar AbortController + clearTimeout para no dejar timers huérfanos.
+      const pubAbort = new AbortController();
+      const pubTimeoutId = setTimeout(() => pubAbort.abort(), 1200);
       try {
         await Promise.race([
           supabase.auth.getUser(),
-          new Promise((_, reject) =>
-            setTimeout(() => reject(new Error("auth-timeout")), 1500)
-          ),
+          new Promise((_, reject) => {
+            pubAbort.signal.addEventListener("abort", () =>
+              reject(new Error("auth-timeout"))
+            );
+          }),
         ]);
-      } catch {
+      } catch (e) {
         // Si falla/timeout, seguimos sin sesión refrescada.
         // El próximo request retrocederá al login si la sesión expiró.
+        if (process.env.NODE_ENV !== "production") {
+          console.warn("[middleware] public-path auth refresh timeout/error:", e);
+        }
+      } finally {
+        clearTimeout(pubTimeoutId);
       }
     }
     return supabaseResponse;
   }
 
-  // ── 2. Obtener usuario ────────────────────────────────────────────────────
-  const {
-    data: { user },
-    error: authError,
-  } = await supabase.auth.getUser();
+  // ── 2. Obtener usuario (timeout 1200ms vía AbortController) ──────────────
+  // FIX 5-jun-2026: sin timeout, si Supabase tarda el middleware se cuelga 40s
+  // y agota workers — contagia rutas no relacionadas (/preuni, /dashboard).
+  // Notas del review (REVIEW_FASE_0.md):
+  //  · AbortController + clearTimeout en lugar de setTimeout bare (Edge runtime)
+  //  · .catch() dentro del race para capturar throws no resolves
+  //  · console.warn para visibilidad en Vercel Logs
+  //  · 1200ms × 2 awaits ≤ 2400ms — deja margen ante budget 5s
+  type AuthResult = { user: AuthUser | null; error: AuthErrorLike | null };
+  let user: AuthUser | null = null;
+  let authError: AuthErrorLike | null = null;
+
+  const authAbort = new AbortController();
+  const authTimeoutId = setTimeout(() => authAbort.abort(), 1200);
+  try {
+    const result = await Promise.race<AuthResult>([
+      supabase.auth
+        .getUser()
+        .then((r): AuthResult => ({
+          user: (r.data.user ?? null) as AuthUser | null,
+          error: (r.error ?? null) as AuthErrorLike | null,
+        }))
+        .catch((e: unknown): AuthResult => ({
+          user: null,
+          error: { message: e instanceof Error ? e.message : "auth-failed" },
+        })),
+      new Promise<AuthResult>((_, reject) => {
+        authAbort.signal.addEventListener("abort", () =>
+          reject(new Error("auth-timeout"))
+        );
+      }),
+    ]);
+    user = result.user;
+    authError = result.error;
+  } catch (e) {
+    if (process.env.NODE_ENV !== "production") {
+      console.warn("[middleware] auth getUser timeout/error:", e);
+    }
+    user = null;
+    authError = { message: e instanceof Error ? e.message : "auth-timeout" };
+  } finally {
+    clearTimeout(authTimeoutId);
+  }
 
   // ── 3. Sin sesión → login con redirect ────────────────────────────────────
   if (!user || authError) {
@@ -102,11 +162,48 @@ export async function updateSession(request: NextRequest) {
   // para super_admins cuyo user_metadata.role estaba vacío.
   // Mantenemos user_metadata.role como fallback por compatibilidad.
   // Ver: DEPARTAMENTOS/08_TECNOLOGIA_INNOVACION/AUDITORIA_CAMPUS_30MAY_2026.md
-  const { data: dbProfile } = await supabase
-    .from("profiles")
-    .select("role")
-    .eq("id", user.id)
-    .single();
+  //
+  // FIX 5-jun-2026: timeout 1200ms via AbortController — esta query había
+  // contribuido al cuelgue masivo de /preuni /dashboard /cursos-pro al saturar
+  // el pool de Supabase.
+  type ProfileResult = { data: { role?: string } | null };
+  let dbProfile: { role?: string } | null = null;
+
+  const profileAbort = new AbortController();
+  const profileTimeoutId = setTimeout(() => profileAbort.abort(), 1200);
+  try {
+    // Envolver en Promise.resolve para tener acceso a .catch (PostgrestBuilder
+    // es PromiseLike sin .catch nativo).
+    const profileQuery: Promise<ProfileResult> = Promise.resolve(
+      supabase
+        .from("profiles")
+        .select("role")
+        .eq("id", user.id)
+        .abortSignal(profileAbort.signal)
+        .single()
+    )
+      .then((r): ProfileResult => ({
+        data: (r.data as { role?: string } | null) ?? null,
+      }))
+      .catch((): ProfileResult => ({ data: null }));
+
+    const profileResult = await Promise.race<ProfileResult>([
+      profileQuery,
+      new Promise<ProfileResult>((_, reject) => {
+        profileAbort.signal.addEventListener("abort", () =>
+          reject(new Error("profile-timeout"))
+        );
+      }),
+    ]);
+    dbProfile = profileResult.data;
+  } catch (e) {
+    if (process.env.NODE_ENV !== "production") {
+      console.warn("[middleware] profile timeout/error:", e);
+    }
+    dbProfile = null;
+  } finally {
+    clearTimeout(profileTimeoutId);
+  }
 
   const meta: UserAuthMeta = {
     role:
