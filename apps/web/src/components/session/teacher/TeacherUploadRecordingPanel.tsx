@@ -2,11 +2,11 @@
 
 /**
  * TeacherUploadRecordingPanel — Guardar URL de grabación de la sesión.
- * Guarda en cursos_pro_sessions.recording_url + recording_provider.
+ * Hace POST a /api/teacher/cursos-pro/recording (server-side, service role)
+ * para no exponer UPDATE de cursos_pro_sessions via anon key.
  */
 
 import { useState } from "react";
-import { createClient } from "@/lib/supabase/client";
 import { Video, Loader2, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -33,16 +33,21 @@ export default function TeacherUploadRecordingPanel({
     }
     setSaving(true);
     try {
-      const supabase = createClient();
-      const { error: err } = await supabase
-        .from("cursos_pro_sessions")
-        .update({
-          recording_url: url.trim(),
-          recording_provider: provider,
-        })
-        .eq("id", sessionId);
-      if (err) {
-        setError(err.message);
+      const res = await fetch("/api/teacher/cursos-pro/recording", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          sessionId,
+          recordingUrl: url.trim(),
+          recordingProvider: provider,
+        }),
+      });
+      if (!res.ok) {
+        const j = (await res.json().catch(() => ({}))) as {
+          error?: string;
+          detail?: string;
+        };
+        setError(j.detail || j.error || `HTTP ${res.status}`);
       } else {
         setSaved(true);
       }

@@ -80,8 +80,11 @@ export default async function DocenteCursoSesionLegacyRedirect({
   }
   if (!moduleNum) moduleNum = Math.ceil(sessionNum / 5);
   if (!moduleSlug) {
-    moduleSlug = MODULE_NUM_TO_SLUG[moduleNum] ?? `m${moduleNum}-modulo`;
+    moduleSlug = MODULE_NUM_TO_SLUG[moduleNum] ?? null;
   }
+  // Si BD aún no tiene slug Y no está en el mapa de cursos conocidos,
+  // notFound() limpio en vez de generar slug genérico falso (REGLA 6).
+  if (!moduleSlug) notFound();
 
   const sessionsSameModule = allSessions
     .filter((s) => {
