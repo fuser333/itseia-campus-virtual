@@ -240,7 +240,7 @@ export default async function CursosProDashboardPage() {
             </div>
 
             <Link
-              href={`/cursos-pro/c/${cursoActivo.cohorte_slug}`}
+              href={`/cursos-pro/${cursoActivo.cohorte_slug}`}
               className="inline-flex items-center justify-center gap-2 rounded-lg px-5 py-3 font-semibold transition hover:opacity-90"
               style={{
                 backgroundColor: accentVar,

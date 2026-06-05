@@ -101,7 +101,7 @@ export default function StudentSessionView({
     <div className="space-y-6">
       {/* ── Breadcrumb ─────────────────────────────────────────────────── */}
       <Link
-        href={`/cursos-pro/c/${courseSlug}`}
+        href={`/cursos-pro/${courseSlug}`}
         className="inline-flex items-center gap-1 text-sm opacity-60 hover:opacity-100"
         style={{ color: 'var(--itseia-text)' }}
       >

@@ -123,7 +123,7 @@ export default function CursosProSidebar({
   // "MI PROGRAMA" se omite del menú renderizado.
   const moduloItems: NavItem[] = activeCourse
     ? activeCourse.modules.map((m, i) => ({
-        href: `/cursos-pro/c/${activeCourse.slug}`,
+        href: `/cursos-pro/${activeCourse.slug}`,
         label: `M${m.num}: ${m.name}`,
         icon: MODULE_ICONS[i % MODULE_ICONS.length],
       }))

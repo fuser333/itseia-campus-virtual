@@ -139,7 +139,7 @@ export default async function CursosProLayout({
           const numInMod = s.num_in_module ?? s.num;
           const href = m.slug
             ? `/cursos-pro/${courseSlug}/modulo/${m.slug}/sesion/${numInMod}`
-            : `/cursos-pro/c/${courseSlug}/sesion/${s.num}`;
+            : `/cursos-pro/${courseSlug}`;
           return {
             id: s.id,
             numInModule: numInMod,
