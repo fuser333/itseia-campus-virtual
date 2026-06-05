@@ -51,16 +51,28 @@ interface CursoProModule {
   id: string;
   course_id: string;
   num: number;
-  slug: string | null;
+  slug?: string | null;
   name: string;
 }
+
+// Fallback slug → num para cuando la BD aun NO tiene la columna slug
+// (pre-migration 022). Cubre el curso admin-salud activo. Cuando la
+// migration se aplique, el query por slug toma prioridad y este map
+// queda dormido sin efecto.
+const MODULE_SLUG_TO_NUM_FALLBACK: Record<string, number> = {
+  "m1-fundamentos-ia-lopdp": 1,
+  "m2-stack-profesional-ia": 2,
+  "m3-gestion-operativa-ia": 3,
+  "m4-facturacion-power-bi-cierre": 4,
+  "m5-proyecto-final": 5,
+};
 
 interface CursoProSession {
   id: string;
   course_id: string;
   module_id: string;
   num: number;
-  num_in_module: number | null;
+  num_in_module?: number | null;
   title: string;
   description: string | null;
   scheduled_at: string | null;
@@ -131,14 +143,38 @@ export default function CursoProSessionPage({ params }: PageProps) {
     }
     setCourse(courseRow);
 
-    // ─── Grupo 3: module (por slug, requiere course_id) ─────────────
-    const { data: moduleRows } = await supabase
-      .from("cursos_pro_modules")
-      .select("id, course_id, num, slug, name")
-      .eq("course_id", courseRow.id)
-      .eq("slug", moduleSlug)
-      .limit(1);
-    const moduleRow = (moduleRows as CursoProModule[] | null)?.[0] || null;
+    // ─── Grupo 3: module (intento 1 por slug, intento 2 por num fallback) ──
+    // Intento 1: query por slug. Falla silenciosamente si la columna no
+    // existe todavía en BD (pre-migration 022).
+    let moduleRow: CursoProModule | null = null;
+    try {
+      const { data: bySlug, error: slugErr } = await supabase
+        .from("cursos_pro_modules")
+        .select("id, course_id, num, name")
+        .eq("course_id", courseRow.id)
+        .eq("slug", moduleSlug)
+        .limit(1);
+      if (!slugErr) {
+        moduleRow = (bySlug as CursoProModule[] | null)?.[0] || null;
+      }
+    } catch {
+      moduleRow = null;
+    }
+
+    // Intento 2: fallback por num del mapa (mientras migration 022 no este).
+    if (!moduleRow) {
+      const moduleNum = MODULE_SLUG_TO_NUM_FALLBACK[moduleSlug];
+      if (moduleNum) {
+        const { data: byNum } = await supabase
+          .from("cursos_pro_modules")
+          .select("id, course_id, num, name")
+          .eq("course_id", courseRow.id)
+          .eq("num", moduleNum)
+          .limit(1);
+        moduleRow = (byNum as CursoProModule[] | null)?.[0] || null;
+      }
+    }
+
     if (!moduleRow) {
       setLoading(false);
       return;
@@ -146,6 +182,10 @@ export default function CursoProSessionPage({ params }: PageProps) {
     setModuleData(moduleRow);
 
     // ─── Grupo 4: enrollment + sessions modulo en paralelo ──────────
+    // Sesiones: NO incluimos num_in_module en select porque la columna
+    // puede no existir todavía (pre-migration 022). Calculamos posición
+    // intra-módulo por orden de num. Cuando la migration se aplique,
+    // num_in_module estará disponible si lo queremos en el futuro.
     const [enrollResult, allSessionsResult] = await Promise.all([
       user
         ? supabase
@@ -157,7 +197,7 @@ export default function CursoProSessionPage({ params }: PageProps) {
         : Promise.resolve({ count: 0 }),
       supabase
         .from("cursos_pro_sessions")
-        .select("id, num, num_in_module, title")
+        .select("id, num, title")
         .eq("course_id", courseRow.id)
         .eq("module_id", moduleRow.id)
         .order("num", { ascending: true }),
@@ -182,13 +222,14 @@ export default function CursoProSessionPage({ params }: PageProps) {
 
     const allSessions =
       (allSessionsResult as {
-        data: { id: string; num: number; num_in_module: number | null; title: string }[] | null;
+        data: { id: string; num: number; title: string }[] | null;
       }).data || [];
 
-    // num_in_module fallback: si BD no lo tiene, calcular por orden
+    // num_in_module: calculamos siempre por orden del num global
+    // dentro del módulo. Esto es estable sin depender de la columna BD.
     const sessionsList = allSessions.map((s, idx) => ({
       ...s,
-      _numInModule: s.num_in_module ?? idx + 1,
+      _numInModule: idx + 1,
     }));
     setTotalSessionsModule(sessionsList.length);
 
@@ -489,7 +530,7 @@ export default function CursoProSessionPage({ params }: PageProps) {
   ];
 
   const moduleUrl = `/cursos-pro/c/${courseSlug}/m/${moduleSlug}`;
-  const currentNumInModule = session.num_in_module ?? parseInt(num);
+  const currentNumInModule = parseInt(num);
 
   return (
     <div className="flex h-screen flex-col">
