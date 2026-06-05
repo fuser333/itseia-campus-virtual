@@ -176,9 +176,25 @@ export const PUBLIC_PATHS = [
   "/preuniversitario",
 ];
 
-/** Devuelve true si el pathname es una ruta pública (no requiere sesión) */
+/**
+ * Devuelve true si el pathname es una ruta pública (no requiere sesión).
+ *
+ * FIX 5-jun-2026: la tercera condición `pathname.startsWith(p)` original causaba
+ * que con `p = "/"` TODA ruta se considerara pública. La seguridad funcionaba
+ * solo porque cada layout protegido hacía su propio guard.
+ *
+ * Lógica nueva:
+ *   - Si `p === "/"`: match SOLO con pathname exacto "/" (la raíz)
+ *   - Para el resto: match exacto o subruta limpia (con barra)
+ *
+ * Esto preserva que `/api/auth`, `/login`, `/preuni-info`, etc. funcionen como
+ * públicas tanto en match exacto (`/api/auth`) como en subrutas (`/api/auth/callback`).
+ */
 export function isPublicPath(pathname: string): boolean {
-  return PUBLIC_PATHS.some((p) => pathname === p || pathname.startsWith(p + "/") || pathname.startsWith(p));
+  return PUBLIC_PATHS.some((p) => {
+    if (p === "/") return pathname === "/";
+    return pathname === p || pathname.startsWith(p + "/");
+  });
 }
 
 // ─── Rutas protegidas por sesión (requieren estar logueado) ───────────────────
