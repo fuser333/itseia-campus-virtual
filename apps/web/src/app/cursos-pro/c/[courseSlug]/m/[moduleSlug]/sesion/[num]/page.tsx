@@ -99,6 +99,7 @@ export default function CursoProSessionPage({ params }: PageProps) {
   const [totalSessionsModule, setTotalSessionsModule] = useState(0);
   const [userRole, setUserRole] = useState<UserRole | null>(null);
   const [isEnrolled, setIsEnrolled] = useState(false);
+  const [accessDenied, setAccessDenied] = useState(false);
 
   const loadData = useCallback(async () => {
     setLoading(true);
@@ -162,7 +163,22 @@ export default function CursoProSessionPage({ params }: PageProps) {
         .order("num", { ascending: true }),
     ]);
 
-    setIsEnrolled(((enrollResult as { count: number | null }).count || 0) > 0);
+    const enrolledNow = ((enrollResult as { count: number | null }).count || 0) > 0;
+    setIsEnrolled(enrolledNow);
+
+    // ─── Guard de acceso (Condición 2 review FASE 2) ─────────────────
+    // Cursos-pro = 100% restrictivo: solo matriculados activos + roles staff.
+    // Si NO enrolled y NO staff → mostrar vista "acceso denegado".
+    const STAFF_ROLES = ["docente", "admin", "coordinacion", "super_admin", "finanzas"];
+    const profileRole = profileResult.data
+      ? ((profileResult.data as { role: UserRole }).role as string)
+      : "";
+    const isStaff = STAFF_ROLES.includes(profileRole);
+    if (!enrolledNow && !isStaff) {
+      setAccessDenied(true);
+      setLoading(false);
+      return;
+    }
 
     const allSessions =
       (allSessionsResult as {
@@ -225,6 +241,29 @@ export default function CursoProSessionPage({ params }: PageProps) {
     );
   }
 
+  // ─── Acceso denegado (no matriculado, no staff) ───────────────────
+  if (accessDenied) {
+    return (
+      <div className="flex h-[calc(100vh-64px)] items-center justify-center">
+        <div className="text-center max-w-md px-6">
+          <BookOpen className="mx-auto size-12 text-[#F0846D]" />
+          <p className="mt-3 text-base font-semibold text-[#1F2F58]">
+            Curso no disponible para tu cuenta
+          </p>
+          <p className="mt-1 text-sm text-[#1F2F58]/60">
+            No tienes una matricula activa en este curso profesional. Si crees
+            que es un error, contacta a soporte.
+          </p>
+          <Link href="/dashboard" className="mt-4 inline-block">
+            <Button variant="outline" size="sm">
+              Volver al panel
+            </Button>
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
   // ─── Not found ────────────────────────────────────────────────────
   if (!session || !course || !moduleData) {
     return (
@@ -247,30 +286,43 @@ export default function CursoProSessionPage({ params }: PageProps) {
     );
   }
 
-  // ─── Parsear recursos (puede ser array o {recursos: array}) ──────
+  // ─── Parsear recursos (try/catch defensivo) ──────────────────────
   let resources: ResourceRaw[] = [];
-  if (Array.isArray(session.resources_json)) {
-    resources = session.resources_json as ResourceRaw[];
-  } else if (
-    session.resources_json &&
-    typeof session.resources_json === "object" &&
-    "recursos" in (session.resources_json as Record<string, unknown>)
-  ) {
-    const obj = session.resources_json as { recursos: ResourceRaw[] };
-    if (Array.isArray(obj.recursos)) resources = obj.recursos;
+  try {
+    if (Array.isArray(session.resources_json)) {
+      resources = session.resources_json as ResourceRaw[];
+    } else if (
+      session.resources_json &&
+      typeof session.resources_json === "object" &&
+      "recursos" in (session.resources_json as Record<string, unknown>)
+    ) {
+      const obj = session.resources_json as { recursos: ResourceRaw[] };
+      if (Array.isArray(obj.recursos)) resources = obj.recursos;
+    }
+    // Validar shape mínimo: cada elem debe tener al menos title + url
+    resources = resources.filter(
+      (r) => r && typeof r.title === "string" && typeof r.url === "string"
+    );
+  } catch {
+    resources = [];
   }
 
-  // ─── Parsear quiz (puede ser array o {preguntas: array}) ─────────
+  // ─── Parsear quiz (try/catch defensivo) ───────────────────────────
   let quizQuestions: unknown[] | null = null;
-  if (Array.isArray(session.quiz_json) && session.quiz_json.length > 0) {
-    quizQuestions = session.quiz_json;
-  } else if (
-    session.quiz_json &&
-    typeof session.quiz_json === "object" &&
-    "preguntas" in (session.quiz_json as Record<string, unknown>)
-  ) {
-    const obj = session.quiz_json as { preguntas: unknown[] };
-    if (Array.isArray(obj.preguntas)) quizQuestions = obj.preguntas;
+  try {
+    if (Array.isArray(session.quiz_json) && session.quiz_json.length > 0) {
+      quizQuestions = session.quiz_json;
+    } else if (
+      session.quiz_json &&
+      typeof session.quiz_json === "object" &&
+      "preguntas" in (session.quiz_json as Record<string, unknown>)
+    ) {
+      const obj = session.quiz_json as { preguntas: unknown[] };
+      if (Array.isArray(obj.preguntas) && obj.preguntas.length > 0)
+        quizQuestions = obj.preguntas;
+    }
+  } catch {
+    quizQuestions = null;
   }
 
   // ─── Build context AI Lab ────────────────────────────────────────
