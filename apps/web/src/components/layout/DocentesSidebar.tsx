@@ -42,68 +42,131 @@ interface NavSection {
 }
 
 // ─── Menu definition ──────────────────────────────────────────────────────────
+//
+// Las rutas se definen como sufijos relativos al `basePath` que recibe el
+// componente. Default = "/teacher" (mantiene compatibilidad con el sidebar
+// que YA usa Héctor para clases en vivo de preuni). Cuando se monte en el
+// shell nuevo /docente/preuni, se pasa basePath="/docente/preuni".
+//
+// Las páginas globales del docente (configuración / capacitación / etc.)
+// usan path absoluto fuera del basePath cuando aplique.
 
-const SECTIONS: NavSection[] = [
+interface SectionDef {
+  label: string;
+  items: Array<{
+    suffix: string;            // sufijo relativo al basePath ("" = root)
+    isGlobal?: boolean;        // true → usa globalsBase en lugar de basePath
+    absolutePath?: string;     // si se setea, ignora basePath/globalsBase
+    label: string;
+    icon: React.ComponentType<{ className?: string }>;
+    badge?: "pending_submissions";
+    external?: boolean;
+  }>;
+}
+
+const SECTION_DEFS: SectionDef[] = [
   {
     label: "PANEL DOCENTE",
     items: [
-      { href: "/teacher",           label: "Dashboard Docente",    icon: LayoutDashboard },
-      { href: "/teacher/materias",  label: "Mis Cursos Asignados", icon: BookOpen },
-      { href: "/teacher/progreso",  label: "Mis Estudiantes",      icon: Users },
+      { suffix: "",          label: "Dashboard Docente",    icon: LayoutDashboard },
+      { suffix: "/materias", label: "Mis Cursos Asignados", icon: BookOpen },
+      { suffix: "/progreso", label: "Mis Estudiantes",      icon: Users },
     ],
   },
   {
     label: "CONTENIDO",
     items: [
-      { href: "/teacher/materias",        label: "Gestionar Módulos", icon: Layers },
-      { href: "/teacher/material",        label: "Material del Curso", icon: FileText },
-      { href: "/teacher/comunicacion",    label: "Anuncios",           icon: Megaphone },
+      { suffix: "/materias",     label: "Gestionar Módulos",  icon: Layers },
+      { suffix: "/material",     label: "Material del Curso", icon: FileText },
+      { suffix: "/comunicacion", label: "Anuncios",           icon: Megaphone },
     ],
   },
   {
     label: "EVALUACIONES",
     items: [
-      { href: "/teacher/banco-preguntas", label: "Banco de Preguntas", icon: HelpCircle },
-      { href: "/teacher/quiz",            label: "Crear Quiz / Examen", icon: ClipboardCheck },
-      { href: "/teacher/entregas",        label: "Calificaciones",      icon: BookMarked, badge: "pending_submissions" },
+      { suffix: "/banco-preguntas", label: "Banco de Preguntas",  icon: HelpCircle },
+      { suffix: "/quiz",            label: "Crear Quiz / Examen", icon: ClipboardCheck },
+      { suffix: "/entregas",        label: "Calificaciones",      icon: BookMarked, badge: "pending_submissions" },
     ],
   },
   {
     label: "SEGUIMIENTO",
     items: [
-      { href: "/teacher/asistencia", label: "Libro de Calificaciones", icon: BookMarked },
-      { href: "/teacher/analytics",  label: "Analytics Estudiantes",   icon: BarChart3 },
+      { suffix: "/asistencia", label: "Libro de Calificaciones", icon: BookMarked },
+      { suffix: "/analytics",  label: "Analytics Estudiantes",   icon: BarChart3 },
     ],
   },
   {
     label: "CUENTA",
     items: [
       {
-        href: "https://wa.me/593959892034?text=Hola%2C%20necesito%20soporte%20docente",
+        suffix: "",
+        absolutePath: "https://wa.me/593959892034?text=Hola%2C%20necesito%20soporte%20docente",
         label: "Chat Soporte",
         icon: MessageCircle,
         external: true,
       },
-      { href: "/teacher/programar-clases", label: "Mi Calendario",  icon: CalendarDays },
-      { href: "/teacher/configuracion",    label: "Configuración",  icon: Settings },
+      { suffix: "/programar-clases", label: "Mi Calendario",   icon: CalendarDays },
+      { suffix: "/configuracion",    label: "Configuración",   icon: Settings, isGlobal: true },
     ],
   },
 ];
+
+/**
+ * Deriva el path raíz para items globales del docente (configuración, etc.).
+ * - basePath "/teacher" → globalsBase "/teacher" (legacy, mantenemos todo bajo /teacher)
+ * - basePath "/docente/preuni" → globalsBase "/docente" (items globales van fuera del curso)
+ */
+function deriveGlobalsBase(basePath: string): string {
+  if (basePath === "/teacher") return "/teacher";
+  // strip último segmento: /docente/preuni → /docente
+  const parts = basePath.split("/").filter(Boolean);
+  if (parts.length > 1) return "/" + parts.slice(0, -1).join("/");
+  return basePath;
+}
+
+function buildSections(basePath: string): NavSection[] {
+  const globalsBase = deriveGlobalsBase(basePath);
+  return SECTION_DEFS.map((s) => ({
+    label: s.label,
+    items: s.items.map((it) => {
+      const root = it.isGlobal ? globalsBase : basePath;
+      return {
+        href: it.absolutePath || `${root}${it.suffix}`,
+        label: it.label,
+        icon: it.icon,
+        badge: it.badge,
+        external: it.external,
+      };
+    }),
+  }));
+}
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
 interface DocentesSidebarProps {
   userName?: string;
   userRole?: string;
+  /**
+   * Prefijo de rutas a generar (por defecto `/teacher` para compat con la
+   * vista legacy). Cuando se monte en `/docente/preuni`, pasarlo aquí para
+   * que cada item del menú apunte a la versión nueva sin duplicar componente.
+   */
+  basePath?: string;
 }
 
 export default function DocentesSidebar({
   userName,
   userRole = "Docente",
+  basePath = "/teacher",
 }: DocentesSidebarProps) {
   const router   = useRouter();
   const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(false);
+
+  // Sections con basePath aplicado (memoizable trivial; basePath es estable
+  // para la vida del shell)
+  const SECTIONS: NavSection[] = buildSections(basePath);
 
   async function handleLogout() {
     const supabase = createClient();
@@ -114,7 +177,7 @@ export default function DocentesSidebar({
 
   function isActive(href: string): boolean {
     if (href.startsWith("http")) return false;
-    if (href === "/teacher") return pathname === "/teacher";
+    if (href === basePath) return pathname === basePath;
     return pathname === href || pathname.startsWith(href + "/");
   }
 
@@ -140,7 +203,7 @@ export default function DocentesSidebar({
       {/* ── Logo ──────────────────────────────────────────────────────────── */}
       <div className="h-16 flex items-center px-4 border-b border-white/[0.06] flex-shrink-0">
         <Link
-          href="/teacher"
+          href={basePath}
           className="flex items-center gap-2.5 group overflow-hidden"
         >
           {collapsed ? (
