@@ -340,8 +340,8 @@ function CursosProCard({
 function CarrerasCard({ note }: { note: string }) {
   return (
     <Link
-      href="/teacher"
-      className="group relative overflow-hidden rounded-2xl border-2 border-white/10 bg-white/[0.03] p-6 transition-all hover:border-white/30 hover:bg-white/[0.05]"
+      href="/docente"
+      className="group relative overflow-hidden rounded-2xl border-2 border-white/10 bg-white/[0.03] p-6 transition-all hover:border-white/30 hover:bg-white/[0.05] cursor-default"
     >
       <div className="space-y-4">
         <div className="flex items-start justify-between gap-3">
