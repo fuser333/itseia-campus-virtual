@@ -158,7 +158,7 @@ async function loadAllCohortesForAdmin(
     .eq('producto', producto)
     .order('fecha_inicio', { ascending: false });
 
-  return ((rows ?? []) as Array<Record<string, unknown>>).map((r) => ({
+  const fromMeta: CohorteDocente[] = ((rows ?? []) as Array<Record<string, unknown>>).map((r) => ({
     assignment_id: '',
     producto,
     cohorte_slug: r.cohorte_slug as string,
@@ -171,6 +171,35 @@ async function loadAllCohortesForAdmin(
     estado: (r.estado as string | null) ?? 'planificada',
     cliente_referencia: (r.cliente_referencia as string | null) ?? null,
   }));
+
+  // Fallback legacy · cursos-pro vive en cursos_pro_courses hasta migración.
+  if (producto === 'cursos-pro') {
+    const { data: legacyRows } = await supabaseAdmin
+      .from('cursos_pro_courses')
+      .select('slug, name, start_date, end_date, is_active')
+      .eq('is_active', true)
+      .order('start_date', { ascending: false });
+
+    const knownSlugs = new Set(fromMeta.map((c) => c.cohorte_slug));
+    for (const r of (legacyRows ?? []) as Array<Record<string, unknown>>) {
+      const slug = r.slug as string;
+      if (knownSlugs.has(slug)) continue;
+      fromMeta.push({
+        assignment_id: '',
+        producto,
+        cohorte_slug: slug,
+        nombre_publico: (r.name as string | null) ?? slug,
+        rol_en_cohorte: 'titular' as const,
+        fecha_inicio: (r.start_date as string | null) ?? null,
+        fecha_fin: (r.end_date as string | null) ?? null,
+        meet_url: null,
+        estado: 'activa',
+        cliente_referencia: null,
+      });
+    }
+  }
+
+  return fromMeta;
 }
 
 // ─────────────────────────────────────────────────────────────────────────────

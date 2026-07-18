@@ -283,7 +283,18 @@ export default function CatalogoPage() {
 
                           {/* CTAs */}
                           <div className="flex gap-3">
-                            <Link href={`/programs/${program.slug}`} className="flex-1">
+                            <Link
+                              href={
+                                program.type === "carrera"
+                                  ? `/carreras/${program.slug}`
+                                  : program.type === "preuni"
+                                    ? `/preuni`
+                                    : program.type === "bootcamp"
+                                      ? `/bootcamp`
+                                      : `/cursos-mdt`
+                              }
+                              className="flex-1"
+                            >
                               <Button
                                 variant="outline"
                                 className="w-full border-white/10 text-white hover:bg-white/5 text-sm"

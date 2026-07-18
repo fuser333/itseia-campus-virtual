@@ -55,7 +55,7 @@ export default async function CohorteDocentePage({ params }: PageProps) {
     data: { user },
   } = await supabase.auth.getUser();
   if (!user)
-    redirect(`/login?redirect=/${productoId}/${cohorteSlug}`);
+    redirect(`/login?module=docentes&redirect=/docente-shell/${productoId}/${cohorteSlug}`);
 
   const { data: profile } = await supabaseAdmin
     .from('profiles')
@@ -78,8 +78,8 @@ export default async function CohorteDocentePage({ params }: PageProps) {
   }
 
   if (!cohorte) {
-    // Sin assignment ni admin-level: kick out al dashboard.
-    redirect(`/${productoId}`);
+    // Sin assignment ni admin-level: kick out al dashboard docente del producto.
+    redirect(`/docente-shell/${productoId}`);
   }
 
   const stats = await getCohorteStats(productoId, cohorteSlug);
@@ -344,20 +344,48 @@ async function loadCohorteAsAdmin(
     .eq('cohorte_slug', slug)
     .maybeSingle();
 
-  if (!data) return null;
-  return {
-    assignment_id: '',
-    producto,
-    cohorte_slug: data.cohorte_slug as string,
-    nombre_publico:
-      (data.nombre_publico as string | null) ?? (data.cohorte_slug as string),
-    rol_en_cohorte: 'titular',
-    fecha_inicio: (data.fecha_inicio as string | null) ?? null,
-    fecha_fin: (data.fecha_fin as string | null) ?? null,
-    meet_url: (data.meet_url as string | null) ?? null,
-    estado: (data.estado as string | null) ?? 'planificada',
-    cliente_referencia: (data.cliente_referencia as string | null) ?? null,
-  };
+  if (data) {
+    return {
+      assignment_id: '',
+      producto,
+      cohorte_slug: data.cohorte_slug as string,
+      nombre_publico:
+        (data.nombre_publico as string | null) ?? (data.cohorte_slug as string),
+      rol_en_cohorte: 'titular',
+      fecha_inicio: (data.fecha_inicio as string | null) ?? null,
+      fecha_fin: (data.fecha_fin as string | null) ?? null,
+      meet_url: (data.meet_url as string | null) ?? null,
+      estado: (data.estado as string | null) ?? 'planificada',
+      cliente_referencia: (data.cliente_referencia as string | null) ?? null,
+    };
+  }
+
+  // Fallback legacy · cursos-pro vive en cursos_pro_courses hasta que se migre a cohorte_metadata.
+  if (producto === 'cursos-pro') {
+    const { data: legacy } = await supabaseAdmin
+      .from('cursos_pro_courses')
+      .select('slug, name, start_date, end_date, is_active')
+      .eq('slug', slug)
+      .eq('is_active', true)
+      .maybeSingle();
+
+    if (legacy) {
+      return {
+        assignment_id: '',
+        producto,
+        cohorte_slug: legacy.slug as string,
+        nombre_publico: (legacy.name as string | null) ?? (legacy.slug as string),
+        rol_en_cohorte: 'titular',
+        fecha_inicio: (legacy.start_date as string | null) ?? null,
+        fecha_fin: (legacy.end_date as string | null) ?? null,
+        meet_url: null,
+        estado: 'activa',
+        cliente_referencia: null,
+      };
+    }
+  }
+
+  return null;
 }
 
 // ─────────────────────────────────────────────────────────────────────────────

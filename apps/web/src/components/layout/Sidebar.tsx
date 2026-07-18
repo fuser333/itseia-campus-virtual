@@ -84,7 +84,6 @@ const MENU_ALUMNO: NavSection[] = [
       { href: "/payments",      label: "Pagos",        icon: CreditCard },
       { href: "/profile",       label: "Perfil",       icon: User },
       { href: "/certificates",  label: "Certificados", icon: FileCheck },
-      { href: "/portfolio",     label: "Portafolio",   icon: Briefcase },
     ],
   },
 ];
