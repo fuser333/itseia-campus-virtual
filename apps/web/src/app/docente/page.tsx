@@ -290,9 +290,14 @@ function CursosProCard({
           nextStart ? ` · arranca ${formatShortDate(nextStart)}` : ""
         }`;
 
+  const primarySlug = courses[0]?.slug;
+  const targetHref = primarySlug
+    ? `/docente-shell/cursos-pro/${primarySlug}`
+    : "/docente-shell/cursos-pro";
+
   return (
     <Link
-      href="/cursos-pro/docente"
+      href={targetHref}
       className="group relative overflow-hidden rounded-2xl border-2 border-[#73B8E7]/40 bg-gradient-to-br from-[#73B8E7]/15 to-[#FBBC0C]/10 p-6 transition-all hover:border-[#FBBC0C] hover:shadow-xl hover:shadow-[#73B8E7]/10"
     >
       <div className="absolute -right-6 -top-6 size-32 rounded-full bg-[#73B8E7]/20 blur-2xl group-hover:bg-[#73B8E7]/30 transition-all" />
