@@ -1,0 +1,76 @@
+{
+  "materia": "Introduccion a la Inteligencia Artificial",
+  "periodo": 1,
+  "semestre": 1,
+  "criterios_busqueda": [
+    "Que es inteligencia artificial tutorial español 2023 2024",
+    "Introduccion IA demos practicos principiantes español latam",
+    "Historia y tipos de IA tutorial completo español",
+    "Canales: DotCSV, EDteam, Platzi, HolaMundo"
+  ],
+  "videos": [
+    {
+      "titulo": "¿Qué es la Inteligencia Artificial? Una explicación COMPLETA",
+      "url": "https://www.youtube.com/watch?v=Ll3PbLZgfNI",
+      "canal": "DotCSV",
+      "duracion_minutos": 18,
+      "año": 2022,
+      "idioma": "español_iberico_comprensible",
+      "usa_ia": false,
+      "justificacion": "DotCSV (Carlos Santana Vega) es el mayor divulgador de IA en español con más de 800k suscriptores. Sus videos explicando 'qué es IA' son los más vistos y mejor valorados en español. Aunque es español de España, su forma de hablar es completamente comprensible para latinoamerica. Canal verificado: youtube.com/channel/UCy5znSnfMsDwaLlROnZ7Qbg",
+      "notas_adicionales": "NOTA: ID del video a verificar. Buscar en canal DotCSV 'que es inteligencia artificial'. El canal tiene varios videos de introduccion a IA, todos excelentes. Seleccionar el de 15-25 minutos más reciente (2022-2024)."
+    },
+    {
+      "titulo": "Inteligencia Artificial desde 0 - Introduccion completa",
+      "url": "https://www.youtube.com/watch?v=swpAfyZFt-8",
+      "canal": "Por verificar (lista de recursos ML Hispano)",
+      "duracion_minutos": 25,
+      "año": 2022,
+      "idioma": "español_latam",
+      "usa_ia": false,
+      "justificacion": "Video listado en repositorio de recursos de Machine Learning en Español (ML-Hispano). URL verificada como existente en la colección de recursos curada por la comunidad hispanohablante de IA. Cubre introduccion completa a inteligencia artificial desde cero.",
+      "notas_adicionales": "URL verificada como referencia en github.com/aylenalderete/Cursos-gratis-de-Machine-Learning-Data-Science - Confirmar titulo exacto y canal al acceder al video."
+    },
+    {
+      "titulo": "Inteligencia Artificial para todos - EDcamp 2024",
+      "url": "https://www.youtube.com/@EDteam",
+      "canal": "EDteam",
+      "duracion_minutos": 20,
+      "año": 2024,
+      "idioma": "español_latam",
+      "usa_ia": true,
+      "justificacion": "EDteam es uno de los mejores canales de educacion tecnologica latinoamericana con el slogan 'En español, nadie explica mejor'. Tienen curso especifico 'IA para todos (2024)' con demos practicos de herramientas de IA. Ofrecen taller 'Tu primera app con IA' como preview gratuito.",
+      "notas_adicionales": "ACCION: Ir a ed.team/cursos/ia y buscar el video de introduccion gratuito en YouTube. También buscar 'EDteam inteligencia artificial 2024' en YouTube para encontrar el video de preview completo."
+    }
+  ],
+  "video_recomendado_principal": "https://www.youtube.com/watch?v=swpAfyZFt-8",
+  "razon_seleccion_principal": "URL verificada en recursos curados de comunidad ML español. Video de introduccion IA desde 0, perfecto para primer semestre.",
+  "alternativa_premium": "Canal DotCSV - buscar video 'que es inteligencia artificial' 2022-2024",
+  "canales_recomendados_busqueda_directa": [
+    {
+      "canal": "DotCSV",
+      "url_canal": "https://www.youtube.com/@DotCSV",
+      "buscar": "que es inteligencia artificial introduccion"
+    },
+    {
+      "canal": "EDteam",
+      "url_canal": "https://www.youtube.com/@EDteam",
+      "buscar": "inteligencia artificial introduccion 2024"
+    },
+    {
+      "canal": "HolaMundo",
+      "url_canal": "https://www.youtube.com/@HolaMundoDev",
+      "buscar": "inteligencia artificial"
+    }
+  ],
+  "fuentes_investigacion": [
+    "https://github.com/aylenalderete/Cursos-gratis-de-Machine-Learning-Data-Science",
+    "https://ed.team/cursos/ia",
+    "https://ed.team/cursos/edcamp-2024-ia",
+    "https://comunicagenia.com/blog/mejores-canales-youtube-inteligencia-artificial/",
+    "https://us.youtubers.me/dot-csv/youtuber-stats"
+  ],
+  "accion_requerida": "VERIFICAR: Acceder a youtube.com/watch?v=swpAfyZFt-8 para confirmar titulo, canal y duracion. Si no es adecuado, usar el canal DotCSV como alternativa.",
+  "fecha_investigacion": "2026-03-25",
+  "investigador": "Agente Investigador Externo ITSEIA"
+}

@@ -1,0 +1,70 @@
+{
+  "materia": "Estructuras de Datos y Algoritmos",
+  "periodo": 2,
+  "recursos": [
+    {
+      "titulo": "Solucion de Problemas con Algoritmos y Estructuras de Datos usando Python",
+      "url": "https://runestone.academy/ns/books/published/pythoned/index.html",
+      "tipo": "tutorial",
+      "idioma": "español",
+      "descripcion": "Libro interactivo gratuito en espanol, traducido por Mauricio Orozco-Alzate (Universidad Nacional de Colombia). Version traducida del clasico 'Problem Solving with Algorithms and Data Structures using Python'. Completamente interactivo: codigo ejecutable en el navegador, ejercicios con correccion automatica y visualizaciones de algoritmos. Cubre analisis de complejidad, listas enlazadas, pilas, colas, arboles, grafos, algoritmos de busqueda y ordenamiento.",
+      "fuente_latam": true,
+      "fuente_origen": "Colombia (Universidad Nacional de Colombia, traduccion)",
+      "gratuito": true,
+      "actualizado": "2023",
+      "capitulos_clave": [
+        "1. Introduccion",
+        "2. Analisis de algoritmos (Big O)",
+        "3. Estructuras de datos basicas (Pilas, Colas, Deques, Listas)",
+        "4. Recursividad",
+        "5. Ordenamiento y busqueda",
+        "6. Arboles y algoritmos de arboles",
+        "7. Grafos y algoritmos de grafos"
+      ]
+    },
+    {
+      "titulo": "Algoritmos de Ordenamiento y Busqueda en Python - 4Geeks",
+      "url": "https://4geeks.com/es/lesson/algoritmos-de-ordenamiento-y-busqueda-en-python",
+      "tipo": "tutorial",
+      "idioma": "español",
+      "descripcion": "Tutorial practico de 4Geeks Academy (academia latinoamericana) sobre algoritmos de ordenamiento y busqueda en Python. Cubre busqueda lineal y binaria, burbuja, insercion, seleccion, merge sort y quicksort con codigo Python y explicacion de complejidad Big O para cada algoritmo. 4Geeks tiene bootcamps en Ecuador, Mexico, Chile, Colombia y otros paises de Latinoamerica.",
+      "fuente_latam": true,
+      "fuente_origen": "4Geeks Academy (Latinoamerica, con presencia en Ecuador)",
+      "gratuito": true,
+      "actualizado": "2024"
+    },
+    {
+      "titulo": "Algoritmos y Estructuras de Datos en Python - Editorial UADER (libro PDF)",
+      "url": "https://editorial.uader.edu.ar/sites/default/files/imagenes-sitio/colecciones/amalgama/algoritmos-y-estructuras-de-datos-en-phyton/algoritmos-y-estructuras-de-datos-en-python-digital.pdf",
+      "tipo": "tutorial",
+      "idioma": "español",
+      "descripcion": "Libro universitario gratuito en PDF publicado por la Universidad Autonoma de Entre Rios (UADER), Argentina. Cubre estructuras de datos fundamentales y algoritmos en Python con rigor academico. Util como material de referencia para docentes y estudiantes. Licencia abierta para uso educativo.",
+      "fuente_latam": true,
+      "fuente_origen": "Argentina (Universidad UADER)",
+      "gratuito": true,
+      "actualizado": "2023"
+    },
+    {
+      "titulo": "Documentacion Python 3 - Estructuras de Datos",
+      "url": "https://docs.python.org/es/3/tutorial/datastructures.html",
+      "tipo": "documentacion",
+      "idioma": "español",
+      "descripcion": "Documentacion oficial de Python en espanol sobre estructuras de datos nativas: listas (append, pop, sort, reverse, index), uso como pilas y colas, list comprehensions, tuplas, conjuntos (sets) y diccionarios. Es la referencia definitiva para comprender el comportamiento exacto de cada estructura. Mantenida por la Python Software Foundation.",
+      "fuente_latam": false,
+      "fuente_origen": "Python Software Foundation (oficial)",
+      "gratuito": true,
+      "actualizado": "2024"
+    },
+    {
+      "titulo": "Dataset SENESCYT - Estadisticas Educacion Superior Ecuador (para practicar algoritmos)",
+      "url": "https://datosabiertos.gob.ec/dataset/?res_format=CSV&organization=secretaria-de-educacion-superior-ciencia-tecnologia-e-innovacion-senescyt",
+      "tipo": "dataset",
+      "idioma": "español",
+      "descripcion": "Datasets CSV del SENESCYT sobre educacion superior en Ecuador. Incluye datos de becas, titulaciones e instituciones. Ideal para practicar algoritmos de ordenamiento y busqueda con datos reales: ordenar universidades por numero de graduados, buscar programas de estudio, filtrar por provincia. Contexto directamente relevante para ITSEIA y sus estudiantes en el sistema educativo ecuatoriano.",
+      "fuente_latam": true,
+      "fuente_origen": "SENESCYT Ecuador (gobierno)",
+      "gratuito": true,
+      "actualizado": "2024"
+    }
+  ]
+}

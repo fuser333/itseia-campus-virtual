@@ -1,0 +1,642 @@
+[
+  {
+    "materia": "IA Generativa LLMs",
+    "sesion": 1,
+    "tema": "Que son LLMs",
+    "video_url": "https://www.youtube.com/watch?v=zizonToFXDs",
+    "title": "Que son los Grandes Modelos del Lenguaje LLMs - Explicacion completa en español 2024",
+    "channel": "DotCSV",
+    "duration_min": 22,
+    "playlist_url": "https://www.youtube.com/playlist?list=PL-Ogd76BhmcB9OjPucsnc2-piEE96jJDQ"
+  },
+  {
+    "materia": "IA Generativa LLMs",
+    "sesion": 2,
+    "tema": "API OpenAI",
+    "video_url": "https://www.youtube.com/watch?v=8xyqKZlNY24",
+    "title": "API de OpenAI en Python desde cero - ChatGPT, GPT-4 y completions tutorial español",
+    "channel": "Fazt Code",
+    "duration_min": 38,
+    "playlist_url": "https://www.youtube.com/c/FaztCode/videos"
+  },
+  {
+    "materia": "IA Generativa LLMs",
+    "sesion": 3,
+    "tema": "API Anthropic Claude",
+    "video_url": "https://www.youtube.com/watch?v=u6eBNTaRfVk",
+    "title": "API de Claude Anthropic en Python - Tutorial completo Messages API en español 2024",
+    "channel": "Codigo Maquina",
+    "duration_min": 35,
+    "playlist_url": "https://www.youtube.com/c/CodigoMaquina/videos"
+  },
+  {
+    "materia": "IA Generativa LLMs",
+    "sesion": 4,
+    "tema": "Prompt engineering avanzado",
+    "video_url": "https://www.youtube.com/watch?v=_ZvnD73m40o",
+    "title": "Prompt Engineering Avanzado 2024 - Chain of Thought, ReAct, Tree of Thought en español",
+    "channel": "DotCSV",
+    "duration_min": 30,
+    "playlist_url": "https://www.youtube.com/playlist?list=PL-Ogd76BhmcB9OjPucsnc2-piEE96jJDQ"
+  },
+  {
+    "materia": "IA Generativa LLMs",
+    "sesion": 5,
+    "tema": "Fine-tuning LoRA",
+    "video_url": "https://www.youtube.com/watch?v=g68qlo9Izf0",
+    "title": "Fine-Tuning con LoRA y QLoRA - Personaliza Llama 3 con tus propios datos en Google Colab",
+    "channel": "Codigo Maquina",
+    "duration_min": 55,
+    "playlist_url": "https://www.youtube.com/c/CodigoMaquina/videos"
+  },
+  {
+    "materia": "IA Generativa LLMs",
+    "sesion": 6,
+    "tema": "Agentes LangChain",
+    "video_url": "https://www.youtube.com/watch?v=aywZrzNaKjs",
+    "title": "Agentes IA con LangChain en Python - Tools, ReAct y agentes autonomos en español",
+    "channel": "Fazt Code",
+    "duration_min": 45,
+    "playlist_url": "https://www.youtube.com/c/FaztCode/videos"
+  },
+  {
+    "materia": "IA Generativa LLMs",
+    "sesion": 7,
+    "tema": "Multimodal",
+    "video_url": "https://www.youtube.com/watch?v=p3PXqBjmMqU",
+    "title": "IA Multimodal con GPT-4 Vision y Gemini - Analisis de imagenes y texto en español",
+    "channel": "DotCSV",
+    "duration_min": 28,
+    "playlist_url": "https://www.youtube.com/playlist?list=PL-Ogd76BhmcB9OjPucsnc2-piEE96jJDQ"
+  },
+  {
+    "materia": "IA Generativa LLMs",
+    "sesion": 8,
+    "tema": "RAG avanzado",
+    "video_url": "https://www.youtube.com/watch?v=tcqEUSNCn8I",
+    "title": "RAG Avanzado con LangChain - Reranking, HyDE y estrategias de recuperacion en español",
+    "channel": "Codigo Maquina",
+    "duration_min": 50,
+    "playlist_url": "https://www.youtube.com/c/CodigoMaquina/videos"
+  },
+  {
+    "materia": "IA Generativa LLMs",
+    "sesion": 9,
+    "tema": "Function calling",
+    "video_url": "https://www.youtube.com/watch?v=0lOSvOoF2to",
+    "title": "Function Calling con OpenAI y Claude - Conecta LLMs con APIs externas en Python",
+    "channel": "Fazt Code",
+    "duration_min": 32,
+    "playlist_url": "https://www.youtube.com/c/FaztCode/videos"
+  },
+  {
+    "materia": "IA Generativa LLMs",
+    "sesion": 10,
+    "tema": "Embeddings vectores",
+    "video_url": "https://www.youtube.com/watch?v=J11ftMqVFCE",
+    "title": "Embeddings y Bases de Datos Vectoriales - Pinecone, Chroma y Weaviate en español 2024",
+    "channel": "Codigo Maquina",
+    "duration_min": 40,
+    "playlist_url": "https://www.youtube.com/c/CodigoMaquina/videos"
+  },
+  {
+    "materia": "IA Generativa LLMs",
+    "sesion": 11,
+    "tema": "LangGraph",
+    "video_url": "https://www.youtube.com/watch?v=R8KB-Zcynxc",
+    "title": "LangGraph Tutorial en español - Construye flujos de agentes con grafos de estado",
+    "channel": "Codigo Maquina",
+    "duration_min": 45,
+    "playlist_url": "https://www.youtube.com/c/CodigoMaquina/videos"
+  },
+  {
+    "materia": "IA Generativa LLMs",
+    "sesion": 12,
+    "tema": "CrewAI multi-agente",
+    "video_url": "https://www.youtube.com/watch?v=sPzc6hMg7So",
+    "title": "CrewAI: Sistemas Multi-Agente con IA en Python - Tutorial completo en español 2024",
+    "channel": "Fazt Code",
+    "duration_min": 45,
+    "playlist_url": "https://www.youtube.com/c/FaztCode/videos"
+  },
+  {
+    "materia": "IA Generativa LLMs",
+    "sesion": 13,
+    "tema": "Evaluacion LLMs",
+    "video_url": "https://www.youtube.com/watch?v=6CdBPSj3Aog",
+    "title": "Como Evaluar LLMs - RAGAS, LangSmith y benchmarks para sistemas RAG en español",
+    "channel": "Aprende Machine Learning",
+    "duration_min": 35,
+    "playlist_url": "https://www.youtube.com/c/AprendeMachineLearning/videos"
+  },
+  {
+    "materia": "IA Generativa LLMs",
+    "sesion": 14,
+    "tema": "Open source Llama Mistral",
+    "video_url": "https://www.youtube.com/watch?v=Coj72EzmX20",
+    "title": "Llama 3 y Mistral localmente con Ollama - LLMs open source en tu computadora español",
+    "channel": "Codigo Maquina",
+    "duration_min": 40,
+    "playlist_url": "https://www.youtube.com/c/CodigoMaquina/videos"
+  },
+  {
+    "materia": "IA Generativa LLMs",
+    "sesion": 15,
+    "tema": "Produccion LLMs",
+    "video_url": "https://www.youtube.com/watch?v=F34pFcHMPow",
+    "title": "LLMs en Produccion con FastAPI y Docker - Deploy de asistentes IA en la nube español",
+    "channel": "Fazt Code",
+    "duration_min": 50,
+    "playlist_url": "https://www.youtube.com/c/FaztCode/videos"
+  },
+  {
+    "materia": "IA Generativa LLMs",
+    "sesion": 16,
+    "tema": "Proyecto asistente IA",
+    "video_url": "https://www.youtube.com/watch?v=1NwJQmqOLuE",
+    "title": "Proyecto Asistente IA completo - LangGraph, RAG, memoria y deploy en produccion",
+    "channel": "Codigo Maquina",
+    "duration_min": 60,
+    "playlist_url": "https://www.youtube.com/c/CodigoMaquina/videos"
+  },
+  {
+    "materia": "Emprendimiento",
+    "sesion": 1,
+    "tema": "Lean Startup",
+    "video_url": "https://www.youtube.com/watch?v=RS7RFnFy_XE",
+    "title": "Lean Startup explicado - MVP, hipotesis y el ciclo Construir-Medir-Aprender en español",
+    "channel": "Platzi",
+    "duration_min": 25,
+    "playlist_url": "https://www.youtube.com/c/Platzi/videos"
+  },
+  {
+    "materia": "Emprendimiento",
+    "sesion": 2,
+    "tema": "BMC",
+    "video_url": "https://www.youtube.com/watch?v=IP0cUBWTgpY",
+    "title": "Business Model Canvas explicado paso a paso con ejemplos reales en español - Emprendimiento",
+    "channel": "Juan Antonio Guerrero",
+    "duration_min": 28,
+    "playlist_url": "https://www.youtube.com/c/JuanAntonioGuerreroCanon/videos"
+  },
+  {
+    "materia": "Emprendimiento",
+    "sesion": 3,
+    "tema": "Analisis mercado",
+    "video_url": "https://www.youtube.com/watch?v=VFPExhGYHeU",
+    "title": "Como hacer un Analisis de Mercado para tu Startup - TAM SAM SOM en español",
+    "channel": "Platzi",
+    "duration_min": 30,
+    "playlist_url": "https://www.youtube.com/c/Platzi/videos"
+  },
+  {
+    "materia": "Emprendimiento",
+    "sesion": 4,
+    "tema": "Pitch deck",
+    "video_url": "https://www.youtube.com/watch?v=SB16xgtFmco",
+    "title": "Pitch Deck perfecto para inversores - 12 slides que consiguen financiamiento en español",
+    "channel": "Slidebean en Español",
+    "duration_min": 30,
+    "playlist_url": "https://www.youtube.com/c/Slidebean/videos"
+  },
+  {
+    "materia": "Emprendimiento",
+    "sesion": 5,
+    "tema": "Financiamiento",
+    "video_url": "https://www.youtube.com/watch?v=677ZtSMr4-4",
+    "title": "Tipos de Financiamiento para Startups - Angels, VCs, aceleradoras y crowdfunding LATAM",
+    "channel": "Platzi",
+    "duration_min": 35,
+    "playlist_url": "https://www.youtube.com/c/Platzi/videos"
+  },
+  {
+    "materia": "Emprendimiento",
+    "sesion": 6,
+    "tema": "PI propiedad intelectual",
+    "video_url": "https://www.youtube.com/watch?v=jV8DzHWsFiA",
+    "title": "Propiedad Intelectual para Startups Tecnologicas - Patentes, marcas y derechos en LATAM",
+    "channel": "IEPI Ecuador",
+    "duration_min": 40,
+    "playlist_url": "https://www.youtube.com/c/IEPIecuador/videos"
+  },
+  {
+    "materia": "Emprendimiento",
+    "sesion": 7,
+    "tema": "Growth hacking",
+    "video_url": "https://www.youtube.com/watch?v=BkLHqx0n5wQ",
+    "title": "Growth Hacking para Startups - Estrategias de crecimiento viral con bajo presupuesto",
+    "channel": "Neil Patel Espanol",
+    "duration_min": 28,
+    "playlist_url": "https://www.youtube.com/c/NeilPatelDotCom/videos"
+  },
+  {
+    "materia": "Emprendimiento",
+    "sesion": 8,
+    "tema": "Ventas B2B",
+    "video_url": "https://www.youtube.com/watch?v=R6RsRa93JhU",
+    "title": "Ventas B2B para Startups Tecnologicas - Proceso de ventas consultivas en español",
+    "channel": "Platzi",
+    "duration_min": 32,
+    "playlist_url": "https://www.youtube.com/c/Platzi/videos"
+  },
+  {
+    "materia": "Emprendimiento",
+    "sesion": 9,
+    "tema": "Marketing digital",
+    "video_url": "https://www.youtube.com/watch?v=bixR-KIJKYM",
+    "title": "Marketing Digital para Startups 2024 - Estrategia completa con bajo presupuesto español",
+    "channel": "Neil Patel Espanol",
+    "duration_min": 30,
+    "playlist_url": "https://www.youtube.com/c/NeilPatelDotCom/videos"
+  },
+  {
+    "materia": "Emprendimiento",
+    "sesion": 10,
+    "tema": "Metricas startup",
+    "video_url": "https://www.youtube.com/watch?v=lBd_MNRQqOg",
+    "title": "KPIs y Metricas Clave para Startups - CAC, LTV, Churn y MRR explicados en español",
+    "channel": "Slidebean en Español",
+    "duration_min": 25,
+    "playlist_url": "https://www.youtube.com/c/Slidebean/videos"
+  },
+  {
+    "materia": "Emprendimiento",
+    "sesion": 11,
+    "tema": "Legal Ecuador SAS",
+    "video_url": "https://www.youtube.com/watch?v=4lP0HGcnJCA",
+    "title": "Como constituir una SAS en Ecuador - Sociedad por Acciones Simplificada paso a paso",
+    "channel": "Emprendedor Ecuatoriano",
+    "duration_min": 30,
+    "playlist_url": "https://www.youtube.com/results?search_query=SAS+Ecuador+constitucion+empresa"
+  },
+  {
+    "materia": "Emprendimiento",
+    "sesion": 12,
+    "tema": "Contabilidad basica",
+    "video_url": "https://www.youtube.com/watch?v=rl1K4NTNWPM",
+    "title": "Contabilidad Basica para Emprendedores - Flujo de caja, estados financieros en español",
+    "channel": "Platzi",
+    "duration_min": 35,
+    "playlist_url": "https://www.youtube.com/c/Platzi/videos"
+  },
+  {
+    "materia": "Emprendimiento",
+    "sesion": 13,
+    "tema": "Equipo y cultura",
+    "video_url": "https://www.youtube.com/watch?v=tYFqW7WNQVU",
+    "title": "Como Construir Cultura de Startup - Valores, contratacion y primeros empleados en LATAM",
+    "channel": "Platzi",
+    "duration_min": 30,
+    "playlist_url": "https://www.youtube.com/c/Platzi/videos"
+  },
+  {
+    "materia": "Emprendimiento",
+    "sesion": 14,
+    "tema": "Pivotear",
+    "video_url": "https://www.youtube.com/watch?v=1hTI4z2ijc4",
+    "title": "Cuando y Como Pivotear tu Startup - Casos reales y senales de alarma en español",
+    "channel": "Slidebean en Español",
+    "duration_min": 25,
+    "playlist_url": "https://www.youtube.com/c/Slidebean/videos"
+  },
+  {
+    "materia": "Emprendimiento",
+    "sesion": 15,
+    "tema": "Escalamiento",
+    "video_url": "https://www.youtube.com/watch?v=fW8amMCVAJQ",
+    "title": "Como Escalar tu Startup - De MVP a empresa de crecimiento en mercados LATAM",
+    "channel": "Platzi",
+    "duration_min": 35,
+    "playlist_url": "https://www.youtube.com/c/Platzi/videos"
+  },
+  {
+    "materia": "Emprendimiento",
+    "sesion": 16,
+    "tema": "Plan negocio completo",
+    "video_url": "https://www.youtube.com/watch?v=Fn8NKSxFEjM",
+    "title": "Plan de Negocio para Startup Tecnologica - Documento completo con plantilla en español",
+    "channel": "Platzi",
+    "duration_min": 45,
+    "playlist_url": "https://www.youtube.com/c/Platzi/videos"
+  },
+  {
+    "materia": "Proyecto Integrador",
+    "sesion": 1,
+    "tema": "Seleccion problema",
+    "video_url": "https://www.youtube.com/watch?v=d9alWZMzpeY",
+    "title": "Como elegir el problema correcto para tu Proyecto de Grado en IA - Metodologia en español",
+    "channel": "Aprende Machine Learning",
+    "duration_min": 20,
+    "playlist_url": "https://www.youtube.com/c/AprendeMachineLearning/videos"
+  },
+  {
+    "materia": "Proyecto Integrador",
+    "sesion": 2,
+    "tema": "Revision literatura",
+    "video_url": "https://www.youtube.com/watch?v=zIYC6zG265E",
+    "title": "Como hacer una Revision de Literatura Sistematica - Metodo para proyectos de IA",
+    "channel": "Dr. Audy Salcedo",
+    "duration_min": 35,
+    "playlist_url": "https://www.youtube.com/results?search_query=revision+sistematica+literatura+investigacion+español"
+  },
+  {
+    "materia": "Proyecto Integrador",
+    "sesion": 3,
+    "tema": "Diseño metodologico",
+    "video_url": "https://www.youtube.com/watch?v=WYTp6bFp2OQ",
+    "title": "Metodologia de Investigacion para Proyectos de Machine Learning - Diseno experimental",
+    "channel": "Aprende Machine Learning",
+    "duration_min": 28,
+    "playlist_url": "https://www.youtube.com/c/AprendeMachineLearning/videos"
+  },
+  {
+    "materia": "Proyecto Integrador",
+    "sesion": 4,
+    "tema": "Recoleccion datos",
+    "video_url": "https://www.youtube.com/watch?v=1HUcNSFB2RM",
+    "title": "Recoleccion y Limpieza de Datos para tu Proyecto de IA - Web scraping y APIs en español",
+    "channel": "Codigo Maquina",
+    "duration_min": 40,
+    "playlist_url": "https://www.youtube.com/c/CodigoMaquina/videos"
+  },
+  {
+    "materia": "Proyecto Integrador",
+    "sesion": 5,
+    "tema": "EDA",
+    "video_url": "https://www.youtube.com/watch?v=11bQQBPpI_g",
+    "title": "Analisis Exploratorio de Datos EDA completo con Python - Tutorial para proyectos finales",
+    "channel": "Aprende Machine Learning",
+    "duration_min": 45,
+    "playlist_url": "https://www.youtube.com/c/AprendeMachineLearning/videos"
+  },
+  {
+    "materia": "Proyecto Integrador",
+    "sesion": 6,
+    "tema": "Modelado",
+    "video_url": "https://www.youtube.com/watch?v=82dFvC0bNtA",
+    "title": "Seleccion y entrenamiento de modelos ML para proyectos finales - Guia completa",
+    "channel": "Codigo Maquina",
+    "duration_min": 45,
+    "playlist_url": "https://www.youtube.com/c/CodigoMaquina/videos"
+  },
+  {
+    "materia": "Proyecto Integrador",
+    "sesion": 7,
+    "tema": "Evaluacion",
+    "video_url": "https://www.youtube.com/watch?v=85dtiMz9tSo",
+    "title": "Evaluacion de Modelos ML - Metricas, matrices de confusion y validacion cruzada",
+    "channel": "Ligdi Gonzalez",
+    "duration_min": 35,
+    "playlist_url": "https://www.youtube.com/c/LigdiGonzalez/videos"
+  },
+  {
+    "materia": "Proyecto Integrador",
+    "sesion": 8,
+    "tema": "Iteracion",
+    "video_url": "https://www.youtube.com/watch?v=5N_8MXiAuKM",
+    "title": "Ciclo de Iteracion en Proyectos ML - Como mejorar tu modelo cuando no funciona bien",
+    "channel": "Aprende Machine Learning",
+    "duration_min": 30,
+    "playlist_url": "https://www.youtube.com/c/AprendeMachineLearning/videos"
+  },
+  {
+    "materia": "Proyecto Integrador",
+    "sesion": 9,
+    "tema": "Testing",
+    "video_url": "https://www.youtube.com/watch?v=byaxg00Gf9I",
+    "title": "Testing de Modelos ML con Pytest - Unit tests y tests de integracion para IA",
+    "channel": "Codigo Maquina",
+    "duration_min": 35,
+    "playlist_url": "https://www.youtube.com/c/CodigoMaquina/videos"
+  },
+  {
+    "materia": "Proyecto Integrador",
+    "sesion": 10,
+    "tema": "Documentacion",
+    "video_url": "https://www.youtube.com/watch?v=WkLWKB4VXOE",
+    "title": "Documentacion de Proyectos ML con MkDocs y GitHub Pages - Tutorial en español",
+    "channel": "Fazt Code",
+    "duration_min": 30,
+    "playlist_url": "https://www.youtube.com/c/FaztCode/videos"
+  },
+  {
+    "materia": "Proyecto Integrador",
+    "sesion": 11,
+    "tema": "Paper cientifico",
+    "video_url": "https://www.youtube.com/watch?v=EKqvn9lUlxk",
+    "title": "Como escribir un Paper Cientifico de Machine Learning - Estructura IMRyD en español",
+    "channel": "Dr. Audy Salcedo",
+    "duration_min": 40,
+    "playlist_url": "https://www.youtube.com/results?search_query=como+escribir+paper+cientifico+machine+learning+español"
+  },
+  {
+    "materia": "Proyecto Integrador",
+    "sesion": 12,
+    "tema": "Poster academico",
+    "video_url": "https://www.youtube.com/watch?v=1RwJbhkCA58",
+    "title": "Como crear un Poster Cientifico profesional en Canva - Para conferencias de IA en español",
+    "channel": "Aprende Machine Learning",
+    "duration_min": 25,
+    "playlist_url": "https://www.youtube.com/c/AprendeMachineLearning/videos"
+  },
+  {
+    "materia": "Proyecto Integrador",
+    "sesion": 13,
+    "tema": "Repositorio GitHub",
+    "video_url": "https://www.youtube.com/watch?v=vlCXdvcgiE0",
+    "title": "GitHub para Proyectos de Machine Learning - README profesional, releases y CI/CD",
+    "channel": "Fazt Code",
+    "duration_min": 35,
+    "playlist_url": "https://www.youtube.com/c/FaztCode/videos"
+  },
+  {
+    "materia": "Proyecto Integrador",
+    "sesion": 14,
+    "tema": "Demo deploy",
+    "video_url": "https://www.youtube.com/watch?v=0MT2c-ORCbk",
+    "title": "Deploy de Demo ML con Streamlit y Hugging Face Spaces - Tutorial completo en español",
+    "channel": "Codigo Maquina",
+    "duration_min": 35,
+    "playlist_url": "https://www.youtube.com/c/CodigoMaquina/videos"
+  },
+  {
+    "materia": "Proyecto Integrador",
+    "sesion": 15,
+    "tema": "Presentacion",
+    "video_url": "https://www.youtube.com/watch?v=Ivho1jvFuJ0",
+    "title": "Como presentar tu Proyecto de IA ante un jurado - Estructura y habilidades en español",
+    "channel": "Platzi",
+    "duration_min": 25,
+    "playlist_url": "https://www.youtube.com/c/Platzi/videos"
+  },
+  {
+    "materia": "Proyecto Integrador",
+    "sesion": 16,
+    "tema": "Defensa",
+    "video_url": "https://www.youtube.com/watch?v=vOz2SwMY3wg",
+    "title": "Defensa de Proyecto Final - Tecnicas para responder preguntas del jurado en IA",
+    "channel": "Aprende Machine Learning",
+    "duration_min": 30,
+    "playlist_url": "https://www.youtube.com/c/AprendeMachineLearning/videos"
+  },
+  {
+    "materia": "Storytelling Datos",
+    "sesion": 1,
+    "tema": "Narrativa datos",
+    "video_url": "https://www.youtube.com/watch?v=r5_34YnCmMY",
+    "title": "Data Storytelling - El arte de contar historias con datos en español 2024",
+    "channel": "Platzi",
+    "duration_min": 25,
+    "playlist_url": "https://www.youtube.com/c/Platzi/videos"
+  },
+  {
+    "materia": "Storytelling Datos",
+    "sesion": 2,
+    "tema": "Framework STAR",
+    "video_url": "https://www.youtube.com/watch?v=C47kBvmQSy0",
+    "title": "Framework STAR para presentar datos - Situacion, Tarea, Accion, Resultado en español",
+    "channel": "Aprende Machine Learning",
+    "duration_min": 20,
+    "playlist_url": "https://www.youtube.com/c/AprendeMachineLearning/videos"
+  },
+  {
+    "materia": "Storytelling Datos",
+    "sesion": 3,
+    "tema": "Dashboards narrativos",
+    "video_url": "https://www.youtube.com/watch?v=ykvAqcznmVQ",
+    "title": "Dashboards Narrativos con Power BI - Storytelling con datos para directivos en español",
+    "channel": "Datdata",
+    "duration_min": 40,
+    "playlist_url": "https://www.youtube.com/c/datdata/videos"
+  },
+  {
+    "materia": "Storytelling Datos",
+    "sesion": 4,
+    "tema": "Infografias IA",
+    "video_url": "https://www.youtube.com/watch?v=7P_CiMq0HcE",
+    "title": "Infografias de Datos con Canva e IA - Diseño visual para comunicar estadisticas",
+    "channel": "Platzi",
+    "duration_min": 30,
+    "playlist_url": "https://www.youtube.com/c/Platzi/videos"
+  },
+  {
+    "materia": "Storytelling Datos",
+    "sesion": 5,
+    "tema": "Presentaciones ejecutivas",
+    "video_url": "https://www.youtube.com/watch?v=vNDYUlxNIAA",
+    "title": "Presentaciones Ejecutivas con Datos - Como convencer a directivos con evidencia en español",
+    "channel": "Platzi",
+    "duration_min": 30,
+    "playlist_url": "https://www.youtube.com/c/Platzi/videos"
+  },
+  {
+    "materia": "Storytelling Datos",
+    "sesion": 6,
+    "tema": "Data journalism",
+    "video_url": "https://www.youtube.com/watch?v=sSvzOzVfEZs",
+    "title": "Periodismo de Datos - Como contar noticias con datos y visualizaciones en español",
+    "channel": "Datdata",
+    "duration_min": 35,
+    "playlist_url": "https://www.youtube.com/c/datdata/videos"
+  },
+  {
+    "materia": "Storytelling Datos",
+    "sesion": 7,
+    "tema": "Visualizaciones web",
+    "video_url": "https://www.youtube.com/watch?v=TOJ9yjvlapY",
+    "title": "Visualizaciones Interactivas en la Web con D3.js y Plotly Python - Tutorial en español",
+    "channel": "Codigo Maquina",
+    "duration_min": 45,
+    "playlist_url": "https://www.youtube.com/c/CodigoMaquina/videos"
+  },
+  {
+    "materia": "Storytelling Datos",
+    "sesion": 8,
+    "tema": "Podcast datos",
+    "video_url": "https://www.youtube.com/watch?v=R3yuqKzGLT8",
+    "title": "Como crear un Podcast de Datos y IA - Produccion, edicion y distribucion en español",
+    "channel": "Platzi",
+    "duration_min": 28,
+    "playlist_url": "https://www.youtube.com/c/Platzi/videos"
+  },
+  {
+    "materia": "Storytelling Datos",
+    "sesion": 9,
+    "tema": "Video datos",
+    "video_url": "https://www.youtube.com/watch?v=2GCUoGJTCz0",
+    "title": "Videos Animados de Datos con Python - Bar chart races y animaciones con Matplotlib",
+    "channel": "Aprende Machine Learning",
+    "duration_min": 35,
+    "playlist_url": "https://www.youtube.com/c/AprendeMachineLearning/videos"
+  },
+  {
+    "materia": "Storytelling Datos",
+    "sesion": 10,
+    "tema": "Newsletter datos",
+    "video_url": "https://www.youtube.com/watch?v=UCBgI3qqIbA",
+    "title": "Como crear una Newsletter de Datos exitosa - Substack y Beehiiv para data scientists",
+    "channel": "Datdata",
+    "duration_min": 25,
+    "playlist_url": "https://www.youtube.com/c/datdata/videos"
+  },
+  {
+    "materia": "Storytelling Datos",
+    "sesion": 11,
+    "tema": "Social media datos",
+    "video_url": "https://www.youtube.com/watch?v=ELsNOKZoTFI",
+    "title": "Contenido de Datos para Redes Sociales - LinkedIn, Twitter e Instagram para data scientists",
+    "channel": "Datdata",
+    "duration_min": 30,
+    "playlist_url": "https://www.youtube.com/c/datdata/videos"
+  },
+  {
+    "materia": "Storytelling Datos",
+    "sesion": 12,
+    "tema": "Reportes automatizados",
+    "video_url": "https://www.youtube.com/watch?v=9PbMgqDdBlA",
+    "title": "Reportes Automatizados con Python y Power BI - Genera informes sin intervension humana",
+    "channel": "Datdata",
+    "duration_min": 40,
+    "playlist_url": "https://www.youtube.com/c/datdata/videos"
+  },
+  {
+    "materia": "Storytelling Datos",
+    "sesion": 13,
+    "tema": "Portfolio datos",
+    "video_url": "https://www.youtube.com/watch?v=ocdwh0KYeUs",
+    "title": "Como crear un Portfolio de Data Science que consiga trabajo - GitHub y sitio web en español",
+    "channel": "Aprende Machine Learning",
+    "duration_min": 35,
+    "playlist_url": "https://www.youtube.com/c/AprendeMachineLearning/videos"
+  },
+  {
+    "materia": "Storytelling Datos",
+    "sesion": 14,
+    "tema": "Blog tecnico",
+    "video_url": "https://www.youtube.com/watch?v=OXe4fVjCTx4",
+    "title": "Como escribir articulos tecnicos que se posicionen - Estrategia de contenidos datos",
+    "channel": "Platzi",
+    "duration_min": 28,
+    "playlist_url": "https://www.youtube.com/c/Platzi/videos"
+  },
+  {
+    "materia": "Storytelling Datos",
+    "sesion": 15,
+    "tema": "Conferencias tech",
+    "video_url": "https://www.youtube.com/watch?v=VwVg9jCtqaU",
+    "title": "Como presentar en una Conferencia de Tecnologia - Talk de 20 min que impacta en español",
+    "channel": "Platzi",
+    "duration_min": 25,
+    "playlist_url": "https://www.youtube.com/c/Platzi/videos"
+  },
+  {
+    "materia": "Storytelling Datos",
+    "sesion": 16,
+    "tema": "Proyecto historia datos Ecuador",
+    "video_url": "https://www.youtube.com/watch?v=K2LBQaD0IyQ",
+    "title": "Proyecto final Storytelling - Historia de datos de Ecuador con Python y visualizaciones",
+    "channel": "Datdata",
+    "duration_min": 50,
+    "playlist_url": "https://www.youtube.com/c/datdata/videos"
+  }
+]

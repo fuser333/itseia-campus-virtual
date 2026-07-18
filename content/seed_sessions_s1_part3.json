@@ -1,0 +1,424 @@
+{
+  "materia": {
+    "carrera": "big-data",
+    "materia": "Introducción a Big Data",
+    "codigo": "IBD-101",
+    "semestre": 1,
+    "horas_docencia": 48,
+    "horas_practica": 48,
+    "horas_autonomo": 24,
+    "horas_total": 120,
+    "sesiones": [
+      {
+        "number": 1,
+        "title": "¿Qué es Big Data? Las 5 Vs",
+        "video_url": "https://www.youtube.com/watch?v=bAyrObl7TYE",
+        "video_title": "Big Data explicado en 5 minutos - Las 5 V del Big Data",
+        "video_channel": "Aprender Big Data",
+        "video_duration_minutes": 15,
+        "theory_markdown": "# ¿Qué es Big Data? Las 5 Vs\n\n## El problema que define a Big Data\n\nEn 2025, la humanidad genera **2.5 quintillones de bytes de datos cada día**. Para tener perspectiva:\n- Si imprimieras todos esos datos en libros, podrías cubrir la superficie de Ecuador 52,000 veces\n- Google procesa 8.5 mil millones de búsquedas diarias\n- WhatsApp entrega 100 mil millones de mensajes por día\n\nLos sistemas de bases de datos tradicionales (como Excel, MySQL o Access) **no pueden manejar** esta escala. Ahí nace el concepto de Big Data.\n\n## Definición de Big Data\n\n**Big Data** es la capacidad de gestionar, procesar y analizar conjuntos de datos tan grandes, variados o generados tan rápidamente que las herramientas de análisis tradicionales son insuficientes.\n\nLa definición más aceptada en la industria usa el modelo de las **5 Vs**, introducido por Doug Laney de Gartner en 2001 (inicialmente 3 Vs, luego expandido a 5).\n\n## Las 5 Vs del Big Data\n\n### V1: VOLUMEN (Volume)\n\n**¿De qué trata?** La cantidad masiva de datos generados.\n\n```\nKilobyte (KB)   = 1,000 bytes       - Un email de texto\nMegabyte (MB)   = 1,000 KB          - Una foto de alta resolución\nGigabyte (GB)   = 1,000 MB          - Una película HD\nTerabyte (TB)   = 1,000 GB          - Disco duro moderno\nPetabyte (PB)   = 1,000 TB          - Facebook almacena 100+ PB\nExabyte  (EB)   = 1,000 PB          - Todo internet ~5 EB\nZettabyte (ZB)  = 1,000 EB          - Datos globales 2023: 120 ZB\n```\n\n**Ejemplo Ecuador**: El SRI (Servicio de Rentas Internas) recibe millones de declaraciones tributarias anuales. El IESS tiene registros de más de 10 millones de afiliados desde hace décadas.\n\n**¿Cuándo el volumen es un problema?** Cuando los datos no caben en un solo servidor o no pueden ser procesados por una sola máquina en tiempo razonable.\n\n### V2: VELOCIDAD (Velocity)\n\n**¿De qué trata?** La rapidez con que los datos se generan y deben ser procesados.\n\n| Tipo de velocidad | Descripción | Ejemplo |\n|------------------|-------------|----------|\n| **Batch (lotes)** | Procesar datos acumulados periódicamente | Reportes nocturnos del banco |\n| **Near Real-time** | Procesamiento con segundos de retraso | Alertas de fraude (segundos) |\n| **Real-time (streaming)** | Procesamiento al instante, ms de latencia | Precios de bolsa, GPS |\n\n**Ejemplo Ecuador**: Cuando pagas con tarjeta en un Supermaxi, el sistema de detección de fraude tiene **menos de 2 segundos** para decidir si aprobar o rechazar la transacción antes de que el cliente se impaciente.\n\n### V3: VARIEDAD (Variety)\n\n**¿De qué trata?** Los diferentes tipos y formatos de datos.\n\n```\nDatos Estructurados (10-20% del total):\n├── Tablas SQL\n├── Hojas de cálculo Excel\n└── CSVs, bases de datos relacionales\n\nDatos Semi-estructurados (10%):\n├── JSON (APIs)\n├── XML (documentos)\n└── Logs de servidores\n\nDatos No Estructurados (70-80% del total):\n├── Texto (emails, tweets, noticias)\n├── Imágenes y video\n├── Audio (call centers)\n└── Datos de sensores IoT\n```\n\n**Ejemplo Ecuador**: El Banco del Pichincha tiene que integrar en sus análisis: transacciones (estructurado), contratos en PDF (no estructurado), datos de redes sociales para evaluar riesgo reputacional (no estructurado), y respuestas de API de burós de crédito (semi-estructurado).\n\n### V4: VERACIDAD (Veracity)\n\n**¿De qué trata?** La confiabilidad, exactitud y calidad de los datos.\n\nNo todos los datos son iguales:\n- Un tweet puede ser falso, sarcástico o de un bot\n- Una encuesta tiene sesgo según quién responde\n- Un sensor defectuoso genera datos incorrectos\n- Los registros médicos tienen errores humanos de transcripción\n\n**El problema de la veracidad**: Si analizas datos de baja calidad, obtienes conclusiones incorrectas. En inglés: **Garbage In, Garbage Out (GIGO)**.\n\n**Ejemplo Ecuador**: Durante la pandemia de COVID-19, los datos de contagios reportados por los municipios ecuatorianos tenían inconsistencias significativas. Construir modelos predictivos con esos datos requería técnicas especiales de manejo de incertidumbre.\n\n### V5: VALOR (Value)\n\n**¿De qué trata?** La capacidad de extraer valor económico o social de los datos.\n\nEl valor es la V más importante porque es la razón de ser de todo Big Data. Sin valor, las otras 4 Vs no tienen sentido.\n\n| Organización | Datos que tiene | Valor que extrae |\n|-------------|-----------------|------------------|\n| Netflix | Historial de visualización | Recomendaciones que retienen suscriptores |\n| Amazon | Compras y búsquedas | Cross-selling que aumenta ventas 35% |\n| Gobierno Ecuador | Datos de pobreza SIISE | Focalización de programas sociales |\n| Hospital ecuatoriano | Historiales clínicos | Diagnóstico temprano de enfermedades |\n\n## Vs adicionales (modelos extendidos)\n\nAlgunos modelos modernos incluyen:\n- **Visualización**: Los datos necesitan ser presentados de forma comprensible\n- **Variabilidad**: Los datos cambian de significado según el contexto\n- **Viscosidad**: Resistencia al flujo de datos entre sistemas\n\n## Big Data vs Data Science vs Analytics\n\n| Término | Enfoque | Pregunta que responde |\n|---------|---------|----------------------|\n| **Big Data** | Infraestructura para manejar datos masivos | ¿Cómo almaceno y proceso esto? |\n| **Data Science** | Extraer insights de datos | ¿Qué significan estos datos? |\n| **Business Analytics** | Tomar decisiones con datos | ¿Qué debo hacer con esto? |\n\nSon complementarios: Big Data provee la infraestructura, Data Science provee los métodos, Analytics provee las decisiones.\n\n## ¿Por qué Big Data en Ecuador y LATAM?\n\n- El sector financiero ecuatoriano procesa millones de transacciones diarias\n- El sistema de salud IESS tiene 40+ años de datos de pacientes sin explotar\n- Las telcos (Claro, Movistar, CNT) generan terabytes de datos de uso diariamente\n- El agro-ecuatoriano (cacao, banano, flores) genera datos de sensores IoT en cultivos\n- La brecha de talento en Big Data en Ecuador es de 10:1 (plazas vs graduados)",
+        "quiz": {
+          "title": "Quiz - Sesión 1: Big Data y las 5 Vs",
+          "pass_percentage": 70,
+          "questions": [
+            {
+              "question_text": "Una empresa ecuatoriana de telecomunicaciones necesita analizar el comportamiento de llamadas de 15 millones de usuarios en los últimos 5 años. ¿Cuál de las 5 Vs del Big Data es el principal desafío aquí?",
+              "options": [
+                {"id": "a", "text": "Veracidad - los datos de llamadas pueden ser incorrectos", "is_correct": false},
+                {"id": "b", "text": "Valor - no está claro qué valor tienen esos datos", "is_correct": false},
+                {"id": "c", "text": "Volumen - la cantidad masiva de registros de 15 millones de usuarios durante 5 años", "is_correct": true},
+                {"id": "d", "text": "Velocidad - las llamadas se generan muy rápido", "is_correct": false}
+              ],
+              "explanation": "15 millones de usuarios × 365 días × 5 años × potencialmente decenas de llamadas diarias = cientos de miles de millones de registros. Esto es un desafío de Volumen porque ninguna base de datos tradicional puede almacenar y procesar esta cantidad eficientemente. Se necesitan tecnologías como Hadoop HDFS o sistemas distribuidos."
+            },
+            {
+              "question_text": "Un sistema de detección de fraude en tarjetas de crédito debe decidir en 1.5 segundos si aprobar o rechazar cada transacción. ¿Cuál V del Big Data es crítica aquí?",
+              "options": [
+                {"id": "a", "text": "Volumen", "is_correct": false},
+                {"id": "b", "text": "Variedad", "is_correct": false},
+                {"id": "c", "text": "Velocidad", "is_correct": true},
+                {"id": "d", "text": "Veracidad", "is_correct": false}
+              ],
+              "explanation": "La Velocidad (real-time processing) es la V crítica aquí. El sistema debe procesar cada transacción en milisegundos comparando contra patrones de fraude conocidos. Si tarda más de 1.5-2 segundos, la experiencia del usuario se degrada y el sistema no cumple su función. Esto requiere tecnologías de streaming como Apache Kafka o Spark Streaming."
+            },
+            {
+              "question_text": "¿Cuántos bytes aproximadamente tiene un Petabyte?",
+              "options": [
+                {"id": "a", "text": "1,000 Gigabytes", "is_correct": false},
+                {"id": "b", "text": "1,000,000 Gigabytes (1 millón de GB)", "is_correct": true},
+                {"id": "c", "text": "1,000 Terabytes solamente", "is_correct": false},
+                {"id": "d", "text": "1 Zettabyte", "is_correct": false}
+              ],
+              "explanation": "La escala es: KB → MB → GB → TB → PB → EB → ZB, donde cada nivel es 1,000 veces el anterior. Un Petabyte = 1,000 TB = 1,000,000 GB = 1,000,000,000 MB. Para contexto: Facebook almacena más de 100 Petabytes de fotos. Un disco duro doméstico típico es 1-4 TB, así que 1 PB equivale a entre 250 y 1,000 discos duros."
+            },
+            {
+              "question_text": "El principio 'Garbage In, Garbage Out' (GIGO) está relacionado principalmente con cuál de las 5 Vs?",
+              "options": [
+                {"id": "a", "text": "Volumen", "is_correct": false},
+                {"id": "b", "text": "Velocidad", "is_correct": false},
+                {"id": "c", "text": "Variedad", "is_correct": false},
+                {"id": "d", "text": "Veracidad", "is_correct": true}
+              ],
+              "explanation": "GIGO (Basura entra, basura sale) es el principio central de la Veracidad. Si alimentas tu modelo o análisis con datos incorrectos, incompletos o de baja calidad, las conclusiones serán igualmente incorrectas sin importar cuán sofisticado sea el algoritmo. La Veracidad es la V que se refiere a la calidad y confiabilidad de los datos."
+            },
+            {
+              "question_text": "¿Cuál es la diferencia fundamental entre Big Data y una base de datos relacional tradicional (como MySQL)?",
+              "options": [
+                {"id": "a", "text": "Big Data solo puede almacenar números; MySQL también almacena texto", "is_correct": false},
+                {"id": "b", "text": "MySQL es de pago; Big Data siempre es gratuito", "is_correct": false},
+                {"id": "c", "text": "Big Data usa procesamiento distribuido en múltiples máquinas para escalar; MySQL corre en un solo servidor", "is_correct": true},
+                {"id": "d", "text": "No hay diferencia real, Big Data es solo un término de marketing", "is_correct": false}
+              ],
+              "explanation": "La diferencia fundamental es la arquitectura: MySQL y bases de datos relacionales corren en un solo servidor (escalamiento vertical: agregas más RAM/CPU a la misma máquina). Big Data usa procesamiento distribuido horizontal: distribuyes los datos y el procesamiento entre decenas, cientos o miles de máquinas (nodos) trabajando en paralelo. Esto permite escalar sin límite práctico."
+            }
+          ]
+        },
+        "assignment": {
+          "title": "Mapa de Big Data en Ecuador",
+          "instructions_markdown": "## Ejercicio: Identifica Big Data en Tu Entorno\n\n### Objetivo\nIdentificar y analizar casos reales de Big Data en organizaciones ecuatorianas.\n\n### Instrucciones\n\n1. Investiga y documenta **3 organizaciones ecuatorianas** (empresas, entidades de gobierno, hospitales, etc.) que claramente manejen Big Data.\n\n2. Para cada organización, completa esta ficha:\n\n```\n=== ORGANIZACIÓN: [Nombre] ===\nSector: [Financiero / Gobierno / Salud / Retail / Telecom / etc.]\n\nFuentes de datos:\n- [Dato 1 que generan]\n- [Dato 2 que generan]\n- [Dato 3 que generan]\n\nAnálisis de las 5 Vs:\n- Volumen: [¿Cuántos datos aproximadamente? ¿TB, PB?]\n- Velocidad: [¿Batch, near real-time o real-time?]\n- Variedad: [¿Estructurados, semi, no estructurados?]\n- Veracidad: [¿Qué problemas de calidad podrían tener?]\n- Valor: [¿Qué valor económico o social generan con esos datos?]\n\nV dominante: [¿Cuál de las 5 Vs es el mayor reto?]\nJustificación: [Por qué elegiste esa V]\n```\n\n3. **Pregunta de reflexión** (150-200 palabras): ¿Cómo podría Ecuador usar mejor sus datos gubernamentales (INEC, SRI, IESS) para mejorar las políticas públicas? Da 2 ejemplos concretos.\n\n### Criterios de evaluación\n| Criterio | Puntos |\n|----------|--------|\n| 3 organizaciones con fichas completas | 45 |\n| Análisis correcto de las 5 Vs por organización | 30 |\n| Identificación de la V dominante con justificación | 10 |\n| Reflexión sobre datos gubernamentales ecuatorianos | 15 |\n| **Total** | **100** |",
+          "allowed_file_types": ["pdf", "docx", "md"]
+        },
+        "ai_prompt_suggested": "Estoy estudiando Big Data en ITSEIA. Quiero entender mejor las 5 Vs aplicadas a [organización ecuatoriana específica que elegiste]. Ayúdame a analizar cuál de las 5 Vs es el mayor desafío para esa organización y por qué. También quiero entender qué tecnologías de Big Data usarían para resolverlo.",
+        "ai_context": "Sesión 1 - IBD-101. El estudiante conoce las 5 Vs (Volumen, Velocidad, Variedad, Veracidad, Valor), la escala de datos (KB hasta ZB), diferencia entre batch/streaming, tipos de datos estructurados/semi/no estructurados, y la diferencia entre Big Data y bases de datos tradicionales.",
+        "resources": [
+          {
+            "title": "IBM - What is Big Data?",
+            "url": "https://www.ibm.com/think/topics/big-data",
+            "type": "link",
+            "description": "Explicación oficial de IBM sobre Big Data. IBM es uno de los pioneros del campo y su definición es referencia de la industria."
+          },
+          {
+            "title": "Oracle - Big Data Overview",
+            "url": "https://www.oracle.com/big-data/what-is-big-data/",
+            "type": "link",
+            "description": "Perspectiva de Oracle (empresa líder en bases de datos) sobre Big Data y sus características."
+          },
+          {
+            "title": "INEC Ecuador - Datos Abiertos para análisis",
+            "url": "https://www.ecuadorencifras.gob.ec/estadisticas/",
+            "type": "dataset",
+            "description": "Fuente oficial de datos del gobierno ecuatoriano. Excelente para practicar análisis con datos reales del país."
+          },
+          {
+            "title": "Aprender Big Data - Canal YouTube Español",
+            "url": "https://www.youtube.com/@aprenderbigdata",
+            "type": "link",
+            "description": "Canal especializado en Big Data en español con tutoriales de Hadoop, Spark y tecnologías del ecosistema."
+          },
+          {
+            "title": "Gartner - Informe original 3Vs (reseña)",
+            "url": "https://www.gartner.com/en/information-technology/glossary/big-data",
+            "type": "link",
+            "description": "Definición oficial de Gartner sobre Big Data. Gartner acuñó el término 3Vs en 2001."
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "title": "Ecosistema de Tecnologías Big Data",
+        "video_url": "https://www.youtube.com/watch?v=LHBE6Q9XlzI",
+        "video_title": "Introduction to Big Data with Spark and Hadoop - IBM (ver primeras 2 horas)",
+        "video_channel": "freeCodeCamp.org / IBM",
+        "video_duration_minutes": 45,
+        "theory_markdown": "# Ecosistema de Tecnologías Big Data\n\n## El problema de escala: por qué necesitamos nuevas herramientas\n\nUna base de datos MySQL puede manejar eficientemente hasta ~100 GB en un solo servidor. Pero ¿qué pasa cuando tienes 100 TB? ¿O 1 PB?\n\nLa solución de Big Data: **distribuir** el almacenamiento y procesamiento en múltiples máquinas (nodos) que trabajan en paralelo.\n\n## Apache Hadoop: el padre del Big Data\n\nHadoop fue creado en 2006 por Doug Cutting (inspirado en papers de Google). Es el framework fundacional del Big Data moderno.\n\n### Los 3 pilares de Hadoop\n\n#### 1. HDFS (Hadoop Distributed File System)\nEl sistema de archivos distribuido. Divide los archivos en bloques (128 MB por defecto) y los distribuye en múltiples máquinas.\n\n```\nArchivo original: video_trafico_quito.mp4 (500 GB)\n\nHDFS lo divide en:\n├── Bloque 1 (128 MB) → Nodo 1 + copia en Nodo 4\n├── Bloque 2 (128 MB) → Nodo 2 + copia en Nodo 5\n├── Bloque 3 (128 MB) → Nodo 3 + copia en Nodo 6\n└── ... (3,906 bloques en total)\n```\n\n**Factor de replicación = 3**: Cada bloque se copia en 3 nodos diferentes. Si un servidor falla, los datos están seguros.\n\n#### 2. MapReduce\nEl modelo de programación de Hadoop para procesar datos en paralelo.\n\n```\nEjemplo: Contar palabras en 1 millón de tweets ecuatorianos\n\nMAP (distribuir trabajo):\n├── Nodo 1 procesa tweets 1-250,000 → {\"Ecuador\":450, \"quito\":200, ...}\n├── Nodo 2 procesa tweets 250,001-500,000 → {\"Ecuador\":380, \"quito\":190, ...}\n├── Nodo 3 procesa tweets 500,001-750,000 → {\"Ecuador\":420, \"quito\":180, ...}\n└── Nodo 4 procesa tweets 750,001-1,000,000 → {\"Ecuador\":510, \"quito\":220, ...}\n\nREDUCE (combinar resultados):\n└── \"Ecuador\": 450+380+420+510 = 1,760 menciones\n    \"quito\": 200+190+180+220 = 790 menciones\n```\n\n#### 3. YARN (Yet Another Resource Negotiator)\nEl gestor de recursos que decide qué nodo ejecuta qué tarea. El \"jefe de orquesta\" del cluster.\n\n## Apache Spark: el sucesor moderno\n\nSpark fue creado en 2009 en Berkeley para superar las limitaciones de Hadoop MapReduce.\n\n### ¿Por qué Spark es mejor que MapReduce?\n\n| Característica | Hadoop MapReduce | Apache Spark |\n|---------------|-----------------|-------------|\n| Velocidad | Lee/escribe en disco | Procesa en memoria RAM |\n| Rendimiento | Referencia: 1x | Hasta 100x más rápido |\n| APIs | Java verboso | Python, Scala, R, SQL |\n| Tipos de proceso | Solo batch | Batch + Streaming + ML + Graph |\n| Casos de uso | ETL masivo | Casi todo |\n\n```python\n# PySpark - Spark con Python\nfrom pyspark.sql import SparkSession\n\nspark = SparkSession.builder.appName(\"ITSEIA_Demo\").getOrCreate()\n\n# Cargar dataset de 1 TB en segundos (distribuido en el cluster)\ndf = spark.read.csv(\"hdfs://namenode/datos/ventas_itseia.csv\", \n                    header=True, inferSchema=True)\n\n# Operaciones distribuidas (se ejecutan en paralelo)\nresumen = df.groupBy(\"ciudad\").agg({\"monto\": \"sum\", \"id\": \"count\"})\nresumen.show()\n```\n\n## El ecosistema completo de Hadoop/Spark\n\n```\n┌─────────────────────────────────────────────────────┐\n│              CAPA DE APLICACIONES                    │\n│  ML con Spark │  SQL con Hive  │  Dashboards Tableau │\n├─────────────────────────────────────────────────────┤\n│              CAPA DE PROCESAMIENTO                   │\n│        Apache Spark       │     MapReduce            │\n├─────────────────────────────────────────────────────┤\n│         CAPA DE GESTIÓN DE RECURSOS (YARN)           │\n├─────────────────────────────────────────────────────┤\n│          CAPA DE ALMACENAMIENTO (HDFS)               │\n├─────────────────────────────────────────────────────┤\n│              INFRAESTRUCTURA DE CLUSTER              │\n│  Servidor 1 │ Servidor 2 │ Servidor 3 │ ... │ Nodo N │\n└─────────────────────────────────────────────────────┘\n```\n\n## Herramientas clave del ecosistema\n\n### Ingesta de datos\n- **Apache Kafka**: Sistema de mensajería distribuida para streaming de datos en tiempo real\n- **Apache Flume**: Ingesta de logs y datos de servidores\n- **Sqoop**: Transferencia de datos entre HDFS y bases de datos SQL\n\n### Almacenamiento y consulta\n- **Apache Hive**: SQL sobre HDFS (HiveQL)\n- **Apache HBase**: Base de datos NoSQL sobre HDFS, para acceso en tiempo real\n- **Apache Cassandra**: Base de datos distribuida para alta disponibilidad\n\n### Procesamiento\n- **Apache Spark**: El estándar moderno (Batch + Streaming + ML)\n- **Apache Flink**: Streaming de datos en tiempo real\n\n### Orquestación\n- **Apache Airflow**: Programar y monitorear pipelines de datos\n- **Apache Oozie**: Scheduler de workflows Hadoop\n\n## Big Data en la nube: el modelo moderno\n\nHoy en día, pocas empresas instalan Hadoop localmente. La tendencia es usar **Big Data como Servicio (BDaaS)** en la nube:\n\n| Proveedor | Servicio | Equivalente |\n|-----------|---------|-------------|\n| **AWS** | EMR (Elastic MapReduce) | Hadoop/Spark administrado |\n| **Google Cloud** | Dataproc + BigQuery | Spark + Data Warehouse |\n| **Azure** | HDInsight + Synapse | Hadoop + Analytics |\n\n**Ventaja para Ecuador**: No necesitas invertir millones en servidores. Puedes usar un cluster de 100 nodos por horas y pagar solo lo que consumas.\n\n## Arquitectura Lambda: el patrón más usado\n\nCombuina procesamiento batch y streaming:\n\n```\nFuentes de datos\n      │\n      ├──────────────────────────────┐\n      │                              │\n      ▼                              ▼\n  BATCH LAYER                  SPEED LAYER\n  (Hadoop HDFS)               (Apache Kafka +\n  Procesa TODO                 Spark Streaming)\n  los datos históricos         Procesa datos\n  (horas/días)                 RECIENTES (segundos)\n      │                              │\n      └──────────────┬───────────────┘\n                     ▼\n              SERVING LAYER\n           (HBase / Cassandra)\n         Responde consultas\n         mezclando resultados\n```",
+        "quiz": {
+          "title": "Quiz - Sesión 2: Ecosistema Big Data",
+          "pass_percentage": 70,
+          "questions": [
+            {
+              "question_text": "¿Cuál es el principal componente de Hadoop responsable de almacenar datos distribuidos en múltiples servidores?",
+              "options": [
+                {"id": "a", "text": "MapReduce", "is_correct": false},
+                {"id": "b", "text": "YARN", "is_correct": false},
+                {"id": "c", "text": "HDFS (Hadoop Distributed File System)", "is_correct": true},
+                {"id": "d", "text": "Apache Spark", "is_correct": false}
+              ],
+              "explanation": "HDFS (Hadoop Distributed File System) es el sistema de almacenamiento distribuido de Hadoop. Divide los archivos en bloques y los distribuye en múltiples nodos con replicación (3 copias por defecto). MapReduce es el modelo de procesamiento, YARN gestiona los recursos, y Spark es una tecnología separada que puede usar HDFS como almacenamiento."
+            },
+            {
+              "question_text": "¿Por qué Apache Spark puede ser hasta 100 veces más rápido que Hadoop MapReduce?",
+              "options": [
+                {"id": "a", "text": "Spark usa más servidores que MapReduce", "is_correct": false},
+                {"id": "b", "text": "Spark procesa los datos en memoria RAM en lugar de leer y escribir en disco en cada paso", "is_correct": true},
+                {"id": "c", "text": "Spark solo funciona con datos pequeños donde es más fácil procesar", "is_correct": false},
+                {"id": "d", "text": "MapReduce está desactualizado y no funciona con hardware moderno", "is_correct": false}
+              ],
+              "explanation": "La ventaja clave de Spark es el procesamiento In-Memory (en RAM). MapReduce escribe los resultados intermedios en disco después de cada paso Map y antes de cada paso Reduce. Spark mantiene los datos intermedios en RAM, evitando miles de operaciones de I/O de disco lentas. Acceder a RAM es ~100,000 veces más rápido que acceder a disco."
+            },
+            {
+              "question_text": "Una empresa quiere recibir y procesar datos de 10,000 sensores IoT instalados en cultivos de banano en Ecuador, generando datos cada segundo. ¿Qué tecnología es más adecuada?",
+              "options": [
+                {"id": "a", "text": "Excel con macros para automatizar la recepción", "is_correct": false},
+                {"id": "b", "text": "MySQL con inserciones por lotes cada hora", "is_correct": false},
+                {"id": "c", "text": "Apache Kafka para ingesta de streaming en tiempo real", "is_correct": true},
+                {"id": "d", "text": "Un CSV compartido en Google Drive", "is_correct": false}
+              ],
+              "explanation": "Apache Kafka es el estándar de la industria para ingestar flujos de datos en tiempo real de múltiples fuentes. Puede manejar millones de eventos por segundo con baja latencia. 10,000 sensores × 1 dato/segundo = 10,000 mensajes/segundo, lo cual está dentro del rango natural de Kafka. MySQL con inserciones masivas sería muy lento e inestable a esa escala."
+            },
+            {
+              "question_text": "¿Cuál es la principal ventaja del modelo de Big Data en la nube (AWS EMR, Google Dataproc) vs instalar Hadoop en servidores propios?",
+              "options": [
+                {"id": "a", "text": "Los servicios en la nube son siempre más rápidos en procesamiento", "is_correct": false},
+                {"id": "b", "text": "La nube elimina la necesidad de conocer tecnologías Big Data", "is_correct": false},
+                {"id": "c", "text": "Se paga solo por el tiempo de uso, sin inversión inicial en hardware, con escalado automático", "is_correct": true},
+                {"id": "d", "text": "Los datos en la nube son siempre más seguros que en servidores locales", "is_correct": false}
+              ],
+              "explanation": "El modelo de nube transforma un gasto de capital (CapEx: comprar $500,000 en servidores) en un gasto operativo (OpEx: pagar $2/hora por un cluster). Para Ecuador, esto es especialmente importante: una startup o entidad pública puede usar un cluster de 100 nodos por 8 horas y pagar ~$160, sin comprar ningún servidor. El escalado automático agrega/quita nodos según la demanda."
+            },
+            {
+              "question_text": "En la Arquitectura Lambda, ¿cuál es el rol de la 'Speed Layer'?",
+              "options": [
+                {"id": "a", "text": "Procesar todo el historial de datos para análisis profundos", "is_correct": false},
+                {"id": "b", "text": "Almacenar los datos de forma permanente y eficiente", "is_correct": false},
+                {"id": "c", "text": "Procesar los datos recientes en tiempo real para respuestas inmediatas", "is_correct": true},
+                {"id": "d", "text": "Gestionar la seguridad y autenticación del cluster", "is_correct": false}
+              ],
+              "explanation": "En la Arquitectura Lambda, la Speed Layer (capa de velocidad) procesa los datos más recientes con muy baja latencia (segundos) usando tecnologías como Spark Streaming o Apache Flink. Complementa a la Batch Layer que procesa el historial completo (más lento pero más preciso). La combinación de ambas en la Serving Layer da respuestas que combinan precisión histórica con datos actualizados."
+            }
+          ]
+        },
+        "assignment": {
+          "title": "Diseña una Arquitectura Big Data para Ecuador",
+          "instructions_markdown": "## Ejercicio: Arquitectura Big Data\n\n### Objetivo\nDiseñar una solución Big Data conceptual para un problema real ecuatoriano.\n\n### Escenario\nEl Ministerio de Salud de Ecuador quiere construir un sistema para:\n1. Monitorear en tiempo real brotes de enfermedades en todo el país\n2. Analizar historial de 40 años de datos de salud\n3. Predecir epidemias con 2 semanas de anticipación\n\n### Fuentes de datos disponibles:\n- 6,000 centros de salud reportando diariamente (CSV estructurado)\n- Twitter con menciones de síntomas (texto, no estructurado)\n- Datos del IESS sobre consultas médicas (SQL)\n- Sensores de temperatura y humedad en ciudades (IoT, tiempo real)\n- Datos de movilidad de celulares (streaming)\n\n### Tu tarea:\n\nDiseña la arquitectura en un documento que incluya:\n\n1. **Análisis de las 5 Vs** para este problema\n\n2. **Diagrama de arquitectura** (puede ser un dibujo escaneado o hecho en draw.io/Miro):\n   - ¿Dónde almacenarías los datos? (HDFS, S3, etc.)\n   - ¿Qué herramienta usarías para datos en streaming? (Kafka, etc.)\n   - ¿Qué motor de procesamiento? (Spark, Hadoop, etc.)\n   - ¿Cómo presentarías los resultados? (dashboard, API, etc.)\n\n3. **Estimación de volumen**: ¿Cuántos TB/PB aproximados generaría este sistema al año?\n\n4. **Un riesgo de veracidad**: ¿Qué problema de calidad de datos anticipas y cómo lo manejarías?\n\n### Criterios de evaluación\n| Criterio | Puntos |\n|----------|--------|\n| Análisis de 5 Vs completo y coherente | 30 |\n| Diagrama de arquitectura con tecnologías correctas | 35 |\n| Estimación de volumen razonada | 20 |\n| Identificación y solución del riesgo de veracidad | 15 |\n| **Total** | **100** |",
+          "allowed_file_types": ["pdf", "docx", "png", "jpg"]
+        },
+        "ai_prompt_suggested": "Estoy diseñando una arquitectura Big Data para el Ministerio de Salud Ecuador. Tengo estas fuentes de datos: [lista tus fuentes]. Necesito ayuda para elegir entre estas opciones tecnológicas: [tus opciones]. ¿Puedes explicarme las diferencias y cuál recomendarías para el contexto ecuatoriano, considerando el presupuesto limitado del sector público?",
+        "ai_context": "Sesión 2 - El estudiante conoce HDFS, MapReduce, YARN, Apache Spark, Kafka, Hive, HBase, el ecosistema de Hadoop, Big Data en la nube (AWS EMR, GCP Dataproc), y la Arquitectura Lambda. Comprende la diferencia entre batch y streaming.",
+        "resources": [
+          {
+            "title": "Apache Hadoop Documentation Oficial",
+            "url": "https://hadoop.apache.org/docs/stable/",
+            "type": "link",
+            "description": "Documentación oficial de Apache Hadoop. El punto de referencia para entender HDFS, MapReduce y YARN."
+          },
+          {
+            "title": "Apache Spark Documentation",
+            "url": "https://spark.apache.org/docs/latest/",
+            "type": "link",
+            "description": "Documentación oficial de Apache Spark. Incluye guías de inicio rápido en Python (PySpark)."
+          },
+          {
+            "title": "Coursera - Introduction to Big Data with Spark and Hadoop (IBM)",
+            "url": "https://www.coursera.org/learn/introduction-to-big-data-with-spark-hadoop",
+            "type": "link",
+            "description": "Curso gratuito de IBM en Coursera sobre Big Data con Spark y Hadoop. Auditable sin pago."
+          },
+          {
+            "title": "AWS - Big Data en la nube (Free Tier)",
+            "url": "https://aws.amazon.com/es/big-data/datalakes-and-analytics/",
+            "type": "tool",
+            "description": "Servicios de Big Data de Amazon Web Services. Puedes crear una cuenta gratuita y experimentar con EMR."
+          },
+          {
+            "title": "Roadmap Big Data 2024 - roadmap.sh",
+            "url": "https://roadmap.sh/data-engineer",
+            "type": "link",
+            "description": "Mapa visual de las tecnologías que debe aprender un Data Engineer / Big Data Engineer. Excelente para planificar tu carrera."
+          }
+        ]
+      },
+      {
+        "number": 3,
+        "title": "Datos Estructurados vs No Estructurados",
+        "video_url": "https://www.youtube.com/watch?v=LHBE6Q9XlzI",
+        "video_title": "Python Data Science - Structured vs Unstructured Data (freeCodeCamp, ver sección relevante)",
+        "video_channel": "freeCodeCamp.org",
+        "video_duration_minutes": 35,
+        "theory_markdown": "# Datos Estructurados vs No Estructurados\n\n## La composición real de los datos del mundo\n\n```\nDatos del mundo (100%)\n├── No estructurados: 80%  ← El mayor desafío y oportunidad\n├── Semi-estructurados: 10%\n└── Estructurados: 10%    ← Los más fáciles de procesar\n```\n\nLa ironía: el 80% de los datos más ricos (imágenes, texto, voz) han sido históricamente imposibles de analizar. El Deep Learning está cambiando eso.\n\n## Datos Estructurados en profundidad\n\n### Características\n- Organizados en filas y columnas\n- Esquema fijo predefinido\n- Fácilmente consultables con SQL\n- Almacenados en bases de datos relacionales\n\n### Ejemplos en Ecuador\n\n**Tabla de clientes (Produbanco):**\n```\nid_cliente | nombre          | edad | saldo    | ciudad\n-----------|-----------------|------|----------|----------\n10045      | Ana Torres      | 28   | 5,430.00 | Quito\n10046      | Carlos Vega     | 35   | 12,800.00| Guayaquil\n10047      | María Rodríguez | 31   | 890.00   | Cuenca\n```\n\n**Ventajas:**\n- SQL permite consultas rápidas sobre millones de filas\n- Fácil de limpiar, validar y transformar\n- Herramientas maduras y abundantes\n- Fácil de entender y compartir\n\n**Limitaciones:**\n- Solo captura lo que el esquema permite\n- No sirve para sentimientos, emociones, contexto visual\n- Requiere diseño previo del esquema (inflexible)\n\n### Sistemas que manejan datos estructurados\n\n| Sistema | Tipo | Caso de uso |\n|---------|------|-------------|\n| MySQL / PostgreSQL | RDBMS | Transacciones, CRM |\n| Oracle | RDBMS Enterprise | Banca, gobierno |\n| SQL Server | RDBMS | Aplicaciones Microsoft |\n| Redshift (AWS) | Data Warehouse | Análisis a gran escala |\n| BigQuery (Google) | Data Warehouse | Petabytes en SQL |\n\n## Datos No Estructurados en profundidad\n\n### Tipos principales\n\n#### 1. Texto\nEl tipo más abundante de datos no estructurados.\n\n```python\n# Ejemplo: Tweets sobre servicios bancarios en Ecuador\ntexto_1 = \"El #BancoPichincha acaba de cobrarme comisión de nuevo sin avisar. \n            Estoy furioso. #Ecuador #Estafa\"\ntexto_2 = \"Acabo de abrir mi cuenta en Produbanco y la app es increíble. \n            Super fácil! Recomendado 100%\"\ntexto_3 = \"¿Alguien sabe si el @BancoCentral va a subir las tasas este mes?\"\n```\n\nTécnicas para analizar texto:\n- **Análisis de Sentimiento**: ¿Positivo, negativo, neutral?\n- **NLP (Procesamiento de Lenguaje Natural)**: Entender el significado\n- **Topic Modeling**: Descubrir temas recurrentes\n- **Named Entity Recognition**: Identificar personas, lugares, organizaciones\n\n#### 2. Imágenes\n\n```python\n# Una imagen es una matriz de píxeles\nimport numpy as np\nfrom PIL import Image\n\nimg = Image.open('foto_cedula_ecuador.jpg')\narray = np.array(img)\nprint(array.shape)  # (480, 640, 3) - alto x ancho x canales RGB\nprint(array[0, 0]) # [123, 87, 210] - valor RGB del primer píxel\n```\n\nAplicaciones en Ecuador:\n- OCR (Reconocimiento óptico de caracteres) en cédulas para onboarding bancario digital\n- Análisis de imágenes satelitales para agricultura de precisión\n- Diagnóstico médico asistido por IA (ImagemIA, empresa ITSEIA)\n\n#### 3. Audio\n\n```python\nimport librosa\n\n# Cargar audio de llamada de call center\naudio, sr = librosa.load('llamada_cliente.wav', sr=16000)\nprint(f\"Duración: {len(audio)/sr:.1f} segundos\")\nprint(f\"Tasa de muestreo: {sr} Hz\")\n# Un audio de 1 minuto = 16,000 * 60 = 960,000 números\n```\n\nAplicaciones:\n- Transcripción automática de llamadas de call center\n- Análisis de satisfacción del cliente por tono de voz\n- Detección de palabras clave en conversaciones\n\n#### 4. Video\nCombinación de imágenes + audio + metadatos temporales.\n- 1 hora de video HD = ~7 GB de datos\n- Análisis de cámaras de tráfico en Quito\n- Detección de presencia en locales comerciales\n\n## Datos Semi-estructurados\n\n### JSON (JavaScript Object Notation)\nEl formato de intercambio de datos más usado en APIs:\n\n```json\n{\n  \"transaccion\": {\n    \"id\": \"TXN-2026-001234\",\n    \"fecha\": \"2026-03-21T14:30:00Z\",\n    \"cliente\": {\n      \"cedula\": \"1712345678\",\n      \"nombre\": \"Ana Torres\",\n      \"ciudad\": \"Quito\"\n    },\n    \"monto\": 250.00,\n    \"tipo\": \"compra\",\n    \"establecimiento\": \"Supermaxi Quicentro\",\n    \"coordenadas\": {\n      \"lat\": -0.1761,\n      \"lon\": -78.4844\n    }\n  }\n}\n```\n\n```python\nimport json\nimport pandas as pd\n\n# Leer JSON en Python\nwith open('transacciones.json') as f:\n    data = json.load(f)\n\n# Convertir lista de JSONs a DataFrame\ndf = pd.json_normalize(data, sep='_')\nprint(df.head())\n```\n\n### Logs de servidor\n```\n192.168.1.1 - - [21/Mar/2026:14:30:15 -0500] \"GET /mallas/ HTTP/1.1\" 200 4521 \"-\" \"Mozilla/5.0\"\n192.168.1.2 - - [21/Mar/2026:14:30:16 -0500] \"POST /api/inscripcion HTTP/1.1\" 201 892 \"-\" \"Mozilla/5.0\"\n```\n\n## El pipeline de procesamiento\n\n### Para datos estructurados (SQL pipeline)\n```\nFuente → ETL → Data Warehouse → SQL Query → Dashboard\n```\n\n### Para datos no estructurados (ML pipeline)\n```\nFuente → Preprocesamiento → Extracción de features → Modelo ML → Predicción\n```\n\n**Ejemplo texto:**\n```\nTweet crudo → Limpieza → Tokenización → TF-IDF → Clasificador → Sentimiento\n```\n\n**Ejemplo imagen:**\n```\nFoto → Redimensionar → Normalizar píxeles → CNN → Diagnóstico\n```\n\n## Almacenamiento: la elección correcta\n\n| Tipo de dato | Almacenamiento recomendado | Por qué |\n|-------------|--------------------------|--------|\n| Estructurado (tablas) | PostgreSQL, Redshift, BigQuery | SQL optimizado para tablas |\n| Semi-estructurado (JSON) | MongoDB, DynamoDB, Couchbase | Esquema flexible |\n| No estructurado (archivos) | HDFS, Amazon S3, Google Cloud Storage | Almacenamiento de objetos barato |\n| Tiempo real (streams) | Apache Kafka, AWS Kinesis | Alta velocidad, bajo latencia |",
+        "quiz": {
+          "title": "Quiz - Sesión 3: Datos Estructurados vs No Estructurados",
+          "pass_percentage": 70,
+          "questions": [
+            {
+              "question_text": "¿Qué porcentaje aproximado del total de datos del mundo son datos NO estructurados?",
+              "options": [
+                {"id": "a", "text": "10%", "is_correct": false},
+                {"id": "b", "text": "30%", "is_correct": false},
+                {"id": "c", "text": "50%", "is_correct": false},
+                {"id": "d", "text": "80%", "is_correct": true}
+              ],
+              "explanation": "Aproximadamente el 80% de todos los datos del mundo son no estructurados: correos electrónicos, redes sociales, imágenes, videos, audio, documentos PDF, páginas web. Solo el 10-20% son datos estructurados en tablas. Esto representa tanto el mayor desafío como la mayor oportunidad para Big Data y la IA."
+            },
+            {
+              "question_text": "Un banco ecuatoriano digitaliza las firmas de los contratos de préstamo escaneando los documentos PDF. ¿Qué tipo de dato es el resultado del escaneo?",
+              "options": [
+                {"id": "a", "text": "Dato estructurado - porque el contrato tiene una estructura lógica", "is_correct": false},
+                {"id": "b", "text": "Dato semi-estructurado - porque tiene texto y metadatos", "is_correct": false},
+                {"id": "c", "text": "Dato no estructurado - las imágenes escaneadas son matrices de píxeles sin esquema fijo", "is_correct": true},
+                {"id": "d", "text": "No son datos, solo son documentos físicos escaneados", "is_correct": false}
+              ],
+              "explanation": "Aunque el contrato tiene lógica interna, un PDF escaneado es fundamentalmente una imagen (o conjunto de imágenes), que son datos no estructurados. Para extraer el texto del PDF se necesita OCR (Optical Character Recognition), que es un proceso de transformación de no estructurado a semi/estructurado. Sin OCR, la computadora ve solo píxeles, no texto."
+            },
+            {
+              "question_text": "¿Qué técnica de procesamiento de lenguaje natural (NLP) usarías para determinar si un tweet sobre un banco ecuatoriano es positivo, negativo o neutral?",
+              "options": [
+                {"id": "a", "text": "Clustering K-means", "is_correct": false},
+                {"id": "b", "text": "Análisis de Sentimiento", "is_correct": true},
+                {"id": "c", "text": "Regresión lineal", "is_correct": false},
+                {"id": "d", "text": "SQL GROUP BY", "is_correct": false}
+              ],
+              "explanation": "El Análisis de Sentimiento (Sentiment Analysis) es la técnica de NLP diseñada para clasificar texto según la emoción o actitud expresada (positivo/negativo/neutral). Los bancos, aerolíneas y marcas lo usan masivamente para monitorear su reputación en redes sociales. K-means es para clustering, regresión lineal para predicciones numéricas, y SQL no procesa texto no estructurado."
+            },
+            {
+              "question_text": "¿Por qué MongoDB es más adecuado que MySQL para almacenar respuestas de APIs en formato JSON con esquemas variables?",
+              "options": [
+                {"id": "a", "text": "MongoDB es más barato que MySQL", "is_correct": false},
+                {"id": "b", "text": "MongoDB almacena documentos JSON directamente con esquema flexible; MySQL requiere un esquema fijo predefinido", "is_correct": true},
+                {"id": "c", "text": "MongoDB soporta SQL y MySQL no", "is_correct": false},
+                {"id": "d", "text": "MySQL no puede almacenar más de 1 GB de datos", "is_correct": false}
+              ],
+              "explanation": "MySQL (base de datos relacional) requiere que definas el esquema exacto antes de insertar datos: todas las filas deben tener las mismas columnas. MongoDB (NoSQL documental) almacena cada documento JSON de forma independiente, sin requerir que todos tengan los mismos campos. Cuando las APIs devuelven JSON con estructuras variables (campo opcional aquí, array allá), MongoDB lo maneja nativamente."
+            },
+            {
+              "question_text": "¿Cuál es la diferencia entre ETL y un pipeline de ML para datos no estructurados?",
+              "options": [
+                {"id": "a", "text": "ETL es para datos grandes y ML para datos pequeños", "is_correct": false},
+                {"id": "b", "text": "ETL extrae, transforma y carga datos estructurados hacia un Data Warehouse; ML pipeline procesa datos no estructurados extrayendo features para modelos", "is_correct": true},
+                {"id": "c", "text": "No hay diferencia, son el mismo proceso con diferente nombre", "is_correct": false},
+                {"id": "d", "text": "ETL es manual y ML pipeline es automático", "is_correct": false}
+              ],
+              "explanation": "ETL (Extract-Transform-Load) es el proceso clásico para mover datos estructurados: extraes de la fuente (ej: base de datos de ventas), transformas (limpias, formateas), y cargas en un Data Warehouse para análisis SQL. Un pipeline de ML para datos no estructurados hace algo diferente: toma imágenes/texto/audio, los preprocesa (redimensionar, tokenizar), extrae características numéricas (features) y alimenta un modelo estadístico."
+            }
+          ]
+        },
+        "assignment": {
+          "title": "Pipeline de Procesamiento de Datos Mixtos",
+          "instructions_markdown": "## Ejercicio: Analiza Datos de Dos Tipos\n\n### Objetivo\nExperimentar con datos estructurados y semi-estructurados en Python.\n\n### Parte 1: Datos Estructurados con Pandas (50 puntos)\n\nCrea un archivo `analisis_estructurado.py` que:\n\n```python\nimport pandas as pd\nimport json\n\n# Dataset estructurado: ventas simuladas de un negocio ecuatoriano\nventas = pd.DataFrame({\n    'fecha': ['2026-01-01', '2026-01-02', '2026-01-03', '2026-01-04', '2026-01-05'],\n    'producto': ['Arroz 5lb', 'Atún', 'Arroz 5lb', 'Aceite', 'Atún'],\n    'cantidad': [50, 30, 45, 20, 35],\n    'precio_unit': [3.50, 1.80, 3.50, 4.20, 1.80],\n    'ciudad': ['Quito', 'Quito', 'Guayaquil', 'Quito', 'Cuenca']\n})\n\nventas['total'] = ventas['cantidad'] * ventas['precio_unit']\n```\n\nCalcula: ventas totales por producto, por ciudad, el producto más vendido.\n\n### Parte 2: Datos Semi-estructurados con JSON (50 puntos)\n\nCrea y procesa este JSON:\n\n```python\nclientes_json = [\n    {\"id\": 1, \"nombre\": \"Ana Torres\", \"ciudad\": \"Quito\", \n     \"compras\": [45.00, 23.50, 67.80]},\n    {\"id\": 2, \"nombre\": \"Carlos Vega\", \"ciudad\": \"Guayaquil\", \n     \"compras\": [120.00, 85.00]},\n    {\"id\": 3, \"nombre\": \"María Paz\", \"ciudad\": \"Quito\", \n     \"compras\": [15.00, 34.00, 89.00, 45.00]}\n]\n\n# Convierte a DataFrame y calcula total de compras por cliente\ndf = pd.json_normalize(clientes_json)\n```\n\nMuestra el cliente con mayor gasto total y el promedio general.\n\n### Criterios de evaluación\n| Criterio | Puntos |\n|----------|--------|\n| Parte 1: análisis correcto de datos estructurados | 50 |\n| Parte 2: procesamiento correcto del JSON | 50 |\n| **Total** | **100** |",
+          "allowed_file_types": ["py", "ipynb"]
+        },
+        "ai_prompt_suggested": "Estoy aprendiendo sobre datos estructurados y no estructurados en Big Data. Tengo este JSON de la API de [servicio]: [pega el JSON]. Necesito convertirlo en un DataFrame de Pandas para analizarlo. El JSON tiene campos anidados y algunos valores pueden ser nulos. ¿Cómo lo proceso correctamente?",
+        "ai_context": "Sesión 3 - El estudiante conoce los tres tipos de datos (estructurado, semi-estructurado, no estructurado), sus proporciones en el mundo real, técnicas básicas de procesamiento (SQL para estructurado, NLP para texto, CNN para imágenes), JSON/logs como semi-estructurados, y qué sistema de almacenamiento aplica a cada tipo.",
+        "resources": [
+          {
+            "title": "Python JSON Documentation",
+            "url": "https://docs.python.org/es/3/library/json.html",
+            "type": "link",
+            "description": "Documentación oficial de Python para manejar JSON. Incluye ejemplos de parse, lectura y escritura."
+          },
+          {
+            "title": "Pandas - json_normalize (para JSONs anidados)",
+            "url": "https://pandas.pydata.org/docs/reference/api/pandas.json_normalize.html",
+            "type": "link",
+            "description": "Documentación oficial de pd.json_normalize(), la función más útil para convertir JSON anidado a DataFrame."
+          },
+          {
+            "title": "MongoDB University - Free Courses",
+            "url": "https://learn.mongodb.com/",
+            "type": "link",
+            "description": "Cursos gratuitos oficiales de MongoDB para aprender bases de datos de documentos NoSQL."
+          },
+          {
+            "title": "Hugging Face - NLP para principiantes",
+            "url": "https://huggingface.co/learn/nlp-course/chapter1/1",
+            "type": "link",
+            "description": "Curso gratuito de NLP con la librería Transformers. El punto de entrada al análisis de texto con Deep Learning."
+          }
+        ]
+      },
+      {
+        "number": 4,
+        "title": "Introducción a SQL para Big Data",
+        "video_url": "https://www.youtube.com/watch?v=HXV3zeQKqGY",
+        "video_title": "SQL Tutorial - Full Database Course for Beginners (freeCodeCamp - inglés, referencia global)",
+        "video_channel": "freeCodeCamp.org",
+        "video_duration_minutes": 60,
+        "theory_markdown": "# Introducción a SQL para Big Data\n\n## ¿Por qué SQL en Big Data?\n\nSQL (Structured Query Language) fue inventado en 1974 y sigue siendo el lenguaje más usado en datos en 2026. En Big Data, SQL evoluciona:\n- Hive permite escribir SQL sobre HDFS (petabytes)\n- Spark SQL permite SQL sobre datos distribuidos\n- BigQuery (Google) ejecuta SQL sobre petabytes en segundos\n- Redshift (AWS) es un Data Warehouse SQL masivo\n\n**La habilidad más demandada en LinkedIn para Data roles: SQL (apareció en el 82% de las ofertas de trabajo en datos en 2024)**\n\n## Fundamentos de SQL\n\n### Las bases de datos relacionales\n\nUna base de datos relacional organiza los datos en **tablas** relacionadas entre sí mediante claves.\n\n```sql\n-- Tabla de Estudiantes ITSEIA\nCREATE TABLE estudiantes (\n    id          INTEGER PRIMARY KEY,\n    nombre      VARCHAR(100) NOT NULL,\n    carrera     VARCHAR(50),\n    ciudad      VARCHAR(50),\n    nota_final  DECIMAL(4,2),\n    fecha_ingreso DATE\n);\n```\n\n## El CRUD en SQL\n\n### CREATE (Insertar)\n```sql\nINSERT INTO estudiantes (nombre, carrera, ciudad, nota_final, fecha_ingreso)\nVALUES \n    ('Ana Torres', 'Inteligencia Artificial', 'Quito', 18.50, '2026-03-01'),\n    ('Carlos Vega', 'Ciencia de Datos', 'Guayaquil', 15.00, '2026-03-01'),\n    ('María Paz', 'Big Data', 'Cuenca', 19.00, '2026-03-01'),\n    ('Pedro Ruiz', 'Inteligencia Artificial', 'Quito', 12.00, '2026-03-01'),\n    ('Lucía Mora', 'Big Data', 'Ambato', 16.50, '2026-03-01');\n```\n\n### READ (Consultar) - La operación más importante\n\n```sql\n-- Todos los registros\nSELECT * FROM estudiantes;\n\n-- Columnas específicas\nSELECT nombre, carrera, nota_final \nFROM estudiantes;\n\n-- Con condición WHERE\nSELECT nombre, nota_final \nFROM estudiantes \nWHERE nota_final >= 14;\n\n-- Múltiples condiciones\nSELECT nombre, carrera, nota_final \nFROM estudiantes \nWHERE carrera = 'Inteligencia Artificial' \n  AND ciudad = 'Quito';\n\n-- Ordenar resultados\nSELECT nombre, nota_final \nFROM estudiantes \nORDER BY nota_final DESC;  -- DESC = mayor a menor\n\n-- Limitar resultados\nSELECT nombre, nota_final \nFROM estudiantes \nORDER BY nota_final DESC \nLIMIT 3;  -- Solo los 3 mejores\n```\n\n### UPDATE (Actualizar)\n\n```sql\n-- Actualizar un registro específico\nUPDATE estudiantes \nSET nota_final = 17.50 \nWHERE nombre = 'Pedro Ruiz';\n\n-- Actualizar múltiples registros\nUPDATE estudiantes \nSET ciudad = 'Quito' \nWHERE ciudad = 'quito';  -- Normalizar capitalización\n```\n\n### DELETE (Eliminar)\n\n```sql\n-- Eliminar un registro\nDELETE FROM estudiantes \nWHERE id = 5;\n\n-- SIEMPRE usar WHERE en DELETE - sin WHERE eliminas TODA la tabla\n```\n\n## Funciones de Agregación: el poder de SQL\n\n```sql\n-- Contar registros\nSELECT COUNT(*) AS total_estudiantes \nFROM estudiantes;\n-- resultado: 5\n\n-- Promedio\nSELECT AVG(nota_final) AS promedio_general \nFROM estudiantes;\n-- resultado: 16.20\n\n-- Máximo y mínimo\nSELECT \n    MAX(nota_final) AS nota_maxima,\n    MIN(nota_final) AS nota_minima,\n    SUM(nota_final) AS suma_total\nFROM estudiantes;\n\n-- GROUP BY: el más poderoso\nSELECT \n    carrera,\n    COUNT(*) AS num_estudiantes,\n    AVG(nota_final) AS promedio,\n    MAX(nota_final) AS mejor_nota\nFROM estudiantes \nGROUP BY carrera\nORDER BY promedio DESC;\n```\n\nResultado:\n```\ncarrera                    | num_estudiantes | promedio | mejor_nota\n---------------------------|-----------------|----------|-----------\nBig Data                   | 2               | 17.75    | 19.00\nInteligencia Artificial    | 2               | 15.25    | 18.50\nCiencia de Datos           | 1               | 15.00    | 15.00\n```\n\n## HAVING: filtrar grupos\n\n```sql\n-- Carreras con promedio mayor a 16\nSELECT carrera, AVG(nota_final) AS promedio\nFROM estudiantes \nGROUP BY carrera\nHAVING AVG(nota_final) > 16;\n\n-- WHERE filtra filas ANTES de agrupar\n-- HAVING filtra grupos DESPUÉS de agrupar\n```\n\n## JOINs: relacionar tablas\n\n```sql\n-- Tabla de carreras\nCREATE TABLE carreras (\n    id      INTEGER PRIMARY KEY,\n    nombre  VARCHAR(50),\n    duracion_semestres INTEGER,\n    precio_mensual DECIMAL(8,2)\n);\n\nINSERT INTO carreras VALUES \n    (1, 'Inteligencia Artificial', 5, 220.00),\n    (2, 'Ciencia de Datos', 5, 220.00),\n    (3, 'Big Data', 5, 220.00);\n\n-- INNER JOIN: combinar tablas relacionadas\nSELECT \n    e.nombre,\n    e.nota_final,\n    c.duracion_semestres,\n    c.precio_mensual\nFROM estudiantes e\nINNER JOIN carreras c ON e.carrera = c.nombre\nWHERE e.nota_final >= 14;\n```\n\n## SQL en Big Data: Spark SQL\n\nUna vez que aprendes SQL básico, puedes usarlo sobre petabytes con Spark SQL:\n\n```python\nfrom pyspark.sql import SparkSession\n\nspark = SparkSession.builder.appName(\"SQL_BigData\").getOrCreate()\n\n# Cargar datos masivos en Spark\ndf = spark.read.csv(\"hdfs://namenode/datos/ventas_ecuador_5anos.csv\",\n                    header=True, inferSchema=True)\n\n# Registrar como tabla SQL temporal\ndf.createOrReplaceTempView(\"ventas\")\n\n# Ejecutar SQL estándar sobre MILLONES de filas en paralelo\nresultado = spark.sql(\"\"\"\n    SELECT \n        ciudad,\n        COUNT(*) AS num_transacciones,\n        SUM(monto) AS total_ventas,\n        AVG(monto) AS ticket_promedio\n    FROM ventas\n    WHERE anio = 2025\n    GROUP BY ciudad\n    ORDER BY total_ventas DESC\n    LIMIT 10\n\"\"\")\n\nresultado.show()\n```\n\n## SQL vs NoSQL: cuándo usar qué\n\n| Criterio | SQL (Relacional) | NoSQL |\n|----------|-----------------|-------|\n| Estructura | Fija, predefinida | Flexible, dinámica |\n| Consultas | Muy poderosas con JOIN | Limitadas para relaciones complejas |\n| Escalado | Vertical (un servidor más grande) | Horizontal (más servidores) |\n| Consistencia | ACID garantizada | Eventual consistency |\n| Casos de uso | Transacciones, reportes | Big Data, tiempo real, JSON |\n| Ejemplos | PostgreSQL, MySQL, Oracle | MongoDB, Cassandra, Redis |",
+        "quiz": {
+          "title": "Quiz - Sesión 4: SQL para Big Data",
+          "pass_percentage": 70,
+          "questions": [
+            {
+              "question_text": "¿Cuál es la diferencia entre WHERE y HAVING en SQL?",
+              "options": [
+                {"id": "a", "text": "No hay diferencia, ambos filtran de la misma manera", "is_correct": false},
+                {"id": "b", "text": "WHERE filtra filas antes de agrupar; HAVING filtra grupos después del GROUP BY", "is_correct": true},
+                {"id": "c", "text": "WHERE es más lento que HAVING para grandes datasets", "is_correct": false},
+                {"id": "d", "text": "HAVING solo funciona con la función COUNT()", "is_correct": false}
+              ],
+              "explanation": "Esta distinción es crítica en SQL: WHERE se aplica sobre las filas individuales ANTES de que se forme cualquier grupo (GROUP BY). HAVING se aplica DESPUÉS del GROUP BY, filtrando los grupos resultantes. Por ejemplo, para encontrar ciudades con más de 100 ventas: GROUP BY ciudad HAVING COUNT(*) > 100. No puedes usar WHERE COUNT(*) > 100 porque COUNT todavía no se ha calculado."
+            },
+            {
+              "question_text": "¿Qué hace la siguiente consulta?\n\nSELECT carrera, AVG(nota_final)\nFROM estudiantes\nGROUP BY carrera\nORDER BY AVG(nota_final) DESC\nLIMIT 1;",
+              "options": [
+                {"id": "a", "text": "Muestra todas las carreras ordenadas por promedio", "is_correct": false},
+                {"id": "b", "text": "Muestra la carrera con el promedio de nota más alto", "is_correct": true},
+                {"id": "c", "text": "Muestra el estudiante con la nota más alta de cada carrera", "is_correct": false},
+                {"id": "d", "text": "Da error porque AVG no puede usarse en ORDER BY", "is_correct": false}
+              ],
+              "explanation": "Paso a paso: GROUP BY carrera calcula el AVG(nota_final) para cada carrera. ORDER BY AVG(nota_final) DESC ordena de mayor a menor promedio. LIMIT 1 toma solo el primer resultado (el mayor). Resultado: el nombre y promedio de la carrera con mejor rendimiento académico."
+            },
+            {
+              "question_text": "Un Data Engineer debe ejecutar SQL sobre un dataset de 50 TB de ventas almacenado en HDFS. ¿Qué herramienta es más apropiada?",
+              "options": [
+                {"id": "a", "text": "Microsoft Excel con Power Query", "is_correct": false},
+                {"id": "b", "text": "MySQL instalado en un único servidor", "is_correct": false},
+                {"id": "c", "text": "Apache Hive o Spark SQL sobre el cluster Hadoop", "is_correct": true},
+                {"id": "d", "text": "SQLite para consultas rápidas", "is_correct": false}
+              ],
+              "explanation": "Apache Hive fue diseñado específicamente para ejecutar consultas tipo SQL (HiveQL) sobre datos almacenados en HDFS. Spark SQL también permite ejecutar SQL estándar sobre datos distribuidos de forma mucho más rápida. MySQL en un único servidor no puede manejar 50 TB eficientemente. Excel tiene un límite de ~1 millón de filas. SQLite es para bases de datos locales pequeñas."
+            },
+            {
+              "question_text": "¿Qué tipo de operación SQL es peligrosa sin la cláusula WHERE?",
+              "options": [
+                {"id": "a", "text": "SELECT", "is_correct": false},
+                {"id": "b", "text": "CREATE TABLE", "is_correct": false},
+                {"id": "c", "text": "DELETE", "is_correct": true},
+                {"id": "d", "text": "GROUP BY", "is_correct": false}
+              ],
+              "explanation": "DELETE sin WHERE elimina TODOS los registros de la tabla, dejándola vacía sin posibilidad de recuperación inmediata (a menos que tengas backups). Es uno de los errores más costosos en producción. La regla de oro: NUNCA ejecutes DELETE ni UPDATE sin verificar primero el WHERE con un SELECT. Muchas empresas requieren aprobación especial para ejecutar DELETE en bases de datos de producción."
+            },
+            {
+              "question_text": "¿Por qué Google BigQuery puede ejecutar SQL sobre petabytes en segundos?",
+              "options": [
+                {"id": "a", "text": "Usa servidores más rápidos que los disponibles para otras empresas", "is_correct": false},
+                {"id": "b", "text": "Limita los datos que procesa para ser más rápido", "is_correct": false},
+                {"id": "c", "text": "Distribuye la consulta en miles de máquinas en paralelo usando la infraestructura de Google", "is_correct": true},
+                {"id": "d", "text": "Tiene un lenguaje SQL especial diferente al estándar que es más eficiente", "is_correct": false}
+              ],
+              "explanation": "BigQuery usa la infraestructura masiva de Google (miles de servidores) para distribuir una sola consulta SQL en paralelo. Cada parte del dataset es procesada simultáneamente por diferentes máquinas, y los resultados se combinan. Es el mismo principio que MapReduce pero aplicado a SQL. Esto permite que una consulta sobre 10 PB tome 30 segundos en lugar de días en un servidor tradicional."
+            }
+          ]
+        },
+        "assignment": {
+          "title": "Análisis SQL de Base de Datos ITSEIA",
+          "instructions_markdown": "## Ejercicio: Consultas SQL Reales\n\n### Objetivo\nPracticar SQL con un dataset simulado de datos académicos de ITSEIA.\n\n### Configuración (usa SQLite en Python, no necesitas instalar nada extra)\n\n```python\nimport sqlite3\nimport pandas as pd\n\n# Crear base de datos en memoria\nconn = sqlite3.connect(':memory:')\ncursor = conn.cursor()\n\n# Crear tablas\ncursor.execute('''\nCREATE TABLE estudiantes (\n    id INTEGER PRIMARY KEY,\n    nombre TEXT, carrera TEXT, ciudad TEXT,\n    nota_final REAL, semestre INTEGER, activo INTEGER\n)\n''')\n\ncursor.execute('''\nCREATE TABLE materias (\n    id INTEGER PRIMARY KEY,\n    nombre TEXT, carrera TEXT, creditos INTEGER, semestre INTEGER\n)\n''')\n\n# Insertar 20 estudiantes de prueba\nestudiantes_data = [\n    (1,'Ana Torres','IA','Quito',18.5,1,1),\n    (2,'Carlos Vega','CD','Guayaquil',15.0,1,1),\n    (3,'Maria Paz','BD','Quito',19.0,1,1),\n    (4,'Pedro Ruiz','IA','Cuenca',12.0,1,0),\n    (5,'Lucia Mora','BD','Ambato',16.5,1,1),\n    (6,'Juan Silva','IA','Quito',17.0,2,1),\n    (7,'Carmen Diaz','CD','Guayaquil',14.5,2,1),\n    (8,'Diego Lopez','BD','Quito',11.0,1,0),\n    (9,'Sofia Castro','IA','Manta',18.0,2,1),\n    (10,'Andres Mora','CD','Quito',16.0,1,1),\n    (11,'Paola Reyes','BD','Loja',15.5,1,1),\n    (12,'Fernando Gil','IA','Quito',13.5,3,1),\n    (13,'Valeria Cruz','CD','Ibarra',17.5,2,1),\n    (14,'Miguel Vera','BD','Guayaquil',14.0,1,1),\n    (15,'Daniela Fon','IA','Quito',19.5,3,1),\n    (16,'Roberto Aza','CD','Cuenca',10.5,1,0),\n    (17,'Gabriela Paz','BD','Quito',18.0,2,1),\n    (18,'Esteban Ri','IA','Guayaquil',16.5,1,1),\n    (19,'Melissa Bor','CD','Quito',15.0,2,1),\n    (20,'Nicolas Sal','BD','Ambato',17.0,1,1)\n]\n\ncursor.executemany(\n    'INSERT INTO estudiantes VALUES (?,?,?,?,?,?,?)', \n    estudiantes_data\n)\nconn.commit()\n```\n\n### Escribe las consultas SQL para responder:\n\n1. ¿Cuántos estudiantes hay por carrera?\n2. ¿Cuál es el promedio de nota por ciudad (solo para ciudades con más de 2 estudiantes)?\n3. ¿Cuáles son los 5 estudiantes con mejor nota?\n4. ¿Cuántos estudiantes activos (activo=1) vs inactivos hay?\n5. ¿Cuál es la carrera con el mejor promedio?\n6. ¿Cuántos estudiantes de Quito están en semestre 1?\n7. **Query compleja**: Nombre y nota de todos los estudiantes de IA o BD con nota >= 16, ordenados por nota descendente.\n\nPara ejecutar las queries:\n```python\n# Ejemplo de cómo ejecutar:\nresult = pd.read_sql_query('SELECT * FROM estudiantes LIMIT 5', conn)\nprint(result)\n```\n\n### Criterios de evaluación\n| Criterio | Puntos |\n|----------|--------|\n| Queries 1-4 correctas | 40 |\n| Queries 5-6 correctas | 30 |\n| Query 7 compleja correcta | 20 |\n| Código sin errores y bien comentado | 10 |\n| **Total** | **100** |",
+          "allowed_file_types": ["py", "ipynb", "sql"]
+        },
+        "ai_prompt_suggested": "Estoy aprendiendo SQL para Big Data en ITSEIA. Tengo esta query que no funciona correctamente: [pega tu SQL]. El resultado que obtengo es [describe el resultado] pero yo esperaba [describe lo esperado]. ¿Qué está mal? Explícame el error y cómo debería reescribir la query. Si puedes, también dime cómo se ejecutaría esta misma query en Spark SQL para un dataset de Big Data.",
+        "ai_context": "Sesión 4 - El estudiante conoce CREATE TABLE, INSERT, SELECT (con WHERE, ORDER BY, LIMIT), UPDATE, DELETE, funciones de agregación (COUNT, AVG, MAX, MIN, SUM), GROUP BY, HAVING, INNER JOIN, y conceptos básicos de Spark SQL. Ha ejecutado SQL en Python usando sqlite3 y pandas.read_sql_query.",
+        "resources": [
+          {
+            "title": "SQLZoo - Tutorial SQL interactivo en español",
+            "url": "https://sqlzoo.net/wiki/SQL_Tutorial/es",
+            "type": "link",
+            "description": "El mejor tutorial interactivo de SQL. Ejecutas queries directamente en el navegador sobre bases de datos reales."
+          },
+          {
+            "title": "Mode SQL Tutorial",
+            "url": "https://mode.com/sql-tutorial/",
+            "type": "link",
+            "description": "Tutorial completo de SQL con enfoque en análisis de datos. Cubre desde básico hasta window functions."
+          },
+          {
+            "title": "SQLite con Python - Documentación oficial",
+            "url": "https://docs.python.org/es/3/library/sqlite3.html",
+            "type": "link",
+            "description": "Cómo usar SQLite desde Python. SQLite viene incluido en Python, no necesitas instalar nada."
+          },
+          {
+            "title": "Google BigQuery - Sandbox gratuito",
+            "url": "https://console.cloud.google.com/bigquery",
+            "type": "tool",
+            "description": "Prueba BigQuery gratis con 10 GB de consultas mensuales. Experimenta SQL sobre datasets públicos masivos."
+          },
+          {
+            "title": "Kaggle - SQL Course (gratis)",
+            "url": "https://www.kaggle.com/learn/intro-to-sql",
+            "type": "link",
+            "description": "Curso gratuito de SQL en Kaggle con ejercicios prácticos sobre bases de datos reales de varios GB."
+          }
+        ]
+      }
+    ]
+  }
+}

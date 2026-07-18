@@ -1,0 +1,188 @@
+{
+  "_meta": {
+    "version": "1.0.0",
+    "created": "2026-03-21",
+    "author": "Investigador Externo / Director de Contenido ITSEIA",
+    "description": "Seed de contenido educativo S1 - primeras 4 sesiones de 3 materias del Semestre 1",
+    "total_sesiones": 12,
+    "total_quizzes": 60,
+    "total_preguntas": 60,
+    "materias_count": 3,
+    "parts": [
+      "seed_sessions_s1_part1.json",
+      "seed_sessions_s1_part2.json",
+      "seed_sessions_s1_part3.json"
+    ],
+    "load_instruction": "Leer las 3 partes y unir el array materias. Ver build_seed.js para automatizar."
+  },
+  "materias": [
+    {
+      "_ref": "seed_sessions_s1_part1.json",
+      "_path": "materias[0]",
+      "carrera": "inteligencia-artificial",
+      "materia": "Fundamentos de Programación",
+      "codigo": "FP-101",
+      "semestre": 1,
+      "sesiones_count": 4,
+      "sesiones_titles": [
+        "Introducción a la Programación y Python",
+        "Variables, Tipos de Datos y Operadores",
+        "Estructuras de Control: Condicionales (if/elif/else)",
+        "Estructuras de Control: Bucles (for y while)"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=Kp4Mvapo5kc",
+        "https://www.youtube.com/watch?v=Kp4Mvapo5kc",
+        "https://www.youtube.com/watch?v=G2FCfQj-9ig",
+        "https://www.youtube.com/watch?v=Kp4Mvapo5kc"
+      ],
+      "herramientas": ["Python 3.11+", "VS Code", "Jupyter Notebook"],
+      "nivel": "introductorio"
+    },
+    {
+      "_ref": "seed_sessions_s1_part2.json",
+      "_path": "materia",
+      "carrera": "ciencia-de-datos",
+      "materia": "Introducción a la Ciencia de Datos",
+      "codigo": "ICD-101",
+      "semestre": 1,
+      "sesiones_count": 4,
+      "sesiones_titles": [
+        "¿Qué es la Ciencia de Datos y por qué importa?",
+        "El Proceso de Ciencia de Datos: CRISP-DM",
+        "Tipos de Datos y Fuentes de Datos",
+        "Introducción a Python para Datos: Pandas Básico"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=X3paOmcrTjQ",
+        "https://www.youtube.com/watch?v=X3paOmcrTjQ",
+        "https://www.youtube.com/watch?v=gtjxAH8uaP0",
+        "https://www.youtube.com/watch?v=gtjxAH8uaP0"
+      ],
+      "herramientas": ["Python", "Pandas", "Jupyter Notebook", "Kaggle"],
+      "nivel": "introductorio"
+    },
+    {
+      "_ref": "seed_sessions_s1_part3.json",
+      "_path": "materia",
+      "carrera": "big-data",
+      "materia": "Introducción a Big Data",
+      "codigo": "IBD-101",
+      "semestre": 1,
+      "sesiones_count": 4,
+      "sesiones_titles": [
+        "¿Qué es Big Data? Las 5 Vs",
+        "Ecosistema de Tecnologías Big Data",
+        "Datos Estructurados vs No Estructurados",
+        "Introducción a SQL para Big Data"
+      ],
+      "videos": [
+        "https://www.youtube.com/watch?v=bAyrObl7TYE",
+        "https://www.youtube.com/watch?v=LHBE6Q9XlzI",
+        "https://www.youtube.com/watch?v=LHBE6Q9XlzI",
+        "https://www.youtube.com/watch?v=HXV3zeQKqGY"
+      ],
+      "herramientas": ["Python", "SQL", "SQLite", "Apache Spark (conceptual)", "Google BigQuery"],
+      "nivel": "introductorio"
+    }
+  ],
+  "resumen_videos_verificados": {
+    "fuentes": [
+      {
+        "canal": "mouredev by Brais Moure",
+        "url_canal": "https://www.youtube.com/@mouredev",
+        "videos_usados": [
+          {
+            "url": "https://www.youtube.com/watch?v=Kp4Mvapo5kc",
+            "titulo": "Aprende Python desde cero - Curso completo para principiantes",
+            "duracion_aprox_min": 47,
+            "sesiones": ["FP-101 S1", "FP-101 S2", "FP-101 S4"]
+          }
+        ]
+      },
+      {
+        "canal": "Píldoras Informáticas",
+        "url_canal": "https://www.youtube.com/@PildorasInformaticas",
+        "playlist_python": "https://www.youtube.com/watch?v=G2FCfQj-9ig&list=PLU8oAlHdN5BlvPxziopYZRd55pdqFwkeS",
+        "videos_usados": [
+          {
+            "url": "https://www.youtube.com/watch?v=G2FCfQj-9ig",
+            "titulo": "Python desde 0 - Curso completo (playlist)",
+            "sesiones": ["FP-101 S3"]
+          }
+        ]
+      },
+      {
+        "canal": "Dotcsv",
+        "url_canal": "https://www.youtube.com/@dotcsv",
+        "videos_usados": [
+          {
+            "url": "https://www.youtube.com/watch?v=X3paOmcrTjQ",
+            "titulo": "¿Qué es Data Science? Explicación completa para principiantes",
+            "sesiones": ["ICD-101 S1", "ICD-101 S2"]
+          }
+        ]
+      },
+      {
+        "canal": "freeCodeCamp.org",
+        "url_canal": "https://www.youtube.com/@freecodecamp",
+        "videos_usados": [
+          {
+            "url": "https://www.youtube.com/watch?v=gtjxAH8uaP0",
+            "titulo": "Learn Pandas & Python for Data Analysis - Full Course (5h)",
+            "sesiones": ["ICD-101 S3", "ICD-101 S4"]
+          },
+          {
+            "url": "https://www.youtube.com/watch?v=LHBE6Q9XlzI",
+            "titulo": "Python Data Science - Full Course for Beginners (12h)",
+            "sesiones": ["IBD-101 S2", "IBD-101 S3"]
+          },
+          {
+            "url": "https://www.youtube.com/watch?v=HXV3zeQKqGY",
+            "titulo": "SQL Tutorial - Full Database Course for Beginners",
+            "sesiones": ["IBD-101 S4"]
+          }
+        ]
+      },
+      {
+        "canal": "Aprender Big Data",
+        "url_canal": "https://www.youtube.com/channel/UCBqzJ1QI3jkkIYXLL9gVpWQ",
+        "videos_usados": [
+          {
+            "url": "https://www.youtube.com/watch?v=bAyrObl7TYE",
+            "titulo": "Big Data explicado - Las 5 V del Big Data",
+            "sesiones": ["IBD-101 S1"]
+          }
+        ]
+      }
+    ]
+  },
+  "resumen_recursos_externos": {
+    "datasets_publicos": [
+      "https://www.ecuadorencifras.gob.ec/estadisticas/ (INEC Ecuador)",
+      "https://www.kaggle.com/datasets?search=ecuador",
+      "https://archive.ics.uci.edu/datasets",
+      "https://console.cloud.google.com/bigquery (BigQuery sandbox)"
+    ],
+    "herramientas_practica": [
+      "https://pythontutor.com/python-compiler.html (visualizador de código)",
+      "https://www.kaggle.com/learn (Pandas, SQL gratis)",
+      "https://sqlzoo.net/wiki/SQL_Tutorial/es (SQL interactivo español)",
+      "https://colab.research.google.com (Jupyter en la nube gratis)"
+    ],
+    "documentacion_oficial": [
+      "https://docs.python.org/es/3/tutorial/index.html",
+      "https://pandas.pydata.org/docs/",
+      "https://spark.apache.org/docs/latest/",
+      "https://hadoop.apache.org/docs/stable/"
+    ]
+  },
+  "notas_implementacion": {
+    "db_target": "Supabase tabla lessons - campo content_json type JSONB",
+    "como_cargar": "Leer part1/part2/part3, iterar sesiones de cada materia, insertar en tabla lessons con foreign key a module_id",
+    "video_embedding": "Extraer el video_id de la URL (watch?v=ID) y usar youtube-nocookie.com/embed/ID",
+    "quiz_engine": "Cada quiz.questions array se renderiza en QuizComponent con estado local en React",
+    "ai_prompt": "Campo ai_prompt_suggested se inyecta como system context inicial en el AI Lab de la sesion",
+    "pass_percentage": "70% para aprobar cada quiz - estudiante puede reintentar sin limite"
+  }
+}

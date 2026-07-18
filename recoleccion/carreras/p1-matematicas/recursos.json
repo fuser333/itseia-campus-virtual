@@ -1,0 +1,85 @@
+{
+  "materia": "Matematicas I - Estadistica y Calculo",
+  "periodo": 1,
+  "descripcion": "Estadistica descriptiva, probabilidad y fundamentos de calculo aplicados a datos",
+  "fecha_actualizacion": "2026-03-25",
+  "recursos": [
+    {
+      "titulo": "Khan Academy - Estadistica y Probabilidad en espanol",
+      "url": "https://es.khanacademy.org/math/statistics-probability",
+      "tipo": "curso",
+      "idioma": "espanol",
+      "descripcion": "Curso gratuito y completo de estadistica y probabilidad de Khan Academy. Cubre media, mediana, moda, varianza, distribuciones, probabilidad condicional, regresion e inferencia estadistica. Incluye ejercicios interactivos con feedback inmediato. Reconocido mundialmente como el mejor recurso gratuito para matematicas.",
+      "nivel": "principiante",
+      "gratuito": true,
+      "fuente_latam": false,
+      "fuente_ecuador": false,
+      "año_actualizacion": 2024,
+      "tags": ["estadistica", "probabilidad", "khan-academy", "ejercicios", "interactivo"]
+    },
+    {
+      "titulo": "Estadistica descriptiva - Curso gratuito GCFGlobal en espanol",
+      "url": "https://edu.gcfglobal.org/es/estadistica-basica/",
+      "tipo": "curso",
+      "idioma": "espanol",
+      "descripcion": "Curso gratuito de estadistica basica de GCFGlobal (Goodwill Community Foundation). Explica conceptos esenciales: tipos de datos, frecuencias, medidas de tendencia central y dispersion, graficos estadisticos. Muy visual y accesible para estudiantes sin base matematica.",
+      "nivel": "principiante",
+      "gratuito": true,
+      "fuente_latam": false,
+      "fuente_ecuador": false,
+      "año_actualizacion": 2024,
+      "tags": ["estadistica-descriptiva", "basico", "visual", "graficos", "introductorio"]
+    },
+    {
+      "titulo": "Estadistica y Probabilidad - Coursera UNAM (gratis en modo auditoria)",
+      "url": "https://www.coursera.org/learn/estadistica-probabilidad",
+      "tipo": "curso",
+      "idioma": "espanol",
+      "descripcion": "Curso universitario de la Universidad Nacional Autonoma de Mexico (UNAM) disponible gratuitamente en modo auditoria. Cubre estadistica descriptiva, datos bivariados, probabilidad y distribucion normal. Ideal para nivel universitario con enfoque LATAM.",
+      "nivel": "principiante",
+      "gratuito": true,
+      "fuente_latam": true,
+      "fuente_ecuador": false,
+      "año_actualizacion": 2023,
+      "tags": ["UNAM", "universitario", "coursera", "probabilidad", "LATAM"]
+    },
+    {
+      "titulo": "INEC Ecuador - Bases de datos y estadisticas oficiales",
+      "url": "https://www.ecuadorencifras.gob.ec/bases-de-datos-poblacion-demografia/",
+      "tipo": "dataset",
+      "idioma": "espanol",
+      "descripcion": "Instituto Nacional de Estadistica y Censos del Ecuador. Provee bases de datos reales del Censo 2022, encuestas de empleo, produccion, salud y educacion. Datasets en CSV y XLSX descargables. Permite practicar estadistica con datos reales ecuatorianos: poblacion por provincia, empleo, nivel educativo.",
+      "nivel": "principiante",
+      "gratuito": true,
+      "fuente_latam": true,
+      "fuente_ecuador": true,
+      "año_actualizacion": 2024,
+      "tags": ["INEC", "Ecuador", "dataset", "censo", "estadisticas-oficiales"]
+    },
+    {
+      "titulo": "Datos Abiertos Ecuador - Portal Gubernamental con 500+ datasets",
+      "url": "https://www.datosabiertos.gob.ec/",
+      "tipo": "dataset",
+      "idioma": "espanol",
+      "descripcion": "Portal oficial de datos abiertos del gobierno ecuatoriano. Incluye datos del Banco Central, Ministerio de Educacion, INEC, Senescyt y mas de 30 instituciones publicas. Datos en CSV, XLSX y JSON listos para analisis estadistico. Excelente para proyectos con contexto local relevante.",
+      "nivel": "principiante",
+      "gratuito": true,
+      "fuente_latam": true,
+      "fuente_ecuador": true,
+      "año_actualizacion": 2024,
+      "tags": ["Ecuador", "datos-abiertos", "gobierno", "CSV", "multiples-temas"]
+    }
+  ],
+  "herramientas_recomendadas": [
+    {
+      "nombre": "Google Sheets",
+      "url": "https://sheets.google.com",
+      "descripcion": "Para estadistica descriptiva basica sin necesidad de codigo. Graficos y formulas integradas."
+    },
+    {
+      "nombre": "NumPy + Pandas en Google Colab",
+      "url": "https://colab.research.google.com/",
+      "descripcion": "Para estadistica con Python. Las librerias vienen preinstaladas en Colab."
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "materia": "Estadistica Inferencial",
+  "periodo": 2,
+  "videos": [
+    {
+      "titulo": "Estadistica Inferencial para Data Science e Inteligencia Artificial",
+      "url": "https://platzi.com/cursos/estadistica-inferencial-python/",
+      "canal": "Platzi",
+      "url_youtube": "https://www.youtube.com/@PlatziOnline",
+      "duracion_minutos": 120,
+      "año": 2024,
+      "idioma": "español_latam",
+      "usa_ia": true,
+      "justificacion": "Platzi ofrece este curso en espanol con enfoque directo en Data Science e IA. Instructora: Silvia Ariza Sentis (Founder & CEO de Eina Data). 22 clases, 2h de video, 8h de practica. Cubre distribucion normal, intervalos de confianza, prueba de hipotesis (t-test, Pearson, ANOVA), bootstrapping y validacion cruzada con Python (scipy.stats). Rating: 4.5 estrellas con 409 resenas. Conexion directa con las materias de ML del Periodo 3.",
+      "temas_clave": [
+        "Distribucion normal y teorema central del limite",
+        "Metodos de muestreo",
+        "Estadisticas muestrales (media, varianza, desviacion estandar)",
+        "Intervalos de confianza",
+        "Prueba de hipotesis (t-test)",
+        "Correlacion de Pearson",
+        "ANOVA",
+        "Errores Tipo I y Tipo II",
+        "Bootstrapping",
+        "Validacion cruzada"
+      ],
+      "nivel": "intermedio",
+      "prerequisitos": "Estadistica descriptiva, Python basico",
+      "rating": "4.5 estrellas (409 resenas)",
+      "url_github_curso": "https://github.com/platzi/fundamentos-estadistica-analisis-de-datos-python"
+    }
+  ]
+}

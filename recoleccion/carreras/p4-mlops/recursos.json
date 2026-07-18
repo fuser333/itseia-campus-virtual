@@ -1,0 +1,41 @@
+{
+  "materia": "MLOps",
+  "periodo": "P4",
+  "recursos": [
+    {
+      "titulo": "MLflow Documentacion oficial en español con tutoriales",
+      "url": "https://mlflow.org/docs/latest/index.html",
+      "tipo": "documentacion",
+      "idioma": "ingles con tutoriales en español",
+      "descripcion": "Documentacion oficial de MLflow para tracking de experimentos, registro de modelos y deployment. La comunidad latinohispana tiene tutoriales en YouTube: buscar 'MLflow tutorial español Platzi o Codigo Maquina'. MLflow es el estandar open source para MLOps. Gratuito, puede instalarse localmente o usarse en Databricks Cloud."
+    },
+    {
+      "titulo": "FastAPI Tutorial en Español - Para servir modelos ML",
+      "url": "https://fastapi.tiangolo.com/es/",
+      "tipo": "documentacion",
+      "idioma": "español",
+      "descripcion": "Documentacion oficial de FastAPI completamente en español. FastAPI es el framework Python mas rapido para construir APIs REST. Ideal para servir modelos de Machine Learning en produccion. Creado por Sebastian Ramirez (colombiano), tiene amplia comunidad hispanohablante. Gratuito y open source con documentacion interactiva automatica."
+    },
+    {
+      "titulo": "Docker para Ciencia de Datos - Tutorial en español",
+      "url": "https://docs.docker.com/language/python/",
+      "tipo": "tutorial",
+      "idioma": "ingles con comunidad en español",
+      "descripcion": "Tutorial oficial de Docker para aplicaciones Python. La comunidad latinohispana tiene tutoriales completos en YouTube: Fazt Code tiene 'Docker desde cero' con 500K+ vistas en español. Docker Desktop es gratuito para uso personal y educativo. Indispensable para MLOps moderno y despliegue de modelos en contenedores."
+    },
+    {
+      "titulo": "DVC (Data Version Control) - Tutorial en español",
+      "url": "https://dvc.org/doc/start",
+      "tipo": "herramienta",
+      "idioma": "ingles con tutoriales en español",
+      "descripcion": "Herramienta open source para versionado de datos y modelos ML. Funciona sobre Git. La comunidad en español tiene tutoriales en el blog de iterative.ai y en YouTube. Permite reproducibilidad de experimentos y colaboracion en equipos de datos. Gratuito para uso individual y equipos pequenos. Muy demandado en MLOps profesional."
+    },
+    {
+      "titulo": "Platzi - Curso MLOps en español (acceso parcial gratuito)",
+      "url": "https://platzi.com/cursos/mlops/",
+      "tipo": "curso",
+      "idioma": "español",
+      "descripcion": "Curso de MLOps de Platzi en español que cubre ciclo completo: entrenamiento, registro, deployment y monitoreo con MLflow, FastAPI, Docker, AWS y Prefect. La primera semana es de acceso gratuito. Instructores latinoamericanos con experiencia en industria. El mejor curso de MLOps en español disponible en 2024."
+    }
+  ]
+}

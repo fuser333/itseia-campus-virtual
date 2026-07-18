@@ -1,0 +1,41 @@
+{
+  "materia": "Machine Learning",
+  "periodo": "P3",
+  "recursos": [
+    {
+      "titulo": "Curso de Machine Learning con Python - Google Developers en Español",
+      "url": "https://developers.google.com/machine-learning/crash-course?hl=es",
+      "tipo": "curso",
+      "idioma": "español",
+      "descripcion": "Curso gratuito de 25 horas de Google sobre fundamentos de ML. Cubre regresion, clasificacion, redes neuronales y TensorFlow. Traducido completamente al español con ejemplos interactivos en Google Colab. Ideal como referencia oficial para conceptos como descenso de gradiente, regularizacion y metricas de evaluacion."
+    },
+    {
+      "titulo": "Aprende Machine Learning en Español - Blog con Notebooks",
+      "url": "https://www.aprendemachinelearning.com/",
+      "tipo": "tutorial",
+      "idioma": "español",
+      "descripcion": "Blog latinoamericano con mas de 50 tutoriales de ML en Python con notebooks descargables. Cubre desde regresion lineal hasta gradient boosting con ejemplos en español. Incluye datasets de paises hispanohablantes. Repositorio GitHub con codigo abierto: github.com/jbagnato/machine-learning."
+    },
+    {
+      "titulo": "Scikit-learn Documentacion en Español",
+      "url": "https://scikit-learn.org/stable/",
+      "tipo": "documentacion",
+      "idioma": "inglés con ejemplos adaptables",
+      "descripcion": "Documentacion oficial de scikit-learn con ejemplos en Python. Aunque en ingles, es la referencia estandar para todos los algoritmos de ML. Incluye user guides con explicacion matematica, ejemplos de codigo y galeria de ejemplos visuales. Indispensable para cualquier practicante de ML."
+    },
+    {
+      "titulo": "Kaggle Learn - Machine Learning (Version Español disponible)",
+      "url": "https://www.kaggle.com/learn/intro-to-machine-learning",
+      "tipo": "curso_interactivo",
+      "idioma": "español",
+      "descripcion": "Curso gratuito de Kaggle con notebooks interactivos en el navegador. Cubre arboles de decision, random forests, validacion de modelos y manejo de datos faltantes. Completamente gratuito con certificado. Los notebooks se ejecutan en la nube sin instalacion. Plataforma con competencias y datasets reales."
+    },
+    {
+      "titulo": "Datos Abiertos Ecuador - Datasets para practicar ML",
+      "url": "https://www.datosabiertos.gob.ec/",
+      "tipo": "dataset",
+      "idioma": "español",
+      "descripcion": "Portal oficial del gobierno ecuatoriano con mas de 500 datasets abiertos. Incluye datos de salud, educacion, economia, transporte y medio ambiente de Ecuador. Ideal para proyectos de ML con datos locales y relevantes. Formatos CSV, JSON y Excel descargables directamente. Permite crear proyectos con contexto ecuatoriano real."
+    }
+  ]
+}

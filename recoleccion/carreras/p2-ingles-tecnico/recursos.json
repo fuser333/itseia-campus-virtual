@@ -1,0 +1,62 @@
+{
+  "materia": "Ingles Tecnico I",
+  "periodo": 2,
+  "recursos": [
+    {
+      "titulo": "GrokEnglish - Ingles interactivo para desarrolladores de software",
+      "url": "https://grokenglish.dev/es",
+      "tipo": "herramienta",
+      "idioma": "español",
+      "descripcion": "Plataforma interactiva especializada en ingles tecnico para desarrolladores. Permite grabar la voz y comparar pronunciacion con hablantes nativos. Cubre 9 modulos: onboarding laboral, herramientas de programacion y linea de comandos, bases de datos y SQL, POO y programacion funcional, estructuras de datos y algoritmos, entrevistas tecnicas, testing y QA, y documentacion de requerimientos. Curso introductorio 'First Day in the Office' es gratuito. Perfectamente alineado con el perfil del egresado ITSEIA.",
+      "fuente_latam": false,
+      "fuente_origen": "Internacional (interfaz en español)",
+      "gratuito": false,
+      "nota": "Primer curso gratuito, resto de pago. Codigo GROK20 para 20% descuento.",
+      "actualizado": "2024"
+    },
+    {
+      "titulo": "Ingles para IT: Como Aprender siendo Programador - CodigoNautas",
+      "url": "https://codigonautas.com/ingles-ti-programadores-recursos/",
+      "tipo": "tutorial",
+      "idioma": "español",
+      "descripcion": "Guia completa en espanol con recursos para aprender ingles tecnico siendo programador. Recomienda libros especializados (English for IT, Oxford English for IT, Professional English in Use ICT), diccionarios tecnicos online (techterms.com, computerhope.com), plataformas de vocabulario, podcasts de programacion en ingles (talkpython.fm, javascript jabber) y recursos de gramatica. Escrito desde la perspectiva del desarrollador latinoamericano.",
+      "fuente_latam": true,
+      "fuente_origen": "Latinoamerica (CodigoNautas)",
+      "gratuito": true,
+      "actualizado": "2023"
+    },
+    {
+      "titulo": "Vocabulario esencial de programacion en ingles - Glosario para desarrolladores",
+      "url": "https://www.programaenlinea.net/vocabulario-esencial-de-programacion-en-ingles-glosario-para-desarrolladores/",
+      "tipo": "tutorial",
+      "idioma": "español",
+      "descripcion": "Glosario completo en espanol con los terminos tecnicos mas comunes en ingles que todo desarrollador debe conocer. Cubre terminologia de programacion (algorithm, array, class, function, loop, variable), arquitectura de software (API, REST, microservices, deployment), DevOps (CI/CD, pipeline, container) y trabajo en equipo (sprint, backlog, pull request). Incluye pronunciacion y ejemplos de uso en contexto.",
+      "fuente_latam": true,
+      "fuente_origen": "Latinoamerica",
+      "gratuito": true,
+      "actualizado": "2024"
+    },
+    {
+      "titulo": "FreeCodeCamp - Aprende Ingles para Desarrolladores (A2-B1 con certificado gratis)",
+      "url": "https://www.freecodecamp.org/espanol/news/aprender-ingles-para-desarrolladores-a2/",
+      "tipo": "tutorial",
+      "idioma": "español",
+      "descripcion": "FreeCodeCamp lanzo un plan de estudios de ingles especificamente para desarrolladores, con vocabulario tecnico, expresiones reales del mundo dev y situaciones profesionales. Niveles A2 a B1 con mas de 278 retos. Certificado gratuito al completar. Completamente en espanol como interfaz de aprendizaje. Ideal para estudiantes que parten desde nivel basico de ingles y necesitan alcanzar un nivel funcional para leer documentacion tecnica.",
+      "fuente_latam": false,
+      "fuente_origen": "FreeCodeCamp (internacional, contenido en español)",
+      "gratuito": true,
+      "actualizado": "2024"
+    },
+    {
+      "titulo": "Ingles Tecnico para Programadores - Expresiones y Terminologia del Sector",
+      "url": "https://www.paraaprenderingls.com/2024/11/04/ngles-para-programadores-expresiones-tecnicas-y-terminologia-del-sector/",
+      "tipo": "tutorial",
+      "idioma": "español",
+      "descripcion": "Guia de 2024 con expresiones tecnicas reales usadas en el trabajo diario de desarrollo: frases para reuniones de equipo ('Let us debug this issue', 'We need to refactor this code'), comunicacion en Slack/Teams ('I will push the changes', 'The build is failing'), code reviews ('This needs to be optimized', 'Good catch'), y vocabulario de flujo de trabajo agil (sprint, standup, retrospective). Orientado a contexto profesional real de LatAm.",
+      "fuente_latam": true,
+      "fuente_origen": "Latinoamerica",
+      "gratuito": true,
+      "actualizado": "2024"
+    }
+  ]
+}
