@@ -1,0 +1,41 @@
+{
+  "materia": "Bases de Datos y SQL Avanzado",
+  "periodo": "P3",
+  "recursos": [
+    {
+      "titulo": "SQLZoo - Tutorial SQL interactivo en español",
+      "url": "https://sqlzoo.net/wiki/SQL_Tutorial",
+      "tipo": "tutorial_interactivo",
+      "idioma": "español",
+      "descripcion": "Plataforma gratuita de aprendizaje SQL con ejercicios interactivos en el navegador. Disponible parcialmente en español. Cubre SELECT, WHERE, JOIN, GROUP BY, subconsultas y ventanas. Muy usado en bootcamps latinoamericanos. Permite practicar sin instalar nada con datasets reales precargados."
+    },
+    {
+      "titulo": "PostgreSQL Tutorial en Español - postgresqltutorial.com",
+      "url": "https://www.postgresqltutorial.com/",
+      "tipo": "tutorial",
+      "idioma": "ingles con versiones en español disponibles",
+      "descripcion": "Tutorial completo de PostgreSQL con mas de 500 ejercicios. La comunidad en español de stack overflow y blogs como 'developerideas.com' tienen traducciones. PostgreSQL es el motor de bases de datos de Supabase (plataforma ITSEIA) y el mas usado en proyectos de datos modernos. Gratuito y open source."
+    },
+    {
+      "titulo": "Google BigQuery - Analisis de datos SQL en la nube (capa gratuita)",
+      "url": "https://cloud.google.com/bigquery/docs/introduction?hl=es-419",
+      "tipo": "herramienta",
+      "idioma": "español",
+      "descripcion": "Documentacion de Google BigQuery en español latinoamericano. BigQuery ofrece 1TB de consultas gratuitas al mes y 10GB de almacenamiento gratis. Permite analizar datasets publicos masivos con SQL estandar. Incluye datasets publicos de LATAM como datos climaticos y de transporte. Habilidad muy demandada en el mercado."
+    },
+    {
+      "titulo": "Supabase - Base de datos PostgreSQL open source con API automática",
+      "url": "https://supabase.com/docs",
+      "tipo": "herramienta",
+      "idioma": "ingles con comunidad español",
+      "descripcion": "Plataforma open source alternativa a Firebase con PostgreSQL. La comunidad de YouTube en español (canales Fazt Code, Midudev) tiene tutoriales actualizados 2024. Nivel gratuito robusto (500MB, 2 proyectos). Es la plataforma de base de datos que usa ITSEIA para su campus virtual. Esencial para proyectos modernos."
+    },
+    {
+      "titulo": "Mode Analytics - Curso SQL gratuito en español",
+      "url": "https://mode.com/sql-tutorial/",
+      "tipo": "curso",
+      "idioma": "ingles con material adicional en español",
+      "descripcion": "Tutorial SQL de Mode Analytics con 20 lecciones desde basico hasta avanzado. Cubre SQL para analisis de datos incluyendo funciones de ventana, expresiones CTE y optimizacion de consultas. Muy orientado al analisis de datos real. Complementar con el canal de YouTube 'techTFQ en Español' para funciones de ventana."
+    }
+  ]
+}

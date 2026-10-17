@@ -1,0 +1,33 @@
+{
+  "materia": "Estructuras de Datos y Algoritmos",
+  "periodo": 2,
+  "videos": [
+    {
+      "titulo": "Estructuras de Datos y Algoritmos en Python - Curso desde cero",
+      "url": "https://codigofacilito.com/cursos/python-estructuras-datos",
+      "canal": "Codigo Facilito",
+      "url_youtube": "https://www.youtube.com/@codigofacilito",
+      "duracion_minutos": 180,
+      "año": 2023,
+      "idioma": "español_latam",
+      "usa_ia": false,
+      "justificacion": "Codigo Facilito es una de las plataformas de programacion mas influyentes del mundo hispanohablante, fundada en 2010. Su curso de Estructuras de Datos en Python es metodico, con explicaciones claras y ejercicios practicos. Cubre pilas, colas, listas enlazadas, arboles y grafos con implementaciones reales en Python. El canal de YouTube de Codigo Facilito tiene contenido gratuito de alta calidad que complementa el curso. Perfecto para ITSEIA porque las estructuras de datos son fundamento directo de los algoritmos de ML.",
+      "temas_clave": [
+        "Listas, tuplas y diccionarios (Python nativo)",
+        "Pilas (Stack) y su implementacion",
+        "Colas (Queue) y sus variantes",
+        "Listas enlazadas simples y dobles",
+        "Arboles binarios y arboles de busqueda",
+        "Grafos y sus representaciones",
+        "Algoritmos de busqueda (lineal, binaria)",
+        "Algoritmos de ordenamiento (burbuja, insercion, merge sort, quicksort)",
+        "Complejidad algoritmica Big O",
+        "Recursividad"
+      ],
+      "nivel": "principiante-intermedio",
+      "prerequisitos": "Python basico, POO basica",
+      "url_libro_interactivo": "https://runestone.academy/ns/books/published/pythoned/index.html",
+      "nota": "El libro interactivo en espanol de Runestone Academy es recurso complementario recomendado"
+    }
+  ]
+}

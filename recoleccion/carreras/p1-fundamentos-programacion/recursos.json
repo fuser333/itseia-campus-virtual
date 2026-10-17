@@ -1,0 +1,85 @@
+{
+  "materia": "Fundamentos de Programacion",
+  "periodo": 1,
+  "descripcion": "Python desde cero para estudiantes sin experiencia previa en programacion",
+  "fecha_actualizacion": "2026-03-25",
+  "recursos": [
+    {
+      "titulo": "Documentacion oficial de Python en espanol",
+      "url": "https://docs.python.org/es/3/tutorial/",
+      "tipo": "documentacion",
+      "idioma": "espanol",
+      "descripcion": "Tutorial oficial del lenguaje Python traducido y mantenido por la comunidad hispanohablante. Cubre desde conceptos basicos hasta estructuras de datos, modulos y clases. Es la fuente de verdad del lenguaje.",
+      "nivel": "principiante",
+      "gratuito": true,
+      "fuente_latam": false,
+      "fuente_ecuador": false,
+      "año_actualizacion": 2024,
+      "tags": ["python", "oficial", "tutorial", "sintaxis", "documentacion"]
+    },
+    {
+      "titulo": "Hello-Python - Curso completo de Python desde cero (mouredev)",
+      "url": "https://github.com/mouredev/Hello-Python",
+      "tipo": "curso",
+      "idioma": "espanol",
+      "descripcion": "Repositorio GitHub con 100 clases en video, 44 horas de contenido, proyectos practicos y grupo de chat. Cubre fundamentos, programacion orientada a objetos, testing, backend y aplicaciones de IA. Uno de los recursos mas completos y actualizados en espanol.",
+      "nivel": "principiante",
+      "gratuito": true,
+      "fuente_latam": false,
+      "fuente_ecuador": false,
+      "año_actualizacion": 2024,
+      "tags": ["python", "video", "proyectos", "OOP", "github"]
+    },
+    {
+      "titulo": "El Libro de Python - Referencia completa en espanol",
+      "url": "https://ellibrodepython.com/",
+      "tipo": "libro_web",
+      "idioma": "espanol",
+      "descripcion": "Recurso web gratuito con explicaciones claras de todos los conceptos de Python: tipos de datos, funciones, clases, manejo de errores, librerias populares. Ideal como referencia de consulta rapida mientras se aprende.",
+      "nivel": "principiante",
+      "gratuito": true,
+      "fuente_latam": false,
+      "fuente_ecuador": false,
+      "año_actualizacion": 2024,
+      "tags": ["python", "referencia", "libro", "conceptos", "ejemplos"]
+    },
+    {
+      "titulo": "Google Colab - Entorno de programacion Python gratuito en la nube",
+      "url": "https://colab.research.google.com/",
+      "tipo": "herramienta",
+      "idioma": "espanol",
+      "descripcion": "Plataforma gratuita de Google que permite ejecutar Python desde el navegador sin instalar nada. Incluye acceso a GPU/TPU gratuitos, integracion con Google Drive y soporte para Jupyter Notebooks. Herramienta estandar de la industria para ciencia de datos e IA.",
+      "nivel": "principiante",
+      "gratuito": true,
+      "fuente_latam": false,
+      "fuente_ecuador": false,
+      "año_actualizacion": 2024,
+      "tags": ["herramienta", "cloud", "jupyter", "sin-instalacion", "GPU"]
+    },
+    {
+      "titulo": "Aprende Python - Comunidad oficial Python en Espanol",
+      "url": "https://es.python.org/aprende-python/",
+      "tipo": "directorio_recursos",
+      "idioma": "espanol",
+      "descripcion": "Directorio curado por la comunidad oficial de Python en espanol con los mejores recursos de aprendizaje: libros, tutoriales, videos y cursos clasificados por nivel. Punto de entrada recomendado por la Python Software Foundation para hispanohablantes.",
+      "nivel": "principiante",
+      "gratuito": true,
+      "fuente_latam": true,
+      "fuente_ecuador": false,
+      "año_actualizacion": 2024,
+      "tags": ["comunidad", "directorio", "python", "hispanohablante", "curado"]
+    }
+  ],
+  "herramientas_recomendadas": [
+    {
+      "nombre": "Visual Studio Code",
+      "url": "https://code.visualstudio.com/",
+      "descripcion": "Editor de codigo gratuito con extension Python. Recomendado para trabajo local."
+    },
+    {
+      "nombre": "Google Colab",
+      "url": "https://colab.research.google.com/",
+      "descripcion": "Para trabajo en la nube sin instalacion. Ideal para primeras semanas."
+    }
+  ]
+}

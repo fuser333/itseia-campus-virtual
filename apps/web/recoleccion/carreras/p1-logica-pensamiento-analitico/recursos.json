@@ -1,0 +1,85 @@
+{
+  "materia": "Logica y Pensamiento Analitico",
+  "periodo": 1,
+  "descripcion": "Razonamiento logico, algoritmos, resolucion de problemas y pensamiento computacional",
+  "fecha_actualizacion": "2026-03-25",
+  "recursos": [
+    {
+      "titulo": "Platzi - Curso de Pensamiento Logico",
+      "url": "https://platzi.com/cursos/pensamiento-logico/",
+      "tipo": "curso",
+      "idioma": "espanol",
+      "descripcion": "Curso de Platzi que desarrolla las bases del pensamiento logico aplicado a la programacion. Cubre algoritmos, estructuras de datos basicas, operaciones y estructuras de control. Enseña a pensar como programador antes de escribir codigo. Primera clase gratis. Producido en Colombia con perspectiva LATAM.",
+      "nivel": "principiante",
+      "gratuito": true,
+      "fuente_latam": true,
+      "fuente_ecuador": false,
+      "año_actualizacion": 2024,
+      "tags": ["algoritmos", "logica", "pensamiento-computacional", "LATAM", "Platzi"]
+    },
+    {
+      "titulo": "Introduccion al Pensamiento Critico, Razonamiento y Logica - LibreTexts Espanol",
+      "url": "https://espanol.libretexts.org/Bookshelves/Humanidades/Filosofia/Razonamiento_Critico_y_Escritura_(Levin_et_al.)/01:_Introduccion_al_pensamiento_critico_razonamiento_y_logica",
+      "tipo": "libro_web",
+      "idioma": "espanol",
+      "descripcion": "Capitulo de libro universitario gratuito en LibreTexts sobre pensamiento critico, razonamiento y logica. Plataforma de textos abiertos universitarios de la Universidad de California. Explica argumentacion valida, falacias logicas, razonamiento deductivo e inductivo. Descargable en PDF.",
+      "nivel": "principiante",
+      "gratuito": true,
+      "fuente_latam": false,
+      "fuente_ecuador": false,
+      "año_actualizacion": 2023,
+      "tags": ["pensamiento-critico", "logica", "argumentacion", "universitario", "PDF-gratis"]
+    },
+    {
+      "titulo": "Pensamiento Critico para el Aprendizaje - UNAM (libro abierto)",
+      "url": "https://librosoa.unam.mx/bitstream/handle/123456789/3690/9786073081603.pdf",
+      "tipo": "libro_pdf",
+      "idioma": "espanol",
+      "descripcion": "Libro universitario gratuito de la UNAM (Universidad Nacional Autonoma de Mexico) sobre pensamiento critico en educacion superior. Presentado por investigadores latinoamericanos. Descargable en PDF desde el repositorio oficial de la UNAM. Perspectiva pedagogica latinoamericana.",
+      "nivel": "principiante",
+      "gratuito": true,
+      "fuente_latam": true,
+      "fuente_ecuador": false,
+      "año_actualizacion": 2023,
+      "tags": ["UNAM", "libro", "pensamiento-critico", "PDF", "LATAM"]
+    },
+    {
+      "titulo": "EDteam - Curso de Algoritmos en la Programacion (gratis)",
+      "url": "https://ed.team/cursos/algoritmos",
+      "tipo": "curso",
+      "idioma": "espanol",
+      "descripcion": "Curso gratuito de EDteam (plataforma latinoamericana con sede en Mexico/Colombia) sobre algoritmos fundamentales. Enseña a resolver problemas como programador, complejidad computacional y tecnicas algoritmicas. Incluye ejercicios practicos. EDteam es referente educativo en LATAM.",
+      "nivel": "principiante",
+      "gratuito": true,
+      "fuente_latam": true,
+      "fuente_ecuador": false,
+      "año_actualizacion": 2024,
+      "tags": ["algoritmos", "EDteam", "LATAM", "practica", "complejidad"]
+    },
+    {
+      "titulo": "Platzi - Curso de Introduccion al Pensamiento Computacional con Python",
+      "url": "https://platzi.com/cursos/python-cs/",
+      "tipo": "curso",
+      "idioma": "espanol",
+      "descripcion": "Curso basado en el enfoque del MIT sobre pensamiento computacional. Cubre abstraccion, descomposicion, reconocimiento de patrones y generalizacion. Conecta directamente con Python, lo que lo hace ideal como puente entre logica y programacion practica.",
+      "nivel": "principiante",
+      "gratuito": true,
+      "fuente_latam": true,
+      "fuente_ecuador": false,
+      "año_actualizacion": 2024,
+      "tags": ["pensamiento-computacional", "MIT-style", "abstraccion", "Python", "puente"]
+    }
+  ],
+  "herramientas_recomendadas": [
+    {
+      "nombre": "PSeInt - Pseudocodigo en espanol",
+      "url": "http://pseint.sourceforge.net/",
+      "descripcion": "Herramienta gratuita para escribir y ejecutar algoritmos en pseudocodigo en espanol. Ideal para las primeras semanas antes de pasar a Python."
+    },
+    {
+      "nombre": "draw.io / Diagrams.net",
+      "url": "https://app.diagrams.net/",
+      "descripcion": "Para crear diagramas de flujo de algoritmos. Gratis, en la nube, sin instalacion."
+    }
+  ]
+}

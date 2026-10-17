@@ -1,0 +1,46 @@
+{
+  "materia": "Fundamentos de Programacion (Python)",
+  "periodo": 1,
+  "semestre": 1,
+  "criterios_busqueda": [
+    "Python tutorial español latinoamerica 2023 2024",
+    "Python con ChatGPT/Copilot programacion asistida por IA",
+    "Python desde cero para IA y datos",
+    "Canales: MoureDev, Fazt, HolaMundo, Codigo Facilito"
+  ],
+  "videos": [
+    {
+      "titulo": "Aprende Python desde Cero - Curso Completo para Principiantes (con IA, Backend y más)",
+      "url": "https://www.youtube.com/watch?v=Kp4Mvapo5kc",
+      "canal": "MoureDev by Brais Moure",
+      "duracion_minutos": 240,
+      "año": 2023,
+      "idioma": "español_latam",
+      "usa_ia": true,
+      "justificacion": "Curso Python más completo en español con 100 clases, 44 horas de video y módulo dedicado a IA. Brais Moure es el mayor divulgador de programación en español hispanohablante. El curso incluye sección específica de Python + IA con ChatGPT API. Más de 2 millones de estudiantes. GitHub: github.com/mouredev/Hello-Python",
+      "notas_adicionales": "Para la clase, usar solo la parte de fundamentos (primeras 2-3 horas). El video completo tiene 44h pero la sección de fundamentos está en el inicio. Es el video de referencia más sólido disponible en español para Python en 2023."
+    },
+    {
+      "titulo": "Como usar ChatGPT desde Python - OpenAI Tutorial",
+      "url": "https://www.youtube.com/watch?v=Iims6J7FUn4",
+      "canal": "Fazt",
+      "duracion_minutos": 20,
+      "año": 2023,
+      "idioma": "español_latam",
+      "usa_ia": true,
+      "justificacion": "Video específico de Fazt (canal latinoamericano muy popular, ~900k suscriptores) enseñando cómo integrar ChatGPT con Python usando la API de OpenAI. Publicado agosto 2023. Perfecto para mostrar Python USANDO IA, que es el objetivo de la materia. URL verificada directamente desde faztweb.com/contenido/como-usar-chatgpt-desde-python.",
+      "notas_adicionales": "Este es el video ideal para la primera clase: muestra de inmediato el poder de Python conectado a IA, motivando a los estudiantes desde el día 1."
+    }
+  ],
+  "video_recomendado_principal": "https://www.youtube.com/watch?v=Iims6J7FUn4",
+  "razon_seleccion_principal": "20 minutos exactos, tema perfecto (Python + ChatGPT), canal latinoamericano, 2023, enseña programacion asistida por IA desde el primer dia",
+  "alternativa_extendida": "https://www.youtube.com/watch?v=Kp4Mvapo5kc",
+  "fuentes_investigacion": [
+    "https://faztweb.com/contenido/como-usar-chatgpt-desde-python",
+    "https://github.com/mouredev/Hello-Python",
+    "https://newsletter.moure.dev/p/megapython",
+    "https://www.linkedin.com/posts/fazttech_crea-tu-propio-chatgpt-en-python-openai-activity-7100510156513255424-0eHq"
+  ],
+  "fecha_investigacion": "2026-03-25",
+  "investigador": "Agente Investigador Externo ITSEIA"
+}

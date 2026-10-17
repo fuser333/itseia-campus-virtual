@@ -1,0 +1,41 @@
+{
+  "materia": "Analisis de Datos con Python",
+  "periodo": "P3",
+  "recursos": [
+    {
+      "titulo": "Pandas Documentacion en Español - Tutorial oficial",
+      "url": "https://pandas.pydata.org/docs/getting_started/intro_tutorials/index.html",
+      "tipo": "documentacion",
+      "idioma": "ingles con guias traducidas por comunidad",
+      "descripcion": "Tutorial oficial de Pandas con 10 guias progresivas. Cubre lectura de datos, seleccion, filtrado, agrupacion, combinacion y visualizacion. Completamente gratuito. La comunidad hispanohablante de stackoverflow.com/questions/tagged/pandas tiene miles de respuestas en español. Indispensable para analisis de datos."
+    },
+    {
+      "titulo": "Kaggle - Pandas Tutorial interactivo en el navegador",
+      "url": "https://www.kaggle.com/learn/pandas",
+      "tipo": "curso_interactivo",
+      "idioma": "español (interfaz parcial)",
+      "descripcion": "Micro-curso gratuito de Pandas en Kaggle con 6 notebooks interactivos. Ejecuta codigo directamente en el navegador sin instalacion. Cubre creacion de DataFrames, indexado, mapas y agrupaciones con datos reales. Certificado gratuito al completar. Ampliamente reconocido en el mercado laboral."
+    },
+    {
+      "titulo": "Python para Analisis de Datos - Libro en PDF gratuito UNAM",
+      "url": "https://www.fciencias.unam.mx/",
+      "tipo": "libro_pdf",
+      "idioma": "español",
+      "descripcion": "La Facultad de Ciencias de la UNAM ofrece materiales de Python para ciencia de datos en español. Buscar en el repositorio institucional 'Python analisis datos Pandas'. Alternativa: el libro 'Python for Data Analysis' de Wes McKinney tiene traduccion no oficial circulando en foros academicos latinoamericanos en PDF."
+    },
+    {
+      "titulo": "OpenRefine - Herramienta gratuita de limpieza de datos con español",
+      "url": "https://openrefine.org/",
+      "tipo": "herramienta",
+      "idioma": "español",
+      "descripcion": "Software gratuito y open source para limpieza, transformacion y enriquecimiento de datos. Interfaz grafica en español. Ideal para limpiar datos de portales ecuatorianos como datos.gob.ec. Tiene tutoriales en YouTube en español de la comunidad latinoamericana. Muy usado en periodismo de datos y proyectos sociales."
+    },
+    {
+      "titulo": "Banco Central del Ecuador - Series estadisticas historicas",
+      "url": "https://www.bce.fin.ec/index.php/informacioneconomica",
+      "tipo": "dataset",
+      "idioma": "español",
+      "descripcion": "Portal del Banco Central del Ecuador con series estadisticas economicas y financieras históricas. Incluye PIB, inflacion, comercio exterior, sistema financiero y sector real. Datos en Excel descargables. Perfectos para proyectos de analisis de datos con contexto economico ecuatoriano real y series temporales."
+    }
+  ]
+}

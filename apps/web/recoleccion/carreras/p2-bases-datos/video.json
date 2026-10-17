@@ -1,0 +1,35 @@
+{
+  "materia": "Bases de Datos Relacionales (SQL)",
+  "periodo": 2,
+  "videos": [
+    {
+      "titulo": "SQL desde cero - Curso completo en 7 horas (MySQL y PostgreSQL)",
+      "url": "https://youtu.be/OuJerKzV5T0",
+      "canal": "MoureDev by Brais Moure",
+      "url_youtube": "https://www.youtube.com/@mouredev",
+      "duracion_minutos": 420,
+      "año": 2023,
+      "idioma": "español_latam",
+      "usa_ia": false,
+      "justificacion": "MoureDev es uno de los canales de programacion mas respetados en espanol. Su curso de SQL tiene 80+ lecciones, cubre 50+ comandos SQL y usa tanto MySQL como PostgreSQL. Disponible gratuitamente en YouTube. Cubre SELECT, INSERT, UPDATE, DELETE, JOINs, triggers, vistas, procedimientos almacenados y transacciones. El repositorio de soporte esta en GitHub (mouredev/hello-sql). Ideal para la asignatura porque el alumno puede reproducir todo el curso con herramientas gratuitas.",
+      "temas_clave": [
+        "SELECT con modificadores (DISTINCT, WHERE, ORDER BY, LIKE, LIMIT, GROUP BY, HAVING)",
+        "INSERT, UPDATE, DELETE",
+        "Creacion y administracion de bases de datos",
+        "PRIMARY KEY, UNIQUE, NOT NULL, CHECK, DEFAULT",
+        "AUTO_INCREMENT y ALTER TABLE",
+        "Relaciones 1:1, 1:N, N:M",
+        "INNER JOIN, LEFT JOIN, RIGHT JOIN, UNION",
+        "Indices y optimizacion",
+        "Triggers y vistas",
+        "Procedimientos almacenados",
+        "Transacciones",
+        "Conectores de base de datos"
+      ],
+      "nivel": "principiante",
+      "prerequisitos": "Ninguno",
+      "url_repositorio": "https://github.com/mouredev/hello-sql",
+      "rating": "Mas de 500K vistas estimadas"
+    }
+  ]
+}

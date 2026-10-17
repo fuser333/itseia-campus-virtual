@@ -1,0 +1,41 @@
+{
+  "materia": "Emprendimiento e Innovacion",
+  "periodo": "P5",
+  "recursos": [
+    {
+      "titulo": "Platzi - Escuela de Startups con materiales gratuitos en español",
+      "url": "https://platzi.com/escuela/startups/",
+      "tipo": "curso",
+      "idioma": "español",
+      "descripcion": "Escuela de Startups de Platzi con cursos de Lean Startup, Business Model Canvas, pitch deck y growth hacking en español latinoamericano. Varios cursos con preview gratuito. Instructores son emprendedores y VCs de LATAM. Comunidad de Discord activa con +50K emprendedores hispanohablantes. Certificados reconocidos en el ecosistema tech."
+    },
+    {
+      "titulo": "Y Combinator Startup School - Programa gratuito de emprendimiento",
+      "url": "https://www.startupschool.org/",
+      "tipo": "curso",
+      "idioma": "ingles con subtitulos en español",
+      "descripcion": "Programa gratuito de Y Combinator (mayor aceleradora del mundo) con 10 semanas de videos y tareas. Los videos tienen subtitulos en español. Cubre idea, producto, crecimiento, fundraising y cultura. Completamente gratuito con acceso a comunidad global. El mismo curriculo que se imparte en el programa YC. Gratuito con certificado."
+    },
+    {
+      "titulo": "Superadmin Ecuador - Constitucion de empresas SAS en Ecuador",
+      "url": "https://www.supercias.gob.ec/",
+      "tipo": "recurso_institucional",
+      "idioma": "español",
+      "descripcion": "Portal oficial de la Superintendencia de Companias, Valores y Seguros del Ecuador. Contiene guias para constituir SAS (Sociedad por Acciones Simplificada), formularios, requisitos y tramites legales. Fundamental para el modulo de aspectos legales del emprendimiento en Ecuador. Gratuito y oficial del gobierno ecuatoriano."
+    },
+    {
+      "titulo": "SIETEL - Sistema de Informacion para el Emprendimiento en Ecuador",
+      "url": "https://emprendimiento.mintel.gob.ec/",
+      "tipo": "recurso_institucional",
+      "idioma": "español",
+      "descripcion": "Portal del Ministerio de Telecomunicaciones de Ecuador para emprendimiento tecnologico. Incluye guias de financiamiento, programas de apoyo a startups tecnologicas, fondos y aceleradoras en Ecuador. Informacion sobre el ecosistema de innovacion ecuatoriano: Yachay Tech, SENESCYT y programas de capital semilla."
+    },
+    {
+      "titulo": "Slidebean - Canal YouTube de startups con ejemplos reales en español",
+      "url": "https://www.youtube.com/@Slidebean",
+      "tipo": "canal_youtube",
+      "idioma": "español",
+      "descripcion": "Canal de YouTube de Slidebean (startup costarricense) con mas de 1M suscriptores. Analiza pitch decks reales de Airbnb, Uber, Facebook con critica detallada. Videos en español e ingles subtitulado. Serie 'How I built this' con fundadores latinoamericanos. Es el referente para pitch decks en el ecosistema startup hispano."
+    }
+  ]
+}

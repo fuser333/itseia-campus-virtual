@@ -1,0 +1,41 @@
+{
+  "materia": "Procesamiento de Lenguaje Natural (NLP)",
+  "periodo": "P4",
+  "recursos": [
+    {
+      "titulo": "Hugging Face NLP Course en Español - Tutorial oficial completo",
+      "url": "https://huggingface.co/learn/nlp-course/es/chapter1/1",
+      "tipo": "curso",
+      "idioma": "español",
+      "descripcion": "Curso oficial de Hugging Face traducido al español que cubre Transformers, tokenizadores, fine-tuning de BERT y GPT, y deployment. Gratuito con 9 capitulos y notebooks interactivos en Google Colab. Es la referencia principal para NLP moderno con Python. Incluye capitulo especifico de modelos para español como BETO y RoBERTa-es."
+    },
+    {
+      "titulo": "Somos NLP - Comunidad de NLP en Español",
+      "url": "https://somosnlp.org/",
+      "tipo": "comunidad",
+      "idioma": "español",
+      "descripcion": "Comunidad dedicada a democratizar el NLP en español. Organiza hackathons, talleres y el curso gratuito 'NLP de cero a cien'. Repositorio de modelos entrenados en español en Hugging Face Hub (somosnlp). Blog con tutoriales de NLP para el idioma español: tokenizacion, embeddings y modelos. Fundamental para NLP en español."
+    },
+    {
+      "titulo": "spaCy en Español - Documentacion y modelos para el idioma español",
+      "url": "https://spacy.io/usage/models#languages",
+      "tipo": "herramienta",
+      "idioma": "ingles con modelos en español",
+      "descripcion": "spaCy tiene modelos oficiales para español (es_core_news_sm/md/lg) que permiten tokenizacion, POS tagging, NER y analisis de dependencias en español. La documentacion oficial tiene ejemplos para todos los modelos en español. Gratuito y open source. La comunidad hispanohablante tiene tutoriales en YouTube y blogs."
+    },
+    {
+      "titulo": "LangChain Documentacion en Español - Comunidad y traduccion",
+      "url": "https://python.langchain.com/docs/introduction/",
+      "tipo": "documentacion",
+      "idioma": "ingles con tutoriales en español",
+      "descripcion": "Documentacion oficial de LangChain. La comunidad LATAM tiene traducciones en blogs: buscar 'LangChain tutorial español 2024' en YouTube canales Fazt Code y Codigo Maquina. LangChain es el framework estandar para construir aplicaciones con LLMs en produccion. GitHub con ejemplos en Colab gratuito."
+    },
+    {
+      "titulo": "Corpus del Español - Datasets de texto en español para NLP",
+      "url": "https://www.corpusdelespanol.org/",
+      "tipo": "dataset",
+      "idioma": "español",
+      "descripcion": "Corpus con 2000 millones de palabras en español dividido en 20 paises hispanohablantes incluyendo Ecuador. Permite buscar patrones linguisticos, frases y contextos. Gratuito para investigacion academica. Complementar con el corpus CREA de la RAE y los datasets del proyecto Common Crawl para español."
+    }
+  ]
+}

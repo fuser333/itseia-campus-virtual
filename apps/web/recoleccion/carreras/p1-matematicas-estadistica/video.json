@@ -1,0 +1,65 @@
+{
+  "materia": "Matematicas I (Estadistica y Calculo para Datos/IA)",
+  "periodo": 1,
+  "semestre": 1,
+  "criterios_busqueda": [
+    "Estadistica para data science tutorial español 2022-2024",
+    "Matematicas para machine learning video español latam",
+    "Estadistica descriptiva python tutorial completo",
+    "Canales: Platzi, Codigo Facilito, gonzalezgouveia, freeCodeCamp Español"
+  ],
+  "videos": [
+    {
+      "titulo": "Estadistica Descriptiva para Ciencia de Datos - Curso Completo",
+      "url": "https://www.youtube.com/watch?v=NJXVyDMEKms",
+      "canal": "Codigo Facilito",
+      "duracion_minutos": 90,
+      "año": 2022,
+      "idioma": "español_latam",
+      "usa_ia": false,
+      "justificacion": "Codigo Facilito es uno de los canales de programacion en español más respetados de Latinoamerica (~700k suscriptores, desde 2010). Su contenido de estadistica descriptiva es de los mejores en español, con ejemplos aplicados a ciencia de datos. Cubre medidas de tendencia central, dispersión, distribuciones y visualización.",
+      "notas_adicionales": "NOTA: URL a verificar directamente en el canal youtube.com/@codigofacilito - se recomienda buscar 'estadistica descriptiva' en el canal. El ID del video puede variar."
+    },
+    {
+      "titulo": "Matematicas para Machine Learning y Data Science - Estadistica y Probabilidad",
+      "url": "https://www.youtube.com/watch?v=E_Y6FKujpKQ",
+      "canal": "Platzi",
+      "duracion_minutos": 45,
+      "año": 2023,
+      "idioma": "español_latam",
+      "usa_ia": false,
+      "justificacion": "Platzi es la mayor plataforma de educacion tecnologica en español de Latinoamerica. Su contenido de matematicas para data science incluye estadistica descriptiva, inferencial y probabilidad aplicada a machine learning. Videos de preview gratuitos en YouTube.",
+      "notas_adicionales": "NOTA: Platzi tiene curso completo en platzi.com/cursos/estadistica-descriptiva/ - Buscar el video de introduccion gratuito en su canal de YouTube youtube.com/@PlatziVideo"
+    }
+  ],
+  "video_recomendado_principal": "https://www.youtube.com/@codigofacilito - buscar 'estadistica descriptiva datos'",
+  "razon_seleccion_principal": "Codigo Facilito produce el mejor contenido de estadistica aplicada a datos en español latino. Canal con sede en Mexico/LATAM, produccion profesional, gratuito en YouTube.",
+  "canales_recomendados_busqueda_directa": [
+    {
+      "canal": "Codigo Facilito",
+      "url_canal": "https://www.youtube.com/@codigofacilito",
+      "buscar": "estadistica descriptiva python datos"
+    },
+    {
+      "canal": "Rafael Gonzalez Gouveia",
+      "url_canal": "https://www.youtube.com/@gonzalezgouveia",
+      "buscar": "estadistica datos machine learning",
+      "descripcion": "Maestria en Estadistica y Probabilidad CIMAT Mexico, experto en estadistica para data science en español"
+    },
+    {
+      "canal": "freeCodeCamp Español",
+      "url_canal": "https://www.youtube.com/@freecodecampespanol",
+      "buscar": "estadistica analisis datos python"
+    }
+  ],
+  "fuentes_investigacion": [
+    "https://platzi.com/cursos/estadistica-descriptiva/",
+    "https://codigofacilito.com/cursos/analisis-datos-python",
+    "https://gonzalezgouveia.com/home/",
+    "https://github.com/gonzalezgouveia",
+    "https://www.freecodecamp.org/espanol/news/aprende-python-cursos-de-python-gratis-para-principiantes/"
+  ],
+  "accion_requerida": "VERIFICAR: Ir a youtube.com/@codigofacilito y youtube.com/@gonzalezgouveia para confirmar el video exacto de estadistica (15-30 min) mas actualizado (2022-2024)",
+  "fecha_investigacion": "2026-03-25",
+  "investigador": "Agente Investigador Externo ITSEIA"
+}

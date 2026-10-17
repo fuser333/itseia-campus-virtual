@@ -1,0 +1,28 @@
+{
+  "materia": "Programacion Orientada a Objetos (Python)",
+  "periodo": 2,
+  "videos": [
+    {
+      "titulo": "Programacion Orientada a Objetos con Python - Curso Completo",
+      "url": "https://ed.team/cursos/poo-python",
+      "canal": "EDteam",
+      "url_youtube": "https://www.youtube.com/@EDteam",
+      "duracion_minutos": 20,
+      "año": 2023,
+      "idioma": "español_latam",
+      "usa_ia": false,
+      "justificacion": "EDteam es una plataforma latinoamericana liderada por ingenieros de Latinoamerica. El modulo gratuito de 2h 7min cubre clases, objetos, herencia, abstraccion, polimorfismo y encapsulamiento en Python. Instructor: Kevin Guzman (@kevinguzman). Relevante para ITSEIA porque los conceptos POO son base directa de los frameworks de IA como TensorFlow y PyTorch. El primer modulo es completamente gratuito.",
+      "temas_clave": [
+        "Clases y objetos en Python",
+        "Herencia y polimorfismo",
+        "Encapsulamiento y abstraccion",
+        "Decoradores de propiedad",
+        "Metodos de clase y estaticos",
+        "Proyecto practico: sistema de contactos"
+      ],
+      "nivel": "principiante-intermedio",
+      "prerequisitos": "Python basico",
+      "url_alternativa_youtube": "https://www.youtube.com/c/EDteam"
+    }
+  ]
+}

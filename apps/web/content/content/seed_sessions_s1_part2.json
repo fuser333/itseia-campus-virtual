@@ -1,0 +1,418 @@
+{
+  "materia": {
+    "carrera": "ciencia-de-datos",
+    "materia": "Introducción a la Ciencia de Datos",
+    "codigo": "ICD-101",
+    "semestre": 1,
+    "horas_docencia": 48,
+    "horas_practica": 48,
+    "horas_autonomo": 24,
+    "horas_total": 120,
+    "sesiones": [
+      {
+        "number": 1,
+        "title": "¿Qué es la Ciencia de Datos y por qué importa?",
+        "video_url": "https://www.youtube.com/watch?v=X3paOmcrTjQ",
+        "video_title": "¿Qué es Data Science? Explicación completa para principiantes",
+        "video_channel": "Dotcsv",
+        "video_duration_minutes": 18,
+        "theory_markdown": "# ¿Qué es la Ciencia de Datos y por qué importa?\n\n## Definición\n\nLa Ciencia de Datos (Data Science) es la disciplina que combina **estadística**, **programación** y **conocimiento del dominio** para extraer información útil y tomar mejores decisiones a partir de datos.\n\nEs el puente entre los datos brutos que generamos constantemente y las decisiones inteligentes que pueden mejorar negocios, servicios públicos y calidad de vida.\n\n## El mundo que vivimos: datos en todos lados\n\nCada segundo en el mundo se generan:\n- 6,000 tweets\n- 1,000 fotos en Instagram\n- 100,000 búsquedas en Google\n- 2.5 millones de emails\n\nEn Ecuador, el Banco Central, el INEC, el Ministerio de Salud y empresas como Supermaxi generan terabytes de datos diariamente. El problema: esos datos solos no valen nada. Necesitan ser analizados.\n\n**El Científico de Datos es quien convierte ese caos de números en decisiones.**\n\n## Las 3 habilidades del Científico de Datos\n\n```\n        Estadística\n         /      \\\n        /        \\\n       /  ZONA   \\\nProgramación --- Conocimiento\n                  del Dominio\n```\n\n| Habilidad | Qué hace | Herramientas |\n|-----------|----------|-------------|\n| **Estadística** | Entender los datos, encontrar patrones | Distribuciones, correlación, regresión |\n| **Programación** | Procesar y automatizar el análisis | Python, R, SQL |\n| **Dominio** | Hacer las preguntas correctas | Negocio, medicina, marketing... |\n\n## Ejemplos reales de Ciencia de Datos en Ecuador y LATAM\n\n### 1. Banca (Produbanco, Banco Pichincha)\nUsan modelos de datos para:\n- Detectar transacciones fraudulentas en tiempo real\n- Predecir qué clientes van a pedir un crédito\n- Calcular el riesgo crediticio automáticamente\n\n### 2. Salud (IESS, hospitales)\n- Predecir epidemias con datos históricos de enfermedades\n- Optimizar turnos médicos según demanda\n- ImagemIA (empresa fundada por Hector Velasco, alumni ITSEIA) usa IA predictiva en imagenología\n\n### 3. Retail (Supermaxi, TÍA)\n- Predecir qué productos se venderán más la próxima semana\n- Personalizar ofertas para cada cliente\n- Optimizar inventario y reducir desperdicio\n\n### 4. Gobierno (SENPLADES, INEC)\n- Analizar el Censo 2022 para políticas públicas\n- Detectar patrones de pobreza para focalizar subsidios\n\n## ¿Por qué estudiar Ciencia de Datos en 2026?\n\n| Indicador | Dato |\n|-----------|------|\n| Crecimiento del campo | +35% empleos nuevos anuales (LinkedIn 2024) |\n| Salario promedio Ecuador | $800 - $2,500/mes según experiencia |\n| Brechas de talento Ecuador | 30,000 plazas / 3,000 graduados (ratio 10:1) |\n| Herramientas demandadas | Python, SQL, Tableau, Power BI |\n| Sectores que más contratan | Fintech, Salud, Retail, Gobierno |\n\n## ¿Qué hace un Científico de Datos en un día normal?\n\n1. **Mañana**: Reunión con el negocio para entender el problema\n2. **Media mañana**: Explorar y limpiar los datos (la parte más larga: 60-80% del tiempo)\n3. **Tarde**: Construir y evaluar modelos estadísticos o de ML\n4. **Final del día**: Comunicar resultados con visualizaciones y presentaciones\n\n## Ciencia de Datos vs campos relacionados\n\n| Campo | Enfoque principal | Ejemplo de tarea |\n|-------|-------------------|------------------|\n| **Ciencia de Datos** | Extraer insights de datos | \"¿Por qué bajaron las ventas?\" |\n| **Machine Learning** | Hacer que las máquinas aprendan | \"Predice si este cliente se va\" |\n| **Inteligencia Artificial** | Sistemas que piensan | \"Crear un chatbot\" |\n| **Data Engineering** | Infraestructura de datos | \"Construir el pipeline de datos\" |\n| **Business Intelligence** | Reportes y dashboards | \"Dashboard de ventas semanal\" |",
+        "quiz": {
+          "title": "Quiz - Sesión 1: ¿Qué es la Ciencia de Datos?",
+          "pass_percentage": 70,
+          "questions": [
+            {
+              "question_text": "¿Cuáles son las 3 habilidades principales que combinan los Científicos de Datos?",
+              "options": [
+                {"id": "a", "text": "Diseño gráfico, marketing y redes sociales", "is_correct": false},
+                {"id": "b", "text": "Estadística, programación y conocimiento del dominio", "is_correct": true},
+                {"id": "c", "text": "Contabilidad, finanzas y economía", "is_correct": false},
+                {"id": "d", "text": "Matemáticas, física y química", "is_correct": false}
+              ],
+              "explanation": "La Ciencia de Datos se ubica en la intersección de tres campos: Estadística (para entender y analizar datos), Programación (para procesar grandes volúmenes automáticamente) y Conocimiento del Dominio (para hacer las preguntas correctas en el contexto del negocio). Sin las tres, el trabajo está incompleto."
+            },
+            {
+              "question_text": "Según los datos de mercado en Ecuador, ¿cuántas plazas de trabajo en datos hay por cada graduado disponible?",
+              "options": [
+                {"id": "a", "text": "1 plaza por graduado (mercado equilibrado)", "is_correct": false},
+                {"id": "b", "text": "2 plazas por graduado", "is_correct": false},
+                {"id": "c", "text": "10 plazas por graduado", "is_correct": true},
+                {"id": "d", "text": "5 plazas por graduado", "is_correct": false}
+              ],
+              "explanation": "Ecuador tiene una brecha crítica de talento: 30,000 plazas de trabajo en datos vs solo 3,000 graduados disponibles, una proporción de 10:1. Esto significa que hay 10 veces más trabajo disponible que profesionales para cubrirlo, creando una oportunidad excepcional para quienes se especializan ahora."
+            },
+            {
+              "question_text": "¿Qué porcentaje del tiempo de un Científico de Datos se dedica típicamente a limpiar y preparar datos?",
+              "options": [
+                {"id": "a", "text": "10-20% - la mayoría del tiempo es para modelos", "is_correct": false},
+                {"id": "b", "text": "30-40% - equilibrado entre preparación y análisis", "is_correct": false},
+                {"id": "c", "text": "60-80% - preparar datos es la tarea principal", "is_correct": true},
+                {"id": "d", "text": "5% - con IA moderna los datos se limpian solos", "is_correct": false}
+              ],
+              "explanation": "Contrario a lo que muchos imaginan, entre el 60-80% del tiempo de un Científico de Datos se gasta en obtener, limpiar y preparar datos de calidad. Los datos reales están incompletos, con errores y en formatos inconsistentes. Solo una pequeña parte del tiempo se dedica a construir modelos sofisticados."
+            },
+            {
+              "question_text": "¿Cuál es la diferencia principal entre Ciencia de Datos y Business Intelligence (BI)?",
+              "options": [
+                {"id": "a", "text": "No hay diferencia, son exactamente lo mismo", "is_correct": false},
+                {"id": "b", "text": "BI usa Python y Ciencia de Datos usa Excel", "is_correct": false},
+                {"id": "c", "text": "Ciencia de Datos extrae insights y construye modelos predictivos; BI se enfoca en reportes y dashboards históricos", "is_correct": true},
+                {"id": "d", "text": "BI es más avanzado y costoso que Ciencia de Datos", "is_correct": false}
+              ],
+              "explanation": "Business Intelligence analiza datos históricos para responder '¿qué pasó?' mediante reportes y dashboards. La Ciencia de Datos va más allá: responde '¿por qué pasó?' y '¿qué pasará?' usando estadística avanzada y machine learning. Un científico de datos puede construir un modelo que prediga ventas futuras; un analista de BI muestra las ventas pasadas."
+            },
+            {
+              "question_text": "Un banco ecuatoriano quiere detectar automáticamente transacciones fraudulentas. ¿Qué disciplina es más apropiada?",
+              "options": [
+                {"id": "a", "text": "Diseño de bases de datos relacionales", "is_correct": false},
+                {"id": "b", "text": "Ciencia de Datos / Machine Learning", "is_correct": true},
+                {"id": "c", "text": "Desarrollo web frontend", "is_correct": false},
+                {"id": "d", "text": "Auditoría contable manual", "is_correct": false}
+              ],
+              "explanation": "Detectar fraudes en tiempo real requiere analizar patrones en millones de transacciones, aprender de casos históricos de fraude y tomar decisiones en milisegundos. Esto es exactamente lo que hacen los modelos de Machine Learning entrenados con Ciencia de Datos. Es imposible hacer esto manualmente."
+            }
+          ]
+        },
+        "assignment": {
+          "title": "Mapa de Oportunidades en Datos - Ecuador",
+          "instructions_markdown": "## Ejercicio: Investigación de Mercado en Datos\n\n### Objetivo\nInvestigar y documentar oportunidades reales de Ciencia de Datos en Ecuador.\n\n### Instrucciones\n\n1. Busca en LinkedIn Jobs y en páginas de empleo ecuatorianas (multitrabajos.com, computrabajo.com.ec) al menos **5 ofertas de trabajo** relacionadas con Ciencia de Datos, Data Analyst, o similares en Ecuador.\n\n2. Para cada oferta, anota en una tabla:\n   - Empresa\n   - Cargo\n   - Salario (si lo indica)\n   - Skills requeridos\n   - Ciudad\n\n3. Responde en un documento (.pdf o .docx):\n   - ¿Cuáles son las 3 skills más repetidas en las ofertas?\n   - ¿Qué sectores industriales demandan más estos perfiles?\n   - ¿Cómo se comparan los salarios con el sueldo básico ecuatoriano?\n   - ¿Qué skill que no conoces todavía aparece más veces y te parece más interesante aprender?\n\n4. **Reflexión final** (100-150 palabras): ¿Por qué decidiste estudiar Ciencia de Datos? ¿Cómo conecta con tus intereses y metas personales?\n\n### Criterios de evaluación\n| Criterio | Puntos |\n|----------|--------|\n| 5 ofertas de trabajo reales documentadas | 30 |\n| Tabla completa con todos los campos | 20 |\n| Análisis de skills más demandadas | 25 |\n| Reflexión personal coherente | 25 |\n| **Total** | **100** |",
+          "allowed_file_types": ["pdf", "docx", "md"]
+        },
+        "ai_prompt_suggested": "Soy estudiante de Ciencia de Datos en ITSEIA Ecuador. Acabo de aprender qué es la Ciencia de Datos y sus aplicaciones. Quiero explorar más sobre [sector específico: banca / salud / gobierno / retail] en Ecuador. ¿Qué proyectos reales de Ciencia de Datos existen en ese sector en Ecuador o Latinoamérica? ¿Qué tipo de datos usan y qué problemas resuelven?",
+        "ai_context": "Sesión 1 - ICD-101. El estudiante conoce la definición de Ciencia de Datos, las 3 habilidades (estadística, programación, dominio), casos de uso reales en Ecuador, y las diferencias con ML, IA y BI. No ha visto metodologías ni herramientas todavía.",
+        "resources": [
+          {
+            "title": "Dotcsv - Canal YouTube Español IA y Data Science",
+            "url": "https://www.youtube.com/@dotcsv",
+            "type": "link",
+            "description": "Canal de referencia en español para Ciencia de Datos e Inteligencia Artificial. Contenido de alta calidad y actualizado."
+          },
+          {
+            "title": "Harvard Business Review - Data Scientist: Sexiest Job of the 21st Century",
+            "url": "https://hbr.org/2012/10/data-scientist-the-sexiest-job-of-the-21st-century",
+            "type": "link",
+            "description": "El artículo que puso la Ciencia de Datos en el mapa. Lectura histórica fundamental para entender el campo."
+          },
+          {
+            "title": "Kaggle - Plataforma de Data Science",
+            "url": "https://www.kaggle.com",
+            "type": "tool",
+            "description": "La plataforma más importante del mundo para practicar Ciencia de Datos. Tiene datasets gratuitos, competencias y notebooks. Crea tu cuenta desde hoy."
+          },
+          {
+            "title": "INEC Ecuador - Datos Abiertos",
+            "url": "https://www.ecuadorencifras.gob.ec/estadisticas/",
+            "type": "dataset",
+            "description": "Instituto Nacional de Estadística de Ecuador. Datos reales del país para practicar análisis."
+          },
+          {
+            "title": "Towards Data Science - Medium",
+            "url": "https://towardsdatascience.com",
+            "type": "link",
+            "description": "La publicación más leída del mundo sobre Ciencia de Datos. Miles de artículos de practitioners reales."
+          }
+        ]
+      },
+      {
+        "number": 2,
+        "title": "El Proceso de Ciencia de Datos: CRISP-DM",
+        "video_url": "https://www.youtube.com/watch?v=X3paOmcrTjQ",
+        "video_title": "El proceso de Data Science paso a paso - CRISP-DM explicado",
+        "video_channel": "Dotcsv",
+        "video_duration_minutes": 22,
+        "theory_markdown": "# El Proceso de Ciencia de Datos: CRISP-DM\n\n## ¿Por qué necesitamos un proceso?\n\nSin una metodología, los proyectos de datos fracasan. El error más común de los principiantes es empezar a escribir código antes de entender el problema. CRISP-DM evita ese error.\n\n## ¿Qué es CRISP-DM?\n\n**CRISP-DM** = Cross-Industry Standard Process for Data Mining\n\nEs el framework más usado en la industria para estructurar proyectos de Ciencia de Datos. Fue desarrollado en 1996 por un consorcio de empresas (IBM, SPSS, NCR) y sigue siendo el estándar de facto en 2026.\n\n## Las 6 Fases de CRISP-DM\n\n```\n        ┌─────────────────────────────┐\n        │     COMPRENSIÓN DEL         │\n        │         NEGOCIO             │\n        └──────────┬──────────────────┘\n                   │\n        ┌──────────▼──────────────────┐\n        │     COMPRENSIÓN DE          │\n        │         LOS DATOS           │\n        └──────────┬──────────────────┘\n                   │\n        ┌──────────▼──────────────────┐\n        │     PREPARACIÓN DE          │\n        │         LOS DATOS           │\n        └──────────┬──────────────────┘\n                   │\n        ┌──────────▼──────────────────┐\n        │         MODELADO            │\n        └──────────┬──────────────────┘\n                   │\n        ┌──────────▼──────────────────┐\n        │         EVALUACIÓN          │\n        └──────────┬──────────────────┘\n                   │\n        ┌──────────▼──────────────────┐\n        │         DESPLIEGUE          │\n        └─────────────────────────────┘\n```\n\n### Fase 1: Comprensión del Negocio (Business Understanding)\n\n**El 'por qué' del proyecto. La fase más crítica.**\n\nPreguntas que debes responder:\n- ¿Cuál es el problema real que queremos resolver?\n- ¿Cómo mediremos el éxito?\n- ¿Qué valor de negocio genera la solución?\n- ¿Tenemos los recursos necesarios?\n\n**Ejemplo Ecuador - Banco Pichincha:**\n- Problema: El 3% de los préstamos terminan en mora\n- Objetivo: Predecir qué solicitantes tienen riesgo de no pagar\n- Métrica de éxito: Reducir mora al 1.5% sin rechazar buenos clientes\n- Valor de negocio: Ahorro de $5M anuales en préstamos malos\n\n### Fase 2: Comprensión de los Datos (Data Understanding)\n\n**Explorar los datos disponibles sin asumir nada.**\n\nActividades:\n- Recolectar datos relevantes\n- Exploración inicial (¿cuántos registros? ¿cuántas columnas?)\n- Identificar problemas de calidad (valores nulos, duplicados, outliers)\n- Descubrir relaciones interesantes\n\n```python\n# Primer vistazo a un dataset en Python\nimport pandas as pd\n\ndf = pd.read_csv('clientes_banco.csv')\nprint(df.shape)        # (10000, 25) - 10000 filas, 25 columnas\nprint(df.head())       # Primeras 5 filas\nprint(df.info())       # Tipos de datos\nprint(df.describe())   # Estadísticas básicas\n```\n\n### Fase 3: Preparación de los Datos (Data Preparation)\n\n**La fase que consume 60-80% del tiempo. La más tediosa pero crucial.**\n\nActividades:\n- Limpiar datos (eliminar o imputar valores nulos)\n- Tratar outliers (valores extremos)\n- Crear nuevas variables (feature engineering)\n- Formatear para el modelo\n\n```python\n# Limpiar valores nulos\ndf['edad'].fillna(df['edad'].median(), inplace=True)\n\n# Eliminar duplicados\ndf.drop_duplicates(inplace=True)\n\n# Convertir texto a números\ndf['genero'] = df['genero'].map({'M': 1, 'F': 0})\n```\n\n### Fase 4: Modelado (Modeling)\n\n**Elegir y aplicar técnicas de ML/estadística.**\n\nEjemplos de técnicas:\n- Regresión logística (predicción de mora)\n- Árboles de decisión (clasificación de clientes)\n- K-means (segmentación de clientes)\n- Redes neuronales (detección de fraude)\n\n### Fase 5: Evaluación (Evaluation)\n\n**¿El modelo realmente resuelve el problema del negocio?**\n\nMétricas comunes:\n- Exactitud (Accuracy): % de predicciones correctas\n- Precisión y Recall: importante en fraude y medicina\n- RMSE: para predicciones numéricas\n\n### Fase 6: Despliegue (Deployment)\n\n**Llevar el modelo a producción donde crea valor real.**\n\n- API que responde en tiempo real\n- Integración con sistemas existentes\n- Monitoreo continuo del modelo\n- Reentrenamiento periódico\n\n## CRISP-DM es iterativo\n\nClave: CRISP-DM NO es lineal. Constantemente vuelves a fases anteriores:\n- El modelado puede revelar que necesitas más datos (vuelves a fase 2)\n- La evaluación puede mostrar que el problema estaba mal definido (vuelves a fase 1)\n- El despliegue genera nuevos datos para mejorar el modelo\n\n## Comparación: CRISP-DM vs otras metodologías\n\n| Metodología | Origen | Cuándo usar |\n|------------|--------|-------------|\n| **CRISP-DM** | Minería de datos 1996 | Proyectos de datos, ML |\n| **SEMMA** | SAS Institute | Proyectos SAS |\n| **KDD** | Académico 1989 | Investigación |\n| **Agile DS** | Adaptación Scrum | Startups, iteración rápida |",
+        "quiz": {
+          "title": "Quiz - Sesión 2: CRISP-DM",
+          "pass_percentage": 70,
+          "questions": [
+            {
+              "question_text": "¿Cuál es la primera fase de CRISP-DM y por qué es la más crítica?",
+              "options": [
+                {"id": "a", "text": "Modelado - porque construir el modelo es lo más importante", "is_correct": false},
+                {"id": "b", "text": "Comprensión del Negocio - porque sin entender el problema, ninguna solución técnica servirá", "is_correct": true},
+                {"id": "c", "text": "Preparación de Datos - porque los datos limpios son la base de todo", "is_correct": false},
+                {"id": "d", "text": "Despliegue - porque el modelo solo vale si llega a producción", "is_correct": false}
+              ],
+              "explanation": "La Comprensión del Negocio es la fase más crítica porque define TODO lo que viene después. Si no entiendes el problema real, puedes construir un modelo técnicamente perfecto que no sirva para nada. Es el error más común: saltar directo al código sin entender qué se quiere lograr."
+            },
+            {
+              "question_text": "Un científico de datos está en la fase de Modelado y descubre que le faltan datos importantes. Según CRISP-DM, ¿qué debe hacer?",
+              "options": [
+                {"id": "a", "text": "Terminar el modelo con los datos disponibles sin importar la calidad", "is_correct": false},
+                {"id": "b", "text": "Abandonar el proyecto", "is_correct": false},
+                {"id": "c", "text": "Regresar a la fase de Comprensión o Preparación de Datos para obtener lo que falta", "is_correct": true},
+                {"id": "d", "text": "Pasar directo a Evaluación para ver si el modelo funciona igual", "is_correct": false}
+              ],
+              "explanation": "CRISP-DM es explícitamente iterativo, no lineal. Es normal y esperado regresar a fases anteriores cuando se descubren nuevas necesidades. Regresar a Comprensión de Datos para recolectar más información es la decisión profesional correcta, aunque tome más tiempo."
+            },
+            {
+              "question_text": "¿Qué fase de CRISP-DM consume típicamente entre el 60-80% del tiempo total de un proyecto?",
+              "options": [
+                {"id": "a", "text": "Modelado", "is_correct": false},
+                {"id": "b", "text": "Evaluación", "is_correct": false},
+                {"id": "c", "text": "Preparación de Datos", "is_correct": true},
+                {"id": "d", "text": "Despliegue", "is_correct": false}
+              ],
+              "explanation": "La Preparación de Datos (limpiar, transformar, formatear) consume entre 60-80% del tiempo en proyectos reales. Los datos del mundo real están llenos de valores nulos, errores, formatos inconsistentes y duplicados. Esto frustra a muchos principiantes que esperan pasar más tiempo 'haciendo IA', pero es la realidad del campo."
+            },
+            {
+              "question_text": "En el contexto de Banco Pichincha Ecuador, ¿qué fase de CRISP-DM corresponde a la tarea 'Integrar el modelo de riesgo crediticio con el sistema de solicitud de préstamos online'?",
+              "options": [
+                {"id": "a", "text": "Comprensión del Negocio", "is_correct": false},
+                {"id": "b", "text": "Modelado", "is_correct": false},
+                {"id": "c", "text": "Evaluación", "is_correct": false},
+                {"id": "d", "text": "Despliegue", "is_correct": true}
+              ],
+              "explanation": "El Despliegue (Deployment) es la fase donde el modelo sale del entorno de análisis y se integra en sistemas productivos reales. Conectar el modelo con el sistema de solicitudes es exactamente eso: llevar la solución al lugar donde crea valor real para el negocio y sus clientes."
+            },
+            {
+              "question_text": "¿Cuál de las siguientes afirmaciones sobre CRISP-DM es FALSA?",
+              "options": [
+                {"id": "a", "text": "CRISP-DM tiene 6 fases principales", "is_correct": false},
+                {"id": "b", "text": "Es el estándar más usado en la industria de datos", "is_correct": false},
+                {"id": "c", "text": "CRISP-DM es un proceso lineal estricto donde nunca se vuelve a fases anteriores", "is_correct": true},
+                {"id": "d", "text": "Fue desarrollado en los años 90 y sigue vigente", "is_correct": false}
+              ],
+              "explanation": "Esta es la afirmación FALSA: CRISP-DM es un proceso ITERATIVO, no lineal. Una de sus características más importantes es que permite y fomenta regresar a fases anteriores cuando se descubren nuevos problemas o necesidades. Las otras tres afirmaciones son verdaderas: tiene 6 fases, es el estándar más usado, y fue creado en 1996."
+            }
+          ]
+        },
+        "assignment": {
+          "title": "Planifica un Proyecto CRISP-DM para Ecuador",
+          "instructions_markdown": "## Ejercicio: Diseña tu Primer Proyecto CRISP-DM\n\n### Objetivo\nAplicar CRISP-DM para planificar un proyecto de Ciencia de Datos real para Ecuador.\n\n### Elige UNO de estos escenarios:\n\n**A)** El Municipio de Quito quiere predecir en qué zonas habrá más accidentes de tráfico la próxima semana.\n\n**B)** Una cadena de farmacias ecuatoriana quiere predecir qué medicamentos van a necesitar más en los próximos 30 días para no quedarse sin stock.\n\n**C)** Una universidad quiere predecir qué estudiantes de primer semestre tienen riesgo de abandonar la carrera.\n\n### Para el escenario elegido, completa el siguiente formato:\n\n```\n=== PROYECTO CRISP-DM ===\nEscenario elegido: [A/B/C]\n\n1. COMPRENSIÓN DEL NEGOCIO\n   - Problema: [describe en 2-3 líneas]\n   - Objetivo de datos: [¿qué quieres predecir/descubrir?]\n   - Métrica de éxito: [¿cómo medirás si funcionó?]\n   - Valor para el negocio: [¿cuánto dinero/vidas/eficiencia mejora?]\n\n2. COMPRENSIÓN DE LOS DATOS\n   - Fuentes de datos posibles: [lista al menos 3]\n   - Variables que usarías: [lista 5-8 variables]\n   - Posibles problemas de calidad: [lista 2-3 problemas que anticipas]\n\n3. PREPARACIÓN DE LOS DATOS\n   - ¿Qué limpiezas necesitarías hacer? [lista 2-3 tareas]\n\n4. MODELADO\n   - Tipo de problema: [¿clasificación, regresión, clustering?]\n   - Técnica posible: [nombre un método aunque no lo conozcas bien aún]\n\n5. EVALUACIÓN\n   - ¿Cómo sabrás si el modelo es bueno? [métrica]\n\n6. DESPLIEGUE\n   - ¿Cómo llegaría el resultado al usuario final?\n```\n\n### Criterios de evaluación\n| Criterio | Puntos |\n|----------|--------|\n| Todas las 6 fases completas | 30 |\n| Propuesta realista y coherente | 30 |\n| Identifica fuentes de datos reales | 20 |\n| Reflexión sobre retos y limitaciones | 20 |\n| **Total** | **100** |",
+          "allowed_file_types": ["pdf", "docx", "md", "txt"]
+        },
+        "ai_prompt_suggested": "Estoy aprendiendo CRISP-DM en mi curso de Ciencia de Datos en ITSEIA. Elegí el escenario [describe tu escenario] para mi ejercicio. Necesito ayuda para completar la fase [indica cuál fase: Comprensión del Negocio / Comprensión de Datos / etc.]. ¿Puedes guiarme con preguntas y ejemplos? No me des la respuesta directa, ayúdame a pensar.",
+        "ai_context": "Sesión 2 - El estudiante conoce las 6 fases de CRISP-DM, la naturaleza iterativa del proceso, y cómo se aplica en casos de negocio reales. No ha trabajado con Python para datos todavía.",
+        "resources": [
+          {
+            "title": "CRISP-DM Reference Guide (PDF original)",
+            "url": "https://www.datascience-pm.com/wp-content/uploads/2024/12/CRISP-DM-for-Data-Science-2025.pdf",
+            "type": "pdf",
+            "description": "El documento original de CRISP-DM actualizado. Lectura obligatoria para cualquier Científico de Datos profesional."
+          },
+          {
+            "title": "Data Science Process Alliance - CRISP-DM",
+            "url": "https://www.datascience-pm.com/crisp-dm-2/",
+            "type": "link",
+            "description": "Explicación moderna y detallada de CRISP-DM con ejemplos actualizados."
+          },
+          {
+            "title": "Kaggle - Datasets Ecuador y LATAM",
+            "url": "https://www.kaggle.com/datasets?search=ecuador",
+            "type": "dataset",
+            "description": "Datasets reales relacionados con Ecuador para practicar. Empieza a explorar qué datos existen."
+          },
+          {
+            "title": "INEC - Censo Ecuador 2022",
+            "url": "https://www.ecuadorencifras.gob.ec/censo-de-poblacion-y-vivienda/",
+            "type": "dataset",
+            "description": "Datos del Censo Nacional 2022. Un proyecto CRISP-DM real podría analizarlos para entender tendencias de población."
+          }
+        ]
+      },
+      {
+        "number": 3,
+        "title": "Tipos de Datos y Fuentes de Datos",
+        "video_url": "https://www.youtube.com/watch?v=gtjxAH8uaP0",
+        "video_title": "Learn Pandas & Python for Data Analysis - freeCodeCamp (ver intro sobre tipos de datos)",
+        "video_channel": "freeCodeCamp.org",
+        "video_duration_minutes": 30,
+        "theory_markdown": "# Tipos de Datos y Fuentes de Datos\n\n## ¿Por qué importa entender los tipos de datos?\n\nAntes de analizar cualquier dato, necesitas saber de qué tipo es. El tipo de dato determina:\n- Qué operaciones puedes hacer con él\n- Qué visualizaciones aplican\n- Qué modelos de ML puedes usar\n\n## Clasificación de datos por estructura\n\n### 1. Datos Estructurados\nOrganizados en filas y columnas (como una hoja de Excel o una tabla de base de datos). Son los más fáciles de analizar.\n\n**Ejemplos:**\n- Registro de ventas de Supermaxi\n- Historial de pacientes del IESS\n- Transacciones bancarias\n- Datos del Censo del INEC\n\n```\nID | Nombre      | Edad | Ciudad  | Salario\n---|-------------|------|---------|--------\n1  | Ana Torres  | 28   | Quito   | 1200\n2  | Luis Vega   | 35   | Guayaquil | 1800\n3  | María Paz   | 22   | Cuenca  | 950\n```\n\n### 2. Datos No Estructurados\nNo tienen un formato predefinido. Representan el 80% de los datos del mundo.\n\n**Ejemplos:**\n- Textos (tweets, emails, noticias)\n- Imágenes (radiografías, fotos de satélite)\n- Audio (llamadas de call center)\n- Video (cámaras de tráfico)\n- PDFs (contratos, facturas)\n\n### 3. Datos Semi-estructurados\nTienen alguna organización pero no están en formato tabular.\n\n**Ejemplos:**\n- JSON (respuestas de APIs)\n- XML (datos de sistemas legacy)\n- HTML (páginas web)\n- Logs de servidores\n\n```json\n{\n  \"estudiante\": {\n    \"nombre\": \"Carlos Ruiz\",\n    \"carrera\": \"Inteligencia Artificial\",\n    \"notas\": [18, 16, 19, 15]\n  }\n}\n```\n\n## Tipos de variables estadísticas\n\n| Tipo | Subtipo | Ejemplo | Operaciones posibles |\n|------|---------|---------|---------------------|\n| **Cuantitativa** | Continua | Temperatura, salario | Media, desv. estándar, histograma |\n| **Cuantitativa** | Discreta | Número de hijos, edad | Conteo, moda, barplot |\n| **Cualitativa** | Nominal | Ciudad, carrera, género | Moda, pie chart, conteo |\n| **Cualitativa** | Ordinal | Nivel educativo, calificación (A/B/C) | Moda, frecuencias, orden |\n\n```python\nimport pandas as pd\n\n# Identificar tipos de variables en un dataset\ndf = pd.read_csv('estudiantes.csv')\nprint(df.dtypes)\n# nombre      object   <- cualitativa nominal\n# edad         int64   <- cuantitativa discreta\n# nota       float64   <- cuantitativa continua\n# carrera     object   <- cualitativa nominal\n```\n\n## Fuentes de datos principales\n\n### Datos Primarios (los generas tú)\n- Encuestas y formularios\n- Experimentos controlados\n- Sensores e IoT\n- Entrevistas\n\n**Ventaja**: Control total sobre calidad y relevancia\n**Desventaja**: Costosos y lentos de obtener\n\n### Datos Secundarios (ya existen)\n\n#### Datos Abiertos del Gobierno Ecuador:\n- **INEC**: https://www.ecuadorencifras.gob.ec\n- **Banco Central del Ecuador**: https://www.bce.fin.ec\n- **SENESCYT**: datos de educación superior\n- **Ministerio de Salud**: datos epidemiológicos\n\n#### Plataformas internacionales de datasets:\n- **Kaggle** (kaggle.com): Miles de datasets curados\n- **UCI Machine Learning Repository**: Clásicos para ML\n- **Google Dataset Search**: Motor de búsqueda de datasets\n- **Data.gov**: Datos del gobierno de EE.UU.\n- **World Bank Open Data**: Datos económicos globales\n\n#### APIs (datos en tiempo real):\n- Twitter/X API (análisis de redes sociales)\n- OpenWeatherMap (clima)\n- Alpha Vantage (datos financieros)\n- Google Maps API (geolocalización)\n\n## Calidad de los datos: las 6 dimensiones\n\n| Dimensión | Qué mide | Problema típico |\n|-----------|----------|----------------|\n| **Exactitud** | ¿Es correcto el valor? | Edad = -5, Salario = 0 |\n| **Completitud** | ¿Faltan valores? | 30% de emails en blanco |\n| **Consistencia** | ¿Es coherente? | Quito, QUITO, quito son la misma ciudad |\n| **Oportunidad** | ¿Es actual? | Datos de 2015 para predecir 2026 |\n| **Relevancia** | ¿Sirve para el problema? | Incluir número de zapatos para predecir salario |\n| **Unicidad** | ¿Hay duplicados? | El mismo cliente aparece 3 veces |\n\n## Formato de archivos de datos más comunes\n\n```python\nimport pandas as pd\n\n# CSV (Comma Separated Values) - el más común\ndf = pd.read_csv('datos.csv')\n\n# Excel\ndf = pd.read_excel('datos.xlsx')\n\n# JSON\ndf = pd.read_json('datos.json')\n\n# SQL\nimport sqlite3\nconn = sqlite3.connect('base.db')\ndf = pd.read_sql('SELECT * FROM clientes', conn)\n```",
+        "quiz": {
+          "title": "Quiz - Sesión 3: Tipos y Fuentes de Datos",
+          "pass_percentage": 70,
+          "questions": [
+            {
+              "question_text": "Las radiografías de pacientes que analiza un sistema de IA médica, ¿qué tipo de datos son?",
+              "options": [
+                {"id": "a", "text": "Datos estructurados", "is_correct": false},
+                {"id": "b", "text": "Datos semi-estructurados", "is_correct": false},
+                {"id": "c", "text": "Datos no estructurados", "is_correct": true},
+                {"id": "d", "text": "Datos cuantitativos discretos", "is_correct": false}
+              ],
+              "explanation": "Las imágenes (incluyendo radiografías) son datos no estructurados porque no tienen filas y columnas. Son matrices de píxeles sin un esquema predefinido. El 80% de los datos del mundo son no estructurados: imágenes, textos, audio, video. Procesarlos requiere técnicas especiales como redes neuronales convolucionales (CNN)."
+            },
+            {
+              "question_text": "La variable 'Nivel de Educación' con valores (Primaria, Secundaria, Universitaria, Posgrado) es de qué tipo estadístico?",
+              "options": [
+                {"id": "a", "text": "Cuantitativa continua", "is_correct": false},
+                {"id": "b", "text": "Cualitativa nominal", "is_correct": false},
+                {"id": "c", "text": "Cualitativa ordinal", "is_correct": true},
+                {"id": "d", "text": "Cuantitativa discreta", "is_correct": false}
+              ],
+              "explanation": "Es cualitativa ordinal porque: (1) Es cualitativa - describe una categoría no un número. (2) Es ordinal - hay un orden natural implícito (Primaria < Secundaria < Universitaria < Posgrado). Si fuera nominal, no habría orden (como 'ciudad' donde Quito no es mayor ni menor que Guayaquil)."
+            },
+            {
+              "question_text": "¿Cuál de estas fuentes de datos NO es una fuente de datos abiertos del gobierno ecuatoriano?",
+              "options": [
+                {"id": "a", "text": "INEC - Instituto Nacional de Estadística", "is_correct": false},
+                {"id": "b", "text": "Banco Central del Ecuador", "is_correct": false},
+                {"id": "c", "text": "Kaggle.com", "is_correct": true},
+                {"id": "d", "text": "Ministerio de Salud", "is_correct": false}
+              ],
+              "explanation": "Kaggle.com es una plataforma privada de la comunidad de Data Science (propiedad de Google) donde usuarios de todo el mundo comparten datasets. No es una fuente gubernamental ecuatoriana. El INEC, Banco Central y Ministerio de Salud son entidades públicas del Ecuador que publican datos oficiales."
+            },
+            {
+              "question_text": "Un dataset de ventas tiene el campo 'ciudad' con valores: Quito, QUITO, quito, Qto. ¿Qué dimensión de calidad de datos está siendo violada?",
+              "options": [
+                {"id": "a", "text": "Exactitud", "is_correct": false},
+                {"id": "b", "text": "Completitud", "is_correct": false},
+                {"id": "c", "text": "Consistencia", "is_correct": true},
+                {"id": "d", "text": "Unicidad", "is_correct": false}
+              ],
+              "explanation": "La Consistencia mide si los datos usan el mismo formato y convención. Quito, QUITO, quito y Qto son la misma ciudad pero escritas de formas diferentes. Para Python, estas son 4 ciudades distintas, lo que arruinaría cualquier análisis agrupado por ciudad. Limpiar esto es parte de la Preparación de Datos en CRISP-DM."
+            },
+            {
+              "question_text": "¿Qué función de Pandas usarías para ver los tipos de datos de cada columna de un DataFrame?",
+              "options": [
+                {"id": "a", "text": "df.types()", "is_correct": false},
+                {"id": "b", "text": "df.dtypes", "is_correct": true},
+                {"id": "c", "text": "df.columns.type()", "is_correct": false},
+                {"id": "d", "text": "df.show_types()", "is_correct": false}
+              ],
+              "explanation": "df.dtypes es un atributo (no un método, por eso no tiene paréntesis) que muestra el tipo de dato de cada columna del DataFrame. Retorna object para texto/strings, int64 para enteros, float64 para decimales y datetime64 para fechas. Es una de las primeras cosas que debes verificar al recibir un nuevo dataset."
+            }
+          ]
+        },
+        "assignment": {
+          "title": "Explorador de Datasets Ecuador",
+          "instructions_markdown": "## Ejercicio: Exploración de Dataset Real\n\n### Objetivo\nDescargar y explorar un dataset real de Ecuador aplicando lo aprendido sobre tipos de datos.\n\n### Instrucciones\n\n1. Ve a https://www.ecuadorencifras.gob.ec/estadisticas/ o a https://www.kaggle.com/datasets?search=ecuador\n\n2. Descarga un dataset de tu interés (puede ser sobre: economía, salud, educación, transporte, etc.)\n\n3. Crea un Jupyter Notebook llamado `exploracion_datos_ecuador.ipynb` y ejecuta:\n\n```python\nimport pandas as pd\n\n# Cargar el dataset\ndf = pd.read_csv('tu_dataset.csv')  # o pd.read_excel()\n\n# 1. Dimensiones\nprint(\"Filas y columnas:\", df.shape)\n\n# 2. Primeras filas\nprint(df.head(10))\n\n# 3. Tipos de datos\nprint(df.dtypes)\n\n# 4. Estadísticas básicas\nprint(df.describe())\n\n# 5. Valores nulos\nprint(df.isnull().sum())\n```\n\n4. En celdas de texto (Markdown) del notebook, responde:\n   - ¿Qué dataset elegiste y por qué?\n   - ¿Cuántas filas y columnas tiene?\n   - Lista 3 variables cuantitativas y 3 variables cualitativas\n   - ¿Hay valores nulos? ¿En qué columnas?\n   - ¿Qué pregunta de negocio o social podrías responder con este dataset?\n\n### Criterios de evaluación\n| Criterio | Puntos |\n|----------|--------|\n| Notebook ejecuta sin errores | 25 |\n| Las 5 operaciones de exploración están presentes | 25 |\n| Clasificación correcta de variables | 25 |\n| Análisis textual coherente en Markdown | 25 |\n| **Total** | **100** |",
+          "allowed_file_types": ["ipynb"]
+        },
+        "ai_prompt_suggested": "Descargué el dataset [nombre del dataset] de [fuente]. Tiene [X] columnas. Necesito ayuda para: 1) Identificar correctamente el tipo estadístico de estas columnas: [lista tus columnas], 2) Entender qué significan los valores nulos en [columna específica], 3) Decidir si esta fuente de datos es confiable para un análisis serio.",
+        "ai_context": "Sesión 3 - El estudiante conoce datos estructurados/no estructurados/semi-estructurados, tipos estadísticos (cuantitativo continuo/discreto, cualitativo nominal/ordinal), fuentes de datos (gobierno Ecuador, Kaggle, APIs), dimensiones de calidad, y formatos de archivo. Ha tenido primer contacto con Pandas básico.",
+        "resources": [
+          {
+            "title": "Kaggle - Aprende y practica con datasets reales",
+            "url": "https://www.kaggle.com/learn",
+            "type": "tool",
+            "description": "Kaggle Learn ofrece cursos gratuitos con ejercicios prácticos en datasets reales. El curso de Pandas es excelente."
+          },
+          {
+            "title": "Google Dataset Search",
+            "url": "https://datasetsearch.research.google.com",
+            "type": "tool",
+            "description": "Motor de búsqueda de Google específico para datasets. Busca 'Ecuador' para encontrar datos relevantes."
+          },
+          {
+            "title": "UCI Machine Learning Repository",
+            "url": "https://archive.ics.uci.edu/datasets",
+            "type": "dataset",
+            "description": "Repositorio clásico de datasets para ML con más de 600 datasets históricos y bien documentados."
+          },
+          {
+            "title": "Pandas Documentation - IO Tools",
+            "url": "https://pandas.pydata.org/docs/user_guide/io.html",
+            "type": "link",
+            "description": "Documentación oficial de Pandas para leer diferentes formatos: CSV, Excel, JSON, SQL, HTML, etc."
+          }
+        ]
+      },
+      {
+        "number": 4,
+        "title": "Introducción a Python para Datos: Pandas Básico",
+        "video_url": "https://www.youtube.com/watch?v=gtjxAH8uaP0",
+        "video_title": "Learn Pandas & Python for Data Analysis - Full Course (freeCodeCamp)",
+        "video_channel": "freeCodeCamp.org",
+        "video_duration_minutes": 300,
+        "theory_markdown": "# Introducción a Python para Datos: Pandas\n\n## ¿Qué es Pandas?\n\nPandas es la librería de Python más usada en Ciencia de Datos. Su nombre viene de **Pan**el **Da**ta (datos en panel, término econométrico). Permite cargar, explorar, limpiar y transformar datos de manera eficiente.\n\n**¿Por qué Pandas?**\n- Lee decenas de formatos de datos (CSV, Excel, SQL, JSON, etc.)\n- Opera sobre millones de filas en segundos\n- Integración perfecta con NumPy, Matplotlib, scikit-learn\n- Sintaxis intuitiva y expresiva\n\n## Instalación\n\n```bash\npip install pandas numpy jupyter\n```\n\n## Las dos estructuras de datos de Pandas\n\n### Series (1D - una columna)\n```python\nimport pandas as pd\n\n# Crear una Serie\nnotas = pd.Series([18, 15, 19, 12, 16], \n                  index=['Ana', 'Carlos', 'María', 'Pedro', 'Luisa'])\nprint(notas)\n# Ana      18\n# Carlos   15\n# María    19\n# Pedro    12\n# Luisa    16\n\nprint(notas['Ana'])        # 18\nprint(notas.mean())        # 16.0\nprint(notas.max())         # 19\n```\n\n### DataFrame (2D - tabla completa)\n```python\n# Crear un DataFrame desde diccionario\ndata = {\n    'nombre': ['Ana Torres', 'Carlos Vega', 'María Paz', 'Pedro Ruiz'],\n    'carrera': ['IA', 'CD', 'BD', 'IA'],\n    'nota': [18, 15, 19, 12],\n    'ciudad': ['Quito', 'Guayaquil', 'Quito', 'Cuenca']\n}\n\ndf = pd.DataFrame(data)\nprint(df)\n```\n\nSalida:\n```\n       nombre carrera  nota     ciudad\n0  Ana Torres      IA    18      Quito\n1 Carlos Vega      CD    15  Guayaquil\n2   María Paz      BD    19      Quito\n3   Pedro Ruiz     IA    12     Cuenca\n```\n\n## Cargar datos desde archivo\n\n```python\n# Desde CSV (lo más común)\ndf = pd.read_csv('estudiantes_itseia.csv')\n\n# Desde Excel\ndf = pd.read_excel('ventas_2025.xlsx', sheet_name='Enero')\n\n# Con parámetros especiales\ndf = pd.read_csv('datos.csv', \n                 sep=';',           # separador punto y coma\n                 encoding='latin1', # encodig para español\n                 index_col='ID')    # columna como índice\n```\n\n## Exploración inicial (EDA básico)\n\n```python\n# Dimensiones del DataFrame\nprint(df.shape)         # (1000, 10) - 1000 filas, 10 columnas\n\n# Primeras y últimas filas\nprint(df.head())        # Primeras 5 filas\nprint(df.tail(3))       # Últimas 3 filas\n\n# Información general\nprint(df.info())        # Tipos, valores no nulos, memoria\n\n# Estadísticas descriptivas\nprint(df.describe())    # Media, std, min, max para numéricas\n\n# Nombres de columnas\nprint(df.columns)       # Index(['nombre', 'nota', ...])\n\n# Tipos de datos\nprint(df.dtypes)        # nombre    object, nota    int64...\n\n# Valores únicos de una columna\nprint(df['carrera'].unique())    # ['IA', 'CD', 'BD']\nprint(df['carrera'].value_counts()) # Conteo por categoría\n```\n\n## Selección y filtrado\n\n```python\n# Seleccionar una columna (retorna Series)\nnotas = df['nota']\n\n# Seleccionar múltiples columnas (retorna DataFrame)\nsubset = df[['nombre', 'nota', 'ciudad']]\n\n# Filtrar filas por condición\naprobados = df[df['nota'] >= 14]\nquito_ia = df[(df['ciudad'] == 'Quito') & (df['carrera'] == 'IA')]\n\n# Seleccionar por posición (iloc)\nprimeras_3 = df.iloc[0:3]       # Filas 0, 1, 2\nprimera_col = df.iloc[:, 0]     # Toda la primera columna\n\n# Seleccionar por etiqueta (loc)\ndf.loc[0:2, 'nombre':'nota']    # Filas 0-2, columnas nombre hasta nota\n```\n\n## Manejo de valores nulos\n\n```python\n# Detectar nulos\nprint(df.isnull().sum())\n# nombre      0\n# nota        3   <- hay 3 valores nulos en nota\n# ciudad      1\n\n# Eliminar filas con nulos\ndf_limpio = df.dropna()\n\n# Rellenar nulos con un valor\ndf['nota'] = df['nota'].fillna(df['nota'].mean())\ndf['ciudad'] = df['ciudad'].fillna('Sin información')\n```\n\n## Operaciones de agregación\n\n```python\n# Estadísticas básicas\nprint(df['nota'].mean())    # Promedio\nprint(df['nota'].median())  # Mediana\nprint(df['nota'].std())     # Desviación estándar\n\n# Agrupar por categoría (groupby)\nresumen = df.groupby('carrera')['nota'].agg(['mean', 'min', 'max', 'count'])\nprint(resumen)\n# carrera   mean  min  max  count\n# BD        17.5   15   20     10\n# CD        16.2   12   20     12\n# IA        15.8   10   19     15\n```\n\n## Guardar resultados\n\n```python\n# Guardar como CSV\ndf.to_csv('resultado_limpio.csv', index=False)\n\n# Guardar como Excel\ndf.to_excel('resultado.xlsx', sheet_name='Análisis', index=False)\n```",
+        "quiz": {
+          "title": "Quiz - Sesión 4: Pandas Básico",
+          "pass_percentage": 70,
+          "questions": [
+            {
+              "question_text": "¿Cuál es la diferencia entre una Series y un DataFrame en Pandas?",
+              "options": [
+                {"id": "a", "text": "No hay diferencia, son lo mismo con diferente nombre", "is_correct": false},
+                {"id": "b", "text": "Series es para números y DataFrame para texto", "is_correct": false},
+                {"id": "c", "text": "Series es una estructura unidimensional (1 columna); DataFrame es bidimensional (tabla con múltiples columnas)", "is_correct": true},
+                {"id": "d", "text": "DataFrame es más lento que Series para cualquier operación", "is_correct": false}
+              ],
+              "explanation": "Una Series es como una columna de datos con un índice (1D). Un DataFrame es una tabla completa con múltiples columnas (2D), donde cada columna es una Series. Cuando seleccionas una columna de un DataFrame (df['columna']), obtienes una Series. Son las dos estructuras fundamentales de Pandas."
+            },
+            {
+              "question_text": "¿Qué retorna df.isnull().sum() en Pandas?",
+              "options": [
+                {"id": "a", "text": "El número total de filas del DataFrame", "is_correct": false},
+                {"id": "b", "text": "La suma de todos los valores numéricos del DataFrame", "is_correct": false},
+                {"id": "c", "text": "El número de valores nulos (faltantes) por cada columna", "is_correct": true},
+                {"id": "d", "text": "Un error, porque isnull() y sum() no se pueden encadenar", "is_correct": false}
+              ],
+              "explanation": "df.isnull() crea un DataFrame de True/False (True donde hay valor nulo). Al encadenar .sum(), Python suma los True (que valen 1) por columna, dando el conteo de nulos en cada columna. Es una de las operaciones más comunes al inicio de cualquier análisis de datos para evaluar la calidad."
+            },
+            {
+              "question_text": "¿Cuál es la forma correcta de filtrar un DataFrame para obtener solo los estudiantes de Quito con nota mayor a 15?",
+              "options": [
+                {"id": "a", "text": "df[df['ciudad'] == 'Quito' and df['nota'] > 15]", "is_correct": false},
+                {"id": "b", "text": "df[(df['ciudad'] == 'Quito') & (df['nota'] > 15)]", "is_correct": true},
+                {"id": "c", "text": "df.filter(ciudad='Quito', nota>15)", "is_correct": false},
+                {"id": "d", "text": "df.where(ciudad='Quito').where(nota>15)", "is_correct": false}
+              ],
+              "explanation": "En Pandas, cuando combinas múltiples condiciones de filtrado DEBES usar & (para AND) o | (para OR), NO 'and' ni 'or' de Python estándar. Además, cada condición debe estar entre paréntesis. La opción A falla porque 'and' no funciona con Series de Pandas."
+            },
+            {
+              "question_text": "¿Qué hace df.groupby('carrera')['nota'].mean()?",
+              "options": [
+                {"id": "a", "text": "Calcula el promedio de todas las notas del DataFrame", "is_correct": false},
+                {"id": "b", "text": "Agrupa los estudiantes por carrera y calcula el promedio de nota para cada carrera", "is_correct": true},
+                {"id": "c", "text": "Ordena el DataFrame por carrera y muestra solo la columna nota", "is_correct": false},
+                {"id": "d", "text": "Error - groupby y mean no se pueden usar juntos", "is_correct": false}
+              ],
+              "explanation": "groupby() es una de las operaciones más poderosas de Pandas. Divide el DataFrame en grupos según los valores únicos de la columna especificada ('carrera'), luego aplica una función de agregación (.mean()) a cada grupo. El resultado es el promedio de nota separado por cada carrera: IA, CD, BD."
+            },
+            {
+              "question_text": "¿Cuál es el parámetro correcto para leer un CSV que usa punto y coma (;) como separador en lugar de coma?",
+              "options": [
+                {"id": "a", "text": "pd.read_csv('archivo.csv', delimiter=';')", "is_correct": false},
+                {"id": "b", "text": "pd.read_csv('archivo.csv', sep=';')", "is_correct": true},
+                {"id": "c", "text": "pd.read_csv('archivo.csv', separator=';')", "is_correct": false},
+                {"id": "d", "text": "Ambas A y B son correctas", "is_correct": false}
+              ],
+              "explanation": "La opción B (sep=';') es la correcta y oficial de Pandas. La opción A también funcionaría porque 'delimiter' es un alias de 'sep' en Pandas (ambas son aceptadas técnicamente, pero sep es la preferida). En Ecuador y Latinoamérica muchos archivos CSV usan punto y coma como separador porque la coma se usa como separador decimal."
+            }
+          ]
+        },
+        "assignment": {
+          "title": "Análisis de Dataset con Pandas: Educación Ecuador",
+          "instructions_markdown": "## Ejercicio: Análisis Real con Pandas\n\n### Objetivo\nRealizar un análisis exploratorio completo usando Pandas sobre datos reales de educación en Ecuador.\n\n### Dataset\nUsa el archivo CSV proporcionado por el docente O descarga datos del INEC sobre educación en Ecuador.\n\nAlternativamente, puedes crear tu propio dataset con datos de ejemplo:\n\n```python\nimport pandas as pd\nimport numpy as np\n\n# Crear dataset de ejemplo con 50 estudiantes ficticios\nnp.random.seed(42)\nn = 50\n\ndf = pd.DataFrame({\n    'nombre': [f'Estudiante_{i}' for i in range(n)],\n    'carrera': np.random.choice(['IA', 'Ciencia de Datos', 'Big Data'], n),\n    'ciudad': np.random.choice(['Quito', 'Guayaquil', 'Cuenca', 'Ambato'], n),\n    'nota_final': np.random.randint(8, 20, n).astype(float),\n    'edad': np.random.randint(18, 30, n),\n    'tiene_laptop': np.random.choice([True, False], n, p=[0.8, 0.2])\n})\n\n# Agregar algunos valores nulos reales\ndf.loc[np.random.choice(n, 5), 'nota_final'] = np.nan\n```\n\n### Tareas a realizar en el notebook:\n\n1. **Exploración inicial** (head, info, describe, shape)\n2. **Análisis de nulos** (isnull().sum() y estrategia de limpieza)\n3. **Estadísticas por grupo** (nota promedio por carrera y por ciudad)\n4. **Filtros** (solo aprobados, solo de Quito, etc.)\n5. **Al menos 2 insights** expresados en texto Markdown dentro del notebook\n\n### Criterios de evaluación\n| Criterio | Puntos |\n|----------|--------|\n| Notebook ejecuta completamente sin errores | 25 |\n| Las 5 tareas están resueltas correctamente | 40 |\n| Los insights son coherentes con los datos | 20 |\n| Código tiene comentarios explicativos | 15 |\n| **Total** | **100** |",
+          "allowed_file_types": ["ipynb"]
+        },
+        "ai_prompt_suggested": "Estoy aprendiendo Pandas en mi curso de Ciencia de Datos en ITSEIA. Tengo este código que da error: [pega tu código aquí]. El error que me aparece es: [pega el mensaje de error]. ¿Qué está mal y cómo lo corrijo? Además, explícame por qué ocurre ese error para no cometerlo de nuevo.",
+        "ai_context": "Sesión 4 - El estudiante conoce Series y DataFrame, pd.read_csv/excel/json, head/tail/info/describe/dtypes/shape, selección de columnas, filtrado con condiciones, isnull/dropna/fillna, groupby y agregaciones básicas. Ha ejecutado código en Jupyter Notebook.",
+        "resources": [
+          {
+            "title": "Pandas Documentation Oficial",
+            "url": "https://pandas.pydata.org/docs/",
+            "type": "link",
+            "description": "La referencia definitiva de Pandas. Guarda en favoritos - la consultarás constantemente."
+          },
+          {
+            "title": "Pandas Cheat Sheet - DataCamp",
+            "url": "https://www.datacamp.com/cheat-sheet/pandas-cheat-sheet-for-data-science-in-python",
+            "type": "pdf",
+            "description": "Hoja de referencia rápida de Pandas. Imprime y pega en tu escritorio."
+          },
+          {
+            "title": "Kaggle - Pandas Course (gratis)",
+            "url": "https://www.kaggle.com/learn/pandas",
+            "type": "link",
+            "description": "Curso gratuito de Pandas en Kaggle con ejercicios interactivos. Altamente recomendado."
+          },
+          {
+            "title": "freeCodeCamp - Pandas Full Course (YouTube)",
+            "url": "https://www.youtube.com/watch?v=gtjxAH8uaP0",
+            "type": "video",
+            "description": "Curso completo de Pandas en inglés (5 horas). El video de referencia de esta sesión."
+          },
+          {
+            "title": "10 Minutes to Pandas (documentación oficial)",
+            "url": "https://pandas.pydata.org/docs/user_guide/10min.html",
+            "type": "link",
+            "description": "Tutorial oficial de 10 minutos para empezar con Pandas. Cubre los conceptos fundamentales con ejemplos."
+          }
+        ]
+      }
+    ]
+  }
+}

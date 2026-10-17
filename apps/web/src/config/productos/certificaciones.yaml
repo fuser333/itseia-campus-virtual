@@ -1,0 +1,69 @@
+# ============================================================================
+# Certificaciones · Preparación AWS / Google / Anthropic
+# Grupos según demanda.
+# ============================================================================
+
+producto:
+  id: certificaciones
+  nombre: "Certificaciones Internacionales"
+  descripcion: "Preparación para certificaciones AWS, Google Cloud y Anthropic."
+  color_accent: "#C99300"        # dorado oscuro
+  icono: "🏆"
+  url_publica: "https://itseia.ai/certificaciones"
+
+cohorte:
+  estructura: "por_demanda"
+  duracion_dias: 45
+  horario_default:
+    inicio_ec: "19:00"
+    fin_ec: "21:00"
+    dias_semana: ["mie", "vie"]
+  sesiones_totales: 12
+
+alumno:
+  pestañas_sesion:
+    - video_resumen
+    - materiales
+    - ejercicios
+    - evaluacion
+  ai_lab: true
+  comunidad: true
+  asesorias: true
+
+docente:
+  pestañas_sesion:
+    - resumen
+    - plan_clase
+    - materiales_editar
+    - ejercicios_editar
+    - evaluacion_editar
+    - prompts
+    - recursos
+    - notas_privadas
+    - grabaciones
+  boton_grabar: true
+  asistencia: true
+
+pricing:
+  modelo: "pago_unico"
+  precio_usd: 297                # precio promedio · varía por certificación
+  moneda: "USD"
+  beca_h3l: false
+  certificadores_partners:
+    - "Amazon Web Services"
+    - "Google Cloud"
+    - "Anthropic"
+
+assignment_docente:
+  modo: "manual"
+
+cross_promo:
+  excluir_a_si_mismo: true
+  orden_otros:
+    - bootcamp
+    - carreras
+    - cursos-pro
+    - mdt
+    - preuni
+    - b2b
+    - demo

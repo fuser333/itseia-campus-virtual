@@ -1,0 +1,309 @@
+{
+  "curso": "IA para Contadores y Auditores",
+  "version": "1.0",
+  "fecha_creacion": "2026-03-18",
+  "quizzes": [
+    {
+      "id": "quiz-T03-T04",
+      "titulo": "Seguridad, Privacidad y Evaluacion Critica de IA",
+      "modulos_cubre": ["T-03", "T-04"],
+      "descripcion": "Evalua tu comprension sobre el uso seguro de datos financieros con IA y la capacidad de validar criticamente los outputs antes de usarlos en documentos profesionales.",
+      "puntaje_maximo": 100,
+      "puntaje_aprobacion": 70,
+      "tiempo_estimado_min": 15,
+      "preguntas": [
+        {
+          "idx": 1,
+          "tipo": "multiple_choice",
+          "dificultad": "basico",
+          "enunciado": "Eres contador de una empresa y necesitas pedir a ChatGPT que analice el balance general de tu cliente para detectar variaciones. El documento incluye el nombre real de la empresa, su RUC y los estados financieros completos. ¿Cual es la accion mas adecuada?",
+          "opciones": {
+            "A": "Subir el documento tal cual porque ChatGPT es confidencial por sus terminos de servicio",
+            "B": "Anonimizar el documento: reemplazar nombre de empresa por 'Empresa XYZ', el RUC por un numero ficticio, y mantener los valores numericos antes de subirlo",
+            "C": "Subir solo las primeras 3 paginas porque menos datos es menos riesgo",
+            "D": "No usar ChatGPT para este tipo de analisis bajo ninguna circunstancia"
+          },
+          "respuesta_correcta": "B",
+          "explicacion": "La anonimizacion es la practica correcta: permite usar la IA para el analisis manteniendo la confidencialidad del cliente. Reemplazar identificadores (nombre, RUC) por ficticios mientras se mantienen los valores numericos da el mismo resultado analitico sin exponer datos sensibles. La opcion A es incorrecta porque el plan gratuito y Plus de ChatGPT puede usar conversaciones para mejora del modelo. La opcion D es demasiado restrictiva — con anonimizacion adecuada, la IA es una herramienta valida.",
+          "puntos": 15
+        },
+        {
+          "idx": 2,
+          "tipo": "multiple_choice",
+          "dificultad": "intermedio",
+          "enunciado": "Segun la Ley Organica de Proteccion de Datos Personales (LOPDP) del Ecuador, cuando un contador procesa nominas de empleados usando una plataforma de IA externa, actua como:",
+          "opciones": {
+            "A": "Auditor de datos — su rol es unicamente verificar que los datos sean correctos",
+            "B": "Responsable del tratamiento — debe garantizar que el procesamiento cumple con los principios de la ley",
+            "C": "Encargado del tratamiento — delega toda la responsabilidad a la plataforma de IA",
+            "D": "Observador — la responsabilidad recae exclusivamente en la empresa empleadora"
+          },
+          "respuesta_correcta": "B",
+          "explicacion": "Bajo la LOPDP, quien decide los fines y medios del tratamiento de datos personales es el 'responsable del tratamiento'. Al usar una plataforma externa para procesar nominas (datos personales de empleados), el contador actua como responsable. Debe garantizar que el tratamiento cumple los principios de finalidad, minimizacion y seguridad. No puede delegar esta responsabilidad a la plataforma tecnologica.",
+          "puntos": 15
+        },
+        {
+          "idx": 3,
+          "tipo": "multiple_choice",
+          "dificultad": "intermedio",
+          "enunciado": "Usaste Claude para que te ayude a calcular la participacion de trabajadores y el impuesto a la renta de una empresa ecuatoriana. Claude responde con total confianza que la participacion de trabajadores es del 10% sobre la utilidad. ¿Que debes hacer?",
+          "opciones": {
+            "A": "Aceptar el resultado porque Claude es una herramienta de alta confiabilidad tecnica",
+            "B": "Verificar en la fuente primaria (Codigo del Trabajo, Art. 97) porque la tasa correcta en Ecuador es 15%, no 10%",
+            "C": "Pedirle a Claude que lo calcule de nuevo con mas detalle antes de aceptar",
+            "D": "Usar el promedio entre lo que dice Claude (10%) y lo que recuerdas (15%) = 12.5%"
+          },
+          "respuesta_correcta": "B",
+          "explicacion": "Este es un ejemplo clasico de alucinacion de IA en datos normativos especificos. La tasa de participacion de trabajadores en Ecuador es del 15% sobre la utilidad antes de impuestos (Art. 97 del Codigo del Trabajo). Claude respondio con confianza pero erro. La regla fundamental es: cualquier tasa, porcentaje o cita normativa especifica debe verificarse en la fuente oficial. Pedir que recalcule (opcion C) no corregira el error si el dato base es incorrecto.",
+          "puntos": 15
+        },
+        {
+          "idx": 4,
+          "tipo": "multiple_choice",
+          "dificultad": "intermedio",
+          "enunciado": "¿Cual de las siguientes opciones de herramienta IA ofrece mayor seguridad contractual para procesar datos financieros de clientes en Ecuador?",
+          "opciones": {
+            "A": "ChatGPT version gratuita con historial de conversaciones desactivado",
+            "B": "ChatGPT Plus ($20/mes) con la opcion 'No usar para entrenamiento' activada",
+            "C": "Microsoft 365 Copilot en Excel con plan empresarial del cliente (M365 Business Standard)",
+            "D": "Claude.ai plan gratuito porque Anthropic es mas pequena y maneja menos datos"
+          },
+          "respuesta_correcta": "C",
+          "explicacion": "Microsoft 365 Copilot con plan empresarial es la opcion mas segura porque: los datos permanecen dentro del tenant de Microsoft de la organizacion, Microsoft tiene acuerdos contractuales de procesamiento de datos (DPA) que cumplen con GDPR y similares, y los datos no se usan para entrenar modelos. Las otras opciones ofrecen menos garantias contractuales sobre el uso de los datos. El tamano de Anthropic (opcion D) no es relevante para determinar seguridad contractual.",
+          "puntos": 15
+        },
+        {
+          "idx": 5,
+          "tipo": "multiple_choice",
+          "dificultad": "avanzado",
+          "enunciado": "Aplicaste el checklist de 5 puntos al output de ChatGPT sobre la conciliacion tributaria de tu cliente. El output pasa los puntos 1, 2, 4 y 5, pero en el Punto 3 detectas que ChatGPT calculo la base imponible sin restar la participacion de trabajadores antes del impuesto a la renta. ¿Cual es el curso de accion correcto?",
+          "opciones": {
+            "A": "Descartar todo el analisis de ChatGPT y hacerlo manualmente desde cero",
+            "B": "Corregir especificamente el Punto 3 en Excel, recalcular la base imponible y el IR, y usar el resto del analisis de ChatGPT que paso el checklist",
+            "C": "Pedirle a ChatGPT que corrija el error y aceptar la nueva version sin revisar de nuevo",
+            "D": "Usar el output como esta porque el error no es significativo en el resultado final"
+          },
+          "respuesta_correcta": "B",
+          "explicacion": "El checklist sirve exactamente para este caso: identificar el error especifico y corregirlo puntualmente, sin desechar todo el trabajo. Los puntos 1, 2, 4 y 5 estan validados — puedes usarlos. El error en el Punto 3 (calculo de base imponible) debe corregirse manualmente en Excel. Pedir a ChatGPT que lo corrija (opcion C) es util pero debes volver a verificar el resultado. Ignorar el error (opcion D) generaria un impuesto a la renta incorrecto con consecuencias ante el SRI.",
+          "puntos": 15
+        },
+        {
+          "idx": 6,
+          "tipo": "multiple_choice",
+          "dificultad": "avanzado",
+          "enunciado": "Una firma de auditoria en Quito quiere implementar Claude para que sus auditores asistentes puedan analizar estados financieros de clientes en sus laptops. El Socio Director pregunta: '¿Que opcion de Claude debemos usar para cumplir con nuestra obligacion de confidencialidad hacia los clientes?' ¿Cual es tu recomendacion correcta?",
+          "opciones": {
+            "A": "Claude.ai Pro porque la suscripcion de pago implica mayor proteccion de datos",
+            "B": "Cualquier version de Claude porque todos los LLMs cumplen con ISO 27001 automaticamente",
+            "C": "Claude for Work o acceso via API con un acuerdo de procesamiento de datos (DPA) firmado con Anthropic, y adicionalmente implementar una politica de anonimizacion obligatoria de datos de clientes",
+            "D": "No usar Claude sino solo ChatGPT Enterprise porque es el unico con certificacion de auditoria"
+          },
+          "respuesta_correcta": "C",
+          "explicacion": "Para una firma de auditoria, la solucion correcta combina dos capas: (1) un acuerdo contractual con Anthropic (DPA disponible para clientes API/Enterprise) que garantiza que los datos no se usan para entrenamiento, y (2) una politica interna de anonimizacion que protege la identidad de los clientes independientemente de la plataforma. El precio del plan no determina las garantias de privacidad (opcion A es falsa). No todos los LLMs tienen ISO 27001 (opcion B es falsa). ChatGPT Enterprise no es el unico con certificacion (opcion D es falsa).",
+          "puntos": 15
+        },
+        {
+          "idx": 7,
+          "tipo": "texto_corto",
+          "dificultad": "intermedio",
+          "enunciado": "Explica con tus propias palabras por que la 'alucinacion' de los modelos de IA es particularmente peligrosa para el trabajo contable, y describe al menos dos tipos de informacion contable o tributaria especifica donde este riesgo es mas alto. Usa ejemplos del contexto ecuatoriano.",
+          "rubrica": {
+            "criterio_1": {
+              "descripcion": "Explica correctamente que es la alucinacion en el contexto de los LLMs",
+              "peso_porcentaje": 30,
+              "indicadores": "Menciona que el modelo genera informacion falsa con confianza, que no sabe distinguir entre lo que conoce y lo que inventa, y por que ocurre (prediccion estadistica de tokens)"
+            },
+            "criterio_2": {
+              "descripcion": "Identifica al menos dos tipos de informacion contable/tributaria de alto riesgo con ejemplos ecuatorianos",
+              "peso_porcentaje": 45,
+              "indicadores": "Menciona ejemplos como: tasas del SRI (IVA, IR, retenciones), plazos de declaracion, articulos especificos del RLORTI, calculos con multiples pasos (participacion trabajadores + IR encadenados), formulas de provisiones bajo NIIF especificas"
+            },
+            "criterio_3": {
+              "descripcion": "Propone al menos una medida practica de mitigacion del riesgo",
+              "peso_porcentaje": 25,
+              "indicadores": "Verificacion en fuente primaria (sri.gob.ec, lexis, bce), uso del checklist de 5 puntos, chain-of-thought prompting para ver el razonamiento, no usar IA para calculos normativoss sin validacion"
+            }
+          },
+          "keywords_minimas": ["alucinacion", "confianza", "falso", "verificar", "normativa"],
+          "puntos": 10
+        },
+        {
+          "idx": 8,
+          "tipo": "texto_corto",
+          "dificultad": "avanzado",
+          "enunciado": "Tu jefe de departamento propone la siguiente regla: 'A partir de ahora, para ahorrar tiempo, los asistentes pueden subir directamente a ChatGPT Plus los archivos de balance general de nuestros clientes sin anonimizar, porque igual las facturas del SRI son publicas.' Redacta una respuesta profesional de maximo 150 palabras explicando por que esta propuesta es incorrecta y que politica alternativa recomendarias.",
+          "rubrica": {
+            "criterio_1": {
+              "descripcion": "Refuta correctamente el argumento de que 'las facturas del SRI son publicas'",
+              "peso_porcentaje": 35,
+              "indicadores": "Distingue entre informacion publica y datos personales protegidos por la LOPDP. Las facturas siendo consultables en el SRI no implica que los estados financieros completos de una empresa sean de dominio publico. El balance general contiene informacion estrategica y de propiedad de la empresa."
+            },
+            "criterio_2": {
+              "descripcion": "Menciona la Ley Organica de Proteccion de Datos Personales u obligacion de confidencialidad profesional",
+              "peso_porcentaje": 35,
+              "indicadores": "Referencia a la LOPDP, al deber de confidencialidad del contador, a la responsabilidad profesional bajo la Ley de Contadores Publicos, o al riesgo reputacional y legal de la firma"
+            },
+            "criterio_3": {
+              "descripcion": "Propone una politica alternativa clara y practica",
+              "peso_porcentaje": 30,
+              "indicadores": "Propone anonimizacion sistematica, uso de M365 Copilot dentro del ecosistema del cliente, politica de clasificacion de datos antes de subir a IA, o similar"
+            }
+          },
+          "keywords_minimas": ["LOPDP", "confidencialidad", "anonimizar", "responsabilidad"],
+          "puntos": 10
+        }
+      ]
+    },
+    {
+      "id": "quiz-F02",
+      "titulo": "Deteccion de Anomalias y Fraude con IA",
+      "modulos_cubre": ["F-02"],
+      "descripcion": "Evalua tu capacidad para identificar patrones de fraude, preparar datasets para analisis con IA y documentar hallazgos en formato de auditoria.",
+      "puntaje_maximo": 100,
+      "puntaje_aprobacion": 70,
+      "tiempo_estimado_min": 15,
+      "preguntas": [
+        {
+          "idx": 1,
+          "tipo": "multiple_choice",
+          "dificultad": "basico",
+          "enunciado": "Al analizar el libro de cuentas por pagar de una empresa ecuatoriana con ChatGPT Plus, encuentras que la misma factura del Proveedor_47 (Fact. No. 001-001-000892) por $3,750 aparece registrada el 12 de enero y el 14 de enero de 2026. ¿Cual es el nombre tecnico de este patron de fraude y que accion deberias tomar primero?",
+          "opciones": {
+            "A": "Factura fantasma — reportar inmediatamente al SRI porque el proveedor tiene un RUC invalido",
+            "B": "Factura duplicada — verificar con el departamento de compras si fue un error de ingreso o si el pago se ejecuto dos veces antes de concluir que es fraude",
+            "C": "Inflacion de facturas — pedir al proveedor que emita una nota de credito por el exceso",
+            "D": "Error de sistema — ignorar porque los software contables a veces duplican registros automaticamente"
+          },
+          "respuesta_correcta": "B",
+          "explicacion": "Una factura con el mismo numero, proveedor y monto registrada en fechas muy cercanas es una factura duplicada — uno de los esquemas de fraude en cuentas por pagar mas comunes. Sin embargo, la primera accion debe ser verificar si el pago se ejecuto una o dos veces, y si fue un error de ingreso o algo intencional. Concluir fraude sin investigacion es prematuro. El SRI solo se involucra si hay evasion tributaria confirmada. La opcion D es incorrecta: los sistemas contables no duplican registros automaticamente — siempre hay un usuario que registro el asiento.",
+          "puntos": 12
+        },
+        {
+          "idx": 2,
+          "tipo": "multiple_choice",
+          "dificultad": "intermedio",
+          "enunciado": "Preparas un dataset de 8,000 transacciones para analisis de anomalias con IA. El dataset incluye: fecha, id_proveedor, numero_factura, monto, cuenta_contable, usuario_registro, fecha_pago. ¿Cual de los siguientes pasos NO es necesario antes de subir a ChatGPT Plus?",
+          "opciones": {
+            "A": "Reemplazar nombres reales de proveedores por codigos anonimos (Proveedor_001, etc.)",
+            "B": "Convertir todos los montos a una sola moneda (USD) si habia facturas en otras monedas",
+            "C": "Eliminar el historial de compras de los ultimos 3 anos para reducir el tamano del archivo",
+            "D": "Verificar que la columna de montos no tenga texto mezclado (como simbolos $ o comas de miles)"
+          },
+          "respuesta_correcta": "C",
+          "explicacion": "Eliminar el historial historico (opcion C) reduciria la calidad del analisis porque la IA necesita el patron historico para identificar desviaciones estadisticas. Si solo tienes el mes actual, no puede determinar si un monto es 'inusual' para ese proveedor. Las otras tres opciones son necesarias: anonimizar (privacidad), unificar moneda (consistencia del analisis) y limpiar formato de montos (para que el Code Interpreter de ChatGPT pueda procesarlos como numeros).",
+          "puntos": 12
+        },
+        {
+          "idx": 3,
+          "tipo": "multiple_choice",
+          "dificultad": "intermedio",
+          "enunciado": "La Ley de Benford establece que en datos financieros naturales, el digito 1 aparece como primer digito significativo aproximadamente el 30% de las veces. Al aplicar esta prueba al libro de gastos de una empresa ecuatoriana encuentras que el digito 5 aparece el 22% de las veces (en lugar del 7.9% esperado). ¿Cual es la interpretacion mas probable?",
+          "opciones": {
+            "A": "El resultado es normal porque Ecuador tiene inflacion alta que genera muchos montos que empiezan con 5",
+            "B": "Hay posible manipulacion de registros — muchas transacciones se estan creando con montos que empiezan en 5 (como $500, $5,000, $5,500) lo que es inusual en datos organicos",
+            "C": "La Ley de Benford no aplica a libros contables en dolares porque los datos no son 'naturales'",
+            "D": "Hay un problema de configuracion en el software contable que esta redondeando automaticamente los montos"
+          },
+          "respuesta_correcta": "B",
+          "explicacion": "Una desviacion tan significativa del digito 5 (22% vs 7.9% esperado) es una señal de alerta seria. En datos financieros manipulados, los operadores tienden a crear transacciones con montos redondos o semi-redondos que 'parecen razonables' — y muchos caen en rangos que empiezan con 5. No es un resultado normal ni inflacionario (la inflacion no cambia la distribucion de Benford). La Ley de Benford si aplica a libros contables — es precisamente para eso que fue popularizada en auditoria forense. El siguiente paso es investigar las transacciones especificas con montos en ese rango.",
+          "puntos": 13
+        },
+        {
+          "idx": 4,
+          "tipo": "multiple_choice",
+          "dificultad": "intermedio",
+          "enunciado": "Al analizar la nomina del mes de febrero de una empresa con 35 empleados, el prompt de deteccion de empleados fantasma de ChatGPT señala al 'Empleado_018' con este hallazgo: salario de $2,800/mes, fecha de ingreso 3 semanas atras, sin descuentos de IESS en los ultimos 2 meses. ¿Que investigacion adicional deberia hacer el auditor para determinar si es un hallazgo real?",
+          "opciones": {
+            "A": "Verificar directamente con el Empleado_018 si realmente trabaja en la empresa",
+            "B": "Revisar el contrato de trabajo en el Ministerio del Trabajo, el aviso de entrada al IESS y la clave bancaria de deposito del salario contra los registros de RRHH",
+            "C": "Reportar inmediatamente a la Fiscalia por presunto fraude de nomina",
+            "D": "Cruzar el nombre del empleado con el registro del SRI para verificar que el RUC es real"
+          },
+          "respuesta_correcta": "B",
+          "explicacion": "La investigacion adecuada usa fuentes documentales verificables: (1) el contrato registrado en el Ministerio del Trabajo confirma si la relacion laboral existe legalmente, (2) el aviso de entrada al IESS (consultable en el portal del IESS) confirma si la empresa reporto al empleado a la seguridad social, y (3) la cuenta bancaria de deposito cruzada con RRHH verifica que el salario va a una persona real. La opcion A compromete la independencia del auditor. La opcion C es prematura sin evidencia suficiente. La opcion D no verifica si la persona trabaja realmente.",
+          "puntos": 13
+        },
+        {
+          "idx": 5,
+          "tipo": "multiple_choice",
+          "dificultad": "avanzado",
+          "enunciado": "Una empresa de Guayaquil te contrata para una auditoria de cuentas por pagar. Usas ChatGPT Plus para analizar 6,000 transacciones y el modelo identifica 23 'anomalias potenciales'. Al revisar manualmente las 23, encuentras que 18 son falsos positivos (transacciones legitimas que la IA señalo incorrectamente) y 5 son anomalias reales. ¿Que concluyes sobre el uso de IA en este proceso de auditoria?",
+          "opciones": {
+            "A": "La IA es inutil para este tipo de analisis porque tiene una tasa de falsos positivos del 78%",
+            "B": "El proceso fue exitoso: la IA redujo el universo de revision de 6,000 transacciones a 23 (0.38% del total), encontrando 5 anomalias reales que probablemente no habrias detectado revisando manualmente",
+            "C": "Debes usar un modelo de IA mas avanzado porque GPT-4o deberia tener 0% de falsos positivos",
+            "D": "La firma de auditoria deberia reclamar a OpenAI por las 18 transacciones incorrectamente señaladas"
+          },
+          "respuesta_correcta": "B",
+          "explicacion": "Esta es la perspectiva correcta de como usar IA en auditoria. La IA no es un juicio — es un filtro. Revisar manualmente 6,000 transacciones habria tomado dias. La IA redujo el universo a 23 transacciones que requieren atencion humana (0.38%). De esas 23, se encontraron 5 anomalias reales que de otro modo podrian haber pasado desapercibidas. La tasa de falsos positivos del 78% en el subconjunto señalado es alta, pero la alternativa (revision manual completa o sin revision) habria sido peor o imposible. La IA no es perfecta — es una herramienta de priorización.",
+          "puntos": 12
+        },
+        {
+          "idx": 6,
+          "tipo": "multiple_choice",
+          "dificultad": "avanzado",
+          "enunciado": "Redactas un hallazgo de auditoria usando el formato Condicion-Criterio-Causa-Efecto-Recomendacion. La IA te ayuda a redactarlo pero en la seccion 'Criterio' escribe: 'Segun el Art. 15 de las Normas Ecuatorianas de Contabilidad (NEC 15), toda empresa debe...'. ¿Que accion tomas antes de incluir este hallazgo en el informe?",
+          "opciones": {
+            "A": "Incluirlo directamente porque la IA cito un articulo especifico, lo que indica que tiene la informacion correcta",
+            "B": "Verificar que la NEC 15 existe, que el Art. 15 dice lo que la IA afirma, y actualizar la referencia normativa a NIIF si la empresa aplica NIIF (las NEC fueron reemplazadas)",
+            "C": "Cambiar la referencia a 'buenas practicas internacionales de auditoria' para no depender de normativa especifica",
+            "D": "Pedirle a la IA que cite la misma norma en otro prompt para confirmar que es correcta"
+          },
+          "respuesta_correcta": "B",
+          "explicacion": "Esta pregunta prueba la aplicacion del checklist de 5 puntos. Las NEC (Normas Ecuatorianas de Contabilidad) fueron oficialmente reemplazadas por las NIIF en Ecuador por mandato de la Junta de Regulacion de Contabilidad. Si la empresa aplica NIIF (la gran mayoria), citar NEC en un hallazgo actual seria un error tecnico grave. Ademas, el articulo especifico debe verificarse porque la IA puede citar articulos inexistentes. Confirmar con la IA (opcion D) no resuelve el problema — la IA puede ser consistente en su alucinacion.",
+          "puntos": 12
+        },
+        {
+          "idx": 7,
+          "tipo": "texto_corto",
+          "dificultad": "intermedio",
+          "enunciado": "Una empresa importadora ecuatoriana tiene 3 proveedores que representan el 78% de su gasto anual en compras. Al analizar las transacciones con estos proveedores usando IA, ¿que 3 tipos de anomalias especificas deberia buscar el auditor considerando el contexto de importacion en Ecuador (aduanas, tipos de cambio, liquidaciones de aduana)? Describe cada una brevemente con un ejemplo numerico o concreto.",
+          "rubrica": {
+            "criterio_1": {
+              "descripcion": "Identifica anomalias relacionadas con el proceso de importacion y liquidacion aduanera",
+              "peso_porcentaje": 40,
+              "indicadores": "Menciona: diferencias entre el valor FOB declarado en la liquidacion de aduana y el costo registrado en contabilidad, aranceles o seguros registrados por un monto diferente al calculado segun el arancel oficial del SENAE, diferencias de tipo de cambio entre la fecha de la orden de compra y la fecha de la liquidacion"
+            },
+            "criterio_2": {
+              "descripcion": "Identifica anomalias de concentracion de proveedores que son especificas del riesgo de empresas relacionadas",
+              "peso_porcentaje": 35,
+              "indicadores": "Menciona: transacciones con proveedores que tienen el mismo RUC o direccion que un directivo o accionista de la empresa (partes relacionadas no reveladas), precios de compra que se desvian significativamente del precio de mercado sin justificacion de contrato, condiciones de pago inusuales (plazos muy cortos o muy largos) que no aplican a otros proveedores del mismo tipo"
+            },
+            "criterio_3": {
+              "descripcion": "Da al menos un ejemplo con valor numerico o situacion concreta del mercado ecuatoriano",
+              "peso_porcentaje": 25,
+              "indicadores": "Ejemplo concreto como: 'La liquidacion de aduana muestra un CIF de $45,000 pero el asiento contable registra $43,000 — diferencia de $2,000 sin ajuste por diferencia en cambio registrado', o 'El proveedor tiene los mismos 3 digitos iniciales de RUC que el gerente de compras'"
+            }
+          },
+          "keywords_minimas": ["proveedor", "anomalia", "importacion", "liquidacion", "diferencia"],
+          "puntos": 13
+        },
+        {
+          "idx": 8,
+          "tipo": "texto_corto",
+          "dificultad": "avanzado",
+          "enunciado": "Redacta la seccion 'Condicion' y 'Recomendacion' de un hallazgo de auditoria para el siguiente caso: Al analizar las cuentas por pagar de Comercializadora Beta S.A. con ChatGPT Plus, se identificaron 4 facturas del proveedor 'Servicios Tecnicos Andinos' (RUC 0503287461001) por un total de $28,400 en el trimestre, todas con montos redondos ($7,100 cada una), registradas el ultimo dia de cada mes, aprobadas por el mismo usuario del sistema (Usuario_03). La empresa no tiene contrato firmado con este proveedor en el archivo de contratos revisado.",
+          "rubrica": {
+            "criterio_1": {
+              "descripcion": "Redacta la 'Condicion' describiendo objetivamente los hechos observados sin conclusiones prematuras",
+              "peso_porcentaje": 40,
+              "indicadores": "La condicion describe: los hechos observados (4 facturas, monto total, periodicidad, montos identicos, mismo usuario), señala la ausencia de contrato como hecho objetivo, usa lenguaje objetivo ('se observo', 'se identifico') sin decir 'hay fraude' o 'es ilegal'"
+            },
+            "criterio_2": {
+              "descripcion": "Redacta la 'Recomendacion' con acciones especificas, asignadas y medibles",
+              "peso_porcentaje": 40,
+              "indicadores": "Propone: revision de expediente del proveedor para verificar existencia real, verificacion en el SRI del estado del RUC y actividad economica del proveedor, solicitud de los servicios tecnicos recibidos (entregables, informes, actas de recepcion), entrevista al Usuario_03 para explicar las aprobaciones, actualizacion de controles de autorizacion de pagos"
+            },
+            "criterio_3": {
+              "descripcion": "El lenguaje es profesional, objetivo y apropiado para un informe de auditoria formal",
+              "peso_porcentaje": 20,
+              "indicadores": "No hay lenguaje acusatorio sin evidencia, usa terminologia de auditoria (constatacion, procedimiento de auditoria, control interno, excepcion), tono formal y directo"
+            }
+          },
+          "keywords_minimas": ["contrato", "proveedor", "usuario", "aprobacion", "recomendacion"],
+          "puntos": 13
+        }
+      ]
+    }
+  ]
+}

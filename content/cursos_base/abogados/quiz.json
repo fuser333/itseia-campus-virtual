@@ -1,0 +1,261 @@
+{
+  "curso": "IA para Abogados y Profesionales Juridicos",
+  "profesion": "abogado",
+  "quizzes": [
+    {
+      "id": "quiz_seguridad_evaluacion",
+      "titulo": "Seguridad, Confidencialidad y Evaluacion Critica de IA Juridica",
+      "modulos_relacionados": ["T-03", "T-04"],
+      "instrucciones": "Este quiz evalua tu comprension sobre el uso seguro y responsable de la IA en la practica juridica ecuatoriana. Para las preguntas de seleccion multiple, elige la mejor respuesta. Para las preguntas de texto corto, escribe una respuesta concisa de 2-4 oraciones.",
+      "tiempo_estimado_minutos": 15,
+      "puntaje_minimo_aprobacion": 70,
+      "preguntas": [
+        {
+          "id": "tsq_01",
+          "tipo": "multiple_choice",
+          "numero": 1,
+          "pregunta": "Tu cliente, una empresa de construccion, te trae un contrato con datos confidenciales de su socio comercial para que lo revises con IA. Que debes hacer ANTES de ingresar el texto en ChatGPT Plus con historial activado?",
+          "opciones": [
+            "A. Ingresar el contrato directamente, ChatGPT Plus garantiza privacidad total",
+            "B. Anonimizar el contrato reemplazando nombres, cedulas y datos identificables con etiquetas genericas como [EMPRESA_X] o [PERSONA_A]",
+            "C. Solo ingresar las primeras 3 clausulas para que la IA no vea el contrato completo",
+            "D. Pedir permiso a la IA antes de subir informacion sensible"
+          ],
+          "respuesta_correcta": "B",
+          "explicacion": "La anonimizacion es el proceso obligatorio antes de ingresar cualquier dato personal o confidencial en herramientas de IA de uso publico. Esto protege el secreto profesional del abogado, cumple con la LOPDP y reduce el riesgo de exposicion de informacion sensible. ChatGPT Plus con historial activado puede usar datos para mejorar el modelo y los operadores de OpenAI pueden revisar conversaciones.",
+          "puntos": 12
+        },
+        {
+          "id": "tsq_02",
+          "tipo": "multiple_choice",
+          "numero": 2,
+          "pregunta": "El abogado Steven Schwartz en Nueva York fue sancionado en 2023 por presentar ante un tribunal citas de sentencias que ChatGPT habia inventado. Que nombre tecnico recibe este fenomeno?",
+          "opciones": [
+            "A. Error de sistema",
+            "B. Sesgo algoritmico",
+            "C. Alucinacion de IA",
+            "D. Fallo de entrenamiento"
+          ],
+          "respuesta_correcta": "C",
+          "explicacion": "La alucinacion es el termino tecnico para cuando un modelo de IA genera informacion factualmente incorrecta con total confianza. No es un bug sino una consecuencia matematica de como funcionan los modelos de lenguaje: predicen el token mas probable, y en contextos juridicos pueden generar numeros de sentencia, articulos y fechas que suenan plausibles pero son completamente inventados.",
+          "puntos": 12
+        },
+        {
+          "id": "tsq_03",
+          "tipo": "multiple_choice",
+          "numero": 3,
+          "pregunta": "Bajo la LOPDP ecuatoriana, cuando ingresas datos de un cliente ecuatoriano en ChatGPT (servidor en Estados Unidos), estas realizando una:",
+          "opciones": [
+            "A. Comunicacion de datos entre sistemas",
+            "B. Transferencia internacional de datos personales que requiere garantias adecuadas",
+            "C. Procesamiento en la nube sin implicaciones legales",
+            "D. Operacion tecnologica no cubierta por la LOPDP"
+          ],
+          "respuesta_correcta": "B",
+          "explicacion": "Los articulos 55-60 de la LOPDP regulan las transferencias internacionales de datos personales. Cuando datos de un ciudadano o empresa ecuatoriana son enviados a servidores en otro pais, se requiere garantias adecuadas: un contrato de procesamiento de datos (DPA) con el proveedor, o que el pais receptor tenga nivel de proteccion equivalente, o consentimiento explicito del titular. Las versiones consumer de ChatGPT y Claude no incluyen DPA automaticamente.",
+          "puntos": 12
+        },
+        {
+          "id": "tsq_04",
+          "tipo": "multiple_choice",
+          "numero": 4,
+          "pregunta": "Estas preparando una demanda y ChatGPT te proporciona la siguiente cita: 'Sentencia No. 09801-2022-00345, Primera Sala de lo Civil y Mercantil de la CNJ, 14 de junio de 2022'. Cual es el paso correcto?",
+          "opciones": [
+            "A. Usar la cita directamente ya que ChatGPT es una fuente confiable para jurisprudencia",
+            "B. Verificar el numero de causa en el buscador del SATJE o CNJ antes de usar la cita en cualquier documento formal",
+            "C. Preguntar a ChatGPT si la sentencia es real para confirmarla",
+            "D. Referenciar la cita agregando la nota 'segun IA' para transparencia"
+          ],
+          "respuesta_correcta": "B",
+          "explicacion": "Toda cita de sentencia especifica generada por IA debe verificarse en el SATJE (satje.gob.ec) o el buscador de la CNJ antes de ser usada en documentos formales. No basta con preguntar a la misma IA si la sentencia es real, porque el modelo puede reafirmar sus propias alucinaciones con confianza. La cita solo puede usarse una vez verificada su existencia en la fuente primaria oficial.",
+          "puntos": 12
+        },
+        {
+          "id": "tsq_05",
+          "tipo": "multiple_choice",
+          "numero": 5,
+          "pregunta": "Cual de los siguientes tipos de datos NUNCA debe ingresarse en herramientas de IA de uso publico (ChatGPT gratuito o Plus con historial activado)?",
+          "opciones": [
+            "A. El texto de una ley ecuatoriana publicada en el Registro Oficial",
+            "B. Un concepto juridico general sobre el debido proceso",
+            "C. Informacion completa de una causa penal activa con nombre del imputado",
+            "D. La estructura general de una demanda ordinaria sin datos de partes"
+          ],
+          "respuesta_correcta": "C",
+          "explicacion": "La informacion de causas penales activas con identificacion de imputados es una categoria de datos sensibles que combina datos personales, datos de situacion juridica y potencial afectacion a derechos fundamentales. Ademas de la LOPDP, el principio de presuncion de inocencia y el secreto de sumario en la etapa de instruccion fiscal hacen que esta informacion tenga proteccion reforzada. Los textos de leyes y conceptos generales son informacion publica sin restricciones.",
+          "puntos": 10
+        },
+        {
+          "id": "tsq_06",
+          "tipo": "multiple_choice",
+          "numero": 6,
+          "pregunta": "Un cliente te trae un contrato de 80 paginas para revision. Necesitas analizarlo con IA. Cual herramienta es mas adecuada para este tipo de tarea?",
+          "opciones": [
+            "A. ChatGPT gratuito, que puede procesar cualquier longitud de texto",
+            "B. Claude Pro, por su ventana de contexto de hasta 200,000 tokens que permite documentos muy extensos",
+            "C. Perplexity AI, que busca informacion juridica en tiempo real",
+            "D. Microsoft Word sin IA, ya que los documentos largos superan la capacidad de todas las IA"
+          ],
+          "respuesta_correcta": "B",
+          "explicacion": "Claude Pro de Anthropic tiene una ventana de contexto de hasta 200,000 tokens (aproximadamente 150,000 palabras), lo que permite cargar contratos muy extensos en su totalidad y trabajar con el documento completo manteniendo coherencia en el analisis. ChatGPT tiene ventanas de contexto mas limitadas y puede perder coherencia en documentos muy largos. Perplexity es una herramienta de busqueda web, no de analisis de documentos.",
+          "puntos": 10
+        },
+        {
+          "id": "tsq_07",
+          "tipo": "texto_corto",
+          "numero": 7,
+          "pregunta": "Explica en tus propias palabras la diferencia entre usar IA en una tarea de 'riesgo alto' versus una tarea de 'riesgo bajo' en el contexto juridico. Da un ejemplo de cada una y describe que debes hacer en cada caso.",
+          "respuesta_modelo": "Una tarea de riesgo alto implica informacion especifica y verificable que la IA puede inventar con aparente precision, como citar numeros de articulos, fechas de sentencias o plazos procesales exactos. Ejemplo: pedir a la IA que cite la sentencia especifica de la CNJ que establece el criterio sobre responsabilidad civil extracontractual. En este caso se requiere verificacion obligatoria en el SATJE antes de usar el dato. Una tarea de riesgo bajo implica outputs cuya precision no depende de datos especificos verificables, como generar la estructura de una demanda o un borrador de contrato tipo. Ejemplo: pedir a la IA que redacte la introduccion de una carta notarial. En este caso basta con revision critica del abogado sin verificacion en fuentes primarias.",
+          "keywords_evaluacion": ["verificacion", "fuente primaria", "SATJE", "especifico", "cita", "borrador", "estructura", "articulo", "sentencia", "riesgo"],
+          "puntos": 16
+        },
+        {
+          "id": "tsq_08",
+          "tipo": "texto_corto",
+          "numero": 8,
+          "pregunta": "Como abogado en Ecuador, describes el proceso de anonimizacion de datos que aplicarias antes de ingresar un contrato de compraventa de inmueble en ChatGPT Plus. Menciona al menos 4 tipos de datos que debes sustituir y como los reemplazarias.",
+          "respuesta_modelo": "La anonimizacion consiste en reemplazar todos los datos identificables del contrato con etiquetas genericas antes de subirlo a la herramienta de IA. Para un contrato de compraventa de inmueble, los datos a sustituir incluyen: (1) Nombres completos de las partes, reemplazados por [COMPRADOR] y [VENDEDOR] o [PERSONA_A] y [PERSONA_B]; (2) Numeros de cedula o RUC, reemplazados por [CI_A] y [RUC_X]; (3) Direcciones especificas del inmueble y domicilios de las partes, reemplazadas por [DIRECCION_INMUEBLE] y [DOMICILIO_PARTE]; (4) Numeros de escritura, inscripcion o datos registrales, reemplazados por [NUM_ESCRITURA]; (5) Datos bancarios o de transferencias, reemplazados por [CUENTA_BANCARIA]. El monto del contrato puede mantenerse si es comercialmente comun y no permite identificar el caso.",
+          "keywords_evaluacion": ["anonimizacion", "etiquetas", "nombres", "cedula", "direccion", "datos", "reemplazar", "identificable", "CI", "RUC"],
+          "puntos": 16
+        }
+      ],
+      "puntaje_total": 100,
+      "retroalimentacion": {
+        "90_100": "Excelente. Dominas el uso seguro y responsable de la IA en practica juridica. Eres el tipo de abogado que puede implementar IA en su firma sin comprometer su responsabilidad profesional.",
+        "70_89": "Buen desempeno. Comprendes los conceptos clave pero hay areas donde reforzar tu protocolo de seguridad. Repasa los modulos T-03 y T-04 antes de implementar IA en casos de alto perfil.",
+        "menor_70": "Necesitas reforzar los fundamentos. El uso de IA sin estos protocolos puede comprometer tu responsabilidad profesional. Revisa los modulos T-03 y T-04 completos antes de continuar."
+      }
+    },
+    {
+      "id": "quiz_riesgo_legal",
+      "titulo": "Analisis de Riesgo Legal con IA",
+      "modulos_relacionados": ["J-03"],
+      "instrucciones": "Este quiz evalua tu capacidad para identificar y clasificar riesgos legales en contratos y operaciones empresariales usando IA como herramienta de soporte. Aplica los conceptos del modulo J-03.",
+      "tiempo_estimado_minutos": 15,
+      "puntaje_minimo_aprobacion": 70,
+      "preguntas": [
+        {
+          "id": "jrq_01",
+          "tipo": "multiple_choice",
+          "numero": 1,
+          "pregunta": "Una empresa contratante te muestra un contrato de prestacion de servicios de IT que tiene la siguiente clausula: 'El contratista sera responsable de todos los danos directos e indirectos que se deriven del incumplimiento, incluyendo lucro cesante, dano emergente y cualquier perdida de clientes, sin limite de monto'. Esta clausula, en un contrato donde el contratista es una empresa pequena y el contratante es una corporacion grande, representa un riesgo:",
+          "opciones": [
+            "A. Bajo, porque es una clausula estandar en contratos de servicios",
+            "B. Medio, porque el lucro cesante es normalmente poco reclamable",
+            "C. Alto, porque la responsabilidad ilimitada puede superar con creces el valor del contrato y llevar a la insolvencia del prestador",
+            "D. Nulo, porque el Codigo Civil ecuatoriano no permite clausulas de este tipo"
+          ],
+          "respuesta_correcta": "C",
+          "explicacion": "Una clausula de responsabilidad ilimitada por danos directos e indirectos, incluido lucro cesante sin tope, es un riesgo critico para el prestador de servicios. En casos reales de falla de software o IT, las reclamaciones por lucro cesante de una corporacion grande pueden exceder el valor del contrato por 100 veces. El prestador pequeno quedaria en insolvencia. La recomendacion es negociar un tope de responsabilidad (cap) equivalente al valor total del contrato o un multiplo razonable.",
+          "puntos": 12
+        },
+        {
+          "id": "jrq_02",
+          "tipo": "multiple_choice",
+          "numero": 2,
+          "pregunta": "En una matriz de riesgo legal, la combinacion de ALTA probabilidad de ocurrencia y ALTO impacto economico-juridico genera un riesgo de prioridad:",
+          "opciones": [
+            "A. Baja — puede gestionarse mas adelante",
+            "B. Media — hay que monitorearlo",
+            "C. Alta o Critica — requiere atencion inmediata y negociacion antes de firmar",
+            "D. Depende del tipo de contrato y no puede determinarse en general"
+          ],
+          "respuesta_correcta": "C",
+          "explicacion": "La matriz de riesgo clasifica los riesgos por la combinacion de probabilidad e impacto. Un riesgo de alta probabilidad y alto impacto es critico y debe resolverse antes de que el cliente firme el contrato. Ignorarlo o dejarlo para despues expone al cliente a una vulnerabilidad que se materializara con alta probabilidad y causara danho significativo. Este es el riesgo que debes priorizar en tu recomendacion al cliente.",
+          "puntos": 12
+        },
+        {
+          "id": "jrq_03",
+          "tipo": "multiple_choice",
+          "numero": 3,
+          "pregunta": "Un contrato de arrendamiento comercial de 3 anos no tiene clausula sobre el destino del deposito de garantia en caso de resolucion anticipada por causas imputables al arrendador. Desde la perspectiva del arrendatario, este es un ejemplo de:",
+          "opciones": [
+            "A. Clausula leonina a favor del arrendador",
+            "B. Vacio contractual que crea incertidumbre juridica para el arrendatario",
+            "C. Clausula de escasa relevancia porque el deposito siempre se devuelve",
+            "D. Condicion resolutoria automatica bajo el Codigo Civil"
+          ],
+          "respuesta_correcta": "B",
+          "explicacion": "Un vacio contractual ocurre cuando el contrato omite regular una situacion que puede ocurrir. La ausencia de clausula sobre devolucion del deposito en caso de resolucion por causa del arrendador es un vacio que, si el conflicto llega a juicio, dependera de la interpretacion del juez y de las normas supletorias del Codigo Civil, creando incertidumbre para el arrendatario. La recomendacion es agregar una clausula explicita que establezca la devolucion del deposito mas intereses si la resolucion es imputable al arrendador.",
+          "puntos": 12
+        },
+        {
+          "id": "jrq_04",
+          "tipo": "multiple_choice",
+          "numero": 4,
+          "pregunta": "Estas realizando una due diligence legal para un cliente que quiere adquirir una empresa de 50 empleados en Ecuador. Cual de los siguientes es el riesgo LABORAL mas importante a verificar?",
+          "opciones": [
+            "A. Si la empresa tiene logotipo registrado en el SENADI",
+            "B. Si hay procesos laborales (despidos con juicio pendiente), actas de finiquito firmadas, y si la empresa esta al dia con el IESS",
+            "C. Si los contratos laborales tienen periodo de prueba mayor a 90 dias",
+            "D. Si los empleados tienen titulo universitario"
+          ],
+          "respuesta_correcta": "B",
+          "explicacion": "En una due diligence laboral ecuatoriana, los tres elementos criticos son: (1) existencia de procesos laborales activos o con sentencia pendiente de ejecutar (el comprador puede heredar la contingencia), (2) validez de los actas de finiquito firmadas ante el Inspector de Trabajo para que sean oponibles, y (3) mora patronal con el IESS (deudas de aportaciones, fondos de reserva) que el comprador asume. Estos elementos representan pasivos contingentes que pueden cambiar radicalmente el valor de la transaccion.",
+          "puntos": 12
+        },
+        {
+          "id": "jrq_05",
+          "tipo": "multiple_choice",
+          "numero": 5,
+          "pregunta": "Un cliente empresa quiere saber si puede usar un algoritmo de IA para tomar decisiones automaticas sobre si aprobar o rechazar solicitudes de empleo sin revision humana. Bajo la LOPDP ecuatoriana, esto:",
+          "opciones": [
+            "A. Esta completamente prohibido y sujeto a sancion inmediata",
+            "B. Es legalmente indiferente ya que la LOPDP no regula el empleo",
+            "C. Presenta riesgo juridico significativo porque el articulo 24 de la LOPDP reconoce el derecho a no ser objeto de decisiones basadas unicamente en tratamiento automatizado con efectos significativos",
+            "D. Solo es problematico si el algoritmo discrimina por etnia o genero"
+          ],
+          "respuesta_correcta": "C",
+          "explicacion": "El articulo 24 de la LOPDP establece que toda persona tiene derecho a no ser objeto exclusivo de una decision basada unicamente en tratamiento automatizado de datos que produzca efectos juridicos significativos o le afecte de manera apreciable. Una decision de empleo tiene efectos juridicos significativos para el candidato. El riesgo juridico no es prohibition absoluta, pero si la empresa usa IA sin ninguna revision humana en el proceso, se expone a reclamos bajo la LOPDP. La recomendacion es que la IA preseleccione pero un humano tome la decision final.",
+          "puntos": 10
+        },
+        {
+          "id": "jrq_06",
+          "tipo": "multiple_choice",
+          "numero": 6,
+          "pregunta": "Al usar IA para construir un analisis de riesgo legal de un contrato, el rol del abogado es:",
+          "opciones": [
+            "A. Simplemente aprobar el output de la IA ya que es mas preciso que el analisis humano",
+            "B. Usar el output de la IA como borrador inicial, agregar contexto especifico del caso y del cliente, y aplicar criterio profesional para el analisis final",
+            "C. Rechazar el output de la IA y hacer el analisis desde cero para garantizar la calidad",
+            "D. Presentar el output de la IA directamente al cliente etiquetandolo como opinion juridica profesional"
+          ],
+          "respuesta_correcta": "B",
+          "explicacion": "La IA es un asistente de primer barrido que produce un borrador sistematico de riesgos. El valor profesional del abogado esta en enriquecer ese borrador con: conocimiento del cliente y su situacion especifica, comprension del contexto del negocio y la contraparte, experiencia en como los tribunales locales interpretan clausulas similares, y criterio estrategico sobre que riesgos priorizar segun los objetivos del cliente. La IA aumenta la productividad; el criterio del abogado determina la calidad del resultado.",
+          "puntos": 10
+        },
+        {
+          "id": "jrq_07",
+          "tipo": "texto_corto",
+          "numero": 7,
+          "pregunta": "Describe el proceso que seguirias para construir una matriz de riesgo legal de un contrato de joint venture entre dos empresas ecuatorianas usando IA. Incluye: como prepares el documento para la IA, que le pides a la IA, y como completas el analisis con tu criterio profesional.",
+          "respuesta_modelo": "Primero anonimizaria el contrato reemplazando los nombres de las empresas y personas con etiquetas genericas. Luego lo cargaria en Claude (por su capacidad de documentos largos) con un prompt que solicite: construir una tabla de riesgos clasificados por probabilidad e impacto, identificar clausulas desequilibradas, detectar vacios sobre la gestion de conflictos entre socios, y revisar las disposiciones sobre propiedad intelectual y salida de uno de los socios. Revisaria el output de la IA identificando si alguna categoria de riesgo fue omitida por desconocimiento del contexto local ecuatoriano (como obligaciones ante la Superintendencia de Companias, implicaciones tributarias de la estructura societaria, o restricciones de la Ley de Companias). Agregaria los riesgos especificos del sector de actividad del cliente que la IA no puede conocer. Finalmente presentaria al cliente los 3-5 riesgos criticos con recomendaciones concretas de negociacion.",
+          "keywords_evaluacion": ["anonimizar", "Claude", "prompt", "tabla", "probabilidad", "impacto", "contexto", "Superintendencia", "criterio", "negociacion"],
+          "puntos": 16
+        },
+        {
+          "id": "jrq_08",
+          "tipo": "texto_corto",
+          "numero": 8,
+          "pregunta": "Un cliente empresarial te pregunta si puede usar IA para vigilar la productividad de sus empleados remotos (monitoreando el tiempo activo en el computador, capturas de pantalla periodicas y analisis de correos internos). Como abogado, que riesgos legales le adviertes bajo el derecho ecuatoriano?",
+          "respuesta_modelo": "Le advertiria tres riesgos principales. Primero, riesgo bajo la LOPDP: el monitoreo electronico de empleados implica tratamiento de datos personales sensibles (conducta laboral, comunicaciones) que requiere base legal clara, generalmente el contrato de trabajo mas un aviso de privacidad especifico que el empleado haya firmado. Capturas de pantalla y analisis de correos sin aviso previo violarian el principio de transparencia del art. 10 LOPDP. Segundo, riesgo laboral: el Codigo de Trabajo reconoce el derecho a la intimidad del trabajador. Un monitoreo excesivo o no notificado podria constituir acoso laboral o dar lugar a demandas por dano moral, ademas de invalidar cualquier prueba obtenida con esa vigilancia en un eventual juicio de visto bueno. Tercero, riesgo reputacional y de clima laboral: practicas de vigilancia intrusiva generan alta rotacion y conflicto laboral. Recomendaria implementar una politica de monitoreo limitada, notificada en el contrato de trabajo, proporcional al objetivo (control de productividad, no vigilancia total), con bases legales documentadas.",
+          "keywords_evaluacion": ["LOPDP", "datos personales", "Codigo de Trabajo", "intimidad", "aviso previo", "transparencia", "contrato", "acoso", "privacidad", "proporcional"],
+          "puntos": 16
+        }
+      ],
+      "puntaje_total": 100,
+      "retroalimentacion": {
+        "90_100": "Excelente dominio del analisis de riesgo legal con IA. Estas preparado para ofrecer este servicio a clientes empresariales con alto nivel de profesionalismo.",
+        "70_89": "Buen desempeno. Comprendes la metodologia pero hay aspectos del analisis de riesgo bajo derecho ecuatoriano especifico que puedes profundizar. Repasa el modulo J-03.",
+        "menor_70": "Necesitas reforzar los conceptos de analisis de riesgo contractual. El modulo J-03 tiene los fundamentos necesarios. Repasalo antes de intentar el quiz nuevamente."
+      }
+    }
+  ],
+  "metadata": {
+    "version": "1.0",
+    "creado": "2026-03-18",
+    "responsable": "Departamento Academico ITSEIA",
+    "sistema_calificacion": "MVP: calificacion por keywords en respuestas de texto corto | V1: calificacion por Claude API con rubrica",
+    "idioma": "es-EC"
+  }
+}

@@ -1,0 +1,420 @@
+{
+  "materias": [
+    {
+      "carrera": "inteligencia-artificial",
+      "materia": "Fundamentos de Programación",
+      "codigo": "FP-101",
+      "semestre": 1,
+      "horas_docencia": 48,
+      "horas_practica": 48,
+      "horas_autonomo": 24,
+      "horas_total": 120,
+      "sesiones": [
+        {
+          "number": 1,
+          "title": "Introducción a la Programación y Python",
+          "video_url": "https://www.youtube.com/watch?v=Kp4Mvapo5kc",
+          "video_title": "Aprende Python desde cero - Curso completo para principiantes (mouredev)",
+          "video_channel": "mouredev by Brais Moure",
+          "video_duration_minutes": 47,
+          "theory_markdown": "# Introducción a la Programación y Python\n\n## ¿Qué es programar?\n\nProgramar es el proceso de escribir instrucciones que una computadora puede entender y ejecutar. Imagina que eres el chef de un restaurante y debes escribir una receta paso a paso para que otra persona la prepare exactamente como tú la harías. De la misma forma, un programa es una secuencia de instrucciones precisas para que la computadora realice una tarea.\n\nEn Ecuador y en todo el mundo, la programación se ha convertido en una habilidad fundamental. Empresas como Banco Pichincha, CNT, y startups quiteñas buscan permanentemente profesionales que sepan programar.\n\n## ¿Por qué Python?\n\nPython es el lenguaje de programación más usado en Inteligencia Artificial y Ciencia de Datos. Sus ventajas principales son:\n\n- **Sintaxis clara**: se lee casi como inglés natural\n- **Versatilidad**: sirve para IA, web, automatización, análisis de datos\n- **Comunidad enorme**: millones de recursos gratuitos en internet\n- **Alta demanda laboral**: el 75% de las ofertas de trabajo en IA mencionan Python\n\n## Tu primer programa\n\nEl programa más famoso en programación es el \"Hola Mundo\". En Python se escribe así:\n\n```python\nprint(\"Hola Mundo\")\n```\n\nAl ejecutar esta línea, la computadora mostrará en pantalla el texto: `Hola Mundo`\n\nTambién podemos personalizar el saludo:\n\n```python\nnombre = \"Ecuador\"\nprint(\"Hola\", nombre)\nprint(f\"Bienvenido al mundo de la programación, {nombre}!\")\n```\n\n## Instalación del entorno\n\nPara programar en Python necesitas:\n\n1. **Python 3.11+**: descárgalo desde python.org (gratuito)\n2. **VS Code**: editor de código gratuito de Microsoft\n3. **Extensión Python para VS Code**: busca \"Python\" en el marketplace\n\n### Verificar instalación\n\nAbre una terminal (cmd en Windows, Terminal en Mac/Linux) y escribe:\n\n```bash\npython --version\n```\n\nDebe mostrar algo como: `Python 3.11.x`\n\n## Python como calculadora\n\nAntes de escribir programas complejos, puedes usar Python directamente como calculadora:\n\n```python\nprint(2 + 3)      # Suma: 5\nprint(10 - 4)     # Resta: 6\nprint(3 * 7)      # Multiplicación: 21\nprint(15 / 4)     # División: 3.75\nprint(15 // 4)    # División entera: 3\nprint(15 % 4)     # Módulo (residuo): 3\nprint(2 ** 8)     # Potencia: 256\n```\n\n## La función print()\n\n`print()` es la función más básica de Python. Sirve para mostrar información en pantalla.\n\n```python\nprint(\"Texto entre comillas\")\nprint(42)\nprint(3.14)\nprint(\"El resultado es:\", 10 + 5)\n```\n\n## Comentarios en el código\n\nLos comentarios son notas que escribes para explicar tu código. Python los ignora al ejecutar:\n\n```python\n# Esto es un comentario de una línea\nprint(\"Hola\")  # Comentario al final de una línea\n\n\"\"\"\nEsto es un comentario\nde múltiples líneas\n\"\"\"\n```\n\n**Buena práctica:** Escribe comentarios que expliquen el POR QUÉ de tu código, no el QUÉ (eso ya lo dice el código mismo).",
+          "quiz": {
+            "title": "Quiz - Sesión 1: Introducción a Python",
+            "pass_percentage": 70,
+            "questions": [
+              {
+                "question_text": "¿Cuál es la función principal que se usa en Python para mostrar información en pantalla?",
+                "options": [
+                  {"id": "a", "text": "show()", "is_correct": false},
+                  {"id": "b", "text": "display()", "is_correct": false},
+                  {"id": "c", "text": "print()", "is_correct": true},
+                  {"id": "d", "text": "output()", "is_correct": false}
+                ],
+                "explanation": "La función print() es la función estándar de Python para mostrar información en la consola o terminal. Las otras opciones (show, display, output) no son funciones nativas de Python para esta tarea."
+              },
+              {
+                "question_text": "¿Cuál de los siguientes comandos te permite verificar qué versión de Python tienes instalada en tu computadora?",
+                "options": [
+                  {"id": "a", "text": "python --check", "is_correct": false},
+                  {"id": "b", "text": "python --version", "is_correct": true},
+                  {"id": "c", "text": "python -info", "is_correct": false},
+                  {"id": "d", "text": "check python", "is_correct": false}
+                ],
+                "explanation": "El comando 'python --version' (o 'python3 --version' en algunos sistemas) muestra la versión instalada de Python. Es el comando estándar reconocido internacionalmente para verificar versiones de Python."
+              },
+              {
+                "question_text": "¿Qué símbolo se usa en Python para escribir un comentario de una sola línea?",
+                "options": [
+                  {"id": "a", "text": "//", "is_correct": false},
+                  {"id": "b", "text": "/* */", "is_correct": false},
+                  {"id": "c", "text": "#", "is_correct": true},
+                  {"id": "d", "text": "--", "is_correct": false}
+                ],
+                "explanation": "En Python, el símbolo # inicia un comentario de una línea. Todo lo que esté después del # en esa línea será ignorado por Python. Los símbolos // son de JavaScript/C++, y /* */ son de C/Java."
+              },
+              {
+                "question_text": "¿Cuál es el resultado de ejecutar print(2 ** 3) en Python?",
+                "options": [
+                  {"id": "a", "text": "6", "is_correct": false},
+                  {"id": "b", "text": "5", "is_correct": false},
+                  {"id": "c", "text": "23", "is_correct": false},
+                  {"id": "d", "text": "8", "is_correct": true}
+                ],
+                "explanation": "El operador ** en Python representa la potencia (exponenciación). Por lo tanto, 2 ** 3 significa 2 elevado a la 3, que es 2 × 2 × 2 = 8. No confundir con multiplicación (que sería 2 * 3 = 6)."
+              },
+              {
+                "question_text": "¿Cuál de estas razones explica mejor por qué Python es tan popular en Inteligencia Artificial?",
+                "options": [
+                  {"id": "a", "text": "Es el único lenguaje que entienden las computadoras modernas", "is_correct": false},
+                  {"id": "b", "text": "Fue inventado específicamente para IA y no sirve para otras cosas", "is_correct": false},
+                  {"id": "c", "text": "Tiene sintaxis simple, gran ecosistema de librerías de IA y una comunidad enorme", "is_correct": true},
+                  {"id": "d", "text": "Es el lenguaje más rápido en ejecución de todos los lenguajes existentes", "is_correct": false}
+                ],
+                "explanation": "Python es popular en IA por su combinación de factores: sintaxis legible que reduce la curva de aprendizaje, librerías especializadas como TensorFlow, PyTorch, scikit-learn, y una comunidad activa que produce documentación y tutoriales. No es el lenguaje más rápido (C++ lo supera), pero su productividad es mayor."
+              }
+            ]
+          },
+          "assignment": {
+            "title": "Mi Primera Calculadora Python",
+            "instructions_markdown": "## Ejercicio: Mi Primera Calculadora\n\n### Objetivo\nCrear un script Python que realice operaciones matemáticas básicas y las muestre con formato.\n\n### Instrucciones paso a paso\n\n1. Abre VS Code y crea un archivo llamado `calculadora.py`\n\n2. En el archivo, define dos variables con números de tu elección:\n```python\nnumero1 = 25\nnumero2 = 7\n```\n\n3. Calcula y muestra las siguientes operaciones con mensajes descriptivos:\n- Suma\n- Resta\n- Multiplicación\n- División\n- División entera (cociente)\n- Módulo (residuo)\n- Potencia (número1 elevado a número2... usa números pequeños)\n\n4. El output debe verse así:\n```\n=== MI CALCULADORA PYTHON ===\nNúmero 1: 25\nNúmero 2: 7\n\nSuma: 25 + 7 = 32\nResta: 25 - 7 = 18\nMultiplicación: 25 * 7 = 175\nDivisión: 25 / 7 = 3.5714285714285716\nDivisión entera: 25 // 7 = 3\nResiduo: 25 % 7 = 4\nPotencia: 2 ** 8 = 256\n```\n\n5. **Bonus (+10 puntos)**: Agrega al menos 3 comentarios explicando qué hace cada sección.\n\n### Entrega\nSube el archivo `calculadora.py` a la plataforma.\n\n### Criterios de evaluación\n| Criterio | Puntos |\n|----------|--------|\n| Archivo se ejecuta sin errores | 30 |\n| Las 6 operaciones básicas están presentes | 30 |\n| Output tiene mensajes descriptivos (no solo números) | 20 |\n| Código tiene comentarios | 20 |\n| **Total** | **100** |",
+            "allowed_file_types": ["py"]
+          },
+          "ai_prompt_suggested": "Soy estudiante de primer semestre de Inteligencia Artificial en ITSEIA. Acabo de ver la sesión 1 sobre introducción a Python. Tengo las siguientes dudas: [escribe tu duda aquí]. Por favor explícame de manera simple, con ejemplos de código Python que pueda copiar y probar, y si puedes relacionarlo con aplicaciones reales de IA o con el contexto de Ecuador y Latinoamérica, sería genial.",
+          "ai_context": "Sesión 1 - Fundamentos de Programación. El estudiante acaba de instalar Python y VS Code. Conoce print(), comentarios, operadores aritméticos básicos y el concepto de variable. No ha visto tipos de datos formalmente ni estructuras de control.",
+          "resources": [
+            {
+              "title": "Documentación oficial de Python (español)",
+              "url": "https://docs.python.org/es/3/tutorial/index.html",
+              "type": "link",
+              "description": "Tutorial oficial de Python en español. El punto de partida definitivo para aprender Python desde la fuente."
+            },
+            {
+              "title": "Python.org - Descarga oficial",
+              "url": "https://www.python.org/downloads/",
+              "type": "tool",
+              "description": "Descarga la última versión estable de Python 3 para tu sistema operativo."
+            },
+            {
+              "title": "VS Code para Python - Guía oficial",
+              "url": "https://code.visualstudio.com/docs/python/python-tutorial",
+              "type": "link",
+              "description": "Guía oficial de Microsoft para configurar VS Code con Python. Incluye instalación de extensiones y primer programa."
+            },
+            {
+              "title": "El Libro de Python - Introducción",
+              "url": "https://ellibrodepython.com/introduccion-python",
+              "type": "link",
+              "description": "Recurso gratuito en español con explicaciones claras sobre los fundamentos de Python."
+            },
+            {
+              "title": "freeCodeCamp - Python desde cero (12 horas)",
+              "url": "https://www.youtube.com/watch?v=LHBE6Q9XlzI",
+              "type": "video",
+              "description": "Curso completo de Python en inglés de freeCodeCamp. Ideal para reforzar conceptos con otro enfoque."
+            }
+          ]
+        },
+        {
+          "number": 2,
+          "title": "Variables, Tipos de Datos y Operadores",
+          "video_url": "https://www.youtube.com/watch?v=Kp4Mvapo5kc",
+          "video_title": "Aprende Python desde cero - Variables y Tipos de Datos (mouredev, ver min 45-90)",
+          "video_channel": "mouredev by Brais Moure",
+          "video_duration_minutes": 45,
+          "theory_markdown": "# Variables, Tipos de Datos y Operadores\n\n## Variables en Python\n\nUna variable es un contenedor que almacena un valor en la memoria de la computadora. Piensa en ella como una caja etiquetada donde guardas información.\n\n```python\nnombre = \"Ana Torres\"    # Variable de texto\nedad = 20               # Variable numérica entera\naltura = 1.65           # Variable numérica decimal\nes_estudiante = True    # Variable booleana\n```\n\n### Reglas para nombrar variables\n- Deben comenzar con letra o guión bajo (`_`)\n- Solo pueden contener letras, números y guiones bajos\n- Son sensibles a mayúsculas: `edad` y `Edad` son variables distintas\n- No pueden ser palabras reservadas de Python (`if`, `for`, `while`, etc.)\n\n**Buenas prácticas:**\n```python\n# Correcto - nombres descriptivos en snake_case\nedad_estudiante = 20\nnombre_completo = \"Carlos\"\nprecio_producto = 15.99\n\n# Incorrecto - nombres poco descriptivos\nx = 20\nn = \"Carlos\"\npp = 15.99\n```\n\n## Tipos de Datos Principales\n\n| Tipo | Nombre en Python | Ejemplo | Descripción |\n|------|-----------------|---------|-------------|\n| Entero | `int` | `42` | Números sin decimales |\n| Decimal | `float` | `3.14` | Números con decimales |\n| Texto | `str` | `\"Hola\"` | Cadenas de caracteres |\n| Booleano | `bool` | `True` / `False` | Verdadero o Falso |\n| Nulo | `NoneType` | `None` | Ausencia de valor |\n\n```python\n# Verificar el tipo de una variable\nprint(type(42))        # <class 'int'>\nprint(type(3.14))      # <class 'float'>\nprint(type(\"Hola\"))    # <class 'str'>\nprint(type(True))      # <class 'bool'>\nprint(type(None))      # <class 'NoneType'>\n```\n\n## Strings (Cadenas de texto)\n\nLos strings son fundamentales en programación. En Python tienen muchas operaciones útiles:\n\n```python\nnombre = \"Ecuador\"\n\n# Longitud del string\nprint(len(nombre))          # 7\n\n# Mayúsculas y minúsculas\nprint(nombre.upper())       # ECUADOR\nprint(nombre.lower())       # ecuador\n\n# Concatenación\nprint(\"Hola \" + nombre)     # Hola Ecuador\n\n# f-strings (formato moderno)\nciudad = \"Quito\"\nprint(f\"La capital de {nombre} es {ciudad}\")  # La capital de Ecuador es Quito\n\n# Acceder a caracteres individuales\nprint(nombre[0])    # E (primera letra)\nprint(nombre[-1])   # r (última letra)\nprint(nombre[0:3])  # Ecu (slice, primeras 3 letras)\n```\n\n## Conversión entre tipos\n\n```python\n# Convertir string a número\nedades_str = \"25\"\nedades_int = int(edades_str)   # 25 como entero\nprint(edades_int + 5)          # 30\n\n# Convertir número a string\nprecio = 99.50\nprecio_str = str(precio)       # \"99.5\"\nprint(\"El precio es: \" + precio_str)\n\n# Convertir a decimal\nnota_str = \"18.5\"\nnota_float = float(nota_str)   # 18.5\n```\n\n## Input del usuario\n\n```python\nnombre = input(\"¿Cuál es tu nombre? \")\nprint(f\"Hola, {nombre}! Bienvenido a ITSEIA\")\n\n# IMPORTANTE: input() siempre devuelve un string\nedad_str = input(\"¿Cuántos años tienes? \")\nedad = int(edad_str)  # Convertir a entero para operar\nprint(f\"En 5 años tendrás {edad + 5} años\")\n```\n\n## Operadores de comparación\n\n```python\na = 10\nb = 20\n\nprint(a == b)   # False - ¿son iguales?\nprint(a != b)   # True  - ¿son distintos?\nprint(a < b)    # True  - ¿a es menor que b?\nprint(a > b)    # False - ¿a es mayor que b?\nprint(a <= b)   # True  - ¿a es menor o igual?\nprint(a >= b)   # False - ¿a es mayor o igual?\n```\n\n## Operadores lógicos\n\n```python\nx = 15\n\nprint(x > 10 and x < 20)   # True - ambas condiciones se cumplen\nprint(x < 10 or x > 100)   # False - ninguna se cumple\nprint(not (x > 10))         # False - niega el resultado\n```",
+          "quiz": {
+            "title": "Quiz - Sesión 2: Variables, Tipos y Operadores",
+            "pass_percentage": 70,
+            "questions": [
+              {
+                "question_text": "¿Qué tipo de dato retorna la función input() en Python sin importar lo que escriba el usuario?",
+                "options": [
+                  {"id": "a", "text": "int (entero)", "is_correct": false},
+                  {"id": "b", "text": "float (decimal)", "is_correct": false},
+                  {"id": "c", "text": "str (string)", "is_correct": true},
+                  {"id": "d", "text": "bool (booleano)", "is_correct": false}
+                ],
+                "explanation": "La función input() SIEMPRE retorna un string (cadena de texto), sin importar si el usuario escribe un número, un texto o cualquier otro valor. Por eso, cuando necesitas usar el input como número, debes convertirlo explícitamente con int() o float()."
+              },
+              {
+                "question_text": "¿Cuál es el resultado de len(\"Quito\") en Python?",
+                "options": [
+                  {"id": "a", "text": "4", "is_correct": false},
+                  {"id": "b", "text": "5", "is_correct": true},
+                  {"id": "c", "text": "6", "is_correct": false},
+                  {"id": "d", "text": "Error - len() no funciona con strings", "is_correct": false}
+                ],
+                "explanation": "La función len() cuenta el número de caracteres en un string. 'Quito' tiene 5 letras: Q-u-i-t-o. len() es una función muy útil que funciona con strings, listas, tuplas y otros tipos de colecciones en Python."
+              },
+              {
+                "question_text": "¿Cuál de los siguientes es un nombre de variable VÁLIDO en Python?",
+                "options": [
+                  {"id": "a", "text": "2precio", "is_correct": false},
+                  {"id": "b", "text": "precio-producto", "is_correct": false},
+                  {"id": "c", "text": "for", "is_correct": false},
+                  {"id": "d", "text": "precio_producto_2026", "is_correct": true}
+                ],
+                "explanation": "precio_producto_2026 es válido porque comienza con letra, usa guiones bajos (no guiones medios) y no es una palabra reservada. '2precio' falla porque empieza con número; 'precio-producto' usa guión medio que Python interpreta como resta; 'for' es una palabra reservada de Python."
+              },
+              {
+                "question_text": "¿Qué imprime el siguiente código?\n\nnombre = \"IA\"\nprint(f\"ITSEIA {nombre} 2026\")",
+                "options": [
+                  {"id": "a", "text": "ITSEIA {nombre} 2026", "is_correct": false},
+                  {"id": "b", "text": "ITSEIA IA 2026", "is_correct": true},
+                  {"id": "c", "text": "Error de sintaxis", "is_correct": false},
+                  {"id": "d", "text": "ITSEIA nombre 2026", "is_correct": false}
+                ],
+                "explanation": "Los f-strings (strings formateados) en Python permiten insertar variables directamente dentro del texto usando llaves {}. El f antes de las comillas activa este formato. Python reemplaza {nombre} con el valor de la variable, que es 'IA'."
+              },
+              {
+                "question_text": "¿Cuál es el resultado de: print(10 > 5 and 3 < 1)?",
+                "options": [
+                  {"id": "a", "text": "True", "is_correct": false},
+                  {"id": "b", "text": "False", "is_correct": true},
+                  {"id": "c", "text": "Error", "is_correct": false},
+                  {"id": "d", "text": "None", "is_correct": false}
+                ],
+                "explanation": "El operador 'and' requiere que AMBAS condiciones sean verdaderas. Aquí: 10 > 5 es True, pero 3 < 1 es False. True AND False = False. Si fuera 'or', el resultado sería True porque al menos una condición se cumple."
+              }
+            ]
+          },
+          "assignment": {
+            "title": "Perfil de Estudiante ITSEIA",
+            "instructions_markdown": "## Ejercicio: Perfil de Estudiante\n\n### Objetivo\nCrear un programa interactivo que recopile información del usuario y genere un perfil completo.\n\n### Instrucciones\n\n1. Crea un archivo llamado `perfil_estudiante.py`\n\n2. El programa debe:\n   - Solicitar con input() el nombre completo del estudiante\n   - Solicitar la edad (y convertirla a entero)\n   - Solicitar la ciudad de origen\n   - Solicitar la carrera elegida (Inteligencia Artificial, Ciencia de Datos, o Big Data)\n   - Solicitar la nota del último año de bachillerato (decimal)\n\n3. Luego mostrar un perfil formateado:\n\n```\n========================================\n     PERFIL - ITSEIA ACADEMY 2026\n========================================\nNombre:    Ana Torres Vega\nEdad:      19 años\nCiudad:    Guayaquil\nCarrera:   Inteligencia Artificial\nNota B.:   18.5/20\n\nDatos calculados:\n- En 5 años tendrás: 24 años\n- Nombre en mayúsculas: ANA TORRES VEGA\n- Iniciales: A.T.V\n- Longitud del nombre: 14 caracteres\n========================================\n```\n\n4. **Bonus**: Calcula y muestra si la nota es aprobatoria (>= 14/20)\n\n### Criterios de evaluación\n| Criterio | Puntos |\n|----------|--------|\n| Programa corre sin errores | 25 |\n| Usa input() correctamente para todos los campos | 25 |\n| Convierte tipos de datos cuando es necesario | 25 |\n| Output está bien formateado con f-strings | 25 |\n| **Total** | **100** |",
+            "allowed_file_types": ["py"]
+          },
+          "ai_prompt_suggested": "Estoy en la sesión 2 de Fundamentos de Programación en ITSEIA. Aprendí sobre variables, tipos de datos (int, float, str, bool) y operadores. Quiero entender mejor [escribe tu duda específica]. Dame ejemplos prácticos y dime cómo se usan estos conceptos en proyectos reales de Inteligencia Artificial.",
+          "ai_context": "Sesión 2 - El estudiante conoce variables, tipos básicos (int, float, str, bool, None), f-strings, input(), conversión de tipos, operadores aritméticos, de comparación y lógicos. No ha visto condicionales ni bucles todavía.",
+          "resources": [
+            {
+              "title": "El Libro de Python - Variables",
+              "url": "https://ellibrodepython.com/variables-python",
+              "type": "link",
+              "description": "Explicación detallada de variables en Python con ejemplos claros en español."
+            },
+            {
+              "title": "El Libro de Python - Tipos de datos",
+              "url": "https://ellibrodepython.com/tipos-de-datos",
+              "type": "link",
+              "description": "Guía completa de todos los tipos de datos en Python con ejercicios prácticos."
+            },
+            {
+              "title": "W3Schools Python - Data Types",
+              "url": "https://www.w3schools.com/python/python_datatypes.asp",
+              "type": "link",
+              "description": "Referencia rápida interactiva de tipos de datos Python. Puedes ejecutar código directamente en el navegador."
+            },
+            {
+              "title": "Documentación Python - Tipos incorporados",
+              "url": "https://docs.python.org/es/3/library/stdtypes.html",
+              "type": "link",
+              "description": "Documentación oficial en español de todos los tipos de datos incorporados en Python."
+            }
+          ]
+        },
+        {
+          "number": 3,
+          "title": "Estructuras de Control: Condicionales (if/elif/else)",
+          "video_url": "https://www.youtube.com/watch?v=G2fqAlgmoPo",
+          "video_title": "Python para principiantes - Condicionales if elif else (Píldoras Informáticas)",
+          "video_channel": "Píldoras Informáticas",
+          "video_duration_minutes": 20,
+          "theory_markdown": "# Estructuras de Control: Condicionales\n\n## ¿Qué son las estructuras de control?\n\nLas estructuras de control permiten que tu programa tome decisiones y ejecute diferentes bloques de código según las circunstancias. Sin ellas, los programas ejecutarían siempre las mismas instrucciones en el mismo orden.\n\n## La estructura if\n\nLa instrucción `if` ejecuta un bloque de código solo si una condición es verdadera:\n\n```python\ntemperatura = 35\n\nif temperatura > 30:\n    print(\"Hace calor, lleva agua\")\n    print(\"Considera usar protector solar\")\n```\n\n**MUY IMPORTANTE**: Python usa la **indentación** (espacios al inicio de la línea) para definir bloques de código. Se usan 4 espacios o 1 tabulación. Si no indentas correctamente, Python lanzará un error.\n\n## if / else\n\nCuando hay dos posibles caminos:\n\n```python\nnota = 15\n\nif nota >= 14:\n    print(\"Aprobado - Felicitaciones\")\nelse:\n    print(\"Reprobado - Debes recuperar\")\n```\n\n## if / elif / else\n\nCuando hay múltiples condiciones a evaluar:\n\n```python\nnota = 18\n\nif nota >= 19:\n    print(\"Excelente - Sobresaliente\")\nelif nota >= 16:\n    print(\"Muy Bueno\")\nelif nota >= 14:\n    print(\"Bueno - Aprobado\")\nelif nota >= 12:\n    print(\"Regular - Aprobado con dificultad\")\nelse:\n    print(\"Insuficiente - Reprobado\")\n```\n\n## Ejemplo práctico: Elegibilidad para ITSEIA\n\n```python\nedad = int(input(\"¿Cuántos años tienes? \"))\nbachiller = input(\"¿Tienes título de bachiller? (si/no) \")\n\nif edad >= 18 and bachiller == \"si\":\n    print(\"Cumples los requisitos para inscribirte en ITSEIA\")\nelif edad >= 17 and bachiller == \"si\":\n    print(\"Puedes inscribirte como preuniversitario en ITSEIA\")\nelif bachiller != \"si\":\n    print(\"Necesitas terminar el bachillerato primero\")\nelse:\n    print(\"Debes tener al menos 17 años para aplicar\")\n```\n\n## Condicionales anidados\n\nPuedes poner un if dentro de otro if:\n\n```python\nsalario = 800\nexperiencia_anios = 2\n\nif salario > 500:\n    print(\"El salario supera el básico\")\n    if experiencia_anios >= 2:\n        print(\"Y tiene experiencia suficiente - Candidato ideal\")\n    else:\n        print(\"Pero le falta experiencia - Candidato junior\")\nelse:\n    print(\"El salario está por debajo del básico\")\n```\n\n## Operador ternario (condicional en una línea)\n\nPara condiciones simples existe una forma más compacta:\n\n```python\nedadEstudiante = 20\nestado = \"mayor de edad\" if edadEstudiante >= 18 else \"menor de edad\"\nprint(estado)  # mayor de edad\n\n# Equivale a:\nif edadEstudiante >= 18:\n    estado = \"mayor de edad\"\nelse:\n    estado = \"menor de edad\"\n```\n\n## El operador in\n\nMuy útil para verificar si un valor está en una lista de opciones:\n\n```python\ncarrera = input(\"¿Qué carrera te interesa? \")\ncorrecto = input(\"¿carrera en ['inteligencia artificial', 'ciencia de datos', 'big data']\")\n\nif carrera.lower() in [\"inteligencia artificial\", \"ciencia de datos\", \"big data\"]:\n    print(f\"La carrera {carrera} está disponible en ITSEIA\")\nelse:\n    print(\"Esa carrera no está disponible. Consulta nuestro catálogo.\")\n```\n\n## Diagrama de flujo mental\n\nAntes de escribir condicionales, dibuja el flujo:\n```\n¿Condición? --Sí--> Ejecuta bloque A\n             |\n             No\n             |\n             v\n         Ejecuta bloque B\n```",
+          "quiz": {
+            "title": "Quiz - Sesión 3: Condicionales",
+            "pass_percentage": 70,
+            "questions": [
+              {
+                "question_text": "¿Qué elemento es OBLIGATORIO en Python para definir un bloque de código dentro de un if?",
+                "options": [
+                  {"id": "a", "text": "Llaves { }", "is_correct": false},
+                  {"id": "b", "text": "Paréntesis ( )", "is_correct": false},
+                  {"id": "c", "text": "La palabra 'begin'", "is_correct": false},
+                  {"id": "d", "text": "Indentación (4 espacios o 1 tabulación)", "is_correct": true}
+                ],
+                "explanation": "Python usa indentación para definir bloques de código, a diferencia de lenguajes como Java o C++ que usan llaves {}. Si no indentamos correctamente, Python lanza un IndentationError. La convención es usar 4 espacios, aunque 1 tabulación también funciona (pero no mezclarlos)."
+              },
+              {
+                "question_text": "¿Qué imprime el siguiente código si nota = 13?\n\nif nota >= 14:\n    print(\"Aprobado\")\nelif nota >= 10:\n    print(\"Recuperación\")\nelse:\n    print(\"Reprobado\")",
+                "options": [
+                  {"id": "a", "text": "Aprobado", "is_correct": false},
+                  {"id": "b", "text": "Recuperación", "is_correct": true},
+                  {"id": "c", "text": "Reprobado", "is_correct": false},
+                  {"id": "d", "text": "Aprobado y Recuperación", "is_correct": false}
+                ],
+                "explanation": "Python evalúa las condiciones en orden. nota=13: primero verifica 13 >= 14 (False, se salta), luego verifica 13 >= 10 (True, ejecuta y sale del if). El else nunca se evalúa porque ya se encontró una condición verdadera. Solo se ejecuta UN bloque en un if/elif/else."
+              },
+              {
+                "question_text": "¿Cuál es el resultado de: print(\"python\" in [\"java\", \"python\", \"javascript\"])?",
+                "options": [
+                  {"id": "a", "text": "False", "is_correct": false},
+                  {"id": "b", "text": "Error - in no funciona con listas", "is_correct": false},
+                  {"id": "c", "text": "True", "is_correct": true},
+                  {"id": "d", "text": "1", "is_correct": false}
+                ],
+                "explanation": "El operador 'in' en Python verifica si un elemento existe dentro de una secuencia (lista, string, tupla, etc.). Como 'python' SÍ está en la lista, retorna True. Esto es muy útil para validar entradas del usuario sin escribir múltiples condiciones or."
+              },
+              {
+                "question_text": "¿Cuántos bloques de código puede ejecutar un if/elif/else por cada vez que se evalúa?",
+                "options": [
+                  {"id": "a", "text": "Todos los que tengan condición verdadera", "is_correct": false},
+                  {"id": "b", "text": "Solo el primero con condición verdadera", "is_correct": true},
+                  {"id": "c", "text": "Solo el último", "is_correct": false},
+                  {"id": "d", "text": "Depende del número de elif", "is_correct": false}
+                ],
+                "explanation": "En una estructura if/elif/else, Python evalúa las condiciones de arriba a abajo y ejecuta ÚNICAMENTE el primer bloque cuya condición sea verdadera, luego salta toda la estructura. Si ninguna condición es verdadera y hay un else, ese bloque se ejecuta."
+              },
+              {
+                "question_text": "¿Cuál es el equivalente correcto del operador ternario: resultado = \"mayor\" if edad >= 18 else \"menor\"?",
+                "options": [
+                  {"id": "a", "text": "if edad >= 18: resultado = \"mayor\" else: resultado = \"menor\"", "is_correct": false},
+                  {"id": "b", "text": "resultado = if edad >= 18 then \"mayor\" else \"menor\"", "is_correct": false},
+                  {"id": "c", "text": "if edad >= 18:\n    resultado = \"mayor\"\nelse:\n    resultado = \"menor\"", "is_correct": true},
+                  {"id": "d", "text": "resultado = (edad >= 18) ? \"mayor\" : \"menor\"", "is_correct": false}
+                ],
+                "explanation": "El operador ternario (x if condición else y) es una forma compacta del if/else normal. La opción C es el equivalente expandido correcto. La opción A no tiene indentación. La opción B usa sintaxis de otro lenguaje. La opción D usa el operador ternario de C/JavaScript que NO existe en Python."
+              }
+            ]
+          },
+          "assignment": {
+            "title": "Clasificador de Candidatos ITSEIA",
+            "instructions_markdown": "## Ejercicio: Clasificador de Candidatos\n\n### Objetivo\nCrear un programa que evalúe si un candidato califica para ITSEIA y qué modalidad le corresponde.\n\n### Instrucciones\n\n1. Crea un archivo llamado `clasificador_candidatos.py`\n\n2. El programa solicita con input():\n   - Nombre del candidato\n   - Edad\n   - Nota promedio de bachillerato (sobre 10)\n   - ¿Tiene computadora propia? (si/no)\n   - Carrera de interés\n\n3. Lógica de clasificación:\n\n```\nSi edad >= 18 Y nota >= 7:\n    → \"Candidato Activo - Puede inscribirse inmediatamente\"\n    Si nota >= 9:\n        → Agregar \"+ Candidato para beca de excelencia\"\n\nSi edad entre 16-17 Y nota >= 7:\n    → \"Candidato Preuniversitario - Modalidad especial $399\"\n\nSi nota < 7:\n    → \"Recomendamos nuestro curso de nivelación antes de inscribirse\"\n\nSi no tiene computadora:\n    → Agregar mensaje sobre el laboratorio disponible 24/7\n```\n\n4. Al final mostrar resumen completo del candidato.\n\n### Criterios de evaluación\n| Criterio | Puntos |\n|----------|--------|\n| Programa corre sin errores | 20 |\n| Usa if/elif/else correctamente | 30 |\n| Maneja todos los casos posibles | 30 |\n| Output es claro y profesional | 20 |\n| **Total** | **100** |",
+            "allowed_file_types": ["py"]
+          },
+          "ai_prompt_suggested": "Estoy aprendiendo condicionales en Python (if/elif/else) en ITSEIA. Quiero entender [escribe tu duda] con un ejemplo relacionado a aplicaciones de IA, como por ejemplo cómo se usan las condiciones en sistemas de clasificación o en chatbots. Muéstrame código Python que pueda ejecutar.",
+          "ai_context": "Sesión 3 - El estudiante conoce if/elif/else, operadores de comparación y lógicos, el operador in, operador ternario e indentación. No ha visto bucles todavía.",
+          "resources": [
+            {
+              "title": "El Libro de Python - Condicionales",
+              "url": "https://ellibrodepython.com/if-python",
+              "type": "link",
+              "description": "Guía completa de condicionales en Python con múltiples ejemplos y ejercicios."
+            },
+            {
+              "title": "W3Schools - Python If...Else",
+              "url": "https://www.w3schools.com/python/python_conditions.asp",
+              "type": "link",
+              "description": "Referencia interactiva de condicionales. Permite ejecutar los ejemplos directamente en el navegador."
+            },
+            {
+              "title": "Python Tutor - Visualizador de código",
+              "url": "https://pythontutor.com/python-compiler.html",
+              "type": "tool",
+              "description": "Herramienta visual que muestra paso a paso cómo Python ejecuta tu código. Ideal para entender el flujo de las condicionales."
+            },
+            {
+              "title": "Ejercicios de condicionales Python - w3resource",
+              "url": "https://www.w3resource.com/python-exercises/python-conditional-exercise.php",
+              "type": "link",
+              "description": "50+ ejercicios prácticos de condicionales con soluciones para practicar."
+            }
+          ]
+        },
+        {
+          "number": 4,
+          "title": "Estructuras de Control: Bucles (for y while)",
+          "video_url": "https://www.youtube.com/watch?v=Kp4Mvapo5kc",
+          "video_title": "Aprende Python - Bucles for y while (mouredev, ver sección de bucles)",
+          "video_channel": "mouredev by Brais Moure",
+          "video_duration_minutes": 40,
+          "theory_markdown": "# Estructuras de Control: Bucles\n\n## ¿Qué es un bucle?\n\nUn bucle (loop) permite ejecutar un bloque de código repetidamente. En lugar de escribir 100 veces `print(\"Hola\")`, simplemente le dices a Python: \"repite esto 100 veces\".\n\nEn IA y ciencia de datos los bucles son esenciales para procesar grandes cantidades de datos.\n\n## El bucle for\n\nEl `for` se usa cuando sabes de antemano cuántas veces quieres repetir algo o cuando quieres recorrer una colección:\n\n```python\n# Iterar sobre un rango de números\nfor i in range(5):\n    print(f\"Iteración número: {i}\")\n# Salida: 0, 1, 2, 3, 4\n\n# range(inicio, fin, paso)\nfor numero in range(1, 11):\n    print(numero)  # Del 1 al 10\n\nfor par in range(0, 20, 2):\n    print(par)  # 0, 2, 4, 6... 18\n```\n\n### range() en detalle\n\n| Uso | Descripción | Ejemplo |\n|-----|-------------|----------|\n| `range(n)` | Del 0 al n-1 | `range(5)` → 0,1,2,3,4 |\n| `range(a, b)` | Del a al b-1 | `range(1,6)` → 1,2,3,4,5 |\n| `range(a, b, s)` | Del a al b con paso s | `range(0,10,2)` → 0,2,4,6,8 |\n\n### Iterar sobre strings y listas\n\n```python\n# Iterar sobre letras de un string\npalabra = \"Python\"\nfor letra in palabra:\n    print(letra)  # P, y, t, h, o, n\n\n# Iterar sobre una lista\ncarre ras = [\"Inteligencia Artificial\", \"Ciencia de Datos\", \"Big Data\"]\nfor carrera in carreras:\n    print(f\"ITSEIA ofrece: {carrera}\")\n```\n\n## El bucle while\n\nEl `while` se usa cuando no sabes cuántas veces necesitas repetir, sino que repites mientras una condición sea verdadera:\n\n```python\ncontador = 0\n\nwhile contador < 5:\n    print(f\"Contador: {contador}\")\n    contador += 1  # IMPORTANTE: siempre modificar la condición\n\nprint(\"Bucle terminado\")\n```\n\n**PELIGRO - Bucle infinito**: Si olvidas modificar la variable de la condición, el programa nunca termina:\n\n```python\n# ESTO CREA UN BUCLE INFINITO - NO EJECUTAR\nx = 0\nwhile x < 5:\n    print(x)\n    # Olvidamos x += 1 -> el loop nunca termina\n```\n\n### Ejemplo práctico: validar entrada del usuario\n\n```python\n# while es perfecto para validar entradas\ncarrera_valida = False\n\nwhile not carrera_valida:\n    carrera = input(\"Ingresa tu carrera (IA/CD/BD): \").upper()\n    if carrera in [\"IA\", \"CD\", \"BD\"]:\n        carrera_valida = True\n        print(f\"Carrera {carrera} registrada correctamente\")\n    else:\n        print(\"Carrera no válida. Intenta de nuevo.\")\n```\n\n## break y continue\n\n```python\n# break: termina el bucle inmediatamente\nfor i in range(10):\n    if i == 5:\n        print(\"Encontré el 5, saliendo del bucle\")\n        break\n    print(i)\n# Imprime: 0, 1, 2, 3, 4\n\n# continue: salta a la siguiente iteración\nfor i in range(10):\n    if i % 2 == 0:\n        continue  # Salta los pares\n    print(i)\n# Imprime solo números impares: 1, 3, 5, 7, 9\n```\n\n## Bucles con enumerate()\n\nCuando necesitas el índice Y el valor al mismo tiempo:\n\n```python\nmaterias = [\"Python\", \"Matemáticas\", \"Estadística\", \"Machine Learning\"]\n\nfor indice, materia in enumerate(materias, 1):\n    print(f\"{indice}. {materia}\")\n# 1. Python\n# 2. Matemáticas\n# 3. Estadística\n# 4. Machine Learning\n```\n\n## Aplicación en IA: procesamiento de datos\n\n```python\n# Simular procesamiento de un dataset de notas\nnotas = [15, 18, 12, 19, 14, 11, 17, 16]\n\ntotal = 0\naprobados = 0\nreprobados = 0\n\nfor nota in notas:\n    total += nota\n    if nota >= 14:\n        aprobados += 1\n    else:\n        reprobados += 1\n\npromedio = total / len(notas)\nprint(f\"Total estudiantes: {len(notas)}\")\nprint(f\"Promedio: {promedio:.2f}\")\nprint(f\"Aprobados: {aprobados}\")\nprint(f\"Reprobados: {reprobados}\")\n```\n\n## ¿Cuándo usar for vs while?\n\n| Usa **for** cuando... | Usa **while** cuando... |\n|----------------------|-------------------------|\n| Conoces el número de iteraciones | No conoces cuántas iteraciones necesitas |\n| Recorres una lista o rango | Esperas que algo cambie |\n| Procesas cada elemento de datos | Validas entrada del usuario |\n| Generas secuencias numéricas | El criterio de parada es dinámico |",
+          "quiz": {
+            "title": "Quiz - Sesión 4: Bucles for y while",
+            "pass_percentage": 70,
+            "questions": [
+              {
+                "question_text": "¿Cuántas veces se ejecutará el print en: for i in range(3, 9, 2): print(i)?",
+                "options": [
+                  {"id": "a", "text": "6 veces", "is_correct": false},
+                  {"id": "b", "text": "3 veces", "is_correct": true},
+                  {"id": "c", "text": "2 veces", "is_correct": false},
+                  {"id": "d", "text": "4 veces", "is_correct": false}
+                ],
+                "explanation": "range(3, 9, 2) genera: 3, 5, 7 (empieza en 3, termina antes del 9, avanza de 2 en 2). El número 9 NO se incluye. Son 3 iteraciones. Para verificar: 3→5→7→(9 no entra porque el límite es exclusivo)."
+              },
+              {
+                "question_text": "¿Qué instrucción en Python termina inmediatamente la ejecución de un bucle?",
+                "options": [
+                  {"id": "a", "text": "stop", "is_correct": false},
+                  {"id": "b", "text": "exit", "is_correct": false},
+                  {"id": "c", "text": "continue", "is_correct": false},
+                  {"id": "d", "text": "break", "is_correct": true}
+                ],
+                "explanation": "La instrucción 'break' termina inmediatamente el bucle más cercano y el programa continúa con el código después del bucle. 'continue' NO termina el bucle, solo salta a la siguiente iteración. 'stop' y 'exit' no son instrucciones de bucle en Python."
+              },
+              {
+                "question_text": "¿Qué problema tiene este código?\n\nx = 1\nwhile x > 0:\n    print(x)\n    x += 1",
+                "options": [
+                  {"id": "a", "text": "Error de sintaxis - while mal escrito", "is_correct": false},
+                  {"id": "b", "text": "No imprime nada porque la condición es False desde el inicio", "is_correct": false},
+                  {"id": "c", "text": "Bucle infinito - x siempre es mayor que 0 y sigue creciendo", "is_correct": true},
+                  {"id": "d", "text": "Solo se ejecuta una vez", "is_correct": false}
+                ],
+                "explanation": "x empieza en 1 (mayor que 0), y en cada iteración x += 1 la hace crecer (2, 3, 4...). Como x siempre será mayor que 0, la condición NUNCA se vuelve False y el bucle es infinito. Para corregirlo, deberías usar x -= 1 para que eventualmente x llegue a 0."
+              },
+              {
+                "question_text": "¿Qué hace enumerate([\"a\", \"b\", \"c\"], 1) en un bucle for?",
+                "options": [
+                  {"id": "a", "text": "Cuenta cuántos elementos tiene la lista", "is_correct": false},
+                  {"id": "b", "text": "Proporciona el índice y el valor, comenzando el índice desde 1", "is_correct": true},
+                  {"id": "c", "text": "Invierte el orden de la lista", "is_correct": false},
+                  {"id": "d", "text": "Convierte la lista en números enteros", "is_correct": false}
+                ],
+                "explanation": "enumerate() permite recorrer una lista obteniendo tanto el índice como el valor en cada iteración. El segundo parámetro (1) indica desde qué número empezar a contar. for i, v in enumerate(['a','b','c'], 1) daría: (1,'a'), (2,'b'), (3,'c'). Muy útil para numerar listas automáticamente."
+              },
+              {
+                "question_text": "En el procesamiento de un dataset de 1000 pacientes con Python, ¿qué estructura es más apropiada para calcular el promedio de edad de todos los pacientes?",
+                "options": [
+                  {"id": "a", "text": "while, porque no sabemos cuántos pacientes hay", "is_correct": false},
+                  {"id": "b", "text": "if/elif/else, porque necesitamos comparar edades", "is_correct": false},
+                  {"id": "c", "text": "for, porque sabemos que hay exactamente 1000 pacientes y los recorremos todos", "is_correct": true},
+                  {"id": "d", "text": "No se necesita bucle, Python calcula promedios automáticamente", "is_correct": false}
+                ],
+                "explanation": "El bucle 'for' es ideal cuando sabemos cuántos elementos hay que procesar o cuando recorremos una colección finita (como un dataset). Para calcular el promedio necesitamos sumar todas las edades (iterando con for) y dividir entre el total. El 'while' sería apropiado si los pacientes llegaran uno a uno y no supiéramos cuántos son."
+              }
+            ]
+          },
+          "assignment": {
+            "title": "Analizador de Notas del Semestre",
+            "instructions_markdown": "## Ejercicio: Analizador de Notas\n\n### Objetivo\nCrear un programa que ingrese notas de múltiples estudiantes y genere estadísticas del grupo.\n\n### Instrucciones\n\n1. Crea un archivo llamado `analizador_notas.py`\n\n2. El programa debe:\n   - Preguntar cuántos estudiantes tiene el grupo (mínimo 5)\n   - Para cada estudiante, solicitar nombre y nota (sobre 20)\n   - Calcular y mostrar al final:\n     * Promedio del grupo\n     * Nota más alta y nombre del estudiante\n     * Nota más baja y nombre del estudiante\n     * Número de aprobados (>= 14) y reprobados\n     * Porcentaje de aprobación\n\n3. Output esperado:\n```\n========== ANÁLISIS DE NOTAS - ITSEIA ==========\n\nEstudiante 1: Ana Torres - 18\nEstudiante 2: Carlos Vega - 12\nEstudiante 3: María Paz - 16\nEstudiante 4: Pedro Ruiz - 14\nEstudiante 5: Lucia Mora - 9\n\n============= ESTADÍSTICAS ==================\nPromedio del grupo: 13.80\nNota más alta: 18 (Ana Torres)\nNota más baja: 9 (Lucia Mora)\nAprobados: 3 (60.0%)\nReprobados: 2 (40.0%)\n```\n\n4. **Bonus**: Agrega un bucle while para validar que cada nota esté entre 0 y 20.\n\n### Criterios de evaluación\n| Criterio | Puntos |\n|----------|--------|\n| Usa for para recorrer todos los estudiantes | 25 |\n| Calcula correctamente promedio, max y min | 25 |\n| Cuenta aprobados y reprobados | 25 |\n| Output formateado y claro | 25 |\n| **Total** | **100** |",
+            "allowed_file_types": ["py"]
+          },
+          "ai_prompt_suggested": "Estoy aprendiendo bucles for y while en Python en ITSEIA. Quiero entender mejor [escribe tu duda]. Explícame con un ejemplo donde se procesen datos reales, como podría hacerse en un proyecto de Inteligencia Artificial o análisis de datos en Ecuador. Muéstrame el código paso a paso.",
+          "ai_context": "Sesión 4 - El estudiante conoce for, while, range(), break, continue, enumerate(). Ha completado 4 sesiones: print, variables/tipos, condicionales y bucles. Puede escribir programas básicos completos con lógica real.",
+          "resources": [
+            {
+              "title": "El Libro de Python - Bucles",
+              "url": "https://ellibrodepython.com/for-python",
+              "type": "link",
+              "description": "Guía completa del bucle for en Python con range(), enumerate() y más."
+            },
+            {
+              "title": "El Libro de Python - While",
+              "url": "https://ellibrodepython.com/while-python",
+              "type": "link",
+              "description": "Guía del bucle while con ejemplos prácticos y casos de uso."
+            },
+            {
+              "title": "Ejercicios de bucles Python - w3resource",
+              "url": "https://www.w3resource.com/python-exercises/python-loop-exercise.php",
+              "type": "link",
+              "description": "100+ ejercicios de bucles con soluciones. Práctica esencial para dominar esta habilidad."
+            },
+            {
+              "title": "Python Tutor - Visualiza tus bucles",
+              "url": "https://pythontutor.com/python-compiler.html",
+              "type": "tool",
+              "description": "Pega tu código de bucles aquí y visualiza cómo Python los ejecuta paso a paso. Fundamental para entender el flujo."
+            },
+            {
+              "title": "freeCodeCamp - Python Data Science (12h, ver sección loops)",
+              "url": "https://www.youtube.com/watch?v=LHBE6Q9XlzI",
+              "type": "video",
+              "description": "Curso completo en inglés. La sección de bucles muestra cómo se usan en análisis de datos reales."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

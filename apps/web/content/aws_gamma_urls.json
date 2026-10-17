@@ -1,0 +1,34 @@
+[
+  {
+    "domainOrden": 1,
+    "title": "AWS CLF-C02 Dominio 1 — Cloud Concepts",
+    "gammaUrl": "https://gamma.app/docs/wpfzcuic9zly8oh",
+    "exportUrl": null,
+    "generationId": "go0JcMKCU3QLrniVHJ1Jn",
+    "generatedAt": "2026-04-27T00:48:05.138Z"
+  },
+  {
+    "domainOrden": 2,
+    "title": "AWS CLF-C02 Dominio 2 — Security and Compliance",
+    "gammaUrl": "https://gamma.app/docs/vqii3knvkxf632p",
+    "exportUrl": null,
+    "generationId": "p8cWc4z3BQBEYyFNf9lum",
+    "generatedAt": "2026-04-27T00:49:19.675Z"
+  },
+  {
+    "domainOrden": 3,
+    "title": "AWS CLF-C02 Dominio 3 — Cloud Technology and Services",
+    "gammaUrl": "https://gamma.app/docs/o1ufwe30jnncirs",
+    "exportUrl": null,
+    "generationId": "nvMFtVNjV8p08lhotyYmZ",
+    "generatedAt": "2026-04-27T00:50:38.507Z"
+  },
+  {
+    "domainOrden": 4,
+    "title": "AWS CLF-C02 Dominio 4 — Billing, Pricing and Support",
+    "gammaUrl": "https://gamma.app/docs/4uv6hf6g0zjmbg0",
+    "exportUrl": null,
+    "generationId": "i9jC9AfEikiuZKRxqFFD0",
+    "generatedAt": "2026-04-27T00:51:46.679Z"
+  }
+]

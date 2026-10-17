@@ -1,0 +1,41 @@
+{
+  "materia": "Vision Artificial",
+  "periodo": "P4",
+  "recursos": [
+    {
+      "titulo": "OpenCV Documentacion oficial con tutoriales Python en español",
+      "url": "https://docs.opencv.org/4.x/d9/df8/tutorial_root.html",
+      "tipo": "documentacion",
+      "idioma": "ingles con comunidad española",
+      "descripcion": "Documentacion oficial de OpenCV con mas de 100 tutoriales de Python. La comunidad hispanohablante tiene traducciones en 'OpenCV-Python Tutorial en Español' en GitHub y blogs como 'programarfacil.com'. OpenCV es la libreria estandar de vision por computadora con 20M+ descargas. Completamente gratuita y open source."
+    },
+    {
+      "titulo": "Ultralytics YOLO - Documentacion y tutoriales en español",
+      "url": "https://docs.ultralytics.com/es/",
+      "tipo": "documentacion",
+      "idioma": "español",
+      "descripcion": "Documentacion oficial de Ultralytics YOLO v8 completamente traducida al español. Cubre deteccion, segmentacion, clasificacion, estimacion de poses y seguimiento. Incluye tutoriales de entrenamiento con datos propios y deployment. YOLO v8/v11 es el modelo estandar de deteccion de objetos en tiempo real. Gratuito y open source."
+    },
+    {
+      "titulo": "Roboflow - Plataforma de datos para Vision Artificial (capa gratuita)",
+      "url": "https://roboflow.com/",
+      "tipo": "herramienta",
+      "idioma": "ingles con tutoriales en español",
+      "descripcion": "Plataforma para crear y gestionar datasets de vision artificial. Capa gratuita con 10,000 imagenes y herramientas de anotacion. La comunidad en YouTube en español tiene tutoriales: buscar 'Roboflow tutorial español'. Permite exportar datasets en formato YOLO, COCO y Pascal VOC. Indispensable para proyectos de deteccion propios."
+    },
+    {
+      "titulo": "MediaPipe - Framework de IA multimodal de Google con Python",
+      "url": "https://ai.google.dev/edge/mediapipe/solutions/guide?hl=es-419",
+      "tipo": "herramienta",
+      "idioma": "español",
+      "descripcion": "Framework gratuito de Google para deteccion de rostros, manos, poses corporales y gestos en tiempo real. Documentacion en español con ejemplos en Python. Funciona en CPU comun sin GPU. La comunidad latinohispana tiene tutoriales extensos en YouTube (buscar 'MediaPipe Python español'). Ideal para proyectos de vision en tiempo real."
+    },
+    {
+      "titulo": "Kaggle Computer Vision Datasets - Datasets publicos de vision artificial",
+      "url": "https://www.kaggle.com/datasets?search=vision+computer",
+      "tipo": "dataset",
+      "idioma": "español (algunos)",
+      "descripcion": "Repositorio de Kaggle con miles de datasets de vision artificial gratuitos: clasificacion de imagenes, deteccion de objetos, segmentacion medica, reconocimiento facial y mas. Incluye datasets con imagenes de Ecuador y LATAM. Kaggle Notebooks permite explorar y entrenar modelos directamente en el navegador con GPU gratuita."
+    }
+  ]
+}

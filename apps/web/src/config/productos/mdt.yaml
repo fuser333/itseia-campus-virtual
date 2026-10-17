@@ -1,0 +1,68 @@
+# ============================================================================
+# Cursos MDT · 15 cursos OCC con certificación Ministerio del Trabajo · desde $99
+# Cada uno de los 15 cursos puede tener su propia cohorte según demanda.
+# ============================================================================
+
+producto:
+  id: mdt
+  nombre: "Cursos MDT"
+  descripcion: "15 cursos por competencias con certificación del Ministerio del Trabajo de Ecuador."
+  color_accent: "#4CAF50"        # verde MDT (institucional)
+  icono: "🏛️"
+  url_publica: "https://itseia.ai/cursos-mdt"
+
+cohorte:
+  estructura: "por_demanda"      # se abre cohorte cuando hay grupo
+  duracion_dias: 21              # rango 14-30 según curso OCC
+  horario_default:
+    inicio_ec: "18:00"
+    fin_ec: "20:00"
+    dias_semana: ["mar", "jue"]
+  sesiones_totales: 8            # default; varía por curso OCC
+
+alumno:
+  pestañas_sesion:
+    - video_resumen
+    - materiales
+    - ejercicios
+    - evaluacion
+  ai_lab: true
+  comunidad: true
+  asesorias: false               # cursos cortos sin tutorías 1:1
+
+docente:
+  pestañas_sesion:
+    - resumen
+    - plan_clase
+    - materiales_editar
+    - ejercicios_editar
+    - evaluacion_editar
+    - prompts
+    - recursos
+    - notas_privadas
+    - grabaciones
+  boton_grabar: true
+  asistencia: true
+
+pricing:
+  modelo: "pago_unico"
+  precio_usd: 99                 # precio desde; varía por curso OCC
+  moneda: "USD"
+  beca_h3l: false
+  certificacion_oficial: true
+  certificador: "Ministerio del Trabajo del Ecuador"
+  total_catalogo: 15
+
+assignment_docente:
+  modo: "manual"
+
+cross_promo:
+  excluir_a_si_mismo: true
+  orden_otros:
+    - cursos-pro
+    - certificaciones
+    - bootcamp
+    - carreras
+    - preuni
+    - b2b
+    - demo

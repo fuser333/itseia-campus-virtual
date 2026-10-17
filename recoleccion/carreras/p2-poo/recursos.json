@@ -1,0 +1,62 @@
+{
+  "materia": "Programacion Orientada a Objetos (Python)",
+  "periodo": 2,
+  "recursos": [
+    {
+      "titulo": "Programacion Orientada a Objetos en Python - El Libro de Python",
+      "url": "https://ellibrodepython.com/programacion-orientada-a-objetos-python",
+      "tipo": "tutorial",
+      "idioma": "español",
+      "descripcion": "Guia completa y gratuita en espanol sobre POO en Python. Cubre clases, objetos, herencia simple y multiple, polimorfismo, encapsulamiento, metodos especiales (__init__, __str__, __repr__), decoradores @property, @classmethod, @staticmethod. Con ejemplos de codigo ejecutables y ejercicios. El Libro de Python es una referencia mantenida activamente por desarrolladores hispanohablantes.",
+      "fuente_latam": false,
+      "fuente_origen": "España",
+      "gratuito": true,
+      "actualizado": "2024"
+    },
+    {
+      "titulo": "Documentacion oficial Python 3 - Clases",
+      "url": "https://docs.python.org/es/3/tutorial/classes.html",
+      "tipo": "documentacion",
+      "idioma": "español",
+      "descripcion": "Documentacion oficial de Python en espanol sobre el modelo de objetos. Explica el alcance de nombres, definicion de clases, objetos de instancia, metodos, herencia (simple y multiple), variables privadas y el modelo de datos. Es la fuente de verdad definitiva para cualquier comportamiento de Python. Mantenida por la Python Software Foundation con traduccion comunitaria al espanol.",
+      "fuente_latam": false,
+      "fuente_origen": "Python Software Foundation (oficial)",
+      "gratuito": true,
+      "actualizado": "2024"
+    },
+    {
+      "titulo": "Curso de Programacion Orientada a Objetos con Python - EDteam",
+      "url": "https://ed.team/cursos/poo-python",
+      "tipo": "tutorial",
+      "idioma": "español",
+      "descripcion": "Plataforma latinoamericana EDteam ofrece un curso con primer modulo completamente gratuito (2h 7min). Instructor Kevin Guzman ensena herencia, polimorfismo, encapsulamiento, decoradores y un proyecto real de administracion de contactos. Incluye ejercicios y evaluaciones. EDteam tiene sede en Latin America y su metodologia esta adaptada al contexto educativo hispanoablante.",
+      "fuente_latam": true,
+      "fuente_origen": "EDteam (Latinoamerica)",
+      "gratuito": true,
+      "actualizado": "2023"
+    },
+    {
+      "titulo": "POO Python - Programacion en Castellano",
+      "url": "https://programacion.net/articulo/programacion_orientada_a_objetos_con_python_1188",
+      "tipo": "tutorial",
+      "idioma": "español",
+      "descripcion": "Tutorial practico en espanol con ejemplos de codigo reales. Cubre instancias, atributos de clase vs instancia, metodos especiales, sobrecarga de operadores y herencia multiple. Orientado a estudiantes con conocimiento previo de Python procedimental que dan el salto a POO.",
+      "fuente_latam": false,
+      "fuente_origen": "España",
+      "gratuito": true,
+      "actualizado": "2023"
+    },
+    {
+      "titulo": "Curso de Python POO - Platzi (gratis con registro)",
+      "url": "https://platzi.com/cursos/python-poo/",
+      "tipo": "tutorial",
+      "idioma": "español",
+      "descripcion": "Platzi (Colombia) ofrece el Curso de Python Orientado a Objetos con enfasis en aplicaciones reales. Cubre clases, herencia, metodos, encapsulamiento y un proyecto de sistema de biblioteca completo. Orientado al mercado laboral latinoamericano. Primera clase gratuita sin necesidad de suscripcion.",
+      "fuente_latam": true,
+      "fuente_origen": "Platzi (Colombia)",
+      "gratuito": false,
+      "nota": "Primera clase gratuita, resto requiere suscripcion Platzi",
+      "actualizado": "2024"
+    }
+  ]
+}

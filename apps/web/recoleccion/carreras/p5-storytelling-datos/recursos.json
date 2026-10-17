@@ -1,0 +1,41 @@
+{
+  "materia": "Storytelling con Datos",
+  "periodo": "P5",
+  "recursos": [
+    {
+      "titulo": "Datdata - Canal YouTube de storytelling y visualizacion en español",
+      "url": "https://www.youtube.com/@datdata",
+      "tipo": "canal_youtube",
+      "idioma": "español",
+      "descripcion": "Canal latinoamericano especializado en storytelling con datos, Power BI, Python y visualizacion. Contenido en español con mas de 150 videos sobre dashboards narrativos, data journalism y comunicacion de datos. Tutorial de bar chart race, mapas coropleticos y animaciones con Python incluidos. El referente hispano de storytelling de datos."
+    },
+    {
+      "titulo": "Storytelling con Datos - Resumen libro Cole Nussbaumer en español",
+      "url": "https://www.datdata.com/blog/resumen-libro-storytelling-with-data",
+      "tipo": "libro_resumen",
+      "idioma": "español",
+      "descripcion": "Resumen en español del libro 'Storytelling with Data' de Cole Nussbaumer Knaflic, considerado la biblia del storytelling de datos. El blog datdata.com ofrece resumen detallado capitulo por capitulo en español. El libro completo en español ('Storytelling con datos') esta disponible en Amazon. Los principios de diseno de Cole son el estandar de la industria."
+    },
+    {
+      "titulo": "Flourish - Plataforma gratuita de visualizacion narrativa",
+      "url": "https://flourish.studio/",
+      "tipo": "herramienta",
+      "idioma": "ingles con interfaz accesible para hispanohablantes",
+      "descripcion": "Plataforma web gratuita para crear visualizaciones animadas e interactivas sin codigo: bar chart races, mapas, redes de datos y lineas de tiempo. Usada por periodistas de datos de BBC, Reuters y medios latinoamericanos. Capa gratuita robusta. Ideal para el proyecto de historia de datos Ecuador. Compatible con datos del INEC y BCE."
+    },
+    {
+      "titulo": "Canva - Infografias y presentaciones de datos en español",
+      "url": "https://www.canva.com/es_es/graficas/",
+      "tipo": "herramienta",
+      "idioma": "español",
+      "descripcion": "Plataforma de diseño gratuita con cientos de plantillas de infografias, dashboards y presentaciones de datos en español. Version educativa completamente gratuita para estudiantes universitarios. Incluye graficos conectados a datos de Google Sheets. La herramienta de visualizacion no tecnica mas usada en LATAM para comunicar datos a audiencias no tecnicas."
+    },
+    {
+      "titulo": "Ecuador en Cifras - Datos del INEC para proyectos de storytelling",
+      "url": "https://www.ecuadorencifras.gob.ec/estadisticas/",
+      "tipo": "dataset",
+      "idioma": "español",
+      "descripcion": "Portal estadistico oficial del Ecuador con datos del INEC listos para proyectos de storytelling. Incluye series historicas de poblacion, pobreza, educacion, empleo y salud del Ecuador. Los datos vienen con visualizaciones propias del INEC como referencia. Ideal para la sesion 16 del proyecto de historia de datos Ecuador con datos oficiales."
+    }
+  ]
+}
