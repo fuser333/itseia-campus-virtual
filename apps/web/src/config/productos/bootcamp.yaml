@@ -1,0 +1,66 @@
+# ============================================================================
+# Bootcamp Intensivo · 120 horas en 3 meses · $497
+# Cohorte semestral.
+# ============================================================================
+
+producto:
+  id: bootcamp
+  nombre: "Bootcamp Intensivo IA"
+  descripcion: "120 horas de inmersión total en IA aplicada · 3 meses · proyecto final con empresa."
+  color_accent: "#D45A3F"        # coral oscuro
+  icono: "🚀"
+  url_publica: "https://itseia.ai/bootcamp"
+
+cohorte:
+  estructura: "semestral"        # 2 cohortes por año
+  duracion_dias: 90
+  horario_default:
+    inicio_ec: "19:00"
+    fin_ec: "22:00"
+    dias_semana: ["lun", "mie", "vie"]
+  sesiones_totales: 40           # ~3h × 40 sesiones ≈ 120h
+
+alumno:
+  pestañas_sesion:
+    - video_resumen
+    - materiales
+    - ejercicios
+    - evaluacion
+  ai_lab: true
+  comunidad: true
+  asesorias: true
+
+docente:
+  pestañas_sesion:
+    - resumen
+    - plan_clase
+    - materiales_editar
+    - ejercicios_editar
+    - evaluacion_editar
+    - prompts
+    - recursos
+    - notas_privadas
+    - grabaciones
+  boton_grabar: true
+  asistencia: true
+
+pricing:
+  modelo: "pago_unico"
+  precio_usd: 497
+  moneda: "USD"
+  beca_h3l: false
+  cuenta_pago: "Produbanco 27059145711"
+
+assignment_docente:
+  modo: "manual"
+
+cross_promo:
+  excluir_a_si_mismo: true
+  orden_otros:
+    - carreras
+    - certificaciones
+    - cursos-pro
+    - mdt
+    - preuni
+    - b2b
+    - demo

@@ -1,0 +1,263 @@
+{
+  "titulo": "IA para Contadores y Auditores",
+  "profesion": "contador",
+  "version": "1.0",
+  "fecha_creacion": "2026-03-18",
+  "duracion_total_horas": 20,
+  "semanas": 4,
+  "precio": {
+    "express": 97,
+    "estandar": 197,
+    "completo": 297
+  },
+  "descripcion_corta": "Aprende a automatizar reportes, detectar anomalias y cerrar contabilidades con IA en 4 semanas. Herramientas reales aplicadas al contexto tributario ecuatoriano.",
+  "perfil_objetivo": "Contadores, auditores y analistas financieros con experiencia profesional que quieren integrar herramientas de IA en su flujo de trabajo diario sin necesidad de saber programar.",
+  "prerequisitos": [
+    "Conocimientos basicos de contabilidad (NIIF o NEC)",
+    "Experiencia con Excel intermedio",
+    "Acceso a computadora con internet"
+  ],
+  "herramientas_principales": [
+    "Copilot Excel",
+    "ChatGPT Plus",
+    "Claude",
+    "Power BI",
+    "Vic.ai"
+  ],
+  "competencias_al_egreso": [
+    "Automatizar la generacion de reportes financieros con asistencia de IA",
+    "Detectar patrones anomalos en transacciones contables usando IA",
+    "Usar Excel + Copilot para analisis avanzado sin formulas complejas",
+    "Evaluar criticamente los outputs de IA aplicados a datos financieros",
+    "Aplicar controles de privacidad y seguridad a datos financieros sensibles",
+    "Construir presupuestos con modelos predictivos asistidos por IA"
+  ],
+  "formatos": {
+    "express": {
+      "duracion": "1 semana",
+      "modulos_incluidos": ["T-01", "T-02", "F-01", "F-03"],
+      "precio": 97
+    },
+    "estandar": {
+      "duracion": "4 semanas",
+      "modulos_incluidos": ["T-01", "T-02", "T-03", "T-04", "F-01", "F-02", "F-03", "F-04"],
+      "precio": 197
+    },
+    "completo": {
+      "duracion": "4 semanas + sesion 1-on-1",
+      "modulos_incluidos": ["T-01", "T-02", "T-03", "T-04", "F-01", "F-02", "F-03", "F-04", "F-05"],
+      "precio": 297,
+      "incluye_sesion_individual": true
+    }
+  },
+  "modulos": [
+    {
+      "orden": 1,
+      "codigo": "T-01",
+      "titulo": "Fundamentos de IA sin tecnicismos",
+      "tipo": "leccion",
+      "duracion_min": 45,
+      "semana": 1,
+      "descripcion": "Entender que es realmente la IA, como funciona a nivel conceptual y por que esta cambiando la contabilidad y la auditoria. Sin matematicas, sin codigo — solo el mapa mental que necesitas para usarla con criterio.",
+      "keyPoints": [
+        "La IA no reemplaza al contador — amplifica su capacidad",
+        "Diferencia entre IA generativa, ML y automatizacion RPA",
+        "Casos reales de IA en Big 4 y firmas ecuatorianas",
+        "El modelo de lenguaje grande (LLM): como trabaja con tus datos",
+        "Limitaciones que debes conocer antes de confiar en la IA"
+      ],
+      "herramientas": [
+        "ChatGPT (version gratuita para el modulo)",
+        "Claude (version gratuita)"
+      ],
+      "evaluacion": "Sin evaluacion formal — reflexion guiada al final"
+    },
+    {
+      "orden": 2,
+      "codigo": "T-02",
+      "titulo": "ChatGPT y Claude para contadores",
+      "tipo": "leccion",
+      "duracion_min": 60,
+      "semana": 1,
+      "descripcion": "Dominar los dos asistentes de IA mas usados a nivel profesional con aplicaciones directas al trabajo contable: elaboracion de notas a los estados financieros, consultas tributarias, redaccion de informes y estructuracion de datos desordenados.",
+      "keyPoints": [
+        "Diferencias practicas entre ChatGPT y Claude para trabajo contable",
+        "Prompt engineering basico para respuestas precisas y confiables",
+        "Casos de uso inmediatos: notas NIIF, consultas SRI, cartas de representacion",
+        "Subir archivos PDF y Excel para analisis directo",
+        "Plantillas de prompts reutilizables para tu flujo de trabajo"
+      ],
+      "herramientas": [
+        "ChatGPT Plus ($20/mes) o GPT-4o gratuito con limites",
+        "Claude Sonnet (claude.ai, plan gratuito disponible)"
+      ],
+      "evaluacion": "Demo practico guiado incluido en el modulo"
+    },
+    {
+      "orden": 3,
+      "codigo": "T-03",
+      "titulo": "Seguridad y privacidad de datos financieros",
+      "tipo": "leccion_quiz",
+      "duracion_min": 30,
+      "semana": 2,
+      "descripcion": "Saber que puedes y que NO debes subir a herramientas de IA cuando manejas informacion financiera de clientes. Estrategias de anonimizacion, politicas de las plataformas y cumplimiento con la Ley Organica de Proteccion de Datos Personales de Ecuador.",
+      "keyPoints": [
+        "Que dice ChatGPT y Anthropic sobre el uso de tus datos",
+        "Datos que NUNCA debes subir a IA publica (RUC, NIT, cuentas bancarias)",
+        "Tecnicas de anonimizacion para trabajar con IA sin comprometer confidencialidad",
+        "LOPDP Ecuador: implicaciones para contadores y auditores",
+        "Herramientas de IA con opcion Enterprise (datos no entrenados)"
+      ],
+      "herramientas": [
+        "ChatGPT Enterprise (referencia)",
+        "Claude for Work (referencia)"
+      ],
+      "evaluacion": "Quiz de 4 preguntas incluido"
+    },
+    {
+      "orden": 4,
+      "codigo": "T-04",
+      "titulo": "Evaluacion critica de resultados de IA",
+      "tipo": "leccion_quiz",
+      "duracion_min": 30,
+      "semana": 2,
+      "descripcion": "La IA se equivoca, alucina y a veces responde con confianza aunque este mal. Este modulo te da los criterios profesionales para validar los outputs antes de firmar cualquier documento.",
+      "keyPoints": [
+        "Que es la alucinacion de IA y por que ocurre con datos numericos",
+        "Casos reales de errores de IA en contexto financiero",
+        "Lista de verificacion de 5 puntos antes de usar un output de IA",
+        "Como pedir a la IA que explique su razonamiento paso a paso",
+        "Responsabilidad profesional del contador frente a la IA"
+      ],
+      "herramientas": [
+        "ChatGPT con Chain-of-Thought prompting",
+        "Claude con modo Extended Thinking (referencia)"
+      ],
+      "evaluacion": "Quiz de 4 preguntas incluido"
+    },
+    {
+      "orden": 5,
+      "codigo": "F-01",
+      "titulo": "Automatizacion de reportes financieros con IA",
+      "tipo": "leccion",
+      "duracion_min": 60,
+      "semana": 2,
+      "descripcion": "Pasar de datos en bruto a un estado financiero bien redactado usando IA. Desde la generacion de las notas explicativas hasta el formato final del reporte para gerencia o para el SRI.",
+      "keyPoints": [
+        "Pipeline completo: datos → IA → reporte listo para firmar",
+        "Notas a los estados financieros bajo NIIF con IA",
+        "Generacion automatica de analisis de variaciones (mes vs mes, real vs presupuesto)",
+        "Formato del Formulario 101 del SRI asistido por IA",
+        "Plantilla de prompts para reportes mensuales recurrentes"
+      ],
+      "herramientas": [
+        "ChatGPT Plus con subida de archivos Excel",
+        "Claude con documentos adjuntos",
+        "Power BI con Q&A natural language"
+      ],
+      "evaluacion": "Sin quiz — ejercicio guiado durante el modulo"
+    },
+    {
+      "orden": 6,
+      "codigo": "F-02",
+      "titulo": "Deteccion de anomalias y fraude con IA",
+      "tipo": "leccion_quiz",
+      "duracion_min": 30,
+      "semana": 3,
+      "descripcion": "Usar IA para identificar patrones irregulares en libros contables: transacciones duplicadas, montos inusuales, proveedores fantasma y senales clasicas de fraude. Un trabajo que antes tomaba dias, ahora en horas.",
+      "keyPoints": [
+        "Patrones de fraude mas comunes en empresas ecuatorianas (segun auditores KPMG)",
+        "Como preparar un dataset de transacciones para analisis con IA",
+        "Prompt efectivo para pedir a ChatGPT que detecte anomalias en un libro mayor",
+        "Herramientas especializadas: Vic.ai, AppZen, MindBridge",
+        "Documentacion de hallazgos para informe de auditoria",
+        "Pruebas de Benford con IA para detectar manipulacion de cifras"
+      ],
+      "herramientas": [
+        "ChatGPT Plus con Code Interpreter (analisis de datos)",
+        "Vic.ai (herramienta especializada, referencia)",
+        "Excel con Power Query para preparar datos"
+      ],
+      "evaluacion": "Quiz de 8 preguntas incluido"
+    },
+    {
+      "orden": 7,
+      "codigo": "F-03",
+      "titulo": "Excel + IA: Copilot y automatizacion",
+      "tipo": "demo",
+      "duracion_min": 45,
+      "semana": 3,
+      "descripcion": "Demostrar en vivo como Microsoft Copilot en Excel transforma una hoja de calculo compleja en segundos. Reconciliaciones bancarias, tablas dinamicas, formulas complejas y graficos con instrucciones en espanol.",
+      "keyPoints": [
+        "Activar y configurar Copilot en Microsoft 365",
+        "Instrucciones en lenguaje natural para formulas BUSCARV, SUMAR.SI, SI anidados",
+        "Generar tablas dinamicas y graficos con una sola instruccion",
+        "Reconciliacion bancaria automatica: libro vs estado de cuenta",
+        "Macros VBA generadas por IA sin saber programar"
+      ],
+      "herramientas": [
+        "Microsoft 365 con Copilot (requiere licencia Business Standard)",
+        "Excel Online (alternativa gratuita con funciones limitadas)",
+        "ChatGPT para generar formulas Excel (alternativa sin Copilot)"
+      ],
+      "evaluacion": "Demo descargable incluido — herramienta funcional offline"
+    },
+    {
+      "orden": 8,
+      "codigo": "F-04",
+      "titulo": "Analisis predictivo para presupuestos",
+      "tipo": "leccion",
+      "duracion_min": 45,
+      "semana": 4,
+      "descripcion": "Usar IA para construir proyecciones financieras mas solidas. Desde tendencias de ventas hasta modelos de escenarios (optimista, base, pesimista) explicados en lenguaje claro para gerencia.",
+      "keyPoints": [
+        "Diferencia entre pronostico estadistico y prediccion con IA",
+        "Como usar ChatGPT para analizar series de tiempo de ventas",
+        "Construccion de escenarios What-If con asistencia de IA",
+        "Visualizacion de proyecciones en Power BI con lenguaje natural",
+        "Limitaciones del analisis predictivo y como comunicarlas a la gerencia",
+        "Presupuesto base cero asistido por IA"
+      ],
+      "herramientas": [
+        "ChatGPT Plus con Code Interpreter",
+        "Power BI Desktop (gratuito)",
+        "Excel con funciones de pronostico + Copilot"
+      ],
+      "evaluacion": "Sin quiz — entregable guiado incluido"
+    },
+    {
+      "orden": 9,
+      "codigo": "F-05",
+      "titulo": "Cierre contable asistido por IA",
+      "tipo": "caso_practico",
+      "duracion_min": 45,
+      "semana": 4,
+      "descripcion": "Caso practico integrador: ejecutar un cierre trimestral completo para una empresa ecuatoriana ficticia usando IA en cada paso. Desde el balance de comprobacion hasta la nota de hallazgos para gerencia.",
+      "keyPoints": [
+        "Flujo completo de cierre Q1 con asistencia de IA",
+        "Identificacion de 3 anomalias plantadas en el dataset",
+        "Ajustes contables sugeridos por IA y validados por el contador",
+        "Redaccion de nota de gerencia con hallazgos",
+        "Checklist final de cierre auditado por IA"
+      ],
+      "herramientas": [
+        "ChatGPT Plus o Claude (segun preferencia del alumno)",
+        "Excel para manipulacion del dataset"
+      ],
+      "evaluacion": "Caso practico con 5 entregables y auto-evaluacion de 3 criterios",
+      "empresa_ficticia": "Distribuidora Andina S.A.",
+      "contexto": "Cierre trimestral Q1 2026 con 3 anomalias plantadas"
+    }
+  ],
+  "calendario_referencial": {
+    "semana_1": ["T-01", "T-02"],
+    "semana_2": ["T-03", "T-04", "F-01"],
+    "semana_3": ["F-02", "F-03"],
+    "semana_4": ["F-04", "F-05"]
+  },
+  "certificacion": {
+    "nombre": "Certificado ITSEIA Academy: IA para Contadores y Auditores",
+    "condicion": "Completar todos los modulos del formato adquirido con 70% o mas en quizzes",
+    "formato": "PDF digital con firma digital del Director Academico"
+  }
+}

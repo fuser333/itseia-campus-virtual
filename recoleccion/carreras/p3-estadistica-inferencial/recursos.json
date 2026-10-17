@@ -1,0 +1,41 @@
+{
+  "materia": "Estadistica Inferencial para IA",
+  "periodo": "P3",
+  "recursos": [
+    {
+      "titulo": "Khan Academy - Estadistica e Inferencia en Español completo",
+      "url": "https://es.khanacademy.org/math/statistics-probability",
+      "tipo": "curso",
+      "idioma": "español",
+      "descripcion": "Curso completo de probabilidad y estadistica de Khan Academy en español. Cubre desde probabilidad basica hasta distribuciones, intervalos de confianza, pruebas de hipotesis y regresion. Completamente gratuito con videos, ejercicios y tests. Nivel universitario adaptado para autodidactas. Certificados gratuitos incluidos."
+    },
+    {
+      "titulo": "StatQuest con Josh Starmer - Videos en español subtitulados",
+      "url": "https://www.youtube.com/@statquest",
+      "tipo": "canal_youtube",
+      "idioma": "ingles con subtitulos español",
+      "descripcion": "Canal de YouTube con las mejores explicaciones visuales de estadistica para ML. Videos como 'Distribucion Normal explicada', 'Pruebas t', 'ANOVA' y 'PCA'. La mayoria tiene subtitulos automaticos en español de buena calidad. Bam! Explicaciones claras y visuales unicas en el mundo de la estadistica educativa."
+    },
+    {
+      "titulo": "SciPy y StatsModels - Estadistica avanzada con Python",
+      "url": "https://docs.scipy.org/doc/scipy/reference/stats.html",
+      "tipo": "documentacion",
+      "idioma": "ingles con blogs tutoriales en español",
+      "descripcion": "Documentacion de SciPy Stats y StatsModels para estadistica inferencial en Python. La comunidad hispanohablante en 'cienciadedatos.net' y 'estadisticamente.com' tiene tutoriales en español sobre pruebas de hipotesis, ANOVA y regresion con Python. Gratuito y open source. Estandar en ciencia de datos profesional."
+    },
+    {
+      "titulo": "INEC Ecuador - Metodologias estadisticas oficiales",
+      "url": "https://www.ecuadorencifras.gob.ec/metodologias/",
+      "tipo": "recurso_institucional",
+      "idioma": "español",
+      "descripcion": "Seccion de metodologias del INEC Ecuador con documentos tecnicos sobre encuestas y muestreo estadistico. Incluye la metodologia de la Encuesta Nacional de Empleo (ENEMDU), encuestas de hogares y censos. Fundamental para entender como se aplica la estadistica inferencial en el contexto ecuatoriano real."
+    },
+    {
+      "titulo": "Probabilidad y Estadistica - Libro abierto UNAM en PDF",
+      "url": "https://www.iimas.unam.mx/",
+      "tipo": "libro_pdf",
+      "idioma": "español",
+      "descripcion": "El Instituto de Investigaciones en Matematicas Aplicadas de la UNAM ofrece materiales abiertos de probabilidad y estadistica. Buscar en repositorio 'probabilidad estadistica inferencial'. Los libros de texto del profesor Rolando Ramos de la UNAM son los mas usados en universidades latinoamericanas para este tema."
+    }
+  ]
+}

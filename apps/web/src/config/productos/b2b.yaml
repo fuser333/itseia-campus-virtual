@@ -1,0 +1,59 @@
+# ============================================================================
+# Cursos B2B · Corporativos a la medida · 1 cohorte = 1 cliente corporativo
+# Ej: ARMADA, ADIUM, DECORPIN, USFQ.
+# ============================================================================
+
+producto:
+  id: b2b
+  nombre: "Cursos B2B Corporativos"
+  descripcion: "Programas a la medida para empresas · contenido construido sobre tus procesos reales."
+  color_accent: "#2A3F6E"        # navy-light (institucional, serio)
+  icono: "🏢"
+  url_publica: "https://empresas.itseia.ai"
+
+cohorte:
+  estructura: "por_cliente"      # 1 cohorte = 1 cliente
+  duracion_dias: 45              # default; depende del scope contratado
+  horario_default:
+    inicio_ec: "08:00"           # B2B suele ser horario laboral
+    fin_ec: "10:00"
+    dias_semana: ["mar", "jue"]
+  sesiones_totales: 12           # default; cada propuesta lo redefine
+
+alumno:
+  pestañas_sesion:
+    - video_resumen
+    - materiales
+    - ejercicios
+    - evaluacion
+  ai_lab: true
+  comunidad: false               # B2B no mezcla con comunidad pública
+  asesorias: true
+
+docente:
+  pestañas_sesion:
+    - resumen
+    - plan_clase
+    - materiales_editar
+    - ejercicios_editar
+    - evaluacion_editar
+    - prompts
+    - recursos
+    - notas_privadas
+    - grabaciones
+  boton_grabar: true
+  asistencia: true
+
+pricing:
+  modelo: "a_la_medida"
+  precio_usd: null               # se define por contrato
+  moneda: "USD"
+  beca_h3l: false
+  factura_empresa: true
+
+assignment_docente:
+  modo: "manual"
+
+cross_promo:
+  excluir_a_si_mismo: true
+  orden_otros: []                # B2B NO publicita otros productos al alumno corporativo

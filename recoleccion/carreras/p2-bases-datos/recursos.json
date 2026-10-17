@@ -1,0 +1,68 @@
+{
+  "materia": "Bases de Datos Relacionales (SQL)",
+  "periodo": 2,
+  "recursos": [
+    {
+      "titulo": "Hello SQL - Repositorio oficial del curso MoureDev",
+      "url": "https://github.com/mouredev/hello-sql",
+      "tipo": "tutorial",
+      "idioma": "español",
+      "descripcion": "Repositorio GitHub oficial del curso de SQL de MoureDev (mas de 500K suscriptores). Incluye todo el codigo SQL del curso de 7 horas en YouTube. Cubre MySQL y PostgreSQL, con 80+ lecciones y 50+ comandos SQL. Incluye scripts de creacion de tablas, datos de prueba, consultas avanzadas y ejemplos de JOINs. El instructor Brais Moure es una referencia en programacion en espanol.",
+      "fuente_latam": false,
+      "fuente_origen": "España",
+      "gratuito": true,
+      "url_video_youtube": "https://youtu.be/OuJerKzV5T0",
+      "actualizado": "2023"
+    },
+    {
+      "titulo": "Bases de Datos SQL desde cero - EDteam",
+      "url": "https://ed.team/cursos/sql",
+      "tipo": "tutorial",
+      "idioma": "español",
+      "descripcion": "Curso en espanol de EDteam (plataforma latinoamericana) con 6 horas de contenido y 7 modulos. Instructor: Alexys Lozada (CTO de EDteam). Cubre PostgreSQL desde instalacion, psql y pgAdmin, DDL, DCL, DML, SELECT avanzado, funciones de agregacion y JOINs. Primer modulo gratuito. Orientado al nivel principiante con prerequisito solo de consola basica.",
+      "fuente_latam": true,
+      "fuente_origen": "EDteam (Latinoamerica)",
+      "gratuito": true,
+      "nota": "Primer modulo gratuito, resto requiere suscripcion EDteam",
+      "actualizado": "2023"
+    },
+    {
+      "titulo": "FreeCodeCamp - Base de Datos Relacional (certificacion gratuita)",
+      "url": "https://www.freecodecamp.org/espanol/learn/relational-database",
+      "tipo": "tutorial",
+      "idioma": "español",
+      "descripcion": "FreeCodeCamp ofrece en espanol una certificacion gratuita de Bases de Datos Relacionales. Ensena Git, GitHub, Bash, SQL y PostgreSQL directamente en el navegador usando VS Code y Docker. 100% interactivo, sin necesidad de instalacion. Incluye proyectos practicos reales y certificado gratuito al terminar. Ideal para estudiantes que quieren aprender a su ritmo.",
+      "fuente_latam": false,
+      "fuente_origen": "FreeCodeCamp (internacional, contenido en español)",
+      "gratuito": true,
+      "actualizado": "2024"
+    },
+    {
+      "titulo": "Datos Abiertos Ecuador - Datasets para practicar SQL",
+      "url": "https://www.datosabiertos.gob.ec/dataset/",
+      "tipo": "dataset",
+      "idioma": "español",
+      "descripcion": "Portal oficial de datos abiertos del gobierno ecuatoriano. Disponible datasets en CSV de educacion, salud, economia y poblacion. Permite importar datasets reales a PostgreSQL o MySQL para practicar SQL con datos locales: consultas sobre estadisticas educativas, datos del INEC, informacion de entidades publicas. Contexto ecuatoriano directo para los estudiantes de ITSEIA.",
+      "fuente_latam": true,
+      "fuente_origen": "Gobierno Ecuador",
+      "gratuito": true,
+      "actualizado": "2024",
+      "datasets_recomendados": [
+        "Encuesta Nacional de Empleo (ENEMDU)",
+        "Estadisticas de Educacion Superior - SENESCYT",
+        "Recursos y Actividades de Salud - INEC"
+      ]
+    },
+    {
+      "titulo": "MySQL Ya - Tutorial completo en espanol",
+      "url": "https://www.tutorialesprogramacionya.com/mysqlya/",
+      "tipo": "tutorial",
+      "idioma": "español",
+      "descripcion": "Sitio web educativo hispanohablante con tutorial completo de MySQL desde cero. Cubre conceptos teoricos, ejercicios resueltos y practicas progresivas. Incluye mas de 100 ejercicios con soluciones. Orientado a personas con poco conocimiento previo. Complementa el video principal con ejercicios adicionales de practica.",
+      "fuente_latam": false,
+      "fuente_origen": "Argentina (Tutorial Programacion Ya)",
+      "gratuito": true,
+      "actualizado": "2023"
+    }
+  ]
+}

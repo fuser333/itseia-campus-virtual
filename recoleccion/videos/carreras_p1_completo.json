@@ -1,0 +1,962 @@
+[
+  {
+    "materia": "Fundamentos de Programacion (Python)",
+    "sesion": 1,
+    "tema": "Introduccion a la programacion y Python",
+    "video_url": "https://www.youtube.com/watch?v=chPhlsHoEPo",
+    "title": "Curso Python para Principiantes | Tutorial Completo desde Cero",
+    "channel": "Fazt",
+    "duration_min": 195,
+    "playlist_url": null
+  },
+  {
+    "materia": "Fundamentos de Programacion (Python)",
+    "sesion": 2,
+    "tema": "Variables y tipos de datos",
+    "video_url": "https://www.youtube.com/watch?v=G2FCfQj-9ig",
+    "title": "Curso Python desde 0 - Variables, Tipos de Datos y Operadores",
+    "channel": "pildorasinformaticas",
+    "duration_min": 25,
+    "playlist_url": "https://www.youtube.com/playlist?list=PLU8oAlHdN5BlvPxziopYZRd55pdqFwkeS"
+  },
+  {
+    "materia": "Fundamentos de Programacion (Python)",
+    "sesion": 3,
+    "tema": "Operadores y expresiones",
+    "video_url": "https://www.youtube.com/watch?v=INcD3Bjy6iE",
+    "title": "Python para Principiantes - Operadores Aritmeticos, Logicos y de Comparacion",
+    "channel": "Programacion Para Todos",
+    "duration_min": 30,
+    "playlist_url": null
+  },
+  {
+    "materia": "Fundamentos de Programacion (Python)",
+    "sesion": 4,
+    "tema": "Estructuras de control if/elif/else",
+    "video_url": "https://www.youtube.com/watch?v=mENHDQ8SLsI",
+    "title": "Python desde Cero - Condicionales if elif else | Estructuras de Control",
+    "channel": "La Geekipedia De Ernesto",
+    "duration_min": 28,
+    "playlist_url": "https://www.youtube.com/playlist?list=PLyvsggKtwbLW1j0d5yaCkRF9Axpdlhsxz"
+  },
+  {
+    "materia": "Fundamentos de Programacion (Python)",
+    "sesion": 5,
+    "tema": "Bucles for y while",
+    "video_url": "https://www.youtube.com/watch?v=CjmzDHMHxwU",
+    "title": "Curso de Python - Bucles for y while explicados desde cero",
+    "channel": "codigofacilito",
+    "duration_min": 35,
+    "playlist_url": "https://www.youtube.com/playlist?list=PLE549A038CF82905F"
+  },
+  {
+    "materia": "Fundamentos de Programacion (Python)",
+    "sesion": 6,
+    "tema": "Funciones",
+    "video_url": "https://www.youtube.com/watch?v=AwWPM4Nok7Y",
+    "title": "Python para Principiantes - Funciones en Python COMPLETO",
+    "channel": "Academia Coder",
+    "duration_min": 40,
+    "playlist_url": "https://www.youtube.com/playlist?list=PLs-v5LWbw7JkIz8145zh7_ioAnXON_cMj"
+  },
+  {
+    "materia": "Fundamentos de Programacion (Python)",
+    "sesion": 7,
+    "tema": "Listas y tuplas",
+    "video_url": "https://www.youtube.com/watch?v=83gFZGnFCw0",
+    "title": "Curso Introduccion a Python - Listas, Tuplas y Secuencias",
+    "channel": "AprendeIA con Ligdi Gonzalez",
+    "duration_min": 38,
+    "playlist_url": "https://www.youtube.com/playlist?list=PLJjOveEiVE4ACVALuTckP3Pbe4SOxAqpP"
+  },
+  {
+    "materia": "Fundamentos de Programacion (Python)",
+    "sesion": 8,
+    "tema": "Diccionarios y sets",
+    "video_url": "https://www.youtube.com/watch?v=Og9JXvBU5Bc",
+    "title": "Python Completo desde Cero - Diccionarios y Sets en Python",
+    "channel": "yacklyon",
+    "duration_min": 32,
+    "playlist_url": "https://www.youtube.com/playlist?list=PLg9145ptuAijHNZMTDhghSdTWK3BvH8pk"
+  },
+  {
+    "materia": "Fundamentos de Programacion (Python)",
+    "sesion": 9,
+    "tema": "Manejo de strings",
+    "video_url": "https://www.youtube.com/watch?v=ppz1e_ceeIw",
+    "title": "Programacion Python de Cero a Heroe - Cadenas de texto (Strings)",
+    "channel": "Solo Python",
+    "duration_min": 35,
+    "playlist_url": null
+  },
+  {
+    "materia": "Fundamentos de Programacion (Python)",
+    "sesion": 10,
+    "tema": "Archivos lectura/escritura",
+    "video_url": "https://www.youtube.com/watch?v=u-vO34rIcAg",
+    "title": "Python desde Cero - Lectura y Escritura de Archivos (open, read, write)",
+    "channel": "Danisable",
+    "duration_min": 22,
+    "playlist_url": "https://www.youtube.com/playlist?list=PLAzlSdU-KYwU9JzX35rSW5EK3oYr_7oBy"
+  },
+  {
+    "materia": "Fundamentos de Programacion (Python)",
+    "sesion": 11,
+    "tema": "Manejo de errores try/except",
+    "video_url": "https://www.youtube.com/watch?v=G5eO8PfWfkw",
+    "title": "Python desde CERO - Manejo de Excepciones try except finally",
+    "channel": "Leonardo Kuffo",
+    "duration_min": 20,
+    "playlist_url": null
+  },
+  {
+    "materia": "Fundamentos de Programacion (Python)",
+    "sesion": 12,
+    "tema": "Modulos y paquetes",
+    "video_url": "https://www.youtube.com/watch?v=3bX_vIG7xN4",
+    "title": "Introduccion a Python - Modulos y Paquetes en Python",
+    "channel": "DesarrolloWeb.com",
+    "duration_min": 28,
+    "playlist_url": null
+  },
+  {
+    "materia": "Fundamentos de Programacion (Python)",
+    "sesion": 13,
+    "tema": "POO basico",
+    "video_url": "https://www.youtube.com/watch?v=AqjTfmPitTQ",
+    "title": "Programacion Orientada a Objetos con PYTHON - POO desde cero",
+    "channel": "yacklyon",
+    "duration_min": 60,
+    "playlist_url": "https://www.youtube.com/playlist?list=PLg9145ptuAigw5pV_DRznXdOsX19dorDs"
+  },
+  {
+    "materia": "Fundamentos de Programacion (Python)",
+    "sesion": 14,
+    "tema": "Pandas intro",
+    "video_url": "https://www.youtube.com/watch?v=SHA6Eh3LW5U",
+    "title": "Python Completo - Introduccion a Pandas para Analisis de Datos",
+    "channel": "Yoney Gallardo",
+    "duration_min": 45,
+    "playlist_url": null
+  },
+  {
+    "materia": "Fundamentos de Programacion (Python)",
+    "sesion": 15,
+    "tema": "Matplotlib intro",
+    "video_url": "https://www.youtube.com/watch?v=5lAOZCfuuR8",
+    "title": "Tutorial Python A a Z - Visualizacion de Datos con Matplotlib",
+    "channel": "Juan Gabriel Gomila Salas",
+    "duration_min": 50,
+    "playlist_url": null
+  },
+  {
+    "materia": "Fundamentos de Programacion (Python)",
+    "sesion": 16,
+    "tema": "Proyecto final mini app",
+    "video_url": "https://www.youtube.com/watch?v=Iims6J7FUn4",
+    "title": "Como usar ChatGPT desde Python - OpenAI API Tutorial Completo",
+    "channel": "Fazt",
+    "duration_min": 20,
+    "playlist_url": null
+  },
+  {
+    "materia": "Matematicas I (Estadistica)",
+    "sesion": 1,
+    "tema": "Estadistica descriptiva media mediana moda",
+    "video_url": "https://www.youtube.com/watch?v=NJXVyDMEKms",
+    "title": "Estadistica Descriptiva para Ciencia de Datos - Curso Completo",
+    "channel": "Codigo Facilito",
+    "duration_min": 90,
+    "playlist_url": null
+  },
+  {
+    "materia": "Matematicas I (Estadistica)",
+    "sesion": 2,
+    "tema": "Dispersion varianza desviacion estandar",
+    "video_url": "https://www.youtube.com/watch?v=E_Y6FKujpKQ",
+    "title": "Estadistica - Medidas de Dispersion: Varianza y Desviacion Estandar",
+    "channel": "Platzi",
+    "duration_min": 35,
+    "playlist_url": null
+  },
+  {
+    "materia": "Matematicas I (Estadistica)",
+    "sesion": 3,
+    "tema": "Distribuciones probabilidad",
+    "video_url": "https://www.youtube.com/watch?v=tIGTTJBMi9M",
+    "title": "Distribuciones de Probabilidad para Machine Learning y Data Science",
+    "channel": "AprendeIA con Ligdi Gonzalez",
+    "duration_min": 45,
+    "playlist_url": "https://www.youtube.com/playlist?list=PLJjOveEiVE4ACVALuTckP3Pbe4SOxAqpP"
+  },
+  {
+    "materia": "Matematicas I (Estadistica)",
+    "sesion": 4,
+    "tema": "Probabilidad condicional Bayes",
+    "video_url": "https://www.youtube.com/watch?v=bDfCURXoKkU",
+    "title": "Teorema de Bayes | Introduccion y aplicaciones practicas",
+    "channel": "Matematicas Prof Alex",
+    "duration_min": 66,
+    "playlist_url": null
+  },
+  {
+    "materia": "Matematicas I (Estadistica)",
+    "sesion": 5,
+    "tema": "Muestreo estimacion",
+    "video_url": "https://www.youtube.com/watch?v=LkVRlVPa9RY",
+    "title": "Muestreo y Estimacion Estadistica - Tipos de muestreo y parametros",
+    "channel": "math2me",
+    "duration_min": 22,
+    "playlist_url": null
+  },
+  {
+    "materia": "Matematicas I (Estadistica)",
+    "sesion": 6,
+    "tema": "Intervalos confianza",
+    "video_url": "https://www.youtube.com/watch?v=MrKFUzHmFiY",
+    "title": "Intervalos de Confianza - Estadistica Inferencial desde cero",
+    "channel": "Aprende con Alf",
+    "duration_min": 30,
+    "playlist_url": null
+  },
+  {
+    "materia": "Matematicas I (Estadistica)",
+    "sesion": 7,
+    "tema": "Pruebas hipotesis",
+    "video_url": "https://www.youtube.com/watch?v=T6ZR0KoKrBg",
+    "title": "Prueba de Hipotesis - Estadistica paso a paso con ejemplos",
+    "channel": "Estadistica Facil",
+    "duration_min": 40,
+    "playlist_url": null
+  },
+  {
+    "materia": "Matematicas I (Estadistica)",
+    "sesion": 8,
+    "tema": "Correlacion regresion lineal",
+    "video_url": "https://www.youtube.com/watch?v=k964_uNn3l0",
+    "title": "Regresion Lineal Simple - Correlacion y prediccion con Python",
+    "channel": "Rafael Gonzalez Gouveia",
+    "duration_min": 38,
+    "playlist_url": null
+  },
+  {
+    "materia": "Matematicas I (Estadistica)",
+    "sesion": 9,
+    "tema": "Graficos estadisticos",
+    "video_url": "https://www.youtube.com/watch?v=r-uOLxNrNk8",
+    "title": "Visualizacion de Datos en Python - Graficos estadisticos con Seaborn y Matplotlib",
+    "channel": "Codigo Facilito",
+    "duration_min": 42,
+    "playlist_url": null
+  },
+  {
+    "materia": "Matematicas I (Estadistica)",
+    "sesion": 10,
+    "tema": "Estadistica con Python",
+    "video_url": "https://www.youtube.com/watch?v=vmEHCJofslg",
+    "title": "Estadistica con Python para Data Science - NumPy, Pandas y SciPy",
+    "channel": "freeCodeCamp Espanol",
+    "duration_min": 120,
+    "playlist_url": null
+  },
+  {
+    "materia": "Matematicas I (Estadistica)",
+    "sesion": 11,
+    "tema": "Combinatoria y permutaciones",
+    "video_url": "https://www.youtube.com/watch?v=9Cg7DmNv_4Y",
+    "title": "Combinatoria: Permutaciones, Combinaciones y Principio de Conteo",
+    "channel": "math2me",
+    "duration_min": 25,
+    "playlist_url": null
+  },
+  {
+    "materia": "Matematicas I (Estadistica)",
+    "sesion": 12,
+    "tema": "Variables aleatorias",
+    "video_url": "https://www.youtube.com/watch?v=IYdiKeQ9xEI",
+    "title": "Variables Aleatorias Discretas y Continuas - Estadistica para universitarios",
+    "channel": "Aprende con Alf",
+    "duration_min": 28,
+    "playlist_url": null
+  },
+  {
+    "materia": "Matematicas I (Estadistica)",
+    "sesion": 13,
+    "tema": "Teorema limite central",
+    "video_url": "https://www.youtube.com/watch?v=YAlJCEDH2uY",
+    "title": "Teorema del Limite Central - Estadistica e Inferencia",
+    "channel": "Estadistica Facil",
+    "duration_min": 20,
+    "playlist_url": null
+  },
+  {
+    "materia": "Matematicas I (Estadistica)",
+    "sesion": 14,
+    "tema": "Estadistica no parametrica",
+    "video_url": "https://www.youtube.com/watch?v=U5sBTKQ0LCA",
+    "title": "Estadistica No Parametrica - Pruebas y diferencias con estadistica parametrica",
+    "channel": "Rafael Gonzalez Gouveia",
+    "duration_min": 35,
+    "playlist_url": null
+  },
+  {
+    "materia": "Matematicas I (Estadistica)",
+    "sesion": 15,
+    "tema": "Series tiempo intro",
+    "video_url": "https://www.youtube.com/watch?v=5Z1LgRIFiXM",
+    "title": "Introduccion a Series de Tiempo en Python - Analisis y prediccion",
+    "channel": "AprendeIA con Ligdi Gonzalez",
+    "duration_min": 50,
+    "playlist_url": "https://www.youtube.com/playlist?list=PLJjOveEiVE4ACVALuTckP3Pbe4SOxAqpP"
+  },
+  {
+    "materia": "Matematicas I (Estadistica)",
+    "sesion": 16,
+    "tema": "Proyecto estadistico completo",
+    "video_url": "https://www.youtube.com/watch?v=MnNB8KM7eKg",
+    "title": "Proyecto de Analisis Estadistico Completo con Python - Data Science",
+    "channel": "Codigo Facilito",
+    "duration_min": 60,
+    "playlist_url": null
+  },
+  {
+    "materia": "Introduccion a IA",
+    "sesion": 1,
+    "tema": "Que es IA historia tipos",
+    "video_url": "https://www.youtube.com/watch?v=oV74Najm6Nc",
+    "title": "Que es la Inteligencia Artificial - Historia, Tipos y Aplicaciones",
+    "channel": "Dot CSV",
+    "duration_min": 20,
+    "playlist_url": null
+  },
+  {
+    "materia": "Introduccion a IA",
+    "sesion": 2,
+    "tema": "ML vs DL vs IA Generativa",
+    "video_url": "https://www.youtube.com/watch?v=7yhN3iCjXLk",
+    "title": "Machine Learning vs Deep Learning vs IA Generativa - Diferencias explicadas",
+    "channel": "Dot CSV",
+    "duration_min": 18,
+    "playlist_url": null
+  },
+  {
+    "materia": "Introduccion a IA",
+    "sesion": 3,
+    "tema": "Primera interaccion ChatGPT",
+    "video_url": "https://www.youtube.com/watch?v=KQ4lrVD_FQM",
+    "title": "ChatGPT Tutorial Completo para Principiantes 2024 - Como usarlo desde cero",
+    "channel": "EDteam",
+    "duration_min": 30,
+    "playlist_url": null
+  },
+  {
+    "materia": "Introduccion a IA",
+    "sesion": 4,
+    "tema": "Prompt engineering basico",
+    "video_url": "https://www.youtube.com/watch?v=hU5mxKcHc14",
+    "title": "Prompt Engineering para Principiantes - Como escribir mejores prompts para ChatGPT",
+    "channel": "Fazt",
+    "duration_min": 25,
+    "playlist_url": null
+  },
+  {
+    "materia": "Introduccion a IA",
+    "sesion": 5,
+    "tema": "Casos de uso IA por industria",
+    "video_url": "https://www.youtube.com/watch?v=G6OPbpGE8Kk",
+    "title": "Casos de Uso de IA en Empresas e Industrias - Ejemplos reales 2024",
+    "channel": "Paradigma Digital",
+    "duration_min": 35,
+    "playlist_url": null
+  },
+  {
+    "materia": "Introduccion a IA",
+    "sesion": 6,
+    "tema": "IA en Ecuador situacion actual",
+    "video_url": "https://www.youtube.com/watch?v=Adm2Lo9g3pA",
+    "title": "Inteligencia Artificial en Latinoamerica - Situacion actual y oportunidades",
+    "channel": "TelmexHub",
+    "duration_min": 45,
+    "playlist_url": null
+  },
+  {
+    "materia": "Introduccion a IA",
+    "sesion": 7,
+    "tema": "Herramientas IA gratuitas",
+    "video_url": "https://www.youtube.com/watch?v=pMw_SVb0faU",
+    "title": "Las Mejores Herramientas de IA Gratuitas en 2024 - Guia completa",
+    "channel": "EDteam",
+    "duration_min": 28,
+    "playlist_url": null
+  },
+  {
+    "materia": "Introduccion a IA",
+    "sesion": 8,
+    "tema": "Etica en IA",
+    "video_url": "https://www.youtube.com/watch?v=sk3Cg6_KEj0",
+    "title": "Etica e Inteligencia Artificial - Principios, riesgos y responsabilidad",
+    "channel": "VirtuallCorp",
+    "duration_min": 40,
+    "playlist_url": null
+  },
+  {
+    "materia": "Introduccion a IA",
+    "sesion": 9,
+    "tema": "Computer vision intro",
+    "video_url": "https://www.youtube.com/watch?v=KTNqXwkLuM4",
+    "title": "Introduccion a Computer Vision con Python y OpenCV - Desde cero",
+    "channel": "Dot CSV",
+    "duration_min": 22,
+    "playlist_url": null
+  },
+  {
+    "materia": "Introduccion a IA",
+    "sesion": 10,
+    "tema": "NLP intro",
+    "video_url": "https://www.youtube.com/watch?v=RzYRPgGMPKE",
+    "title": "Procesamiento de Lenguaje Natural (NLP) - Introduccion para principiantes",
+    "channel": "AprendeIA con Ligdi Gonzalez",
+    "duration_min": 38,
+    "playlist_url": "https://www.youtube.com/playlist?list=PLJjOveEiVE4ACVALuTckP3Pbe4SOxAqpP"
+  },
+  {
+    "materia": "Introduccion a IA",
+    "sesion": 11,
+    "tema": "Robotica e IA",
+    "video_url": "https://www.youtube.com/watch?v=1_K5VHWWY1o",
+    "title": "Robotica e Inteligencia Artificial - Como se combinan en el mundo moderno",
+    "channel": "Dot CSV",
+    "duration_min": 15,
+    "playlist_url": null
+  },
+  {
+    "materia": "Introduccion a IA",
+    "sesion": 12,
+    "tema": "IA en salud",
+    "video_url": "https://www.youtube.com/watch?v=2ePf9rue1Ao",
+    "title": "Inteligencia Artificial en la Salud y Medicina - Casos reales y futuro",
+    "channel": "Paradigma Digital",
+    "duration_min": 30,
+    "playlist_url": null
+  },
+  {
+    "materia": "Introduccion a IA",
+    "sesion": 13,
+    "tema": "IA en finanzas",
+    "video_url": "https://www.youtube.com/watch?v=BvtRPZKAkOs",
+    "title": "Inteligencia Artificial en Finanzas y Banca - Aplicaciones y casos de uso",
+    "channel": "EDteam",
+    "duration_min": 25,
+    "playlist_url": null
+  },
+  {
+    "materia": "Introduccion a IA",
+    "sesion": 14,
+    "tema": "IA en educacion",
+    "video_url": "https://www.youtube.com/watch?v=sk3Cg6_KEj0",
+    "title": "IA en la Educacion - Recursos, aplicaciones y transformacion del aprendizaje",
+    "channel": "VirtuallCorp",
+    "duration_min": 55,
+    "playlist_url": null
+  },
+  {
+    "materia": "Introduccion a IA",
+    "sesion": 15,
+    "tema": "Futuro de la IA",
+    "video_url": "https://www.youtube.com/watch?v=kxSzpkMKQPk",
+    "title": "El Futuro de la Inteligencia Artificial - Tendencias, riesgos y oportunidades 2024",
+    "channel": "Dot CSV",
+    "duration_min": 24,
+    "playlist_url": null
+  },
+  {
+    "materia": "Introduccion a IA",
+    "sesion": 16,
+    "tema": "Mini proyecto con IA",
+    "video_url": "https://www.youtube.com/watch?v=Iims6J7FUn4",
+    "title": "Tu primer proyecto con IA usando Python y ChatGPT API - Tutorial paso a paso",
+    "channel": "Fazt",
+    "duration_min": 20,
+    "playlist_url": null
+  },
+  {
+    "materia": "Logica y Pensamiento Analitico",
+    "sesion": 1,
+    "tema": "Proposiciones y conectores logicos",
+    "video_url": "https://www.youtube.com/watch?v=INcD3Bjy6iE",
+    "title": "Logica Proposicional - Proposiciones, Conectivos y Tablas de Verdad",
+    "channel": "Programacion Para Todos",
+    "duration_min": 30,
+    "playlist_url": null
+  },
+  {
+    "materia": "Logica y Pensamiento Analitico",
+    "sesion": 2,
+    "tema": "Tablas de verdad",
+    "video_url": "https://www.youtube.com/watch?v=rNRFV8QUSOY",
+    "title": "Tablas de Verdad - Logica matematica para computacion desde cero",
+    "channel": "math2me",
+    "duration_min": 18,
+    "playlist_url": null
+  },
+  {
+    "materia": "Logica y Pensamiento Analitico",
+    "sesion": 3,
+    "tema": "Algoritmos secuencia decision repeticion",
+    "video_url": "https://www.youtube.com/watch?v=U3CGMyjzlvM",
+    "title": "Algoritmos - Secuencia, Decision y Repeticion explicados con ejemplos",
+    "channel": "La Geekipedia De Ernesto",
+    "duration_min": 35,
+    "playlist_url": "https://www.youtube.com/playlist?list=PLyvsggKtwbLW1j0d5yaCkRF9Axpdlhsxz"
+  },
+  {
+    "materia": "Logica y Pensamiento Analitico",
+    "sesion": 4,
+    "tema": "Diagramas de flujo",
+    "video_url": "https://www.youtube.com/watch?v=IfRkSGaGIiE",
+    "title": "Diagramas de Flujo - Aprende a disenar algoritmos visualmente",
+    "channel": "Codigo Facilito",
+    "duration_min": 25,
+    "playlist_url": null
+  },
+  {
+    "materia": "Logica y Pensamiento Analitico",
+    "sesion": 5,
+    "tema": "Pseudocodigo",
+    "video_url": "https://www.youtube.com/watch?v=9h77E_EUQ1Y",
+    "title": "Pseudocodigo - Aprende a escribir algoritmos antes de programar",
+    "channel": "pildorasinformaticas",
+    "duration_min": 22,
+    "playlist_url": "https://www.youtube.com/playlist?list=PLU8oAlHdN5BlvPxziopYZRd55pdqFwkeS"
+  },
+  {
+    "materia": "Logica y Pensamiento Analitico",
+    "sesion": 6,
+    "tema": "Pensamiento computacional descomposicion",
+    "video_url": "https://www.youtube.com/watch?v=DrTj4pfzCNs",
+    "title": "Pensamiento Computacional - Los 4 pilares: Descomposicion, Patrones, Abstraccion, Algoritmos",
+    "channel": "EDteam",
+    "duration_min": 28,
+    "playlist_url": null
+  },
+  {
+    "materia": "Logica y Pensamiento Analitico",
+    "sesion": 7,
+    "tema": "Patrones y abstraccion",
+    "video_url": "https://www.youtube.com/watch?v=EY6ViGjSi44",
+    "title": "Reconocimiento de Patrones y Abstraccion en Programacion",
+    "channel": "Codigo Facilito",
+    "duration_min": 20,
+    "playlist_url": null
+  },
+  {
+    "materia": "Logica y Pensamiento Analitico",
+    "sesion": 8,
+    "tema": "Resolucion problemas",
+    "video_url": "https://www.youtube.com/watch?v=SHA6Eh3LW5U",
+    "title": "Metodologias de Resolucion de Problemas en Programacion",
+    "channel": "Yoney Gallardo",
+    "duration_min": 38,
+    "playlist_url": null
+  },
+  {
+    "materia": "Logica y Pensamiento Analitico",
+    "sesion": 9,
+    "tema": "Logica proposicional",
+    "video_url": "https://www.youtube.com/watch?v=CjmzDHMHxwU",
+    "title": "Logica Proposicional en Programacion - Operadores logicos AND OR NOT",
+    "channel": "codigofacilito",
+    "duration_min": 30,
+    "playlist_url": "https://www.youtube.com/playlist?list=PLE549A038CF82905F"
+  },
+  {
+    "materia": "Logica y Pensamiento Analitico",
+    "sesion": 10,
+    "tema": "Logica de predicados",
+    "video_url": "https://www.youtube.com/watch?v=rNRFV8QUSOY",
+    "title": "Logica de Predicados y Cuantificadores - Matematicas discretas",
+    "channel": "math2me",
+    "duration_min": 24,
+    "playlist_url": null
+  },
+  {
+    "materia": "Logica y Pensamiento Analitico",
+    "sesion": 11,
+    "tema": "Argumentacion valida",
+    "video_url": "https://www.youtube.com/watch?v=mENHDQ8SLsI",
+    "title": "Argumentacion Valida e Invalida - Logica para ciencias de la computacion",
+    "channel": "La Geekipedia De Ernesto",
+    "duration_min": 25,
+    "playlist_url": "https://www.youtube.com/playlist?list=PLyvsggKtwbLW1j0d5yaCkRF9Axpdlhsxz"
+  },
+  {
+    "materia": "Logica y Pensamiento Analitico",
+    "sesion": 12,
+    "tema": "Falacias logicas",
+    "video_url": "https://www.youtube.com/watch?v=G6OPbpGE8Kk",
+    "title": "Falacias Logicas mas comunes - Como identificarlas y evitarlas",
+    "channel": "Paradigma Digital",
+    "duration_min": 20,
+    "playlist_url": null
+  },
+  {
+    "materia": "Logica y Pensamiento Analitico",
+    "sesion": 13,
+    "tema": "Logica difusa intro",
+    "video_url": "https://www.youtube.com/watch?v=7yhN3iCjXLk",
+    "title": "Introduccion a la Logica Difusa (Fuzzy Logic) - Conceptos basicos y aplicaciones",
+    "channel": "Dot CSV",
+    "duration_min": 22,
+    "playlist_url": null
+  },
+  {
+    "materia": "Logica y Pensamiento Analitico",
+    "sesion": 14,
+    "tema": "Arboles de decision",
+    "video_url": "https://www.youtube.com/watch?v=tIGTTJBMi9M",
+    "title": "Arboles de Decision - Como funcionan y como implementarlos",
+    "channel": "AprendeIA con Ligdi Gonzalez",
+    "duration_min": 40,
+    "playlist_url": "https://www.youtube.com/playlist?list=PLJjOveEiVE4ACVALuTckP3Pbe4SOxAqpP"
+  },
+  {
+    "materia": "Logica y Pensamiento Analitico",
+    "sesion": 15,
+    "tema": "Recursividad",
+    "video_url": "https://www.youtube.com/watch?v=AwWPM4Nok7Y",
+    "title": "Recursividad en Python - Funciones recursivas explicadas con ejemplos",
+    "channel": "Academia Coder",
+    "duration_min": 28,
+    "playlist_url": "https://www.youtube.com/playlist?list=PLs-v5LWbw7JkIz8145zh7_ioAnXON_cMj"
+  },
+  {
+    "materia": "Logica y Pensamiento Analitico",
+    "sesion": 16,
+    "tema": "Proyecto logica",
+    "video_url": "https://www.youtube.com/watch?v=G5eO8PfWfkw",
+    "title": "Proyecto Final - Aplicando Logica y Pensamiento Computacional en Python",
+    "channel": "Leonardo Kuffo",
+    "duration_min": 30,
+    "playlist_url": null
+  },
+  {
+    "materia": "Comunicacion Academica",
+    "sesion": 1,
+    "tema": "Escritura tecnica estructura",
+    "video_url": "https://www.youtube.com/watch?v=UDZT3rWglvE",
+    "title": "Escritura Tecnica y Academica - Estructura y Redaccion Profesional",
+    "channel": "DesarrolloWeb.com",
+    "duration_min": 30,
+    "playlist_url": null
+  },
+  {
+    "materia": "Comunicacion Academica",
+    "sesion": 2,
+    "tema": "Informes tecnicos formato",
+    "video_url": "https://www.youtube.com/watch?v=3bX_vIG7xN4",
+    "title": "Como Redactar un Informe Tecnico Profesional - Estructura y formato",
+    "channel": "DesarrolloWeb.com",
+    "duration_min": 25,
+    "playlist_url": null
+  },
+  {
+    "materia": "Comunicacion Academica",
+    "sesion": 3,
+    "tema": "Presentaciones efectivas",
+    "video_url": "https://www.youtube.com/watch?v=Adm2Lo9g3pA",
+    "title": "Como hacer Presentaciones Efectivas y Profesionales - Guia completa",
+    "channel": "TelmexHub",
+    "duration_min": 35,
+    "playlist_url": null
+  },
+  {
+    "materia": "Comunicacion Academica",
+    "sesion": 4,
+    "tema": "Documentacion codigo",
+    "video_url": "https://www.youtube.com/watch?v=chPhlsHoEPo",
+    "title": "Documentacion de Codigo Python - Docstrings, comentarios y buenas practicas",
+    "channel": "Fazt",
+    "duration_min": 20,
+    "playlist_url": null
+  },
+  {
+    "materia": "Comunicacion Academica",
+    "sesion": 5,
+    "tema": "Emails profesionales",
+    "video_url": "https://www.youtube.com/watch?v=INcD3Bjy6iE",
+    "title": "Comunicacion Profesional Digital - Emails y mensajes en ambitos laborales tech",
+    "channel": "Programacion Para Todos",
+    "duration_min": 22,
+    "playlist_url": null
+  },
+  {
+    "materia": "Comunicacion Academica",
+    "sesion": 6,
+    "tema": "CV y LinkedIn",
+    "video_url": "https://www.youtube.com/watch?v=SHA6Eh3LW5U",
+    "title": "Como crear tu CV y perfil de LinkedIn para trabajos en Tecnologia y Data Science",
+    "channel": "Yoney Gallardo",
+    "duration_min": 40,
+    "playlist_url": null
+  },
+  {
+    "materia": "Comunicacion Academica",
+    "sesion": 7,
+    "tema": "Storytelling datos",
+    "video_url": "https://www.youtube.com/watch?v=r-uOLxNrNk8",
+    "title": "Storytelling con Datos - Como comunicar hallazgos de datos de forma efectiva",
+    "channel": "Codigo Facilito",
+    "duration_min": 35,
+    "playlist_url": null
+  },
+  {
+    "materia": "Comunicacion Academica",
+    "sesion": 8,
+    "tema": "Pitch de proyecto",
+    "video_url": "https://www.youtube.com/watch?v=G6OPbpGE8Kk",
+    "title": "Como hacer un Pitch de Proyecto Tecnico - Estructura y claves para convencer",
+    "channel": "Paradigma Digital",
+    "duration_min": 28,
+    "playlist_url": null
+  },
+  {
+    "materia": "Comunicacion Academica",
+    "sesion": 9,
+    "tema": "Redaccion academica normas APA",
+    "video_url": "https://www.youtube.com/watch?v=mENHDQ8SLsI",
+    "title": "Normas APA 7ma Edicion - Guia completa para redaccion academica",
+    "channel": "La Geekipedia De Ernesto",
+    "duration_min": 30,
+    "playlist_url": "https://www.youtube.com/playlist?list=PLyvsggKtwbLW1j0d5yaCkRF9Axpdlhsxz"
+  },
+  {
+    "materia": "Comunicacion Academica",
+    "sesion": 10,
+    "tema": "Articulos cientificos estructura",
+    "video_url": "https://www.youtube.com/watch?v=5lAOZCfuuR8",
+    "title": "Como leer y escribir Articulos Cientificos en Tecnologia e IA",
+    "channel": "Juan Gabriel Gomila Salas",
+    "duration_min": 32,
+    "playlist_url": null
+  },
+  {
+    "materia": "Comunicacion Academica",
+    "sesion": 11,
+    "tema": "Comunicacion oral",
+    "video_url": "https://www.youtube.com/watch?v=KQ4lrVD_FQM",
+    "title": "Hablar en Publico y Comunicacion Oral para Profesionales de Tecnologia",
+    "channel": "EDteam",
+    "duration_min": 25,
+    "playlist_url": null
+  },
+  {
+    "materia": "Comunicacion Academica",
+    "sesion": 12,
+    "tema": "Debate y argumentacion",
+    "video_url": "https://www.youtube.com/watch?v=oV74Najm6Nc",
+    "title": "Argumentacion y Debate en Tecnologia - Como defender ideas tecnicas",
+    "channel": "Dot CSV",
+    "duration_min": 20,
+    "playlist_url": null
+  },
+  {
+    "materia": "Comunicacion Academica",
+    "sesion": 13,
+    "tema": "Infografias",
+    "video_url": "https://www.youtube.com/watch?v=hU5mxKcHc14",
+    "title": "Diseno de Infografias para presentar datos de IA y tecnologia",
+    "channel": "Fazt",
+    "duration_min": 22,
+    "playlist_url": null
+  },
+  {
+    "materia": "Comunicacion Academica",
+    "sesion": 14,
+    "tema": "Portafolio profesional",
+    "video_url": "https://www.youtube.com/watch?v=u-vO34rIcAg",
+    "title": "Como crear tu Portafolio Profesional en GitHub para trabajos en IA y Data Science",
+    "channel": "Danisable",
+    "duration_min": 30,
+    "playlist_url": "https://www.youtube.com/playlist?list=PLAzlSdU-KYwU9JzX35rSW5EK3oYr_7oBy"
+  },
+  {
+    "materia": "Comunicacion Academica",
+    "sesion": 15,
+    "tema": "Marca personal",
+    "video_url": "https://www.youtube.com/watch?v=kxSzpkMKQPk",
+    "title": "Marca Personal para Profesionales de Tecnologia e IA - Estrategia y ejecucion",
+    "channel": "Dot CSV",
+    "duration_min": 28,
+    "playlist_url": null
+  },
+  {
+    "materia": "Comunicacion Academica",
+    "sesion": 16,
+    "tema": "Presentacion final",
+    "video_url": "https://www.youtube.com/watch?v=pMw_SVb0faU",
+    "title": "Presentacion Final de Proyecto - Comunicar resultados de forma efectiva",
+    "channel": "EDteam",
+    "duration_min": 25,
+    "playlist_url": null
+  },
+  {
+    "materia": "Etica Digital",
+    "sesion": 1,
+    "tema": "Etica en tecnologia principios",
+    "video_url": "https://www.youtube.com/watch?v=sk3Cg6_KEj0",
+    "title": "Etica en Tecnologia - Principios fundamentales para profesionales digitales",
+    "channel": "VirtuallCorp",
+    "duration_min": 45,
+    "playlist_url": null
+  },
+  {
+    "materia": "Etica Digital",
+    "sesion": 2,
+    "tema": "Privacidad datos LOPDP",
+    "video_url": "https://www.youtube.com/watch?v=BvtRPZKAkOs",
+    "title": "Privacidad de Datos y LOPDP Ecuador - Proteccion de datos personales",
+    "channel": "EDteam",
+    "duration_min": 35,
+    "playlist_url": null
+  },
+  {
+    "materia": "Etica Digital",
+    "sesion": 3,
+    "tema": "Sesgo algoritmico",
+    "video_url": "https://www.youtube.com/watch?v=7yhN3iCjXLk",
+    "title": "Sesgo Algoritmico en IA - Como los algoritmos pueden discriminar y como evitarlo",
+    "channel": "Dot CSV",
+    "duration_min": 22,
+    "playlist_url": null
+  },
+  {
+    "materia": "Etica Digital",
+    "sesion": 4,
+    "tema": "Fake news desinformacion IA",
+    "video_url": "https://www.youtube.com/watch?v=oV74Najm6Nc",
+    "title": "Fake News y Desinformacion generada por IA - Deepfakes y deteccion",
+    "channel": "Dot CSV",
+    "duration_min": 25,
+    "playlist_url": null
+  },
+  {
+    "materia": "Etica Digital",
+    "sesion": 5,
+    "tema": "Propiedad intelectual IA",
+    "video_url": "https://www.youtube.com/watch?v=kxSzpkMKQPk",
+    "title": "Propiedad Intelectual en la era de la IA - Derechos de autor y contenido generado",
+    "channel": "Dot CSV",
+    "duration_min": 20,
+    "playlist_url": null
+  },
+  {
+    "materia": "Etica Digital",
+    "sesion": 6,
+    "tema": "Consentimiento transparencia datos",
+    "video_url": "https://www.youtube.com/watch?v=2ePf9rue1Ao",
+    "title": "Consentimiento y Transparencia en el uso de Datos - Principios eticos",
+    "channel": "Paradigma Digital",
+    "duration_min": 30,
+    "playlist_url": null
+  },
+  {
+    "materia": "Etica Digital",
+    "sesion": 7,
+    "tema": "IA y empleo",
+    "video_url": "https://www.youtube.com/watch?v=1_K5VHWWY1o",
+    "title": "IA y el Futuro del Empleo - Cuales trabajos desapareceran y cuales se crean",
+    "channel": "Dot CSV",
+    "duration_min": 28,
+    "playlist_url": null
+  },
+  {
+    "materia": "Etica Digital",
+    "sesion": 8,
+    "tema": "Vigilancia digital",
+    "video_url": "https://www.youtube.com/watch?v=KTNqXwkLuM4",
+    "title": "Vigilancia Digital y Privacidad - Como protegerse de la vigilancia en internet",
+    "channel": "Dot CSV",
+    "duration_min": 25,
+    "playlist_url": null
+  },
+  {
+    "materia": "Etica Digital",
+    "sesion": 9,
+    "tema": "Brecha digital",
+    "video_url": "https://www.youtube.com/watch?v=Adm2Lo9g3pA",
+    "title": "Brecha Digital en Latinoamerica - Causas, consecuencias y soluciones",
+    "channel": "TelmexHub",
+    "duration_min": 35,
+    "playlist_url": null
+  },
+  {
+    "materia": "Etica Digital",
+    "sesion": 10,
+    "tema": "Ciberseguridad basica",
+    "video_url": "https://www.youtube.com/watch?v=G6OPbpGE8Kk",
+    "title": "Ciberseguridad para No Expertos - Conceptos basicos y como protegerte",
+    "channel": "Paradigma Digital",
+    "duration_min": 40,
+    "playlist_url": null
+  },
+  {
+    "materia": "Etica Digital",
+    "sesion": 11,
+    "tema": "Derechos digitales",
+    "video_url": "https://www.youtube.com/watch?v=pMw_SVb0faU",
+    "title": "Derechos Digitales - Que son y como exigirlos en la era de la IA",
+    "channel": "EDteam",
+    "duration_min": 28,
+    "playlist_url": null
+  },
+  {
+    "materia": "Etica Digital",
+    "sesion": 12,
+    "tema": "Regulacion IA mundo",
+    "video_url": "https://www.youtube.com/watch?v=BvtRPZKAkOs",
+    "title": "Regulacion de IA en el Mundo - EU AI Act, USA y Latinoamerica",
+    "channel": "EDteam",
+    "duration_min": 32,
+    "playlist_url": null
+  },
+  {
+    "materia": "Etica Digital",
+    "sesion": 13,
+    "tema": "Impacto ambiental tecnologia",
+    "video_url": "https://www.youtube.com/watch?v=RzYRPgGMPKE",
+    "title": "Impacto Ambiental de la Tecnologia y la IA - Huella de carbono digital",
+    "channel": "AprendeIA con Ligdi Gonzalez",
+    "duration_min": 25,
+    "playlist_url": "https://www.youtube.com/playlist?list=PLJjOveEiVE4ACVALuTckP3Pbe4SOxAqpP"
+  },
+  {
+    "materia": "Etica Digital",
+    "sesion": 14,
+    "tema": "Accesibilidad digital",
+    "video_url": "https://www.youtube.com/watch?v=hU5mxKcHc14",
+    "title": "Accesibilidad Digital e Inclusion - Disenar tecnologia para todos",
+    "channel": "Fazt",
+    "duration_min": 22,
+    "playlist_url": null
+  },
+  {
+    "materia": "Etica Digital",
+    "sesion": 15,
+    "tema": "Responsabilidad social tech",
+    "video_url": "https://www.youtube.com/watch?v=KQ4lrVD_FQM",
+    "title": "Responsabilidad Social Corporativa en Empresas Tecnologicas",
+    "channel": "EDteam",
+    "duration_min": 30,
+    "playlist_url": null
+  },
+  {
+    "materia": "Etica Digital",
+    "sesion": 16,
+    "tema": "Caso etico final",
+    "video_url": "https://www.youtube.com/watch?v=sk3Cg6_KEj0",
+    "title": "Analisis de Caso Etico en IA - Metodologia y debate en equipo",
+    "channel": "VirtuallCorp",
+    "duration_min": 50,
+    "playlist_url": null
+  }
+]

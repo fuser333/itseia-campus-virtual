@@ -1,0 +1,41 @@
+{
+  "materia": "Ingenieria de Datos",
+  "periodo": "P3",
+  "recursos": [
+    {
+      "titulo": "Apache Airflow Tutorial en Español - Orquestacion de pipelines de datos",
+      "url": "https://airflow.apache.org/docs/apache-airflow/stable/tutorial/index.html",
+      "tipo": "documentacion",
+      "idioma": "ingles con tutoriales en español en YouTube",
+      "descripcion": "Documentacion oficial de Apache Airflow para orquestacion de workflows de datos. La comunidad latinoamericana tiene tutoriales en YouTube: buscar 'Apache Airflow tutorial español Platzi'. Airflow es el orquestador mas usado en ingenieria de datos. Gratuito y open source con version cloud en Google Composer."
+    },
+    {
+      "titulo": "dbt (data build tool) - Transformaciones de datos modernas",
+      "url": "https://docs.getdbt.com/docs/introduction",
+      "tipo": "herramienta",
+      "idioma": "ingles con comunidad español en Slack",
+      "descripcion": "dbt es la herramienta estandar para transformaciones de datos en el stack moderno (ELT). Tiene comunidad hispanohablante activa en dbt Slack en español. El canal de YouTube 'Kahan Data Solutions' subtitulado en español cubre dbt desde cero. Gratuito en su version core, muy demandado en empresas tech LATAM."
+    },
+    {
+      "titulo": "Curso de Data Engineering - DataTalks.Club (con subtitulos español)",
+      "url": "https://github.com/DataTalksClub/data-engineering-zoomcamp",
+      "tipo": "curso",
+      "idioma": "ingles con subtitulos y comunidad en español",
+      "descripcion": "Data Engineering Zoomcamp gratuito de DataTalks.Club con 9 semanas de contenido. Cubre Docker, Terraform, BigQuery, Airflow, dbt, Spark y Kafka. Repositorio GitHub con todos los materiales. La comunidad tiene canal de Discord con hispanohablantes activos. El mejor curso gratuito de ingenieria de datos disponible en 2024."
+    },
+    {
+      "titulo": "Spark con Python (PySpark) - Tutorial en español DataBricks",
+      "url": "https://spark.apache.org/docs/latest/api/python/getting_started/index.html",
+      "tipo": "documentacion",
+      "idioma": "ingles con laboratorios gratuitos en español",
+      "descripcion": "Documentacion de PySpark con ejemplos. DataBricks ofrece Community Edition gratuita para practicar Spark en la nube. El canal de YouTube 'Aprende Machine Learning' y 'Codigo Maquina' tienen videos de PySpark en español. Apache Spark es el estandar para procesamiento de big data distribuido."
+    },
+    {
+      "titulo": "Portal Datos Abiertos Ecuador - Para pipelines de datos reales",
+      "url": "https://www.datosabiertos.gob.ec/",
+      "tipo": "dataset",
+      "idioma": "español",
+      "descripcion": "Portal de datos abiertos del gobierno ecuatoriano con mas de 500 datasets en formatos CSV, JSON, XML y Excel. Ideal para construir pipelines de ingenieria de datos reales: descarga de APIs, transformacion, carga en bases de datos. Datasets de salud, educacion, transporte y economia del Ecuador completamente gratuitos."
+    }
+  ]
+}

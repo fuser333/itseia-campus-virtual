@@ -1,0 +1,32 @@
+{
+  "materia": "Ingles Tecnico I",
+  "periodo": 2,
+  "videos": [
+    {
+      "titulo": "Ingles para Programadores - Curso completo",
+      "url": "https://platzi.com/cursos/ingles-developers/",
+      "canal": "Platzi",
+      "url_youtube": "https://www.youtube.com/@PlatziOnline",
+      "duracion_minutos": 60,
+      "año": 2024,
+      "idioma": "español_latam",
+      "usa_ia": false,
+      "justificacion": "Platzi es referencia en educacion tech para Latinoamerica. El Curso de Ingles para Programadores esta ensenado en espanol pero ensena comunicacion tecnica en ingles: pronunciacion de terminos tecnicos, lectura de documentacion, acronimos, neologismos del sector, roles en equipos de desarrollo, vocabulario para entrevistas de trabajo y estimacion de proyectos. Instructor: Sebastian Delmont. 12 clases, 1h de video, 8h de practica. Rating: 4.8 estrellas con 741 resenas. Directamente aplicable al contexto profesional de los egresados ITSEIA.",
+      "temas_clave": [
+        "Pronunciacion correcta de terminos de software en ingles",
+        "Nombres comunes en programacion y sus simbolos",
+        "Acronimos e iniciales tecnicas (API, REST, CRUD, OOP...)",
+        "Evolucion del lenguaje en tecnologia",
+        "Vocabulario de tecnologias y frameworks",
+        "Roles y jerarquias en equipos de desarrollo",
+        "Neologismos del desarrollo de software",
+        "Preparacion para entrevistas de trabajo en ingles",
+        "Gestion de proyectos y estimacion en ingles"
+      ],
+      "nivel": "principiante",
+      "prerequisitos": "Ingles A2 basico",
+      "rating": "4.8 estrellas (741 resenas)",
+      "nota": "El curso esta en espanol pero ensena terminologia tecnica en ingles. Ideal para complementar con GrokEnglish (grokenglish.dev/es) para practica interactiva adicional."
+    }
+  ]
+}

@@ -1,0 +1,211 @@
+{
+  "titulo": "IA para Abogados y Profesionales Juridicos",
+  "profesion": "abogado",
+  "descripcion": "Curso especializado para abogados, fiscales, asesores juridicos y profesionales del derecho ecuatoriano. Aprende a usar IA para investigacion jurisprudencial, redaccion de documentos, analisis de riesgo y cumplimiento normativo, con ejemplos del sistema juridico ecuatoriano: COIP, COGEP, Codigo Civil, SATJE y CNJ.",
+  "duracion_total_horas": 20,
+  "semanas": 4,
+  "precio": {
+    "express": 97,
+    "estandar": 197,
+    "completo": 297,
+    "descripcion_express": "Modulos T-01, T-02, J-01, J-02 — 1 semana",
+    "descripcion_estandar": "Todos los modulos — 4 semanas",
+    "descripcion_completo": "Todo + sesion 1-on-1 con instructor juridico IA — 4 semanas"
+  },
+  "herramientas_principales": [
+    "ChatGPT Plus (GPT-4o)",
+    "Claude (Anthropic)",
+    "Microsoft Copilot para Word",
+    "Lexis+ AI",
+    "Harvey AI"
+  ],
+  "herramientas_secundarias": [
+    "Perplexity AI (investigacion rapida)",
+    "Gamma.app (presentaciones juridicas)",
+    "Bing Copilot (busqueda web)",
+    "Notion AI (gestion de casos)"
+  ],
+  "perfil_egreso": {
+    "titulo": "Abogado con Competencias IA",
+    "descripcion": "Profesional juridico capaz de integrar herramientas de IA en su practica diaria para incrementar productividad, profundidad de investigacion y calidad de documentos, manteniendo el criterio profesional y la responsabilidad etica propias del ejercicio del derecho.",
+    "competencias": [
+      "Usar ChatGPT y Claude como asistentes de investigacion juridica con validacion critica",
+      "Buscar y analizar jurisprudencia del SATJE y CNJ con apoyo de IA",
+      "Redactar y revisar contratos con asistencia de IA bajo normativa ecuatoriana",
+      "Identificar riesgos legales en contratos y operaciones comerciales",
+      "Generar borradores de documentos procesales (demandas, recursos, contestaciones)",
+      "Aplicar la IA respetando la LOPDP y el marco etico-profesional del abogado",
+      "Evaluar criticamente las respuestas de la IA en contextos juridicos"
+    ]
+  },
+  "modulos": [
+    {
+      "codigo": "T-01",
+      "titulo": "Fundamentos de IA para Profesionales Juridicos",
+      "tipo": "leccion",
+      "duracion_minutos": 45,
+      "semana": 1,
+      "descripcion": "Comprension solida de como funciona la IA, sus capacidades y limitaciones especificas para el derecho. Diferencias entre modelos de lenguaje, IA generativa y herramientas especializadas. Por que la IA no es un oraculo juridico sino un asistente poderoso.",
+      "objetivos": [
+        "Comprender que es la IA generativa y como genera texto juridico",
+        "Identificar las herramientas de IA mas relevantes para abogados en 2026",
+        "Entender por que la IA comete errores en citas legales y como detectarlos",
+        "Establecer un flujo de trabajo responsable con IA en la practica juridica"
+      ],
+      "archivo": "modulos/T01_fundamentos_ia_juridica.md"
+    },
+    {
+      "codigo": "T-02",
+      "titulo": "ChatGPT y Claude para Abogados: Uso Profesional",
+      "tipo": "leccion",
+      "duracion_minutos": 60,
+      "semana": 1,
+      "descripcion": "Dominio practico de las dos herramientas de IA mas utiles para el ejercicio juridico. Tecnicas de prompting avanzado para contextos legales, uso de memoria de conversacion, archivos y modo de razonamiento extendido. Comparacion de fortalezas para tareas especificas del derecho.",
+      "objetivos": [
+        "Escribir prompts efectivos para tareas juridicas especificas",
+        "Usar el modo de analisis de documentos para revisar contratos y escrituras",
+        "Aprovechar el modo de razonamiento de Claude para analisis complejos",
+        "Construir flujos de trabajo repetibles para tareas recurrentes"
+      ],
+      "archivo": "modulos/T02_chatgpt_claude_abogados.md"
+    },
+    {
+      "codigo": "T-03",
+      "titulo": "Seguridad y Confidencialidad de Informacion Legal",
+      "tipo": "leccion_quiz",
+      "duracion_minutos": 30,
+      "semana": 1,
+      "descripcion": "Marco de seguridad para el uso de IA con informacion de clientes, contratos y documentos sensibles. LOPDP Ecuador, secreto profesional y responsabilidad del abogado. Que datos NUNCA deben ingresarse en herramientas publicas de IA.",
+      "objetivos": [
+        "Aplicar la LOPDP ecuatoriana al uso de IA con datos de clientes",
+        "Distinguir entre IA publica y IA privada (enterprise) para datos sensibles",
+        "Establecer politica de anonimizacion de datos antes de usar IA",
+        "Comprender las implicaciones del secreto profesional en el uso de IA"
+      ],
+      "archivo": "modulos/T03_seguridad_confidencialidad.md",
+      "tiene_quiz": true,
+      "quiz_id": "quiz_seguridad_evaluacion"
+    },
+    {
+      "codigo": "T-04",
+      "titulo": "Evaluacion Critica: Cuando NO Confiar en la IA",
+      "tipo": "leccion_quiz",
+      "duracion_minutos": 30,
+      "semana": 2,
+      "descripcion": "La habilidad mas importante: saber cuando la IA esta equivocada. Alucinaciones en citas legales, normativa desactualizada, interpretaciones incorrectas. Caso famoso del abogado neoyorkino y las citas inventadas. Protocolo de verificacion para cualquier output juridico de IA.",
+      "objetivos": [
+        "Identificar los patrones de error mas comunes de la IA en contextos juridicos",
+        "Aplicar el protocolo de verificacion de citas legales generadas por IA",
+        "Distinguir entre usos de alto riesgo y bajo riesgo de IA juridica",
+        "Construir un criterio profesional informado sobre las limitaciones de la IA"
+      ],
+      "archivo": "modulos/T04_evaluacion_critica_ia.md",
+      "tiene_quiz": true,
+      "quiz_id": "quiz_seguridad_evaluacion"
+    },
+    {
+      "codigo": "J-01",
+      "titulo": "Investigacion Jurisprudencial con IA",
+      "tipo": "leccion",
+      "duracion_minutos": 60,
+      "semana": 2,
+      "descripcion": "Estrategias avanzadas para usar IA en investigacion de jurisprudencia, doctrina y normativa ecuatoriana. Integracion con SATJE, bases de datos del CNJ, y uso de IA para sintetizar y analizar fallos. Tecnicas para encontrar precedentes relevantes en minutos en lugar de horas.",
+      "objetivos": [
+        "Usar ChatGPT y Claude para analizar y sintetizar fallos del SATJE",
+        "Construir prompts de busqueda jurisprudencial con parametros especificos",
+        "Identificar tendencias jurisprudenciales con ayuda de IA",
+        "Integrar la investigacion IA con verificacion en fuentes primarias oficiales"
+      ],
+      "archivo": "modulos/J01_investigacion_jurisprudencial.md"
+    },
+    {
+      "codigo": "J-02",
+      "titulo": "Redaccion y Revision de Contratos con IA",
+      "tipo": "demo",
+      "duracion_minutos": 45,
+      "semana": 2,
+      "descripcion": "Uso practico de IA para redactar borradores de contratos, identificar clausulas problematicas, sugerir mejoras de redaccion y detectar vacios legales. Demo con contrato de compraventa bajo normativa ecuatoriana (Codigo Civil, Codigo de Comercio). Uso de Copilot en Word.",
+      "objetivos": [
+        "Generar borradores de contratos tipo con IA como punto de partida",
+        "Pedir a la IA que identifique riesgos y vacios en un contrato dado",
+        "Usar Microsoft Copilot en Word para revision y mejora de contratos",
+        "Adaptar plantillas de contratos al contexto juridico ecuatoriano"
+      ],
+      "archivo": "modulos/J02_redaccion_contratos.md"
+    },
+    {
+      "codigo": "J-03",
+      "titulo": "Analisis de Riesgo Legal Automatizado",
+      "tipo": "quiz",
+      "duracion_minutos": 30,
+      "semana": 3,
+      "descripcion": "Metodologia para usar IA en la identificacion y cuantificacion de riesgos legales en contratos, operaciones comerciales y situaciones procesales. Matrices de riesgo generadas con IA. Aplicacion practica en contratos de prestacion de servicios, joint ventures y contratos laborales bajo el Codigo de Trabajo.",
+      "objetivos": [
+        "Construir una matriz de riesgo legal usando IA como asistente de analisis",
+        "Identificar clausulas de alto riesgo en contratos comerciales",
+        "Usar IA para simular escenarios adversos en litigios",
+        "Presentar analisis de riesgo a clientes usando outputs de IA como insumo"
+      ],
+      "archivo": "modulos/J03_analisis_riesgo_legal.md",
+      "tiene_quiz": true,
+      "quiz_id": "quiz_riesgo_legal"
+    },
+    {
+      "codigo": "J-04",
+      "titulo": "Documentos Procesales con IA",
+      "tipo": "caso_practico",
+      "duracion_minutos": 45,
+      "semana": 3,
+      "descripcion": "Caso practico completo: bufete 'Andrade y Asociados' recibe caso de incumplimiento contractual. Uso de IA para redactar demanda, investigar precedentes, identificar estrategia procesal y preparar argumentacion. Aplicacion del COGEP y normativa procesal ecuatoriana.",
+      "objetivos": [
+        "Usar IA para generar un borrador de demanda bajo el COGEP",
+        "Investigar precedentes jurisprudenciales relevantes para el caso",
+        "Identificar la estrategia procesal optima con apoyo de analisis IA",
+        "Preparar argumentacion juridica con IA como herramienta de apoyo"
+      ],
+      "archivo": "modulos/J04_documentos_procesales.md",
+      "es_caso_practico": true
+    },
+    {
+      "codigo": "J-05",
+      "titulo": "Compliance: Marco Legal de la IA en Ecuador",
+      "tipo": "leccion",
+      "duracion_minutos": 30,
+      "semana": 4,
+      "descripcion": "Estado actual del marco normativo sobre IA en Ecuador y America Latina. LOPDP, regulaciones emergentes, propuestas de ley sobre IA en tramite. Implicaciones para el ejercicio juridico: responsabilidad cuando la IA comete errores, uso de IA como prueba, derechos de autor en outputs de IA.",
+      "objetivos": [
+        "Conocer el estado actual de la regulacion de IA en Ecuador",
+        "Entender las implicaciones de la LOPDP para el uso de IA con datos de clientes",
+        "Identificar los riesgos de responsabilidad profesional al usar IA",
+        "Estar preparado para asesorar a clientes sobre compliance en IA"
+      ],
+      "archivo": "modulos/J05_compliance_ia_ecuador.md"
+    }
+  ],
+  "calendario_sugerido": {
+    "semana_1": ["T-01", "T-02", "T-03"],
+    "semana_2": ["T-04", "J-01", "J-02"],
+    "semana_3": ["J-03", "J-04"],
+    "semana_4": ["J-05", "repaso_general", "certificacion"]
+  },
+  "roi_estimado": {
+    "ahorro_tiempo_semanal_horas": 6,
+    "tareas_optimizadas": [
+      "Investigacion jurisprudencial (3 horas → 30 minutos)",
+      "Redaccion inicial de contratos (2 horas → 20 minutos)",
+      "Revision de contratos de terceros (1.5 horas → 25 minutos)",
+      "Preparacion de escritos procesales (4 horas → 1.5 horas)"
+    ],
+    "recuperacion_inversion_dias": 7,
+    "descripcion": "Un abogado que cobra $50/hora recupera la inversion del curso Estandar ($197) en la primera semana de uso efectivo"
+  },
+  "metadata": {
+    "version": "1.0",
+    "creado": "2026-03-18",
+    "responsable": "Departamento Academico ITSEIA",
+    "normativa_referenciada": ["Constitucion Ecuador 2008", "COIP", "COGEP", "Codigo Civil", "Codigo de Comercio", "LOPDP", "Codigo de Trabajo"],
+    "sistemas_referenciados": ["SATJE", "CNJ", "eSATJE", "Registro Civil Digital"],
+    "idioma": "es-EC",
+    "moneda": "USD"
+  }
+}

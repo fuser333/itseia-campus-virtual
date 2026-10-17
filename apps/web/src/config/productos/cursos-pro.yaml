@@ -1,0 +1,78 @@
+# ============================================================================
+# Cursos Profesionales · Express ($99) / Estándar ($197) / Completo ($297)
+# Cohortes pequeñas (1:1 hasta 5 alumnos) · 1 cohorte por cliente / grupo.
+# ============================================================================
+
+producto:
+  id: cursos-pro
+  nombre: "Cursos Profesionales"
+  descripcion: "40 a 80 horas de formación intensiva · 3 niveles según profundidad."
+  color_accent: "#FBBC0C"        # gold ITSEIA
+  icono: "🎓"
+  url_publica: "https://itseia.ai/cursos"
+
+cohorte:
+  estructura: "por_cliente"      # cada cohorte = 1 cliente / grupo pequeño
+  duracion_dias: 60              # ~2 meses para Estándar; varía por nivel
+  horario_default:
+    inicio_ec: "20:00"
+    fin_ec: "22:00"
+    dias_semana: ["mar", "jue"]
+  sesiones_totales: 8            # default Estándar; Express=4, Completo=12
+
+alumno:
+  pestañas_sesion:
+    - video_resumen
+    - materiales
+    - ejercicios
+    - evaluacion
+  ai_lab: true
+  comunidad: true
+  asesorias: true
+
+docente:
+  pestañas_sesion:
+    - resumen
+    - plan_clase
+    - materiales_editar
+    - ejercicios_editar
+    - evaluacion_editar
+    - prompts
+    - recursos
+    - notas_privadas
+    - grabaciones
+  boton_grabar: true
+  asistencia: true
+
+pricing:
+  modelo: "por_persona"          # variable según nivel
+  precio_usd: 197                # default Estándar
+  moneda: "USD"
+  beca_h3l: false
+  niveles:
+    express:
+      precio_usd: 99
+      horas: 40
+      sesiones: 4
+    estandar:
+      precio_usd: 197
+      horas: 60
+      sesiones: 8
+    completo:
+      precio_usd: 297
+      horas: 80
+      sesiones: 12
+
+assignment_docente:
+  modo: "manual"
+
+cross_promo:
+  excluir_a_si_mismo: true
+  orden_otros:
+    - carreras
+    - bootcamp
+    - certificaciones
+    - mdt
+    - preuni
+    - b2b
+    - demo

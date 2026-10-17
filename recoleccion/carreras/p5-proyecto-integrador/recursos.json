@@ -1,0 +1,41 @@
+{
+  "materia": "Proyecto Integrador de IA",
+  "periodo": "P5",
+  "recursos": [
+    {
+      "titulo": "arXiv.org - Repositorio de papers de IA gratuitos para revision literaria",
+      "url": "https://arxiv.org/list/cs.AI/recent",
+      "tipo": "repositorio",
+      "idioma": "ingles (papers) con herramientas de traduccion",
+      "descripcion": "Repositorio principal de preprints de Inteligencia Artificial, Machine Learning y Deep Learning. Acceso gratuito a todos los papers. Usar junto con 'Semantic Scholar' para busqueda semantica y 'DeepL' para traduccion al español. Fundamental para la revision de literatura del proyecto integrador. Buscar papers con datasets latinoamericanos."
+    },
+    {
+      "titulo": "Repositorio EPN Ecuador - Tesis de IA de la Escuela Politecnica Nacional",
+      "url": "https://bibdigital.epn.edu.ec/",
+      "tipo": "repositorio",
+      "idioma": "español",
+      "descripcion": "Repositorio digital de tesis de la Escuela Politecnica Nacional del Ecuador. Contiene cientos de tesis de grado y maestria en Inteligencia Artificial, Machine Learning y Ciencia de Datos aplicadas al contexto ecuatoriano. Acceso gratuito. Ideal para ver ejemplos de proyectos integradores con datos y problemas locales reales."
+    },
+    {
+      "titulo": "Streamlit - Deploy gratuito de demos ML en español",
+      "url": "https://streamlit.io/",
+      "tipo": "herramienta",
+      "idioma": "ingles con comunidad en español",
+      "descripcion": "Framework Python gratuito para crear aplicaciones web de datos y ML sin frontend. Deploy gratuito en Streamlit Community Cloud. La comunidad latinohispana en YouTube tiene tutoriales: 'Streamlit tutorial español Fazt Code'. Permite crear demos interactivos del proyecto integrador en horas. Muy usado en proyectos de ciencia de datos."
+    },
+    {
+      "titulo": "Zenodo - Repositorio para publicar datos y codigos de proyectos",
+      "url": "https://zenodo.org/",
+      "tipo": "herramienta",
+      "idioma": "ingles con interfaz parcial en español",
+      "descripcion": "Repositorio academico gratuito de la Union Europea para publicar datasets, codigo y papers. Asigna DOI permanente a cada recurso publicado. Ideal para publicar el dataset y codigo del proyecto integrador con citacion academica formal. Gratuito hasta 50GB por deposito. Muy aceptado en revistas cientificas internacionales."
+    },
+    {
+      "titulo": "SENESCYT - Reglamento de trabajos de titulacion en Ecuador",
+      "url": "https://www.senescyt.gob.ec/",
+      "tipo": "recurso_institucional",
+      "idioma": "español",
+      "descripcion": "Portal oficial del SENESCYT con reglamentos para trabajos de titulacion en institutos tecnicos superiores del Ecuador. Incluye normas de presentacion, estructura requerida y criterios de evaluacion segun la normativa ecuatoriana vigente. Fundamental para que el proyecto integrador cumpla con los requisitos legales de titulacion en Ecuador."
+    }
+  ]
+}

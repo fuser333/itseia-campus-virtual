@@ -1,0 +1,41 @@
+{
+  "materia": "Visualizacion de Datos",
+  "periodo": "P3",
+  "recursos": [
+    {
+      "titulo": "Matplotlib y Seaborn Tutorial completo en español - Analisis visual de datos",
+      "url": "https://matplotlib.org/stable/tutorials/index.html",
+      "tipo": "documentacion",
+      "idioma": "inglés con comunidad español",
+      "descripcion": "Documentacion oficial de Matplotlib con galeria de mas de 200 tipos de graficos con codigo Python reproducible. Complementar con tutoriales de Seaborn en aprendemachinelearning.com que estan en español completo. Indispensable para visualizaciones estadisticas en ciencia de datos."
+    },
+    {
+      "titulo": "Platzi - Curso de Visualizacion de Datos con Python (acceso gratuito parcial)",
+      "url": "https://platzi.com/cursos/visualizacion-datos-python/",
+      "tipo": "curso",
+      "idioma": "español",
+      "descripcion": "Curso de Platzi que cubre Matplotlib, Seaborn, Plotly y Bokeh en español latinoamericano. Incluye proyectos practicos con datasets reales. Parcialmente gratuito con la version trial. Es el curso de referencia en LATAM para visualizacion de datos. Instructores colombianos y mexicanos."
+    },
+    {
+      "titulo": "Plotly Express - Visualizaciones interactivas con Python",
+      "url": "https://plotly.com/python/plotly-express/",
+      "tipo": "documentacion",
+      "idioma": "inglés con ejemplos universales",
+      "descripcion": "Documentacion de Plotly Express con galeria completa de visualizaciones interactivas en Python. Completamente gratuito y open source. Ideal para dashboards y graficos web interactivos. El codigo es simple y reproducible. Plotly es estandar en la industria para reportes de datos interactivos."
+    },
+    {
+      "titulo": "Power BI Desktop - Herramienta gratuita Microsoft en español",
+      "url": "https://powerbi.microsoft.com/es-es/desktop/",
+      "tipo": "herramienta",
+      "idioma": "español",
+      "descripcion": "Software gratuito de Microsoft para visualizacion y business intelligence. Interfaz completamente en español. Permite conectar con multiples fuentes de datos, crear dashboards interactivos y publicar reportes. Muy demandado en empresas ecuatorianas y latinoamericanas. Incluye cursos gratuitos en el sitio oficial de Microsoft Learn en español."
+    },
+    {
+      "titulo": "INEC Ecuador - Visualizaciones y datos estadisticos nacionales",
+      "url": "https://www.ecuadorencifras.gob.ec/estadisticas/",
+      "tipo": "dataset",
+      "idioma": "español",
+      "descripcion": "Portal del Instituto Nacional de Estadistica y Censos del Ecuador. Provee datos demograficos, economicos y sociales con visualizaciones propias. Ideal para proyectos de visualizacion con datos reales del Ecuador. Incluye series de tiempo del censo, empleo, educacion y salud. Datos 100% gratuitos en formato descargable."
+    }
+  ]
+}

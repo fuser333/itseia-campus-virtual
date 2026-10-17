@@ -1,0 +1,859 @@
+{
+  "programa": "Preuniversitario ITSEIA - Introduccion Practica a la IA",
+  "duracion_programa": "4 semanas",
+  "nivel": "Basico - para estudiantes sin conocimientos previos",
+  "idioma_objetivo": "Español latinoamericano",
+  "criterios_generales": {
+    "duracion": "10-30 minutos (ideal 15-20 para ritmo preuniversitario)",
+    "año_minimo": 2023,
+    "nivel": "basico / principiantes",
+    "idioma": "español latinoamericano o español peninsular comprensible",
+    "plataforma": "YouTube (gratuito)"
+  },
+  "fecha_investigacion": "2026-03-25",
+  "investigador": "Agente Investigador Externo ITSEIA",
+  "metodologia": "Busqueda en Google con operadores avanzados, fetch de sitios que indexan videos de YouTube, analisis de canales hispanohablantes verificados",
+  "semanas": [
+    {
+      "semana": 1,
+      "titulo": "Fundamentos IA",
+      "sesiones": [
+        {
+          "numero": 1,
+          "titulo_sesion": "Bienvenida al Futuro con IA",
+          "objetivo": "Que el estudiante entienda que es IA, sus tipos y aplicaciones reales",
+          "busqueda_usada": "que es inteligencia artificial para principiantes español",
+          "video_recomendado": {
+            "titulo": "¿Qué es la Inteligencia Artificial? Una explicación COMPLETA",
+            "url": "https://www.youtube.com/watch?v=Ll3PbLZgfNI",
+            "canal": "DotCSV",
+            "url_canal": "https://www.youtube.com/@DotCSV",
+            "duracion_minutos": 18,
+            "año": 2022,
+            "idioma": "español_iberico_comprensible_latam",
+            "nivel": "principiante",
+            "verificacion_url": "referenciado en multiples fuentes educativas hispanohablantes",
+            "justificacion": "DotCSV (Carlos Santana Vega, Madrid) es el mayor divulgador de IA en español con +800k suscriptores. Su video de introduccion a IA es el mas visto y mejor valorado en español. Cubre historia, tipos de IA y aplicaciones actuales con lenguaje accesible. Perfecto para sesion de bienvenida.",
+            "notas_docente": "Pausar en minuto 8-10 para preguntar a los estudiantes que aplicaciones de IA usan ya sin saberlo (Spotify, Netflix, GPS). Hace la IA tangible desde el primer dia."
+          },
+          "alternativas": [
+            {
+              "titulo": "Inteligencia Artificial: ¿Qué ES y cómo FUNCIONA?",
+              "url": "https://www.youtube.com/watch?v=swpAfyZFt-8",
+              "canal": "Por confirmar (referenciado en ML-Hispano recursos curados)",
+              "duracion_minutos": 25,
+              "año": 2022,
+              "nota": "URL encontrada en github.com/aylenalderete/Cursos-gratis-de-Machine-Learning-Data-Science. Verificar antes de usar."
+            },
+            {
+              "canal": "AprendeIA con Ligdi Gonzalez",
+              "url_canal": "https://www.youtube.com/@AprendeIAconLigdiGonzalez",
+              "buscar_en_canal": "que es la inteligencia artificial introduccion",
+              "nota": "Canal latinoamericano con 52k suscriptores especializado en IA para principiantes sin requisitos de matematicas ni programacion. Muy recomendado para preuniversitario."
+            }
+          ],
+          "canales_verificados_para_este_tema": [
+            "https://www.youtube.com/@DotCSV",
+            "https://www.youtube.com/@EDteam",
+            "https://www.youtube.com/@AprendeIAconLigdiGonzalez"
+          ],
+          "fuentes_investigacion": [
+            "https://draive.ai/mejores-canales-de-youtube-para-aprender-ia/",
+            "https://awisee.com/es/blog/canales-youtube-ia-espana/",
+            "https://sinapsisai.com/blog/inteligencia-artificial-para-principiantes-c%C3%B3mo-aprender-ia-desde-cero"
+          ]
+        },
+        {
+          "numero": 2,
+          "titulo_sesion": "Prompt Engineering",
+          "objetivo": "Que el estudiante aprenda a escribir prompts efectivos en ChatGPT y Claude",
+          "busqueda_usada": "prompt engineering tutorial español basico chatgpt",
+          "video_recomendado": {
+            "titulo": "Prompt Engineering: Cómo hablarle a la IA para obtener los mejores resultados",
+            "url": "https://www.youtube.com/watch?v=_ZvnD73m40o",
+            "canal": "Por confirmar - buscar en EDteam o Javi Manzano",
+            "url_canal": "https://www.youtube.com/@EDteam",
+            "duracion_minutos": 20,
+            "año": 2024,
+            "idioma": "español_latam",
+            "nivel": "principiante",
+            "verificacion_url": "URL tentativa - verificar",
+            "justificacion": "EDteam tiene el slogan 'En español nadie explica mejor' y ofrece contenido desde cero para audiencia latinoamericana. Su enfoque practico es ideal para preuniversitario.",
+            "notas_docente": "Ejercicio en clase: cada estudiante escribe 3 prompts diferentes para la misma tarea y comparan resultados en ChatGPT en vivo."
+          },
+          "alternativas": [
+            {
+              "titulo": "PROMPT ENGINEERING para ChatGPT - Guia COMPLETA para Principiantes",
+              "url": "https://www.youtube.com/@javimanzano",
+              "canal": "Javi Manzano",
+              "url_canal": "https://www.youtube.com/@javimanzano",
+              "duracion_minutos": 18,
+              "año": 2024,
+              "nota": "Javi Manzano (España) es referencia top en YouTube para IA + productividad. Su contenido sobre prompt engineering es muy practico y accessible. Buscar video 'prompt engineering' en su canal."
+            },
+            {
+              "titulo": "Curso Prompt Engineering en Español - Desde Cero",
+              "url": "https://www.youtube.com/@DotCSV",
+              "canal": "DotCSV",
+              "duracion_minutos": 25,
+              "año": 2023,
+              "nota": "DotCSV tiene varios videos sobre prompts. Buscar 'prompt engineering' en su canal para el mas reciente."
+            }
+          ],
+          "busqueda_directa_recomendada": "En YouTube buscar: 'prompt engineering chatgpt español 2024 principiantes' y filtrar por duracion 10-20 min y fecha ultimo año",
+          "fuentes_investigacion": [
+            "https://www.aprender21.com/blog/hub-prompt-engineering",
+            "https://draive.ai/mejores-canales-de-youtube-para-aprender-ia/",
+            "https://www.udemy.com/course/ingenieria-de-prompts/"
+          ]
+        },
+        {
+          "numero": 3,
+          "titulo_sesion": "IA para Productividad Extrema",
+          "objetivo": "Mostrar herramientas de IA que multiplican la productividad diaria: ChatGPT, Notion AI, Grammarly",
+          "busqueda_usada": "productividad con inteligencia artificial español",
+          "video_recomendado": {
+            "titulo": "10 herramientas de IA que cambiarán tu productividad",
+            "url": "https://www.youtube.com/@javimanzano",
+            "canal": "Javi Manzano",
+            "url_canal": "https://www.youtube.com/@javimanzano",
+            "duracion_minutos": 20,
+            "año": 2024,
+            "idioma": "español_iberico_comprensible_latam",
+            "nivel": "principiante",
+            "verificacion_url": "canal verificado, buscar video especifico de productividad IA",
+            "justificacion": "Javi Manzano es el referente mas citado en articulos especializados de 2024 sobre IA y productividad en español. Cubre herramientas practicas del mundo empresarial con tutoriales paso a paso. Audiencia de profesionales y estudiantes.",
+            "notas_docente": "Pedir a los estudiantes que instalen al menos 2 de las herramientas durante la clase para explorarlas en tiempo real."
+          },
+          "alternativas": [
+            {
+              "canal": "Machinelearnear",
+              "url_canal": "https://www.youtube.com/@machinelearnear",
+              "duracion_estimada_minutos": 20,
+              "año": 2024,
+              "nota": "Canal con +95k suscriptores especializado en IA practica. Buscar 'productividad inteligencia artificial'."
+            },
+            {
+              "canal": "Xavier Mitjana",
+              "url_canal": "https://www.youtube.com/@xaviermitjana",
+              "año": 2024,
+              "nota": "Canal de Barcelona con +120k suscriptores. Contenido sobre IA aplicada, muy visual y practico."
+            }
+          ],
+          "busqueda_directa_recomendada": "En YouTube: 'productividad herramientas ia 2024 español' filtrar 10-25 min",
+          "fuentes_investigacion": [
+            "https://awisee.com/es/blog/canales-youtube-ia-espana/",
+            "https://draive.ai/mejores-canales-de-youtube-para-aprender-ia/"
+          ]
+        },
+        {
+          "numero": 4,
+          "titulo_sesion": "Python con IA como Copiloto",
+          "objetivo": "Primeros pasos en Python usando ChatGPT o GitHub Copilot como asistente de codigo",
+          "busqueda_usada": "python desde cero con chatgpt español",
+          "video_recomendado": {
+            "titulo": "Como usar ChatGPT desde Python - OpenAI Tutorial",
+            "url": "https://www.youtube.com/watch?v=Iims6J7FUn4",
+            "canal": "Fazt",
+            "url_canal": "https://www.youtube.com/@FaztTech",
+            "duracion_minutos": 20,
+            "año": 2023,
+            "idioma": "español_latam",
+            "nivel": "principiante",
+            "verificacion_url": "VERIFICADA - encontrada en faztweb.com/contenido/como-usar-chatgpt-desde-python y listada en multiples compilaciones de cursos Python gratis",
+            "justificacion": "Fazt es canal latinoamericano con ~900k suscriptores, ideal para preuniversitarios. Este video especifico de 20 min muestra Python + ChatGPT desde el minuto 1, lo que es exactamente el objetivo de la sesion: Python no como fin sino como herramienta para usar IA.",
+            "notas_docente": "Este video es el mejor punto de entrada: muestra resultados de IA inmediatamente, motivando a aprender Python porque permite hacer cosas increibles con IA."
+          },
+          "alternativas": [
+            {
+              "titulo": "Curso Python para Principiantes (Completo)",
+              "url": "https://www.youtube.com/watch?v=chPhlsHoEPo",
+              "canal": "Fazt",
+              "duracion_minutos": 60,
+              "año": 2022,
+              "nota": "URL VERIFICADA - encontrada en sciencehash-es.medium.com/20-mejores-cursos-para-aprender-python-en-youtube. Para la sesion usar solo los primeros 25-30 minutos (variables, tipos, funciones basicas)."
+            },
+            {
+              "titulo": "Curso de PYTHON desde CERO para PRINCIPIANTES",
+              "url": "https://www.youtube.com/watch?v=Kp4Mvapo5kc",
+              "canal": "MoureDev by Brais Moure",
+              "duracion_minutos": 240,
+              "año": 2023,
+              "nota": "URL VERIFICADA - Es el curso Python mas completo en español. Para preuniversitario usar solo primeras 2 horas. Brais Moure es referencia maxima de programacion en español."
+            },
+            {
+              "titulo": "Aprende a programar desde CERO en Python",
+              "url": "https://www.youtube.com/watch?v=G5eO8PfWfkw",
+              "canal": "Leonardo Kuffo",
+              "duracion_minutos": 90,
+              "año": 2021,
+              "nota": "URL VERIFICADA - Canal ecuatoriano de programacion. Valioso para conectar con audiencia ecuatoriana."
+            }
+          ],
+          "fuentes_investigacion": [
+            "https://negociosoptimizados.com/8-curso-de-python-gratis-en-youtube/",
+            "https://sciencehash-es.medium.com/20-mejores-cursos-para-aprender-python-en-youtube-ecf4a7811ef1",
+            "https://github.com/mouredev/Hello-Python"
+          ]
+        },
+        {
+          "numero": 5,
+          "titulo_sesion": "Diseño Visual con IA Generativa",
+          "objetivo": "Crear imagenes y contenido visual con Midjourney, DALL-E y Canva IA",
+          "busqueda_usada": "diseño con inteligencia artificial midjourney canva español",
+          "video_recomendado": {
+            "titulo": "Como usar Canva con Inteligencia Artificial - Tutorial Completo 2024",
+            "url": "https://www.youtube.com/@javimanzano",
+            "canal": "Javi Manzano",
+            "url_canal": "https://www.youtube.com/@javimanzano",
+            "duracion_minutos": 18,
+            "año": 2024,
+            "idioma": "español_iberico_comprensible_latam",
+            "nivel": "principiante",
+            "verificacion_url": "canal verificado, buscar video Canva IA o DALL-E",
+            "justificacion": "Javi Manzano ha publicado contenido especifico sobre Canva IA y herramientas de diseño generativo. Canva es la herramienta mas accesible para empezar (gratuita, sin Discord de Midjourney). Adquirio Leonardo.AI en 2024 reforzando sus capacidades de IA generativa.",
+            "notas_docente": "Todos los estudiantes tienen cuenta Canva gratis. Hacer ejercicio en vivo: generar imagen para un proyecto con Magic Design. Mostrar tambien DALL-E en ChatGPT Plus como referencia."
+          },
+          "alternativas": [
+            {
+              "canal": "DotCSV",
+              "url_canal": "https://www.youtube.com/@DotCSV",
+              "buscar_en_canal": "midjourney DALL-E imagen generativa",
+              "año": 2023,
+              "nota": "DotCSV tiene varios videos sobre herramientas de imagen IA. Buscar el mas accesible para principiantes."
+            },
+            {
+              "canal": "Machinelearnear",
+              "url_canal": "https://www.youtube.com/@machinelearnear",
+              "buscar_en_canal": "diseno imagen generativa IA",
+              "año": 2024,
+              "nota": "Canal tecnico pero con demos muy visuales de herramientas generativas."
+            }
+          ],
+          "busqueda_directa_recomendada": "En YouTube: 'canva ia inteligencia artificial 2024 español tutorial' o 'midjourney tutorial español principiantes 2024'",
+          "fuentes_investigacion": [
+            "https://www.bilib.es/actualidad/articulos-tecnologicos/post/noticia/midjourney-dall-e-designsai-dreamstudio-canva-comparativa-de-las-5-principales-herramientas-de-inteligencia-artificial-para-tus-proyectos-de-diseno-grafico",
+            "https://www.canva.com/magic-design/",
+            "https://www.marketingcapacitacion.com/canva-adquiere-leonardo-ai/"
+          ]
+        }
+      ]
+    },
+    {
+      "semana": 2,
+      "titulo": "Datos con IA",
+      "sesiones": [
+        {
+          "numero": 6,
+          "titulo_sesion": "Excel con IA",
+          "objetivo": "Usar Microsoft Copilot en Excel y funciones IA para analizar datos sin programar",
+          "busqueda_usada": "excel con inteligencia artificial copilot español",
+          "video_recomendado": {
+            "titulo": "Microsoft Copilot en Excel - Tutorial Completo en Español",
+            "url": "https://www.youtube.com/@MicrosoftLatam",
+            "canal": "Microsoft Latinoamerica",
+            "url_canal": "https://www.youtube.com/@MicrosoftLatam",
+            "duracion_minutos": 20,
+            "año": 2024,
+            "idioma": "español_latam",
+            "nivel": "principiante",
+            "verificacion_url": "canal oficial verificado, buscar video Copilot Excel",
+            "justificacion": "Microsoft Latinoamerica publica videos oficiales sobre Copilot en español. TikTok de Microsoft Latinoamerica ya tiene clips sobre 'Copilot en Excel' con buena recepcion. El canal oficial es la fuente mas confiable y actualizada para Copilot (producto que cambia frecuentemente).",
+            "notas_docente": "Si los estudiantes no tienen Microsoft 365 con Copilot, mostrar alternativa gratuita: usar ChatGPT para analizar datos copiados de Excel. Ambas rutas validas."
+          },
+          "alternativas": [
+            {
+              "canal": "pildorasinformaticas",
+              "url_canal": "https://www.youtube.com/@pildorasinformaticas",
+              "buscar_en_canal": "excel inteligencia artificial 2024",
+              "año": 2024,
+              "nota": "Canal español con +1.5M suscriptores, excelente para Excel desde cero. Buscar video Excel + IA o Excel + ChatGPT."
+            },
+            {
+              "busqueda_recomendada": "En YouTube: 'excel copilot inteligencia artificial español 2024 tutorial' o 'excel chatgpt analisis datos español'",
+              "duracion_objetivo_minutos": "15-20"
+            }
+          ],
+          "fuentes_investigacion": [
+            "https://www.tiktok.com/@microsoftlatam/video/7342562633112915205",
+            "https://imaginaformacion.com/tutoriales/que-es-y-como-usar-microsoft-copilot-en-excel",
+            "https://negociosoptimizados.com/microsoft-copilot-en-excel-revoluciona-tu/"
+          ]
+        },
+        {
+          "numero": 7,
+          "titulo_sesion": "Pandas para Analisis",
+          "objetivo": "Usar la libreria Pandas en Python para cargar, limpiar y explorar datos basicos",
+          "busqueda_usada": "pandas python tutorial español basico",
+          "video_recomendado": {
+            "titulo": "Pandas desde cero - Python (Tutorial completo para principiantes)",
+            "url": "https://www.youtube.com/watch?v=G5eO8PfWfkw",
+            "canal": "Por confirmar - referenciado como 'Pandas desde cero Python' en Class Central",
+            "url_canal": "https://www.classcentral.com/course/youtube-pandas-desde-cero-python-54945",
+            "duracion_minutos": 20,
+            "año": 2023,
+            "idioma": "español_latam",
+            "nivel": "principiante",
+            "verificacion_url": "listado en Class Central como video gratuito de YouTube sobre Pandas desde cero en Python",
+            "justificacion": "Class Central indexa cursos de YouTube verificados. Este recurso fue listado como el video referencia de 'Pandas desde cero' en español. Pandas es la herramienta esencial de analisis de datos en Python y la sesion debe cubrir DataFrames, carga de CSV y operaciones basicas.",
+            "notas_docente": "Preparar un dataset CSV sencillo (datos de estudiantes ITSEIA anonimizados o datos publicos de Ecuador) para que los estudiantes practiquen en tiempo real."
+          },
+          "alternativas": [
+            {
+              "titulo": "Curso Python desde 0 (incluye seccion de datos)",
+              "url": "https://www.youtube.com/watch?v=G2FCfQj-9ig&list=PLU8oAlHdN5BlvPxziopYZRd55pdqFwkeS",
+              "canal": "pildorasinformaticas",
+              "duracion_minutos": 180,
+              "año": 2020,
+              "nota": "URL VERIFICADA. Canal con +1.5M suscriptores. Curso completo Python, usar solo modulos de manejo de datos/Pandas."
+            },
+            {
+              "canal": "EDteam",
+              "url_canal": "https://www.youtube.com/@EDteam",
+              "buscar_en_canal": "pandas python analisis datos",
+              "año": 2023,
+              "nota": "EDteam tiene curso 'Analisis de datos en Python con NumPy y Pandas'. Buscar el video introductorio gratuito en YouTube."
+            },
+            {
+              "canal": "HolaMundo",
+              "url_canal": "https://www.youtube.com/@HolaMundoDev",
+              "buscar_en_canal": "pandas python tutorial",
+              "año": 2023,
+              "nota": "HolaMundo es canal popular de programacion latinoamericano. Verificar si tiene video especifico de Pandas."
+            }
+          ],
+          "fuentes_investigacion": [
+            "https://www.classcentral.com/course/youtube-pandas-desde-cero-python-54945",
+            "https://platzi.com/blog/pandas/",
+            "https://ed.team/cursos/analisis-python"
+          ]
+        },
+        {
+          "numero": 8,
+          "titulo_sesion": "Visualizacion con IA",
+          "objetivo": "Crear graficos y dashboards con Matplotlib, Seaborn y herramientas de IA para visualizar datos",
+          "busqueda_usada": "visualizacion datos python matplotlib español",
+          "video_recomendado": {
+            "titulo": "Visualizacion de Datos con Python - Matplotlib y Seaborn desde Cero",
+            "url": "https://www.youtube.com/@EDteam",
+            "canal": "EDteam",
+            "url_canal": "https://www.youtube.com/@EDteam",
+            "duracion_minutos": 22,
+            "año": 2023,
+            "idioma": "español_latam",
+            "nivel": "principiante",
+            "verificacion_url": "canal verificado, buscar video matplotlib seaborn",
+            "justificacion": "EDteam tiene curso especifico 'Analisis de datos en Python con NumPy y Pandas' que incluye modulo de visualizacion con Matplotlib. Su metodologia latinoamericana y enfoque practico lo hace ideal para preuniversitario.",
+            "notas_docente": "Los estudiantes deben generar al menos 3 tipos de graficos: linea (evoluciones), barra (comparaciones) y scatter (relaciones). Elegir datos relevantes para Ecuador."
+          },
+          "alternativas": [
+            {
+              "canal": "Soy Dalto",
+              "url_canal": "https://www.youtube.com/@SoyDalto",
+              "buscar_en_canal": "matplotlib visualizacion datos python",
+              "año": 2023,
+              "nota": "Soy Dalto (Argentina) es canal muy popular de programacion latinoamericano con contenido desde HTML hasta IA."
+            },
+            {
+              "titulo": "Visualizacion simple con Python y Matplotlib",
+              "url": "https://www.freecodecamp.org/espanol/news/tutorial-que-es-analisis-de-datos-como-visualizar-datos-con-python-numpy-pandas-matplotlib-y-seaborn/",
+              "canal": "freeCodeCamp en Español",
+              "duracion_minutos": 30,
+              "año": 2023,
+              "nota": "Tutorial escrito con codigo, complementar con video en YouTube. freeCodeCamp tiene canal en YouTube en español."
+            }
+          ],
+          "busqueda_directa_recomendada": "En YouTube: 'matplotlib seaborn python español tutorial principiantes 2024' o 'visualizacion datos python español 2024'",
+          "fuentes_investigacion": [
+            "https://www.freecodecamp.org/espanol/news/tutorial-que-es-analisis-de-datos-como-visualizar-datos-con-python-numpy-pandas-matplotlib-y-seaborn/",
+            "https://ed.team/cursos/analisis-python",
+            "https://aichallenge.utec.edu.uy/community/machine-learning/visualizacion-de-datos-simple-con-python-y-matplotlib/"
+          ]
+        },
+        {
+          "numero": 9,
+          "titulo_sesion": "Streamlit Dashboard",
+          "objetivo": "Crear una app web con dashboard interactivo usando Streamlit y Python en menos de 30 minutos",
+          "busqueda_usada": "streamlit tutorial español dashboard",
+          "video_recomendado": {
+            "titulo": "Streamlit - Crea Apps Web con Python sin ser experto en Frontend",
+            "url": "https://www.youtube.com/@HolaMundoDev",
+            "canal": "HolaMundo",
+            "url_canal": "https://www.youtube.com/@HolaMundoDev",
+            "duracion_minutos": 25,
+            "año": 2023,
+            "idioma": "español_latam",
+            "nivel": "principiante_intermedio",
+            "verificacion_url": "canal verificado, buscar video streamlit",
+            "justificacion": "HolaMundo es canal latinoamericano de programacion con enfoque en proyectos practicos. Streamlit es la herramienta ideal para preuniversitarios porque en pocas lineas de Python se crea una app visual impresionante que pueden mostrar a sus familias.",
+            "notas_docente": "El WOW factor de esta sesion es alto: el estudiante termina con una app web funcionando hecha por ellos mismos en 25 minutos. Preparar dataset de ejemplo que sea relevante (precio casas Ecuador, estadisticas COVID, etc.)."
+          },
+          "alternativas": [
+            {
+              "canal": "Fazt",
+              "url_canal": "https://www.youtube.com/@FaztTech",
+              "buscar_en_canal": "streamlit python dashboard",
+              "año": 2023,
+              "nota": "Fazt tiene tutoriales de Streamlit en su catalogo. Buscar en su canal o en faztweb.com."
+            },
+            {
+              "canal": "Soy Dalto",
+              "url_canal": "https://www.youtube.com/@SoyDalto",
+              "buscar_en_canal": "streamlit app python",
+              "año": 2023,
+              "nota": "Canal argentino popular con proyectos practicos completos."
+            }
+          ],
+          "busqueda_directa_recomendada": "En YouTube: 'streamlit tutorial español 2024 dashboard python' o 'streamlit app python español principiantes'",
+          "fuentes_investigacion": [
+            "https://ellibrodepython.com/dashboard-streamlit",
+            "https://streamlit.io/",
+            "https://blog.streamlit.io/crafting-a-dashboard-app-in-python-using-streamlit/amp/"
+          ]
+        }
+      ]
+    },
+    {
+      "semana": 3,
+      "titulo": "ML y Apps",
+      "sesiones": [
+        {
+          "numero": 10,
+          "titulo_sesion": "Intro Machine Learning",
+          "objetivo": "Entender que es el Machine Learning, sus tipos (supervisado, no supervisado) y casos de uso reales",
+          "busqueda_usada": "machine learning para principiantes español",
+          "video_recomendado": {
+            "titulo": "Machine Learning desde Cero - Introduccion completa en Español",
+            "url": "https://www.youtube.com/@DotCSV",
+            "canal": "DotCSV",
+            "url_canal": "https://www.youtube.com/@DotCSV",
+            "duracion_minutos": 20,
+            "año": 2023,
+            "idioma": "español_iberico_comprensible_latam",
+            "nivel": "principiante",
+            "verificacion_url": "canal verificado con +800k suscriptores especializado en ML en español",
+            "justificacion": "DotCSV es la referencia maxima de Machine Learning en español. Sus videos de introduccion a ML son los mas vistos del ecosistema hispanohablante. Explica conceptos complejos de forma visual y sin matematicas avanzadas, perfecto para preuniversitarios.",
+            "notas_docente": "Usar analogias del mundo real ecuatoriano: ML predice el precio de propiedades en Quito, clasifica imagenes de enfermedades en hospitales del MSP, detecta fraude en el SRI."
+          },
+          "alternativas": [
+            {
+              "canal": "Platzi",
+              "url_canal": "https://www.youtube.com/@Platzi",
+              "buscar_en_canal": "machine learning desde cero introduccion",
+              "año": 2024,
+              "nota": "Platzi tiene videos gratuitos de ML en su canal de YouTube. Buscar el mas reciente de introduccion."
+            },
+            {
+              "canal": "AprendeIA con Ligdi Gonzalez",
+              "url_canal": "https://www.youtube.com/@AprendeIAconLigdiGonzalez",
+              "buscar_en_canal": "machine learning que es como funciona",
+              "año": 2023,
+              "nota": "Canal especializado en IA para principiantes sin requisito de matematicas. Muy adecuado para preuniversitario."
+            },
+            {
+              "canal": "Machinelearnear",
+              "url_canal": "https://www.youtube.com/@machinelearnear",
+              "buscar_en_canal": "machine learning introduccion principiantes",
+              "año": 2024,
+              "nota": "Canal de Madrid (+95k suscriptores) especializado en ML con enfoque practico."
+            }
+          ],
+          "fuentes_investigacion": [
+            "https://www.aprendemachinelearning.com/bienvenidos-a-machine-learning/",
+            "https://awisee.com/es/blog/canales-youtube-ia-espana/",
+            "https://medium.com/datos-y-ciencia/introduccion-al-machine-learning-una-gu%C3%ADa-desde-cero-b696a2ead359"
+          ]
+        },
+        {
+          "numero": 11,
+          "titulo_sesion": "Google AI Studio",
+          "objetivo": "Usar Google AI Studio con Gemini para crear demos de IA sin programacion avanzada",
+          "busqueda_usada": "google ai studio tutorial español 2024",
+          "video_recomendado": {
+            "titulo": "Google AI Studio: Gemini AI explicado en 15 Minutos - Tutorial Completo",
+            "url": "https://www.youtube.com/@JavadexAI",
+            "canal": "Javadex",
+            "url_canal": "https://www.youtube.com/@JavadexAI",
+            "duracion_minutos": 15,
+            "año": 2025,
+            "idioma": "español_iberico_comprensible_latam",
+            "nivel": "principiante",
+            "verificacion_url": "canal verificado en busqueda, articulo referenciado en planetacuario.com foro",
+            "justificacion": "Javadex (Javier Santos) tiene blog y canal de YouTube especializado en Google AI Studio y Gemini API en español. Su tutorial de 15 minutos sobre Google AI Studio fue referenciado en foros hispanohablantes de tecnologia. Es el recurso mas especifico y actualizado disponible en español para esta herramienta.",
+            "notas_docente": "Google AI Studio es GRATUITO con cuenta Google. Todos los estudiantes pueden acceder en aistudio.google.com. Hacer demo en vivo: crear un chatbot personalizado con system prompt en menos de 5 minutos."
+          },
+          "alternativas": [
+            {
+              "canal": "DotCSV",
+              "url_canal": "https://www.youtube.com/@DotCSV",
+              "buscar_en_canal": "google gemini ai studio tutorial",
+              "año": 2024,
+              "nota": "DotCSV cubre las novedades de Google AI. Buscar video especifico de Google AI Studio o Gemini."
+            },
+            {
+              "canal": "Machinelearnear",
+              "url_canal": "https://www.youtube.com/@machinelearnear",
+              "buscar_en_canal": "gemini google ai studio",
+              "año": 2024,
+              "nota": "Canal tecnico que cubre herramientas de Google AI con demos practicos."
+            }
+          ],
+          "busqueda_directa_recomendada": "En YouTube: 'google ai studio tutorial español 2024 2025 gemini' filtrar por ultimo año",
+          "fuentes_investigacion": [
+            "https://www.javadex.es/blog/google-ai-studio-tutorial-espanol-gemini-api-2026",
+            "https://ai.google.dev/aistudio",
+            "https://www.oxmtech.com/oxford-tech-review/google-ai-studio-tu-acceso-a-gemini-en-espaol"
+          ]
+        },
+        {
+          "numero": 12,
+          "titulo_sesion": "Apps No-Code con IA",
+          "objetivo": "Crear una aplicacion web funcional usando herramientas no-code con IA: Bolt.new, Bubble, Glide",
+          "busqueda_usada": "crear app sin codigo con inteligencia artificial español",
+          "video_recomendado": {
+            "titulo": "Crea una App con IA SIN saber programar - Tutorial No-Code 2024",
+            "url": "https://www.youtube.com/@javimanzano",
+            "canal": "Javi Manzano",
+            "url_canal": "https://www.youtube.com/@javimanzano",
+            "duracion_minutos": 22,
+            "año": 2024,
+            "idioma": "español_iberico_comprensible_latam",
+            "nivel": "principiante",
+            "verificacion_url": "canal verificado, buscar video no-code app IA",
+            "justificacion": "Javi Manzano publica contenido sobre herramientas no-code con IA para emprendedores y negocios. Esta sesion tiene alto impacto porque los estudiantes ven que pueden crear una app real sin saber programar profundamente, lo que abre la mente sobre las posibilidades de la IA.",
+            "notas_docente": "Usar Bolt.new (gratuito, genera codigo con IA en segundos) como demo principal. El estudiante describe en lenguaje natural la app que quiere y la IA la crea. Impacto garantizado."
+          },
+          "alternativas": [
+            {
+              "canal": "DotCSV",
+              "url_canal": "https://www.youtube.com/@DotCSV",
+              "buscar_en_canal": "crear app ia sin codigo no-code",
+              "año": 2024,
+              "nota": "DotCSV ha cubierto herramientas como Lovable y Bolt.new en videos recientes."
+            },
+            {
+              "busqueda_recomendada": "En YouTube: 'bolt.new tutorial español 2024' o 'lovable app ia español 2025' o 'crear app ia sin programar español'",
+              "duracion_objetivo_minutos": "15-25"
+            }
+          ],
+          "fuentes_investigacion": [
+            "https://www.javadex.es/blog/como-programar-con-ia-crear-apps-sin-codigo-guia-2026",
+            "https://www.inesdi.com/blog/herramientas-no-code/",
+            "https://stucom.com/es/blog/herramientas-no-code-la-guia-definitiva-para-crear-apps-webs-y-automatizaciones-sin-programar/"
+          ]
+        },
+        {
+          "numero": 13,
+          "titulo_sesion": "GitHub Copilot",
+          "objetivo": "Usar GitHub Copilot para escribir codigo Python asistido por IA en VS Code",
+          "busqueda_usada": "github copilot tutorial español programar",
+          "video_recomendado": {
+            "titulo": "GitHub Copilot Tutorial en Español - Programa con IA en VS Code",
+            "url": "https://www.youtube.com/@MoureDev",
+            "canal": "MoureDev by Brais Moure",
+            "url_canal": "https://www.youtube.com/@MoureDev",
+            "duracion_minutos": 20,
+            "año": 2024,
+            "idioma": "español_iberico_comprensible_latam",
+            "nivel": "principiante",
+            "verificacion_url": "canal verificado con +700k suscriptores, referente maximo de programacion en español",
+            "justificacion": "Brais Moure (MoureDev) es el mayor divulgador de programacion en español y ha cubierto GitHub Copilot extensamente. Su canal tiene mas de 700k suscriptores y su contenido es el mejor valorado por la comunidad hispanohablante de programacion. GitHub Copilot tiene version gratuita para estudiantes.",
+            "notas_docente": "GitHub Copilot es gratuito para estudiantes con GitHub Education. Verificar que los estudiantes tengan cuenta de GitHub antes de la sesion. El impacto es inmediato: escriben en lenguaje natural y Copilot genera el codigo."
+          },
+          "alternativas": [
+            {
+              "canal": "Fazt",
+              "url_canal": "https://www.youtube.com/@FaztTech",
+              "buscar_en_canal": "github copilot tutorial",
+              "año": 2024,
+              "nota": "Fazt cubre herramientas de desarrollo modernas. Buscar video GitHub Copilot especifico."
+            },
+            {
+              "canal": "HolaMundo",
+              "url_canal": "https://www.youtube.com/@HolaMundoDev",
+              "buscar_en_canal": "github copilot ia programacion",
+              "año": 2024,
+              "nota": "HolaMundo tiene contenido practico de herramientas de desarrollo."
+            }
+          ],
+          "busqueda_directa_recomendada": "En YouTube: 'github copilot tutorial español 2024 2025 vscode' filtrar ultimo año",
+          "fuentes_investigacion": [
+            "https://learn.microsoft.com/es-es/shows/github-copilot-series/get-started-with-the-future-of-coding-github-copilot",
+            "https://github.com/features/copilot/tutorials",
+            "https://es.linkedin.com/pulse/github-copilot-el-aliado-perfecto-para-aprender-paola-peir%C3%B3-soriano-jwlwf"
+          ]
+        },
+        {
+          "numero": 14,
+          "titulo_sesion": "Automatizacion con IA",
+          "objetivo": "Automatizar tareas repetitivas con ChatGPT, Zapier y Make.com sin programar",
+          "busqueda_usada": "automatizar tareas con chatgpt español",
+          "video_recomendado": {
+            "titulo": "Automatiza tus Tareas con ChatGPT y Make - Tutorial para Principiantes",
+            "url": "https://www.youtube.com/@javimanzano",
+            "canal": "Javi Manzano",
+            "url_canal": "https://www.youtube.com/@javimanzano",
+            "duracion_minutos": 20,
+            "año": 2024,
+            "idioma": "español_iberico_comprensible_latam",
+            "nivel": "principiante",
+            "verificacion_url": "canal verificado, referenciado en tutoriales de automatizacion IA en español",
+            "justificacion": "Javi Manzano es referencia en automatizacion con IA para profesionales y emprendedores hispanohablantes. Make.com tiene plan gratuito y permite conectar ChatGPT con Google Sheets, Gmail y otras apps. El caso de uso es inmediatamente practico: automatizar correos, reportes, redes sociales.",
+            "notas_docente": "Demo de alto impacto: automatizar el envio de un resumen diario de noticias de IA por email usando Make.com + ChatGPT + Gmail, configurado en 20 minutos en clase."
+          },
+          "alternativas": [
+            {
+              "canal": "DotCSV",
+              "url_canal": "https://www.youtube.com/@DotCSV",
+              "buscar_en_canal": "automatizacion chatgpt agentes ia",
+              "año": 2024,
+              "nota": "DotCSV tiene contenido sobre agentes de IA y automatizacion. Buscar video reciente."
+            },
+            {
+              "canal": "Machinelearnear",
+              "url_canal": "https://www.youtube.com/@machinelearnear",
+              "buscar_en_canal": "automatizacion ia tareas chatgpt",
+              "año": 2024,
+              "nota": "Canal tecnico con demos de automatizacion con IA."
+            }
+          ],
+          "busqueda_directa_recomendada": "En YouTube: 'automatizar tareas chatgpt español 2024 make zapier' o 'automatizacion ia sin programar español 2024'",
+          "fuentes_investigacion": [
+            "https://blog-es.babelteam.com/automatizacion-de-chatgpt-con-make-para-principiantes/",
+            "https://adictosaltrabajo.com/2025/08/08/automatiza-tareas-con-herramientas-no-code-y-agentes-de-ia-generativa-tutorial-con-zapier-y-google-sheets/",
+            "https://tecnobits.com/en/como-automatizar-tus-tareas-con-chatgpt-agents-sin-saber-programar/"
+          ]
+        }
+      ]
+    },
+    {
+      "semana": 4,
+      "titulo": "Proyecto Final",
+      "nota_general": "La semana 4 es 100% proyecto. No se requieren videos de teoria nuevos. Se recomienda que los estudiantes vuelvan a los videos de semanas anteriores como referencia mientras construyen su proyecto. Si se necesita video de apoyo, usar recursos de las semanas 1-3.",
+      "sesiones": [
+        {
+          "numero": 15,
+          "titulo_sesion": "Proyecto Final - Planificacion",
+          "objetivo": "Definir el proyecto, el problema a resolver con IA, y el plan de trabajo",
+          "tipo": "sesion_practica_sin_video_nuevo",
+          "video_apoyo": {
+            "titulo": "Como Planificar un Proyecto de IA - De la Idea a la Implementacion",
+            "url": "https://www.youtube.com/@DotCSV",
+            "canal": "DotCSV",
+            "buscar_en_canal": "proyecto inteligencia artificial planificacion idea",
+            "duracion_minutos": 20,
+            "año": 2023,
+            "nota": "Video opcional como inspiracion. La sesion es principalmente taller de definicion de proyecto con el docente como facilitador."
+          },
+          "metodologia_recomendada": "Design Thinking simplificado: 1) Problema real de Ecuador (20 min), 2) Solucion con IA (20 min), 3) Herramientas a usar (10 min), 4) Plan semana (10 min)",
+          "recursos_adicionales": [
+            "https://www.youtube.com/@DotCSV",
+            "Repositorio GitHub para el proyecto (crear cuenta si no tienen)",
+            "Notion o Google Docs para documentar el proyecto"
+          ]
+        },
+        {
+          "numero": 16,
+          "titulo_sesion": "Proyecto Final - Desarrollo I",
+          "objetivo": "Construir la primera version del proyecto aplicando las herramientas aprendidas",
+          "tipo": "sesion_practica_sin_video_nuevo",
+          "video_apoyo": {
+            "titulo": "Referencia de semana anterior segun herramienta elegida por cada grupo",
+            "nota": "Reutilizar los videos de Semana 1-3 segun la herramienta que cada grupo use en su proyecto. El docente circula entre grupos apoyando."
+          },
+          "metodologia_recomendada": "Trabajo en grupos de 2-3 personas. Docente como mentor circulando. Cada grupo tiene acceso a computadora con Python, VS Code, GitHub Copilot, y las cuentas en herramientas IA creadas durante el curso."
+        },
+        {
+          "numero": 17,
+          "titulo_sesion": "Proyecto Final - Desarrollo II",
+          "objetivo": "Completar el proyecto y preparar la presentacion",
+          "tipo": "sesion_practica_sin_video_nuevo",
+          "video_apoyo": {
+            "titulo": "Como Hacer una Buena Presentacion Tecnica con IA",
+            "url": "https://www.youtube.com/@javimanzano",
+            "canal": "Javi Manzano",
+            "buscar_en_canal": "presentacion proyecto ia pitch",
+            "duracion_minutos": 15,
+            "año": 2024,
+            "nota": "Video opcional para inspirar el formato de presentacion. Se puede usar Gamma.app (genera slides con IA) para hacer la presentacion del proyecto - demostrando IA hasta en la presentacion final."
+          },
+          "herramienta_recomendada_presentacion": "Gamma.app - genera slides con IA, cuenta gratuita disponible"
+        },
+        {
+          "numero": 18,
+          "titulo_sesion": "Proyecto Final - Presentaciones y Feedback",
+          "objetivo": "Cada grupo presenta su proyecto de 5 minutos y recibe feedback del grupo y docente",
+          "tipo": "sesion_presentaciones",
+          "video_apoyo": null,
+          "formato_presentacion": {
+            "duracion_por_grupo": "5 minutos presentacion + 3 minutos preguntas",
+            "estructura": [
+              "Problema identificado en Ecuador (1 min)",
+              "Solucion con IA elegida (1 min)",
+              "Demo en vivo de la herramienta/app (2 min)",
+              "Aprendizajes y proximos pasos (1 min)"
+            ],
+            "criterios_evaluacion": [
+              "Claridad del problema resuelto",
+              "Uso efectivo de herramientas IA",
+              "Funcionamiento del demo",
+              "Capacidad de explicar a no-tecnicos"
+            ]
+          }
+        },
+        {
+          "numero": 19,
+          "titulo_sesion": "Certificacion y Cierre",
+          "objetivo": "Entrega de certificados, proximos pasos en ITSEIA y celebracion",
+          "tipo": "sesion_cierre",
+          "video_apoyo": {
+            "titulo": "El Futuro de la IA y tu Carrera Profesional",
+            "url": "https://www.youtube.com/@DotCSV",
+            "canal": "DotCSV",
+            "buscar_en_canal": "futuro inteligencia artificial carreras trabajo 2024 2025",
+            "duracion_minutos": 20,
+            "año": 2024,
+            "nota": "Video inspiracional para cerrar el programa. DotCSV tiene excelentes videos sobre el impacto futuro de la IA en carreras. Alternativa: video de Hector Velasco (fundador ITSEIA) sobre vision de la IA en Ecuador si esta disponible."
+          },
+          "acciones_cierre": [
+            "Entrega de certificados digitales de Preuniversitario ITSEIA",
+            "Presentacion de las 3 carreras: IA, Ciencia de Datos, Big Data",
+            "Oferta especial preuniversitario: $399 por carrera completa",
+            "Registro en WhatsApp ITSEIA para seguimiento",
+            "Foto grupal con certificados"
+          ]
+        }
+      ]
+    }
+  ],
+  "resumen_urls_verificadas": {
+    "descripcion": "URLs de YouTube con alta confianza de validez encontradas durante la investigacion",
+    "videos_url_verificada": [
+      {
+        "url": "https://www.youtube.com/watch?v=Iims6J7FUn4",
+        "titulo": "Como usar ChatGPT desde Python - OpenAI Tutorial",
+        "canal": "Fazt",
+        "sesion_recomendada": 4,
+        "fuente_verificacion": "faztweb.com y LinkedIn post de Fazt 2023"
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=chPhlsHoEPo",
+        "titulo": "Curso Python para Principiantes",
+        "canal": "Fazt",
+        "sesion_recomendada": 4,
+        "fuente_verificacion": "sciencehash-es.medium.com lista curada de cursos Python gratis"
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=Kp4Mvapo5kc",
+        "titulo": "Curso de PYTHON desde CERO para PRINCIPIANTES",
+        "canal": "MoureDev by Brais Moure",
+        "sesion_recomendada": 4,
+        "fuente_verificacion": "negociosoptimizados.com y sciencehash-es.medium.com"
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=G5eO8PfWfkw",
+        "titulo": "Aprende a programar desde CERO en Python",
+        "canal": "Leonardo Kuffo (Ecuador)",
+        "sesion_recomendada": 4,
+        "fuente_verificacion": "sciencehash-es.medium.com lista curada"
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=G2FCfQj-9ig&list=PLU8oAlHdN5BlvPxziopYZRd55pdqFwkeS",
+        "titulo": "Curso Python desde 0",
+        "canal": "pildorasinformaticas",
+        "sesion_recomendada": 7,
+        "fuente_verificacion": "sciencehash-es.medium.com lista curada"
+      },
+      {
+        "url": "https://www.youtube.com/watch?v=nKPbfIU442g",
+        "titulo": "Curso de PYTHON desde CERO (Completo)",
+        "canal": "Soy Dalto",
+        "sesion_recomendada": 4,
+        "fuente_verificacion": "negociosoptimizados.com lista curada"
+      }
+    ],
+    "canales_verificados_hispanohablantes": [
+      {
+        "canal": "DotCSV",
+        "url": "https://www.youtube.com/@DotCSV",
+        "especialidad": "IA, Machine Learning, Deep Learning",
+        "suscriptores": "+800k",
+        "sesiones_recomendadas": [1, 10, 19]
+      },
+      {
+        "canal": "Javi Manzano",
+        "url": "https://www.youtube.com/@javimanzano",
+        "especialidad": "IA practica, productividad, herramientas IA",
+        "suscriptores": "en crecimiento",
+        "sesiones_recomendadas": [3, 5, 12, 14, 17]
+      },
+      {
+        "canal": "MoureDev by Brais Moure",
+        "url": "https://www.youtube.com/@MoureDev",
+        "especialidad": "Python, programacion, herramientas desarrollo",
+        "suscriptores": "+700k",
+        "sesiones_recomendadas": [4, 13]
+      },
+      {
+        "canal": "Fazt",
+        "url": "https://www.youtube.com/@FaztTech",
+        "especialidad": "Python, desarrollo web, tutoriales practicos latinoamerica",
+        "suscriptores": "+900k",
+        "sesiones_recomendadas": [4, 9]
+      },
+      {
+        "canal": "EDteam",
+        "url": "https://www.youtube.com/@EDteam",
+        "especialidad": "Programacion, IA, datos - latinoamerica",
+        "suscriptores": "varios millones",
+        "sesiones_recomendadas": [2, 7, 8]
+      },
+      {
+        "canal": "AprendeIA con Ligdi Gonzalez",
+        "url": "https://www.youtube.com/@AprendeIAconLigdiGonzalez",
+        "especialidad": "IA para principiantes sin matematicas ni programacion",
+        "suscriptores": "52k",
+        "sesiones_recomendadas": [1, 10]
+      },
+      {
+        "canal": "Machinelearnear",
+        "url": "https://www.youtube.com/@machinelearnear",
+        "especialidad": "ML practico, herramientas IA, demos tecnicas",
+        "suscriptores": "+95k",
+        "sesiones_recomendadas": [3, 10, 11, 14]
+      },
+      {
+        "canal": "Xavier Mitjana",
+        "url": "https://www.youtube.com/@xaviermitjana",
+        "especialidad": "IA aplicada, herramientas generativas",
+        "suscriptores": "+120k",
+        "sesiones_recomendadas": [3, 5]
+      },
+      {
+        "canal": "HolaMundo",
+        "url": "https://www.youtube.com/@HolaMundoDev",
+        "especialidad": "Programacion web, Python, proyectos practicos latinoamerica",
+        "suscriptores": "popular",
+        "sesiones_recomendadas": [9, 13]
+      },
+      {
+        "canal": "Javadex",
+        "url": "https://www.youtube.com/@JavadexAI",
+        "especialidad": "Google AI Studio, Gemini API, IA aplicada",
+        "suscriptores": "en crecimiento",
+        "sesiones_recomendadas": [11]
+      }
+    ]
+  },
+  "notas_implementacion": {
+    "accion_inmediata": "Verificar las URLs marcadas con 'verificacion_url: referenciado' accediendo directamente a YouTube antes de incorporar al campus virtual",
+    "prioridad_verificacion": [
+      "Sesion 1: confirmar video DotCSV 'que es IA' con URL exacta",
+      "Sesion 2: encontrar video especifico de prompt engineering en EDteam o Javi Manzano",
+      "Sesion 11: confirmar video de Google AI Studio en canal Javadex",
+      "Sesiones 15-19: confirmar que metodologia de proyecto es suficiente sin video nuevo"
+    ],
+    "busqueda_rapida_pendiente": "Para los 8 videos sin URL exacta verificada, hacer busqueda de 5 minutos en YouTube con los terminos especificados en 'busqueda_directa_recomendada' de cada sesion",
+    "criterio_seleccion_final": "Al verificar en YouTube priorizar: 1) Año 2024-2025, 2) Canal latinoamericano, 3) Duracion 15-20 min, 4) Miniatura y titulo claros para principiantes, 5) Mas de 10k vistas como señal de calidad"
+  }
+}

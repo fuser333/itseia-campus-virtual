@@ -1,0 +1,41 @@
+{
+  "materia": "Deep Learning",
+  "periodo": "P4",
+  "recursos": [
+    {
+      "titulo": "fast.ai - Curso practico de Deep Learning en español (subtitulos)",
+      "url": "https://course.fast.ai/",
+      "tipo": "curso",
+      "idioma": "ingles con subtitulos español y comunidad LATAM",
+      "descripcion": "Curso gratuito de Deep Learning de Jeremy Howard (fast.ai) considerado el mejor del mundo para practitioners. Enfoque top-down practico. La comunidad hispanohablante en forums.fast.ai traduce conceptos clave. Los videos tienen subtitulos en español en YouTube. Cubre vision, NLP, colaborativo y tabular con PyTorch."
+    },
+    {
+      "titulo": "TensorFlow en Español - Documentacion oficial de Google",
+      "url": "https://www.tensorflow.org/learn?hl=es-419",
+      "tipo": "documentacion",
+      "idioma": "español",
+      "descripcion": "Portal oficial de TensorFlow en español latinoamericano con tutoriales, guias y ejemplos de codigo. Google mantiene traduccion activa al español. Cubre Keras, TensorFlow Lite para movil, TFX para produccion y Hub de modelos preentrenados. Gratuito con Google Colab integrado para ejecutar codigo sin instalacion."
+    },
+    {
+      "titulo": "Hugging Face - Curso de NLP y Deep Learning en español",
+      "url": "https://huggingface.co/learn/nlp-course/es/chapter1/1",
+      "tipo": "curso",
+      "idioma": "español",
+      "descripcion": "Curso oficial de Hugging Face traducido completamente al español. Cubre Transformers, BERT, GPT, Tokenizers y la libreria Datasets. Gratuito con notebooks en Google Colab. Hugging Face es la plataforma estandar para modelos de Deep Learning open source. El curso cubre fine-tuning, pipelines y deployment."
+    },
+    {
+      "titulo": "Google Colab - Entorno gratuito con GPU para Deep Learning",
+      "url": "https://colab.research.google.com/",
+      "tipo": "herramienta",
+      "idioma": "español",
+      "descripcion": "Entorno gratuito de Jupyter Notebooks con GPU NVIDIA T4 y TPU de Google. Interfaz completamente en español. Permite ejecutar modelos de Deep Learning sin instalar nada localmente. Incluye 15GB de RAM, acceso a Google Drive y capa gratuita de GPU por sesion. Herramienta principal usada en cursos de ITSEIA."
+    },
+    {
+      "titulo": "Papers with Code - Papers de Deep Learning con implementaciones",
+      "url": "https://paperswithcode.com/methods",
+      "tipo": "repositorio",
+      "idioma": "ingles con resumenes en español disponibles",
+      "descripcion": "Portal que conecta papers academicos de Deep Learning con su codigo de implementacion. Tiene benchmarks de todos los metodos principales. La comunidad en Twitter/X en español (@papers_espanol) resume papers relevantes. Indispensable para mantenerse al dia con el estado del arte en Deep Learning de forma practica."
+    }
+  ]
+}

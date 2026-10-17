@@ -1,0 +1,1154 @@
+#!/usr/bin/env node
+// Carga sesiones 5-8 de Fundamentos de Programación (Carrera IA)
+// Subject ID: 0df94819-8ccc-499b-ae88-7ed70713295d
+
+const BASE_URL = 'https://wqlselfapnggxxeziruo.supabase.co/rest/v1';
+const SERVICE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndxbHNlbGZhcG5nZ3h4ZXppcnVvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDEzMzEzOCwiZXhwIjoyMDg5NzA5MTM4fQ.-84Rvf9WHfZzEZl9X2BRfn8ctS04Zb8NVfSy90DlWxc';
+const ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndxbHNlbGZhcG5nZ3h4ZXppcnVvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQxMzMxMzgsImV4cCI6MjA4OTcwOTEzOH0.CO--ha0pMyJWCbAULMxbI0lwk_RLhrFtUYYTZRzkhdk';
+const SUBJECT_ID = '0df94819-8ccc-499b-ae88-7ed70713295d';
+
+const headers = {
+  'apikey': ANON_KEY,
+  'Authorization': `Bearer ${SERVICE_KEY}`,
+  'Content-Type': 'application/json',
+};
+
+async function post(endpoint, body, prefer = 'return=representation') {
+  const res = await fetch(`${BASE_URL}${endpoint}`, {
+    method: 'POST',
+    headers: { ...headers, 'Prefer': prefer },
+    body: JSON.stringify(body),
+  });
+  const text = await res.text();
+  if (!res.ok) {
+    console.error(`ERROR ${res.status} on ${endpoint}:`, text);
+    return null;
+  }
+  try {
+    const data = JSON.parse(text);
+    return Array.isArray(data) ? data[0] : data;
+  } catch {
+    return null;
+  }
+}
+
+const sessions = [
+  {
+    number: 5,
+    title: 'Funciones: definición, parámetros y return',
+    video_url: 'https://www.youtube.com/watch?v=HXtaLnb7E8Y',
+    estimated_duration_minutes: 75,
+    order_index: 5,
+    theory_markdown: `# Funciones en Python
+
+Las funciones son bloques de código reutilizables que realizan una tarea específica. Permiten organizar el código, evitar repetición y hacer los programas más legibles.
+
+## Definir una función
+
+Se usa la palabra clave \`def\` seguida del nombre y paréntesis:
+
+\`\`\`python
+def saludar():
+    print("¡Hola, mundo!")
+
+saludar()  # Llama a la función
+\`\`\`
+
+## Parámetros y argumentos
+
+Los parámetros son variables que la función recibe al ser llamada:
+
+\`\`\`python
+def saludar_persona(nombre):
+    print(f"¡Hola, {nombre}!")
+
+saludar_persona("María")  # Argumento: "María"
+\`\`\`
+
+### Parámetros con valor por defecto
+
+\`\`\`python
+def potencia(base, exponente=2):
+    return base ** exponente
+
+print(potencia(3))     # 9 (usa exponente=2 por defecto)
+print(potencia(3, 3))  # 27
+\`\`\`
+
+## La instrucción return
+
+\`return\` devuelve un valor desde la función al código que la llamó:
+
+\`\`\`python
+def sumar(a, b):
+    resultado = a + b
+    return resultado
+
+total = sumar(10, 5)
+print(total)  # 15
+\`\`\`
+
+Una función puede retornar múltiples valores:
+
+\`\`\`python
+def dividir(dividendo, divisor):
+    cociente = dividendo // divisor
+    resto = dividendo % divisor
+    return cociente, resto
+
+c, r = dividir(17, 5)
+print(f"Cociente: {c}, Resto: {r}")  # Cociente: 3, Resto: 2
+\`\`\`
+
+## Scope (alcance) de variables
+
+Las variables definidas dentro de una función son **locales**:
+
+\`\`\`python
+def mi_funcion():
+    x = 10  # Variable local
+    print(x)
+
+mi_funcion()
+# print(x)  # Error: x no existe fuera de la función
+\`\`\`
+
+## Funciones como ciudadanos de primera clase
+
+En Python, las funciones pueden asignarse a variables y pasarse como argumentos:
+
+\`\`\`python
+def aplicar(funcion, valor):
+    return funcion(valor)
+
+def duplicar(n):
+    return n * 2
+
+resultado = aplicar(duplicar, 7)
+print(resultado)  # 14
+\`\`\`
+
+## Buenas prácticas
+
+- Nombres descriptivos en minúsculas con guiones bajos: \`calcular_promedio()\`
+- Una función debe hacer **una sola cosa**
+- Documenta con docstrings: \`"""Calcula el promedio de una lista."""\`
+- Mantén funciones cortas (menos de 20 líneas idealmente)
+
+Las funciones son la base de la programación modular y el primer paso hacia escribir código profesional.`,
+    ai_lab_context: `El estudiante está aprendiendo funciones en Python: definición con def, parámetros posicionales y con valores por defecto, la instrucción return, scope de variables y retorno de múltiples valores. Ayúdale a entender la diferencia entre parámetros y argumentos, cuándo usar return vs print, y cómo diseñar funciones con responsabilidad única. Si tiene errores de scope o de llamada incorrecta a funciones, guíale paso a paso.`,
+    ai_lab_suggested_prompt: 'Tengo esta función que calcula el área de un rectángulo pero no entiendo por qué no imprime nada: def area(base, altura): resultado = base * altura. ¿Qué le falta?',
+    quiz: {
+      title: 'Quiz: Funciones en Python',
+      questions: [
+        {
+          question_text: '¿Cuál es la palabra clave correcta para definir una función en Python?',
+          options: JSON.stringify([
+            { key: 'a', text: 'function', is_correct: false },
+            { key: 'b', text: 'def', is_correct: true },
+            { key: 'c', text: 'fun', is_correct: false },
+            { key: 'd', text: 'define', is_correct: false },
+          ]),
+          explanation: 'En Python se usa "def" (abreviación de define) para declarar funciones. Es diferente a JavaScript (function) o Kotlin (fun).',
+          order_index: 1,
+        },
+        {
+          question_text: '¿Qué imprime el siguiente código?\n\ndef multiplicar(x, y=3):\n    return x * y\n\nprint(multiplicar(4))',
+          options: JSON.stringify([
+            { key: 'a', text: '4', is_correct: false },
+            { key: 'b', text: '3', is_correct: false },
+            { key: 'c', text: '12', is_correct: true },
+            { key: 'd', text: 'Error', is_correct: false },
+          ]),
+          explanation: 'El parámetro y tiene valor por defecto 3. Al llamar multiplicar(4), x=4 e y=3, entonces 4*3=12.',
+          order_index: 2,
+        },
+        {
+          question_text: '¿Cuál es la diferencia principal entre print() y return en una función?',
+          options: JSON.stringify([
+            { key: 'a', text: 'No hay diferencia, ambos hacen lo mismo', is_correct: false },
+            { key: 'b', text: 'print() muestra en pantalla; return devuelve un valor que puede usarse en el programa', is_correct: true },
+            { key: 'c', text: 'return es más rápido que print()', is_correct: false },
+            { key: 'd', text: 'print() solo funciona dentro de funciones', is_correct: false },
+          ]),
+          explanation: 'print() solo muestra información visualmente. return devuelve un valor al llamador, permitiendo usar el resultado en operaciones posteriores como asignarlo a una variable.',
+          order_index: 3,
+        },
+        {
+          question_text: '¿Qué ocurre con una variable definida dentro de una función cuando la función termina?',
+          options: JSON.stringify([
+            { key: 'a', text: 'Se guarda automáticamente como variable global', is_correct: false },
+            { key: 'b', text: 'Se puede acceder desde cualquier parte del programa', is_correct: false },
+            { key: 'c', text: 'Deja de existir (es local al scope de la función)', is_correct: true },
+            { key: 'd', text: 'Genera un error si no se retorna', is_correct: false },
+          ]),
+          explanation: 'Las variables locales solo existen durante la ejecución de la función. Cuando la función termina, Python libera esa memoria. Para compartir valores hay que usar return.',
+          order_index: 4,
+        },
+        {
+          question_text: '¿Cuántos valores puede retornar una función en Python con una sola instrucción return?',
+          options: JSON.stringify([
+            { key: 'a', text: 'Solo uno', is_correct: false },
+            { key: 'b', text: 'Máximo dos', is_correct: false },
+            { key: 'c', text: 'Múltiples valores separados por coma', is_correct: true },
+            { key: 'd', text: 'No puede retornar valores, solo None', is_correct: false },
+          ]),
+          explanation: 'Python permite "return a, b, c" que en realidad retorna una tupla. Puedes desempacar con "x, y, z = mi_funcion()" para obtener cada valor por separado.',
+          order_index: 5,
+        },
+      ],
+    },
+    assignment: {
+      title: 'Ejercicio: Calculadora de métricas',
+      instructions_markdown: `# Ejercicio: Calculadora de métricas con funciones
+
+## Objetivo
+Crear un programa que use funciones para calcular métricas estadísticas básicas.
+
+## Instrucciones
+
+### Paso 1: Crear las funciones base
+Define las siguientes funciones:
+\`\`\`python
+def calcular_promedio(numeros):
+    # Retorna el promedio de una lista de números
+    pass
+
+def encontrar_maximo(numeros):
+    # Retorna el número más alto (sin usar max() nativo)
+    pass
+
+def encontrar_minimo(numeros):
+    # Retorna el número más bajo (sin usar min() nativo)
+    pass
+
+def calcular_rango(numeros):
+    # Retorna la diferencia entre máximo y mínimo
+    pass
+\`\`\`
+
+### Paso 2: Función de reporte
+Crea una función \`generar_reporte(nombre, datos)\` que:
+- Reciba un nombre descriptivo y una lista de números
+- Llame a las funciones anteriores
+- Imprima un reporte formateado así:
+
+\`\`\`
+=== Reporte: Calificaciones de Python ===
+Promedio: 85.40
+Máximo: 98
+Mínimo: 72
+Rango: 26
+\`\`\`
+
+### Paso 3: Prueba con datos reales
+Usa estas listas de prueba:
+\`\`\`python
+calificaciones = [85, 92, 78, 95, 88, 72, 98, 83, 91, 76]
+temperaturas = [22.5, 24.1, 19.8, 25.3, 23.7, 21.0, 26.8]
+
+generar_reporte("Calificaciones de Python", calificaciones)
+generar_reporte("Temperaturas semanales", temperaturas)
+\`\`\`
+
+### Paso 4: Función extra (opcional - 10 puntos extra)
+Crea \`clasificar_nota(nota)\` que retorne:
+- "Excelente" si >= 90
+- "Bueno" si >= 75
+- "Regular" si >= 60
+- "Insuficiente" si < 60
+
+## Entrega
+Sube un archivo .py con todo el código y capturas de pantalla del output.
+
+## Criterios de evaluación
+- Funciones bien definidas con return: 40 pts
+- Función de reporte que llama a las otras: 30 pts
+- Output correcto y formateado: 30 pts`,
+      allowed_file_types: JSON.stringify(['.py', '.txt', '.png', '.jpg']),
+    },
+    resources: [
+      { title: 'Documentación oficial Python - Funciones', url: 'https://docs.python.org/es/3/tutorial/controlflow.html#defining-functions', type: 'documentation', description: 'Guía oficial de Python sobre definición y uso de funciones', order_index: 1 },
+      { title: 'Real Python - Defining Your Own Functions', url: 'https://realpython.com/defining-your-own-python-function/', type: 'article', description: 'Tutorial completo en inglés sobre funciones en Python con ejemplos avanzados', order_index: 2 },
+      { title: 'W3Schools Python Functions', url: 'https://www.w3schools.com/python/python_functions.asp', type: 'tutorial', description: 'Tutorial interactivo con ejercicios en línea para practicar funciones', order_index: 3 },
+      { title: 'Python Tutor - Visualizador de código', url: 'https://pythontutor.com/', type: 'tool', description: 'Herramienta visual para entender cómo Python ejecuta funciones paso a paso, ideal para comprender el scope', order_index: 4 },
+    ],
+  },
+  {
+    number: 6,
+    title: 'Listas y tuplas',
+    video_url: 'https://www.youtube.com/watch?v=CTEGh5xHzBE',
+    estimated_duration_minutes: 80,
+    order_index: 6,
+    theory_markdown: `# Listas y Tuplas en Python
+
+Las listas y tuplas son estructuras de datos que almacenan colecciones ordenadas de elementos. Son fundamentales para trabajar con datos en IA y ciencia de datos.
+
+## Listas
+
+Las listas son **mutables** (se pueden modificar) y se definen con corchetes \`[]\`:
+
+\`\`\`python
+frutas = ["manzana", "banana", "naranja"]
+numeros = [1, 2, 3, 4, 5]
+mixta = [42, "texto", True, 3.14]  # Python permite tipos mixtos
+\`\`\`
+
+### Acceso por índice
+
+\`\`\`python
+frutas = ["manzana", "banana", "naranja", "uva"]
+print(frutas[0])   # manzana (primer elemento)
+print(frutas[-1])  # uva (último elemento)
+print(frutas[1:3]) # ['banana', 'naranja'] (slicing)
+\`\`\`
+
+### Métodos principales de listas
+
+\`\`\`python
+lista = [3, 1, 4, 1, 5]
+
+lista.append(9)       # Agrega al final: [3,1,4,1,5,9]
+lista.insert(0, 0)    # Inserta en posición: [0,3,1,4,1,5,9]
+lista.remove(1)       # Elimina primera ocurrencia de 1
+lista.pop()           # Elimina y retorna el último elemento
+lista.sort()          # Ordena en lugar: [0,3,4,5,9]
+lista.reverse()       # Invierte: [9,5,4,3,0]
+print(len(lista))     # Longitud: 5
+print(lista.count(3)) # Cuenta ocurrencias: 1
+\`\`\`
+
+### List comprehension
+
+Forma pythónica de crear listas:
+
+\`\`\`python
+cuadrados = [x**2 for x in range(1, 6)]
+print(cuadrados)  # [1, 4, 9, 16, 25]
+
+pares = [x for x in range(20) if x % 2 == 0]
+print(pares)  # [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]
+\`\`\`
+
+## Tuplas
+
+Las tuplas son **inmutables** (no se pueden modificar) y se definen con paréntesis \`()\`:
+
+\`\`\`python
+coordenadas = (10.5, -75.3)  # Latitud, longitud de Quito
+rgb = (255, 165, 0)           # Color naranja en RGB
+\`\`\`
+
+### ¿Por qué usar tuplas?
+
+\`\`\`python
+# Las tuplas son más rápidas y ocupan menos memoria
+# Úsalas cuando los datos NO deben cambiar
+punto = (3, 7)
+# punto[0] = 5  # Error: tupla inmutable!
+
+# Desempaquetado
+x, y = punto
+print(f"X={x}, Y={y}")  # X=3, Y=7
+
+# Retorno de múltiples valores en funciones
+def min_max(lista):
+    return min(lista), max(lista)
+
+minimo, maximo = min_max([4, 7, 2, 9, 1])
+print(minimo, maximo)  # 1 9
+\`\`\`
+
+## Operaciones comunes
+
+\`\`\`python
+# Comprobar si existe un elemento
+if "banana" in frutas:
+    print("Hay banana")
+
+# Iterar
+for fruta in frutas:
+    print(fruta.upper())
+
+# Enumerate (índice + valor)
+for i, fruta in enumerate(frutas):
+    print(f"{i}: {fruta}")
+
+# zip (combinar dos listas)
+nombres = ["Ana", "Juan", "María"]
+notas = [95, 87, 92]
+for nombre, nota in zip(nombres, notas):
+    print(f"{nombre}: {nota}")
+\`\`\`
+
+## Lista vs Tupla: ¿cuándo usar cada una?
+
+| Característica | Lista | Tupla |
+|---|---|---|
+| Mutabilidad | Mutable | Inmutable |
+| Velocidad | Más lenta | Más rápida |
+| Uso | Datos que cambian | Datos constantes |
+| Ejemplo | Carrito de compras | Coordenadas GPS |`,
+    ai_lab_context: `El estudiante está aprendiendo listas y tuplas en Python. Cubre acceso por índice (positivo y negativo), slicing, métodos de listas (append, insert, remove, pop, sort), list comprehensions, tuplas inmutables, desempaquetado y operaciones como in, enumerate, zip. Ayúdale a entender cuándo usar lista vs tupla y cómo aplicar list comprehensions de forma eficiente. Si tiene IndexError, guíale sobre los límites de los índices.`,
+    ai_lab_suggested_prompt: 'Tengo una lista de calificaciones [85, 92, 78, 95, 88, 72, 98] y quiero crear una nueva lista solo con las notas mayores a 85 usando list comprehension. ¿Cómo lo hago?',
+    quiz: {
+      title: 'Quiz: Listas y Tuplas',
+      questions: [
+        {
+          question_text: '¿Qué resultado produce frutas[-1] si frutas = ["manzana", "banana", "naranja"]?',
+          options: JSON.stringify([
+            { key: 'a', text: 'manzana', is_correct: false },
+            { key: 'b', text: 'banana', is_correct: false },
+            { key: 'c', text: 'naranja', is_correct: true },
+            { key: 'd', text: 'Error de índice', is_correct: false },
+          ]),
+          explanation: 'Los índices negativos en Python cuentan desde el final. -1 es el último elemento, -2 el penúltimo, etc. frutas[-1] = "naranja".',
+          order_index: 1,
+        },
+        {
+          question_text: '¿Cuál es la diferencia fundamental entre lista y tupla en Python?',
+          options: JSON.stringify([
+            { key: 'a', text: 'Las listas solo almacenan números; las tuplas almacenan texto', is_correct: false },
+            { key: 'b', text: 'Las listas usan [] y son mutables; las tuplas usan () y son inmutables', is_correct: true },
+            { key: 'c', text: 'Las tuplas pueden tener más elementos que las listas', is_correct: false },
+            { key: 'd', text: 'No hay diferencia, son intercambiables', is_correct: false },
+          ]),
+          explanation: 'La distinción clave es mutabilidad. Las listas se pueden modificar (append, remove, etc). Las tuplas no se pueden cambiar después de crearse, lo que las hace más seguras y eficientes para datos constantes.',
+          order_index: 2,
+        },
+        {
+          question_text: '¿Qué produce [x*2 for x in [1,2,3,4,5] if x > 2]?',
+          options: JSON.stringify([
+            { key: 'a', text: '[2, 4, 6, 8, 10]', is_correct: false },
+            { key: 'b', text: '[6, 8, 10]', is_correct: true },
+            { key: 'c', text: '[3, 4, 5]', is_correct: false },
+            { key: 'd', text: '[1, 2, 6, 8, 10]', is_correct: false },
+          ]),
+          explanation: 'La list comprehension filtra primero (x > 2 selecciona 3,4,5) y luego aplica la expresión (x*2). Resultado: [3*2, 4*2, 5*2] = [6, 8, 10].',
+          order_index: 3,
+        },
+        {
+          question_text: '¿Qué método de lista elimina y RETORNA el último elemento?',
+          options: JSON.stringify([
+            { key: 'a', text: 'remove()', is_correct: false },
+            { key: 'b', text: 'delete()', is_correct: false },
+            { key: 'c', text: 'pop()', is_correct: true },
+            { key: 'd', text: 'clear()', is_correct: false },
+          ]),
+          explanation: 'pop() elimina y retorna el último elemento (o el de un índice específico con pop(i)). remove() elimina la primera ocurrencia de un valor pero no retorna nada. clear() vacía toda la lista.',
+          order_index: 4,
+        },
+        {
+          question_text: '¿Qué función permite iterar simultáneamente sobre el índice y el valor de una lista?',
+          options: JSON.stringify([
+            { key: 'a', text: 'index()', is_correct: false },
+            { key: 'b', text: 'enumerate()', is_correct: true },
+            { key: 'c', text: 'zip()', is_correct: false },
+            { key: 'd', text: 'range()', is_correct: false },
+          ]),
+          explanation: 'enumerate(lista) retorna pares (índice, valor). zip() combina dos listas elemento a elemento. range() genera secuencias numéricas. enumerate es la forma pythónica de obtener índice y valor juntos.',
+          order_index: 5,
+        },
+      ],
+    },
+    assignment: {
+      title: 'Ejercicio: Gestor de estudiantes con listas',
+      instructions_markdown: `# Ejercicio: Gestor de estudiantes con listas
+
+## Objetivo
+Construir un mini sistema de gestión de notas usando listas y tuplas.
+
+## Instrucciones
+
+### Paso 1: Estructura de datos
+\`\`\`python
+# Cada estudiante es una tupla (nombre, nota)
+estudiantes = [
+    ("Ana García", 92),
+    ("Carlos López", 78),
+    ("María Torres", 85),
+    ("Pedro Vásquez", 61),
+    ("Lucía Mora", 97),
+    ("Andrés Silva", 74),
+    ("Valeria Ruiz", 88),
+]
+\`\`\`
+
+### Paso 2: Funciones a implementar
+
+\`\`\`python
+def obtener_nombres(estudiantes):
+    """Retorna solo la lista de nombres usando list comprehension"""
+    pass
+
+def obtener_notas(estudiantes):
+    """Retorna solo la lista de notas"""
+    pass
+
+def estudiantes_aprobados(estudiantes, nota_minima=70):
+    """Retorna lista de tuplas de estudiantes con nota >= nota_minima"""
+    pass
+
+def top_n_estudiantes(estudiantes, n=3):
+    """Retorna los n mejores estudiantes ordenados por nota descendente"""
+    pass
+
+def agregar_estudiante(estudiantes, nombre, nota):
+    """Agrega un nuevo estudiante a la lista"""
+    pass
+\`\`\`
+
+### Paso 3: Mostrar reporte
+\`\`\`python
+def mostrar_reporte(estudiantes):
+    print("\\n=== REPORTE DE NOTAS ===")
+    for i, (nombre, nota) in enumerate(estudiantes, 1):
+        estado = "APROBADO" if nota >= 70 else "REPROBADO"
+        print(f"{i:2}. {nombre:<20} {nota:3}  [{estado}]")
+
+    notas = obtener_notas(estudiantes)
+    print(f"\\nPromedio: {sum(notas)/len(notas):.1f}")
+    print(f"Mejor nota: {max(notas)}")
+    print(f"Top 3 estudiantes:")
+    for nombre, nota in top_n_estudiantes(estudiantes):
+        print(f"  - {nombre}: {nota}")
+\`\`\`
+
+### Paso 4: Prueba completa
+Llama a \`mostrar_reporte(estudiantes)\` con los datos originales y luego agrega un estudiante nuevo con \`agregar_estudiante()\` y muestra el reporte actualizado.
+
+## Entrega
+Archivo .py y capturas del output.
+
+## Evaluación
+- Funciones con list comprehension correcta: 40 pts
+- Ordenamiento y filtrado funcional: 30 pts
+- Reporte formateado correctamente: 30 pts`,
+      allowed_file_types: JSON.stringify(['.py', '.txt', '.png', '.jpg']),
+    },
+    resources: [
+      { title: 'Python Lists - W3Schools', url: 'https://www.w3schools.com/python/python_lists.asp', type: 'tutorial', description: 'Tutorial interactivo completo sobre listas con ejercicios', order_index: 1 },
+      { title: 'List Comprehensions - Real Python', url: 'https://realpython.com/list-comprehension-python/', type: 'article', description: 'Guía profunda sobre list comprehensions con casos de uso reales', order_index: 2 },
+      { title: 'Documentación Python - Estructuras de datos', url: 'https://docs.python.org/es/3/tutorial/datastructures.html', type: 'documentation', description: 'Documentación oficial en español sobre listas, tuplas y más', order_index: 3 },
+      { title: 'Programación en Python - Listas y tuplas (español)', url: 'https://www.youtube.com/watch?v=hCTEHnFLUZY', type: 'video', description: 'Video explicativo en español sobre listas y tuplas con ejemplos prácticos', order_index: 4 },
+    ],
+  },
+  {
+    number: 7,
+    title: 'Diccionarios y conjuntos',
+    video_url: 'https://www.youtube.com/watch?v=daefaLgNkw0',
+    estimated_duration_minutes: 80,
+    order_index: 7,
+    theory_markdown: `# Diccionarios y Conjuntos en Python
+
+## Diccionarios
+
+Los diccionarios almacenan pares **clave: valor**. Son extremadamente útiles para representar objetos del mundo real y son la base de JSON.
+
+\`\`\`python
+estudiante = {
+    "nombre": "Ana García",
+    "edad": 22,
+    "carrera": "Inteligencia Artificial",
+    "activo": True
+}
+
+print(estudiante["nombre"])    # Ana García
+print(estudiante.get("edad"))  # 22
+print(estudiante.get("gpa", "N/A"))  # "N/A" (valor por defecto)
+\`\`\`
+
+### Operaciones CRUD en diccionarios
+
+\`\`\`python
+# Crear / Actualizar
+estudiante["email"] = "ana@itseia.ai"    # Agregar nueva clave
+estudiante["edad"] = 23                   # Actualizar valor existente
+
+# Leer
+print(list(estudiante.keys()))    # Lista de claves
+print(list(estudiante.values()))  # Lista de valores
+print(list(estudiante.items()))   # Lista de tuplas (clave, valor)
+
+# Eliminar
+del estudiante["activo"]           # Eliminar clave específica
+edad = estudiante.pop("edad")      # Eliminar y retornar valor
+\`\`\`
+
+### Iterar sobre diccionarios
+
+\`\`\`python
+# Solo claves
+for clave in estudiante:
+    print(clave)
+
+# Clave y valor
+for clave, valor in estudiante.items():
+    print(f"{clave}: {valor}")
+\`\`\`
+
+### Dict comprehension
+
+\`\`\`python
+numeros = [1, 2, 3, 4, 5]
+cuadrados = {n: n**2 for n in numeros}
+print(cuadrados)  # {1:1, 2:4, 3:9, 4:16, 5:25}
+
+# Filtrar estudiantes aprobados
+notas = {"Ana": 92, "Juan": 65, "María": 88, "Pedro": 55}
+aprobados = {nombre: nota for nombre, nota in notas.items() if nota >= 70}
+print(aprobados)  # {'Ana': 92, 'María': 88}
+\`\`\`
+
+### Diccionarios anidados
+
+\`\`\`python
+cursos = {
+    "python": {"estudiantes": 45, "duracion": 8, "nivel": "básico"},
+    "machine_learning": {"estudiantes": 30, "duracion": 16, "nivel": "avanzado"},
+}
+
+print(cursos["python"]["duracion"])  # 8
+\`\`\`
+
+## Conjuntos (Sets)
+
+Los conjuntos almacenan elementos **únicos** sin orden. Son ideales para eliminar duplicados y realizar operaciones matemáticas de conjuntos.
+
+\`\`\`python
+# Crear un conjunto
+tecnologias = {"Python", "SQL", "Machine Learning", "Python"}
+print(tecnologias)  # {'Python', 'SQL', 'Machine Learning'} - sin duplicados
+
+# Operaciones de conjuntos
+skills_dev = {"Python", "Git", "Docker", "SQL"}
+skills_ds = {"Python", "SQL", "Pandas", "Matplotlib"}
+
+union = skills_dev | skills_ds           # Todas las skills
+interseccion = skills_dev & skills_ds    # Skills en común
+diferencia = skills_dev - skills_ds      # Solo en dev, no en ds
+
+print("Comunes:", interseccion)  # {'Python', 'SQL'}
+print("Solo dev:", diferencia)   # {'Git', 'Docker'}
+\`\`\`
+
+### Métodos de sets
+
+\`\`\`python
+s = {1, 2, 3}
+s.add(4)           # Agregar elemento
+s.remove(2)        # Eliminar (error si no existe)
+s.discard(10)      # Eliminar (sin error si no existe)
+print(3 in s)      # True - verificar pertenencia (muy rápido)
+\`\`\`
+
+## ¿Cuándo usar qué?
+
+| Estructura | Uso ideal |
+|---|---|
+| Lista | Colección ordenada y modificable |
+| Tupla | Datos fijos, coordenadas, retorno de funciones |
+| Diccionario | Asociar claves con valores, representar objetos |
+| Conjunto | Elementos únicos, operaciones matemáticas |`,
+    ai_lab_context: `El estudiante está aprendiendo diccionarios y conjuntos en Python. Los diccionarios cubren acceso por clave, métodos (keys, values, items, get, pop), dict comprehensions y diccionarios anidados. Los sets cubren unicidad, operaciones matemáticas (unión, intersección, diferencia) y métodos (add, remove, discard). Ayúdale a entender cuándo usar dict vs lista y cómo aprovechar los sets para eliminar duplicados eficientemente. Errores comunes: KeyError en acceso directo vs get(), mutabilidad de sets (no pueden contener listas).`,
+    ai_lab_suggested_prompt: 'Tengo una lista de skills con repeticiones: ["Python", "SQL", "Python", "Pandas", "SQL", "Python"]. ¿Cómo elimino duplicados usando un conjunto y luego convierto el resultado a lista ordenada?',
+    quiz: {
+      title: 'Quiz: Diccionarios y Conjuntos',
+      questions: [
+        {
+          question_text: '¿Qué método de diccionario es preferible para evitar KeyError al acceder a una clave que podría no existir?',
+          options: JSON.stringify([
+            { key: 'a', text: 'dict["clave"]', is_correct: false },
+            { key: 'b', text: 'dict.get("clave")', is_correct: true },
+            { key: 'c', text: 'dict.keys("clave")', is_correct: false },
+            { key: 'd', text: 'dict.find("clave")', is_correct: false },
+          ]),
+          explanation: 'dict.get("clave") retorna None si la clave no existe, sin lanzar error. También acepta un valor por defecto: dict.get("clave", "valor_default"). El acceso directo dict["clave"] lanza KeyError si la clave no existe.',
+          order_index: 1,
+        },
+        {
+          question_text: '¿Qué característica principal distingue a los conjuntos (sets) de las listas?',
+          options: JSON.stringify([
+            { key: 'a', text: 'Los sets son más rápidos para ordenar', is_correct: false },
+            { key: 'b', text: 'Los sets solo almacenan números', is_correct: false },
+            { key: 'c', text: 'Los sets no permiten elementos duplicados y no tienen orden', is_correct: true },
+            { key: 'd', text: 'Los sets son inmutables como las tuplas', is_correct: false },
+          ]),
+          explanation: 'Los sets automáticamente eliminan duplicados y no garantizan orden. Son mutables (puedes add/remove), pero no tienen índices. Son ideales para verificar pertenencia (x in set) con O(1) vs O(n) en listas.',
+          order_index: 2,
+        },
+        {
+          question_text: '¿Qué produce {k: v*2 for k, v in {"a":1, "b":2, "c":3}.items()}?',
+          options: JSON.stringify([
+            { key: 'a', text: '{"a":1, "b":2, "c":3}', is_correct: false },
+            { key: 'b', text: '{"a":2, "b":4, "c":6}', is_correct: true },
+            { key: 'c', text: '[2, 4, 6]', is_correct: false },
+            { key: 'd', text: 'Error de sintaxis', is_correct: false },
+          ]),
+          explanation: 'El dict comprehension {k: v*2 for k, v in d.items()} itera sobre pares clave-valor y crea un nuevo diccionario duplicando cada valor. Resultado: {"a":2, "b":4, "c":6}.',
+          order_index: 3,
+        },
+        {
+          question_text: 'Dado a = {1,2,3,4} y b = {3,4,5,6}, ¿qué produce a & b?',
+          options: JSON.stringify([
+            { key: 'a', text: '{1,2,3,4,5,6}', is_correct: false },
+            { key: 'b', text: '{1,2}', is_correct: false },
+            { key: 'c', text: '{3,4}', is_correct: true },
+            { key: 'd', text: '{1,2,5,6}', is_correct: false },
+          ]),
+          explanation: 'El operador & es intersección: retorna solo los elementos presentes en AMBOS conjuntos. Los elementos 3 y 4 están tanto en a como en b. El | es unión (todos), el - es diferencia (solo en el primero).',
+          order_index: 4,
+        },
+        {
+          question_text: '¿Cuál es la forma correcta de iterar sobre claves Y valores de un diccionario simultáneamente?',
+          options: JSON.stringify([
+            { key: 'a', text: 'for k in diccionario:', is_correct: false },
+            { key: 'b', text: 'for k, v in diccionario.items():', is_correct: true },
+            { key: 'c', text: 'for k, v in diccionario:', is_correct: false },
+            { key: 'd', text: 'for k in diccionario.keys(), v in diccionario.values():', is_correct: false },
+          ]),
+          explanation: 'diccionario.items() retorna una vista de pares (clave, valor). Con "for k, v in d.items():" se desempaqueta cada par. Solo "for k in d:" itera sobre claves. diccionario.values() da solo los valores.',
+          order_index: 5,
+        },
+      ],
+    },
+    assignment: {
+      title: 'Ejercicio: Inventario con diccionarios',
+      instructions_markdown: `# Ejercicio: Sistema de inventario con diccionarios
+
+## Objetivo
+Construir un sistema de inventario que use diccionarios y conjuntos para gestionar productos.
+
+## Instrucciones
+
+### Paso 1: Estructura de inventario
+\`\`\`python
+inventario = {
+    "laptop": {"precio": 850.00, "stock": 15, "categoria": "electronica"},
+    "mouse": {"precio": 25.00, "stock": 50, "categoria": "electronica"},
+    "cuaderno": {"precio": 3.50, "stock": 200, "categoria": "papeleria"},
+    "silla": {"precio": 120.00, "stock": 8, "categoria": "mobiliario"},
+    "monitor": {"precio": 350.00, "stock": 12, "categoria": "electronica"},
+    "lapiz": {"precio": 0.75, "stock": 500, "categoria": "papeleria"},
+}
+\`\`\`
+
+### Paso 2: Funciones requeridas
+
+\`\`\`python
+def obtener_categorias(inventario):
+    """Retorna un SET con todas las categorías únicas"""
+    pass
+
+def productos_por_categoria(inventario, categoria):
+    """Retorna dict de productos de una categoría específica"""
+    pass
+
+def valor_total_inventario(inventario):
+    """Retorna el valor total (precio * stock de cada producto)"""
+    pass
+
+def productos_bajo_stock(inventario, minimo=10):
+    """Retorna lista de productos con stock <= minimo"""
+    pass
+
+def actualizar_precio(inventario, producto, nuevo_precio):
+    """Actualiza el precio de un producto, retorna True/False"""
+    pass
+\`\`\`
+
+### Paso 3: Reporte de inventario
+\`\`\`python
+def mostrar_inventario(inventario):
+    print("\\n=== INVENTARIO GENERAL ===")
+    print(f"{'Producto':<15} {'Precio':>8} {'Stock':>6} {'Categoría':<12}")
+    print("-" * 45)
+    for producto, datos in inventario.items():
+        print(f"{producto:<15} ${datos['precio']:>7.2f} {datos['stock']:>6} {datos['categoria']:<12}")
+
+    print(f"\\nCategorías: {obtener_categorias(inventario)}")
+    print(f"Valor total: ${valor_total_inventario(inventario):,.2f}")
+    print(f"\\nProductos con stock bajo (<10):")
+    for p in productos_bajo_stock(inventario):
+        print(f"  - {p}")
+\`\`\`
+
+### Paso 4: Prueba
+1. Llama a \`mostrar_inventario(inventario)\`
+2. Actualiza el precio de "laptop" a 799.99
+3. Agrega un producto nuevo al inventario
+4. Muestra el inventario actualizado
+
+## Entrega
+Archivo .py y capturas del output final.`,
+      allowed_file_types: JSON.stringify(['.py', '.txt', '.png', '.jpg']),
+    },
+    resources: [
+      { title: 'Python Dictionaries - W3Schools', url: 'https://www.w3schools.com/python/python_dictionaries.asp', type: 'tutorial', description: 'Tutorial completo con ejercicios interactivos sobre diccionarios', order_index: 1 },
+      { title: 'Python Sets - Documentación oficial', url: 'https://docs.python.org/es/3/library/stdtypes.html#set-types-set-frozenset', type: 'documentation', description: 'Referencia oficial de sets y frozensets con todos los métodos y operaciones', order_index: 2 },
+      { title: 'Dictionaries in Python - Real Python', url: 'https://realpython.com/python-dicts/', type: 'article', description: 'Tutorial exhaustivo sobre diccionarios: creación, manipulación y casos de uso avanzados', order_index: 3 },
+      { title: 'Programiz - Python Dictionary', url: 'https://www.programiz.com/python-programming/dictionary', type: 'tutorial', description: 'Guía con ejemplos visuales y ejercicios prácticos sobre diccionarios Python', order_index: 4 },
+    ],
+  },
+  {
+    number: 8,
+    title: 'Manejo de strings y formateo',
+    video_url: 'https://www.youtube.com/watch?v=k9TUPpGqYTo',
+    estimated_duration_minutes: 70,
+    order_index: 8,
+    theory_markdown: `# Manejo de Strings y Formateo en Python
+
+Los strings (cadenas de texto) son uno de los tipos de datos más usados en Python, especialmente en procesamiento de lenguaje natural, scraping de datos y preparación de datasets para IA.
+
+## Creación y caracteres especiales
+
+\`\`\`python
+nombre = "Hector Velasco"
+direccion = 'Quito, Ecuador'
+parrafo = """Este es un texto
+que ocupa múltiples
+líneas."""
+
+# Caracteres especiales
+print("Línea 1\\nLínea 2")     # \\n = nueva línea
+print("Col1\\tCol2")           # \\t = tabulación
+print("Comillas: \\"texto\\"")  # \\" = comillas dentro de string
+\`\`\`
+
+## Métodos de strings
+
+\`\`\`python
+texto = "  Inteligencia Artificial en Ecuador  "
+
+# Transformaciones
+print(texto.upper())      # TODO EN MAYÚSCULAS
+print(texto.lower())      # todo en minúsculas
+print(texto.title())      # Cada Palabra En Mayúscula
+print(texto.strip())      # Elimina espacios al inicio y fin
+print(texto.lstrip())     # Elimina espacios a la izquierda
+print(texto.rstrip())     # Elimina espacios a la derecha
+
+# Búsqueda
+print("Ecuador" in texto)           # True
+print(texto.find("Artificial"))     # índice donde empieza, -1 si no existe
+print(texto.count("a"))             # número de ocurrencias de "a"
+print(texto.startswith("  Intel"))  # True
+print(texto.endswith("Ecuador  "))  # True
+
+# Modificación
+print(texto.replace("Ecuador", "LATAM"))  # Reemplaza texto
+print(texto.strip().split(" "))           # Divide en lista
+\`\`\`
+
+## Slicing de strings
+
+\`\`\`python
+s = "Inteligencia"
+print(s[0])       # I
+print(s[-1])      # a
+print(s[0:5])     # Intel
+print(s[5:])      # igencia
+print(s[:5])      # Intel
+print(s[::2])     # Itlgni (cada 2 caracteres)
+print(s[::-1])    # aicnegiletni (invertido)
+\`\`\`
+
+## Formateo de strings
+
+### f-strings (recomendado desde Python 3.6)
+
+\`\`\`python
+nombre = "Ana"
+nota = 92.567
+semestre = 1
+
+# Básico
+print(f"Bienvenida, {nombre}!")
+
+# Con formato numérico
+print(f"Nota: {nota:.2f}")      # Nota: 92.57
+print(f"Nota: {nota:.0f}")      # Nota: 93
+print(f"Semestre: {semestre:02d}")  # Semestre: 01
+
+# Expresiones dentro de f-strings
+print(f"Aprobado: {nota >= 70}")  # Aprobado: True
+print(f"{'Aprobado' if nota >= 70 else 'Reprobado'}")
+\`\`\`
+
+### format() y % (estilos anteriores)
+
+\`\`\`python
+# format()
+print("Hola, {}! Tu nota es {:.1f}".format("María", 88.5))
+
+# Tablas bien alineadas
+print(f"{'Nombre':<15} {'Nota':>5}")  # Alineado izquierda/derecha
+print(f"{'Ana':<15} {92:>5}")
+print(f"{'Carlos':<15} {78:>5}")
+\`\`\`
+
+## Procesamiento de texto para IA
+
+\`\`\`python
+# Limpiar texto para NLP
+def limpiar_texto(texto):
+    texto = texto.lower()           # Normalizar
+    texto = texto.strip()           # Quitar espacios
+    palabras = texto.split()        # Tokenizar
+    palabras = [p for p in palabras if len(p) > 2]  # Filtrar cortas
+    return " ".join(palabras)       # Reconstruir
+
+texto_raw = "  La Inteligencia Artificial es el futuro de Ecuador  "
+print(limpiar_texto(texto_raw))
+
+# join: unir lista en string
+palabras = ["Python", "es", "poderoso"]
+print(" ".join(palabras))   # Python es poderoso
+print(", ".join(palabras))  # Python, es, poderoso
+\`\`\`
+
+## Strings son inmutables
+
+\`\`\`python
+s = "Python"
+# s[0] = "J"  # Error! Los strings no se pueden modificar
+s = "J" + s[1:]  # Crear uno nuevo: "Jython"
+\`\`\`
+
+Los strings son inmutables como las tuplas, pero puedes crear nuevos strings con modificaciones.`,
+    ai_lab_context: `El estudiante está aprendiendo manejo de strings en Python: métodos (upper, lower, strip, split, replace, find, count), slicing, f-strings para formateo con especificadores de formato numérico (:.2f, :<15, :>5), join para unir listas, y procesamiento básico de texto para IA/NLP. Ayúdale a entender la inmutabilidad de strings, cuándo usar f-strings vs format(), y cómo usar estos skills para preparar datos de texto para modelos de machine learning.`,
+    ai_lab_suggested_prompt: 'Tengo una lista de nombres con espacios y mayúsculas inconsistentes: ["  ANA GARCIA  ", "juan lopez", "  María Torres  "]. ¿Cómo los limpio para que queden todos en formato "Nombre Apellido" sin espacios extra?',
+    quiz: {
+      title: 'Quiz: Strings y Formateo',
+      questions: [
+        {
+          question_text: '¿Qué produce "Python"[::-1]?',
+          options: JSON.stringify([
+            { key: 'a', text: 'Python', is_correct: false },
+            { key: 'b', text: 'nohtyP', is_correct: true },
+            { key: 'c', text: 'Pytho', is_correct: false },
+            { key: 'd', text: 'Error', is_correct: false },
+          ]),
+          explanation: 'El slicing s[::-1] recorre el string desde el final al principio con paso -1, invirtiendo el string. "Python" invertido es "nohtyP".',
+          order_index: 1,
+        },
+        {
+          question_text: '¿Qué método divide un string en una lista de palabras?',
+          options: JSON.stringify([
+            { key: 'a', text: 'divide()', is_correct: false },
+            { key: 'b', text: 'split()', is_correct: true },
+            { key: 'c', text: 'separate()', is_correct: false },
+            { key: 'd', text: 'tokenize()', is_correct: false },
+          ]),
+          explanation: 'split() sin argumentos divide por espacios en blanco y elimina espacios extra. split(",") divide por coma. El método inverso es join(): ", ".join(lista) une elementos de una lista.',
+          order_index: 2,
+        },
+        {
+          question_text: 'Para mostrar un número 3.14159 con solo 2 decimales usando f-string, ¿cuál es la sintaxis correcta?',
+          options: JSON.stringify([
+            { key: 'a', text: 'f"{numero,2f}"', is_correct: false },
+            { key: 'b', text: 'f"{numero:.2f}"', is_correct: true },
+            { key: 'c', text: 'f"{numero:2.f}"', is_correct: false },
+            { key: 'd', text: 'f"{numero[2f]}"', is_correct: false },
+          ]),
+          explanation: 'En f-strings, el formato va después de dos puntos: {variable:.2f} muestra 2 decimales. El punto indica decimales, "f" indica float. Para enteros: {:03d} para 3 dígitos con ceros.',
+          order_index: 3,
+        },
+        {
+          question_text: '¿Qué método elimina espacios al inicio Y al final de un string?',
+          options: JSON.stringify([
+            { key: 'a', text: 'clean()', is_correct: false },
+            { key: 'b', text: 'trim()', is_correct: false },
+            { key: 'c', text: 'strip()', is_correct: true },
+            { key: 'd', text: 'remove_spaces()', is_correct: false },
+          ]),
+          explanation: 'strip() elimina espacios (y otros caracteres blancos) de ambos extremos. lstrip() solo del inicio, rstrip() solo del final. No existe clean() ni trim() en Python nativo (trim es de JavaScript).',
+          order_index: 4,
+        },
+        {
+          question_text: '¿Cuál es la forma recomendada en Python 3.6+ para incrustar variables en strings?',
+          options: JSON.stringify([
+            { key: 'a', text: '"Hola " + nombre + "!"', is_correct: false },
+            { key: 'b', text: '"Hola %s!" % nombre', is_correct: false },
+            { key: 'c', text: '"Hola {}!".format(nombre)', is_correct: false },
+            { key: 'd', text: 'f"Hola {nombre}!"', is_correct: true },
+          ]),
+          explanation: 'Los f-strings (format strings, prefijo f) son la forma moderna y recomendada desde Python 3.6. Son más legibles, rápidos y permiten expresiones directas dentro de {}. Las otras opciones funcionan pero son más verbosas.',
+          order_index: 5,
+        },
+      ],
+    },
+    assignment: {
+      title: 'Ejercicio: Procesador de texto para IA',
+      instructions_markdown: `# Ejercicio: Procesador de texto para preparación de datos
+
+## Objetivo
+Crear funciones de procesamiento de texto que se usan realmente en proyectos de NLP e IA.
+
+## Instrucciones
+
+### Paso 1: Pipeline de limpieza de texto
+\`\`\`python
+import string
+
+def normalizar_texto(texto):
+    """Convierte a minúsculas y elimina espacios extra"""
+    pass
+
+def eliminar_puntuacion(texto):
+    """Elimina signos de puntuación del texto"""
+    # Hint: usa string.punctuation y un loop o replace
+    pass
+
+def tokenizar(texto):
+    """Divide el texto en lista de palabras (tokens)"""
+    pass
+
+def filtrar_palabras_cortas(tokens, longitud_minima=3):
+    """Filtra palabras con menos de longitud_minima caracteres"""
+    pass
+
+def pipeline_completo(texto):
+    """Aplica todos los pasos en secuencia"""
+    pass
+\`\`\`
+
+### Paso 2: Análisis de texto
+\`\`\`python
+def contar_palabras_unicas(texto):
+    """Retorna el número de palabras únicas en el texto"""
+    # Hint: usa un set
+    pass
+
+def palabras_mas_frecuentes(texto, top_n=5):
+    """Retorna las n palabras más frecuentes como lista de tuplas (palabra, count)"""
+    # Hint: usa un diccionario para contar
+    pass
+
+def estadisticas_texto(texto):
+    """Imprime estadísticas del texto"""
+    tokens = pipeline_completo(texto)
+    print(f"Caracteres totales: {len(texto)}")
+    print(f"Palabras totales: {len(tokens)}")
+    print(f"Palabras únicas: {contar_palabras_unicas(' '.join(tokens))}")
+    print(f"\\nTop 5 palabras más frecuentes:")
+    for palabra, freq in palabras_mas_frecuentes(' '.join(tokens)):
+        print(f"  '{palabra}': {freq} veces")
+\`\`\`
+
+### Paso 3: Prueba con texto real
+\`\`\`python
+texto_prueba = """
+La inteligencia artificial está transformando el mundo. La inteligencia artificial
+permite que las computadoras aprendan de los datos. Los algoritmos de machine
+learning son parte fundamental de la inteligencia artificial moderna. Ecuador
+necesita profesionales especializados en inteligencia artificial y ciencia de datos.
+La inteligencia artificial crea oportunidades de trabajo en todo el mundo.
+"""
+
+estadisticas_texto(texto_prueba)
+\`\`\`
+
+### Paso 4: Generador de reporte formateado
+Crea una función \`generar_reporte_analisis(texto, titulo)\` que imprima un reporte bien formateado con bordes usando \`=\` y \`-\`.
+
+## Entrega
+Archivo .py y captura del output del reporte final.
+
+## Evaluación
+- Pipeline de limpieza funcional: 40 pts
+- Análisis de frecuencias correcto: 30 pts
+- Formateo del reporte: 30 pts`,
+      allowed_file_types: JSON.stringify(['.py', '.txt', '.png', '.jpg']),
+    },
+    resources: [
+      { title: 'Python String Methods - W3Schools', url: 'https://www.w3schools.com/python/python_ref_string.asp', type: 'documentation', description: 'Referencia completa de todos los métodos de strings en Python con ejemplos', order_index: 1 },
+      { title: 'Python f-strings - Real Python', url: 'https://realpython.com/python-f-strings/', type: 'article', description: 'Guía completa de f-strings con formatos avanzados y comparación con métodos anteriores', order_index: 2 },
+      { title: 'String Formatting Best Practices', url: 'https://realpython.com/python-formatted-output/', type: 'article', description: 'Mejores prácticas para formateo de salida en Python con tablas y alineación', order_index: 3 },
+      { title: 'Introducción a NLP con Python (español)', url: 'https://www.youtube.com/watch?v=MsPaKlDWjSo', type: 'video', description: 'Video introductorio sobre procesamiento de texto en Python aplicado a NLP', order_index: 4 },
+    ],
+  },
+];
+
+async function loadSession(sessionData) {
+  console.log(`\nCargando sesión ${sessionData.number}: ${sessionData.title}`);
+
+  // 1. Crear sesión
+  const session = await post('/sessions', {
+    subject_id: SUBJECT_ID,
+    number: sessionData.number,
+    title: sessionData.title,
+    video_url: sessionData.video_url,
+    theory_markdown: sessionData.theory_markdown,
+    ai_lab_context: sessionData.ai_lab_context,
+    ai_lab_suggested_prompt: sessionData.ai_lab_suggested_prompt,
+    order_index: sessionData.order_index,
+    estimated_duration_minutes: sessionData.estimated_duration_minutes,
+    is_active: true,
+  });
+  if (!session) { console.error(`  FALLO creando sesión ${sessionData.number}`); return false; }
+  console.log(`  Sesion creada: ${session.id}`);
+
+  // 2. Crear quiz
+  const quiz = await post('/quizzes', {
+    session_id: session.id,
+    title: sessionData.quiz.title,
+    pass_percentage: 70,
+    max_attempts: 3,
+    is_active: true,
+  });
+  if (!quiz) { console.error(`  FALLO creando quiz`); return false; }
+  console.log(`  Quiz creado: ${quiz.id}`);
+
+  // 3. Crear preguntas
+  for (const q of sessionData.quiz.questions) {
+    await post('/quiz_questions', {
+      quiz_id: quiz.id,
+      question_text: q.question_text,
+      question_type: 'multiple_choice',
+      options: q.options,
+      explanation: q.explanation,
+      points: 1,
+      order_index: q.order_index,
+    }, 'return=minimal');
+  }
+  console.log(`  ${sessionData.quiz.questions.length} preguntas creadas`);
+
+  // 4. Crear assignment
+  const assignment = await post('/assignments', {
+    session_id: session.id,
+    title: sessionData.assignment.title,
+    instructions_markdown: sessionData.assignment.instructions_markdown,
+    allowed_file_types: sessionData.assignment.allowed_file_types,
+    max_grade: 100,
+    is_active: true,
+  }, 'return=minimal');
+  console.log(`  Assignment creado`);
+
+  // 5. Crear recursos
+  for (const r of sessionData.resources) {
+    await post('/session_resources', {
+      session_id: session.id,
+      title: r.title,
+      url: r.url,
+      type: r.type,
+      description: r.description,
+      order_index: r.order_index,
+    }, 'return=minimal');
+  }
+  console.log(`  ${sessionData.resources.length} recursos creados`);
+
+  return true;
+}
+
+async function main() {
+  console.log('=== CARGANDO SESIONES 5-8: Fundamentos de Programación (IA) ===');
+  let exitosas = 0;
+  for (const session of sessions) {
+    const ok = await loadSession(session);
+    if (ok) exitosas++;
+  }
+  console.log(`\n=== RESULTADO: ${exitosas}/${sessions.length} sesiones cargadas exitosamente ===`);
+}
+
+main().catch(console.error);
